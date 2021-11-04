@@ -1,0 +1,1 @@
+export { PostAllergyForm } from "./PostAllergyForm";

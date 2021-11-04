@@ -1,0 +1,1 @@
+export { UpdateCurrentUserForm } from "./UpdateCurrentUserForm";

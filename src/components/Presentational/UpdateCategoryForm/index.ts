@@ -1,0 +1,1 @@
+export { UpdateCategoryForm } from "./UpdateCategoryForm";

@@ -1,0 +1,1 @@
+export { UpdateAllergyForm } from "./UpdateAllergyForm";

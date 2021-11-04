@@ -1,0 +1,1 @@
+export { DietarySvg } from "./DietarySvg";

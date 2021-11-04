@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "baseUrl": ".",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "downlevelIteration": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@base": ["src/components/Base"],
+      "@transitions": ["src/components/Transitions/"],
+      "@graphql": ["src/graphql/"],
+      "@contexts": ["src/contexts/"],
+      "@hooks": ["src/hooks/"],
+      "@views": ["src/views/"],
+      "@routes": ["src/routes/"],
+      "@presentational": ["src/components/Presentational/"],
+      "@shared": ["src/shared/"],
+      "@svgs": ["src/svgs/"],
+      "@constants": ["src/constants/"],
+      "@utility": ["src/utility/"]
+
+    }
+  },
+  "include": ["src", ".eslintrc.js", "tailwind.config.js", "postcss.config.js", "tsdx.config.js"]
+}

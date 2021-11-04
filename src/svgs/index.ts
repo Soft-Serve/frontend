@@ -1,0 +1,14 @@
+export { ReactComponent as UpdateSVG } from "./update.svg";
+export { ReactComponent as AddSVG } from "./add.svg";
+export { ReactComponent as DeleteSVG } from "./delete.svg";
+export { ReactComponent as ChevronDownSVG } from "./chevron-down.svg";
+export { ReactComponent as ChevronUpSVG } from "./chevron-up.svg";
+export { ReactComponent as HamburgerSVG } from "./hamburger.svg";
+export { ReactComponent as LogoSVG } from "./logo.svg";
+export { ReactComponent as FullLogoSVG } from "./full-logo.svg";
+export { ReactComponent as MenuSVG } from "./menu.svg";
+export { ReactComponent as LoginSVG } from "./login.svg";
+export { ReactComponent as LogoutSVG } from "./logout.svg";
+export { ReactComponent as RemoveSVG } from "./remove.svg";
+export { ReactComponent as UploadImageSVG } from "./image-upload.svg";
+export { ReactComponent as LoadingSVG } from "./loading.svg";

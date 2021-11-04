@@ -1,0 +1,1 @@
+export { DeleteAllergyForm } from "./DeleteAllergyForm";

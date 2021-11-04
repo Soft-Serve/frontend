@@ -1,0 +1,73 @@
+import React from "react";
+import type { FC } from "react";
+import { useGlobalContext } from "src/contexts";
+import { useAllergiesQuery } from "@shared";
+import Skeleton from "react-loading-skeleton";
+import { Button, Card, CardContent, List, ListItem } from "@base";
+import { UpdateSVG, DeleteSVG } from "src/svgs";
+
+interface Props {
+  handleUpdateItem: any;
+  handleDeleteItem: any;
+}
+
+const AllergiesList: FC<Props> = ({ handleDeleteItem, handleUpdateItem }) => {
+  const { restaurantSlug } = useGlobalContext();
+
+  const { data, loading } = useAllergiesQuery({
+    variables: {
+      restaurantSlug,
+      active: false,
+    },
+  });
+
+  if (loading) {
+    return (
+      <>
+        {[...new Array(3)].map((_, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <div key={index} className="mx-2">
+            <Skeleton width={120} height={40} />
+          </div>
+        ))}
+      </>
+    );
+  }
+
+  return (
+    <Card css="mt-4">
+      <CardContent>
+        <List>
+          {data?.allergies?.map(allergy => (
+            <ListItem key={allergy.id}>
+              <div className="w-0 flex-1 flex items-center">
+                <span className="ml-2 flex-1 w-0 font-medium">{`${allergy.name} / ${allergy.filter_name}`}</span>
+              </div>
+              <div className="ml-4 flex flex-col sm:flex-row">
+                <div className="w-full sm:mr-2 my-1">
+                  <Button isFullwidth size="XS" onClick={() => handleUpdateItem(allergy)}>
+                    <span className="mr-4 text-base">Update</span>
+                    <UpdateSVG className="w-5 h-5" />
+                  </Button>
+                </div>
+                <div className="w-full my-1">
+                  <Button
+                    isFullwidth
+                    colour="accent"
+                    size="XS"
+                    onClick={() => handleDeleteItem(allergy)}
+                  >
+                    <span className="mr-4 text-base">Delete</span>
+                    <DeleteSVG className="w-5 h-5" />
+                  </Button>
+                </div>
+              </div>
+            </ListItem>
+          ))}
+        </List>
+      </CardContent>
+    </Card>
+  );
+};
+
+export { AllergiesList };

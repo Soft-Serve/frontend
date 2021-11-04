@@ -1,0 +1,1 @@
+export { CardMenuItemWithoutImage } from "./CardMenuItemWithoutImage";

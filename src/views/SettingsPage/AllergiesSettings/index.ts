@@ -1,0 +1,1 @@
+export { AllergiesSettings } from "./AllergiesSettings";

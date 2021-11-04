@@ -1,0 +1,1 @@
+export { RestaurantLogo } from "./RestaurantLogo";

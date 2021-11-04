@@ -1,0 +1,1 @@
+export { Dietaries } from "./Dietaries";
