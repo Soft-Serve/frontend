@@ -62,15 +62,13 @@ volumes:
   "private": false,
   "scripts": {
     "install": "cd frontend && yarn",
-    "start": "cd frontend && yarn start",
     "frontend": "cd frontend && yarn start",
     "backend": "cd backend && docker-compose run backend bundle install && docker-compose run backend rails db:reset && docker-compose up",
     "cleanup": "cd backend && docker-compose down -v",
-    "db:seed": "docker-compose run backend rails db:seed",
-    "project": "yarn db:reset && docker-compose up"
+    "seed": "cd backend && docker-compose run backend rails db:seed",
+    "build": "cd backend && docker-compose build"
   }
 }
-
 ```
 
 ## Run the frontend
@@ -78,8 +76,9 @@ volumes:
 2. then run `yarn frontend` a server should start up on `http://localhost:3000/`
 
 ## Run the backend
-1. in the root folder run `yarn backend`
-2. a server should appear on `http://localhost:3091/`
+1. in the root folder run `yarn build` this will build the docker container
+2. to start the backend server run `yarn backend`
+3. a server should appear on `http://localhost:3091/`
 
 ## Run cleanup
 1. once you have finished developing, it is good practice to clean up your docker containers by running `yarn cleanup` in the root folder 
