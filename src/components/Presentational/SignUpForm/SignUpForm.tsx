@@ -4,7 +4,7 @@ import type { FC } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Input } from "@base";
 import { useCurrentUserQuery } from "@shared";
-import { UID, ACCESS_TOKEN, CLIENT_TOKEN } from "src/constants";
+import { uid, accessToken, clientToken } from "src/constants";
 import { useSignUpFormMutation } from "./SignUpForm.mutation";
 import { useSignInFormMutation } from "../SignInForm/SignInForm.mutation";
 
@@ -63,9 +63,9 @@ const SignUpForm: FC = () => {
 
   const [signIn] = useSignInFormMutation({
     onCompleted: completedData => {
-      localStorage.setItem(ACCESS_TOKEN, completedData.signIn.access_token);
-      localStorage.setItem(UID, completedData.signIn.uid);
-      localStorage.setItem(CLIENT_TOKEN, completedData.signIn.client);
+      localStorage.setItem(accessToken, completedData.signIn.access_token);
+      localStorage.setItem(uid, completedData.signIn.uid);
+      localStorage.setItem(clientToken, completedData.signIn.client);
 
       history.push(`/restaurants/${completedData.signIn.restaurant_slug}`);
     },

@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { RestLink } from "apollo-link-rest";
 import { setContext } from "@apollo/client/link/context";
-import { UID, ACCESS_TOKEN, CLIENT_TOKEN } from "src/constants";
+import { uid, accessToken, clientToken } from "src/constants";
 
 const uri =
   process.env.NODE_ENV === "production"
@@ -14,7 +14,6 @@ const link = new RestLink({
     Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.",
     "Content-Type": "application/json; charset=utf-8",
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "*",
   },
 });
 
@@ -22,9 +21,9 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      "access-token": localStorage.getItem(ACCESS_TOKEN) || "",
-      client: localStorage.getItem(CLIENT_TOKEN) || "",
-      uid: localStorage.getItem(UID) || "",
+      "access-token": localStorage.getItem(accessToken) || "",
+      client: localStorage.getItem(clientToken) || "",
+      uid: localStorage.getItem(uid) || "",
     },
   };
 });

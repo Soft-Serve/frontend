@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 import type { FC } from "react";
 import { Input, Button } from "@base";
-import { UID, ACCESS_TOKEN, CLIENT_TOKEN } from "src/constants";
+import { uid, accessToken, clientToken } from "src/constants";
 import { LogoSVG } from "@svgs";
 import { isBasicEmailRegexValid, isEmailAtValid, isEmailDotValid } from "src/utility";
 import { useSignInFormMutation } from "./SignInForm.mutation";
@@ -12,9 +12,9 @@ const SignInForm: FC = () => {
   const [isLoginSuccesFull, setIsLoginSuccessFull] = useState(true);
   const [signIn] = useSignInFormMutation({
     onCompleted: completedData => {
-      localStorage.setItem(ACCESS_TOKEN, completedData.signIn.access_token);
-      localStorage.setItem(UID, completedData.signIn.uid);
-      localStorage.setItem(CLIENT_TOKEN, completedData.signIn.client);
+      localStorage.setItem(accessToken, completedData.signIn.access_token);
+      localStorage.setItem(uid, completedData.signIn.uid);
+      localStorage.setItem(clientToken, completedData.signIn.client);
       history.push(`/restaurants/${completedData.signIn.restaurant_slug}`);
       window.location.reload();
     },
