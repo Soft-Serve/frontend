@@ -2,6 +2,8 @@
 
 ## How to get the project running
 
+** You need Docker installed on your local machine in order to get the backend running **
+
 1. create a new folder, this will be your root working directory, you can name it whatever you want example: `soft-serve-app`
 2. clone the content of this repository into the frontend folder by running `git clone git@github.com:Soft-Serve/frontend.git frontend`
 3. clonse the content of the soft-serve api into the backend folder by running `git clone git@github.com:Soft-Serve/backend.git backend`
