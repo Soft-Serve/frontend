@@ -9,9 +9,10 @@ import {
   ViewGridIcon,
 } from "@heroicons/react/solid";
 
-export const UID = "uid";
-export const ACCESS_TOKEN = "access-token";
-export const CLIENT_TOKEN = "client";
+// Shahyn if you value your life do not change again
+export const uid = "uid";
+export const accessToken = "access-token";
+export const clientToken = "client";
 export const SUB_NAVIGATION = [
   {
     name: "Restaurant",
