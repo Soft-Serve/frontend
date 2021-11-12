@@ -1,6 +1,5 @@
 import { generateThemeAccentColours, generateThemeColours } from "@utility";
 import { classnames, TArg } from "tailwindcss-classnames";
-import { Sizes } from "./types";
 
 const base = classnames(
   "inline",
@@ -67,6 +66,8 @@ const SIZE_MAP = {
   XL,
   XXL,
 };
+
+type Sizes = keyof typeof SIZE_MAP;
 
 const loadingStyles = (colour?: Colours) =>
   classnames("animate-spin", "h-5", "w-5", colour === "primary" ? "text-white" : "text-red-400");
