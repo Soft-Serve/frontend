@@ -51,7 +51,7 @@ const MenuSlideOver: FC<Props> = ({ isOpen, onClose }) => {
                 </Button>
               </div>
             </Transition.Child>
-            <div className="pt-5 pb-4">
+            <div className="pt-5 pb-4 h-full">
               <div className="flex-shrink-0 flex items-center px-4">
                 <RestaurantLogo dimensions={60} borderColor="black" borderWidth={1} />
               </div>

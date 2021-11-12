@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import type { FC } from "react";
 import { Restaurant } from "@presentational";
-import { HeroBanner } from "@base";
+import { HeroBanner, FloatingMenu } from "@base";
+import { useCurrentUserQuery } from "@shared";
 import { MenuPage } from "../MenuPage";
 import { MenuSlideOver } from "./MenuSlideOver";
 import { GuestMobileHeader } from "./GuestMobileHeader";
@@ -10,20 +11,24 @@ import { GuestNavigation } from "./GuestNavigation.tsx";
 import { GuestMobileSubHeader } from "./GuestMobileSubHeader";
 
 const GuestPage: FC = () => {
+  const { data } = useCurrentUserQuery();
   const [isMenuSlideOverOpen, setIsMenuSlideOverOpen] = useState(false);
 
   return (
     <MenuPage>
       <MenuSlideOver isOpen={isMenuSlideOverOpen} onClose={setIsMenuSlideOverOpen} />
       <GuestNavigation />
-      <GuestMobileHeader>
+      <GuestMobileHeader setIsMenuSlideOverOpen={setIsMenuSlideOverOpen}>
         <div className="lg:hidden block">
           <HeroBanner />
         </div>
         <GuestMobileSubHeader />
         <Restaurant />
       </GuestMobileHeader>
-      <GuestMobileNavigation setIsMenuSlideOverOpen={setIsMenuSlideOverOpen} />
+      {data?.currentUser && (
+        <GuestMobileNavigation setIsMenuSlideOverOpen={setIsMenuSlideOverOpen} />
+      )}
+      <FloatingMenu setIsMenuSlideOverOpen={setIsMenuSlideOverOpen} />
     </MenuPage>
   );
 };

@@ -19,7 +19,7 @@ const MenusMobileNavigation: FC<Props> = ({ closeMenu, ...rest }) => {
   });
 
   return (
-    <nav aria-label="Sections" {...rest}>
+    <nav aria-label="Sections" {...rest} className="flex flex-col justify-between h-full">
       <div className="flex-shrink-0 h-16 px-6 border-b border-blue-gray-200 flex items-center">
         <p className="text-lg font-medium text-blue-gray-900">Menus</p>
       </div>
