@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { useGlobalContext } from "src/contexts";
 import { useCurrentUserQuery, useRestaurantQuery, useSignOutMutation } from "@shared";
 import { RestaurantLogo } from "@presentational";
-import { LoginIcon, LogoutIcon, MenuIcon } from "@heroicons/react/solid";
+import { LoginIcon, LogoutIcon } from "@heroicons/react/solid";
 import { Link, useHistory } from "react-router-dom";
 import { routes } from "src/routes";
 import { Button } from "@base";
@@ -12,7 +12,7 @@ interface Props {
   setIsMenuSlideOverOpen: any;
 }
 
-const GuestMobileHeader: FC<Props> = ({ children, setIsMenuSlideOverOpen }) => {
+const GuestMobileHeader: FC<Props> = ({ children }) => {
   const history = useHistory();
   const { data: currentUserData } = useCurrentUserQuery();
   const { restaurantSlug, themeColour, themeTint } = useGlobalContext();
