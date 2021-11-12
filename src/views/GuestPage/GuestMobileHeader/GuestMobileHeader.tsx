@@ -1,57 +1,23 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { useGlobalContext } from "src/contexts";
-import { useCurrentUserQuery, useRestaurantQuery, useSignOutMutation } from "@shared";
+import { useRestaurantQuery } from "@shared";
 import { RestaurantLogo } from "@presentational";
-import { LoginIcon, LogoutIcon } from "@heroicons/react/solid";
-import { Link, useHistory } from "react-router-dom";
-import { routes } from "src/routes";
-import { Button } from "@base";
+import { MenuIcon } from "@heroicons/react/solid";
 
 interface Props {
-  setIsMenuSlideOverOpen: any;
+  setIsGuestNavigationOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const GuestMobileHeader: FC<Props> = ({ children }) => {
-  const history = useHistory();
-  const { data: currentUserData } = useCurrentUserQuery();
+const GuestMobileHeader: FC<Props> = ({ children, setIsGuestNavigationOpen }) => {
   const { restaurantSlug, themeColour, themeTint } = useGlobalContext();
-  const [signOut] = useSignOutMutation();
   const { data } = useRestaurantQuery({
     variables: {
       restaurantSlug,
     },
   });
 
-  const logUserOut = () => {
-    localStorage.clear();
-    signOut({ variables: { input: {} } });
-    history.push(routes.signIn);
-  };
-
   const restaurantName = data?.restaurant.name;
-
-  const renderAuthButton = () => {
-    if (currentUserData?.currentUser) {
-      return (
-        <Button size="LG" css="mx-2" onClick={logUserOut} colour="accent">
-          <div className="flex flex-col items-center">
-            <LogoutIcon className="h-5 w-5" />
-          </div>
-        </Button>
-      );
-    }
-    return (
-      <Button size="LG" css="mx-2" colour="accent">
-        <Link to={routes.signIn}>
-          <div className="flex  items-center">
-            <span className="mx-2">Sign in</span>
-            <LoginIcon className="h-5 w-5" />
-          </div>
-        </Link>
-      </Button>
-    );
-  };
 
   return (
     <div className="flex-1 min-w-0 flex flex-col overflow-y-auto">
@@ -67,7 +33,14 @@ const GuestMobileHeader: FC<Props> = ({ children }) => {
               </div>
             )}
           </div>
-          {!currentUserData?.currentUser && renderAuthButton()}
+          <button
+            type="button"
+            className={`-mr-3 h-12 w-12 inline-flex items-center justify-center bg-${themeColour}-${themeTint} rounded-md text-white  focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white`}
+            onClick={() => setIsGuestNavigationOpen(prevState => !prevState)}
+          >
+            <span className="sr-only">Open sidebar</span>
+            <MenuIcon className="h-6 w-6" aria-hidden="true" />
+          </button>
         </div>
       </div>
       {children}
