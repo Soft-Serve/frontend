@@ -60,7 +60,7 @@ const MobileNavigation: FC<Props> = ({ isOpen, onClose, children }) => {
               <div className="flex-shrink-0 flex items-center px-4">
                 <RestaurantLogo dimensions={60} borderColor="black" borderWidth={1} />
               </div>
-              <nav aria-label="Sidebar" className="mt-5">
+              <nav aria-label="Sidebar" className="mt-5 h-full">
                 {children}
               </nav>
             </div>
