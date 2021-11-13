@@ -36,3 +36,4 @@ export { AllergyLegend } from "./AllergyLegend";
 export { MenusMobileNavigation } from "./MenusMobileNavigation";
 export { CategoriesContainer } from "./CategoriesContainer";
 export { ColourPicker } from "./ColourPicker";
+export { MobileNavigationProfile } from "./MobileNavigationProfile";
