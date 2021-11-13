@@ -1,6 +1,13 @@
 import React from "react";
 import { ApolloProvider } from "@apollo/client";
-import { MenuPage, LandingPage, SettingsPage, SignInPage, SignUpPage } from "@views";
+import {
+  MenuPage,
+  LandingPage,
+  SettingsPage,
+  SignInPage,
+  SignUpPage,
+  ConfirmEmailPage,
+} from "@views";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { routes } from "@routes";
 import { client } from "./client";
@@ -35,6 +42,13 @@ const App = () => (
           <GlobalProvider>
             <MenuPage>
               <SignUpPage />
+            </MenuPage>
+          </GlobalProvider>
+        </Route>
+        <Route exact path={routes.confirm}>
+          <GlobalProvider>
+            <MenuPage>
+              <ConfirmEmailPage />
             </MenuPage>
           </GlobalProvider>
         </Route>

@@ -25,4 +25,5 @@ export { MobileBottomNavigation } from "./MobileBottomNavigation";
 export { ListItem, List, SkeletonList } from "./List";
 export { TextBox } from "./TextBox";
 export { HeroBanner } from "./HeroBanner";
+export { Notification } from "./Notification";
 export { FloatingMenu } from "./FloatingMenu";
