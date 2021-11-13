@@ -1,29 +1,34 @@
 import React, { useState } from "react";
 import type { FC } from "react";
 import { Restaurant } from "@presentational";
-import { HeroBanner } from "@base";
+import { HeroBanner, FloatingMenu } from "@base";
 import { MenuPage } from "../MenuPage";
 import { MenuSlideOver } from "./MenuSlideOver";
 import { GuestMobileHeader } from "./GuestMobileHeader";
-import { GuestMobileNavigation } from "./GuestMobileNavigation";
 import { GuestNavigation } from "./GuestNavigation.tsx";
 import { GuestMobileSubHeader } from "./GuestMobileSubHeader";
+import { GuestMobileSlideNavigation } from "./GuestMobileSlideNavigation";
 
 const GuestPage: FC = () => {
   const [isMenuSlideOverOpen, setIsMenuSlideOverOpen] = useState(false);
+  const [isGuestNavigationOpen, setIsGuestNavigationOpen] = useState(false);
 
   return (
     <MenuPage>
+      <GuestMobileSlideNavigation
+        isOpen={isGuestNavigationOpen}
+        onClose={setIsGuestNavigationOpen}
+      />
       <MenuSlideOver isOpen={isMenuSlideOverOpen} onClose={setIsMenuSlideOverOpen} />
       <GuestNavigation />
-      <GuestMobileHeader>
+      <GuestMobileHeader setIsGuestNavigationOpen={setIsGuestNavigationOpen}>
         <div className="lg:hidden block">
           <HeroBanner />
         </div>
         <GuestMobileSubHeader />
         <Restaurant />
       </GuestMobileHeader>
-      <GuestMobileNavigation setIsMenuSlideOverOpen={setIsMenuSlideOverOpen} />
+      <FloatingMenu setIsMenuSlideOverOpen={setIsMenuSlideOverOpen} />
     </MenuPage>
   );
 };

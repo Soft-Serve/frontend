@@ -1,10 +1,15 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { useGlobalContext } from "src/contexts";
 import { useRestaurantQuery } from "@shared";
 import { RestaurantLogo } from "@presentational";
+import { MenuIcon } from "@heroicons/react/solid";
 
-const GuestMobileHeader: FC = ({ children }) => {
+interface Props {
+  setIsGuestNavigationOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const GuestMobileHeader: FC<Props> = ({ children, setIsGuestNavigationOpen }) => {
   const { restaurantSlug, themeColour, themeTint } = useGlobalContext();
   const { data } = useRestaurantQuery({
     variables: {
@@ -28,6 +33,14 @@ const GuestMobileHeader: FC = ({ children }) => {
               </div>
             )}
           </div>
+          <button
+            type="button"
+            className={`-mr-3 h-12 w-12 inline-flex items-center justify-center bg-${themeColour}-${themeTint} rounded-md text-white  focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white`}
+            onClick={() => setIsGuestNavigationOpen(prevState => !prevState)}
+          >
+            <span className="sr-only">Open sidebar</span>
+            <MenuIcon className="h-6 w-6" aria-hidden="true" />
+          </button>
         </div>
       </div>
       {children}

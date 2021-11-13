@@ -66,18 +66,16 @@ const GuestMobileNavigation: FC<Props> = ({ setIsMenuSlideOverOpen }) => {
   };
 
   return (
-    <>
-      <MobileBottomNavigation>
-        <Button size="S" css="mx-2" colour="accent" onClick={() => setIsMenuSlideOverOpen(true)}>
-          <div className="flex flex-col items-center">
-            <DocumentDuplicateIcon className="h-5 w-5" />
-            <span>Menus</span>
-          </div>
-        </Button>
-        {renderSettingsButton()}
-        {renderAuthButton()}
-      </MobileBottomNavigation>
-    </>
+    <MobileBottomNavigation>
+      <Button size="S" css="mx-2" colour="accent" onClick={() => setIsMenuSlideOverOpen(true)}>
+        <div className="flex flex-col items-center">
+          <DocumentDuplicateIcon className="h-5 w-5" />
+          <span>Menus</span>
+        </div>
+      </Button>
+      {renderSettingsButton()}
+      {renderAuthButton()}
+    </MobileBottomNavigation>
   );
 };
 

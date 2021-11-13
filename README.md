@@ -1,46 +1,88 @@
-# Getting Started with Create React App
+# Soft serve Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How to get the project running
 
-## Available Scripts
+** You need Docker installed on your local machine in order to get the backend running **
 
-In the project directory, you can run:
+1. create a new folder, this will be your root working directory, you can name it whatever you want example: `soft-serve-app`
+2. clone the content of this repository into the frontend folder by running `git clone git@github.com:Soft-Serve/frontend.git frontend`
+3. clonse the content of the soft-serve api into the backend folder by running `git clone git@github.com:Soft-Serve/backend.git backend`
+4. within your `soft-serve-app` folder you should now have a `backend` folder and a `frontend` folder. Both these folders will have their own git repository and production triggers. Changes should be pushed to their own repo
+5. cd in the `backend` folder and run `touch Dockerfile`
+6. copy the content below and paste it in the `Dockerfile`
+```Docker
+FROM ruby:2.7.4-alpine
+RUN apk update && apk add bash build-base nodejs postgresql-dev tzdata
 
-### `yarn start`
+RUN mkdir /backend
+WORKDIR /backend
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+COPY Gemfile Gemfile.lock ./
+RUN gem install bundler --no-document
+RUN bundle install --no-binstubs --jobs $(nproc) --retry 3
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+COPY . .
 
-### `yarn test`
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+7. create docker-compose file by running `touch docker-compose.yml` in the `backend` folder
+8.  copy the content below and paste it in the `docker-compose.yml` file
+```yml
+version: "3"
 
-### `yarn build`
+services:
+  db:
+    image: "postgres:10-alpine"
+    volumes:
+      - "postgres:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+  backend:
+    depends_on:
+      - "db"
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - "3091:3000"
+    environment:
+      - DATABASE_HOST=db
+volumes:
+  postgres:
+```
+9. cd back in the root of `soft-serve app` and run `touch package.json`
+10. copy and paste the following content in the `package.json` file
+```json
+{
+  "name": "soft-serve",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "install": "cd frontend && yarn",
+    "frontend": "cd frontend && yarn start",
+    "backend": "cd backend && docker-compose run backend bundle install && docker-compose run backend rails db:reset && docker-compose up",
+    "cleanup": "cd backend && docker-compose down -v",
+    "seed": "cd backend && docker-compose run backend rails db:seed",
+    "build": "cd backend && docker-compose build"
+  }
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Run the frontend
+1. in the root folder run `yarn install`
+2. then run `yarn frontend` a server should start up on `http://localhost:3000/`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Run the backend
+1. in the root folder run `yarn build` this will build the docker container
+2. to start the backend server run `yarn backend`
+3. a server should appear on `http://localhost:3091/`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Run cleanup
+1. once you have finished developing, it is good practice to clean up your docker containers by running `yarn cleanup` in the root folder 
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
