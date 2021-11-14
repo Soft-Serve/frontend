@@ -9,8 +9,7 @@ const base = classnames(
   "cursor-pointer",
   "flex",
   "items-start",
-  "justify-between",
-  "rounded-md"
+  "justify-between"
 );
 
 const button = classnames("focus:outline-none");

@@ -4,12 +4,14 @@ import { Dialog, Transition } from "@headlessui/react";
 import { RestaurantLogo } from "@presentational";
 import { XIcon } from "@heroicons/react/solid";
 import { Button } from "@base";
+import { useGlobalContext } from "src/contexts";
 
 interface Props {
   isOpen: boolean;
   onClose: any;
 }
 const MobileNavigation: FC<Props> = ({ isOpen, onClose, children }) => {
+  const { themeColour, themeTint } = useGlobalContext();
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -39,7 +41,9 @@ const MobileNavigation: FC<Props> = ({ isOpen, onClose, children }) => {
           leaveFrom="translate-x-0"
           leaveTo="-translate-x-full"
         >
-          <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white focus:outline-none">
+          <div
+            className={`relative flex-1 flex flex-col max-w-xs w-full bg-${themeColour}-${themeTint} focus:outline-none`}
+          >
             <Transition.Child
               as={Fragment}
               enter="ease-in-out duration-300"
@@ -50,17 +54,19 @@ const MobileNavigation: FC<Props> = ({ isOpen, onClose, children }) => {
               leaveTo="opacity-0"
             >
               <div className="absolute top-0 right-0 mr-4 pt-4">
-                <Button onClick={() => onClose(false)}>
+                <Button colour="accent" onClick={() => onClose(false)}>
                   <span className="sr-only">Close sidebar</span>
-                  <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                  <XIcon className="h-6 w-6" aria-hidden="true" />
                 </Button>
               </div>
             </Transition.Child>
-            <div className="pt-5 pb-4">
-              <div className="flex-shrink-0 flex items-center px-4">
-                <RestaurantLogo dimensions={60} borderColor="black" borderWidth={1} />
+            <div className="h-full">
+              <div
+                className={`flex-shrink-0 flex items-center px-4 bg-${themeColour}-${themeTint} pt-4 pb-4`}
+              >
+                <RestaurantLogo dimensions={60} borderColor="white" borderWidth={2} />
               </div>
-              <nav aria-label="Sidebar" className="mt-5 h-full">
+              <nav aria-label="Sidebar" className="h-full">
                 {children}
               </nav>
             </div>
