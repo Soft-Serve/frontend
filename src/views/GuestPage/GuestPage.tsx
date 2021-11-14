@@ -7,7 +7,7 @@ import { MenuSlideOver } from "./MenuSlideOver";
 import { GuestMobileHeader } from "./GuestMobileHeader";
 import { GuestNavigation } from "./GuestNavigation.tsx";
 import { GuestMobileSubHeader } from "./GuestMobileSubHeader";
-import { GuestMobileSlideNavigation } from "./GuestMobileSlideNavigation";
+import { GuestMobileNavigation } from "./GuestMobileNavigation";
 
 const GuestPage: FC = () => {
   const [isMenuSlideOverOpen, setIsMenuSlideOverOpen] = useState(false);
@@ -15,10 +15,7 @@ const GuestPage: FC = () => {
 
   return (
     <MenuPage>
-      <GuestMobileSlideNavigation
-        isOpen={isGuestNavigationOpen}
-        onClose={setIsGuestNavigationOpen}
-      />
+      <GuestMobileNavigation isOpen={isGuestNavigationOpen} onClose={setIsGuestNavigationOpen} />
       <MenuSlideOver isOpen={isMenuSlideOverOpen} onClose={setIsMenuSlideOverOpen} />
       <GuestNavigation />
       <GuestMobileHeader setIsGuestNavigationOpen={setIsGuestNavigationOpen}>

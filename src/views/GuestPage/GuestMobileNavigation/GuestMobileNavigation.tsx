@@ -1,24 +1,28 @@
 import React from "react";
 import type { FC } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { Button, MobileBottomNavigation } from "@base";
 import {
-  DocumentDuplicateIcon,
-  AdjustmentsIcon,
-  LoginIcon,
-  LogoutIcon,
-} from "@heroicons/react/solid";
-import { routes } from "src/routes";
+  MobileNavigation,
+  MobileNavigationWrapper,
+  MobileNavigationProfile,
+  NavigationItem,
+} from "@presentational";
 import { useCurrentUserQuery, useSignOutMutation } from "@shared";
-import { useGlobalContext } from "src/contexts";
+import { LoginIcon } from "@heroicons/react/outline";
+import { routes } from "src/routes";
+import { AdjustmentsIcon, LogoutIcon, PlusCircleIcon } from "@heroicons/react/solid";
+import { useHistory } from "react-router";
+import { useGlobalContext } from "@contexts";
+import { classnames } from "tailwindcss-classnames";
 
 interface Props {
-  setIsMenuSlideOverOpen: any;
+  isOpen: boolean;
+  onClose: any;
 }
 
-const GuestMobileNavigation: FC<Props> = ({ setIsMenuSlideOverOpen }) => {
-  const { restaurantSlug } = useGlobalContext();
+const GuestMobileNavigation: FC<Props> = ({ isOpen, onClose }) => {
   const { data } = useCurrentUserQuery();
+  const { restaurantSlug } = useGlobalContext();
+
   const [signOut] = useSignOutMutation();
   const history = useHistory();
 
@@ -26,56 +30,65 @@ const GuestMobileNavigation: FC<Props> = ({ setIsMenuSlideOverOpen }) => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
     history.push(routes.signIn);
+    window.location.reload();
+  };
+
+  const renderSignUpButton = () => {
+    if (data?.currentUser) return null;
+    return (
+      <NavigationItem to={routes.signUp}>
+        <PlusCircleIcon
+          className="mr-3 flex-shrink-0 h-6 w-6 text-white group-hover:text-gray-500"
+          aria-hidden="true"
+        />
+        <span className="flex-1">Sign up</span>
+      </NavigationItem>
+    );
+  };
+
+  const renderSignInButton = () => {
+    if (data?.currentUser) return null;
+    return (
+      <NavigationItem css={classnames("border-t-2")} to={routes.signIn}>
+        <LoginIcon
+          className="mr-3 flex-shrink-0 h-6 w-6 text-white group-hover:text-gray-500"
+          aria-hidden="true"
+        />
+        <span className="flex-1">Sign in</span>
+      </NavigationItem>
+    );
+  };
+
+  const renderSignOutButton = () => {
+    if (!data?.currentUser) return null;
+    return (
+      <NavigationItem onClick={logUserOut}>
+        <LogoutIcon className="mr-3 flex-shrink-0 h-6 w-6 text-white" aria-hidden="true" />
+        <span className="flex-1 text-left ">Sign out</span>
+      </NavigationItem>
+    );
   };
 
   const renderSettingsButton = () => {
     if (!data?.currentUser) return null;
     return (
-      <Button size="S" css="mx-2" colour="accent">
-        <Link to={`${routes.settings}/${restaurantSlug}`}>
-          <div className="flex flex-col items-center">
-            <AdjustmentsIcon className="h-5 w-5" />
-            <span>Settings</span>
-          </div>
-        </Link>
-      </Button>
-    );
-  };
-
-  const renderAuthButton = () => {
-    if (data?.currentUser) {
-      return (
-        <Button size="S" css="mx-2" onClick={logUserOut} colour="accent">
-          <div className="flex flex-col items-center">
-            <LogoutIcon className="h-5 w-5" />
-            <span>Sign out</span>
-          </div>
-        </Button>
-      );
-    }
-    return (
-      <Button size="S" css="mx-2" colour="accent">
-        <Link to={routes.signIn}>
-          <div className="flex flex-col items-center">
-            <LoginIcon className="h-5 w-5" />
-            <span>Sign in</span>
-          </div>
-        </Link>
-      </Button>
+      <NavigationItem css={classnames("border-t-2")} to={`${routes.settings}/${restaurantSlug}`}>
+        <AdjustmentsIcon className="mr-3 flex-shrink-0 h-6 w-6 text-white" aria-hidden="true" />
+        <span className="flex-1 text-left ">Settings</span>
+      </NavigationItem>
     );
   };
 
   return (
-    <MobileBottomNavigation>
-      <Button size="S" css="mx-2" colour="accent" onClick={() => setIsMenuSlideOverOpen(true)}>
-        <div className="flex flex-col items-center">
-          <DocumentDuplicateIcon className="h-5 w-5" />
-          <span>Menus</span>
-        </div>
-      </Button>
-      {renderSettingsButton()}
-      {renderAuthButton()}
-    </MobileBottomNavigation>
+    <MobileNavigation isOpen={isOpen} onClose={onClose}>
+      <MobileNavigationWrapper>
+        {renderSignInButton()}
+        {renderSettingsButton()}
+        {renderSignOutButton()}
+        {renderSignUpButton()}
+      </MobileNavigationWrapper>
+      <MobileNavigationProfile />
+    </MobileNavigation>
   );
 };
 

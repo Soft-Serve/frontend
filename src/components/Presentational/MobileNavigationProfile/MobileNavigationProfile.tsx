@@ -10,7 +10,7 @@ const MobileNavigationProfile: FC = () => {
     if (data?.currentUser?.first_name.length && data?.currentUser.last_name.length) {
       const { first_name, last_name } = data?.currentUser;
       return (
-        <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+        <p className="text-sm font-medium text-white">
           {first_name} {last_name}
         </p>
       );
@@ -35,7 +35,7 @@ const MobileNavigationProfile: FC = () => {
   };
 
   return (
-    <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
+    <div className="flex-shrink-0 flex p-4 bg-gray-800 absolute w-full bottom-0 rounded-t-md ">
       <a href="/" className="flex-shrink-0 w-full group block">
         <div className="flex items-center">
           {renderAvatar()}
