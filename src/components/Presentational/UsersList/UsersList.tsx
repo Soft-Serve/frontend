@@ -1,11 +1,11 @@
 import React from "react";
 import type { FC } from "react";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "src/contexts";
 import { useUsersQuery } from "@shared";
 import { Card, CardContent, List, ListItem, SkeletonList } from "@base";
 
 const UsersList: FC = () => {
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
 
   const { data, loading } = useUsersQuery({
     variables: {

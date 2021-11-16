@@ -1,6 +1,6 @@
 import { Button } from "@base";
 import React, { FC } from "react";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "@contexts";
 import { buildButtonStyles, buildWrapperStyles, buildToggleStyles } from "./style";
 
 import { ReactComponent as CheckmarkSVG } from "./svgs/checkmark.svg";
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const Toggle: FC<Props> = ({ isEnabled, handleClick }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
   return (
     <Button
       colour="transparant"

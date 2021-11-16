@@ -1,7 +1,7 @@
 import React, { DetailedHTMLProps, TextareaHTMLAttributes, ReactNode } from "react";
 import { TArg } from "tailwindcss-classnames";
 import type { FC } from "react";
-import { useGlobalContext } from "@contexts";
+import { useRestaurantContext } from "@contexts";
 import * as styles from "./styles";
 
 interface Props
@@ -32,7 +32,7 @@ const TextBox: FC<Props> = ({
     return errors?.slice(0, 2).map(error => <p key={`error-item-${error}`}>{error}</p>);
   };
 
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
 
   return (
     <div>

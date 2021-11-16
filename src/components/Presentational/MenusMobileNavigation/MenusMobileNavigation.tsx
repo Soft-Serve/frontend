@@ -2,20 +2,21 @@ import React from "react";
 import type { FC } from "react";
 
 import { RadioTile, RadioTiles } from "@base";
-import { useGlobalContext } from "src/contexts";
+import { useGlobalContext, useRestaurantContext } from "src/contexts";
 import { useMenusQuery } from "src/shared";
 
 interface Props {
   closeMenu: any;
 }
 const MenusMobileNavigation: FC<Props> = ({ closeMenu, ...rest }) => {
+  const { restaurantSlug } = useRestaurantContext();
   const { setMenuID, menuID } = useGlobalContext();
-  const { restaurantSlug } = useGlobalContext();
 
   const { data } = useMenusQuery({
     variables: {
       restaurantSlug,
     },
+    skip: !restaurantSlug,
   });
 
   return (

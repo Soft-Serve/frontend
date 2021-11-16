@@ -1,56 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import type { FC } from "react";
-import { GlobalContext } from "@contexts";
-import { useRestaurantQuery } from "@shared";
-import { useParams } from "react-router-dom";
+import { GlobalContext, useRestaurantContext } from "@contexts";
+import { useRestaurantQuery } from "src/shared";
+import { LoadingSVG } from "@svgs";
 
 const GlobalProvider: FC = ({ children }) => {
   const [menuID, setMenuID] = useState(0);
   const [categoryID, setCategoryID] = useState(0);
-  const [restaurantSlug, setRestaurantSlug] = useState("oliverandbonacini");
   const [activeMenu, setActiveMenu] = useState("");
   const [currentUser, setCurrentUser] = useState("");
-  const [themeColour, setThemeColour] = useState("red");
-  const [themeTint, setThemeTint] = useState(400);
-  const [textColour, setTextColour] = useState("#2D3142");
+  const { restaurantSlug } = useRestaurantContext();
 
-  type RestaurantSlug = {
-    id: string;
-  };
-
-  const { id } = useParams<RestaurantSlug>();
-
-  const { data } = useRestaurantQuery({
+  const { loading } = useRestaurantQuery({
     variables: {
-      restaurantSlug: id,
+      restaurantSlug,
     },
+    skip: !restaurantSlug,
+    onCompleted: completedData => setMenuID(completedData?.restaurant?.id),
   });
 
-  useEffect(() => {
-    if (data?.restaurant.slug) {
-      setRestaurantSlug(data?.restaurant.slug);
-    }
-  }, [data]);
+  if (loading) {
+    return (
+      <div className="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50">
+        <span
+          className=" opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0"
+          style={{
+            top: "50%",
+          }}
+        >
+          <LoadingSVG className="text-red-400 w-24 h-24 md:w-14 md:h-14 animate-spin" />
+        </span>
+      </div>
+    );
+  }
 
   return (
     <GlobalContext.Provider
       value={{
         activeMenu,
         setActiveMenu,
-        restaurantSlug,
-        setRestaurantSlug,
         menuID,
         setMenuID,
         categoryID,
         setCategoryID,
         currentUser,
         setCurrentUser,
-        themeColour,
-        setThemeColour,
-        themeTint,
-        setThemeTint,
-        textColour,
-        setTextColour,
       }}
     >
       {children}

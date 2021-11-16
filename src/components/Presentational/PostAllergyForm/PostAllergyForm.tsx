@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { Button, Input } from "@base";
 import { ALLERGIES_QUERY, useRestaurantQuery } from "@shared";
 import type { AllergyData } from "@shared";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "src/contexts";
 import { XIcon } from "@heroicons/react/solid";
 import { usePostAllergyMutation } from "./PostAllergy.mutation";
 
@@ -14,7 +14,7 @@ interface Props {
 const PostAllergyForm: FC<Props> = ({ onCompleted }) => {
   const [name, setName] = useState("");
   const [filterName, setFilterName] = useState("");
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
   const { data } = useRestaurantQuery({
     variables: {
       restaurantSlug,

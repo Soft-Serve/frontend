@@ -1,20 +1,20 @@
 import React from "react";
 import type { FC } from "react";
 import { Tab, Tabs } from "@base";
-import { useGlobalContext } from "src/contexts";
+import { useGlobalContext, useRestaurantContext } from "src/contexts";
 import { useMenusQuery } from "@shared";
 import Skeleton from "react-loading-skeleton";
 
 const Menus: FC = () => {
   const { setMenuID, setActiveMenu, menuID } = useGlobalContext();
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
 
   const { data, error, loading } = useMenusQuery({
     variables: {
       restaurantSlug,
     },
     onCompleted: completedData => {
-      if (completedData?.menus.length > 0) {
+      if (completedData?.menus?.length > 0) {
         setMenuID(completedData.menus[0].id);
         setActiveMenu(completedData.menus[0].name);
       }

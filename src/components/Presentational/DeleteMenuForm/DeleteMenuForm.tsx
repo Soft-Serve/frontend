@@ -4,7 +4,7 @@ import type { FC } from "react";
 import { MENUS_QUERY, Menu } from "@shared";
 import type { MenusData } from "@shared";
 import { XIcon } from "@heroicons/react/solid";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "src/contexts";
 import { useDeleteMenuMutation } from "./DeleteForm.mutation";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const DeleteMenuForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
 
   const [deleteMenu, { loading }] = useDeleteMenuMutation({
     onCompleted: () => onCompleted?.(false),

@@ -1,10 +1,10 @@
 import React from "react";
 import type { FC } from "react";
 import { RestaurantLogo } from "@presentational";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "@contexts";
 
 const Navigation: FC = ({ children }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
   return (
     <div className="hidden lg:flex lg:flex-shrink-0">
       <div className="flex flex-col">

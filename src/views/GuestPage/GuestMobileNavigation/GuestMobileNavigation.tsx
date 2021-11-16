@@ -11,7 +11,7 @@ import { LoginIcon } from "@heroicons/react/outline";
 import { routes } from "src/routes";
 import { AdjustmentsIcon, LogoutIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import { useHistory } from "react-router";
-import { useGlobalContext } from "@contexts";
+import { useRestaurantContext } from "@contexts";
 import { classnames } from "tailwindcss-classnames";
 
 interface Props {
@@ -20,8 +20,10 @@ interface Props {
 }
 
 const GuestMobileNavigation: FC<Props> = ({ isOpen, onClose }) => {
-  const { data } = useCurrentUserQuery();
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
+  const { data } = useCurrentUserQuery({
+    skip: !restaurantSlug,
+  });
 
   const [signOut] = useSignOutMutation();
   const history = useHistory();

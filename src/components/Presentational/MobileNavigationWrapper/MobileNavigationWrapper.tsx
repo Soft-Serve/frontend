@@ -1,9 +1,9 @@
 import React from "react";
 import type { FC } from "react";
-import { useGlobalContext } from "@contexts";
+import { useRestaurantContext } from "@contexts";
 
 const MobileNavigationWrapper: FC = ({ children }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
 
   return (
     <div className={`flex-1 flex flex-col bg-${themeColour}-${themeTint} h-full`}>

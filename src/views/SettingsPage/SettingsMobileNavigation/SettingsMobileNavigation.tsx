@@ -9,7 +9,7 @@ import {
   NavigationItem,
 } from "@presentational";
 import { useCurrentUserQuery, useSignOutMutation } from "@shared";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "src/contexts";
 import { BookOpenIcon, LogoutIcon } from "@heroicons/react/solid";
 import { classnames } from "tailwindcss-classnames";
 
@@ -19,7 +19,7 @@ interface Props {
 }
 
 const SettingsMobileNavigation: FC<Props> = ({ isOpen, onClose }) => {
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
   const { data } = useCurrentUserQuery();
   const [signOut] = useSignOutMutation();
   const history = useHistory();

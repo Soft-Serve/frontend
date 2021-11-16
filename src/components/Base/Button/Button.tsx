@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes, FC } from "react";
 import { TArg } from "tailwindcss-classnames";
 import { LoadingSVG } from "@svgs";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "src/contexts";
 import { Sizes } from "./types";
 import { buildStyles, loadingStyles } from "./styles";
 import type { Colours } from "./styles";
@@ -26,7 +26,7 @@ const Button: FC<Props> = ({
   disabled,
   ...rest
 }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
   const renderButtonContent = () => {
     if (loading) return <LoadingSVG className={loadingStyles(colour)} />;
     return <>{children}</>;

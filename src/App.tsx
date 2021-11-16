@@ -10,56 +10,62 @@ import {
 } from "@views";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { routes } from "@routes";
+import { AllergyProvider, GlobalProvider, ViewportProvider, RestaurantProvider } from "@contexts";
 import { client } from "./client";
 
-import { AllergyProvider, GlobalProvider, ViewportProvider } from "./contexts";
 import { GuestPage } from "./views/GuestPage";
 
-const App = () => (
-  <ApolloProvider client={client}>
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <LandingPage />
-        </Route>
-        <Route exact path={`${routes.restaurants}/:id`}>
-          <GlobalProvider>
-            <ViewportProvider>
-              <AllergyProvider>
-                <GuestPage />
-              </AllergyProvider>
-            </ViewportProvider>
-          </GlobalProvider>
-        </Route>
-        <Route exact path={routes.signIn}>
-          <GlobalProvider>
-            <MenuPage>
-              <SignInPage />
-            </MenuPage>
-          </GlobalProvider>
-        </Route>
-        <Route exact path={routes.signUp}>
-          <GlobalProvider>
-            <MenuPage>
-              <SignUpPage />
-            </MenuPage>
-          </GlobalProvider>
-        </Route>
-        <Route exact path={routes.confirm}>
-          <GlobalProvider>
-            <MenuPage>
-              <ConfirmEmailPage />
-            </MenuPage>
-          </GlobalProvider>
-        </Route>
-        <Route exact path={`${routes.settings}/:id`}>
-          <GlobalProvider>
-            <SettingsPage />
-          </GlobalProvider>
-        </Route>
-      </Switch>
-    </Router>
-  </ApolloProvider>
-);
+const App = () => {
+  return (
+    <ApolloProvider client={client}>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
+          <Route exact path={`${routes.restaurants}/:id`}>
+            <RestaurantProvider>
+              <GlobalProvider>
+                <ViewportProvider>
+                  <AllergyProvider>
+                    <GuestPage />
+                  </AllergyProvider>
+                </ViewportProvider>
+              </GlobalProvider>
+            </RestaurantProvider>
+          </Route>
+          <Route exact path={routes.signIn}>
+            <RestaurantProvider>
+              <MenuPage>
+                <SignInPage />
+              </MenuPage>
+            </RestaurantProvider>
+          </Route>
+          <Route exact path={routes.signUp}>
+            <RestaurantProvider>
+              <MenuPage>
+                <SignUpPage />
+              </MenuPage>
+            </RestaurantProvider>
+          </Route>
+          <Route exact path={routes.confirm}>
+            <RestaurantProvider>
+              <MenuPage>
+                <ConfirmEmailPage />
+              </MenuPage>
+            </RestaurantProvider>
+          </Route>
+          <Route exact path={`${routes.settings}/:id`}>
+            <RestaurantProvider>
+              <GlobalProvider>
+                <SettingsPage />
+              </GlobalProvider>
+            </RestaurantProvider>
+          </Route>
+        </Switch>
+      </Router>
+    </ApolloProvider>
+  );
+};
 
 export default App;

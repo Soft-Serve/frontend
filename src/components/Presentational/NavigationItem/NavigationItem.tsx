@@ -2,7 +2,7 @@ import React from "react";
 import type { FC } from "react";
 import { NavLink, NavLinkProps } from "react-router-dom";
 import { classnames, TArg } from "tailwindcss-classnames";
-import { useGlobalContext } from "@contexts";
+import { useRestaurantContext } from "@contexts";
 import { generateThemeColours } from "src/utility";
 import { base, button } from "./styles";
 
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const NavigationItem: FC<Props> = ({ children, to, onClick, css }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
 
   if (onClick) {
     return (

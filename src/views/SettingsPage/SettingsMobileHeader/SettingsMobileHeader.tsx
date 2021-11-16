@@ -2,14 +2,14 @@ import React from "react";
 import type { FC } from "react";
 import { RestaurantLogo } from "@presentational";
 import { MenuIcon } from "@heroicons/react/solid";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "@contexts";
 
 interface Props {
   onButtonClick: any;
 }
 
 const SettingsMobileHeader: FC<Props> = ({ onButtonClick, children }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
   return (
     <div className="flex-1 min-w-0 flex flex-col overflow-hidden">
       <div className="lg:hidden">

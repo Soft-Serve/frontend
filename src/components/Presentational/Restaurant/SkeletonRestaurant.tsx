@@ -1,6 +1,6 @@
 import React from "react";
 import type { FC } from "react";
-import { LoadingSVG } from "src/svgs";
+import { LoadingSVG } from "@svgs";
 
 const SkeletonRestaurant: FC = () => {
   return (

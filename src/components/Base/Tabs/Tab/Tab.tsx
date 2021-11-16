@@ -1,7 +1,7 @@
 import React from "react";
 import type { FC } from "react";
 import { Button } from "@base";
-import { useGlobalContext } from "@contexts";
+import { useRestaurantContext } from "@contexts";
 import { buildTabTextStyles, buildTabStyles } from "./styles";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
   onClick: () => void;
 }
 const Tab: FC<Props> = ({ children, tabIndex, numOfTabs, isActive, onClick }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
   return (
     <Button
       onClick={onClick}

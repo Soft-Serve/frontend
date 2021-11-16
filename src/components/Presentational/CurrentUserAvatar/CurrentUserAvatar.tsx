@@ -3,11 +3,11 @@ import type { FC } from "react";
 import { useCurrentUserQuery } from "@shared";
 import { routes } from "src/routes";
 import { Link } from "react-router-dom";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "src/contexts";
 
 const CurrentUserAvatar: FC = () => {
   const { data } = useCurrentUserQuery();
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
   return (
     <div className="flex-shrink-0 flex border-t border-blue-gray-200 p-4">
       <Link to={`${routes.settings}/${restaurantSlug}`} className="flex-shrink-0 group block">

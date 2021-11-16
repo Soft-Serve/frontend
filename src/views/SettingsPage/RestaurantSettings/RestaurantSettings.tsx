@@ -1,13 +1,13 @@
 import React from "react";
 import type { FC } from "react";
 import { UpdateRestaurantForm } from "@presentational";
-import { useRestaurantQuery } from "src/shared";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantQuery } from "@shared";
+import { useRestaurantContext } from "@contexts";
 import { Card, CardContent } from "@base";
 import { SettingsHeader } from "../SettingsHeader";
 
 const RestaurantSettings: FC = () => {
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
 
   const { data, loading } = useRestaurantQuery({
     variables: {

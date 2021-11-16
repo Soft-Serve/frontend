@@ -11,9 +11,10 @@ const GuestMobileSubHeader: FC = () => {
     variables: {
       menuID,
     },
+    skip: !menuID,
     onCompleted: completedData => {
-      if (completedData?.categories[0].id) {
-        setCategoryID(completedData?.categories[0].id);
+      if (completedData?.categories[0]?.id) {
+        setCategoryID(completedData.categories[0].id);
       }
     },
   });
@@ -30,7 +31,6 @@ const GuestMobileSubHeader: FC = () => {
             setCategoryID={setCategoryID}
             loading={loading}
             categories={data?.categories}
-            buttonStyle="accent"
           />
         </div>
       </div>

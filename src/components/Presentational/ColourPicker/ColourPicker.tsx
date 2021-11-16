@@ -2,14 +2,14 @@ import React from "react";
 import type { FC } from "react";
 import { Button } from "@base";
 import { colors } from "@constants";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "@contexts";
 
 interface Props {
   onClose: (state: boolean) => void;
 }
 
 const ColourPicker: FC<Props> = ({ onClose }) => {
-  const { setThemeColour, setThemeTint } = useGlobalContext();
+  const { setThemeColour, setThemeTint } = useRestaurantContext();
 
   const colourMap = Object.entries(colors);
   return (
