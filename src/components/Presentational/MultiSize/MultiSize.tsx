@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { Button } from "@base";
 import { PlusIcon } from "@heroicons/react/solid";
 import { ItemSize } from "@shared";
-import { useGlobalContext } from "@contexts";
+import { useRestaurantContext } from "@contexts";
 import { MultiSizeRow } from "./MultiSizeRow";
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const MultiSize: FC<Props> = ({ addSize, sizes, deleteSize, onChange }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
   return (
     <div className={`border-2 border-${themeColour}-${themeTint} rounded-md mt-4 shadow-lg`}>
       <div

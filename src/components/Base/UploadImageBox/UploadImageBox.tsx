@@ -1,7 +1,7 @@
 import React from "react";
 import type { FC } from "react";
 import { UploadImageSVG } from "@svgs";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "@contexts";
 
 interface Props {
   onChange: (value: File | undefined) => void;
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const UploadImageBox: FC<Props> = ({ onChange, imageFile }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
   return (
     <div
       className={`my-6 max-w-lg flex justify-center px-3 pt-2 pb-2 border-2 border-${themeColour}-${themeTint} border-dashed rounded-md`}

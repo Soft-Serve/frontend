@@ -5,7 +5,7 @@ import { Button, Input, Modal, UploadImageBox } from "@base";
 import { useUploadPhoto } from "@hooks";
 import { ItemImage } from "@presentational";
 import { RESTAURANT_QUERY } from "@shared";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "@contexts";
 import { useUpdateRestaurant } from "./UpdateRestaurant.mutation";
 import type { Restaurant } from "./UpdateRestaurant.mutation";
 import { ColourPicker } from "../ColourPicker";
@@ -20,7 +20,8 @@ type StateMap = {
 
 const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
   const [isColourModalOpen, setIsColourModalOpen] = useState(false);
-  const { setRestaurantSlug, themeColour, themeTint } = useGlobalContext();
+  const { setRestaurantSlug } = useRestaurantContext();
+  const { themeColour, themeTint } = useRestaurantContext();
   const { photoFile, setPhotoFile, fetchPhoto } = useUploadPhoto();
   const currentRestaurant: StateMap = {
     ...restaurant,

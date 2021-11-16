@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import type { FC } from "react";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "@contexts";
 import { Item, useCategoriesQuery, useItemsQuery, useMenusQuery } from "@shared";
 import { Button, Card, CardContent, Grid, Modal, Tab, Tabs } from "@base";
 import { SearchIcon, PlusCircleIcon } from "@heroicons/react/solid";
@@ -16,7 +16,8 @@ enum ModalForms {
 }
 
 const ItemSettings: FC = () => {
-  const { restaurantSlug, themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
+  const { restaurantSlug } = useRestaurantContext();
   const { data: menuData, loading: menuLoading } = useMenusQuery({
     variables: {
       restaurantSlug,

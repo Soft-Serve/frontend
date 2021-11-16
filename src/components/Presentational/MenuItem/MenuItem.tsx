@@ -1,7 +1,7 @@
 import React from "react";
 import type { FC } from "react";
 import { Item } from "@shared";
-import { useGlobalContext } from "@contexts";
+import { useRestaurantContext } from "@contexts";
 import { CardMenuItemWithImage } from "./CardMenuItemWithImage";
 import { CardMenuItemWithoutImage } from "./CardMenuItemWithoutImage";
 
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const MenuItem: FC<Props> = ({ item }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
   if (item.photo && item.photo.length) {
     return (
       <>

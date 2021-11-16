@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import type { FC } from "react";
 import { Button, Card, CardContent, Modal } from "@base";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "@contexts";
 import { useRestaurantQuery, useMenusQuery, Menu } from "@shared";
 import { DeleteMenuForm, PostMenuForm, UpdateMenuForm } from "src/components/Presentational";
 import { DocumentAddIcon } from "@heroicons/react/solid";
@@ -15,7 +15,7 @@ enum ModalForms {
 }
 
 const MenuSettings: FC = () => {
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
 
   const { data: restaurantData } = useRestaurantQuery({
     variables: {

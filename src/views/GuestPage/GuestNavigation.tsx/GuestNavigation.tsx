@@ -7,13 +7,15 @@ import { routes } from "src/routes";
 import { useCurrentUserQuery } from "@shared";
 import { useSignOutMutation } from "src/shared/SignOut.mutation";
 import { AdjustmentsIcon, PlusCircleIcon } from "@heroicons/react/solid";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "src/contexts";
 
 const GuestNavigation: FC = () => {
   const history = useHistory();
-  const { data } = useCurrentUserQuery();
+  const { restaurantSlug } = useRestaurantContext();
+  const { data } = useCurrentUserQuery({
+    skip: !restaurantSlug,
+  });
   const [signOut] = useSignOutMutation();
-  const { restaurantSlug } = useGlobalContext();
 
   const logUserOut = () => {
     signOut({ variables: { input: {} } });

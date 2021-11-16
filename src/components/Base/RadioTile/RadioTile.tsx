@@ -2,7 +2,7 @@ import React from "react";
 import { RadioGroup } from "@headlessui/react";
 import type { FC } from "react";
 import type { TArg } from "tailwindcss-classnames";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "src/contexts";
 import { buildStyles, buildRadioStyles } from "./RadioTile.styles";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const RadioTile: FC<Props> = ({ children, value, size = "SM", type = "naked", css }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
   return (
     <RadioGroup.Option value={value} className={buildStyles(size, type, css)}>
       {({ checked }) => (

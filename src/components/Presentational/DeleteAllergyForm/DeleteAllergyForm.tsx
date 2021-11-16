@@ -2,7 +2,7 @@ import React, { FormEvent } from "react";
 import type { FC } from "react";
 import { ALLERGIES_QUERY, Allergy } from "@shared";
 import type { AllergyData } from "@shared";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "src/contexts";
 import { Button, Column, Columns } from "@base";
 
 import { XIcon } from "@heroicons/react/solid";
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const DeleteAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy }) => {
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
 
   const [deleteAllergy] = useDeleteAllergyMutation({
     onCompleted: () => onCompleted?.(false),

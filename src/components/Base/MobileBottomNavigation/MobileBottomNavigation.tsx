@@ -1,9 +1,9 @@
 import React from "react";
 import type { FC } from "react";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "src/contexts";
 
 const MobileBottomNavigation: FC = ({ children }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
   return (
     <section
       id="bottom-navigation"

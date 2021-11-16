@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 import { RadioTile, RadioTiles } from "@base";
 import { SUB_NAVIGATION } from "@constants";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "@contexts";
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
   selected: string;
@@ -11,7 +11,7 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLEleme
 }
 
 const SettingsSubMenu: FC<Props> = ({ selected, setSelected, ...rest }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
   return (
     <nav aria-label="Sections" {...rest}>
       <div className="flex-shrink-0 h-16 px-6 border-b border-blue-gray-200 flex items-center">

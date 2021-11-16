@@ -1,12 +1,13 @@
 import React, { FC } from "react";
 import { BreadCrumbsNavigation, DietarySvg, Toggle } from "@base";
-import { useAllergyContext, useGlobalContext } from "@contexts";
+import { useAllergyContext, useRestaurantContext } from "@contexts";
 import { Allergy, useAllergiesQuery } from "@shared";
 import { ACTION_TYPES } from "src/contexts/AllergyContext/types";
 import Skeleton from "react-loading-skeleton";
 
 const AllergyLegend: FC = () => {
-  const { restaurantSlug, themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
+  const { restaurantSlug } = useRestaurantContext();
 
   const { dispatch, activeAllergies } = useAllergyContext();
 

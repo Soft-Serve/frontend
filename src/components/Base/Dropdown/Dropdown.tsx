@@ -2,7 +2,7 @@ import type { FC, ReactNode } from "react";
 import React, { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/solid";
-import { useGlobalContext } from "@contexts";
+import { useRestaurantContext } from "@contexts";
 import { buildStyles } from "./styles";
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
   label?: string;
 }
 const Dropdown: FC<Props> = ({ onChange, value, data, defaultValue, errors, label, required }) => {
-  const { themeColour, themeTint } = useGlobalContext();
+  const { themeColour, themeTint } = useRestaurantContext();
 
   const hasErrors = () => {
     if (!errors) return false;

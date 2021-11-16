@@ -4,7 +4,7 @@ import type { FC } from "react";
 import { MENUS_QUERY } from "@shared";
 import type { MenusData, Menu } from "@shared";
 import { XIcon } from "@heroicons/react/solid";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "src/contexts";
 import { isNameValid, isBasicNameValid, isNameOnlyNumbers, isNameInputValid } from "@utility";
 import { useUpdateMenuMutation } from "./UpdateMenu.mutation";
 
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const UpdateMenuForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
   const [input, setInput] = useState(selectedMenu);
   const [isInputDirty, setIsInputDirty] = useState(false);
 

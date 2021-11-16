@@ -4,11 +4,11 @@ import { MenuSVG, LogoutSVG } from "@svgs";
 import { useHistory } from "react-router-dom";
 import { Navigation, NavigationItem } from "@presentational";
 import { routes } from "@routes";
-import { useGlobalContext } from "@contexts";
+import { useRestaurantContext } from "@contexts";
 import { useSignOutMutation } from "@shared";
 
 const SettingsNavigation: FC = () => {
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
   const history = useHistory();
   const [signOut] = useSignOutMutation();
 

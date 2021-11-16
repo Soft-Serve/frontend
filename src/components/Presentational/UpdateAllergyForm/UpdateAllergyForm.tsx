@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { Button, Input } from "@base";
 import { ALLERGIES_QUERY } from "@shared";
 import type { AllergyData, Allergy } from "@shared";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "@contexts";
 import { XIcon } from "@heroicons/react/solid";
 import { useUpdateAllergyMutation } from "./UpdateAllergy.mutation";
 
@@ -16,7 +16,7 @@ const UpdateAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy }) => {
   const [name, setName] = useState(selectedAllergy.name);
   const [filterName, setFilterName] = useState(selectedAllergy.filter_name);
 
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
 
   const [updateAllergy] = useUpdateAllergyMutation({
     onCompleted: () => onCompleted?.(false),

@@ -1,7 +1,7 @@
 import React from "react";
 import type { FC } from "react";
 import { LogoSVG } from "@svgs";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "@contexts";
 import { useRestaurantQuery } from "@shared";
 import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/base";
@@ -17,18 +17,19 @@ interface Props {
 }
 
 const RestaurantLogo: FC<Props> = ({ dimensions, borderColor = "white", borderWidth = 3 }) => {
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
   const { data: restaurantData } = useRestaurantQuery({
     variables: {
       restaurantSlug,
     },
+    skip: !restaurantSlug,
   });
   const cld = new Cloudinary({
     cloud: {
       cloudName: "softserve",
     },
   });
-  const logo = restaurantData?.restaurant.logo;
+  const logo = restaurantData?.restaurant?.logo;
   const cldImage = cld.image(logo);
   cldImage
     .resize(fill().width(dimensions).height(dimensions))

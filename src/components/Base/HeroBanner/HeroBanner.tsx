@@ -1,15 +1,15 @@
 import React from "react";
 import type { FC } from "react";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "src/contexts";
 
 const HeroBanner: FC = () => {
-  const { themeColour } = useGlobalContext();
+  const { themeColour } = useRestaurantContext();
   return (
     <div className="w-full">
       <div className="relative w-full">
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100 w-full" />
         <div className=" w-full mx-auto">
-          <div className="relative shadow-xl  sm:overflow-hidden">
+          <div className="relative  sm:overflow-hidden">
             <div className="absolute inset-0">
               <img
                 className="h-full w-full object-cover"

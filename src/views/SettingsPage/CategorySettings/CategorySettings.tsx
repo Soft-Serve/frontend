@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import type { FC } from "react";
 import { Button, Card, CardContent, Modal, Tab, Tabs } from "@base";
-import { useGlobalContext } from "src/contexts";
+import { useRestaurantContext } from "src/contexts";
 import { useCategoriesQuery, useMenusQuery, Category } from "@shared";
 import {
   UpdateCategoryForm,
@@ -21,7 +21,7 @@ enum ModalForms {
 }
 
 const CategorySettings: FC = () => {
-  const { restaurantSlug } = useGlobalContext();
+  const { restaurantSlug } = useRestaurantContext();
 
   const { data, loading: menusLoading } = useMenusQuery({
     variables: {
