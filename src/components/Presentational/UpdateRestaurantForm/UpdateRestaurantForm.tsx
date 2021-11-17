@@ -45,7 +45,7 @@ const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
   return (
     <>
       <Modal isOpen={isColourModalOpen} onClose={setIsColourModalOpen}>
-        <h3 className="text-sm font-semibold text-gray-800 tracking-wider uppercase mr-4">
+        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           Select Restaurant Theme Colour
         </h3>
         <ColourPicker onClose={setIsColourModalOpen} />

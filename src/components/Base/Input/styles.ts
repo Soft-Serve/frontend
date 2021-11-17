@@ -35,7 +35,7 @@ const disabled = classnames(
 
 const buildThemeStyles = (colour: string, tint: number) => {
   const borderColour = `border-${colour}-${tint}` as TArg;
-  return classnames(borderColour, "text-gray-800", "border-2");
+  return classnames(borderColour, "text-gray-900", "border-2");
 };
 
 const buildStyles = (isDisabled: boolean, themeColour: string, themeTint: number, css?: TArg) =>

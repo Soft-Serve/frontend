@@ -182,7 +182,7 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
   return (
     <div>
       <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-800 tracking-wider uppercase mr-4">
+        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           add new item
         </h3>
         <Button onClick={() => onCompleted?.(false)} size="S" colour="accent">

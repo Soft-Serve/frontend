@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Dispatch, Fragment, SetStateAction } from "react";
 import type { FC } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/solid";
@@ -7,7 +7,7 @@ import { Button } from "@base";
 
 interface Props {
   isOpen: boolean;
-  onClose: any;
+  onClose: Dispatch<SetStateAction<boolean>>;
 }
 
 const MenuSlideOver: FC<Props> = ({ isOpen, onClose }) => {
@@ -45,7 +45,7 @@ const MenuSlideOver: FC<Props> = ({ isOpen, onClose }) => {
               leaveTo="opacity-0"
             >
               <div className="absolute top-0 right-0 mr-2 pt-4">
-                <Button onClick={() => onClose(false)}>
+                <Button onClick={() => onClose(prevState => !prevState)}>
                   <span className="sr-only">Close sidebar</span>
                   <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
                 </Button>

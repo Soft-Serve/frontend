@@ -1,11 +1,11 @@
 import "react-tiny-fab/dist/styles.css";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { Fab } from "react-tiny-fab";
 import { BookOpenIcon } from "@heroicons/react/solid";
 
 interface Props {
-  setIsMenuSlideOverOpen: any;
+  setIsMenuSlideOverOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const FloatingMenu: FC<Props> = ({ setIsMenuSlideOverOpen }) => {
@@ -13,7 +13,7 @@ const FloatingMenu: FC<Props> = ({ setIsMenuSlideOverOpen }) => {
     <div className="lg:hidden block">
       <Fab
         text="Menus"
-        onClick={() => setIsMenuSlideOverOpen(true)}
+        onClick={() => setIsMenuSlideOverOpen(prevState => !prevState)}
         icon={<BookOpenIcon className="text-white bg-gray-900 rounded-full p-2" />}
       />
     </div>

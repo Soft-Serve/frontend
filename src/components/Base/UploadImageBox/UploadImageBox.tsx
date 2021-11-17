@@ -18,7 +18,7 @@ const UploadImageBox: FC<Props> = ({ onChange, imageFile }) => {
         <div className="flex text-sm text-gray-600 w-full">
           <label
             htmlFor="file-upload"
-            className="relative cursor-pointer bg-white rounded-md font-medium text-gray-900 hover:text-gray-800 focus-within:outline-none w-full  px-24"
+            className="relative cursor-pointer bg-white rounded-md font-medium text-gray-900 hover:text-gray-900 focus-within:outline-none w-full  px-24"
           >
             <UploadImageSVG />
             <span className="text-center">Upload a photo</span>

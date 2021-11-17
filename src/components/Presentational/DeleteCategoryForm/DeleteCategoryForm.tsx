@@ -59,7 +59,7 @@ const DeleteCategoryForm: FC<Props> = ({ onCompleted, menuID, selectedCategory }
   return (
     <form noValidate onSubmit={handleSubmit}>
       <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-800 tracking-wider uppercase mr-4">
+        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           Catgeory:{" "}
           <span className="font-bold underline text-red-400">{selectedCategory?.name}</span>
         </h3>

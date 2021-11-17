@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import type { FC } from "react";
+import { Fab } from "react-tiny-fab";
+import { BookOpenIcon } from "@heroicons/react/solid";
 import { Restaurant } from "@presentational";
-import { HeroBanner, FloatingMenu } from "@base";
+import { HeroBanner } from "@base";
 import { MenuPage } from "../MenuPage";
 import { MenuSlideOver } from "./MenuSlideOver";
 import { GuestMobileHeader } from "./GuestMobileHeader";
@@ -25,7 +27,13 @@ const GuestPage: FC = () => {
         <GuestMobileSubHeader />
         <Restaurant />
       </GuestMobileHeader>
-      <FloatingMenu setIsMenuSlideOverOpen={setIsMenuSlideOverOpen} />
+      <div className="lg:hidden block">
+        <Fab
+          text="Menus"
+          onClick={() => setIsMenuSlideOverOpen(prevState => !prevState)}
+          icon={<BookOpenIcon className="text-white bg-gray-900 rounded-full p-2" />}
+        />
+      </div>
     </MenuPage>
   );
 };
