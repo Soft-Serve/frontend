@@ -1,0 +1,1 @@
+export { UpdateRestaurantSlugForm } from "./UpdateRestaurantSlugForm";

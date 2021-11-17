@@ -43,7 +43,7 @@ const ColourPicker: FC<Props> = ({ onClose }) => {
           </div>
         ))}
       </div>
-      <Button onClick={() => onClose(false)} size="XL" isFullwidth>
+      <Button css="mt-4" onClick={() => onClose(false)} size="XXL" isFullwidth>
         close
       </Button>
     </div>

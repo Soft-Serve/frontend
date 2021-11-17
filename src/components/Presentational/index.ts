@@ -38,3 +38,4 @@ export { CategoriesContainer } from "./CategoriesContainer";
 export { ColourPicker } from "./ColourPicker";
 export { MobileNavigationProfile } from "./MobileNavigationProfile";
 export { MobileNavigationWrapper } from "./MobileNavigationWrapper";
+export { UpdateRestaurantSlugForm } from "./UpdateRestaurantSlugForm";

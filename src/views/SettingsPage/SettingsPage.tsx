@@ -1,9 +1,10 @@
 import type { FC } from "react";
 import React, { useState } from "react";
-import { ChevronLeftIcon } from "@heroicons/react/solid";
+import { AdjustmentsIcon } from "@heroicons/react/solid";
+import { Fab } from "react-tiny-fab";
 
 import { SettingsSubMenu } from "src/components/Presentational";
-import { Button, TabContent } from "@base";
+import { TabContent } from "@base";
 import { classnames } from "tailwindcss-classnames";
 import { SUB_NAVIGATION } from "src/constants";
 import { MenuPage } from "../MenuPage";
@@ -18,7 +19,6 @@ import { BillingSettings } from "./BillingSettings";
 import { ItemSettings } from "./ItemSettings";
 import { MenuSettings } from "./MenuSettings";
 import { RestaurantSettings } from "./RestaurantSettings";
-import { SettingsBreadCrumbs } from "./SettingsBreadCrumbs";
 import { SettingsWrapper } from "./SettingsWrapper";
 import { CategorySettings } from "./CategorySettings";
 
@@ -70,13 +70,6 @@ const SettingsPage: FC = () => {
       />
       <SettingsMobileHeader onButtonClick={setMobileMenuOpen}>
         <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
-          <SettingsBreadCrumbs>
-            <Button onClick={() => setIsSubNavOpen(true)} type="button" colour="naked">
-              <ChevronLeftIcon className="h-5 w-5 text-gray-900" aria-hidden="true" />
-              <span className="text-gray-900">Settings</span>
-            </Button>
-          </SettingsBreadCrumbs>
-
           <SettingsWrapper>
             <SettingsSubMenu
               selected={selected}
@@ -87,6 +80,13 @@ const SettingsPage: FC = () => {
           </SettingsWrapper>
         </SettingsWrapper>
       </SettingsMobileHeader>
+      <div className="lg:hidden block">
+        <Fab
+          text="Settings"
+          onClick={() => setIsSubNavOpen(true)}
+          icon={<AdjustmentsIcon className="text-white bg-gray-900 rounded-full p-2" />}
+        />
+      </div>
     </MenuPage>
   );
 };

@@ -14,7 +14,7 @@ const FloatingMenu: FC<Props> = ({ setIsMenuSlideOverOpen }) => {
       <Fab
         text="Menus"
         onClick={() => setIsMenuSlideOverOpen(true)}
-        icon={<BookOpenIcon className="text-red-400 bg-white rounded-full p-2" />}
+        icon={<BookOpenIcon className="text-white bg-gray-900 rounded-full p-2" />}
       />
     </div>
   );

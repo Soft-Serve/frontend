@@ -1,0 +1,1 @@
+export { AttachedLabelInput } from "./AttachedLabelInput";
