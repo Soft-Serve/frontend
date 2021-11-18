@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import type { FC } from "react";
 import { AttachedLabelInput, Button } from "@base";
 import { useViewport } from "@hooks";
@@ -35,7 +35,8 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id }) => {
     },
   });
 
-  const handleSubmit = () =>
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     updateRestaurantSlug({
       variables: {
         input: {
@@ -44,6 +45,7 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id }) => {
         },
       },
     });
+  };
 
   return (
     <form className="p-4" onSubmit={handleSubmit}>

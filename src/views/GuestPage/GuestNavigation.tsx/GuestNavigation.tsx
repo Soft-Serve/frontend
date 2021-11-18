@@ -2,30 +2,34 @@ import React from "react";
 import type { FC } from "react";
 import { Navigation, NavigationItem } from "@presentational";
 import { LoginSVG, LogoutSVG } from "@svgs";
-import { useHistory } from "react-router-dom";
 import { routes } from "src/routes";
-import { useCurrentUserQuery } from "@shared";
+import { CURRENT_USER_QUERY, useCurrentUserQuery } from "@shared";
 import { useSignOutMutation } from "src/shared/SignOut.mutation";
 import { AdjustmentsIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import { useRestaurantContext } from "src/contexts";
 
 const GuestNavigation: FC = () => {
-  const history = useHistory();
   const { restaurantSlug } = useRestaurantContext();
   const { data } = useCurrentUserQuery({
     skip: !restaurantSlug,
   });
-  const [signOut] = useSignOutMutation();
+  const [signOut] = useSignOutMutation({
+    refetchQueries: [
+      {
+        query: CURRENT_USER_QUERY,
+      },
+    ],
+  });
 
-  const logUserOut = () => {
+  const signUserOut = () => {
+    localStorage.clear();
     signOut({ variables: { input: {} } });
-    history.push(routes.signIn);
-    window.location.reload();
+    window.location.assign(routes.signIn);
   };
 
   const renderAuthNavigationItem = () => {
     return data?.currentUser ? (
-      <NavigationItem onClick={logUserOut}>
+      <NavigationItem onClick={signUserOut}>
         <span>Sign Out</span>
         <LogoutSVG className="h-5 w-5 text-white" aria-hidden="true" />
       </NavigationItem>

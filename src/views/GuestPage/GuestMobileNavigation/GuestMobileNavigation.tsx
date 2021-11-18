@@ -6,11 +6,10 @@ import {
   MobileNavigationProfile,
   NavigationItem,
 } from "@presentational";
-import { useCurrentUserQuery, useSignOutMutation } from "@shared";
+import { CURRENT_USER_QUERY, useCurrentUserQuery, useSignOutMutation } from "@shared";
 import { LoginIcon } from "@heroicons/react/outline";
 import { routes } from "src/routes";
 import { AdjustmentsIcon, LogoutIcon, PlusCircleIcon } from "@heroicons/react/solid";
-import { useHistory } from "react-router";
 import { useRestaurantContext } from "@contexts";
 import { classnames } from "tailwindcss-classnames";
 
@@ -25,16 +24,19 @@ const GuestMobileNavigation: FC<Props> = ({ isOpen, onClose }) => {
     skip: !restaurantSlug,
   });
 
-  const [signOut] = useSignOutMutation();
-  const history = useHistory();
+  const [signOut] = useSignOutMutation({
+    refetchQueries: [
+      {
+        query: CURRENT_USER_QUERY,
+      },
+    ],
+  });
 
-  const logUserOut = () => {
+  const signUserOut = () => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
-    history.push(routes.signIn);
-    window.location.reload();
+    window.location.assign(routes.signIn);
   };
-
   const renderSignUpButton = () => {
     if (data?.currentUser) return null;
     return (
@@ -64,7 +66,7 @@ const GuestMobileNavigation: FC<Props> = ({ isOpen, onClose }) => {
   const renderSignOutButton = () => {
     if (!data?.currentUser) return null;
     return (
-      <NavigationItem onClick={logUserOut}>
+      <NavigationItem onClick={signUserOut}>
         <LogoutIcon className="mr-3 flex-shrink-0 h-6 w-6 text-white" aria-hidden="true" />
         <span className="flex-1 text-left ">Sign out</span>
       </NavigationItem>

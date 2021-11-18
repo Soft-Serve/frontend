@@ -1,0 +1,1 @@
+export { UpdateRestaurantThemeForm } from "./UpdateRestaurantThemeForm";

@@ -9,14 +9,18 @@ const GlobalProvider: FC = ({ children }) => {
   const [categoryID, setCategoryID] = useState(0);
   const [activeMenu, setActiveMenu] = useState("");
   const [currentUser, setCurrentUser] = useState("");
-  const { restaurantSlug } = useRestaurantContext();
+  const { restaurantSlug, setThemeColour, setThemeTint } = useRestaurantContext();
 
   const { loading } = useRestaurantQuery({
     variables: {
       restaurantSlug,
     },
     skip: !restaurantSlug,
-    onCompleted: completedData => setMenuID(completedData?.restaurant?.id),
+    onCompleted: completedData => {
+      setMenuID(completedData?.restaurant?.id);
+      setThemeColour(completedData?.restaurant?.colour);
+      setThemeTint(completedData?.restaurant?.tint);
+    },
   });
 
   if (loading) {

@@ -1,23 +1,25 @@
 import React from "react";
 import type { FC } from "react";
 import { MenuSVG, LogoutSVG } from "@svgs";
-import { useHistory } from "react-router-dom";
 import { Navigation, NavigationItem } from "@presentational";
 import { routes } from "@routes";
 import { useRestaurantContext } from "@contexts";
-import { useSignOutMutation } from "@shared";
+import { CURRENT_USER_QUERY, useSignOutMutation } from "@shared";
 
 const SettingsNavigation: FC = () => {
   const { restaurantSlug } = useRestaurantContext();
-  const history = useHistory();
-  const [signOut] = useSignOutMutation();
-
-  const logUserOut = () => {
+  const [signOut] = useSignOutMutation({
+    refetchQueries: [
+      {
+        query: CURRENT_USER_QUERY,
+      },
+    ],
+  });
+  const signUserOut = () => {
+    localStorage.clear();
     signOut({ variables: { input: {} } });
-    window.location.reload();
-    history.push(routes.signIn);
+    window.location.assign(routes.signIn);
   };
-
   return (
     <Navigation>
       <NavigationItem css="border-t-2" to={`${routes.restaurants}/${restaurantSlug}`}>
@@ -25,7 +27,7 @@ const SettingsNavigation: FC = () => {
         <MenuSVG className="h-6 w-6 text-white" aria-hidden="true" />
         <span className="sr-only">Menu</span>
       </NavigationItem>
-      <NavigationItem onClick={logUserOut}>
+      <NavigationItem onClick={signUserOut}>
         <span>Sign Out</span>
         <LogoutSVG className="h-5 w-5 text-white" aria-hidden="true" />
       </NavigationItem>

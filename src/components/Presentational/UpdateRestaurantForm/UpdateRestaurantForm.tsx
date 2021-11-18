@@ -1,12 +1,10 @@
 import React, { ChangeEvent, useState, useEffect } from "react";
 import type { FC } from "react";
 import { classnames } from "tailwindcss-classnames";
-import { Button, Card, Input, Modal, UploadImageBox } from "@base";
+import { Card, Input } from "@base";
 import { useUploadPhoto } from "@hooks";
-import { ItemImage, UpdateRestaurantSlugForm } from "@presentational";
-import { useRestaurantContext } from "@contexts";
+import { UpdateRestaurantSlugForm, UpdateRestaurantThemeForm } from "@presentational";
 import type { Restaurant } from "./UpdateRestaurant.mutation";
-import { ColourPicker } from "../ColourPicker";
 
 interface Props {
   restaurant: Restaurant;
@@ -17,9 +15,7 @@ type StateMap = {
 };
 
 const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
-  const [isColourModalOpen, setIsColourModalOpen] = useState(false);
-  const { themeColour, themeTint } = useRestaurantContext();
-  const { photoFile, setPhotoFile, fetchPhoto } = useUploadPhoto();
+  const { photoFile, fetchPhoto } = useUploadPhoto();
 
   const currentRestaurant: StateMap = {
     ...restaurant,
@@ -44,44 +40,17 @@ const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
 
   return (
     <>
-      <Modal isOpen={isColourModalOpen} onClose={setIsColourModalOpen}>
-        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
-          Select Restaurant Theme Colour
-        </h3>
-        <ColourPicker onClose={setIsColourModalOpen} />
-      </Modal>
       <Card withPadding={false} css={classnames("flex-col")}>
         <UpdateRestaurantSlugForm id={restaurant.id} slug={restaurant.slug} />
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>
-        <Input
-          labelText="Restaurant name"
-          value={input.name}
-          onChange={handleChange}
-          type="text"
-          name="name"
-          id="name"
+        <UpdateRestaurantThemeForm
+          id={restaurant.id}
+          restaurantThemeTint={restaurant.tint}
+          restaurantThemeColour={restaurant.colour}
+          restaurantName={restaurant.name}
+          logo={restaurant.logo}
         />
-        <div className="flex items-end">
-          <div>
-            <span className="font-medium text-gray-700 text-sm">Theme Colour</span>
-            <div className={`w-20 h-20 bg-${themeColour}-${themeTint} mr-4 rounded-md mt-2`}>
-              <span className="sr-only">colour</span>
-            </div>
-          </div>
-          <Button size="XL" onClick={() => setIsColourModalOpen(true)}>
-            select colour
-          </Button>
-        </div>
-        <div>
-          <label className="text-sm font-medium text-gray-700 block my-4">Restaurant Logo</label>
-          <div className="flex items-center w-full justify-between flex-wrap">
-            <div className="m-2">
-              <ItemImage photoUrl={input.logo} />
-            </div>
-            <UploadImageBox onChange={setPhotoFile} imageFile={photoFile} />
-          </div>
-        </div>
       </Card>
       <Card css="mt-4">
         <div className="grid grid-cols-6 gap-6">
