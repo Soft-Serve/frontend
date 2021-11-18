@@ -10,8 +10,8 @@ export const UPDATE_RESTAURANT = gql`
       id
       name
       currency
-      primary_colour
-      secondary_colour
+      colour
+      tint
       logo
       slug
       address_line_1
@@ -28,8 +28,8 @@ interface Restaurant {
   __typename: string;
   id: number;
   name: string;
-  primary_colour: string;
-  secondary_colour: string;
+  colour: string;
+  tint: number;
   logo: string;
   slug: string;
   address_line_1: string;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { Button } from "@base";
 import { colors } from "@constants";
@@ -6,9 +6,11 @@ import { useRestaurantContext } from "@contexts";
 
 interface Props {
   onClose: (state: boolean) => void;
+  setTheme: Dispatch<SetStateAction<string>>;
+  setTint: Dispatch<SetStateAction<number>>;
 }
 
-const ColourPicker: FC<Props> = ({ onClose }) => {
+const ColourPicker: FC<Props> = ({ onClose, setTheme, setTint }) => {
   const { setThemeColour, setThemeTint } = useRestaurantContext();
 
   const colourMap = Object.entries(colors);
@@ -26,11 +28,15 @@ const ColourPicker: FC<Props> = ({ onClose }) => {
                   onKeyDown={() => {
                     setThemeColour(colour);
                     setThemeTint(Number(tailWindNumber));
+                    setTheme(colour);
+                    setTint(Number(tailWindNumber));
                     onClose(false);
                   }}
                   onClick={() => {
                     setThemeColour(colour);
                     setThemeTint(Number(tailWindNumber));
+                    setTheme(colour);
+                    setTint(Number(tailWindNumber));
                     onClose(false);
                   }}
                   key={tailWindNumber}

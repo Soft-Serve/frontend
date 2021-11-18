@@ -13,6 +13,7 @@ const RestaurantSettings: FC = () => {
     variables: {
       restaurantSlug,
     },
+    skip: !restaurantSlug,
   });
   if (loading) {
     return <p>loading</p>;

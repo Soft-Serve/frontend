@@ -1,22 +1,26 @@
 import React, { FC } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { routes } from "src/routes";
 import { Button } from "@base";
-import { useCurrentUserQuery, useSignOutMutation } from "@shared";
+import { CURRENT_USER_QUERY, useCurrentUserQuery, useSignOutMutation } from "@shared";
 
 const AdminNavigation: FC = () => {
-  const history = useHistory();
-  const [signOut] = useSignOutMutation();
   const { data, loading } = useCurrentUserQuery();
-
-  if (loading) return <p>loading</p>;
+  const [signOut] = useSignOutMutation({
+    refetchQueries: [
+      {
+        query: CURRENT_USER_QUERY,
+      },
+    ],
+  });
 
   const signUserOut = () => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
-    history.push(routes.signIn);
+    window.location.assign(routes.signIn);
   };
 
+  if (loading) return <p>loading</p>;
   return (
     <nav>
       <ul>

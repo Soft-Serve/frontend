@@ -17,7 +17,7 @@ const UsersSettings: FC = () => {
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
         <div>
           <div className="flex justify-between items-center">
-            <h3 className="text-sm font-semibold text-gray-800 tracking-wider uppercase mr-4">
+            <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
               Add new user
             </h3>
             <Button onClick={() => setIsModalOpen(false)} size="S" colour="accent">
