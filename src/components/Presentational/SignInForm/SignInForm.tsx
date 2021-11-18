@@ -86,7 +86,7 @@ const SignInForm: FC = () => {
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Or{" "}
-          <a href="/" className="font-medium text-red-400 hover:text-red-500">
+          <a href="/sign-up" className="font-medium text-red-400 hover:text-red-500">
             start your 14-day free trial
           </a>
         </p>

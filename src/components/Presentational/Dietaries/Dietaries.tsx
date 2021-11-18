@@ -6,15 +6,19 @@ import { DietarySvg } from "@base";
 
 interface Props {
   itemID: number;
+  itemAvailable?: boolean;
 }
-const Dietaries: FC<Props> = ({ itemID }) => {
+const Dietaries: FC<Props> = ({ itemID, itemAvailable }) => {
   const { themeColour, themeTint } = useRestaurantContext();
   const { data } = useDietaryQuery({
     variables: {
       itemID,
     },
   });
-  return <>{data?.dietaries.map(dietary => DietarySvg(dietary, themeColour, themeTint))}</>;
+
+  const iconColour = itemAvailable ? themeColour : "gray";
+
+  return <>{data?.dietaries.map(dietary => DietarySvg(dietary, iconColour, themeTint))}</>;
 };
 
 export { Dietaries };
