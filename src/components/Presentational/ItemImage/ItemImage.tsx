@@ -4,7 +4,7 @@ import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary, CloudinaryImage } from "@cloudinary/base";
 import { fill } from "@cloudinary/base/actions/resize";
 import { Plugins } from "@cloudinary/html";
-import { Effect, sepia } from "@cloudinary/base/actions/effect";
+import { Effect } from "@cloudinary/base/actions/effect";
 
 export interface ImgProps {
   cldImg: CloudinaryImage;
