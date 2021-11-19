@@ -13,7 +13,9 @@ const Footer: FC = () => {
         >
           Powered by:
         </h6>
-        <FullLogoSVG className={`w-24 fill-current text-${themeColour}-${themeTint}`} />
+        <FullLogoSVG
+          className={`w-24 fill-current stroke-current text-${themeColour}-${themeTint}`}
+        />
       </div>
     </footer>
   );
