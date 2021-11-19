@@ -10,7 +10,7 @@ const ConfirmEmailPage: FC = () => {
       <Container>
         <BoxSection>
           <div className="sm:mx-auto sm:w-full sm:max-w-md flex justify-center flex-col items-center">
-            <FullLogoSVG className="w-36 fill-current text-red-400" />
+            <FullLogoSVG className="w-36 fill-current stroke-current text-red-400" />
             <h2 className="mt-6 text-center text-2xl font-extrabold text-gray-600">
               Please check your email to confirm your account.
             </h2>
