@@ -8,7 +8,7 @@ import { Card, CardContent } from "@base";
 import { SkeletonMenuItemWithoutImage } from "./SkeletonMenuItemWithoutImage";
 
 interface Props {
-  item: Pick<Item, "description" | "name" | "id">;
+  item: Pick<Item, "description" | "name" | "id" | "available">;
 }
 
 const CardMenuItemWithoutImage: FC<Props> = ({ item }) => {
@@ -26,6 +26,8 @@ const CardMenuItemWithoutImage: FC<Props> = ({ item }) => {
   if (loading) return <SkeletonMenuItemWithoutImage />;
   if (error) return <span>error</span>;
 
+  const textStyle = item.available ? "text-black font-medium" : `text-gray-500 font-light`;
+
   return (
     <Card withPadding={false}>
       <CardContent>
@@ -33,20 +35,22 @@ const CardMenuItemWithoutImage: FC<Props> = ({ item }) => {
           <div>
             <div className="flex items-start justify-between">
               <div>
-                <span className="block text-lg leading-tight font-medium text-black ">
-                  {item.name}
-                </span>
-                <p className="mt-2 text-gray-500 break-words italic">{item.description}</p>
+                <span className={`block text-lg leading-tight ${textStyle}`}>{item.name}</span>
+                <p className="mt-2 text-gray-500 break-words italic">
+                  {item.available ? item.description : "** Temporarily unavailable  **"}
+                </p>
               </div>
 
               <div>
-                <div className="w-full">
-                  <ItemPrice itemID={item.id} />
-                </div>
+                {item.available && (
+                  <div className="w-full">
+                    <ItemPrice itemID={item.id} />
+                  </div>
+                )}
               </div>
             </div>
           </div>
-          <Dietaries itemID={item.id} />
+          <Dietaries itemID={item.id} itemAvailable={item.available} />
         </div>
       </CardContent>
     </Card>
