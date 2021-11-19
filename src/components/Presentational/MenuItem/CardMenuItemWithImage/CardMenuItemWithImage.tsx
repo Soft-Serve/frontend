@@ -26,7 +26,7 @@ const CardMenuItemWithImage: FC<Props> = ({ item }) => {
   if (loading) return <SkeletonMenuItemWithImage />;
   if (error) return <span>error</span>;
 
-  const textColour = item.available ? "text-black" : `text-gray-500`;
+  const textStyle = item.available ? "text-black font-medium" : `text-gray-500 font-light`;
 
   return (
     <Card css="relative" withPadding={false}>
@@ -41,9 +41,7 @@ const CardMenuItemWithImage: FC<Props> = ({ item }) => {
         <div className="flex flex-col h-full justify-between w-full p-4">
           <div>
             <div className="flex items-center justify-between">
-              <span className={`block text-lg leading-tight font-medium ${textColour}`}>
-                {item.name}
-              </span>
+              <span className={`block text-lg leading-tight ${textStyle}`}>{item.name}</span>
               <div className="mt-2 mx-2 ">
                 <Dietaries itemAvailable={item.available} itemID={item.id} />
               </div>
