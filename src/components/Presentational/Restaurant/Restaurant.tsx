@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import type { FC } from "react";
 import { useGlobalContext, useRestaurantContext } from "src/contexts";
-import { AllergyLegend, Items, Menus, CategoriesContainer } from "@presentational";
-import { useRestaurantQuery } from "@shared";
+import { AllergyLegend, Items, Menus, CategoriesContainer, WelcomePage } from "@presentational";
+import { useRestaurantQuery, useMenusQuery } from "@shared";
 import { Container, BoxSection, Footer, HeroBanner } from "@base";
 import { classnames } from "tailwindcss-classnames";
 import { SkeletonRestaurant } from "./SkeletonRestaurant";
 
 const Restaurant: FC = () => {
+  const [skipChecklist, setSkipChecklist] = useState(false);
   const { restaurantSlug } = useRestaurantContext();
   const { categoryID } = useGlobalContext();
   const { data, error, loading } = useRestaurantQuery({
@@ -16,13 +17,39 @@ const Restaurant: FC = () => {
     },
     skip: !restaurantSlug,
   });
+
+  const { data: menusData, loading: menusLoading } = useMenusQuery({
+    variables: {
+      restaurantSlug,
+    },
+  });
   const renderItems = () => {
     if (categoryID) return <Items />;
     return null;
   };
-  if (loading) return <SkeletonRestaurant />;
+  if (loading || menusLoading) return <SkeletonRestaurant />;
 
-  if (data?.restaurant)
+  if (
+    (menusData?.menus.length === 0 ||
+      !data?.restaurant?.has_items ||
+      !data?.restaurant?.has_styles) &&
+    !skipChecklist
+  ) {
+    return (
+      <Container>
+        <BoxSection withPadding css={classnames("lg:py-10")}>
+          <WelcomePage
+            hasMenus={menusData?.menus.length !== 0}
+            hasItems={!!data?.restaurant?.has_items}
+            hasStyles={data?.restaurant?.logo !== null || !!data?.restaurant?.has_styles}
+            skipChecklist={state => setSkipChecklist(state)}
+          />
+        </BoxSection>
+      </Container>
+    );
+  }
+
+  if (data?.restaurant) {
     return (
       <>
         <div className="lg:block hidden">
@@ -43,6 +70,7 @@ const Restaurant: FC = () => {
         <Footer />
       </>
     );
+  }
   return <p>{error?.message}</p>;
 };
 
