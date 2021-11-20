@@ -35,6 +35,7 @@ export { ItemPrice } from "./ItemPrice";
 export { AllergyLegend } from "./AllergyLegend";
 export { MenusMobileNavigation } from "./MenusMobileNavigation";
 export { CategoriesContainer } from "./CategoriesContainer";
+export { WelcomePage } from "./WelcomePage";
 export { ColourPicker } from "./ColourPicker";
 export { MobileNavigationProfile } from "./MobileNavigationProfile";
 export { MobileNavigationWrapper } from "./MobileNavigationWrapper";

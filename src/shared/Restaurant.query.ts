@@ -20,6 +20,8 @@ const RESTAURANT_QUERY = gql`
       province
       postal_code
       country
+      has_items
+      has_styles
     }
   }
 `;
@@ -39,6 +41,8 @@ interface Restaurant {
   province: string;
   postal_code: string;
   country: string;
+  has_items: boolean;
+  has_styles: boolean;
 }
 
 interface RestaurantData {
