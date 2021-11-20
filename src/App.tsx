@@ -55,7 +55,7 @@ const App = () => {
               </MenuPage>
             </RestaurantProvider>
           </Route>
-          <Route exact path={`${routes.settings}/:id`}>
+          <Route exact path={`${routes.settings}/:id/`}>
             <RestaurantProvider>
               <GlobalProvider>
                 <SettingsPage />

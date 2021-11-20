@@ -1,6 +1,6 @@
 import { classnames } from "tailwindcss-classnames";
 
-export const container = classnames("flex-1", "max-h-screen", "xl:overflow-y-auto");
+export const container = classnames("flex-1", "overflow-y-auto");
 export const wrapper = classnames(
   "max-w-3xl",
   "mx-auto",
