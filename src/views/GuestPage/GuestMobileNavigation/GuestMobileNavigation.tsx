@@ -76,7 +76,10 @@ const GuestMobileNavigation: FC<Props> = ({ isOpen, onClose }) => {
   const renderSettingsButton = () => {
     if (!data?.currentUser) return null;
     return (
-      <NavigationItem css={classnames("border-t-2")} to={`${routes.settings}/${restaurantSlug}`}>
+      <NavigationItem
+        css={classnames("border-t-2")}
+        to={`${routes.settings}/${restaurantSlug}/restaurant`}
+      >
         <AdjustmentsIcon className="mr-3 flex-shrink-0 h-6 w-6 text-white" aria-hidden="true" />
         <span className="flex-1 text-left ">Settings</span>
       </NavigationItem>

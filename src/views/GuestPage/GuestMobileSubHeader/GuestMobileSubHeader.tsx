@@ -24,7 +24,10 @@ const GuestMobileSubHeader: FC = () => {
   }
 
   return (
-    <nav aria-label="Breadcrumb" className="bg-white border-b border-blue-gray-200 lg:hidden">
+    <nav
+      aria-label="Breadcrumb"
+      className="bg-white border-b lg:hidden sticky top-0 z-40 shadow-lg"
+    >
       <div className="flex overflow-x-scroll my-2 hide-scroll-bar">
         <div className="flex flex-nowrap mx-2">
           <Categories

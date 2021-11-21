@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import type { FC } from "react";
-import { Button, Card, CardContent, Modal, Tab, Tabs } from "@base";
+import { Button, Card, CardContent, Modal, Tab, Tabs, TabWrapper } from "@base";
 import { useRestaurantContext } from "src/contexts";
 import { useCategoriesQuery, useMenusQuery, Category } from "@shared";
 import {
@@ -108,7 +108,7 @@ const CategorySettings: FC = () => {
   };
 
   return (
-    <>
+    <TabWrapper>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
         {renderModalForm()}
       </Modal>
@@ -127,7 +127,7 @@ const CategorySettings: FC = () => {
         handleModal={handleModal}
         categories={categoriesData?.categories}
       />
-    </>
+    </TabWrapper>
   );
 };
 

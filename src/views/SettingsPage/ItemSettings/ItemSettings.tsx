@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import type { FC } from "react";
 import { useRestaurantContext } from "@contexts";
 import { Item, useCategoriesQuery, useItemsQuery, useMenusQuery } from "@shared";
-import { Button, Card, CardContent, Grid, Modal, Tab, Tabs } from "@base";
+import { Button, Card, CardContent, Grid, Modal, Tab, Tabs, TabWrapper } from "@base";
 import { SearchIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import Skeleton from "react-loading-skeleton";
 import { DeleteItemForm, PostItemForm, UpdateItemForm } from "@presentational";
@@ -113,7 +113,7 @@ const ItemSettings: FC = () => {
   };
 
   return (
-    <>
+    <TabWrapper>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
         {renderModalForm()}
       </Modal>
@@ -166,7 +166,7 @@ const ItemSettings: FC = () => {
           ))}
         </Grid>
       </div>
-    </>
+    </TabWrapper>
   );
 };
 

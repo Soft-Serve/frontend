@@ -1,12 +1,13 @@
 import type { FC } from "react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
 import { AdjustmentsIcon } from "@heroicons/react/solid";
 import { Fab } from "react-tiny-fab";
 
 import { SettingsSubMenu } from "src/components/Presentational";
-import { TabContent } from "@base";
+import { useViewport } from "@hooks";
+import { Footer, TabContent } from "@base";
 import { classnames } from "tailwindcss-classnames";
-import { SUB_NAVIGATION } from "src/constants";
 import { MenuPage } from "../MenuPage";
 import { SettingsMobileNavigation } from "./SettingsMobileNavigation";
 import { SettingsNavigation } from "./SettingsNavigation";
@@ -26,10 +27,17 @@ interface MappableObject {
   [key: string]: JSX.Element;
 }
 
+interface SettingsTab {
+  setting: string;
+}
+
 const SettingsPage: FC = () => {
+  const { setting } = useParams<SettingsTab>();
+
+  const { width } = useViewport();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isSubNavOpen, setIsSubNavOpen] = useState(false);
-  const [selected, setSelected] = useState(SUB_NAVIGATION[0].name);
+  const [selected, setSelected] = useState(setting);
 
   const restaurant = <RestaurantSettings />;
   const users = <UsersSettings />;
@@ -51,11 +59,20 @@ const SettingsPage: FC = () => {
     categories,
   } as MappableObject;
 
-  const renderSettingsTab = () => SettingsMap[selected.toLowerCase()];
+  const renderSettingsTab = () => SettingsMap[setting];
+
+  useEffect(() => {
+    setSelected(setting);
+  }, [setting]);
 
   const handleSetSelected = (value: any) => {
     setSelected(value);
     setIsSubNavOpen(false);
+  };
+
+  const renderMobileFooter = () => {
+    if (width > 1024) return null;
+    return <Footer />;
   };
 
   return (
@@ -78,12 +95,13 @@ const SettingsPage: FC = () => {
             />
             <TabContent>{renderSettingsTab()}</TabContent>
           </SettingsWrapper>
+          {renderMobileFooter()}
         </SettingsWrapper>
       </SettingsMobileHeader>
       <div className="lg:hidden block">
         <Fab
           text="Settings"
-          onClick={() => setIsSubNavOpen(true)}
+          onClick={() => setIsSubNavOpen(prevState => !prevState)}
           icon={<AdjustmentsIcon className="text-white bg-gray-900 rounded-full p-2" />}
         />
       </div>

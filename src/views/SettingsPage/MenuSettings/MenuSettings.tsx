@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import type { FC } from "react";
-import { Button, Card, CardContent, Modal } from "@base";
+import { Button, Card, CardContent, Modal, TabWrapper } from "@base";
 import { useRestaurantContext } from "@contexts";
 import { useRestaurantQuery, useMenusQuery, Menu } from "@shared";
 import { DeleteMenuForm, PostMenuForm, UpdateMenuForm } from "src/components/Presentational";
@@ -57,7 +57,7 @@ const MenuSettings: FC = () => {
   const renderModalForm = () => forms[action];
 
   return (
-    <>
+    <TabWrapper>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
         {renderModalForm()}
       </Modal>
@@ -71,7 +71,7 @@ const MenuSettings: FC = () => {
         </CardContent>
       </Card>
       <MenusList loading={loading} handleModal={handleMenuModal} menus={data?.menus} />
-    </>
+    </TabWrapper>
   );
 };
 
