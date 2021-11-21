@@ -4,7 +4,8 @@ import { AdjustmentsIcon } from "@heroicons/react/solid";
 import { Fab } from "react-tiny-fab";
 
 import { SettingsSubMenu } from "src/components/Presentational";
-import { TabContent } from "@base";
+import { useViewport } from "@hooks";
+import { Footer, TabContent } from "@base";
 import { classnames } from "tailwindcss-classnames";
 import { SUB_NAVIGATION } from "src/constants";
 import { MenuPage } from "../MenuPage";
@@ -27,6 +28,7 @@ interface MappableObject {
 }
 
 const SettingsPage: FC = () => {
+  const { width } = useViewport();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isSubNavOpen, setIsSubNavOpen] = useState(false);
   const [selected, setSelected] = useState(SUB_NAVIGATION[0].name);
@@ -58,6 +60,11 @@ const SettingsPage: FC = () => {
     setIsSubNavOpen(false);
   };
 
+  const renderMobileFooter = () => {
+    if (width > 1024) return null;
+    return <Footer />;
+  };
+
   return (
     <MenuPage>
       <SettingsMobileNavigation isOpen={mobileMenuOpen} onClose={setMobileMenuOpen} />
@@ -78,6 +85,7 @@ const SettingsPage: FC = () => {
             />
             <TabContent>{renderSettingsTab()}</TabContent>
           </SettingsWrapper>
+          {renderMobileFooter()}
         </SettingsWrapper>
       </SettingsMobileHeader>
       <div className="lg:hidden block">

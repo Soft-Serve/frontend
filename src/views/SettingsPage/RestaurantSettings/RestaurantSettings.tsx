@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { UpdateRestaurantForm } from "@presentational";
 import { useRestaurantQuery } from "@shared";
 import { useRestaurantContext } from "@contexts";
-import { Card, CardContent } from "@base";
+import { Card, CardContent, TabWrapper } from "@base";
 import { SettingsHeader } from "../SettingsHeader";
 
 const RestaurantSettings: FC = () => {
@@ -20,7 +20,7 @@ const RestaurantSettings: FC = () => {
   }
   if (data?.restaurant) {
     return (
-      <>
+      <TabWrapper>
         <Card css="mb-4">
           <CardContent>
             <SettingsHeader>Restaurant</SettingsHeader>
@@ -31,7 +31,7 @@ const RestaurantSettings: FC = () => {
             <UpdateRestaurantForm restaurant={data.restaurant} />
           </div>
         </div>
-      </>
+      </TabWrapper>
     );
   }
   return null;

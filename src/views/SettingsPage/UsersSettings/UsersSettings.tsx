@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { SignUpForm } from "src/components/Presentational/SignUpForm";
 import { UsersList } from "src/components/Presentational/UsersList";
 import { XIcon, UserAddIcon } from "@heroicons/react/solid";
-import { Button, Card, CardContent, Modal } from "@base";
+import { Button, Card, CardContent, Modal, TabWrapper } from "@base";
 import { SettingsHeader } from "../SettingsHeader";
 
 const UsersSettings: FC = () => {
@@ -13,7 +13,7 @@ const UsersSettings: FC = () => {
     setIsModalOpen(true);
   };
   return (
-    <>
+    <TabWrapper>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
         <div>
           <div className="flex justify-between items-center">
@@ -42,7 +42,7 @@ const UsersSettings: FC = () => {
           <UsersList />
         </div>
       </div>
-    </>
+    </TabWrapper>
   );
 };
 

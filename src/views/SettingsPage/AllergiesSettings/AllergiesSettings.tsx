@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { PostAllergyForm, DeleteAllergyForm, UpdateAllergyForm } from "@presentational";
 import { AllergiesList } from "src/components/Presentational/AllergiesList";
 import type { Allergy } from "@shared";
-import { Button, Card, CardContent, Modal } from "@base";
+import { Button, Card, CardContent, Modal, TabWrapper } from "@base";
 import { FilterIcon } from "@heroicons/react/solid";
 import { SettingsHeader } from "../SettingsHeader";
 
@@ -33,7 +33,7 @@ const AllergiesSettings: FC = () => {
   };
 
   return (
-    <>
+    <TabWrapper>
       <Modal isOpen={isPostModalOpen} onClose={setIsPostModalOpen}>
         <PostAllergyForm onCompleted={setIsPostModalOpen} />
       </Modal>
@@ -56,7 +56,7 @@ const AllergiesSettings: FC = () => {
         </CardContent>
       </Card>
       <AllergiesList handleDeleteItem={handleDeleteItem} handleUpdateItem={handleUpdateItem} />
-    </>
+    </TabWrapper>
   );
 };
 
