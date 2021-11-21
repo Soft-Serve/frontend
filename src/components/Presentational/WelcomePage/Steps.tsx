@@ -3,6 +3,8 @@ import type { FC } from "react";
 import { useRestaurantContext } from "src/contexts";
 
 import { CheckIcon } from "@heroicons/react/solid";
+import { routes } from "src/routes";
+import { Link } from "react-router-dom";
 
 interface Step {
   name: string;
@@ -18,7 +20,7 @@ interface Props {
 }
 
 const Steps: FC<Props> = ({ hasMenus, hasItems, hasStyles }) => {
-  const { themeColour, themeTint } = useRestaurantContext();
+  const { themeColour, themeTint, restaurantSlug } = useRestaurantContext();
 
   const itemStatus = () => {
     if (!hasMenus) return "upcoming";
@@ -42,20 +44,20 @@ const Steps: FC<Props> = ({ hasMenus, hasItems, hasStyles }) => {
     {
       name: "Create menus",
       description: "Add your restaurant's menu names",
-      href: "#",
+      href: `${routes.settings}/${restaurantSlug}/menus`,
       status: hasMenus ? "complete" : "current",
     },
     {
       name: "Add categories & items",
       description:
         "Add categories and items to your menus. Menus can be created without categories if you do not wish to use them.",
-      href: "#",
+      href: `${routes.settings}/${restaurantSlug}/categories`,
       status: itemStatus(),
     },
     {
       name: "Customize menu design",
       description: "Choose your menu colour, logo and banner",
-      href: "#",
+      href: `${routes.settings}/${restaurantSlug}/restaurant`,
       status: designStatus(),
     },
   ];
@@ -73,7 +75,7 @@ const Steps: FC<Props> = ({ hasMenus, hasItems, hasStyles }) => {
             aria-hidden="true"
           />
         )}
-        <a href={step.href} className="relative flex items-start group">
+        <Link to={step.href} className="relative flex items-start group">
           <span className="h-9 flex items-center">
             <span
               className={`relative z-10 w-8 h-8 flex items-center justify-center bg-${themeColour}-${themeTint} rounded-full group-hover:bg-${themeColour}-200`}
@@ -85,7 +87,7 @@ const Steps: FC<Props> = ({ hasMenus, hasItems, hasStyles }) => {
             <span className="text-xs font-semibold tracking-wide uppercase">{step.name}</span>
             <span className="text-sm text-gray-500">{step.description}</span>
           </span>
-        </a>
+        </Link>
       </>
     );
   };

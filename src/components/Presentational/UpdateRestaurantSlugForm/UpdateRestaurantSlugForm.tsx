@@ -1,8 +1,8 @@
 import React, { FormEvent, useState } from "react";
 import type { FC } from "react";
-import { AttachedLabelInput, Button } from "@base";
+import toast from "react-hot-toast";
+import { AttachedLabelInput, Button, Notification } from "@base";
 import { useViewport } from "@hooks";
-import { useHistory } from "react-router";
 import { useUpdateRestaurantSlug } from "./UpdateRestaurantSlug.mutation";
 
 interface Props {
@@ -13,7 +13,6 @@ interface Props {
 const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id }) => {
   const [slugState, setSlugState] = useState(slug);
   const { width } = useViewport();
-  const history = useHistory();
 
   const isTablet = width < 550;
 
@@ -28,10 +27,12 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id }) => {
     );
   };
 
+  const onSuccess = () => toast.custom(<Notification header="Slug succesfully updated!" />);
+
   const [updateRestaurantSlug] = useUpdateRestaurantSlug({
     onCompleted: completedData => {
-      history.push(`/settings/${completedData.updateRestaurantSlug.slug}`);
-      window.location.reload();
+      window.location.assign(`/settings/${completedData.updateRestaurantSlug.slug}/restaurant`);
+      onSuccess();
     },
   });
 

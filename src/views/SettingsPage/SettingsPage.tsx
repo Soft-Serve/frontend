@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { AdjustmentsIcon } from "@heroicons/react/solid";
 import { Fab } from "react-tiny-fab";
+import { Toaster } from "react-hot-toast";
 
 import { SettingsSubMenu } from "src/components/Presentational";
 import { useViewport } from "@hooks";
@@ -105,6 +106,7 @@ const SettingsPage: FC = () => {
           icon={<AdjustmentsIcon className="text-white bg-gray-900 rounded-full p-2" />}
         />
       </div>
+      <Toaster />
     </MenuPage>
   );
 };

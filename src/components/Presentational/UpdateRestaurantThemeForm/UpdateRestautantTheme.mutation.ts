@@ -11,7 +11,6 @@ export const UPDATE_RESTAURANT_THENE = gql`
       name
       colour
       tint
-      logo
     }
   }
 `;
@@ -22,7 +21,6 @@ interface Theme {
   name: string;
   colour: string;
   tint: number;
-  logo: string;
 }
 
 interface Variables {
@@ -31,7 +29,6 @@ interface Variables {
     name: string;
     colour: string;
     tint: number;
-    logo: string;
   };
 }
 

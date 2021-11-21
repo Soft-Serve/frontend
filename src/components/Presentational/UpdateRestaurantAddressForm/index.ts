@@ -1,0 +1,1 @@
+export { UpdateRestaurantAddressForm } from "./UpdateRestaurantAddressForm";
