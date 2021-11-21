@@ -15,49 +15,49 @@ export const accessToken = "access-token";
 export const clientToken = "client";
 export const SUB_NAVIGATION = [
   {
-    name: "Restaurant",
+    name: "restaurant",
     description: "View and edit your restaurant information",
     icon: HomeIcon,
     current: true,
   },
   {
-    name: "Account",
+    name: "account",
     description: "Your account information",
     icon: CogIcon,
     current: false,
   },
   {
-    name: "Users",
+    name: "users",
     description: "View and add users",
     icon: UserIcon,
     current: false,
   },
   {
-    name: "Menus",
+    name: "menus",
     description: "View and update your menu's",
     icon: BookOpenIcon,
     current: false,
   },
   {
-    name: "Categories",
+    name: "categories",
     description: "View and add categories",
     icon: ViewGridIcon,
     current: false,
   },
   {
-    name: "Items",
+    name: "items",
     description: "View and edit your menu items",
     icon: ClipboardListIcon,
     current: false,
   },
   {
-    name: "Dietaries",
+    name: "dietaries",
     description: "View and modify dietary filters",
     icon: FilterIcon,
     current: false,
   },
   {
-    name: "Billing",
+    name: "billing",
     description: "View and modify your billing information",
     icon: CreditCardIcon,
     current: false,

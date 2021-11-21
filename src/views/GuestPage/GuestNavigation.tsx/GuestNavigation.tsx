@@ -44,7 +44,7 @@ const GuestNavigation: FC = () => {
   return (
     <Navigation>
       {data?.currentUser ? (
-        <NavigationItem css="border-t-2" to={`${routes.settings}/${restaurantSlug}`}>
+        <NavigationItem css="border-t-2" to={`${routes.settings}/${restaurantSlug}/restaurant`}>
           <span>Settings</span>
           <AdjustmentsIcon className="h-6 w-6 text-white" aria-hidden="true" />
           <span className="sr-only">Settings</span>
