@@ -3,6 +3,9 @@ import type { FC } from "react";
 import { Button, Card, CardContent, List, ListItem, SkeletonList } from "@base";
 import { Menu } from "@shared";
 import { UpdateSVG, DeleteSVG } from "src/svgs";
+import { Link } from "react-router-dom";
+import { routes } from "@routes";
+import { useRestaurantContext } from "@contexts";
 
 enum ModalForms {
   UpdateMenu = "updateMenu",
@@ -15,6 +18,7 @@ interface Props {
   loading: boolean;
 }
 const MenusList: FC<Props> = ({ menus, handleModal, loading }) => {
+  const { restaurantSlug } = useRestaurantContext();
   if (loading) {
     return <SkeletonList />;
   }
@@ -25,9 +29,11 @@ const MenusList: FC<Props> = ({ menus, handleModal, loading }) => {
           {menus?.map(menu => (
             <ListItem key={menu.id}>
               <div className="w-0 flex-1 flex items-center">
-                <span className="ml-2 flex-1 w-0 font-medium">{menu.name}</span>
+                <Link to={`${routes.settings}/${restaurantSlug}/items?menu=${menu.name}`}>
+                  <span className="flex-1 w-0 font-medium text-gray-900 py-2">{menu.name}</span>
+                </Link>
               </div>
-              <div className="ml-4 flex flex-col sm:flex-row">
+              <div className="ml-4 flex flex-col lg:flex-row">
                 <div className="w-full sm:mr-2 my-1">
                   <Button
                     isFullwidth

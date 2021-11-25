@@ -19,7 +19,7 @@ const SignInPage: FC = () => {
     <MenuPage>
       <SignInMobileNavigation isOpen={isMobileMenuOpen} onClose={setIsMobileMenuOpen} />
       <SignInNavigation />
-      <SignInMobileHeader onButtonClick={setIsMobileMenuOpen}>
+      <SignInMobileHeader setMobileMenuOpen={setIsMobileMenuOpen}>
         <Container>
           <BoxSection>
             <SignInForm />

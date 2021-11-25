@@ -4,11 +4,13 @@ import { Input, Button } from "@base";
 import { uid, accessToken, clientToken } from "src/constants";
 import { LogoSVG } from "@svgs";
 import { isBasicEmailRegexValid, isEmailAtValid, isEmailDotValid } from "src/utility";
+import { useViewport } from "@hooks";
 import { CURRENT_USER_QUERY } from "@shared";
 import { useSignInFormMutation } from "./SignInForm.mutation";
 
 const SignInForm: FC = () => {
   const [isLoginSuccesFull, setIsLoginSuccessFull] = useState(true);
+  const { width } = useViewport();
   const [signIn] = useSignInFormMutation({
     onCompleted: completedData => {
       localStorage.setItem(accessToken, completedData.signIn.access_token);
@@ -77,9 +79,13 @@ const SignInForm: FC = () => {
     }
   };
 
-  return (
-    <>
-      <div className="sm:mx-auto sm:w-full sm:max-w-md flex justify-center flex-col items-center">
+  const isSmallerThenTablet = width < 500;
+
+  const renderCTA = () => {
+    if (isSmallerThenTablet)
+      return <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in</h2>;
+    return (
+      <>
         <LogoSVG />
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Sign in to your account
@@ -90,8 +96,15 @@ const SignInForm: FC = () => {
             start your 14-day free trial
           </a>
         </p>
-      </div>
+      </>
+    );
+  };
 
+  return (
+    <>
+      <div className="sm:mx-auto sm:w-full sm:max-w-md flex justify-center flex-col items-center">
+        {renderCTA()}
+      </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
@@ -123,7 +136,7 @@ const SignInForm: FC = () => {
             </div>
 
             <div>
-              <Button isFullwidth size="XL" type="submit">
+              <Button isFullwidth size="XXL" type="submit">
                 Sign in
               </Button>
             </div>

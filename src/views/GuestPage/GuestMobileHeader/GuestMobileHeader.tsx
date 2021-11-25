@@ -1,22 +1,21 @@
 import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { useRestaurantContext } from "src/contexts";
-import { useRestaurantQuery } from "@shared";
 import { RestaurantLogo } from "@presentational";
-import { MenuIcon } from "@heroicons/react/solid";
+import { BookOpenIcon, MenuIcon } from "@heroicons/react/solid";
+import { Button } from "@base";
 
 interface Props {
   setIsGuestNavigationOpen: Dispatch<SetStateAction<boolean>>;
+  setIsMenuSlideOverOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const GuestMobileHeader: FC<Props> = ({ children, setIsGuestNavigationOpen }) => {
-  const { themeColour, themeTint, restaurantSlug } = useRestaurantContext();
-  const { data } = useRestaurantQuery({
-    variables: {
-      restaurantSlug,
-    },
-    skip: !restaurantSlug,
-  });
+const GuestMobileHeader: FC<Props> = ({
+  children,
+  setIsGuestNavigationOpen,
+  setIsMenuSlideOverOpen,
+}) => {
+  const { themeColour, themeTint } = useRestaurantContext();
 
   return (
     <div className="flex-1 min-w-0 flex flex-col overflow-y-auto">
@@ -26,20 +25,24 @@ const GuestMobileHeader: FC<Props> = ({ children, setIsGuestNavigationOpen }) =>
         >
           <div className="flex items-center">
             <RestaurantLogo dimensions={50} />
-            {data?.restaurant?.name && (
-              <div className="ml-4">
-                <h2 className="text-2xl text-white font-semibold">{data?.restaurant?.name}</h2>
-              </div>
-            )}
           </div>
-          <button
-            type="button"
-            className={`-mr-3 h-12 w-12 inline-flex items-center justify-center bg-${themeColour}-${themeTint} rounded-md text-white  focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white`}
-            onClick={() => setIsGuestNavigationOpen(prevState => !prevState)}
-          >
-            <span className="sr-only">Open sidebar</span>
-            <MenuIcon className="h-6 w-6" aria-hidden="true" />
-          </button>
+          <div>
+            <Button
+              css="mr-4"
+              colour="accent"
+              onClick={() => setIsMenuSlideOverOpen(prevState => !prevState)}
+            >
+              <span className="sr-only">Open sidebar</span>
+              <BookOpenIcon className="h-6 w-6" />
+            </Button>
+            <Button
+              colour="accent"
+              onClick={() => setIsGuestNavigationOpen(prevState => !prevState)}
+            >
+              <span className="sr-only">Open sidebar</span>
+              <MenuIcon className="h-6 w-6" aria-hidden="true" />
+            </Button>
+          </div>
         </div>
       </div>
       {children}

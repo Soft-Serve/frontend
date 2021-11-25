@@ -1,8 +1,11 @@
 import React from "react";
 import type { FC } from "react";
+import { Link } from "react-router-dom";
 import { Button, Card, CardContent, List, ListItem, SkeletonList } from "@base";
-import { Category } from "@shared";
+import { Category, Menu } from "@shared";
 import { UpdateSVG, DeleteSVG } from "src/svgs";
+import { routes } from "@routes";
+import { useRestaurantContext } from "@contexts";
 
 enum ModalForms {
   UpdateCategory = "updateCategory",
@@ -10,11 +13,14 @@ enum ModalForms {
 }
 
 interface Props {
+  activeMenu?: Menu;
   categories?: Category[];
   handleModal: (modalForm: ModalForms, category?: Category) => void;
   loading: boolean;
 }
-const CategoryList: FC<Props> = ({ categories, handleModal, loading }) => {
+const CategoryList: FC<Props> = ({ categories, handleModal, loading, activeMenu }) => {
+  const { restaurantSlug } = useRestaurantContext();
+
   if (loading) {
     return <SkeletonList />;
   }
@@ -25,7 +31,11 @@ const CategoryList: FC<Props> = ({ categories, handleModal, loading }) => {
           {categories?.map(category => (
             <ListItem key={category.id}>
               <div className="w-0 flex-1 flex items-center">
-                <span className="ml-2 flex-1 w-0 font-medium">{category.name}</span>
+                <Link
+                  to={`${routes.settings}/${restaurantSlug}/items?menu=${activeMenu?.name}&category=${category.name}`}
+                >
+                  <span className="ml-2 flex-1 w-0 font-medium">{category.name}</span>
+                </Link>
               </div>
               <div className="ml-4 flex flex-col sm:flex-row">
                 <div className="w-full sm:mr-2 my-1">

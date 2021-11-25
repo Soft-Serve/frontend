@@ -1,6 +1,6 @@
 import React from "react";
 import type { FC } from "react";
-import { LogoSVG } from "@svgs";
+import { FullLogoSVG } from "@svgs";
 import { useRestaurantContext } from "@contexts";
 import { useRestaurantQuery } from "@shared";
 import { AdvancedImage } from "@cloudinary/react";
@@ -40,11 +40,7 @@ const RestaurantLogo: FC<Props> = ({ dimensions, borderColor = "white", borderWi
       {logo ? (
         <AdvancedImage cldImg={cldImage} />
       ) : (
-        <div>
-          <div className="flex-shrink-0 flex items-center justify-center px-4 bg-white p-2 rounded-full">
-            <LogoSVG className="h-15 w-15" />
-          </div>
-        </div>
+        <FullLogoSVG className="w-20 fill-current stroke-current text-white" />
       )}
     </>
   );

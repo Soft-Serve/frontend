@@ -115,14 +115,15 @@ const CategorySettings: FC = () => {
       <Card css="mb-4">
         <CardContent>
           <SettingsHeader>Categories</SettingsHeader>
-          <Button size="LG" onClick={() => handleModal(ModalForms.PostCategory)}>
-            <span className="mr-4 text-base">Add Category</span>
+          <Button size="XXL" onClick={() => handleModal(ModalForms.PostCategory)}>
+            <span className="mr-4 text-base  hidden sm:block">Add Category</span>
             <ViewGridAddIcon className="w-5 h-5" />
           </Button>
         </CardContent>
       </Card>
       {renderMenusTabs()}
       <CategoryList
+        activeMenu={activeMenu}
         loading={loading}
         handleModal={handleModal}
         categories={categoriesData?.categories}

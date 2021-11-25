@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import type { FC } from "react";
-import { Fab } from "react-tiny-fab";
-import { BookOpenIcon } from "@heroicons/react/solid";
 import { Restaurant } from "@presentational";
 import { HeroBanner } from "@base";
 import { MenuPage } from "../MenuPage";
@@ -20,20 +18,16 @@ const GuestPage: FC = () => {
       <GuestMobileNavigation isOpen={isGuestNavigationOpen} onClose={setIsGuestNavigationOpen} />
       <MenuSlideOver isOpen={isMenuSlideOverOpen} onClose={setIsMenuSlideOverOpen} />
       <GuestNavigation />
-      <GuestMobileHeader setIsGuestNavigationOpen={setIsGuestNavigationOpen}>
+      <GuestMobileHeader
+        setIsMenuSlideOverOpen={setIsMenuSlideOverOpen}
+        setIsGuestNavigationOpen={setIsGuestNavigationOpen}
+      >
         <div className="lg:hidden block">
           <HeroBanner />
         </div>
         <GuestMobileSubHeader />
         <Restaurant />
       </GuestMobileHeader>
-      <div className="lg:hidden block">
-        <Fab
-          text="Menus"
-          onClick={() => setIsMenuSlideOverOpen(prevState => !prevState)}
-          icon={<BookOpenIcon className="text-white bg-gray-900 rounded-full p-2" />}
-        />
-      </div>
     </MenuPage>
   );
 };

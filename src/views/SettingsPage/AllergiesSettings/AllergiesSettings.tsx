@@ -49,8 +49,8 @@ const AllergiesSettings: FC = () => {
       <Card css="mb-4">
         <CardContent>
           <SettingsHeader>Dietaries</SettingsHeader>
-          <Button onClick={handlePostItem} size="LG" type="button">
-            <span className="mr-4 text-base">Add Dietary</span>
+          <Button onClick={handlePostItem} size="XXL" type="button">
+            <span className="mr-4 text-base hidden sm:block">Add Dietary</span>
             <FilterIcon className="w-5 h-5" />
           </Button>
         </CardContent>

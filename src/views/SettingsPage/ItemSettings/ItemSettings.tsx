@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import type { FC } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { useRestaurantContext } from "@contexts";
-import { Item, useCategoriesQuery, useItemsQuery, useMenusQuery } from "@shared";
+import { Category, Item, Menu, useCategoriesQuery, useItemsQuery, useMenusQuery } from "@shared";
 import { Button, Card, CardContent, Grid, Modal, Tab, Tabs, TabWrapper } from "@base";
 import { SearchIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import Skeleton from "react-loading-skeleton";
 import { DeleteItemForm, PostItemForm, UpdateItemForm } from "@presentational";
+import { useGetParams } from "@utility";
+import { routes } from "@routes";
 import { CategoryItems } from "./CategoryItems";
 import { SettingsHeader } from "../SettingsHeader";
 
@@ -17,7 +20,10 @@ enum ModalForms {
 
 const ItemSettings: FC = () => {
   const { themeColour, themeTint } = useRestaurantContext();
+  const params = useGetParams();
   const { restaurantSlug } = useRestaurantContext();
+  const history = useHistory();
+
   const { data: menuData, loading: menuLoading } = useMenusQuery({
     variables: {
       restaurantSlug,
@@ -45,6 +51,16 @@ const ItemSettings: FC = () => {
   useEffect(() => {
     setActiveMenu(menuData?.menus[0]);
   }, [menuData?.menus]);
+
+  const menuParam = params.get("menu");
+  const categoryParam = params.get("category");
+
+  useEffect(() => {
+    if (menuParam) {
+      const selectedMenu = menuData?.menus?.find(menu => menu.name === menuParam);
+      setActiveMenu(selectedMenu);
+    }
+  }, [menuData?.menus, menuParam]);
 
   const deleteItem = (
     <DeleteItemForm
@@ -93,13 +109,23 @@ const ItemSettings: FC = () => {
     setIsModalOpen(true);
   };
 
+  const handleActiveMenu = (menu: Menu) => {
+    if (categoryParam) {
+      params.delete("category");
+      history.replace({
+        search: params.toString(),
+      });
+    }
+    setActiveMenu(menu);
+  };
+
   const renderMenusTabs = () => {
     if (menuLoading) return <Skeleton className="my-2" height={50} />;
     return (
       <Tabs>
         {menuData?.menus.map((menu, index) => (
           <Tab
-            onClick={() => setActiveMenu(menu)}
+            onClick={() => handleActiveMenu(menu)}
             numOfTabs={menuData.menus.length}
             tabIndex={index}
             isActive={menu.id === activeMenu?.id}
@@ -112,18 +138,60 @@ const ItemSettings: FC = () => {
     );
   };
 
+  const filteredCategories = (categories?: Category[]) => {
+    if (!categoryParam) return categories;
+    return categories?.filter(category => category.name === categoryParam);
+  };
+
+  const renderBreadCrumbs = () => {
+    return (
+      <nav className="flex mt-4" aria-label="Breadcrumb">
+        <ol className="bg-white rounded-md shadow px-6 flex space-x-4">
+          <li className="flex">
+            <div className="flex items-center">
+              <span className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
+                {activeMenu?.name}
+              </span>
+            </div>
+          </li>
+          <li className="flex">
+            <div className="flex items-center">
+              <svg
+                className="flex-shrink-0 w-6 h-full text-gray-200"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <Link to={`${routes.settings}/${restaurantSlug}/categories`}>
+                <span className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
+                  {categoryParam || "All categories"}
+                </span>
+              </Link>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    );
+  };
+
   return (
     <TabWrapper>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
         {renderModalForm()}
       </Modal>
       <Card css="mb-4">
-        <CardContent>
-          <SettingsHeader>Items</SettingsHeader>
-          <Button onClick={handlePostItem} size="LG">
-            <span className="mr-4 text-base">Add Item</span>
-            <PlusCircleIcon className="w-5 h-5" />
-          </Button>
+        <CardContent css="flex-col">
+          <div className="flex w-full items-center justify-between mb-4">
+            <SettingsHeader>Items</SettingsHeader>
+            <Button onClick={handlePostItem} size="XXL">
+              <span className="mr-4 text-base e hidden sm:block">Add Item</span>
+              <PlusCircleIcon className="w-5 h-5" />
+            </Button>
+          </div>
         </CardContent>
       </Card>
       {renderMenusTabs()}
@@ -153,9 +221,10 @@ const ItemSettings: FC = () => {
           </div>
         </CardContent>
       </Card>
+      {renderBreadCrumbs()}
       <div className="mt-8">
         <Grid size="SM">
-          {categoryData?.categories?.map(category => (
+          {filteredCategories(categoryData?.categories)?.map(category => (
             <CategoryItems
               handleUpdateItem={handleUpdateItem}
               searchValue={searchValue}

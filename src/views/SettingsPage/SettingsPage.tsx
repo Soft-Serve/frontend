@@ -1,8 +1,6 @@
 import type { FC } from "react";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { AdjustmentsIcon } from "@heroicons/react/solid";
-import { Fab } from "react-tiny-fab";
 import { Toaster } from "react-hot-toast";
 
 import { SettingsSubMenu } from "src/components/Presentational";
@@ -86,7 +84,7 @@ const SettingsPage: FC = () => {
         isOpen={isSubNavOpen}
         onClose={setIsSubNavOpen}
       />
-      <SettingsMobileHeader onButtonClick={setMobileMenuOpen}>
+      <SettingsMobileHeader setIsSubNavOpen={setIsSubNavOpen} setMobileMenuOpen={setMobileMenuOpen}>
         <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
           <SettingsWrapper>
             <SettingsSubMenu
@@ -99,13 +97,6 @@ const SettingsPage: FC = () => {
           {renderMobileFooter()}
         </SettingsWrapper>
       </SettingsMobileHeader>
-      <div className="lg:hidden block">
-        <Fab
-          text="Settings"
-          onClick={() => setIsSubNavOpen(prevState => !prevState)}
-          icon={<AdjustmentsIcon className="text-white bg-gray-900 rounded-full p-2" />}
-        />
-      </div>
       <Toaster />
     </MenuPage>
   );
