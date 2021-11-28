@@ -43,6 +43,7 @@ const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
       </Card>
       <Card css="mt-4">
         <UpdateRestaurantAddressForm
+          restaurantName={restaurant.name}
           id={restaurant.id}
           addressLineOne={restaurant.address_line_1}
           addressLineTwo={restaurant.address_line_2}

@@ -8,7 +8,6 @@ export const UPDATE_RESTAURANT_THENE = gql`
       @rest(type: Item, path: "restaurants/{args.input.id}", method: "PATCH") {
       __typename
       id
-      name
       colour
       tint
     }
@@ -18,7 +17,6 @@ export const UPDATE_RESTAURANT_THENE = gql`
 interface Theme {
   __typename: string;
   id: number;
-  name: string;
   colour: string;
   tint: number;
 }
@@ -26,7 +24,6 @@ interface Theme {
 interface Variables {
   input: {
     id: number;
-    name: string;
     colour: string;
     tint: number;
   };

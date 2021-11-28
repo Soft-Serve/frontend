@@ -7,6 +7,7 @@ import { useRestaurantContext } from "@contexts";
 import { useUpdateRestaurantAddress } from "./UpdateRestaurantAddress.mutation";
 
 interface Props {
+  restaurantName: string;
   addressLineOne: string;
   addressLineTwo: string;
   city: string;
@@ -20,6 +21,7 @@ type StateMap = {
 };
 
 const UpdateRestaurantAddressForm: FC<Props> = ({
+  restaurantName,
   addressLineOne,
   addressLineTwo,
   city,
@@ -28,6 +30,7 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
   id,
 }) => {
   const address = {
+    restaurantName,
     addressLineOne,
     addressLineTwo,
     city,
@@ -96,6 +99,16 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
 
   return (
     <form onSubmit={handleSubmit} className="grid grid-cols-6 gap-6">
+      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+        <Input
+          value={input.restaurantName || ""}
+          onChange={handleChange}
+          labelText="Restaurant name"
+          type="text"
+          name="restaurantName"
+          id="restaurantName"
+        />
+      </div>
       <div className="col-span-6 sm:col-span-3 lg:col-span-2">
         <Input
           labelText="Address line 1"

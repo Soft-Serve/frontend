@@ -20,21 +20,19 @@ const SettingsMobileHeader: FC<Props> = ({ setIsSubNavOpen, setMobileMenuOpen, c
         >
           <div className="flex items-center mr-2">
             <RestaurantLogo dimensions={50} />
-            <div className="ml-4">
-              <h2 className="text-2xl text-white font-semibold">Settings</h2>
-            </div>
           </div>
           <div className="flex w-full justify-end ml-2">
             <Button
-              css="mr-4"
+              css="mr-2"
               colour="accent"
               onClick={() => setIsSubNavOpen(prevState => !prevState)}
             >
-              <span className="sr-only">Open sidebar</span>
+              <span className="sr-only">Open SettingsMenu</span>
               <AdjustmentsIcon className="h-6 w-6" aria-hidden="true" />
+              <span className="ml-2">Settings</span>
             </Button>
             <Button colour="accent" onClick={() => setMobileMenuOpen(prevState => !prevState)}>
-              <span className="sr-only">Open sidebar</span>
+              <span className="sr-only">Open Side Navigation Menu</span>
               <MenuIcon className="h-6 w-6" aria-hidden="true" />
             </Button>
           </div>

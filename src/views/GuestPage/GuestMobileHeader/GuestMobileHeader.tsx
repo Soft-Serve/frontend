@@ -28,12 +28,13 @@ const GuestMobileHeader: FC<Props> = ({
           </div>
           <div>
             <Button
-              css="mr-4"
+              css="mr-2"
               colour="accent"
               onClick={() => setIsMenuSlideOverOpen(prevState => !prevState)}
             >
-              <span className="sr-only">Open sidebar</span>
+              <span className="sr-only">Open Menus List</span>
               <BookOpenIcon className="h-6 w-6" />
+              <span className="ml-2">Menus</span>
             </Button>
             <Button
               colour="accent"

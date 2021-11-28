@@ -24,15 +24,13 @@ const Restaurant: FC = () => {
     },
   });
   const renderItems = () => {
-    if (categoryID) return <Items />;
-    return null;
+    if (loading || menusLoading) return <SkeletonRestaurant />;
+    if (!categoryID) return null;
+    return <Items />;
   };
-  if (loading || menusLoading) return <SkeletonRestaurant />;
 
   if (
-    (menusData?.menus.length === 0 ||
-      !data?.restaurant?.has_items ||
-      !data?.restaurant?.has_styles) &&
+    (!menusData?.menus.length || !data?.restaurant?.has_items || !data?.restaurant?.has_styles) &&
     !skipChecklist
   ) {
     return (

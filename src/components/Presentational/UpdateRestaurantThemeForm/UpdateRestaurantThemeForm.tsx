@@ -1,6 +1,6 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import type { FC } from "react";
-import { Input, Button, Modal, Notification } from "@base";
+import { Button, Modal, Notification } from "@base";
 import toast from "react-hot-toast";
 
 import { ColourPicker } from "@presentational";
@@ -19,8 +19,6 @@ interface Props {
 
 const UpdateRestaurantThemeForm: FC<Props> = ({
   id,
-  logo,
-  restaurantName,
   restaurantThemeColour,
   restaurantThemeTint,
 }) => {
@@ -29,22 +27,13 @@ const UpdateRestaurantThemeForm: FC<Props> = ({
   const { width } = useViewport();
   const onSuccess = () => toast.custom(<Notification header="Theme succesfully updated!" />);
 
-  const [input, setInput] = useState({
-    logo,
-    restaurantName,
-  });
   const [currentThemeColour, setCurrentThemeColour] = useState(themeColour);
   const [currentThemeTint, setCurrentThemeTint] = useState(themeTint);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    setInput(prevState => ({ ...prevState, [name]: value }));
-  };
   const isTablet = width < 592;
 
   const isThemeColourUpdated = restaurantThemeColour !== themeColour;
   const isThemeTintUpdated = restaurantThemeTint !== themeTint;
-  const isNameUpdated = restaurantName !== input.restaurantName;
   const isThemeUpdated = isThemeColourUpdated || isThemeTintUpdated;
 
   const [updateRestaurantTheme, { loading }] = useUpdateRestaurantTheme({
@@ -65,7 +54,6 @@ const UpdateRestaurantThemeForm: FC<Props> = ({
       variables: {
         input: {
           id,
-          name: input.restaurantName,
           tint: currentThemeTint,
           colour: currentThemeColour,
         },
@@ -74,7 +62,7 @@ const UpdateRestaurantThemeForm: FC<Props> = ({
   };
 
   const renderUpdateSlugButton = () => {
-    if (isNameUpdated || isThemeUpdated) {
+    if (isThemeUpdated) {
       return (
         <div className="px-4 py-3  text-right sm:px-6 mt-4">
           <Button loading={loading} isFullwidth={isTablet} size="XXL" type="submit">
@@ -99,26 +87,21 @@ const UpdateRestaurantThemeForm: FC<Props> = ({
         />
       </Modal>
       <form onSubmit={handleSubmit}>
-        <Input
-          value={input.restaurantName}
-          onChange={handleChange}
-          labelText="Restaurant name"
-          type="text"
-          name="restaurantName"
-          id="restaurantName"
-        />
         <div className="flex items-end">
           <div>
             <span className="font-medium text-gray-900 text-sm">Theme Colour</span>
-            <div className={`w-20 h-20 bg-${themeColour}-${themeTint} mr-4 rounded-md mt-2`}>
+            <div
+              onKeyDown={() => setIsColourModalOpen(prevState => !prevState)}
+              tabIndex={0}
+              role="button"
+              onClick={() => setIsColourModalOpen(prevState => !prevState)}
+              className={`w-20 h-20 bg-${themeColour}-${themeTint} mr-4 rounded-md mt-2`}
+            >
               <span className="sr-only">colour</span>
             </div>
           </div>
-          <Button size="XL" onClick={() => setIsColourModalOpen(true)}>
-            select colour
-          </Button>
+          {renderUpdateSlugButton()}
         </div>
-        {renderUpdateSlugButton()}
       </form>
     </>
   );

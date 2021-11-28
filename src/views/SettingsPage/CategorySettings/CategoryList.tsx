@@ -6,6 +6,7 @@ import { Category, Menu } from "@shared";
 import { UpdateSVG, DeleteSVG } from "src/svgs";
 import { routes } from "@routes";
 import { useRestaurantContext } from "@contexts";
+import { ChevronRightIcon } from "@heroicons/react/solid";
 
 enum ModalForms {
   UpdateCategory = "updateCategory",
@@ -30,13 +31,15 @@ const CategoryList: FC<Props> = ({ categories, handleModal, loading, activeMenu 
         <List>
           {categories?.map(category => (
             <ListItem key={category.id}>
-              <div className="w-0 flex-1 flex items-center">
-                <Link
-                  to={`${routes.settings}/${restaurantSlug}/items?menu=${activeMenu?.name}&category=${category.name}`}
-                >
-                  <span className="ml-2 flex-1 w-0 font-medium">{category.name}</span>
-                </Link>
-              </div>
+              <Link
+                className="w-full py-2 cursor-pointer"
+                to={`${routes.settings}/${restaurantSlug}/items?menu=${activeMenu?.name}&category=${category.name}`}
+              >
+                <div className="flex-1 flex items-end">
+                  <span className="font-medium">{category.name}</span>
+                  <ChevronRightIcon className="w-5 h-5" />
+                </div>
+              </Link>
               <div className="ml-4 flex flex-col sm:flex-row">
                 <div className="w-full sm:mr-2 my-1">
                   <Button
