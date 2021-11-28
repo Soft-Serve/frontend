@@ -1,8 +1,9 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 import type { FC } from "react";
-import { Button, Input, Notification } from "@base";
+import { Button, Grid, Input, Notification } from "@base";
 import { RESTAURANT_QUERY } from "@shared";
+import { useViewport } from "@hooks";
 import { useRestaurantContext } from "@contexts";
 import { useUpdateRestaurantAddress } from "./UpdateRestaurantAddress.mutation";
 
@@ -40,6 +41,7 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
 
   const [input, setInput] = useState(address);
   const { restaurantSlug } = useRestaurantContext();
+  const { width } = useViewport();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -88,7 +90,7 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
     if (isAddressUpdated()) {
       return (
         <div className="px-4 py-3  text-right sm:px-6 mt-4">
-          <Button loading={loading} size="XXL" type="submit">
+          <Button loading={loading} size="XXL" isFullwidth={width < 1024} type="submit">
             Update
           </Button>
         </div>
@@ -97,9 +99,16 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
     return null;
   };
 
+  const gridSize = () => {
+    if (width > 1300) return "LG";
+    if (width < 1300 && width > 1024) return "M";
+    if (width < 1024) return "LG";
+    return "SM";
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="grid grid-cols-6 gap-6">
-      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+    <form onSubmit={handleSubmit} className="w-full">
+      <Grid size={gridSize()}>
         <Input
           value={input.restaurantName || ""}
           onChange={handleChange}
@@ -108,8 +117,7 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
           name="restaurantName"
           id="restaurantName"
         />
-      </div>
-      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+
         <Input
           labelText="Address line 1"
           type="text"
@@ -118,8 +126,7 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
           onChange={handleChange}
           value={input.addressLineOne || ""}
         />
-      </div>
-      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+
         <Input
           labelText="Address line 2"
           type="text"
@@ -129,8 +136,7 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
           value={input.addressLineTwo || ""}
           autoComplete="addressLineTwo"
         />
-      </div>
-      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+
         <Input
           labelText="City"
           type="text"
@@ -139,8 +145,7 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
           onChange={handleChange}
           value={input.city || ""}
         />
-      </div>
-      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+
         <Input
           labelText="Province"
           type="text"
@@ -149,8 +154,7 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
           onChange={handleChange}
           value={input.province || ""}
         />
-      </div>
-      <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+
         <Input
           labelText="Postal code"
           type="text"
@@ -159,7 +163,8 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
           onChange={handleChange}
           value={input.postalCode || ""}
         />
-      </div>
+      </Grid>
+
       {renderUpdateSlugButton()}
     </form>
   );
