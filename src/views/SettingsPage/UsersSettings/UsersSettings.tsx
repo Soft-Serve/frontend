@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import type { FC } from "react";
-import { SignUpForm } from "src/components/Presentational/SignUpForm";
-import { UsersList } from "src/components/Presentational/UsersList";
 import { XIcon, UserAddIcon } from "@heroicons/react/solid";
+import { UsersList, PostNewUserForm } from "@presentational";
 import { Button, Card, CardContent, Modal, TabWrapper } from "@base";
 import { SettingsHeader } from "../SettingsHeader";
 
@@ -15,7 +14,7 @@ const UsersSettings: FC = () => {
   return (
     <TabWrapper>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
-        <div>
+        <div className="max-w-xl w-full">
           <div className="flex justify-between items-center">
             <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
               Add new user
@@ -24,7 +23,7 @@ const UsersSettings: FC = () => {
               <XIcon className="w-5 h-5" />
             </Button>
           </div>
-          <SignUpForm />
+          <PostNewUserForm />
         </div>
       </Modal>
 

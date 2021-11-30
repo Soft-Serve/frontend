@@ -83,12 +83,10 @@ const buildStyles = (
 ) =>
   classnames(
     base,
-
     SIZE_MAP[size || "S"],
-    getColours(colour, themeColour, themeTint),
+    isDisabled ? disabled : getColours(colour, themeColour, themeTint),
     {
       [fullWidth]: isFullwidth,
-      [disabled]: isDisabled,
     },
     css
   );

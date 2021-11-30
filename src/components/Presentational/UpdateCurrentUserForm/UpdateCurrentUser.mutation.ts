@@ -9,18 +9,14 @@ export const UPDATE_CURRENT_USER = gql`
       id
       first_name
       last_name
-      email
-      __typename
     }
   }
 `;
 
 interface CurrentUser {
   id: number;
-  email: string;
   first_name: string;
   last_name: string;
-  __typename: string;
 }
 
 interface Variables {

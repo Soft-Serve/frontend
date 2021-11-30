@@ -21,3 +21,4 @@ export {
 export { intersection } from "./intersection";
 export { generateThemeColours, generateThemeAccentColours } from "./generateThemeStyles";
 export { useGetParams } from "./useGetParams";
+export { isPasswordSixChar, isPasswordConfirmd } from "./PasswordValidation";

@@ -1,8 +1,11 @@
 import React, { useState, FormEvent } from "react";
 import type { FC, ChangeEvent } from "react";
-import { Button, Input } from "@base";
+import { Button, Input, Notification } from "@base";
+import toast from "react-hot-toast";
 
 import { CURRENT_USER_QUERY } from "@shared";
+import { useViewport } from "@hooks";
+import { isNameOnlyNumbers, isNameValid } from "@utility";
 import { useUpdateCurrentUser } from "./UpdateCurrentUser.mutation";
 
 interface Props {
@@ -24,11 +27,18 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
   } as StateMap;
 
   const [state, setState] = useState<StateMap>(currentUser);
+  const [isFirstNameDirty, setIsFirstNameDirty] = useState(false);
+  const [isLastNameDirty, setIsLastNameDirty] = useState(false);
+  const { width } = useViewport();
+
+  const isTablet = width < 550;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setState(prevState => ({ ...prevState, [name]: value }));
   };
+
+  const onSuccess = () => toast.custom(<Notification header="Details succesfully updated!" />);
 
   const [updateCurrentUser] = useUpdateCurrentUser({
     update(cache, { data: updatedCurrentUserData }) {
@@ -39,6 +49,7 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
         },
       });
     },
+    onCompleted: () => onSuccess(),
   });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -48,8 +59,6 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
         input: {
           first_name: state.firstName,
           last_name: state.lastName,
-          email: state.email,
-          __typename: "Mutation",
           id,
         },
       },
@@ -58,8 +67,6 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
         updatedUser: {
           first_name: state.firstName,
           last_name: state.lastName,
-          email: state.email,
-          __typename: "Mutation",
           id,
         },
       },
@@ -75,6 +82,19 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
     return false;
   };
 
+  const nameErrors = (name: string, isDirty: boolean) => {
+    if (!isDirty) return null;
+    if (!isNameValid(name)) return <span>Name is required</span>;
+    if (isNameOnlyNumbers(name)) return <span>Name cannot only contain numbers</span>;
+    return null;
+  };
+
+  const isFormValid =
+    isNameValid(state.firstName) &&
+    isNameValid(state.lastName) &&
+    !isNameOnlyNumbers(state.firstName) &&
+    !isNameOnlyNumbers(state.lastName);
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="shadow overflow-hidden sm:rounded-md">
@@ -85,7 +105,9 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
                 First name
               </label>
               <Input
-                value={state.firstName}
+                errors={[nameErrors(state.firstName, isFirstNameDirty)]}
+                onBlur={() => setIsFirstNameDirty(true)}
+                value={state.firstName || ""}
                 onChange={handleChange}
                 type="text"
                 name="firstName"
@@ -99,7 +121,9 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
                 Last name
               </label>
               <Input
-                value={state.lastName}
+                errors={[nameErrors(state.lastName, isLastNameDirty)]}
+                onBlur={() => setIsLastNameDirty(true)}
+                value={state.lastName || ""}
                 onChange={handleChange}
                 type="text"
                 name="lastName"
@@ -124,8 +148,8 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
           </div>
         </div>
         {isCurrentUserUpdated() && (
-          <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-            <Button size="XL" type="submit">
+          <div className="px-4 py-3 bg-white text-right sm:px-6">
+            <Button isFullwidth={isTablet} disabled={!isFormValid} size="XL" type="submit">
               Update
             </Button>
           </div>

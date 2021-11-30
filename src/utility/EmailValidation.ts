@@ -12,7 +12,7 @@ const isBasicEmailValid = (email: string) => {
   return isLengthValid(email) && isEmailAtValid(email);
 };
 
-const isEmailValid = (email: string, regex: RegExp) => {
+const isEmailValid = (email: string, regex = basicEmailRegex) => {
   return isBasicEmailValid(email) && isEmailDotValid(email) && isEmailRegexValid(email, regex);
 };
 

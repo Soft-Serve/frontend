@@ -42,3 +42,4 @@ export { MobileNavigationWrapper } from "./MobileNavigationWrapper";
 export { UpdateRestaurantSlugForm } from "./UpdateRestaurantSlugForm";
 export { UpdateRestaurantThemeForm } from "./UpdateRestaurantThemeForm";
 export { UpdateRestaurantAddressForm } from "./UpdateRestaurantAddressForm";
+export { PostNewUserForm } from "./PostNewUserForm";
