@@ -27,6 +27,7 @@ const CategorySettings: FC = () => {
     variables: {
       restaurantSlug,
     },
+    skip: !restaurantSlug,
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,8 +42,9 @@ const CategorySettings: FC = () => {
 
   const { data: categoriesData, loading } = useCategoriesQuery({
     variables: {
-      menuID: activeMenu?.id ? activeMenu.id : 0,
+      menuID: activeMenu?.id || 0,
     },
+    skip: !activeMenu?.id,
   });
 
   const [activeCategory, setActiveCategory] = useState(categoriesData?.categories?.[0]);

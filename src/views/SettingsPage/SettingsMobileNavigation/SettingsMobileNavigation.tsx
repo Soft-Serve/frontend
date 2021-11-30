@@ -19,7 +19,9 @@ interface Props {
 
 const SettingsMobileNavigation: FC<Props> = ({ isOpen, onClose }) => {
   const { restaurantSlug } = useRestaurantContext();
-  const { data } = useCurrentUserQuery();
+  const { data } = useCurrentUserQuery({
+    skip: !restaurantSlug,
+  });
   const [signOut] = useSignOutMutation({
     refetchQueries: [
       {

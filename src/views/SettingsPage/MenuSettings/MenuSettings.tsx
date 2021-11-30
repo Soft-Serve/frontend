@@ -28,6 +28,7 @@ const MenuSettings: FC = () => {
     variables: {
       restaurantSlug,
     },
+    skip: !restaurantSlug,
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);

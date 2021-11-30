@@ -85,6 +85,7 @@ const PostMenuForm: FC<Props> = ({ onCompleted, restaurantID }) => {
 
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col w-full">
         <Input
+          autoFocus
           errors={[inputError()]}
           onBlur={() => {
             if (input.name) {

@@ -19,17 +19,18 @@ enum ModalForms {
 }
 
 const ItemSettings: FC = () => {
-  const { themeColour, themeTint } = useRestaurantContext();
+  const { themeColour, themeTint, restaurantSlug } = useRestaurantContext();
   const params = useGetParams();
-  const { restaurantSlug } = useRestaurantContext();
   const history = useHistory();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data: menuData, loading: menuLoading } = useMenusQuery({
     variables: {
       restaurantSlug,
     },
+    skip: !restaurantSlug,
   });
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [activeMenu, setActiveMenu] = useState(menuData?.menus?.[0]);
   const [searchValue, setSearchValue] = useState("");
   const [categoryIDForDeleteItem, setCategoryIDForDeleteItem] = useState(0);
@@ -37,14 +38,16 @@ const ItemSettings: FC = () => {
 
   const { data: categoryData } = useCategoriesQuery({
     variables: {
-      menuID: activeMenu?.id ? activeMenu.id : 0,
+      menuID: activeMenu?.id || 0,
     },
+    skip: !activeMenu?.id,
   });
 
   const { data: itemsData } = useItemsQuery({
     variables: {
-      categoryID: categoryData?.categories?.[0] ? categoryData.categories?.[0].id : 0,
+      categoryID: categoryData?.categories?.[0]?.id || 0,
     },
+    skip: !categoryData?.categories?.[0].id,
   });
 
   const [activeItem, setActiveItem] = useState(itemsData?.items?.[0]);
@@ -123,7 +126,7 @@ const ItemSettings: FC = () => {
     if (menuLoading) return <Skeleton className="my-2" height={50} />;
     return (
       <Tabs>
-        {menuData?.menus.map((menu, index) => (
+        {menuData?.menus?.map((menu, index) => (
           <Tab
             onClick={() => handleActiveMenu(menu)}
             numOfTabs={menuData.menus.length}
