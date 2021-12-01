@@ -30,22 +30,26 @@ const Steps: FC<Props> = ({ hasMenus, hasItems, hasStyles }) => {
     return "current";
   };
 
-  const designStatus = () => {
-    if (hasStyles) return "complete";
+  const menuStatus = () => {
+    if (hasMenus) return "complete";
 
-    if (!hasMenus) return "upcoming";
-
-    if (!hasItems) return "upcoming";
+    if (!hasStyles && !hasMenus) return "upcoming";
 
     return "current";
   };
 
   const steps = [
     {
+      name: "Customize menu design",
+      description: "Choose your menu colour, logo and banner",
+      href: `${routes.settings}/${restaurantSlug}/restaurant`,
+      status: hasStyles || hasMenus || hasItems ? "complete" : "current",
+    },
+    {
       name: "Create menus",
       description: "Add your restaurant's menu names",
       href: `${routes.settings}/${restaurantSlug}/menus`,
-      status: hasMenus ? "complete" : "current",
+      status: menuStatus(),
     },
     {
       name: "Add categories & items",
@@ -53,12 +57,6 @@ const Steps: FC<Props> = ({ hasMenus, hasItems, hasStyles }) => {
         "Add categories and items to your menus. Menus can be created without categories if you do not wish to use them.",
       href: `${routes.settings}/${restaurantSlug}/categories`,
       status: itemStatus(),
-    },
-    {
-      name: "Customize menu design",
-      description: "Choose your menu colour, logo and banner",
-      href: `${routes.settings}/${restaurantSlug}/restaurant`,
-      status: designStatus(),
     },
   ];
 

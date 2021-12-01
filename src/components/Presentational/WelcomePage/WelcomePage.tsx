@@ -27,14 +27,11 @@ const WelcomePage: FC<Props> = ({ hasMenus, hasItems, hasStyles, skipChecklist }
       <div className="p-20 flex justify-center">
         <Steps hasMenus={hasMenus} hasItems={hasItems} hasStyles={hasStyles} />
       </div>
-
-      {hasMenus && (
-        <div className="p-20 flex justify-center">
-          <Button size="XL" onClick={() => skipChecklist(true)}>
-            skip for now
-          </Button>
-        </div>
-      )}
+      <div className="p-20 flex justify-center">
+        <Button size="XL" onClick={() => skipChecklist(true)}>
+          skip for now
+        </Button>
+      </div>
     </div>
   );
 };

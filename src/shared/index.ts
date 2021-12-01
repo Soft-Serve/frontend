@@ -8,6 +8,8 @@ export type { ItemSizeData } from "./ItemSizes.query";
 export { useItemSizeQuery, ITEM_SIZES_QUERY } from "./ItemSizes.query";
 export { useCategoriesQuery, CATEGORIES_QUERY } from "./Categories.query";
 export type { CategoriesData, Category } from "./Categories.query";
+export { useBannersQuery, BANNERS_QUERY } from "./Banners.query";
+export type { BannersData, Banner } from "./Banners.query";
 export { useItemsQuery, ITEMS_QUERY } from "./Items.query";
 export type { ItemsData, Item, ItemSize } from "./Items.query";
 export type { Allergy, AllergyData } from "./Allergies.query";
