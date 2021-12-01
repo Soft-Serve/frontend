@@ -1,9 +1,29 @@
 import React from "react";
 import type { FC } from "react";
+import Skeleton from "react-loading-skeleton";
 import { useRestaurantContext } from "src/contexts";
+import { useBannersQuery } from "@shared";
+import { AdvancedImage } from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/base";
 
 const HeroBanner: FC = () => {
-  const { themeColour } = useRestaurantContext();
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: "softserve",
+    },
+  });
+
+  const { themeColour, restaurantSlug } = useRestaurantContext();
+  const { data, loading } = useBannersQuery({
+    variables: {
+      restaurantSlug,
+    },
+  });
+
+  const cldImage = cld.image(data?.banners[0].photo);
+  if (loading) return <Skeleton height={40} />;
+
+  if (!data?.banners[0]) return <></>;
   return (
     <div className="w-full">
       <div className="relative w-full">
@@ -11,17 +31,15 @@ const HeroBanner: FC = () => {
         <div className=" w-full mx-auto">
           <div className="relative  sm:overflow-hidden">
             <div className="absolute inset-0">
-              <img
-                className="h-full w-full object-cover"
-                src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80"
-                alt="People working on laptops"
-              />
+              <AdvancedImage cldImg={cldImage} />
               <div className={`absolute inset-0 bg-${themeColour}-200 mix-blend-multiply`} />
             </div>
             <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
               <h1 className="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                <span className="block text-white">Oliver and Bonacini</span>
-                <span className="block text-white">Bayview Village</span>
+                <span className="block text-white">{data?.banners[0].header}</span>
+                {data?.banners[0].sub_header && (
+                  <span className="block text-white">{data.banners[0].sub_header}</span>
+                )}
               </h1>
             </div>
           </div>
