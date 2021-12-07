@@ -2,8 +2,8 @@ import React, { FormEvent } from "react";
 import type { FC } from "react";
 import { CATEGORIES_QUERY, Category } from "@shared";
 import type { CategoriesData } from "@shared";
-import { Button } from "@base";
-
+import { Button, Notification } from "@base";
+import toast from "react-hot-toast";
 import { XIcon } from "@heroicons/react/solid";
 import { useDeleteCategoryMutation } from "./DeleteCategory.mutation";
 
@@ -14,8 +14,12 @@ interface Props {
 }
 
 const DeleteCategoryForm: FC<Props> = ({ onCompleted, menuID, selectedCategory }) => {
+  const onSuccess = () => toast.custom(<Notification header="Category succesfully removed!" />);
   const [deleteCategory] = useDeleteCategoryMutation({
-    onCompleted: () => onCompleted?.(false),
+    onCompleted: () => {
+      onCompleted?.(false);
+      onSuccess();
+    },
     update(cache, { data: deletedCategoryData }) {
       const { categories } = cache.readQuery({
         query: CATEGORIES_QUERY,

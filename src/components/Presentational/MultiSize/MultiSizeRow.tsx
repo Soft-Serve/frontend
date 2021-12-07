@@ -14,9 +14,7 @@ interface Props {
 
 const MultiSizeRow: FC<Props> = ({ size, deleteSize, index, onChange, disableDeleteButton }) => {
   const isPriceValid = () => !!size.price;
-  const isUnitValid = () => !!size.unit;
   const [isPriceDirty, setIsPriceDirty] = useState(false);
-  const [isUnitDirty, setIsUnitDirty] = useState(false);
 
   const renderPriceError = () => {
     if (!isPriceDirty) return null;
@@ -24,13 +22,7 @@ const MultiSizeRow: FC<Props> = ({ size, deleteSize, index, onChange, disableDel
     return null;
   };
 
-  const renderUnitError = () => {
-    if (!isUnitDirty) return null;
-    if (!isUnitValid()) return <span>Unit is required</span>;
-    return null;
-  };
-
-  const errors = [renderPriceError(), renderUnitError()];
+  const errors = [renderPriceError()];
 
   const renderErrorMessages = (errorIndex: number) => {
     return errors
@@ -48,10 +40,9 @@ const MultiSizeRow: FC<Props> = ({ size, deleteSize, index, onChange, disableDel
       <div className="flex items-center justify-between w-full p-2">
         <div className="w-40">
           <Input
-            onBlur={() => setIsUnitDirty(true)}
             onChange={e => onChange(e, size?.id || "")}
             value={size.unit}
-            placeholder="small"
+            placeholder="5 OZ"
             type="text"
             name="unit"
             id="unit"
@@ -60,6 +51,7 @@ const MultiSizeRow: FC<Props> = ({ size, deleteSize, index, onChange, disableDel
         </div>
         <div className="mx-2">
           <Input
+            placeholder="27.00"
             min={0}
             step={0.1}
             onBlur={() => setIsPriceDirty(true)}

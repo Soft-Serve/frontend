@@ -9,10 +9,9 @@ import {
   ItemSize,
   ITEM_SIZES_QUERY,
 } from "@shared";
-import { Button, Input, Tab, Tabs, TextBox } from "@base";
-
+import { Button, Input, TextBox } from "@base";
 import { XIcon } from "@heroicons/react/solid";
-import { MultiSize, SingleSize } from "@presentational";
+import { MultiSize } from "@presentational";
 import {
   isBasicNameValid,
   isNameInputValid,
@@ -30,15 +29,11 @@ interface Props {
 }
 
 const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem }) => {
-  const { data: itemSizeData, loading } = useItemSizeQuery({
+  const { data: itemSizeData } = useItemSizeQuery({
     variables: {
       itemID: selectedItem?.id || 0,
     },
   });
-
-  const [itemType, setItemType] = useState<"single" | "multi">(
-    itemSizeData?.itemSizes?.length === 1 ? "single" : "multi"
-  );
 
   const [sizes, setSizes] = useState(itemSizeData?.itemSizes);
 
@@ -114,36 +109,12 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem }) => {
   const onDeleteSize = (id: string) =>
     setSizes(prevSizes => prevSizes?.filter(currentSize => currentSize.id !== id));
 
-  const inputPriceError = () => {
-    if (sizes) {
-      if (isPriceInvalid(sizes)) return <span>Price is required</span>;
-    }
-
-    return null;
-  };
-
   const inputNameError = () => {
     const { name } = input;
     if (!isNameValid(name)) return <span>Name is required</span>;
     if (!isBasicNameValid(name)) return <span>Name not valid</span>;
     if (isNameOnlyNumbers(name)) return <span>Name cannot only contain numbers</span>;
     return null;
-  };
-
-  const renderSizeInputs = () => {
-    if (loading) {
-      return <span>loading</span>;
-    }
-    return itemType === "single" ? (
-      <SingleSize errors={[inputPriceError()]} size={sizes?.[0]} handleChange={onSizeChange} />
-    ) : (
-      <MultiSize
-        onChange={onSizeChange}
-        addSize={onAddSize}
-        deleteSize={onDeleteSize}
-        sizes={sizes}
-      />
-    );
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -203,27 +174,12 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem }) => {
             id="description"
           />
         </div>
-        <div className="my-2">
-          <Tabs>
-            <Tab
-              onClick={() => setItemType("single")}
-              numOfTabs={1}
-              tabIndex={0}
-              isActive={itemType === "single"}
-            >
-              Single Price
-            </Tab>
-            <Tab
-              onClick={() => setItemType("multi")}
-              numOfTabs={1}
-              tabIndex={0}
-              isActive={itemType === "multi"}
-            >
-              Multiple Prices
-            </Tab>
-          </Tabs>
-        </div>
-        {renderSizeInputs()}
+        <MultiSize
+          onChange={onSizeChange}
+          addSize={onAddSize}
+          deleteSize={onDeleteSize}
+          sizes={sizes}
+        />
         <div className="mt-4 rounded-md sm:flex-shrink-0">
           <Button
             loading={updateLoading}

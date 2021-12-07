@@ -16,6 +16,7 @@ export {
   isNameOnlyNumbers,
   isNameInputValid,
   isBasicPriceValid,
+  hasBeginningWhiteSpace,
 } from "./MenuValidation";
 
 export { intersection } from "./intersection";

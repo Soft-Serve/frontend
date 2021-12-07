@@ -1,11 +1,12 @@
-import { Button, Input } from "@base";
 import React, { FormEvent, useState } from "react";
+import { Button, Input, Notification } from "@base";
+import { XIcon } from "@heroicons/react/solid";
 import type { FC } from "react";
 import { MENUS_QUERY } from "@shared";
 import type { MenusData } from "@shared";
-import { XIcon } from "@heroicons/react/solid";
-import { useRestaurantContext } from "src/contexts";
-import { isNameValid, isBasicNameValid, isNameOnlyNumbers, isNameInputValid } from "@utility";
+import { useRestaurantContext } from "@contexts";
+import toast from "react-hot-toast";
+import { isNameValid, isNameOnlyNumbers, isNameInputValid, hasBeginningWhiteSpace } from "@utility";
 import { usePostMenuMutation } from "./PostMenu.mutation";
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
 const PostMenuForm: FC<Props> = ({ onCompleted, restaurantID }) => {
   const { restaurantSlug } = useRestaurantContext();
   const [isInputDirty, setIsInputDirty] = useState(false);
+  const onSuccess = () => toast.custom(<Notification header="Menu succesfully added!" />);
 
   const [input, setInput] = useState({
     name: "",
@@ -25,7 +27,10 @@ const PostMenuForm: FC<Props> = ({ onCompleted, restaurantID }) => {
   });
 
   const [postMenu, { loading }] = usePostMenuMutation({
-    onCompleted: () => onCompleted?.(false),
+    onCompleted: () => {
+      onCompleted?.(false);
+      onSuccess();
+    },
     update(cache, { data: newPostMenuData }) {
       const { menus } = cache.readQuery({
         query: MENUS_QUERY,
@@ -58,19 +63,18 @@ const PostMenuForm: FC<Props> = ({ onCompleted, restaurantID }) => {
         },
       },
     });
-    setInput(prevInput => ({ ...prevInput, name: "" }));
   };
 
   const inputError = () => {
     const { name } = input;
     if (!isInputDirty) return null;
     if (!isNameValid(name)) return <span>Name is required</span>;
-    if (!isBasicNameValid(name)) return <span>Name not valid</span>;
     if (isNameOnlyNumbers(name)) return <span>Name cannot only contain numbers</span>;
+    if (hasBeginningWhiteSpace(name)) return <span>Name cannot begin with white space</span>;
     return null;
   };
 
-  const isFormValid = isNameInputValid(input.name);
+  const isFormValid = isNameInputValid(input.name) && !hasBeginningWhiteSpace(input.name);
 
   return (
     <div>

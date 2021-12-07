@@ -11,6 +11,7 @@ const isBasicPriceValid = (sizes: ItemSize[]) =>
   !!sizes.filter(size => basicPriceRegex.test(size.price)).length;
 const isBasicNameValid = (name: string) => !!basicNameRegex.test(name);
 const isNameInputValid = (name: string) => isNameValid(name) && !isNameOnlyNumbers(name);
+const hasBeginningWhiteSpace = (field: string) => new RegExp(/^\s/g).test(field);
 
 export {
   isNameValid,
@@ -20,4 +21,5 @@ export {
   isNameOnlyNumbers,
   isNameInputValid,
   isBasicPriceValid,
+  hasBeginningWhiteSpace,
 };

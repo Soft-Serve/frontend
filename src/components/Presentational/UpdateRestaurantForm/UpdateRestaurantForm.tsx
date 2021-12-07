@@ -56,7 +56,7 @@ const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
         <div className="flex items-center w-full justify-between flex-wrap">
           <div className="m-2">
             <ItemImage
-              photoUrl={bannerData?.banners[0] ? bannerData?.banners[0].photo : restaurant.logo}
+              photoUrl={bannerData?.banners?.[0] ? bannerData?.banners?.[0].photo : restaurant.logo}
             />
           </div>
           <UploadImageBox onChange={setPhotoFile} imageFile={photoFile} />

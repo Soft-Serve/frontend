@@ -1,11 +1,12 @@
 import React, { FormEvent, useState } from "react";
 import type { FC } from "react";
-import { Button, Input, RadioTile, RadioTiles } from "@base";
+import { Button, Input, RadioTile, RadioTiles, Notification } from "@base";
 import { CATEGORIES_QUERY, CategoriesData, Category } from "@shared";
 
 import { XIcon } from "@heroicons/react/solid";
 import { classnames } from "tailwindcss-classnames";
-import { isNameValid, isBasicNameValid, isNameOnlyNumbers, isNameInputValid } from "@utility";
+import { isNameValid, isNameOnlyNumbers, isNameInputValid, hasBeginningWhiteSpace } from "@utility";
+import toast from "react-hot-toast";
 import { useUpdateCategoryMutation } from "./UpdateCategory.mutation";
 
 interface Props {
@@ -17,9 +18,13 @@ interface Props {
 const UpdateCategoryForm: FC<Props> = ({ onCompleted, menuID, selectedCategory }) => {
   const [input, setInput] = useState(selectedCategory);
   const [isInputDirty, setIsInputDirty] = useState(false);
+  const onSuccess = () => toast.custom(<Notification header="Category succesfully updated!" />);
 
   const [updateCategory] = useUpdateCategoryMutation({
-    onCompleted: () => onCompleted?.(false),
+    onCompleted: () => {
+      onCompleted?.(false);
+      onSuccess();
+    },
     update(cache, { data: updatedCategoryData }) {
       const { categories: currentCategories } = cache.readQuery({
         query: CATEGORIES_QUERY,
@@ -60,11 +65,14 @@ const UpdateCategoryForm: FC<Props> = ({ onCompleted, menuID, selectedCategory }
   };
 
   const inputError = () => {
+    if (isInputDirty && !input?.name) return <span>Name is required</span>;
     if (input?.name) {
       if (!isInputDirty) return null;
-      if (!isNameValid(input?.name)) return <span>Name is required</span>;
-      if (!isBasicNameValid(input?.name)) return <span>Name not valid</span>;
-      if (isNameOnlyNumbers(input?.name)) return <span>Name cannot only contain numbers</span>;
+      if (!isNameValid(input.name)) return <span>Name is required</span>;
+      if (isNameOnlyNumbers(input.name)) return <span>Name cannot only contain numbers</span>;
+      if (hasBeginningWhiteSpace(input.name)) {
+        return <span>Name cannot begin with white space</span>;
+      }
     }
     return null;
   };
@@ -73,7 +81,11 @@ const UpdateCategoryForm: FC<Props> = ({ onCompleted, menuID, selectedCategory }
     input?.name !== selectedCategory?.name ||
     input?.category_type !== selectedCategory?.category_type;
 
-  const isFormValid = input?.name && isNameInputValid(input.name) && isInputChanged;
+  const isFormValid =
+    input?.name &&
+    isNameInputValid(input.name) &&
+    !hasBeginningWhiteSpace(input.name) &&
+    isInputChanged;
 
   return (
     <div>

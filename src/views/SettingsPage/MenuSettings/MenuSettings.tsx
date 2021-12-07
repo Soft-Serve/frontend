@@ -4,7 +4,7 @@ import { Button, Card, CardContent, Modal, TabWrapper } from "@base";
 import { useRestaurantContext } from "@contexts";
 import { useRestaurantQuery, useMenusQuery, Menu } from "@shared";
 import { DeleteMenuForm, PostMenuForm, UpdateMenuForm } from "src/components/Presentational";
-import { BookOpenIcon } from "@heroicons/react/solid";
+import { PlusCircleIcon } from "@heroicons/react/solid";
 import { MenusList } from "./MenusList";
 import { SettingsHeader } from "../SettingsHeader";
 
@@ -67,7 +67,7 @@ const MenuSettings: FC = () => {
           <SettingsHeader>Menus</SettingsHeader>
           <Button size="XXL" onClick={() => handleMenuModal(ModalForms.PostMenu)}>
             <span className="mr-4 text-base hidden sm:block">Add Menu</span>
-            <BookOpenIcon className="w-5 h-5" />
+            <PlusCircleIcon className="w-5 h-5" />
           </Button>
         </CardContent>
       </Card>

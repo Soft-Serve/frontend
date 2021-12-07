@@ -1,11 +1,12 @@
-import { Button, Input } from "@base";
 import React, { FormEvent, useState, ChangeEvent } from "react";
 import type { FC } from "react";
+import toast from "react-hot-toast";
+import { Button, Input, Notification } from "@base";
 import { MENUS_QUERY } from "@shared";
 import type { MenusData, Menu } from "@shared";
 import { XIcon } from "@heroicons/react/solid";
 import { useRestaurantContext } from "src/contexts";
-import { isNameValid, isBasicNameValid, isNameOnlyNumbers, isNameInputValid } from "@utility";
+import { isNameValid, isNameOnlyNumbers, isNameInputValid, hasBeginningWhiteSpace } from "@utility";
 import { useUpdateMenuMutation } from "./UpdateMenu.mutation";
 
 interface Props {
@@ -17,9 +18,13 @@ const UpdateMenuForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
   const { restaurantSlug } = useRestaurantContext();
   const [input, setInput] = useState(selectedMenu);
   const [isInputDirty, setIsInputDirty] = useState(false);
+  const onSuccess = () => toast.custom(<Notification header="Menu succesfully updated!" />);
 
   const [updateMenu, { loading }] = useUpdateMenuMutation({
-    onCompleted: () => onCompleted?.(false),
+    onCompleted: () => {
+      onCompleted?.(false);
+      onSuccess();
+    },
     update(cache, { data: updatedMenuData }) {
       const { menus: currentMenus } = cache.readQuery({
         query: MENUS_QUERY,
@@ -69,17 +74,24 @@ const UpdateMenuForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
   };
 
   const inputError = () => {
+    if (isInputDirty && !input?.name) return <span>Name is required</span>;
     if (input?.name) {
       if (!isInputDirty) return null;
-      if (!isNameValid(input?.name)) return <span>Name is required</span>;
-      if (!isBasicNameValid(input?.name)) return <span>Name not valid</span>;
-      if (isNameOnlyNumbers(input?.name)) return <span>Name cannot only contain numbers</span>;
+      if (!isNameValid(input.name)) return <span>Name is required</span>;
+      if (isNameOnlyNumbers(input.name)) return <span>Name cannot only contain numbers</span>;
+      if (hasBeginningWhiteSpace(input.name)) {
+        return <span>Name cannot begin with white space</span>;
+      }
     }
     return null;
   };
 
   const isInputChanged = input?.name !== selectedMenu?.name;
-  const isFormValid = input?.name && isNameInputValid(input.name) && isInputChanged;
+  const isFormValid =
+    input?.name &&
+    isNameInputValid(input.name) &&
+    !hasBeginningWhiteSpace(input.name) &&
+    isInputChanged;
 
   return (
     <div>

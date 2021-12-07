@@ -17,13 +17,15 @@ interface Props {
 const MultiSize: FC<Props> = ({ addSize, sizes, deleteSize, onChange }) => {
   const { themeColour, themeTint } = useRestaurantContext();
   return (
-    <div className={`border-2 border-${themeColour}-${themeTint} rounded-md mt-4 shadow-lg`}>
+    <div className={`border-2 border-${themeColour}-${themeTint} rounded-md mt-4`}>
       <div
-        className={`flex items-center justify-between w-full bg-${themeColour}-${themeTint} p-2`}
+        className={`flex items-center justify-between w-full p-2 border-b-2 border-${themeColour}-${themeTint}`}
       >
-        <span className="text-white font-medium text-sm">Unit</span>
-        <span className="text-white font-medium text-sm">Price</span>
-        <Button colour="accent" onClick={addSize}>
+        <span className="text-gray-900 font-medium text-sm ml-2">Unit</span>
+        <span className="text-gray-900  font-medium text-sm">
+          Price <span className="text-red-500">*</span>
+        </span>
+        <Button colour="primary" onClick={addSize}>
           <PlusIcon className="w-5 h-5" />
         </Button>
       </div>

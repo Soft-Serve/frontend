@@ -1,11 +1,11 @@
-import { Button, RadioTiles, RadioTile, Input } from "@base";
+import { Button, RadioTiles, RadioTile, Input, Notification } from "@base";
 import React, { FormEvent, useState } from "react";
 import type { FC } from "react";
-
+import toast from "react-hot-toast";
 import { CategoriesData, CATEGORIES_QUERY } from "@shared";
 import { XIcon } from "@heroicons/react/solid";
 import { classnames } from "tailwindcss-classnames";
-import { isNameValid, isBasicNameValid, isNameOnlyNumbers, isNameInputValid } from "@utility";
+import { isNameValid, isNameOnlyNumbers, isNameInputValid, hasBeginningWhiteSpace } from "@utility";
 import { usePostCategoryMutation } from "./PostCategory.mutation";
 
 interface Props {
@@ -17,9 +17,13 @@ const PostCategoryForm: FC<Props> = ({ onCompleted, menuID }) => {
   const [name, setName] = useState("");
   const [isNameDirty, setIsNameDirty] = useState(false);
   const [categoryType, setCategoryType] = useState("food");
+  const onSuccess = () => toast.custom(<Notification header="Category succesfully added!" />);
 
   const [postCategory] = usePostCategoryMutation({
-    onCompleted: () => onCompleted?.(false),
+    onCompleted: () => {
+      onCompleted?.(false);
+      onSuccess();
+    },
     update(cache, { data: newPostCategoryData }) {
       const { categories } = cache.readQuery({
         query: CATEGORIES_QUERY,
@@ -42,12 +46,13 @@ const PostCategoryForm: FC<Props> = ({ onCompleted, menuID }) => {
   const nameError = () => {
     if (!isNameDirty) return null;
     if (!isNameValid(name)) return <span>Name is required</span>;
-    if (!isBasicNameValid(name)) return <span>Name not valid</span>;
     if (isNameOnlyNumbers(name)) return <span>Name cannot only contain numbers</span>;
+    if (hasBeginningWhiteSpace(name)) return <span>Name cannot begin with white space</span>;
+
     return null;
   };
 
-  const isFormValid = isNameInputValid(name);
+  const isFormValid = isNameInputValid(name) && !hasBeginningWhiteSpace(name);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

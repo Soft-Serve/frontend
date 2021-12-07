@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import type { FC, ChangeEvent, FormEvent } from "react";
 import { Item, ItemsData, ItemSize, ITEMS_QUERY, Menu, useCategoriesQuery } from "@shared";
-import { Button, Dropdown, Input, UploadImageBox, Tooltip, Tab, Tabs, TextBox } from "@base";
+import { Button, Dropdown, Input, UploadImageBox, Tooltip, TextBox, Notification } from "@base";
 import { v4 as uuidv4 } from "uuid";
-
+import toast from "react-hot-toast";
 import { classnames } from "tailwindcss-classnames";
 import { XIcon } from "@heroicons/react/solid";
-import { MultiSize, SingleSize } from "@presentational";
-
+import { MultiSize } from "@presentational";
 import { useUploadPhoto } from "@hooks";
 import {
   isNameValid,
@@ -15,7 +14,7 @@ import {
   isBasicNameValid,
   isNameOnlyNumbers,
   isNameInputValid,
-  isBasicPriceValid,
+  hasBeginningWhiteSpace,
 } from "@utility";
 import { usePostItemMutation } from "./PostItem.mutation";
 
@@ -26,9 +25,8 @@ interface Props {
 
 const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
   const { photoFile, setPhotoFile, fetchPhoto } = useUploadPhoto();
-  const [itemType, setItemType] = useState<"single" | "multi">("single");
   const [isInputNameDirty, setIsInputNameDirty] = useState(false);
-  const [isInputPriceDirty, setIsInputPriceDirty] = useState(false);
+  const onSuccess = () => toast.custom(<Notification header="Item succesfully added!" />);
 
   const { data: categoryData } = useCategoriesQuery({
     variables: {
@@ -85,7 +83,10 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
     }));
 
   const [postItem, { loading }] = usePostItemMutation({
-    onCompleted: () => onCompleted?.(false),
+    onCompleted: () => {
+      onCompleted?.(false);
+      onSuccess();
+    },
     update(cache, { data: newPostItemData }) {
       const { items } = cache.readQuery({
         query: ITEMS_QUERY,
@@ -117,18 +118,15 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
     if (!isNameValid(name)) return <span>Name is required</span>;
     if (!isBasicNameValid(name)) return <span>Name not valid</span>;
     if (isNameOnlyNumbers(name)) return <span>Name cannot only contain numbers</span>;
-    return null;
-  };
-
-  const inputPriceError = () => {
-    if (!isInputPriceDirty) return null;
-    if (isPriceInvalid(input.sizes)) return <span>Price is required</span>;
-    if (isBasicPriceValid(input.sizes)) return <span>Price is not valid </span>;
+    if (hasBeginningWhiteSpace(name)) return <span>Name cannot begin with white space</span>;
     return null;
   };
 
   const isFormValid =
-    isNameInputValid(input.name) && !isPriceInvalid(input.sizes) && activeCategory?.id;
+    isNameInputValid(input.name) &&
+    !isPriceInvalid(input.sizes) &&
+    activeCategory?.id &&
+    !hasBeginningWhiteSpace(input.name);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -153,25 +151,6 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
       });
     }
   };
-
-  const renderSizeInputs = () =>
-    itemType === "single" ? (
-      <SingleSize
-        handleChange={onSizeChange}
-        onBlur={() => {
-          if (!isPriceInvalid(input.sizes)) setIsInputPriceDirty(true);
-        }}
-        errors={[inputPriceError()]}
-        size={input.sizes[0]}
-      />
-    ) : (
-      <MultiSize
-        onChange={onSizeChange}
-        addSize={onAddSize}
-        deleteSize={onDeleteSize}
-        sizes={input.sizes}
-      />
-    );
 
   const tooltiptext = (
     <span className="text-center px-5 text-white justify-center w-full text-sm font-semibold">
@@ -224,28 +203,12 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
             id="description"
           />
         </div>
-        <div className="my-2">
-          <Tabs>
-            <Tab
-              onClick={() => setItemType("single")}
-              numOfTabs={1}
-              tabIndex={0}
-              isActive={itemType === "single"}
-            >
-              Single Price
-            </Tab>
-            <Tab
-              onClick={() => setItemType("multi")}
-              numOfTabs={1}
-              tabIndex={0}
-              isActive={itemType === "multi"}
-            >
-              Multiple Prices
-            </Tab>
-          </Tabs>
-        </div>
-        {renderSizeInputs()}
-
+        <MultiSize
+          onChange={onSizeChange}
+          addSize={onAddSize}
+          deleteSize={onDeleteSize}
+          sizes={input.sizes}
+        />
         <UploadImageBox onChange={setPhotoFile} imageFile={photoFile} />
         <Tooltip
           css={classnames("w-full")}

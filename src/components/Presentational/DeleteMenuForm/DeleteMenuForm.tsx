@@ -1,9 +1,10 @@
-import { Button } from "@base";
 import React, { FormEvent } from "react";
 import type { FC } from "react";
+import { Button, Notification } from "@base";
 import { MENUS_QUERY, Menu } from "@shared";
 import type { MenusData } from "@shared";
 import { XIcon } from "@heroicons/react/solid";
+import toast from "react-hot-toast";
 import { useRestaurantContext } from "src/contexts";
 import { useDeleteMenuMutation } from "./DeleteForm.mutation";
 
@@ -14,9 +15,13 @@ interface Props {
 
 const DeleteMenuForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
   const { restaurantSlug } = useRestaurantContext();
+  const onSuccess = () => toast.custom(<Notification header="Menu succesfully deleted!" />);
 
   const [deleteMenu, { loading }] = useDeleteMenuMutation({
-    onCompleted: () => onCompleted?.(false),
+    onCompleted: () => {
+      onCompleted?.(false);
+      onSuccess();
+    },
     update(cache, { data: deletedMenuData }) {
       const { menus } = cache.readQuery({
         query: MENUS_QUERY,
