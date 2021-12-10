@@ -20,7 +20,7 @@ const HeroBanner: FC = () => {
     },
   });
 
-  const cldImage = cld.image(data?.banners?.[0].photo);
+  const cldImage = cld.image(data?.banners?.[0]?.photo);
   if (loading) return <Skeleton height={40} />;
 
   if (!data?.banners?.[0]) return <></>;

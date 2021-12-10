@@ -3,7 +3,6 @@ import { Button, Input, Notification } from "@base";
 import { XIcon } from "@heroicons/react/solid";
 import type { FC } from "react";
 import { MENUS_QUERY } from "@shared";
-import type { MenusData } from "@shared";
 import { useRestaurantContext } from "@contexts";
 import toast from "react-hot-toast";
 import { isNameValid, isNameOnlyNumbers, isNameInputValid, hasBeginningWhiteSpace } from "@utility";
@@ -31,23 +30,14 @@ const PostMenuForm: FC<Props> = ({ onCompleted, restaurantID }) => {
       onCompleted?.(false);
       onSuccess();
     },
-    update(cache, { data: newPostMenuData }) {
-      const { menus } = cache.readQuery({
+    refetchQueries: [
+      {
         query: MENUS_QUERY,
         variables: {
           restaurantSlug,
         },
-      }) as MenusData;
-      cache.writeQuery({
-        query: MENUS_QUERY,
-        variables: {
-          restaurantSlug,
-        },
-        data: {
-          menus: [...menus, newPostMenuData?.postMenu],
-        },
-      });
-    },
+      },
+    ],
   });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -55,12 +45,6 @@ const PostMenuForm: FC<Props> = ({ onCompleted, restaurantID }) => {
     postMenu({
       variables: {
         input,
-      },
-      optimisticResponse: {
-        __typename: "Mutation",
-        postMenu: {
-          ...input,
-        },
       },
     });
   };

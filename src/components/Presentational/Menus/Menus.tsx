@@ -1,13 +1,15 @@
 import React from "react";
 import type { FC } from "react";
-import { Tab, Tabs } from "@base";
+import { Tab, Tabs, Container, BoxSection, Button } from "@base";
+import { FullLogoSVG } from "@svgs";
 import { useGlobalContext, useRestaurantContext } from "src/contexts";
 import { useMenusQuery } from "@shared";
+import { routes } from "src/routes";
 import Skeleton from "react-loading-skeleton";
 
 const Menus: FC = () => {
   const { setMenuID, setActiveMenu, menuID } = useGlobalContext();
-  const { restaurantSlug } = useRestaurantContext();
+  const { restaurantSlug, themeColour, themeTint } = useRestaurantContext();
 
   const { data, error, loading } = useMenusQuery({
     variables: {
@@ -40,7 +42,26 @@ const Menus: FC = () => {
       </Tabs>
     );
   }
-  return <p>add a menu</p>;
+  return (
+    <Container>
+      <BoxSection>
+        <div className="sm:mx-auto sm:w-full sm:max-w-md flex justify-center flex-col items-center">
+          <FullLogoSVG
+            className={`w-36 fill-current stroke-current text-${themeColour}-${themeTint}`}
+          />
+          <h2 className={`m-8 text-center text-2xl font-bold ${themeColour}-${themeTint}`}>
+            Looks like you do not have any menus yet
+          </h2>
+          <Button
+            size="XL"
+            onClick={() => window.location.assign(`${routes.settings}/${restaurantSlug}/menus`)}
+          >
+            Add a menu
+          </Button>
+        </div>
+      </BoxSection>
+    </Container>
+  );
 };
 
 export { Menus };
