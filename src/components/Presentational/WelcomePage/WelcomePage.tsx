@@ -8,10 +8,10 @@ interface Props {
   hasMenus: boolean;
   hasItems: boolean;
   hasStyles: boolean;
-  skipChecklist: (state: boolean) => void;
+  hideWelcomePage: () => void;
 }
 
-const WelcomePage: FC<Props> = ({ hasMenus, hasItems, hasStyles, skipChecklist }) => {
+const WelcomePage: FC<Props> = ({ hasMenus, hasItems, hasStyles, hideWelcomePage }) => {
   const { themeColour, themeTint } = useRestaurantContext();
 
   return (
@@ -28,7 +28,7 @@ const WelcomePage: FC<Props> = ({ hasMenus, hasItems, hasStyles, skipChecklist }
         <Steps hasMenus={hasMenus} hasItems={hasItems} hasStyles={hasStyles} />
       </div>
       <div className="p-20 flex justify-center">
-        <Button size="XL" onClick={() => skipChecklist(true)}>
+        <Button size="XL" onClick={hideWelcomePage}>
           skip for now
         </Button>
       </div>

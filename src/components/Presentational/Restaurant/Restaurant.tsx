@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import type { FC } from "react";
 import { useGlobalContext, useRestaurantContext } from "src/contexts";
 import { AllergyLegend, Items, Menus, CategoriesContainer, WelcomePage } from "@presentational";
-import { useRestaurantQuery, useMenusQuery } from "@shared";
+import { useRestaurantQuery, useMenusQuery, RESTAURANT_QUERY } from "@shared";
 import { Container, BoxSection, Footer, HeroBanner } from "@base";
 import { classnames } from "tailwindcss-classnames";
 import { SkeletonRestaurant } from "./SkeletonRestaurant";
+import { useUpdateRestaurantOnboarding } from "./UpdateRestaurantOnboarding.mutation";
 
 const Restaurant: FC = () => {
-  const [skipChecklist, setSkipChecklist] = useState(false);
   const { restaurantSlug } = useRestaurantContext();
   const { categoryID } = useGlobalContext();
   const { data, error, loading } = useRestaurantQuery({
@@ -23,15 +23,39 @@ const Restaurant: FC = () => {
       restaurantSlug,
     },
   });
+
+  const [updateRestaurantOnboarding] = useUpdateRestaurantOnboarding({
+    refetchQueries: [
+      {
+        query: RESTAURANT_QUERY,
+        variables: {
+          restaurantSlug,
+        },
+      },
+    ],
+  });
+
+  if (loading || menusLoading) return <SkeletonRestaurant />;
+
+  const hideWelcomePage = () => {
+    updateRestaurantOnboarding({
+      variables: {
+        input: {
+          id: restaurantSlug,
+          onboarding_done: true,
+        },
+      },
+    });
+  };
+
   const renderItems = () => {
-    if (loading || menusLoading) return <SkeletonRestaurant />;
     if (!categoryID) return null;
     return <Items />;
   };
 
   if (
     (!menusData?.menus.length || !data?.restaurant?.has_items || !data?.restaurant?.has_styles) &&
-    !skipChecklist
+    !data?.restaurant?.onboarding_done
   ) {
     return (
       <Container>
@@ -39,8 +63,8 @@ const Restaurant: FC = () => {
           <WelcomePage
             hasMenus={menusData?.menus.length !== 0}
             hasItems={!!data?.restaurant?.has_items}
-            hasStyles={data?.restaurant?.logo !== null || !!data?.restaurant?.has_styles}
-            skipChecklist={state => setSkipChecklist(state)}
+            hasStyles={!!data?.restaurant?.has_styles}
+            hideWelcomePage={hideWelcomePage}
           />
         </BoxSection>
       </Container>

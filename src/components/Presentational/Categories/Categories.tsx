@@ -15,6 +15,7 @@ interface Props {
 const Categories: FC<Props> = ({ categories, loading, setCategoryID }) => {
   const { categoryID } = useGlobalContext();
   if (loading) return <SkeletonCategories />;
+
   return (
     <RadioTiles
       value={categories?.find(category => category?.id === categoryID)}
