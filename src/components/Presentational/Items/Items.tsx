@@ -35,7 +35,7 @@ const Items: FC = () => {
               No menu items yet!
             </h4>
             <p className={`mb-8 text-center ${themeColour}-${themeTint}`}>
-              You can either add items directly to the menu or create <strong>categories</strong>
+              You can either add items directly to the menu or create <strong>categories</strong>{" "}
               and add items to each categories.
             </p>
             <div className={`flex justify-around w-full ${themeColour}-${themeTint}`}>
