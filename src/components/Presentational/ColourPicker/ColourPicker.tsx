@@ -40,7 +40,7 @@ const ColourPicker: FC<Props> = ({ onClose, setTheme, setTint }) => {
                     onClose(false);
                   }}
                   key={tailWindNumber}
-                  className={`bg-${colour}-${tailWindNumber} w-16 h-16 rounded-md m-2 `}
+                  className={`bg-${colour}-${tailWindNumber} w-14 h-14 rounded-md m-2 `}
                 >
                   <span className="sr-only">{hexColour}</span>
                 </div>
