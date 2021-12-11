@@ -47,7 +47,7 @@ const ItemSettings: FC = () => {
     variables: {
       categoryID: categoryData?.categories?.[0]?.id || 0,
     },
-    skip: !categoryData?.categories?.[0].id,
+    skip: !categoryData?.categories?.[0]?.id,
   });
 
   const [activeItem, setActiveItem] = useState(itemsData?.items?.[0]);

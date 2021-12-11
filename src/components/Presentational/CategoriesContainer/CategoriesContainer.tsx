@@ -12,7 +12,7 @@ const CategoriesContainer: FC = () => {
       menuID,
     },
     skip: !menuID,
-    onCompleted: completedData => setCategoryID(completedData.categories[0].id),
+    onCompleted: completedData => setCategoryID(completedData?.categories[0]?.id),
   });
 
   if (data?.categories && data?.categories?.length <= 1) {
