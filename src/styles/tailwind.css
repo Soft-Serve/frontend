@@ -1,3 +1,7 @@
+@import url("../fonts/arima/stylesheet.css");
+@import url("../fonts/raleway/stylesheet.css");
+@import url("../fonts/marckscript/stylesheet.css");
+
 @tailwind base;
 
 /* Your own custom base styles */

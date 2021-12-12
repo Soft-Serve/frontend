@@ -8,8 +8,7 @@ const base = classnames(
   "border-b-2",
   "cursor-pointer",
   "flex",
-  "items-start",
-  "justify-between"
+  "items-start"
 );
 
 const button = classnames("focus:outline-none");

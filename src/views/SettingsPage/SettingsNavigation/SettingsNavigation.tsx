@@ -23,13 +23,13 @@ const SettingsNavigation: FC = () => {
   return (
     <Navigation>
       <NavigationItem css="border-t-2" to={`${routes.restaurants}/${restaurantSlug}`}>
-        <span>Menu</span>
         <MenuSVG className="h-6 w-6 text-white" aria-hidden="true" />
+        <span className="mx-2">Menu</span>
         <span className="sr-only">Menu</span>
       </NavigationItem>
       <NavigationItem onClick={signUserOut}>
-        <span>Sign Out</span>
         <LogoutSVG className="h-5 w-5 text-white" aria-hidden="true" />
+        <span className="mx-2">Sign Out</span>
       </NavigationItem>
     </Navigation>
   );

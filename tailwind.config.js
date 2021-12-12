@@ -283,6 +283,9 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        Arima: ["Arima Madurai", "cursive"],
+        Raleway: ["Raleway", "sans-serif"],
+        MarkScript: ["Marck Script", "cursive"],
       },
     },
   },

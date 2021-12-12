@@ -5,6 +5,8 @@ interface RestaurantContextData {
   setRestaurantSlug: Dispatch<SetStateAction<string>>;
   themeColour: string;
   setThemeColour: Dispatch<SetStateAction<string>>;
+  themeFont: string;
+  setThemeFont: Dispatch<SetStateAction<string>>;
   themeTint: number;
   setThemeTint: Dispatch<SetStateAction<number>>;
 }

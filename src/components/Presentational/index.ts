@@ -43,3 +43,4 @@ export { UpdateRestaurantSlugForm } from "./UpdateRestaurantSlugForm";
 export { UpdateRestaurantThemeForm } from "./UpdateRestaurantThemeForm";
 export { UpdateRestaurantAddressForm } from "./UpdateRestaurantAddressForm";
 export { PostNewUserForm } from "./PostNewUserForm";
+export { UpdateRestaurantFontForm } from "./UpdateRestaurantFontForm";

@@ -8,12 +8,10 @@ const Navigation: FC = ({ children }) => {
   return (
     <div className="hidden lg:flex lg:flex-shrink-0">
       <div className="flex flex-col">
-        <div
-          className={`flex flex-col h-0 flex-1 overflow-y-auto bg-${themeColour}-${themeTint}  w-30`}
-        >
+        <div className={`flex flex-col h-0 flex-1 overflow-y-auto bg-${themeColour}-${themeTint} `}>
           <div className="flex-1 flex flex-col">
             <div
-              className={`"flex-shrink-0 bg-${themeColour}-${themeTint} py-4 flex items-center justify-center w-52`}
+              className={`"flex-shrink-0 bg-${themeColour}-${themeTint} py-4 flex items-center justify-center w-44`}
             >
               <RestaurantLogo dimensions={70} />
             </div>

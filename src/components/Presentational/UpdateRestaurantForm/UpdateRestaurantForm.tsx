@@ -7,6 +7,7 @@ import { useUploadPhoto } from "@hooks";
 import {
   ItemImage,
   UpdateRestaurantAddressForm,
+  UpdateRestaurantFontForm,
   UpdateRestaurantSlugForm,
   UpdateRestaurantThemeForm,
 } from "@presentational";
@@ -32,6 +33,9 @@ const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
     <>
       <Card withPadding={false} css={classnames("flex-col")}>
         <UpdateRestaurantSlugForm id={restaurant.id} slug={restaurant.slug} />
+      </Card>
+      <Card css={classnames("flex-col", "mt-4")}>
+        <UpdateRestaurantFontForm />
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>
         <UpdateRestaurantThemeForm

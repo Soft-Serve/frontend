@@ -30,13 +30,13 @@ const GuestNavigation: FC = () => {
   const renderAuthNavigationItem = () => {
     return data?.currentUser ? (
       <NavigationItem onClick={signUserOut}>
-        <span>Sign Out</span>
         <LogoutSVG className="h-5 w-5 text-white" aria-hidden="true" />
+        <span className="mx-2">Sign Out</span>
       </NavigationItem>
     ) : (
       <NavigationItem to={routes.signIn}>
-        <span>Sign In</span>
         <LoginSVG className="h-6 w-6 text-white" aria-hidden="true" />
+        <span className="mx-2">Sign In</span>
       </NavigationItem>
     );
   };
@@ -45,14 +45,14 @@ const GuestNavigation: FC = () => {
     <Navigation>
       {data?.currentUser ? (
         <NavigationItem css="border-t-2" to={`${routes.settings}/${restaurantSlug}/restaurant`}>
-          <span>Settings</span>
           <AdjustmentsIcon className="h-6 w-6 text-white" aria-hidden="true" />
+          <span className="mx-2">Settings</span>
           <span className="sr-only">Settings</span>
         </NavigationItem>
       ) : (
         <NavigationItem css="border-t-2" to={routes.signUp}>
-          <span>Sign Up</span>
           <PlusCircleIcon className="h-6 w-6 text-white" aria-hidden="true" />
+          <span className="mx-2">Sign Up</span>
           <span className="sr-only">Sign Up</span>
         </NavigationItem>
       )}

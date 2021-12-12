@@ -1,0 +1,1 @@
+export { UpdateRestaurantFontForm } from "./UpdateRestaurantFontForm";

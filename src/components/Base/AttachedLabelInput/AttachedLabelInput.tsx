@@ -17,7 +17,7 @@ const AttachedLabelInput: FC<Props> = ({ label, attachedLabel, id, ...rest }) =>
   if (isViewPortBigSize || isViewportSmalllerThenTablet) {
     return (
       <div className="flex flex-col">
-        <label htmlFor={id} className="block text-sm font-medium text-gray-700">
+        <label htmlFor={id} className="block text-sm font-medium text-gray-900">
           {label}
         </label>
         <div className="mt-2 flex flex-col">
