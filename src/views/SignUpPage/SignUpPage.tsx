@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import type { FC } from "react";
 import { CreateNewUserForm } from "@presentational";
-import { TabContent } from "@base";
+import { BoxSection, Footer } from "@base";
 import { MenuPage } from "../MenuPage";
 import { SignUpNavigation } from "./SignUpNavigation";
 import { SignUpMobileNavigation } from "./SignUpMobileNavigation";
@@ -12,15 +12,16 @@ const SignUpPage: FC = () => {
 
   return (
     <MenuPage>
-      <div className="relative h-screen flex bg-blue-gray-50 overflow-hidden">
-        <SignUpMobileNavigation isOpen={isMobileMenuOpen} onClose={setIsMobileMenuOpen} />
-        <SignUpNavigation />
-        <SignUpMobileHeader onButtonClick={setIsMobileMenuOpen}>
-          <TabContent>
+      <SignUpMobileNavigation isOpen={isMobileMenuOpen} onClose={setIsMobileMenuOpen} />
+      <SignUpNavigation />
+      <SignUpMobileHeader onButtonClick={setIsMobileMenuOpen}>
+        <div className="overflow-y-scroll">
+          <BoxSection>
             <CreateNewUserForm />
-          </TabContent>
-        </SignUpMobileHeader>
-      </div>
+          </BoxSection>
+        </div>
+        <Footer />
+      </SignUpMobileHeader>
     </MenuPage>
   );
 };
