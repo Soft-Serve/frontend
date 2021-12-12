@@ -17,6 +17,7 @@ const SignInPage: FC = () => {
 
   return (
     <MenuPage>
+      {accountConfirmed() && flash()}
       <SignInMobileNavigation isOpen={isMobileMenuOpen} onClose={setIsMobileMenuOpen} />
       <SignInNavigation />
       <SignInMobileHeader setMobileMenuOpen={setIsMobileMenuOpen}>
@@ -25,7 +26,6 @@ const SignInPage: FC = () => {
             <SignInForm />
           </BoxSection>
         </Container>
-        {accountConfirmed() && flash()}
         <Footer />
       </SignInMobileHeader>
     </MenuPage>

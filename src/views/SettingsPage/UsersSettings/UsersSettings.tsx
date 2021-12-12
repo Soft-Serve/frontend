@@ -23,7 +23,7 @@ const UsersSettings: FC = () => {
               <XIcon className="w-5 h-5" />
             </Button>
           </div>
-          <PostNewUserForm />
+          <PostNewUserForm setIsModalOpen={setIsModalOpen} />
         </div>
       </Modal>
 
