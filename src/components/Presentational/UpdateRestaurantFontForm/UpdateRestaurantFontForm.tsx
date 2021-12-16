@@ -5,7 +5,7 @@ import type { FC } from "react";
 import { useRestaurantContext } from "src/contexts";
 import { useUpdateRestaurantFont } from "./UpdateRestaurantFont.mutation";
 
-const FONTS = ["Sans", "Arima", "Raleway", "MarkScript", "Quicksand"];
+const FONTS = ["Sans", "Arima", "Baskerville", "Cardo", "Oswald", "Quicksand", "Raleway"];
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");

@@ -284,9 +284,11 @@ module.exports = {
       fontFamily: {
         Sans: ["Inter var", ...defaultTheme.fontFamily.sans],
         Arima: ["Arima Madurai", "cursive"],
-        Raleway: ["Raleway", "sans-serif"],
-        MarkScript: ["Marck Script", "cursive"],
+        Baskerville: ["Libre Baskerville", "serif"],
+        Cardo: ["Cardo", "serif"],
+        Oswald: ["Oswald", "sans-serif"],
         Quicksand: ["Quicksand", "sans-serif"],
+        Raleway: ["Raleway", "sans-serif"],
       },
     },
   },

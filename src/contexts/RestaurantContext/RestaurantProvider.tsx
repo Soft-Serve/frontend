@@ -6,7 +6,7 @@ import { RestaurantContext } from "./RestaurantContext";
 interface RestaurantSlug {
   id: string;
 }
-const FONTS = ["Sans", "Arima", "Raleway", "MarkScript", "Quicksand"];
+const FONTS = ["Sans", "Arima", "Baskerville", "Cardo", "Oswald", "Quicksand", "Raleway"];
 
 const RestaurantProvider: FC = ({ children }) => {
   const [restaurantSlug, setRestaurantSlug] = useState("");
