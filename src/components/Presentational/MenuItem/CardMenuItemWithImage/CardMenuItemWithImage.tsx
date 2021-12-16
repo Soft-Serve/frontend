@@ -2,7 +2,7 @@ import React from "react";
 import type { FC } from "react";
 import { Item, useDietaryQuery } from "@shared";
 import { Dietaries, ItemImage, ItemPrice } from "@presentational";
-import { useAllergyContext } from "@contexts";
+import { useAllergyContext, useRestaurantContext } from "@contexts";
 import { intersection } from "@utility";
 import { Card, CardContent } from "@base";
 import { SkeletonMenuItemWithImage } from "./SkeletonMenuItemWithImage";
@@ -19,6 +19,9 @@ const CardMenuItemWithImage: FC<Props> = ({ item }) => {
   });
 
   const { activeAllergies } = useAllergyContext();
+
+  const { themeFont } = useRestaurantContext();
+  console.log(themeFont);
 
   if (data?.dietaries && intersection(activeAllergies, data?.dietaries)) {
     return null;
@@ -41,14 +44,16 @@ const CardMenuItemWithImage: FC<Props> = ({ item }) => {
         <div className="flex flex-col h-full justify-between w-full p-4">
           <div>
             <div className="flex items-center justify-between">
-              <span className={`block text-lg leading-tight font-MarkScript ${textStyle}`}>
+              <span
+                className={`block text-lg leading-tight font-${themeFont} ${textStyle} font-${themeFont}`}
+              >
                 {item.name}
               </span>
               <div className="mt-2 mx-2 ">
                 <Dietaries itemAvailable={item.available} itemID={item.id} />
               </div>
             </div>
-            <p className="mt-2 text-gray-500 break-words font-MarkScript">
+            <p className={`mt-2 text-gray-500 break-words font-${themeFont}`}>
               {item.available ? item.description : "** Temporarily unavailable  **"}
             </p>
           </div>

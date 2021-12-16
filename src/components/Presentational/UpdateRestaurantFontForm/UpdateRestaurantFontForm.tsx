@@ -13,6 +13,8 @@ function classNames(...classes: string[]) {
 const UpdateRestaurantFontForm: FC = () => {
   const { themeFont, setThemeFont, themeColour, themeTint } = useRestaurantContext();
 
+  const handleChange = (font: string) => setThemeFont(font);
+
   return (
     <RadioGroup value={themeFont} onChange={setThemeFont}>
       <RadioGroup.Label className="text-sm font-medium  text-gray-900">Theme font</RadioGroup.Label>
