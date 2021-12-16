@@ -2,7 +2,7 @@ import React, { SetStateAction } from "react";
 import type { FC } from "react";
 import { RadioTile, RadioTiles } from "@base";
 import { Category } from "@shared";
-import { useGlobalContext } from "@contexts";
+import { useGlobalContext, useRestaurantContext } from "@contexts";
 import { classnames } from "tailwindcss-classnames";
 import { SkeletonCategories } from "./SkeletonCategories";
 
@@ -14,6 +14,7 @@ interface Props {
 
 const Categories: FC<Props> = ({ categories, loading, setCategoryID }) => {
   const { categoryID } = useGlobalContext();
+  const { themeFont } = useRestaurantContext();
   if (loading) return <SkeletonCategories />;
 
   return (
@@ -28,7 +29,7 @@ const Categories: FC<Props> = ({ categories, loading, setCategoryID }) => {
             key={category.id}
             css={classnames("rounded-md", "mx-2", "whitespace-nowrap")}
           >
-            {category.name}
+            <span className={`font-${themeFont}`}>{category.name}</span>
           </RadioTile>
         ))}
       </div>

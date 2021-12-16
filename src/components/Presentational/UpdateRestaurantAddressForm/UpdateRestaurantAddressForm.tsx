@@ -91,7 +91,7 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
       return (
         <div className="px-4 py-3  text-right sm:px-6 mt-4">
           <Button loading={loading} size="XXL" isFullwidth={width < 1024} type="submit">
-            Update
+            <span className="font-Quicksand">Update</span>
           </Button>
         </div>
       );

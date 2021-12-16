@@ -21,7 +21,7 @@ const UploadImageBox: FC<Props> = ({ onChange, imageFile }) => {
             className="relative cursor-pointer bg-white rounded-md font-medium text-gray-900 hover:text-gray-900 focus-within:outline-none w-full  px-24"
           >
             <UploadImageSVG />
-            <span className="text-center">Upload a photo</span>
+            <span className="text-center font-Quicksand font-bold">Upload a photo</span>
             <input
               type="file"
               id="file-upload"
@@ -32,7 +32,7 @@ const UploadImageBox: FC<Props> = ({ onChange, imageFile }) => {
             />
           </label>
         </div>
-        <p className="text-xs text-gray-500 text-center">
+        <p className="text-xs text-gray-500 text-center font-Quicksand">
           {imageFile?.name || "PNG, JPG, GIF up to 10MB"}
         </p>
       </div>

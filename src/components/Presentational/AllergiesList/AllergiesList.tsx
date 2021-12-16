@@ -41,13 +41,13 @@ const AllergiesList: FC<Props> = ({ handleDeleteItem, handleUpdateItem }) => {
           {data?.allergies?.map(allergy => (
             <ListItem key={allergy.id}>
               <div className="w-0 flex-1 flex items-center">
-                <span className="ml-2 flex-1 w-0 font-medium">{`${allergy.name} / ${allergy.filter_name}`}</span>
+                <span className="ml-2 flex-1 w-0 font-bold font-Quicksand">{`${allergy.name} / ${allergy.filter_name}`}</span>
               </div>
               <div className="ml-4 flex flex-col sm:flex-row">
                 <div className="w-full sm:mr-2 my-1">
                   <Button isFullwidth size="XS" onClick={() => handleUpdateItem(allergy)}>
-                    <span className="mr-4 text-base">Update</span>
-                    <UpdateSVG className="w-5 h-5" />
+                    Update
+                    <UpdateSVG className="w-5 h-5 ml-2" />
                   </Button>
                 </div>
                 <div className="w-full my-1">
@@ -57,8 +57,8 @@ const AllergiesList: FC<Props> = ({ handleDeleteItem, handleUpdateItem }) => {
                     size="XS"
                     onClick={() => handleDeleteItem(allergy)}
                   >
-                    <span className="mr-4 text-base">Delete</span>
-                    <DeleteSVG className="w-5 h-5" />
+                    Delete
+                    <DeleteSVG className="w-5 h-5 ml-2" />
                   </Button>
                 </div>
               </div>

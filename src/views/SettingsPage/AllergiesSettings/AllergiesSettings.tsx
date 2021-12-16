@@ -50,8 +50,8 @@ const AllergiesSettings: FC = () => {
         <CardContent>
           <SettingsHeader>Dietaries</SettingsHeader>
           <Button onClick={handlePostItem} size="XXL" type="button">
-            <span className="mr-4 text-base hidden sm:block">Add Dietary</span>
-            <FilterIcon className="w-5 h-5" />
+            Add Dietary
+            <FilterIcon className="w-5 h-5 ml-2" />
           </Button>
         </CardContent>
       </Card>

@@ -19,7 +19,7 @@ const ColourPicker: FC<Props> = ({ onClose, setTheme, setTint }) => {
       <div className=" h-96 overflow-y-auto mb-2">
         {colourMap.map(([colour, value]) => (
           <div className="my-4" key={colour}>
-            <span className="text-sm font-medium text-gray-900 mx-2">{colour}</span>
+            <span className="text-sm font-bold text-gray-900 mx-2 font-Quicksand">{colour}</span>
             <div className="flex items-center flex-wrap">
               {Object.entries(value).map(([tailWindNumber, hexColour]) => (
                 <div

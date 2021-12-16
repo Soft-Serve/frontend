@@ -9,7 +9,7 @@ import { AdjustmentsIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import { useRestaurantContext } from "src/contexts";
 
 const GuestNavigation: FC = () => {
-  const { restaurantSlug } = useRestaurantContext();
+  const { restaurantSlug, themeFont } = useRestaurantContext();
   const { data } = useCurrentUserQuery({
     skip: !restaurantSlug,
   });
@@ -31,12 +31,12 @@ const GuestNavigation: FC = () => {
     return data?.currentUser ? (
       <NavigationItem onClick={signUserOut}>
         <LogoutSVG className="h-5 w-5 text-white" aria-hidden="true" />
-        <span className="mx-2">Sign Out</span>
+        <span className={`mx-2 font-${themeFont}`}>Sign Out</span>
       </NavigationItem>
     ) : (
       <NavigationItem to={routes.signIn}>
         <LoginSVG className="h-6 w-6 text-white" aria-hidden="true" />
-        <span className="mx-2">Sign In</span>
+        <span className={`mx-2 font-${themeFont}`}>Sign In</span>
       </NavigationItem>
     );
   };
@@ -46,13 +46,13 @@ const GuestNavigation: FC = () => {
       {data?.currentUser ? (
         <NavigationItem css="border-t-2" to={`${routes.settings}/${restaurantSlug}/restaurant`}>
           <AdjustmentsIcon className="h-6 w-6 text-white" aria-hidden="true" />
-          <span className="mx-2">Settings</span>
+          <span className={`mx-2 font-${themeFont}`}>Settings</span>
           <span className="sr-only">Settings</span>
         </NavigationItem>
       ) : (
         <NavigationItem css="border-t-2" to={routes.signUp}>
           <PlusCircleIcon className="h-6 w-6 text-white" aria-hidden="true" />
-          <span className="mx-2">Sign Up</span>
+          <span className={`mx-2 font-${themeFont}`}>Sign Up</span>
           <span className="sr-only">Sign Up</span>
         </NavigationItem>
       )}

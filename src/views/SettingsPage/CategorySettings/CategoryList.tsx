@@ -38,7 +38,7 @@ const CategoryList: FC<Props> = ({ categories, handleModal, loading, activeMenu 
                   to={`${routes.settings}/${restaurantSlug}/items?menu=${activeMenu?.name}&category=${category.name}`}
                 >
                   <div className="flex-1 flex items-end">
-                    <span className="font-medium">{category.name}</span>
+                    <span className="font-bold font-Quicksand">{category.name}</span>
                     <ChevronRightIcon className="w-5 h-5" />
                   </div>
                 </Link>
@@ -49,8 +49,8 @@ const CategoryList: FC<Props> = ({ categories, handleModal, loading, activeMenu 
                       size="XS"
                       onClick={() => handleModal(ModalForms.UpdateCategory, category)}
                     >
-                      <span className="mr-4 text-base">Update</span>
-                      <UpdateSVG className="w-5 h-5" />
+                      Update
+                      <UpdateSVG className="w-5 h-5 ml-2" />
                     </Button>
                   </div>
                   <div className="w-full my-1">
@@ -60,8 +60,8 @@ const CategoryList: FC<Props> = ({ categories, handleModal, loading, activeMenu 
                       size="XS"
                       onClick={() => handleModal(ModalForms.DeleteCategory, category)}
                     >
-                      <span className="mr-4 text-base">Delete</span>
-                      <DeleteSVG className="w-5 h-5" />
+                      Delete
+                      <DeleteSVG className="w-5 h-5 ml-2" />
                     </Button>
                   </div>
                 </div>

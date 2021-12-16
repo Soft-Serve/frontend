@@ -96,6 +96,7 @@ const CategorySettings: FC = () => {
       <Tabs>
         {data?.menus.map((menu, index) => (
           <Tab
+            themeFont="Quicksand"
             onClick={() => setActiveMenu(menu)}
             numOfTabs={data.menus.length}
             tabIndex={index}
@@ -118,8 +119,8 @@ const CategorySettings: FC = () => {
         <CardContent>
           <SettingsHeader>Categories</SettingsHeader>
           <Button size="XXL" onClick={() => handleModal(ModalForms.PostCategory)}>
-            <span className="mr-4 text-base  hidden sm:block">Add Category</span>
-            <ViewGridAddIcon className="w-5 h-5" />
+            Add Category
+            <ViewGridAddIcon className="w-5 h-5 ml-2" />
           </Button>
         </CardContent>
       </Card>

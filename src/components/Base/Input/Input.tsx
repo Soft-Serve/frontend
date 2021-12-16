@@ -41,7 +41,8 @@ const Input: FC<Props> = ({
       </label>
       {labelText && (
         <label htmlFor={name} className={styles.label}>
-          {labelText} {required && <span className="text-red-600">*</span>}
+          <span className="font-Quicksand font-semibold">{labelText} </span>
+          {required && <span className="text-red-600">*</span>}
         </label>
       )}
       <input

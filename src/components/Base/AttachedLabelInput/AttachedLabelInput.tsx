@@ -17,12 +17,12 @@ const AttachedLabelInput: FC<Props> = ({ label, attachedLabel, id, ...rest }) =>
   if (isViewPortBigSize || isViewportSmalllerThenTablet) {
     return (
       <div className="flex flex-col">
-        <label htmlFor={id} className="block text-sm font-medium text-gray-900">
+        <label htmlFor={id} className="block text-sm font-bold text-gray-900 font-Quicksand">
           {label}
         </label>
         <div className="mt-2 flex flex-col">
           <span
-            className={`items-center p-3 rounded-t-md border-r-0 border-2 border-${themeColour}-${themeTint}  text-white bg-${themeColour}-${themeTint} sm:text-sm font-bold"`}
+            className={`items-center p-3 rounded-t-md border-r-0 border-2 border-${themeColour}-${themeTint}  text-white bg-${themeColour}-${themeTint} sm:text-sm font-bold font-Quicksand`}
           >
             {attachedLabel}
           </span>
@@ -37,12 +37,12 @@ const AttachedLabelInput: FC<Props> = ({ label, attachedLabel, id, ...rest }) =>
   }
   return (
     <div className="flex flex-col">
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700">
+      <label htmlFor={id} className="block text-sm font-bold text-gray-900 font-Quicksand">
         {label}
       </label>
       <div className="mt-2 flex rounded-md shadow-sm">
         <span
-          className={`inline-flex  items-center px-3 rounded-l-md  border-r-0 border-2 border-${themeColour}-${themeTint}  text-white bg-${themeColour}-${themeTint}  sm:text-sm font-bold"`}
+          className={`inline-flex  items-center px-3 rounded-l-md  border-r-0 border-2 border-${themeColour}-${themeTint}  text-white bg-${themeColour}-${themeTint}  sm:text-sm font-bold font-Quicksand`}
         >
           {attachedLabel}
         </span>

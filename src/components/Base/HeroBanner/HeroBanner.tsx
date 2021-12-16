@@ -13,7 +13,7 @@ const HeroBanner: FC = () => {
     },
   });
 
-  const { themeColour, restaurantSlug } = useRestaurantContext();
+  const { themeColour, restaurantSlug, themeFont } = useRestaurantContext();
   const { data, loading } = useBannersQuery({
     variables: {
       restaurantSlug,
@@ -36,9 +36,13 @@ const HeroBanner: FC = () => {
             </div>
             <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
               <h1 className="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                <span className="block text-white">{data?.banners?.[0]?.header}</span>
+                <span className={`block text-white font-${themeFont}`}>
+                  {data?.banners?.[0]?.header}
+                </span>
                 {data?.banners?.[0]?.sub_header && (
-                  <span className="block text-white">{data?.banners?.[0]?.sub_header}</span>
+                  <span className={`block text-white font-${themeFont}`}>
+                    {data?.banners?.[0]?.sub_header}
+                  </span>
                 )}
               </h1>
             </div>

@@ -77,7 +77,7 @@ const UpdateRestaurantThemeForm: FC<Props> = ({
   return (
     <>
       <Modal isOpen={isColourModalOpen} onClose={setIsColourModalOpen}>
-        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
+        <h3 className="text-sm font-bold text-gray-900 tracking-wider uppercase mr-4 font-Quicksand ">
           Select Restaurant Theme Colour
         </h3>
         <ColourPicker
@@ -89,7 +89,7 @@ const UpdateRestaurantThemeForm: FC<Props> = ({
       <form onSubmit={handleSubmit}>
         <div className="flex items-end">
           <div>
-            <span className="font-medium text-gray-900 text-sm">Theme Colour</span>
+            <span className="font-bold text-gray-900 text-sm font-Quicksand">Theme Colour</span>
             <div
               onKeyDown={() => setIsColourModalOpen(prevState => !prevState)}
               tabIndex={0}

@@ -6,7 +6,7 @@ import { ACTION_TYPES } from "src/contexts/AllergyContext/types";
 import Skeleton from "react-loading-skeleton";
 
 const AllergyLegend: FC = () => {
-  const { themeColour, themeTint } = useRestaurantContext();
+  const { themeColour, themeTint, themeFont } = useRestaurantContext();
   const { restaurantSlug } = useRestaurantContext();
 
   const { dispatch, activeAllergies } = useAllergyContext();
@@ -52,7 +52,9 @@ const AllergyLegend: FC = () => {
               tabIndex={0}
             >
               {DietarySvg(allergy, themeColour, themeTint)}
-              <span className="text-sm font-medium text-gray-900 mx-2">{allergy.filter_name}</span>
+              <span className={`text-sm font-medium text-gray-900 mx-2 font-${themeFont}`}>
+                {allergy.filter_name}
+              </span>
               <Toggle isEnabled={isAllergyActive(allergy)} />
             </div>
           </div>

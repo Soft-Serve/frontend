@@ -35,7 +35,7 @@ const MenusList: FC<Props> = ({ menus, handleModal, loading }) => {
                 to={`${routes.settings}/${restaurantSlug}/items?menu=${menu.name}`}
               >
                 <div className="flex-1 flex items-end">
-                  <span className="font-medium text-gray-900">{menu.name}</span>
+                  <span className="font-bold text-gray-900 font-Quicksand">{menu.name}</span>
                   <ChevronRightIcon className="w-5 h-5" />
                 </div>
               </Link>
@@ -46,8 +46,8 @@ const MenusList: FC<Props> = ({ menus, handleModal, loading }) => {
                     size="XS"
                     onClick={() => handleModal(ModalForms.UpdateMenu, menu)}
                   >
-                    <span className="mr-4 text-base">Update</span>
-                    <UpdateSVG className="w-5 h-5" />
+                    Update
+                    <UpdateSVG className="w-5 h-5 ml-2" />
                   </Button>
                 </div>
                 <div className="w-full my-1">
@@ -57,8 +57,8 @@ const MenusList: FC<Props> = ({ menus, handleModal, loading }) => {
                     size="XS"
                     onClick={() => handleModal(ModalForms.DeleteMenu, menu)}
                   >
-                    <span className="mr-4 text-base">Delete</span>
-                    <DeleteSVG className="w-5 h-5" />
+                    Delete
+                    <DeleteSVG className="w-5 h-5 ml-2" />
                   </Button>
                 </div>
               </div>

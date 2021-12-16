@@ -38,7 +38,9 @@ const Button: FC<Props> = ({
       className={buildStyles(themeColour, themeTint, size, colour, isFullwidth, disabled, css)}
       {...rest}
     >
-      {renderButtonContent()}
+      <span className="font-Quicksand font-bold inline-flex items-center">
+        {renderButtonContent()}
+      </span>
     </button>
   );
 };

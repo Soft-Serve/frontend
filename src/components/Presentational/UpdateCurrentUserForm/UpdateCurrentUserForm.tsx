@@ -101,10 +101,8 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
         <div className="px-4 py-5 bg-white sm:p-6">
           <div className="grid grid-cols-6 gap-6">
             <div className="col-span-6 sm:col-span-3">
-              <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
-                First name
-              </label>
               <Input
+                labelText="First name"
                 errors={[nameErrors(state.firstName, isFirstNameDirty)]}
                 onBlur={() => setIsFirstNameDirty(true)}
                 value={state.firstName || ""}
@@ -117,10 +115,8 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
             </div>
 
             <div className="col-span-6 sm:col-span-3">
-              <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                Last name
-              </label>
               <Input
+                labelText="Last name"
                 errors={[nameErrors(state.lastName, isLastNameDirty)]}
                 onBlur={() => setIsLastNameDirty(true)}
                 value={state.lastName || ""}
@@ -133,10 +129,8 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
             </div>
 
             <div className="col-span-10 sm:col-span-5">
-              <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-                Email address
-              </label>
               <Input
+                labelText="Email"
                 readOnly
                 value={state.email}
                 type="text"

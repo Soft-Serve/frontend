@@ -9,8 +9,9 @@ interface Props {
   tabIndex: number;
   numOfTabs: number;
   onClick: () => void;
+  themeFont: string;
 }
-const Tab: FC<Props> = ({ children, tabIndex, numOfTabs, isActive, onClick }) => {
+const Tab: FC<Props> = ({ children, tabIndex, numOfTabs, isActive, onClick, themeFont }) => {
   const { themeColour, themeTint } = useRestaurantContext();
   return (
     <Button
@@ -18,7 +19,7 @@ const Tab: FC<Props> = ({ children, tabIndex, numOfTabs, isActive, onClick }) =>
       className={buildTabStyles(isActive, tabIndex, numOfTabs)}
       aria-current={isActive ? "page" : undefined}
     >
-      <span>{children}</span>
+      <span className={`font-${themeFont} ${isActive && `font-bold`}`}>{children}</span>
       <span aria-hidden="true" className={buildTabTextStyles(isActive, themeColour, themeTint)} />
     </Button>
   );

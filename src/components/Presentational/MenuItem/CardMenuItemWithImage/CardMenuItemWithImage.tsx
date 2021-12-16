@@ -21,7 +21,6 @@ const CardMenuItemWithImage: FC<Props> = ({ item }) => {
   const { activeAllergies } = useAllergyContext();
 
   const { themeFont } = useRestaurantContext();
-  console.log(themeFont);
 
   if (data?.dietaries && intersection(activeAllergies, data?.dietaries)) {
     return null;

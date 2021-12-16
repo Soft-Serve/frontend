@@ -35,7 +35,7 @@ const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
         <UpdateRestaurantSlugForm id={restaurant.id} slug={restaurant.slug} />
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>
-        <UpdateRestaurantFontForm />
+        <UpdateRestaurantFontForm id={restaurant.id} />
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>
         <UpdateRestaurantThemeForm
@@ -47,7 +47,9 @@ const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
         />
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>
-        <label className="text-sm font-medium text-gray-900 block my-4">Restaurant Logo</label>
+        <label className="text-sm font-bold text-gray-900 block my-4 font-Quicksand">
+          Restaurant Logo
+        </label>
         <div className="flex items-center w-full justify-between flex-wrap">
           <div className="m-2">
             <ItemImage photoUrl={restaurant.logo} />
@@ -56,7 +58,9 @@ const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
         </div>
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>
-        <label className="text-sm font-medium text-gray-900 block my-4">Restaurant Banner</label>
+        <label className="text-sm font-bold text-gray-900 block my-4 font-Quicksand">
+          Restaurant Banner
+        </label>
         <div className="flex items-center w-full justify-between flex-wrap">
           <div className="m-2">
             <ItemImage

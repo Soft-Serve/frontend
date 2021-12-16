@@ -38,7 +38,7 @@ const CategoryItem: FC<Props> = ({ handleDeleteItem, categoryID, handleUpdateIte
         <div className="flex flex-col h-full justify-between w-full p-4">
           <div>
             <div className="flex items-center justify-between">
-              <span className="block text-lg leading-tight font-medium text-black ">
+              <span className="block text-lg leading-tight font-bold text-black font-Quicksand ">
                 {item.name}
               </span>
               <div className="flex items-center">
@@ -48,7 +48,9 @@ const CategoryItem: FC<Props> = ({ handleDeleteItem, categoryID, handleUpdateIte
                 <Toggle isEnabled={isItemAvailable} handleClick={handleToggle} />
               </div>
             </div>
-            <p className="mt-2 text-gray-500 break-words italic">{item.description}</p>
+            <p className="mt-2 text-gray-500 break-words italic font-Quicksand">
+              {item.description}
+            </p>
           </div>
           <div className="flex items-center flex-wrap w-full">
             <ItemPrice itemID={item.id} />

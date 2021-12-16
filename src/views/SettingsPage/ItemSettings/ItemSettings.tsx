@@ -128,6 +128,7 @@ const ItemSettings: FC = () => {
       <Tabs>
         {menuData?.menus?.map((menu, index) => (
           <Tab
+            themeFont="Quicksand"
             onClick={() => handleActiveMenu(menu)}
             numOfTabs={menuData.menus.length}
             tabIndex={index}
@@ -152,7 +153,7 @@ const ItemSettings: FC = () => {
         <ol className="bg-white rounded-md shadow px-6 flex space-x-4">
           <li className="flex">
             <div className="flex items-center">
-              <span className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
+              <span className="ml-4 text-sm font-medium text-gray-600 hover:text-gray-900 hover:font-bold font-Quicksand">
                 {activeMenu?.name}
               </span>
             </div>
@@ -170,7 +171,7 @@ const ItemSettings: FC = () => {
                 <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
               </svg>
               <Link to={`${routes.settings}/${restaurantSlug}/categories`}>
-                <span className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
+                <span className="ml-4 text-sm font-medium text-gray-600 hover:text-gray-900 hover:font-bold font-Quicksand">
                   {categoryParam || "All categories"}
                 </span>
               </Link>
@@ -191,8 +192,8 @@ const ItemSettings: FC = () => {
           <div className="flex w-full items-center justify-between mb-4">
             <SettingsHeader>Items</SettingsHeader>
             <Button onClick={handlePostItem} size="XXL">
-              <span className="mr-4 text-base e hidden sm:block">Add Item</span>
-              <PlusCircleIcon className="w-5 h-5" />
+              Add Item
+              <PlusCircleIcon className="w-5 h-5 ml-2" />
             </Button>
           </div>
         </CardContent>
@@ -202,7 +203,10 @@ const ItemSettings: FC = () => {
         <CardContent>
           <div className="flex flex-col w-full">
             <div className="w-full flex items-center ">
-              <label htmlFor="search" className="block text-sm font-medium text-gray-700 ml-4">
+              <label
+                htmlFor="search"
+                className="block text-sm font-bold text-gray-900 ml-4 font-Quicksand"
+              >
                 Search items
               </label>
               <div className="flex-1 min-w-0 ml-4 mt-1">

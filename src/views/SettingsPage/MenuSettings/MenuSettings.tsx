@@ -66,8 +66,8 @@ const MenuSettings: FC = () => {
         <CardContent>
           <SettingsHeader>Menus</SettingsHeader>
           <Button size="XXL" onClick={() => handleMenuModal(ModalForms.PostMenu)}>
-            <span className="mr-4 text-base hidden sm:block">Add Menu</span>
-            <PlusCircleIcon className="w-5 h-5" />
+            Add Menu
+            <PlusCircleIcon className="w-5 h-5 ml-2" />
           </Button>
         </CardContent>
       </Card>

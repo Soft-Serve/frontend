@@ -12,6 +12,7 @@ const RESTAURANT_QUERY = gql`
       currency
       colour
       tint
+      font
       logo
       slug
       address_line_1
@@ -35,6 +36,7 @@ interface Restaurant {
   currency: string;
   colour: string;
   tint: number;
+  font: string;
   logo: string;
   slug: string;
   address_line_1: string;

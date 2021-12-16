@@ -3,21 +3,39 @@ import { RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/solid";
 import type { FC } from "react";
 import { useRestaurantContext } from "src/contexts";
+import { useUpdateRestaurantFont } from "./UpdateRestaurantFont.mutation";
 
-const FONTS = ["sans", "Arima", "Raleway", "MarkScript"];
+const FONTS = ["Sans", "Arima", "Raleway", "MarkScript", "Quicksand"];
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const UpdateRestaurantFontForm: FC = () => {
+interface Props {
+  id: number;
+}
+const UpdateRestaurantFontForm: FC<Props> = ({ id }) => {
   const { themeFont, setThemeFont, themeColour, themeTint } = useRestaurantContext();
 
-  const handleChange = (font: string) => setThemeFont(font);
+  const [updateFont] = useUpdateRestaurantFont();
+
+  const handleChange = (font: string) => {
+    setThemeFont(font);
+    updateFont({
+      variables: {
+        input: {
+          font,
+          id,
+        },
+      },
+    });
+  };
 
   return (
-    <RadioGroup value={themeFont} onChange={setThemeFont}>
-      <RadioGroup.Label className="text-sm font-medium  text-gray-900">Theme font</RadioGroup.Label>
+    <RadioGroup value={themeFont} onChange={handleChange}>
+      <RadioGroup.Label className="text-sm font-bold text-gray-900 font-Quicksand">
+        Theme font
+      </RadioGroup.Label>
 
       <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
         {FONTS.map(font => (

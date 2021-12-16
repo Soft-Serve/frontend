@@ -27,7 +27,7 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id }) => {
     return (
       <div className="px-4 py-3  text-right sm:px-6 mt-4">
         <Button size="XXL" isFullwidth={isTablet} type="submit">
-          Update
+          <span className="font-Quicksand font-bold">Update</span>
         </Button>
       </div>
     );

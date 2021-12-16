@@ -9,7 +9,7 @@ import { SkeletonRestaurant } from "./SkeletonRestaurant";
 import { useUpdateRestaurantOnboarding } from "./UpdateRestaurantOnboarding.mutation";
 
 const Restaurant: FC = () => {
-  const { restaurantSlug } = useRestaurantContext();
+  const { restaurantSlug, themeFont } = useRestaurantContext();
   const { categoryID } = useGlobalContext();
   const { data, error, loading } = useRestaurantQuery({
     variables: {
@@ -80,7 +80,7 @@ const Restaurant: FC = () => {
         <Container>
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
             <div className="w-full lg:flex hidden">
-              <Menus />
+              <Menus themeFont={themeFont} />
             </div>
             <CategoriesContainer />
           </BoxSection>

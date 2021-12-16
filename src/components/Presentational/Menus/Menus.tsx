@@ -7,7 +7,10 @@ import { useMenusQuery } from "@shared";
 import { routes } from "src/routes";
 import Skeleton from "react-loading-skeleton";
 
-const Menus: FC = () => {
+interface Props {
+  themeFont: string;
+}
+const Menus: FC<Props> = ({ themeFont }) => {
   const { setMenuID, setActiveMenu, menuID } = useGlobalContext();
   const { restaurantSlug, themeColour, themeTint } = useRestaurantContext();
 
@@ -30,6 +33,7 @@ const Menus: FC = () => {
       <Tabs>
         {data?.menus.map((menu, index) => (
           <Tab
+            themeFont={themeFont}
             onClick={() => setMenuID(menu.id)}
             numOfTabs={data.menus.length}
             tabIndex={index}

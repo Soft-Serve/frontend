@@ -31,8 +31,8 @@ const UsersSettings: FC = () => {
         <CardContent>
           <SettingsHeader>Users</SettingsHeader>
           <Button onClick={handlePostItem} size="XXL">
-            <span className="mr-4 text-base lg:block hidden">Add User</span>
-            <UserAddIcon className="w-5 h-5" />
+            Add User
+            <UserAddIcon className="w-5 h-5 ml-2" />
           </Button>
         </CardContent>
       </Card>

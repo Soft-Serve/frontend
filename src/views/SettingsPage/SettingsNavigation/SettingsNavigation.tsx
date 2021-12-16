@@ -24,12 +24,12 @@ const SettingsNavigation: FC = () => {
     <Navigation>
       <NavigationItem css="border-t-2" to={`${routes.restaurants}/${restaurantSlug}`}>
         <MenuSVG className="h-6 w-6 text-white" aria-hidden="true" />
-        <span className="mx-2">Menu</span>
+        <span className="mx-2 font-Quicksand">Menu</span>
         <span className="sr-only">Menu</span>
       </NavigationItem>
       <NavigationItem onClick={signUserOut}>
         <LogoutSVG className="h-5 w-5 text-white" aria-hidden="true" />
-        <span className="mx-2">Sign Out</span>
+        <span className="mx-2 font-Quicksand">Sign Out</span>
       </NavigationItem>
     </Navigation>
   );

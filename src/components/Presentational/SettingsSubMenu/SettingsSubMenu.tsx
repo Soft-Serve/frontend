@@ -32,8 +32,10 @@ const SettingsSubMenu: FC<Props> = ({ selected, setSelected, ...rest }) => {
                 aria-hidden="true"
               />
               <div className="ml-3 text-sm">
-                <p className="font-medium text-blue-gray-900">{capatalize(item.name)}</p>
-                <p className="mt-1 text-gray-500">{item.description}</p>
+                <p className="font-bold text-blue-gray-900 font-Quicksand">
+                  {capatalize(item.name)}
+                </p>
+                <p className="mt-1 text-gray-500 font-Quicksand">{item.description}</p>
               </div>
             </RadioTile>
           </Link>
