@@ -20,7 +20,7 @@ const GlobalProvider: FC = ({ children }) => {
       setMenuID(completedData?.restaurant?.id);
       setThemeColour(completedData?.restaurant?.colour);
       setThemeTint(completedData?.restaurant?.tint);
-      setThemeFont(completedData?.restaurant?.font);
+      setThemeFont(completedData?.restaurant?.font || "Quicksand");
     },
   });
 

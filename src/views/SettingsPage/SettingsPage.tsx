@@ -21,6 +21,7 @@ import { MenuSettings } from "./MenuSettings";
 import { RestaurantSettings } from "./RestaurantSettings";
 import { SettingsWrapper } from "./SettingsWrapper";
 import { CategorySettings } from "./CategorySettings";
+import { BannerSettings } from "./BannerSettings/BannerSettings";
 
 interface MappableObject {
   [key: string]: JSX.Element;
@@ -39,6 +40,7 @@ const SettingsPage: FC = () => {
   const [selected, setSelected] = useState(setting);
 
   const restaurant = <RestaurantSettings />;
+  const banner = <BannerSettings />;
   const users = <UsersSettings />;
   const menus = <MenuSettings />;
   const dietaries = <AllergiesSettings />;
@@ -49,6 +51,7 @@ const SettingsPage: FC = () => {
 
   const SettingsMap = {
     restaurant,
+    banner,
     menus,
     items,
     account,

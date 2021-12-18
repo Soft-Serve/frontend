@@ -1,7 +1,6 @@
 import React from "react";
 import type { FC } from "react";
 import { classnames } from "tailwindcss-classnames";
-import Skeleton from "react-loading-skeleton";
 import { Card, UploadImageBox } from "@base";
 import { useUploadPhoto } from "@hooks";
 import {
@@ -11,7 +10,6 @@ import {
   UpdateRestaurantSlugForm,
   UpdateRestaurantThemeForm,
 } from "@presentational";
-import { useBannersQuery } from "@shared";
 import type { Restaurant } from "./UpdateRestaurant.mutation";
 
 interface Props {
@@ -21,21 +19,10 @@ interface Props {
 const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
   const { photoFile, setPhotoFile } = useUploadPhoto();
 
-  const { data: bannerData, loading } = useBannersQuery({
-    variables: {
-      restaurantSlug: restaurant.slug,
-    },
-  });
-
-  if (loading) return <Skeleton height={40} />;
-
   return (
     <>
       <Card withPadding={false} css={classnames("flex-col")}>
         <UpdateRestaurantSlugForm id={restaurant.id} slug={restaurant.slug} />
-      </Card>
-      <Card css={classnames("flex-col", "mt-4")}>
-        <UpdateRestaurantFontForm id={restaurant.id} />
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>
         <UpdateRestaurantThemeForm
@@ -47,25 +34,15 @@ const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
         />
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>
+        <UpdateRestaurantFontForm id={restaurant.id} />
+      </Card>
+      <Card css={classnames("flex-col", "mt-4")}>
         <label className="text-sm font-bold text-gray-900 block my-4 font-Quicksand">
           Restaurant Logo
         </label>
         <div className="flex items-center w-full justify-between flex-wrap">
           <div className="m-2">
             <ItemImage photoUrl={restaurant.logo} />
-          </div>
-          <UploadImageBox onChange={setPhotoFile} imageFile={photoFile} />
-        </div>
-      </Card>
-      <Card css={classnames("flex-col", "mt-4")}>
-        <label className="text-sm font-bold text-gray-900 block my-4 font-Quicksand">
-          Restaurant Banner
-        </label>
-        <div className="flex items-center w-full justify-between flex-wrap">
-          <div className="m-2">
-            <ItemImage
-              photoUrl={bannerData?.banners?.[0] ? bannerData?.banners?.[0].photo : restaurant.logo}
-            />
           </div>
           <UploadImageBox onChange={setPhotoFile} imageFile={photoFile} />
         </div>

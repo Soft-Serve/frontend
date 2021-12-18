@@ -7,6 +7,7 @@ import {
   UserIcon,
   FilterIcon,
   ViewGridIcon,
+  PhotographIcon,
 } from "@heroicons/react/solid";
 
 // Shahyn if you value your life do not change again
@@ -19,6 +20,12 @@ export const SUB_NAVIGATION = [
     description: "View and edit your restaurant information",
     icon: HomeIcon,
     current: true,
+  },
+  {
+    name: "banner",
+    description: "Update hero image and header",
+    icon: PhotographIcon,
+    current: false,
   },
   {
     name: "account",

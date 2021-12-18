@@ -29,8 +29,8 @@ const HeroBanner: FC = () => {
       <div className="relative w-full">
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100 w-full" />
         <div className=" w-full mx-auto">
-          <div className="relative  sm:overflow-hidden">
-            <div className="absolute inset-0">
+          <div className="relative  md:overflow-hidden">
+            <div className="absolute inset-0 overflow-hidden">
               <AdvancedImage cldImg={cldImage} />
               <div className={`absolute inset-0 bg-${themeColour}-200 mix-blend-multiply`} />
             </div>

@@ -15,7 +15,7 @@ const GuestMobileHeader: FC<Props> = ({
   setIsGuestNavigationOpen,
   setIsMenuSlideOverOpen,
 }) => {
-  const { themeColour, themeTint } = useRestaurantContext();
+  const { themeColour, themeTint, themeFont } = useRestaurantContext();
 
   return (
     <div className="flex-1 min-w-0 flex flex-col overflow-y-auto">
@@ -26,22 +26,25 @@ const GuestMobileHeader: FC<Props> = ({
           <div className="flex items-center">
             <RestaurantLogo dimensions={50} />
           </div>
-          <div>
+          <div className="flex items-center">
             <Button
+              size="XL"
+              themeFont={themeFont}
               css="mr-2"
               colour="accent"
               onClick={() => setIsMenuSlideOverOpen(prevState => !prevState)}
             >
+              <BookOpenIcon className="h-6 w-6 mr-2" />
+              Menus
               <span className="sr-only">Open Menus List</span>
-              <BookOpenIcon className="h-6 w-6" />
-              <span className="ml-2">Menus</span>
             </Button>
             <Button
+              size="XL"
               colour="accent"
               onClick={() => setIsGuestNavigationOpen(prevState => !prevState)}
             >
               <span className="sr-only">Open sidebar</span>
-              <MenuIcon className="h-6 w-6" aria-hidden="true" />
+              <MenuIcon className="h-6 w-6 " aria-hidden="true" />
             </Button>
           </div>
         </div>

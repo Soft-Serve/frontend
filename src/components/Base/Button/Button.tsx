@@ -13,6 +13,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   isFullwidth?: boolean;
   loading?: boolean;
   css?: TArg;
+  themeFont?: string;
 }
 
 const Button: FC<Props> = ({
@@ -24,6 +25,7 @@ const Button: FC<Props> = ({
   css,
   loading,
   disabled,
+  themeFont = "Quicksand",
   ...rest
 }) => {
   const { themeColour, themeTint } = useRestaurantContext();
@@ -38,7 +40,7 @@ const Button: FC<Props> = ({
       className={buildStyles(themeColour, themeTint, size, colour, isFullwidth, disabled, css)}
       {...rest}
     >
-      <span className="font-Quicksand font-bold inline-flex items-center">
+      <span className={`font-${themeFont} font-bold inline-flex items-center`}>
         {renderButtonContent()}
       </span>
     </button>

@@ -18,9 +18,6 @@ const SkeletonMenuItemWithImage: FC = () => {
             </div>
             <Skeleton width={150} height={10} />
           </div>
-          <div className="flex items-center flex-wrap w-full">
-            <Skeleton width={40} height={20} />
-          </div>
         </div>
       </CardContent>
     </Card>
