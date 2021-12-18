@@ -31,7 +31,7 @@ const CardMenuItemWithImage: FC<Props> = ({ item }) => {
   const textStyle = item.available ? "text-black font-medium" : `text-gray-500 font-light`;
 
   return (
-    <Card css="relative" withPadding={false}>
+    <Card className="relative" withPadding={false}>
       <div className="md:flex-shrink-0 ">
         <ItemImage
           className="h-48 w-full object-cover"
@@ -57,7 +57,7 @@ const CardMenuItemWithImage: FC<Props> = ({ item }) => {
             </p>
           </div>
           {item.available && (
-            <div className="flex items-center flex-wrap w-full">
+            <div className="flex items-center flex-wrap w-full justify-end">
               <ItemPrice itemID={item.id} />
             </div>
           )}

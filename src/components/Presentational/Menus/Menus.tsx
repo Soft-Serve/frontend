@@ -53,7 +53,7 @@ const Menus: FC<Props> = ({ themeFont }) => {
           <FullLogoSVG
             className={`w-36 fill-current stroke-current text-${themeColour}-${themeTint}`}
           />
-          <h2 className={`m-8 text-center text-2xl font-bold ${themeColour}-${themeTint}`}>
+          <h2 className={`m-8 text-center text-2xl font-bold  text-${themeColour}-${themeTint}`}>
             Looks like you do not have any menus yet
           </h2>
           <Button
