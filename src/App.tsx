@@ -3,7 +3,7 @@ import { ApolloProvider } from "@apollo/client";
 import {
   MenuPage,
   LandingPage,
-  SettingsPage,
+  LazySettingsPage,
   SignInPage,
   SignUpPage,
   ConfirmEmailPage,
@@ -58,7 +58,7 @@ const App = () => {
           <Route exact path={`${routes.settings}/:id/:setting`}>
             <RestaurantProvider>
               <GlobalProvider>
-                <SettingsPage />
+                <LazySettingsPage />
               </GlobalProvider>
             </RestaurantProvider>
           </Route>
