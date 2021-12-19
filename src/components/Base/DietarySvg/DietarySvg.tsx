@@ -1,4 +1,5 @@
 import React from "react";
+import { TArg } from "tailwindcss-classnames";
 import { SoySVG, GlutenSVG, NutSVG, DairySVG, MeatSVG, ShellfishSVG } from "./svgs";
 import { buildSvgStyles } from "./styles";
 
@@ -28,12 +29,12 @@ const Components: DietaryMap = {
   Shellfish: ShellfishSVG,
 };
 
-const DietarySvg = (dietary: Dietary, themeColour: string, themeTint: number) => {
+const DietarySvg = (dietary: Dietary, themeColour: string, themeTint: number, css?: TArg) => {
   const { name, id } = dietary;
   if (typeof Components[name] !== "undefined") {
     return React.createElement(Components[dietary.name], {
       key: id,
-      className: buildSvgStyles(themeColour, themeTint),
+      className: buildSvgStyles(themeColour, themeTint, css),
     });
   }
   return null;

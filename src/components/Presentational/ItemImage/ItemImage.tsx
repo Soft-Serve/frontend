@@ -1,10 +1,11 @@
 import React from "react";
 import type { FC } from "react";
-import { AdvancedImage } from "@cloudinary/react";
+import { AdvancedImage, responsive, lazyload, placeholder } from "@cloudinary/react";
 import { Cloudinary, CloudinaryImage } from "@cloudinary/base";
 import { fill } from "@cloudinary/base/actions/resize";
 import { Plugins } from "@cloudinary/html";
 import { Effect } from "@cloudinary/base/actions/effect";
+import { useViewport } from "src/hooks";
 
 export interface ImgProps {
   cldImg: CloudinaryImage;
@@ -18,6 +19,13 @@ interface Props extends Omit<ImgProps, "cldImg"> {
 }
 
 const ItemImage: FC<Props> = ({ photoUrl, unavailable, ...rest }) => {
+  const { width } = useViewport();
+
+  const getImageWidth = () => {
+    if (width < 515) return width - 16;
+    return 160;
+  };
+
   const cld = new Cloudinary({
     cloud: {
       cloudName: "softserve",
@@ -25,14 +33,20 @@ const ItemImage: FC<Props> = ({ photoUrl, unavailable, ...rest }) => {
   });
 
   const cldImage = cld.image(photoUrl);
-  cldImage.resize(fill().width(192).height(192));
+  cldImage.resize(fill().width(getImageWidth()).height(160));
 
   if (unavailable) {
     cldImage.effect(Effect.grayscale());
   }
 
   if (photoUrl) {
-    return <AdvancedImage {...rest} cldImg={cldImage} />;
+    return (
+      <AdvancedImage
+        {...rest}
+        cldImg={cldImage}
+        plugins={[lazyload(), responsive([200, 400, 500]), placeholder("blur")]}
+      />
+    );
   }
   return null;
 };
