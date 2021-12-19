@@ -30,7 +30,7 @@ const ItemPrice: FC<Props> = ({ itemID, withImage }) => {
         >
           {data?.itemSizes?.map(item => (
             <p
-              className={`inline-flex justify-between mx-2 bg-${themeColour}-${themeTint} p-2 rounded-md mb-2`}
+              className={`inline-flex justify-between ml-2 bg-${themeColour}-${themeTint} p-2 rounded-md mb-2`}
               key={item?.id}
             >
               <span className="mr-2">{item?.unit}</span>
