@@ -2,7 +2,7 @@ import React from "react";
 import type { FC } from "react";
 import { Item, useDietaryQuery } from "@shared";
 import { Dietaries, ItemPrice } from "@presentational";
-import { useAllergyContext } from "@contexts";
+import { useAllergyContext, useRestaurantContext } from "@contexts";
 import { intersection } from "@utility";
 import { Card, CardContent } from "@base";
 import { SkeletonMenuItemWithoutImage } from "./SkeletonMenuItemWithoutImage";
@@ -12,6 +12,8 @@ interface Props {
 }
 
 const CardMenuItemWithoutImage: FC<Props> = ({ item }) => {
+  const { themeFont } = useRestaurantContext();
+
   const { data, error, loading } = useDietaryQuery({
     variables: {
       itemID: item.id,
@@ -26,31 +28,24 @@ const CardMenuItemWithoutImage: FC<Props> = ({ item }) => {
   if (loading) return <SkeletonMenuItemWithoutImage />;
   if (error) return <span>error</span>;
 
-  const textStyle = item.available ? "text-black font-medium" : `text-gray-500 font-light`;
+  const renderPrice = () => item?.available && <ItemPrice withImage itemID={item.id} />;
 
   return (
     <Card withPadding={false}>
       <CardContent>
-        <div className="flex flex-col h-full justify-between w-full p-4 z-10">
+        <div className="flex-1 bg-white px-4 flex flex-col justify-between relative">
           <div>
-            <div className="flex items-start justify-between">
-              <div>
-                <span className={`block text-lg leading-tight ${textStyle}`}>{item.name}</span>
-                <p className="mt-2 text-gray-500 break-words italic">
-                  {item.available ? item.description : "** Temporarily unavailable  **"}
-                </p>
-              </div>
-
-              <div>
-                {item.available && (
-                  <div className="w-full">
-                    <ItemPrice itemID={item.id} />
-                  </div>
-                )}
-              </div>
+            <div className="flex items-center justify-between">
+              <p className={`font-bold font-${themeFont} truncate`}>{item?.name}</p>
+              <Dietaries itemAvailable={item.available} itemID={item.id} />
             </div>
+            <p
+              className={`font-${themeFont} italic text-gray-600  text-sm break-words text-ellipsis overflow-hidden`}
+            >
+              {item.available ? item.description : "** Temporarily unavailable  **"}
+            </p>
+            {renderPrice()}
           </div>
-          <Dietaries itemID={item.id} itemAvailable={item.available} />
         </div>
       </CardContent>
     </Card>
