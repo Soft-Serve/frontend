@@ -1,13 +1,15 @@
 import React, { Fragment } from "react";
 import type { FC } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { TArg } from "tailwindcss-classnames";
 
 interface Props {
   isOpen: boolean;
   onClose: (state: boolean) => void;
+  css?: TArg;
 }
 
-const Modal: FC<Props> = ({ children, isOpen, onClose }) => {
+const Modal: FC<Props> = ({ children, isOpen, onClose, css }) => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={onClose}>
@@ -37,7 +39,9 @@ const Modal: FC<Props> = ({ children, isOpen, onClose }) => {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div
+              className={`inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 ${css}`}
+            >
               {children}
             </div>
           </Transition.Child>

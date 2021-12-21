@@ -43,18 +43,20 @@ const AllergyLegend: FC = () => {
     return (
       <>
         {data?.allergies?.map(allergy => (
-          <div key={allergy.id} className="mx-2">
+          <div key={allergy.id} className={`w-full bg-${themeColour}-${themeTint}`}>
             <div
-              className="flex whitespace-nowrap rounded-md p-2 items-center"
+              className="flex whitespace-nowrap rounded-md p-2 items-center w-full bg-white my-2 justify-between "
               onKeyDown={() => handleClick(allergy)}
               role="button"
               onClick={() => handleClick(allergy)}
               tabIndex={0}
             >
-              {DietarySvg(allergy, themeColour, themeTint)}
-              <span className={`text-sm font-medium text-gray-900 mx-2 font-${themeFont}`}>
-                {allergy.filter_name}
-              </span>
+              <div>
+                {DietarySvg(allergy, themeColour, themeTint)}
+                <span className={`text-sm font-medium text-gray-900 mx-2 font-${themeFont}`}>
+                  {allergy.filter_name}
+                </span>
+              </div>
               <Toggle isEnabled={isAllergyActive(allergy)} />
             </div>
           </div>
@@ -67,7 +69,9 @@ const AllergyLegend: FC = () => {
 
   return (
     <BreadCrumbsNavigation>
-      <div className="flex items-end w-full">{renderAllergies()}</div>
+      <div className={`w-full bg-${themeColour}-${themeTint} flex flex-col`}>
+        {renderAllergies()}
+      </div>
     </BreadCrumbsNavigation>
   );
 };
