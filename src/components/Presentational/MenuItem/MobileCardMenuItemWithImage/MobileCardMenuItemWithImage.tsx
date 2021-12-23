@@ -38,7 +38,7 @@ const MobileCardMenuItemWithImage: FC<Props> = ({ item }) => {
           photoUrl={item?.photo}
         />
         <Dietaries
-          css={classnames("justify-end", "absolute", "top-0", "right-0")}
+          css={classnames("justify-end", "absolute", "top-0", "left-0")}
           itemAvailable={item.available}
           itemID={item.id}
         />
@@ -53,7 +53,7 @@ const MobileCardMenuItemWithImage: FC<Props> = ({ item }) => {
           {item.available ? item.description : "** Temporarily unavailable  **"}
         </p>
       </div>
-      {renderPrice()}
+      <div className="w-full bg-white p-2">{renderPrice()}</div>
     </div>
   );
 };

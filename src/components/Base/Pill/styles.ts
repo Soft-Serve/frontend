@@ -6,7 +6,7 @@ const base = classnames(
   "font-medium",
   "rounded-full",
   "py-0.5",
-  "m-2"
+  "mx-2"
 );
 
 const success = classnames("bg-green-100", "text-green-800");

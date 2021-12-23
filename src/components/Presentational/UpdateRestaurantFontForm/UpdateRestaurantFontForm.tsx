@@ -1,8 +1,8 @@
 import React from "react";
+import type { FC } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/solid";
-import type { FC } from "react";
-import { useRestaurantContext } from "src/contexts";
+import { useRestaurantContext } from "@contexts";
 import { useUpdateRestaurantFont } from "./UpdateRestaurantFont.mutation";
 
 const FONTS = ["Sans", "Arima", "Baskerville", "Cardo", "Oswald", "Quicksand", "Raleway"];
@@ -36,7 +36,6 @@ const UpdateRestaurantFontForm: FC<Props> = ({ id }) => {
       <RadioGroup.Label className="text-sm font-bold text-gray-900 font-Quicksand">
         Theme font
       </RadioGroup.Label>
-
       <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
         {FONTS.map(font => (
           <RadioGroup.Option

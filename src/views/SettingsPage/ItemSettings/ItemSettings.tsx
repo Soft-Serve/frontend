@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import type { FC } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useRestaurantContext } from "@contexts";
 import { Category, Item, Menu, useCategoriesQuery, useItemsQuery, useMenusQuery } from "@shared";
 import { Button, Card, CardContent, Grid, Modal, Tab, Tabs, TabWrapper } from "@base";
@@ -8,7 +8,6 @@ import { SearchIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import Skeleton from "react-loading-skeleton";
 import { DeleteItemForm, PostItemForm, UpdateItemForm } from "@presentational";
 import { useGetParams } from "@utility";
-import { routes } from "@routes";
 import { CategoryItems } from "./CategoryItems";
 import { SettingsHeader } from "../SettingsHeader";
 
@@ -147,41 +146,6 @@ const ItemSettings: FC = () => {
     return categories?.filter(category => category.name === categoryParam);
   };
 
-  const renderBreadCrumbs = () => {
-    return (
-      <nav className="flex mt-4" aria-label="Breadcrumb">
-        <ol className="bg-white rounded-md shadow px-6 flex space-x-4">
-          <li className="flex">
-            <div className="flex items-center">
-              <span className="ml-4 text-sm font-medium text-gray-600 hover:text-gray-900 hover:font-bold font-Quicksand">
-                {activeMenu?.name}
-              </span>
-            </div>
-          </li>
-          <li className="flex">
-            <div className="flex items-center">
-              <svg
-                className="flex-shrink-0 w-6 h-full text-gray-200"
-                viewBox="0 0 24 44"
-                preserveAspectRatio="none"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-              </svg>
-              <Link to={`${routes.settings}/${restaurantSlug}/categories`}>
-                <span className="ml-4 text-sm font-medium text-gray-600 hover:text-gray-900 hover:font-bold font-Quicksand">
-                  {categoryParam || "All categories"}
-                </span>
-              </Link>
-            </div>
-          </li>
-        </ol>
-      </nav>
-    );
-  };
-
   return (
     <TabWrapper>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
@@ -228,7 +192,6 @@ const ItemSettings: FC = () => {
           </div>
         </CardContent>
       </Card>
-      {renderBreadCrumbs()}
       <div className="mt-8">
         <Grid size="SM">
           {filteredCategories(categoryData?.categories)?.map(category => (

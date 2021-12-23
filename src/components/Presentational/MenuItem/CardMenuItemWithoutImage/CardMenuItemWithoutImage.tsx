@@ -35,7 +35,7 @@ const CardMenuItemWithoutImage: FC<Props> = ({ item }) => {
       <CardContent>
         <div className="flex-1 bg-white px-4 flex flex-col justify-between relative">
           <div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between py-2">
               <p className={`font-bold font-${themeFont} truncate`}>{item?.name}</p>
               <Dietaries itemAvailable={item.available} itemID={item.id} />
             </div>

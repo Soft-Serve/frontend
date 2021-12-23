@@ -10,7 +10,9 @@ import {
   UpdateRestaurantSlugForm,
   UpdateRestaurantThemeForm,
 } from "@presentational";
+import { useItemsQuery } from "@shared";
 import type { Restaurant } from "./UpdateRestaurant.mutation";
+import { ExampleItem } from "./ExampleItem";
 
 interface Props {
   restaurant: Restaurant;
@@ -18,12 +20,31 @@ interface Props {
 
 const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
   const { photoFile, setPhotoFile } = useUploadPhoto();
+  const { data } = useItemsQuery({
+    variables: {
+      categoryID: 1,
+    },
+  });
+
+  const renderItem = () => {
+    if (data?.items?.[0])
+      return (
+        <Card withPadding={false} css={classnames("flex-col", "my-2", "p-4")}>
+          <label className="text-sm font-bold text-gray-900 block my-4 font-Quicksand">
+            Item Card
+          </label>
+          <ExampleItem item={data?.items?.[0]} />
+        </Card>
+      );
+    return null;
+  };
 
   return (
     <>
       <Card withPadding={false} css={classnames("flex-col")}>
         <UpdateRestaurantSlugForm id={restaurant.id} slug={restaurant.slug} />
       </Card>
+      {renderItem()}
       <Card css={classnames("flex-col", "mt-4")}>
         <UpdateRestaurantThemeForm
           id={restaurant.id}

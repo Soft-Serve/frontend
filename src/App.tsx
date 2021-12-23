@@ -58,7 +58,9 @@ const App = () => {
           <Route exact path={`${routes.settings}/:id/:setting`}>
             <RestaurantProvider>
               <GlobalProvider>
-                <LazySettingsPage />
+                <ViewportProvider>
+                  <LazySettingsPage />
+                </ViewportProvider>
               </GlobalProvider>
             </RestaurantProvider>
           </Route>
