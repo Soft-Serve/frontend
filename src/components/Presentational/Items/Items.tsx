@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import type { FC } from "react";
 import { useGlobalContext, useViewportContext, useRestaurantContext } from "@contexts";
 import { Container, Grid, BoxSection, Button } from "@base";
-import { MenuItem } from "@presentational";
+import { MenuItem, ItemModal } from "@presentational";
 import { routes } from "src/routes";
-import { useItemsQuery } from "@shared";
+import { Item, useItemsQuery } from "@shared";
 import Skeleton from "react-loading-skeleton";
 
 const Items: FC = () => {
   const { categoryID } = useGlobalContext();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { width } = useViewportContext();
   const { restaurantSlug, themeColour, themeTint } = useRestaurantContext();
   const { data, loading, error } = useItemsQuery({
@@ -17,7 +18,14 @@ const Items: FC = () => {
     },
   });
 
+  const [selectedItem, setSelectedItem] = useState(data?.items?.[0]);
+
   const renderGridSize = () => (width < 1340 ? "SM" : "M");
+
+  const handleClick = (item: Item) => {
+    setSelectedItem(item);
+    setIsModalOpen(prevState => !prevState);
+  };
 
   if (loading)
     return (
@@ -61,11 +69,22 @@ const Items: FC = () => {
   }
   return (
     <Container>
-      <Grid size={renderGridSize()}>
-        {data?.items?.map(item => (
-          <MenuItem item={item} key={item.id} />
-        ))}
-      </Grid>
+      <>
+        <Grid size={renderGridSize()}>
+          {data?.items?.map(item => (
+            <div
+              tabIndex={0}
+              onKeyDown={() => handleClick(item)}
+              onClick={() => handleClick(item)}
+              role="button"
+              key={item.id}
+            >
+              <MenuItem item={item} />
+            </div>
+          ))}
+        </Grid>
+        <ItemModal isOpen={isModalOpen} onClose={setIsModalOpen} item={selectedItem} />
+      </>
     </Container>
   );
 };
