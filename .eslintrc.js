@@ -26,6 +26,7 @@ module.exports = {
   },
   rules: {
     "prettier/prettier": ["error", {}, { usePrettierrc: true, endOfLine: "auto" }],
+    "react/no-unescaped-entities": 0,
     "react/prop-types": "off",
     "@typescript-eslint/no-unused-vars": process.env.NODE_ENV === "production" ? "error" : "warn",
     "linebreak-style": "off",

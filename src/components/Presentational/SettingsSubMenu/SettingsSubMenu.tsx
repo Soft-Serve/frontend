@@ -21,7 +21,7 @@ const SettingsSubMenu: FC<Props> = ({ selected, setSelected, ...rest }) => {
   return (
     <nav aria-label="Sections" {...rest}>
       <div className="flex-shrink-0 h-16 px-6 border-b border-blue-gray-200 flex items-center">
-        <p className="text-lg font-medium text-blue-gray-900">Settings</p>
+        <p className="text-lg font-bold text-blue-gray-900 font-Quicksand">Settings</p>
       </div>
       <RadioTiles value={selected} onChange={setSelected}>
         {SUB_NAVIGATION.map(item => (

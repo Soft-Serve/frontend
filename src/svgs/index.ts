@@ -12,3 +12,6 @@ export { ReactComponent as LogoutSVG } from "./logout.svg";
 export { ReactComponent as RemoveSVG } from "./remove.svg";
 export { ReactComponent as UploadImageSVG } from "./image-upload.svg";
 export { ReactComponent as LoadingSVG } from "./loading.svg";
+export { ReactComponent as FacebookSVG } from "./facebook.svg";
+export { ReactComponent as InstagramSVG } from "./instagram.svg";
+export { ReactComponent as TwitterSVG } from "./twitter.svg";
