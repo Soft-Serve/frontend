@@ -4,3 +4,4 @@ export { LazySettingsPage } from "./SettingsPage";
 export { LandingPage } from "./LandingPage";
 export { SignUpPage } from "./SignUpPage";
 export { ConfirmEmailPage } from "./ConfirmEmailPage";
+export { AdminPage } from "./AdminPage";

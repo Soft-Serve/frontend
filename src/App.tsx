@@ -7,6 +7,7 @@ import {
   SignInPage,
   SignUpPage,
   ConfirmEmailPage,
+  AdminPage,
 } from "@views";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { routes } from "@routes";
@@ -52,6 +53,13 @@ const App = () => {
             <RestaurantProvider>
               <MenuPage>
                 <ConfirmEmailPage />
+              </MenuPage>
+            </RestaurantProvider>
+          </Route>
+          <Route exact path={routes.admin}>
+            <RestaurantProvider>
+              <MenuPage>
+                <AdminPage />
               </MenuPage>
             </RestaurantProvider>
           </Route>
