@@ -10,16 +10,32 @@ interface Props {
   setTint: Dispatch<SetStateAction<number>>;
 }
 
+const capatalize = ([firstLetter, ...restOfWord]: string) =>
+  [firstLetter.toUpperCase(), ...restOfWord].join("");
+
+const findUpperCaseIndex = (array: string[]) =>
+  array.findIndex(letter => letter === letter.toUpperCase());
+
+const camelCaseFormatter = (name: string) => {
+  if (findUpperCaseIndex(name.split("")) === -1) return capatalize(name);
+
+  return `${capatalize(name.substring(0, findUpperCaseIndex(name.split(""))))} ${name.substring(
+    findUpperCaseIndex(name.split(""))
+  )}`;
+};
+const colourMap = Object.entries(colors);
+
 const ColourPicker: FC<Props> = ({ onClose, setTheme, setTint }) => {
   const { setThemeColour, setThemeTint } = useRestaurantContext();
 
-  const colourMap = Object.entries(colors);
   return (
     <div>
       <div className=" h-96 overflow-y-auto mb-2">
         {colourMap.map(([colour, value]) => (
           <div className="my-4" key={colour}>
-            <span className="text-sm font-bold text-gray-900 mx-2 font-Quicksand">{colour}</span>
+            <span className="text-sm font-bold text-gray-900 mx-2 font-Quicksand">
+              {camelCaseFormatter(colour)}
+            </span>
             <div className="flex items-center flex-wrap">
               {Object.entries(value).map(([tailWindNumber, hexColour]) => (
                 <div

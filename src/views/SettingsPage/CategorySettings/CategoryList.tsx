@@ -3,10 +3,10 @@ import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, CardContent, List, ListItem, SkeletonList } from "@base";
 import { Category, Menu } from "@shared";
-import { UpdateSVG, DeleteSVG } from "src/svgs";
+import { DeleteSVG } from "@svgs";
 import { routes } from "@routes";
 import { useRestaurantContext } from "@contexts";
-import { ChevronRightIcon } from "@heroicons/react/solid";
+import { ChevronRightIcon, PencilIcon } from "@heroicons/react/solid";
 
 enum ModalForms {
   UpdateCategory = "updateCategory",
@@ -46,18 +46,18 @@ const CategoryList: FC<Props> = ({ categories, handleModal, loading, activeMenu 
                   <div className="w-full sm:mr-2 my-1">
                     <Button
                       isFullwidth
-                      size="XS"
+                      size="S"
                       onClick={() => handleModal(ModalForms.UpdateCategory, category)}
                     >
-                      Update
-                      <UpdateSVG className="w-5 h-5 ml-2" />
+                      Edit
+                      <PencilIcon className="w-5 h-5 ml-2" />
                     </Button>
                   </div>
                   <div className="w-full my-1">
                     <Button
                       isFullwidth
                       colour="accent"
-                      size="XS"
+                      size="S"
                       onClick={() => handleModal(ModalForms.DeleteCategory, category)}
                     >
                       Delete

@@ -4,7 +4,8 @@ import { useRestaurantContext } from "src/contexts";
 import { useAllergiesQuery } from "@shared";
 import Skeleton from "react-loading-skeleton";
 import { Button, Card, CardContent, List, ListItem } from "@base";
-import { UpdateSVG, DeleteSVG } from "src/svgs";
+import { DeleteSVG } from "@svgs";
+import { PencilIcon } from "@heroicons/react/solid";
 
 interface Props {
   handleUpdateItem: any;
@@ -45,16 +46,16 @@ const AllergiesList: FC<Props> = ({ handleDeleteItem, handleUpdateItem }) => {
               </div>
               <div className="ml-4 flex flex-col sm:flex-row">
                 <div className="w-full sm:mr-2 my-1">
-                  <Button isFullwidth size="XS" onClick={() => handleUpdateItem(allergy)}>
-                    Update
-                    <UpdateSVG className="w-5 h-5 ml-2" />
+                  <Button isFullwidth size="S" onClick={() => handleUpdateItem(allergy)}>
+                    Edit
+                    <PencilIcon className="w-5 h-5 ml-2" />
                   </Button>
                 </div>
                 <div className="w-full my-1">
                   <Button
                     isFullwidth
                     colour="accent"
-                    size="XS"
+                    size="S"
                     onClick={() => handleDeleteItem(allergy)}
                   >
                     Delete

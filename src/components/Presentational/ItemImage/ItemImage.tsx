@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 import type { FC } from "react";
-import { AdvancedImage, responsive, lazyload, placeholder } from "@cloudinary/react";
+import { AdvancedImage, lazyload, placeholder } from "@cloudinary/react";
 import { Cloudinary, CloudinaryImage } from "@cloudinary/base";
 import { fill } from "@cloudinary/base/actions/resize";
 import { Plugins } from "@cloudinary/html";
@@ -18,7 +18,7 @@ interface Props extends Omit<ImgProps, "cldImg"> {
   unavailable?: boolean;
 }
 
-const ItemImage: FC<Props> = ({ photoUrl, unavailable, ...rest }) => {
+const ItemImage: FC<Props> = memo(function ItemImage({ photoUrl, unavailable, ...rest }) {
   const { width } = useViewport();
 
   const getImageWidth = () => {
@@ -41,14 +41,10 @@ const ItemImage: FC<Props> = ({ photoUrl, unavailable, ...rest }) => {
 
   if (photoUrl) {
     return (
-      <AdvancedImage
-        {...rest}
-        cldImg={cldImage}
-        plugins={[lazyload(), responsive([200, 400, 500]), placeholder("blur")]}
-      />
+      <AdvancedImage {...rest} cldImg={cldImage} plugins={[lazyload(), placeholder("blur")]} />
     );
   }
   return null;
-};
+});
 
 export { ItemImage };

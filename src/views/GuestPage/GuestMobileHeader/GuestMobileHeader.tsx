@@ -5,8 +5,8 @@ import { useRestaurantContext } from "src/contexts";
 import { CURRENT_USER_QUERY, useCurrentUserQuery, useSignOutMutation } from "@shared";
 import { Button } from "@base";
 import { RestaurantLogo } from "@presentational";
-import { AdjustmentsIcon, FilterIcon, LoginIcon, LogoutIcon } from "@heroicons/react/solid";
 import { routes } from "@routes";
+import { useViewport } from "src/hooks";
 
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
@@ -19,6 +19,9 @@ const GuestMobileHeader: FC<Props> = ({
   setIsMenuSlideOverOpen,
 }) => {
   const { themeColour, themeTint, themeFont, restaurantSlug } = useRestaurantContext();
+  const { width } = useViewport();
+  const isLargerThenSmallMobile = width > 410;
+  const buttonSize = isLargerThenSmallMobile ? "LG" : "S";
   const { data } = useCurrentUserQuery({
     skip: !restaurantSlug,
   });
@@ -39,16 +42,16 @@ const GuestMobileHeader: FC<Props> = ({
     if (!data?.currentUser) {
       return (
         <Link to={routes.signIn}>
-          <Button size="XL" css="mr-2" colour="accent">
-            <LoginIcon className="h-6 w-6 " />
+          <Button size={buttonSize} css="mr-2" colour="accent">
+            Sign In
             <span className="sr-only">Sign in</span>
           </Button>
         </Link>
       );
     }
     return (
-      <Button size="XL" css="mr-2" colour="accent" onClick={signUserOut}>
-        <LogoutIcon className="h-6 w-6 " />
+      <Button size={buttonSize} css="mr-2" colour="accent" onClick={signUserOut}>
+        Sign Out
         <span className="sr-only">Sign out</span>
       </Button>
     );
@@ -58,9 +61,8 @@ const GuestMobileHeader: FC<Props> = ({
     if (!data?.currentUser) return null;
     return (
       <Link to={`${routes.settings}/${restaurantSlug}/restaurant`}>
-        <Button size="XL" css="mr-2" colour="accent">
-          <AdjustmentsIcon className="h-6 w-6 " />
-          <span className="sr-only">Settings</span>
+        <Button size={buttonSize} css="mr-2" colour="accent">
+          Settings
         </Button>
       </Link>
     );
@@ -77,17 +79,17 @@ const GuestMobileHeader: FC<Props> = ({
           </div>
           <div className="flex items-center justify-end w-full ml-2">
             <Button
-              size="XL"
+              size={buttonSize}
               themeFont={themeFont}
               css="mr-2"
               colour="accent"
               onClick={() => setIsFilterSideMenuOpen(prevState => !prevState)}
             >
-              <FilterIcon className="h-6 w-6 " />
+              Dietaries
               <span className="sr-only">Filters List</span>
             </Button>
             <Button
-              size="XL"
+              size={buttonSize}
               themeFont={themeFont}
               css="mr-2"
               colour="accent"

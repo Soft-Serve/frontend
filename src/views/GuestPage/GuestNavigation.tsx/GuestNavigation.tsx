@@ -50,7 +50,7 @@ const GuestNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
         onClick={() => setIsFilterSideMenuOpen(prevState => !prevState)}
       >
         <FilterIcon className="h-6 w-6 text-white" aria-hidden="true" />
-        <span className={`mx-2 font-${themeFont}`}>Filters</span>
+        <span className={`mx-2 font-${themeFont}`}>Dietaries</span>
         <span className="sr-only">Settings</span>
       </NavigationItem>
       {renderAuthNavigationItem()}

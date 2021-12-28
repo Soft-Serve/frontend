@@ -5,6 +5,8 @@ import { classnames } from "tailwindcss-classnames";
 import { Button, Pill, Toggle } from "@base";
 import { useViewportContext } from "@contexts";
 import { ItemPrice, ItemImage, Dietaries } from "@presentational";
+import { PencilIcon } from "@heroicons/react/solid";
+import { DeleteSVG } from "@svgs";
 import { useUpdateItemAvailability } from "./UpdateItemAvailability.mutation";
 
 interface Props {
@@ -101,17 +103,19 @@ const CategoryItem: FC<Props> = ({ handleDeleteItem, categoryID, handleUpdateIte
             onClick={() => handleUpdateItem(item, categoryID)}
             css="mr-2"
             colour="accent"
-            size="M"
+            size="S"
           >
-            Update
+            Edit
+            <PencilIcon className="w-5 h-5 ml-2" />
           </Button>
           <Button
-            size="M"
+            size="S"
             isFullwidth
             onClick={() => handleDeleteItem(item, categoryID)}
             colour="primary"
           >
             Delete
+            <DeleteSVG className="w-5 h-5 ml-2" />
           </Button>
         </div>
       </div>
@@ -141,10 +145,12 @@ const CategoryItem: FC<Props> = ({ handleDeleteItem, categoryID, handleUpdateIte
             css="mr-2"
             colour="accent"
           >
-            Update
+            Edit
+            <PencilIcon className="w-5 h-5 ml-2" />
           </Button>
           <Button size="M" onClick={() => handleDeleteItem(item, categoryID)} colour="primary">
             Delete
+            <DeleteSVG className="w-5 h-5 ml-2" />
           </Button>
         </div>
       </div>
