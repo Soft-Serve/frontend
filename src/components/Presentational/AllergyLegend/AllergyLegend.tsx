@@ -25,6 +25,7 @@ const AllergyLegend: FC = () => {
       restaurantSlug,
       active: true,
     },
+    skip: !restaurantSlug,
   });
 
   const renderAllergies = () => {

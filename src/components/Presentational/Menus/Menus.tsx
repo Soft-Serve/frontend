@@ -20,6 +20,7 @@ const Menus: FC<Props> = ({ themeFont }) => {
     variables: {
       restaurantSlug,
     },
+    skip: !restaurantSlug,
     onCompleted: completedData => {
       if (completedData?.menus?.length > 0) {
         setMenuID(completedData.menus[0].id);

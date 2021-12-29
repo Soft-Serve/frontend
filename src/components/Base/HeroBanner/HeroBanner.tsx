@@ -18,6 +18,7 @@ const HeroBanner: FC = () => {
     variables: {
       restaurantSlug,
     },
+    skip: !restaurantSlug,
   });
 
   const cldImage = cld.image(data?.banners?.[0]?.photo);

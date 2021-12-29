@@ -17,7 +17,9 @@ const BannerSettings: FC = () => {
     variables: {
       restaurantSlug,
     },
+    skip: !restaurantSlug,
   });
+
   const { data: restaurantData, loading: restaurantLoading } = useRestaurantQuery();
 
   const { photoFile, setPhotoFile } = useUploadPhoto();

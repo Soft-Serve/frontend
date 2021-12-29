@@ -22,6 +22,7 @@ const Restaurant: FC = () => {
     variables: {
       restaurantSlug,
     },
+    skip: !restaurantSlug,
   });
 
   const [updateRestaurantOnboarding] = useUpdateRestaurantOnboarding({
