@@ -1,11 +1,10 @@
 import React from "react";
 import type { FC } from "react";
 import { useRestaurantContext, useViewportContext } from "@contexts";
-import { ItemPrice } from "@presentational";
 
 const ExampleItem: FC = () => {
   const { width } = useViewportContext();
-  const { themeFont } = useRestaurantContext();
+  const { themeFont, themeColour, themeTint } = useRestaurantContext();
 
   const item = {
     id: 10,
@@ -27,13 +26,19 @@ const ExampleItem: FC = () => {
           >
             {item.available ? item.description : "** Temporarily unavailable  **"}
           </p>
-          <ItemPrice position="end" withImage itemID={item.id} />
+          <div className={`w-full flex bg-white my-2 font-${themeFont} text-sm justify-end`}>
+            <p
+              className={`text-white p-2 bg-${themeColour}-${themeTint} rounded-md font-bold inline-flex`}
+            >
+              $16.00
+            </p>
+          </div>
         </div>
       </div>
     );
   }
   return (
-    <div key={item.id} className="flex rounded-lg  overflow-hidden relative my-4">
+    <div key={item.id} className="flex rounded-lg  overflow-hidden relative my-4 shadow-md">
       <div className="flex-1 bg-white p-4 flex flex-col justify-between">
         <div>
           <p className={`font-bold font-${themeFont}`}>{item?.name}</p>
@@ -43,7 +48,13 @@ const ExampleItem: FC = () => {
             {item.available ? item.description : "** Temporarily unavailable  **"}
           </p>
         </div>
-        <ItemPrice position="end" withImage itemID={item.id} />
+        <div className={`w-full flex bg-white my-2 font-${themeFont} text-sm justify-end`}>
+          <p
+            className={`text-white p-2 bg-${themeColour}-${themeTint} rounded-md font-bold inline-flex`}
+          >
+            $16.00
+          </p>
+        </div>
       </div>
     </div>
   );

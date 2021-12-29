@@ -29,3 +29,4 @@ export { Notification } from "./Notification";
 export { FloatingMenu } from "./FloatingMenu";
 export { AttachedLabelInput } from "./AttachedLabelInput";
 export { TabWrapper } from "./TabWrapper";
+export { KebabDropdown, KebabDropdownItem } from "./KebabDropdown";

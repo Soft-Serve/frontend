@@ -80,7 +80,7 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id }) => {
     <form className="p-4" onSubmit={handleSubmit}>
       <AttachedLabelInput
         label="Slug"
-        attachedLabel="www.softserve.com/restaurants/"
+        attachedLabel="www.softserveapp.com/restaurants/"
         id="slug"
         value={slugState}
         onChange={e => setSlugState(e.target.value)}

@@ -1,8 +1,9 @@
 import React from "react";
 import type { FC } from "react";
 import { Item } from "@shared";
-import { CategoryItemWithImage } from "./CategoryItemWithImage";
-import { CategoryItemWithoutImage } from "./CategoryItemWithoutImage";
+import { useViewportContext } from "@contexts";
+import { MobileCategoryItemWithImage } from "./MobileCategoryItemWithImage";
+import { DesktopCategoryItemWithImage } from "./DesktopCategoryItemWithImage";
 
 interface Props {
   handleDeleteItem: (item: Item, categoryID: number) => void;
@@ -11,10 +12,17 @@ interface Props {
   item: Item;
 }
 
-const CategoryItem: FC<Props> = ({ handleDeleteItem, categoryID, handleUpdateItem, item }) => {
-  if (item?.photo) {
+const CategoryItemWithImage: FC<Props> = ({
+  handleDeleteItem,
+  categoryID,
+  handleUpdateItem,
+  item,
+}) => {
+  const { width } = useViewportContext();
+
+  if (width < 615) {
     return (
-      <CategoryItemWithImage
+      <MobileCategoryItemWithImage
         item={item}
         handleDeleteItem={handleDeleteItem}
         handleUpdateItem={handleUpdateItem}
@@ -22,9 +30,8 @@ const CategoryItem: FC<Props> = ({ handleDeleteItem, categoryID, handleUpdateIte
       />
     );
   }
-
   return (
-    <CategoryItemWithoutImage
+    <DesktopCategoryItemWithImage
       item={item}
       handleDeleteItem={handleDeleteItem}
       handleUpdateItem={handleUpdateItem}
@@ -33,4 +40,4 @@ const CategoryItem: FC<Props> = ({ handleDeleteItem, categoryID, handleUpdateIte
   );
 };
 
-export { CategoryItem };
+export { CategoryItemWithImage };
