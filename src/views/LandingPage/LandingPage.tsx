@@ -376,7 +376,7 @@ const LandingPage: FC = () => {
                       Get started
                     </Link>
                     <Link
-                      to="/restaurants/oliverandbonacini"
+                      to="/restaurants/cafemonty"
                       className="flex items-center justify-center px-4 py-3 border border-transparent text-base rounded-md shadow-sm text-white bg-red-500 bg-opacity-60 hover:bg-opacity-70 sm:px-8 font-Quicksand font-bold"
                     >
                       Live demo
