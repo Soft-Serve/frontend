@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import type { FC } from "react";
 import { useGlobalContext, useViewportContext, useRestaurantContext } from "@contexts";
+import { useNavigate } from "react-router-dom";
 import { Container, Grid, BoxSection, Button } from "@base";
 import { MenuItem, ItemModal } from "@presentational";
-import { routes } from "src/routes";
+import { routes } from "@routes";
 import { Item, useItemsQuery } from "@shared";
 import Skeleton from "react-loading-skeleton";
 
 const Items: FC = () => {
+  const navigate = useNavigate();
   const { categoryID } = useGlobalContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { width } = useViewportContext();
@@ -49,15 +51,13 @@ const Items: FC = () => {
             <div className={`flex justify-around w-full ${themeColour}-${themeTint}`}>
               <Button
                 size="XL"
-                onClick={() =>
-                  window.location.assign(`${routes.settings}/${restaurantSlug}/categories`)
-                }
+                onClick={() => navigate(`${routes.settings}/${restaurantSlug}/categories`)}
               >
                 Create categories
               </Button>
               <Button
                 size="XL"
-                onClick={() => window.location.assign(`${routes.settings}/${restaurantSlug}/items`)}
+                onClick={() => navigate(`${routes.settings}/${restaurantSlug}/items`)}
               >
                 Add items
               </Button>

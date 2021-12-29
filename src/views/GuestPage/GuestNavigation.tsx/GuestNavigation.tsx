@@ -4,29 +4,25 @@ import { AdjustmentsIcon, FilterIcon, PlusCircleIcon } from "@heroicons/react/so
 import { Navigation, NavigationItem } from "@presentational";
 import { LoginSVG, LogoutSVG } from "@svgs";
 import { routes } from "@routes";
-import { CURRENT_USER_QUERY, useCurrentUserQuery, useSignOutMutation } from "@shared";
+import { useCurrentUserQuery, useSignOutMutation } from "@shared";
 import { useRestaurantContext } from "@contexts";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
 }
 const GuestNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
+  const navigate = useNavigate();
   const { restaurantSlug, themeFont } = useRestaurantContext();
   const { data } = useCurrentUserQuery({
     skip: !restaurantSlug,
   });
-  const [signOut] = useSignOutMutation({
-    refetchQueries: [
-      {
-        query: CURRENT_USER_QUERY,
-      },
-    ],
-  });
+  const [signOut] = useSignOutMutation();
 
   const signUserOut = () => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
-    window.location.assign(routes.signIn);
+    navigate(routes.signIn);
   };
 
   const renderAuthNavigationItem = () => {

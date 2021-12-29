@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRestaurantContext } from "src/contexts";
-import { CURRENT_USER_QUERY, useCurrentUserQuery, useSignOutMutation } from "@shared";
+import { useCurrentUserQuery, useSignOutMutation } from "@shared";
 import { Button } from "@base";
 import { RestaurantLogo } from "@presentational";
 import { routes } from "@routes";
@@ -18,6 +18,7 @@ const GuestMobileHeader: FC<Props> = ({
   setIsFilterSideMenuOpen,
   setIsMenuSlideOverOpen,
 }) => {
+  const navigate = useNavigate();
   const { themeColour, themeTint, themeFont, restaurantSlug } = useRestaurantContext();
   const { width } = useViewport();
   const isLargerThenSmallMobile = width > 410;
@@ -25,17 +26,11 @@ const GuestMobileHeader: FC<Props> = ({
   const { data } = useCurrentUserQuery({
     skip: !restaurantSlug,
   });
-  const [signOut] = useSignOutMutation({
-    refetchQueries: [
-      {
-        query: CURRENT_USER_QUERY,
-      },
-    ],
-  });
+  const [signOut] = useSignOutMutation();
   const signUserOut = () => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
-    window.location.assign(routes.signIn);
+    navigate(routes.signIn);
   };
 
   const renderAuthButton = () => {

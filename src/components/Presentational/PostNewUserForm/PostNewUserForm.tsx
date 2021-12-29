@@ -12,7 +12,7 @@ import {
   isPasswordConfirmd,
   isPasswordSixChar,
 } from "@utility";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRestaurantContext } from "@contexts";
 import { useCurrentUserQuery, USERS_QUERY } from "@shared";
 import { useSignUpFormMutation } from "../SignUpForm/SignUpForm.mutation";
@@ -22,7 +22,7 @@ interface Props {
 }
 
 const PostNewUserForm: FC<Props> = ({ setIsModalOpen }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { restaurantSlug } = useRestaurantContext();
   const [input, setInput] = useState({
     first_name: "",
@@ -49,7 +49,7 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen }) => {
         setIsModalOpen(false);
       }
       if (!userData?.currentUser) {
-        history.push(`/confirm`);
+        navigate("/confirm");
       }
     },
     refetchQueries: [

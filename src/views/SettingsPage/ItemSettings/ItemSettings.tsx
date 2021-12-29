@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import type { FC } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRestaurantContext } from "@contexts";
 import { Category, Item, Menu, useCategoriesQuery, useItemsQuery, useMenusQuery } from "@shared";
 import { Button, Card, CardContent, Grid, Modal, Tab, Tabs, TabWrapper } from "@base";
@@ -21,7 +21,7 @@ enum ModalForms {
 const ItemSettings: FC = () => {
   const { themeColour, themeTint, restaurantSlug } = useRestaurantContext();
   const params = useGetParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data: menuData, loading: menuLoading } = useMenusQuery({
@@ -124,9 +124,7 @@ const ItemSettings: FC = () => {
   const handleActiveMenu = (menu: Menu) => {
     if (categoryParam) {
       params.delete("category");
-      history.replace({
-        search: params.toString(),
-      });
+      navigate(params.toString(), { replace: true });
     }
     setActiveMenu(menu);
   };

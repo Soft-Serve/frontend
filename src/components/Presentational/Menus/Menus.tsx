@@ -6,11 +6,13 @@ import { useGlobalContext, useRestaurantContext } from "src/contexts";
 import { useMenusQuery } from "@shared";
 import { routes } from "src/routes";
 import Skeleton from "react-loading-skeleton";
+import { useNavigate } from "react-router";
 
 interface Props {
   themeFont: string;
 }
 const Menus: FC<Props> = ({ themeFont }) => {
+  const navigate = useNavigate();
   const { setMenuID, setActiveMenu, menuID } = useGlobalContext();
   const { restaurantSlug, themeColour, themeTint } = useRestaurantContext();
 
@@ -56,10 +58,7 @@ const Menus: FC<Props> = ({ themeFont }) => {
           <h2 className={`m-8 text-center text-2xl font-bold  text-${themeColour}-${themeTint}`}>
             Looks like you do not have any menus yet
           </h2>
-          <Button
-            size="XL"
-            onClick={() => window.location.assign(`${routes.settings}/${restaurantSlug}/menus`)}
-          >
+          <Button size="XL" onClick={() => navigate(`${routes.settings}/${restaurantSlug}/menus`)}>
             Add a menu
           </Button>
         </div>

@@ -3,26 +3,25 @@ import type { FC } from "react";
 import { Input, Button } from "@base";
 import { uid, accessToken, clientToken } from "src/constants";
 import { LogoSVG } from "@svgs";
+import { useNavigate } from "react-router";
 import { isBasicEmailRegexValid, isEmailAtValid, isEmailDotValid } from "src/utility";
 import { useViewport } from "@hooks";
-import { CURRENT_USER_QUERY } from "@shared";
 import { useSignInFormMutation } from "./SignInForm.mutation";
 
 const SignInForm: FC = () => {
   const [isLoginSuccesFull, setIsLoginSuccessFull] = useState(true);
   const { width } = useViewport();
-  const [signIn] = useSignInFormMutation({
+  const navigate = useNavigate();
+  const [signIn, { loading }] = useSignInFormMutation({
     onCompleted: completedData => {
       localStorage.setItem(accessToken, completedData.signIn.access_token);
       localStorage.setItem(uid, completedData.signIn.uid);
       localStorage.setItem(clientToken, completedData.signIn.client);
-      window.location.assign(`/restaurants/${completedData.signIn.restaurant_slug}`);
+      if (completedData?.signIn?.restaurant_slug) {
+        navigate(`/restaurants/${completedData?.signIn?.restaurant_slug}`);
+      }
     },
-    refetchQueries: [
-      {
-        query: CURRENT_USER_QUERY,
-      },
-    ],
+
     onError: () => setIsLoginSuccessFull(false),
   });
   const [input, setInput] = useState({
@@ -136,7 +135,7 @@ const SignInForm: FC = () => {
             </div>
 
             <div>
-              <Button isFullwidth size="XXL" type="submit">
+              <Button loading={loading} isFullwidth size="XXL" type="submit">
                 Sign in
               </Button>
             </div>

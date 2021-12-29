@@ -10,7 +10,7 @@ import {
   LazyGuestPage,
   LazyLandingPage,
 } from "@views";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { routes } from "@routes";
 import { AllergyProvider, GlobalProvider, ViewportProvider, RestaurantProvider } from "@contexts";
 import { client } from "./client";
@@ -19,59 +19,75 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Switch>
-          <Route exact path="/">
-            <LazyLandingPage />
-          </Route>
-          <Route exact path={`${routes.restaurants}/:id`}>
-            <RestaurantProvider>
-              <GlobalProvider>
-                <ViewportProvider>
-                  <AllergyProvider>
-                    <LazyGuestPage />
-                  </AllergyProvider>
-                </ViewportProvider>
-              </GlobalProvider>
-            </RestaurantProvider>
-          </Route>
-          <Route exact path={routes.signIn}>
-            <RestaurantProvider>
-              <MenuPage>
-                <SignInPage />
-              </MenuPage>
-            </RestaurantProvider>
-          </Route>
-          <Route exact path={routes.signUp}>
-            <RestaurantProvider>
-              <MenuPage>
-                <SignUpPage />
-              </MenuPage>
-            </RestaurantProvider>
-          </Route>
-          <Route exact path={routes.confirm}>
-            <RestaurantProvider>
-              <MenuPage>
-                <ConfirmEmailPage />
-              </MenuPage>
-            </RestaurantProvider>
-          </Route>
-          <Route exact path={routes.admin}>
-            <RestaurantProvider>
-              <MenuPage>
-                <AdminPage />
-              </MenuPage>
-            </RestaurantProvider>
-          </Route>
-          <Route exact path={`${routes.settings}/:id/:setting`}>
-            <RestaurantProvider>
-              <GlobalProvider>
-                <ViewportProvider>
-                  <LazySettingsPage />
-                </ViewportProvider>
-              </GlobalProvider>
-            </RestaurantProvider>
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/" element={<LazyLandingPage />} />
+          <Route
+            path={`${routes.restaurants}/:id`}
+            element={
+              <RestaurantProvider>
+                <GlobalProvider>
+                  <ViewportProvider>
+                    <AllergyProvider>
+                      <LazyGuestPage />
+                    </AllergyProvider>
+                  </ViewportProvider>
+                </GlobalProvider>
+              </RestaurantProvider>
+            }
+          />
+          <Route
+            path={routes.signIn}
+            element={
+              <RestaurantProvider>
+                <MenuPage>
+                  <SignInPage />
+                </MenuPage>
+              </RestaurantProvider>
+            }
+          />
+          <Route
+            path={routes.signUp}
+            element={
+              <RestaurantProvider>
+                <MenuPage>
+                  <SignUpPage />
+                </MenuPage>
+              </RestaurantProvider>
+            }
+          />
+          <Route
+            path={routes.confirm}
+            element={
+              <RestaurantProvider>
+                <MenuPage>
+                  <ConfirmEmailPage />
+                </MenuPage>
+              </RestaurantProvider>
+            }
+          />
+          <Route
+            path={routes.admin}
+            element={
+              <RestaurantProvider>
+                <MenuPage>
+                  <AdminPage />
+                </MenuPage>
+              </RestaurantProvider>
+            }
+          />
+          <Route
+            path={`${routes.settings}/:id/:setting`}
+            element={
+              <RestaurantProvider>
+                <GlobalProvider>
+                  <ViewportProvider>
+                    <LazySettingsPage />
+                  </ViewportProvider>
+                </GlobalProvider>
+              </RestaurantProvider>
+            }
+          />
+        </Routes>
       </Router>
     </ApolloProvider>
   );

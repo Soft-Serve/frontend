@@ -1,10 +1,11 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { routes } from "src/routes";
 import { Button } from "@base";
 import { CURRENT_USER_QUERY, useCurrentUserQuery, useSignOutMutation } from "@shared";
 
 const AdminNavigation: FC = () => {
+  const navigate = useNavigate();
   const { data, loading } = useCurrentUserQuery();
   const [signOut] = useSignOutMutation({
     refetchQueries: [
@@ -17,7 +18,7 @@ const AdminNavigation: FC = () => {
   const signUserOut = () => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
-    window.location.assign(routes.signIn);
+    navigate(routes.signIn);
   };
 
   if (loading) return <p>loading</p>;

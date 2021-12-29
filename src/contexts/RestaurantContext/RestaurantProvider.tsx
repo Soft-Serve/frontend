@@ -3,16 +3,16 @@ import type { FC } from "react";
 import { useParams } from "react-router-dom";
 import { RestaurantContext } from "./RestaurantContext";
 
-interface RestaurantSlug {
+type Param = {
   id: string;
-}
+};
 
 const RestaurantProvider: FC = ({ children }) => {
-  const [restaurantSlug, setRestaurantSlug] = useState("");
+  const { id } = useParams<Param>() as Param;
+  const [restaurantSlug, setRestaurantSlug] = useState(id);
   const [themeColour, setThemeColour] = useState("red");
   const [themeTint, setThemeTint] = useState(400);
   const [themeFont, setThemeFont] = useState("Quicksand");
-  const { id } = useParams<RestaurantSlug>();
 
   useEffect(() => {
     setRestaurantSlug(id);

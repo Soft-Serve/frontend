@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { RestaurantLogo } from "@presentational";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRestaurantContext } from "@contexts";
 import { Button } from "@base";
 import { routes } from "@routes";
@@ -14,6 +14,7 @@ interface Props {
 }
 
 const SettingsMobileHeader: FC<Props> = ({ setIsSubNavOpen, children }) => {
+  const navigate = useNavigate();
   const { themeColour, themeTint, restaurantSlug } = useRestaurantContext();
   const { width } = useViewport();
   const isLargerThenSmallMobile = width > 410;
@@ -28,7 +29,7 @@ const SettingsMobileHeader: FC<Props> = ({ setIsSubNavOpen, children }) => {
   const signUserOut = () => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
-    window.location.assign(routes.signIn);
+    navigate(routes.signIn);
   };
 
   return (

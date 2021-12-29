@@ -5,8 +5,10 @@ import { Navigation, NavigationItem } from "@presentational";
 import { routes } from "@routes";
 import { useRestaurantContext } from "@contexts";
 import { CURRENT_USER_QUERY, useSignOutMutation } from "@shared";
+import { useNavigate } from "react-router";
 
 const SettingsNavigation: FC = () => {
+  const navigate = useNavigate();
   const { restaurantSlug } = useRestaurantContext();
   const [signOut] = useSignOutMutation({
     refetchQueries: [
@@ -18,7 +20,7 @@ const SettingsNavigation: FC = () => {
   const signUserOut = () => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
-    window.location.assign(routes.signIn);
+    navigate(routes.signIn);
   };
   return (
     <Navigation>

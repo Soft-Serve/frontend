@@ -11,6 +11,7 @@ import { CURRENT_USER_QUERY, useCurrentUserQuery, useSignOutMutation } from "@sh
 import { useRestaurantContext } from "src/contexts";
 import { BookOpenIcon, LogoutIcon } from "@heroicons/react/solid";
 import { classnames } from "tailwindcss-classnames";
+import { useNavigate } from "react-router";
 
 interface Props {
   isOpen: boolean;
@@ -19,6 +20,7 @@ interface Props {
 
 const SettingsMobileNavigation: FC<Props> = ({ isOpen, onClose }) => {
   const { restaurantSlug } = useRestaurantContext();
+  const navigate = useNavigate();
   const { data } = useCurrentUserQuery({
     skip: !restaurantSlug,
   });
@@ -33,7 +35,7 @@ const SettingsMobileNavigation: FC<Props> = ({ isOpen, onClose }) => {
   const signUserOut = () => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
-    window.location.assign(routes.signIn);
+    navigate(routes.signIn);
   };
 
   const renderSignOutButton = () => {

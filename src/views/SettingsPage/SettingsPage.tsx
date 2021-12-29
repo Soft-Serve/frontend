@@ -27,12 +27,12 @@ interface MappableObject {
   [key: string]: JSX.Element;
 }
 
-interface SettingsTab {
+type Param = {
   setting: string;
-}
+};
 
 const SettingsPage: FC = () => {
-  const { setting } = useParams<SettingsTab>();
+  const { setting } = useParams<Param>() as Param;
 
   const { width } = useViewport();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
