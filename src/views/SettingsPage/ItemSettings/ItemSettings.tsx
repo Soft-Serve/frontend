@@ -6,7 +6,7 @@ import { Category, Item, Menu, useCategoriesQuery, useItemsQuery, useMenusQuery 
 import { Button, Card, CardContent, Grid, Modal, Tab, Tabs, TabWrapper } from "@base";
 import { SearchIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import Skeleton from "react-loading-skeleton";
-import { DeleteItemForm, PostItemForm, UpdateItemForm } from "@presentational";
+import { AddDietaryForm, DeleteItemForm, PostItemForm, UpdateItemForm } from "@presentational";
 import { useGetParams } from "@utility";
 import { CategoryItems } from "./CategoryItems";
 import { SettingsHeader } from "../SettingsHeader";
@@ -15,6 +15,7 @@ enum ModalForms {
   PostItem = "postItem",
   UpdateItem = "updateItem",
   DeleteItem = "deleteItem",
+  AddDietary = "addDietary",
 }
 
 const ItemSettings: FC = () => {
@@ -82,14 +83,23 @@ const ItemSettings: FC = () => {
     />
   );
 
+  const addDietary = <AddDietaryForm item={activeItem} />;
+
   const mapModalForms = {
     deleteItem,
     postItem,
     updateItem,
+    addDietary,
   };
 
   const renderModalForm = () => {
     return mapModalForms[action];
+  };
+
+  const handleAddDietary = (item: Item) => {
+    setAction(ModalForms.AddDietary);
+    setActiveItem(item);
+    setIsModalOpen(true);
   };
 
   const handleDeleteItem = (item: Item, categoryID: number) => {
@@ -196,6 +206,7 @@ const ItemSettings: FC = () => {
         <Grid size="SM">
           {filteredCategories(categoryData?.categories)?.map(category => (
             <CategoryItems
+              handleAddDietary={handleAddDietary}
               handleUpdateItem={handleUpdateItem}
               searchValue={searchValue}
               key={category.id}

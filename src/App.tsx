@@ -2,19 +2,18 @@ import React from "react";
 import { ApolloProvider } from "@apollo/client";
 import {
   MenuPage,
-  LandingPage,
   LazySettingsPage,
   SignInPage,
   SignUpPage,
   ConfirmEmailPage,
   AdminPage,
+  LazyGuestPage,
+  LazyLandingPage,
 } from "@views";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { routes } from "@routes";
 import { AllergyProvider, GlobalProvider, ViewportProvider, RestaurantProvider } from "@contexts";
 import { client } from "./client";
-
-import { GuestPage } from "./views/GuestPage";
 
 const App = () => {
   return (
@@ -22,14 +21,14 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/">
-            <LandingPage />
+            <LazyLandingPage />
           </Route>
           <Route exact path={`${routes.restaurants}/:id`}>
             <RestaurantProvider>
               <GlobalProvider>
                 <ViewportProvider>
                   <AllergyProvider>
-                    <GuestPage />
+                    <LazyGuestPage />
                   </AllergyProvider>
                 </ViewportProvider>
               </GlobalProvider>

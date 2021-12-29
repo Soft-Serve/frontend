@@ -7,6 +7,7 @@ import { useUpdateItemAvailability } from "./UpdateItemAvailability.mutation";
 import { ItemDropdown } from "./ItemDropdown";
 
 interface Props {
+  handleAddDietary: (item: Item) => void;
   handleDeleteItem: (item: Item, categoryID: number) => void;
   handleUpdateItem: (item: Item, categoryID: number) => void;
   categoryID: number;
@@ -17,6 +18,7 @@ const CategoryItemWithoutImage: FC<Props> = ({
   handleDeleteItem,
   categoryID,
   handleUpdateItem,
+  handleAddDietary,
   item,
 }) => {
   const [isItemAvailable, setIsItemAvailable] = useState(item.available);
@@ -50,6 +52,7 @@ const CategoryItemWithoutImage: FC<Props> = ({
               <Toggle isEnabled={isItemAvailable} handleClick={handleToggle} />
             </div>
             <ItemDropdown
+              handleAllergies={() => handleAddDietary(item)}
               handleDelete={() => handleDeleteItem(item, categoryID)}
               handleUpdate={() => handleUpdateItem(item, categoryID)}
             />

@@ -3,11 +3,12 @@ import type { FC } from "react";
 import { Item } from "@shared";
 import { Pill, Toggle } from "@base";
 import { ItemPrice, ItemImage } from "@presentational";
-import { useUpdateItemAvailability } from "./UpdateItemAvailability.mutation";
-import { ItemDropdown } from "./ItemDropdown";
-import { CategoryItemDietaries } from "./CategoryItemDietaries";
+import { useUpdateItemAvailability } from "../UpdateItemAvailability.mutation";
+import { ItemDropdown } from "../ItemDropdown";
+import { CategoryItemDietaries } from "../CategoryItemDietaries";
 
 interface Props {
+  handleAddDietary: (item: Item) => void;
   handleDeleteItem: (item: Item, categoryID: number) => void;
   handleUpdateItem: (item: Item, categoryID: number) => void;
   categoryID: number;
@@ -18,6 +19,7 @@ const MobileCategoryItemWithImage: FC<Props> = ({
   handleDeleteItem,
   categoryID,
   handleUpdateItem,
+  handleAddDietary,
   item,
 }) => {
   const [isItemAvailable, setIsItemAvailable] = useState(item.available);
@@ -52,6 +54,7 @@ const MobileCategoryItemWithImage: FC<Props> = ({
       </div>
       <div className="absolute top-1 right-1">
         <ItemDropdown
+          handleAllergies={() => handleAddDietary(item)}
           handleDelete={() => handleDeleteItem(item, categoryID)}
           handleUpdate={() => handleUpdateItem(item, categoryID)}
         />

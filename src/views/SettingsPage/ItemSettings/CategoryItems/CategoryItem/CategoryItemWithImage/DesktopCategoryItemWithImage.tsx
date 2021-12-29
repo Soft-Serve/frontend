@@ -3,11 +3,12 @@ import type { FC } from "react";
 import { Item } from "@shared";
 import { Pill, Toggle } from "@base";
 import { ItemPrice, ItemImage } from "@presentational";
-import { useUpdateItemAvailability } from "./UpdateItemAvailability.mutation";
-import { ItemDropdown } from "./ItemDropdown";
-import { CategoryItemDietaries } from "./CategoryItemDietaries";
+import { useUpdateItemAvailability } from "../UpdateItemAvailability.mutation";
+import { ItemDropdown } from "../ItemDropdown";
+import { CategoryItemDietaries } from "../CategoryItemDietaries";
 
 interface Props {
+  handleAddDietary: (item: Item) => void;
   handleDeleteItem: (item: Item, categoryID: number) => void;
   handleUpdateItem: (item: Item, categoryID: number) => void;
   categoryID: number;
@@ -18,6 +19,7 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
   handleDeleteItem,
   categoryID,
   handleUpdateItem,
+  handleAddDietary,
   item,
 }) => {
   const [isItemAvailable, setIsItemAvailable] = useState(item.available);
@@ -55,6 +57,7 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
                 <Toggle isEnabled={isItemAvailable} handleClick={handleToggle} />
               </div>
               <ItemDropdown
+                handleAllergies={() => handleAddDietary(item)}
                 handleDelete={() => handleDeleteItem(item, categoryID)}
                 handleUpdate={() => handleUpdateItem(item, categoryID)}
               />
@@ -72,29 +75,3 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
 };
 
 export { DesktopCategoryItemWithImage };
-
-/* <div className="flex items-start justify-between w-full flex-wrap">
-          <div className="flex">
-            <p className="font-bold font-Quicksand">{item?.name}</p>
-            <Pill type={isItemAvailable ? "success" : "error"}>
-              {isItemAvailable ? "Available" : "86"}
-            </Pill>
-                      <ItemPrice position="end" withImage itemID={item.id} />
-          </div>
-          <div className="flex">
-            <div className="mr-4">
-              <Toggle isEnabled={isItemAvailable} handleClick={handleToggle} />
-            </div>
-           <div className="mr-2">
-              <Toggle isEnabled={isItemAvailable} handleClick={handleToggle} />
-            </div>
-            <Pill type={isItemAvailable ? "success" : "error"}>
-              {isItemAvailable ? "Available" : "86"}
-            </Pill>
-          </div>
-        </div>
-        <div className="flex items-center w-full justify-end">
-          <p className="font-Quicksand italic text-gray-600 mt-2 text-sm break-words text-ellipsis overflow-hidden">
-            {item.available ? item.description : "** Temporarily unavailable  **"}
-          </p>
-        </div> */

@@ -45,3 +45,4 @@ export { UpdateRestaurantAddressForm } from "./UpdateRestaurantAddressForm";
 export { PostNewUserForm } from "./PostNewUserForm";
 export { UpdateRestaurantFontForm } from "./UpdateRestaurantFontForm";
 export { ItemModal } from "./ItemModal";
+export { AddDietaryForm } from "./AddDietaryForm";

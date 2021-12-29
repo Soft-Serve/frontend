@@ -1,0 +1,1 @@
+export { CategoryItemWithImage } from "./CategoryItemWithImage";

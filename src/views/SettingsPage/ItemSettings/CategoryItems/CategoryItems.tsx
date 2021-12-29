@@ -4,6 +4,7 @@ import { Category, Item, useItemsQuery } from "@shared";
 import { CategoryItem, SkeletonCategoryItem } from "./CategoryItem";
 
 interface Props {
+  handleAddDietary: (item: Item) => void;
   handleDeleteItem: (item: Item, categoryID: number) => void;
   handleUpdateItem: (item: Item, categoryID: number) => void;
   categoryID: number;
@@ -15,6 +16,7 @@ const CategoryItems: FC<Props> = ({
   categoryID,
   searchValue,
   handleUpdateItem,
+  handleAddDietary,
 }) => {
   const { data, loading } = useItemsQuery({
     variables: {
@@ -44,6 +46,7 @@ const CategoryItems: FC<Props> = ({
           categoryID={categoryID}
           key={item.id}
           item={item}
+          handleAddDietary={handleAddDietary}
           handleDeleteItem={handleDeleteItem}
           handleUpdateItem={handleUpdateItem}
         />

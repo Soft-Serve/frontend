@@ -20,14 +20,14 @@ const KebabDropdownItem: FC<Props> = ({ children, onClick }) => {
     "rounded-md",
     aciveFontColor
   );
-  const nonActiveStyles = classnames("block", "p-2", "w-full", "text-left");
+  const nonActiveStyles = classnames("p-2", "w-full", "text-left");
 
   return (
     <Menu.Item>
       {({ active }) => (
         <button
           onClick={onClick}
-          className={`font-Quicksand font-bold text-sm text-white ${classnames(
+          className={`font-Quicksand font-bold text-sm text-white border-2 border-white rounded-md my-1 ${classnames(
             active ? activeStyles : nonActiveStyles
           )}`}
         >

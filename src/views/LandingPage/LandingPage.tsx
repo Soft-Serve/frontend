@@ -23,6 +23,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { FacebookSVG, FullLogoSVG, InstagramSVG, TwitterSVG } from "@svgs";
 import DestopImage from "./desktop.png";
 import settingsImage from "./settings.png";
+import computer from "./computer.png";
 
 const navigation = {
   main: [
@@ -350,7 +351,7 @@ const LandingPage: FC = () => {
               <div className="absolute inset-0">
                 <img
                   className="h-full w-full object-cover"
-                  src="https://cdn.pixabay.com/photo/2017/04/19/13/18/computer-2242276_1280.jpg"
+                  src={computer}
                   alt="People working on laptops"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-red-400 to-red-500 mix-blend-multiply" />
