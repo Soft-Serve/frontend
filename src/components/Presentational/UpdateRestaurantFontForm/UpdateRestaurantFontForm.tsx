@@ -61,18 +61,6 @@ const UpdateRestaurantFontForm: FC<Props> = ({ id }) => {
                     >
                       {font}
                     </RadioGroup.Label>
-                    <RadioGroup.Description
-                      as="span"
-                      className={`mt-1 flex items-center text-sm text-gray-500 font-${font}`}
-                    >
-                      is it me you are looking for
-                    </RadioGroup.Description>
-                    <RadioGroup.Description
-                      as="span"
-                      className={`mt-6 text-sm font-medium text-gray-900 font-${font}`}
-                    >
-                      i can see it in your eyes
-                    </RadioGroup.Description>
                   </div>
                 </div>
                 <CheckCircleIcon
