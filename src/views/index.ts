@@ -1,6 +1,6 @@
-export { SettingsMainPage } from "./SettingsPage";
+export { SettingsPage } from "./SettingsPage";
 export { LazyConfirmEmailPage } from "./ConfirmEmailPage";
-export { GuestMainPage } from "./GuestPage";
-export { LazyLandingPage } from "./LandingPage";
+export { GuestPage } from "./GuestPage";
+export { LandingPage } from "./LandingPage";
 export { SignInMainPage } from "./SignInPage";
 export { SignUpMainPage } from "./SignUpPage";

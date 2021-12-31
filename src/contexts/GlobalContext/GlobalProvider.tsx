@@ -21,6 +21,7 @@ const GlobalProvider: FC = ({ children }) => {
       setThemeColour(completedData?.restaurant?.colour);
       setThemeTint(completedData?.restaurant?.tint);
       setThemeFont(completedData?.restaurant?.font || "Quicksand");
+      setActiveMenu(completedData?.restaurant?.name);
     },
   });
 

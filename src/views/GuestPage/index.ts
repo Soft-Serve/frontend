@@ -1,1 +1,1 @@
-export { GuestMainPage } from "./GuestMainPage";
+export { GuestPage } from "./GuestPage";

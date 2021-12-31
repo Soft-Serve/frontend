@@ -1,0 +1,1 @@
+export { AllergyModal } from "./AllergyModal";
