@@ -1,1 +1,1 @@
-export { ConfirmEmailPage } from "./ConfirmEmailPage";
+export { LazyConfirmEmailPage } from "./LazyConfirmEmailPage";

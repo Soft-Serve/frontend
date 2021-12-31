@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import type { FC } from "react";
 import { CreateNewUserForm } from "@presentational";
-import { RestaurantProvider } from "@contexts";
 import { BoxSection, Footer } from "@base";
 import { MenuPage } from "../MenuPage";
 import { SignUpNavigation } from "./SignUpNavigation";
@@ -12,20 +11,18 @@ const SignUpPage: FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <RestaurantProvider>
-      <MenuPage>
-        <SignUpMobileNavigation isOpen={isMobileMenuOpen} onClose={setIsMobileMenuOpen} />
-        <SignUpNavigation />
-        <SignUpMobileHeader onButtonClick={setIsMobileMenuOpen}>
-          <div className="overflow-y-scroll">
-            <BoxSection>
-              <CreateNewUserForm />
-            </BoxSection>
-          </div>
-          <Footer />
-        </SignUpMobileHeader>
-      </MenuPage>
-    </RestaurantProvider>
+    <MenuPage>
+      <SignUpMobileNavigation isOpen={isMobileMenuOpen} onClose={setIsMobileMenuOpen} />
+      <SignUpNavigation />
+      <SignUpMobileHeader onButtonClick={setIsMobileMenuOpen}>
+        <div className="overflow-y-scroll">
+          <BoxSection>
+            <CreateNewUserForm />
+          </BoxSection>
+        </div>
+        <Footer />
+      </SignUpMobileHeader>
+    </MenuPage>
   );
 };
 

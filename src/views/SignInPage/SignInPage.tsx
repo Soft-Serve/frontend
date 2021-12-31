@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import type { FC } from "react";
-import { RestaurantProvider } from "@contexts";
 import { SignInForm } from "@presentational";
 import { BoxSection, Container, Footer, Notification } from "@base";
 import { MenuPage } from "../MenuPage";
@@ -17,21 +16,19 @@ const SignInPage: FC = () => {
   const accountConfirmed = () => window.location.search === "?account_confirmation_success=true";
 
   return (
-    <RestaurantProvider>
-      <MenuPage>
-        {accountConfirmed() && flash()}
-        <SignInMobileNavigation isOpen={isMobileMenuOpen} onClose={setIsMobileMenuOpen} />
-        <SignInNavigation />
-        <SignInMobileHeader setMobileMenuOpen={setIsMobileMenuOpen}>
-          <Container>
-            <BoxSection>
-              <SignInForm />
-            </BoxSection>
-          </Container>
-          <Footer />
-        </SignInMobileHeader>
-      </MenuPage>
-    </RestaurantProvider>
+    <MenuPage>
+      {accountConfirmed() && flash()}
+      <SignInMobileNavigation isOpen={isMobileMenuOpen} onClose={setIsMobileMenuOpen} />
+      <SignInNavigation />
+      <SignInMobileHeader setMobileMenuOpen={setIsMobileMenuOpen}>
+        <Container>
+          <BoxSection>
+            <SignInForm />
+          </BoxSection>
+        </Container>
+        <Footer />
+      </SignInMobileHeader>
+    </MenuPage>
   );
 };
 

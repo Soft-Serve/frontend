@@ -6,9 +6,9 @@ const Providers: FC = ({ children }) => {
   return (
     <RestaurantProvider>
       <GlobalProvider>
-        <ViewportProvider>
-          <AllergyProvider>{children}</AllergyProvider>
-        </ViewportProvider>
+        <AllergyProvider>
+          <ViewportProvider>{children}</ViewportProvider>
+        </AllergyProvider>
       </GlobalProvider>
     </RestaurantProvider>
   );

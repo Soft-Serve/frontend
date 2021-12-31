@@ -1,2 +1,1 @@
-export { SignUpPage } from "./SignUpPage";
-export { LazySignUpPage } from "./LazySignUpPage";
+export { SignUpMainPage } from "./SignUpMainPage";
