@@ -3,7 +3,6 @@ import { ApolloProvider } from "@apollo/client";
 import {
   LazyConfirmEmailPage,
   GuestMainPage,
-  LazyLandingPage,
   SignInMainPage,
   SignUpMainPage,
   SettingsMainPage,
@@ -11,13 +10,14 @@ import {
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { routes } from "@routes";
 import { client } from "./client";
+import { LandingPage } from "./views/LandingPage/LandingPage";
 
 const App = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
         <Routes>
-          <Route path="/" element={<LazyLandingPage />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path={`${routes.restaurants}/:id`} element={<GuestMainPage />} />
           <Route path={routes.signIn} element={<SignInMainPage />} />
           <Route path={routes.signUp} element={<SignUpMainPage />} />

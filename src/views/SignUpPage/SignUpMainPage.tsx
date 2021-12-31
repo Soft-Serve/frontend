@@ -1,12 +1,12 @@
 import React from "react";
 import type { FC } from "react";
-import { LazySignUpPage } from "./LazySignUpPage";
 import { Providers } from "./Providers";
+import { SignUpPage } from "./SignUpPage";
 
 const SignUpMainPage: FC = () => {
   return (
     <Providers>
-      <LazySignUpPage />
+      <SignUpPage />
     </Providers>
   );
 };
