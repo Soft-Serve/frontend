@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { FC } from "react";
 import { useParams } from "react-router-dom";
 import { RestaurantContext } from "./RestaurantContext";
@@ -13,6 +13,10 @@ const RestaurantProvider: FC = ({ children }) => {
   const [themeColour, setThemeColour] = useState("red");
   const [themeTint, setThemeTint] = useState(400);
   const [themeFont, setThemeFont] = useState("Quicksand");
+
+  useEffect(() => {
+    setRestaurantSlug(id);
+  }, [id]);
 
   return (
     <RestaurantContext.Provider
