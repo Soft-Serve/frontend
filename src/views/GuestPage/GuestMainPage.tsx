@@ -1,12 +1,12 @@
 import React from "react";
 import type { FC } from "react";
-import { LazyGuestPage } from "./LazyGuestPage";
 import { Providers } from "./Providers";
+import { GuestPage } from "./GuestPage";
 
 const GuestMainPage: FC = () => {
   return (
     <Providers>
-      <LazyGuestPage />
+      <GuestPage />
     </Providers>
   );
 };
