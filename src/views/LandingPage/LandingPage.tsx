@@ -62,51 +62,48 @@ const includedFeatures = [
 
 const features = [
   {
-    name: "Unlimited Inboxes",
+    name: "Custom menus",
     description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
+      "Choose your brand colour, banner, logo and font. Build menus with or without photos.",
     icon: InboxIcon,
   },
   {
-    name: "Manage Team Members",
+    name: "Mark items as unavailable",
     description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
+      "When a dish sells out 86 it in real time, instantly updating the menu for guests.",
     icon: UsersIcon,
   },
   {
-    name: "Spam Report",
-    description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
+    name: "Allergy filters",
+    description: "Make ordering easier for guests with allergies by using our dietary filters.",
     icon: TrashIcon,
   },
   {
-    name: "Compose in Markdown",
-    description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
+    name: "QR code",
+    description: "Access the menu with a QR for a safe and contact free experience",
     icon: PencilAltIcon,
   },
   {
-    name: "Team Reporting",
-    description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
+    name: "Unlimited menus",
+    description: "Create separate menus for each service.",
     icon: DocumentReportIcon,
   },
   {
-    name: "Saved Replies",
+    name: "Customer service",
     description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
+      "We pride ourselves on providing quality customer service. Contact us by phone or email and we'll be there to assist.",
     icon: ReplyIcon,
   },
   {
-    name: "Email Commenting",
+    name: "Easy onboarding",
     description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
+      "Don't spend hours adding menu items manually. Add them to our excel spreadsheet and we will them for you within 24 hours.",
     icon: ChatAltIcon,
   },
   {
-    name: "Connect with Customers",
+    name: "Quickly create, update and delete menus",
     description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
+      "Easily manage menus from any device. We make it quick and easy to modify menus on the fly.",
     icon: HeartIcon,
   },
 ];
@@ -358,14 +355,14 @@ const LandingPage: FC = () => {
               </div>
               <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
                 <h1 className="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                  <span className="block text-white font-Quicksand">take control now</span>
+                  <span className="block text-white font-Quicksand">stylish software</span>
                   <span className="block text-red-200 font-Quicksand">
-                    over your restaurant menu
+                    for the service industry
                   </span>
                 </h1>
                 <p className="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl font-Quicksand">
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat
-                  commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+                  Our virtual menu is completely customizable to encapsulate the look and feel of
+                  your restaurant brand.
                 </p>
                 <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
                   <div className="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
@@ -373,7 +370,7 @@ const LandingPage: FC = () => {
                       to="/sign-up"
                       className="flex items-center justify-center px-4 py-3 border border-transparent text-base rounded-md shadow-sm text-red-400 bg-white hover:bg-indigo-50 sm:px-8 font-Quicksand font-bold"
                     >
-                      Get started
+                      Start free trial
                     </Link>
                     <Link
                       to="/restaurants/cafemonty"
@@ -395,30 +392,28 @@ const LandingPage: FC = () => {
                 <div>
                   <div>
                     <span className="h-12 w-12 rounded-md flex items-center justify-center bg-red-400">
-                      <InboxIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                      <PencilAltIcon className="h-6 w-6 text-white" aria-hidden="true" />
                     </span>
                   </div>
                   <div className="mt-6">
                     <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 font-Quicksand">
-                      Stay on top of customer support
+                      Manage your menu from any device
                     </h2>
                     <p className="mt-4 text-lg text-gray-500 font-Quicksand">
-                      Semper curabitur ullamcorper posuere nunc sed. Ornare iaculis bibendum
-                      malesuada faucibus lacinia porttitor. Pulvinar laoreet sagittis viverra duis.
-                      In venenatis sem arcu pretium pharetra at. Lectus viverra dui tellus ornare
-                      pharetra.
+                      Customize your brand colour, logo, banner and font. Create new menus with or
+                      without images and update dishes in real time.
                     </p>
                     <div className="mt-6">
                       <a
                         href="/"
                         className="inline-flex bg-red-400 bg-origin-border px-4 py-2 border border-transparent text-base font-bold rounded-md shadow-sm text-white hover:from-red-700 hover:to-red-700 font-Quicksand"
                       >
-                        Get started
+                        Start free trial
                       </a>
                     </div>
                   </div>
                 </div>
-                <div className="mt-8 border-t border-gray-200 pt-6">
+                {/* <div className="mt-8 border-t border-gray-200 pt-6">
                   <blockquote>
                     <div>
                       <p className="text-base text-gray-500 font-Quicksand italic">
@@ -441,7 +436,7 @@ const LandingPage: FC = () => {
                       </div>
                     </footer>
                   </blockquote>
-                </div>
+                </div> */}
               </div>
               <div className="mt-12 sm:mt-16 lg:mt-0">
                 <div className="pl-4 -mr-48 sm:pl-6 md:-mr-16 lg:px-0 lg:m-0 lg:relative lg:h-full">
@@ -465,20 +460,20 @@ const LandingPage: FC = () => {
                   </div>
                   <div className="mt-6">
                     <h2 className="text-3xl font-bold tracking-tight text-white font-Quicksand">
-                      Better understand your customers
+                      Built by hospitality professionals
                     </h2>
                     <p className="mt-4 text-lg text-white">
-                      Semper curabitur ullamcorper posuere nunc sed. Ornare iaculis bibendum
-                      malesuada faucibus lacinia porttitor. Pulvinar laoreet sagittis viverra duis.
-                      In venenatis sem arcu pretium pharetra at. Lectus viverra dui tellus ornare
-                      pharetra.
+                      Our team has over over 15 years experience working in the hospitality
+                      industry. We understand your needs and are here to make your job easier. We'd
+                      love to chat so if you have questions don't hestitate to reach out to our
+                      team!
                     </p>
                     <div className="mt-6">
                       <a
                         href="/"
                         className="inline-flex bg-white bg-origin-border px-4 py-2 border border-transparent text-base rounded-md shadow-sm text-red-400 font-Quicksand font-bold"
                       >
-                        Get started
+                        Contact team
                       </a>
                     </div>
                   </div>
@@ -498,11 +493,11 @@ const LandingPage: FC = () => {
           <div className="from-red-400 to-red-600 bg-gradient-to-b">
             <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 sm:pt-20 sm:pb-24 lg:max-w-7xl lg:pt-24 lg:px-8">
               <h2 className="text-3xl font-extrabold text-white tracking-tight font-Quicksand">
-                Inbox support built for efficiency
+                30 Day free trial with no commitment
               </h2>
               <p className="mt-4 max-w-3xl text-lg text-red-200 font-Quicksand">
-                Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi
-                lobortis. Blandit aliquam sit nisl euismod mattis in.
+                All of our features are available with your free trial. Try it our risk free and let
+                us know what you think.
               </p>
               <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16">
                 {features.map(feature => (
