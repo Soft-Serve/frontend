@@ -1,4 +1,4 @@
-export { SettingsPage } from "./SettingsPage";
+export { MainSettingsPage } from "./SettingsPage";
 export { LazyConfirmEmailPage } from "./ConfirmEmailPage";
 export { GuestPage } from "./GuestPage";
 export { LandingPage } from "./LandingPage";

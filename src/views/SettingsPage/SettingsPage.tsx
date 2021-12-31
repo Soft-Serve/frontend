@@ -22,7 +22,6 @@ import { RestaurantSettings } from "./RestaurantSettings";
 import { SettingsWrapper } from "./SettingsWrapper";
 import { CategorySettings } from "./CategorySettings";
 import { BannerSettings } from "./BannerSettings/BannerSettings";
-import { Providers } from "./Providers";
 
 interface MappableObject {
   [key: string]: JSX.Element;
@@ -79,35 +78,30 @@ const SettingsPage: FC = () => {
   };
 
   return (
-    <Providers>
-      <MenuPage>
-        <SettingsMobileNavigation isOpen={mobileMenuOpen} onClose={setMobileMenuOpen} />
-        <SettingsNavigation />
-        <SettingsMobileSubNavigation
-          selected={selected}
-          setSelected={handleSetSelected}
-          isOpen={isSubNavOpen}
-          onClose={setIsSubNavOpen}
-        />
-        <SettingsMobileHeader
-          setIsSubNavOpen={setIsSubNavOpen}
-          setMobileMenuOpen={setMobileMenuOpen}
-        >
-          <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
-            <SettingsWrapper>
-              <SettingsSubMenu
-                selected={selected}
-                setSelected={setSelected}
-                className="hidden lg:block flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 xl:flex xl:flex-col "
-              />
-              <TabContent>{renderSettingsTab()}</TabContent>
-            </SettingsWrapper>
-            {renderMobileFooter()}
+    <MenuPage>
+      <SettingsMobileNavigation isOpen={mobileMenuOpen} onClose={setMobileMenuOpen} />
+      <SettingsNavigation />
+      <SettingsMobileSubNavigation
+        selected={selected}
+        setSelected={handleSetSelected}
+        isOpen={isSubNavOpen}
+        onClose={setIsSubNavOpen}
+      />
+      <SettingsMobileHeader setIsSubNavOpen={setIsSubNavOpen} setMobileMenuOpen={setMobileMenuOpen}>
+        <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
+          <SettingsWrapper>
+            <SettingsSubMenu
+              selected={selected}
+              setSelected={setSelected}
+              className="hidden lg:block flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 xl:flex xl:flex-col "
+            />
+            <TabContent>{renderSettingsTab()}</TabContent>
           </SettingsWrapper>
-        </SettingsMobileHeader>
-        <Toaster />
-      </MenuPage>
-    </Providers>
+          {renderMobileFooter()}
+        </SettingsWrapper>
+      </SettingsMobileHeader>
+      <Toaster />
+    </MenuPage>
   );
 };
 

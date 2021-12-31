@@ -5,7 +5,7 @@ import {
   GuestPage,
   SignInMainPage,
   SignUpMainPage,
-  SettingsPage,
+  MainSettingsPage,
   LandingPage,
 } from "@views";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -21,7 +21,7 @@ const App = () => {
           <Route path={`${routes.restaurants}/:id`} element={<GuestPage />} />
           <Route path={routes.signIn} element={<SignInMainPage />} />
           <Route path={routes.signUp} element={<SignUpMainPage />} />
-          <Route path={`${routes.settings}/:id/:setting`} element={<SettingsPage />} />
+          <Route path={`${routes.settings}/:id/:setting`} element={<MainSettingsPage />} />
           <Route path={routes.confirm} element={<LazyConfirmEmailPage />} />
         </Routes>
       </Router>
