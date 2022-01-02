@@ -25,7 +25,10 @@ const SettingsSubMenu: FC<Props> = ({ selected, setSelected, ...rest }) => {
       </div>
       <RadioTiles value={selected} onChange={setSelected}>
         {SUB_NAVIGATION.map(item => (
-          <Link key={item.name} to={`${routes.settings}/${restaurantSlug}/${item.name}`}>
+          <Link
+            key={item.name}
+            to={`${routes.restaurants}/${restaurantSlug}/settings/${item.name}`}
+          >
             <RadioTile value={item.name}>
               <item.icon
                 className={`flex-shrink-0 -mt-0.5 h-6 w-6 text-${themeColour}-${themeTint}`}

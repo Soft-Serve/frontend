@@ -3,11 +3,16 @@ import type { FC } from "react";
 
 import { UpdateCurrentUserForm } from "@presentational";
 import { useCurrentUserQuery } from "@shared";
+import { useRestaurantContext } from "@contexts";
 import { Card, CardContent, TabWrapper } from "@base";
 import { SettingsHeader } from "../SettingsHeader";
 
 const AccountSettings: FC = () => {
-  const { data, loading } = useCurrentUserQuery();
+  const { restaurantSlug } = useRestaurantContext();
+  const { data, loading } = useCurrentUserQuery({
+    skip: !restaurantSlug,
+  });
+
   if (loading) {
     return <p>loading</p>;
   }

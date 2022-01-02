@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import type { FC } from "react";
 import { SignInForm } from "@presentational";
-import { BoxSection, Container, Footer, Notification } from "@base";
+import { BoxSection, Container, Notification } from "@base";
 import { MenuPage } from "../MenuPage";
-import { SignInNavigation } from "./SignInNavigation";
-import { SignInMobileNavigation } from "./SignInMobileNavigation";
-import { SignInMobileHeader } from "./SignInMobileHeader";
 
 const SignInPage: FC = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const flash = () => (
     <Notification header="Account verified!" subHeader="You can now sign in to your account" />
   );
@@ -18,16 +14,11 @@ const SignInPage: FC = () => {
   return (
     <MenuPage>
       {accountConfirmed() && flash()}
-      <SignInMobileNavigation isOpen={isMobileMenuOpen} onClose={setIsMobileMenuOpen} />
-      <SignInNavigation />
-      <SignInMobileHeader setMobileMenuOpen={setIsMobileMenuOpen}>
-        <Container>
-          <BoxSection>
-            <SignInForm />
-          </BoxSection>
-        </Container>
-        <Footer />
-      </SignInMobileHeader>
+      <Container>
+        <BoxSection>
+          <SignInForm />
+        </BoxSection>
+      </Container>
     </MenuPage>
   );
 };

@@ -13,7 +13,7 @@ interface Props {
   setIsMenuSlideOverOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const GuestMobileHeader: FC<Props> = ({
+const MainMobileHeader: FC<Props> = ({
   children,
   setIsFilterSideMenuOpen,
   setIsMenuSlideOverOpen,
@@ -103,4 +103,4 @@ const GuestMobileHeader: FC<Props> = ({
   );
 };
 
-export { GuestMobileHeader };
+export { MainMobileHeader };

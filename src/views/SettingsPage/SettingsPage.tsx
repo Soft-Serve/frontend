@@ -7,10 +7,7 @@ import { SettingsSubMenu } from "@presentational";
 import { useViewport } from "@hooks";
 import { Footer, TabContent } from "@base";
 import { classnames } from "tailwindcss-classnames";
-import { MenuPage } from "../MenuPage";
-import { SettingsMobileNavigation } from "./SettingsMobileNavigation";
-import { SettingsNavigation } from "./SettingsNavigation";
-import { SettingsMobileHeader } from "./SettingsMobileHeader";
+
 import { SettingsMobileSubNavigation } from "./SettingsMobileSubNavigation";
 import { AccountSettings } from "./AccountSettings";
 import { UsersSettings } from "./UsersSettings";
@@ -28,16 +25,15 @@ interface MappableObject {
 }
 
 type Param = {
-  setting: string;
+  id: string;
 };
 
 const SettingsPage: FC = () => {
-  const { setting } = useParams<Param>() as Param;
+  const { id } = useParams<Param>() as Param;
 
   const { width } = useViewport();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isSubNavOpen, setIsSubNavOpen] = useState(false);
-  const [selected, setSelected] = useState(setting);
+  const [selected, setSelected] = useState(id);
 
   const restaurant = <RestaurantSettings />;
   const banner = <BannerSettings />;
@@ -61,11 +57,11 @@ const SettingsPage: FC = () => {
     categories,
   } as MappableObject;
 
-  const renderSettingsTab = () => SettingsMap[setting];
+  const renderSettingsTab = () => SettingsMap[id];
 
   useEffect(() => {
-    setSelected(setting);
-  }, [setting]);
+    setSelected(id);
+  }, [id]);
 
   const handleSetSelected = (value: any) => {
     setSelected(value);
@@ -78,30 +74,26 @@ const SettingsPage: FC = () => {
   };
 
   return (
-    <MenuPage>
-      <SettingsMobileNavigation isOpen={mobileMenuOpen} onClose={setMobileMenuOpen} />
-      <SettingsNavigation />
+    <>
       <SettingsMobileSubNavigation
         selected={selected}
         setSelected={handleSetSelected}
         isOpen={isSubNavOpen}
         onClose={setIsSubNavOpen}
       />
-      <SettingsMobileHeader setIsSubNavOpen={setIsSubNavOpen} setMobileMenuOpen={setMobileMenuOpen}>
-        <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
-          <SettingsWrapper>
-            <SettingsSubMenu
-              selected={selected}
-              setSelected={setSelected}
-              className="hidden lg:block flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 xl:flex xl:flex-col "
-            />
-            <TabContent>{renderSettingsTab()}</TabContent>
-          </SettingsWrapper>
-          {renderMobileFooter()}
+      <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
+        <SettingsWrapper>
+          <SettingsSubMenu
+            selected={selected}
+            setSelected={setSelected}
+            className="hidden lg:block flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 xl:flex xl:flex-col "
+          />
+          <TabContent>{renderSettingsTab()}</TabContent>
         </SettingsWrapper>
-      </SettingsMobileHeader>
+        {renderMobileFooter()}
+      </SettingsWrapper>
       <Toaster />
-    </MenuPage>
+    </>
   );
 };
 

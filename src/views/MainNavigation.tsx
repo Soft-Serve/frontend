@@ -2,16 +2,20 @@ import React from "react";
 import type { FC, Dispatch, SetStateAction } from "react";
 import { AdjustmentsIcon, FilterIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import { Navigation, NavigationItem } from "@presentational";
-import { LoginSVG, LogoutSVG } from "@svgs";
+import { LoginSVG, LogoutSVG, MenuSVG } from "@svgs";
 import { routes } from "@routes";
 import { useCurrentUserQuery, useSignOutMutation } from "@shared";
 import { useRestaurantContext } from "@contexts";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
 }
-const GuestNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
+
+const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
+  const { pathname } = useLocation();
+  const isOnSettingsPage = pathname.includes("settings");
+
   const navigate = useNavigate();
   const { restaurantSlug, themeFont } = useRestaurantContext();
   const { data } = useCurrentUserQuery({
@@ -22,7 +26,7 @@ const GuestNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
   const signUserOut = () => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
-    navigate(routes.signIn);
+    navigate(`${routes.restaurants}/${restaurantSlug}/sign-in`);
   };
 
   const renderAuthNavigationItem = () => {
@@ -32,15 +36,23 @@ const GuestNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
         <span className={`mx-2 font-${themeFont}`}>Sign Out</span>
       </NavigationItem>
     ) : (
-      <NavigationItem to={routes.signIn}>
+      <NavigationItem to={`${routes.restaurants}/${restaurantSlug}/sign-in`}>
         <LoginSVG className="h-6 w-6 text-white" aria-hidden="true" />
         <span className={`mx-2 font-${themeFont}`}>Sign In</span>
       </NavigationItem>
     );
   };
 
-  return (
-    <Navigation>
+  const renderDietariesNavigationItem = () => {
+    if (isOnSettingsPage)
+      return (
+        <NavigationItem css="border-t-2" to={`${routes.restaurants}/${restaurantSlug}`}>
+          <MenuSVG className="h-6 w-6 text-white" aria-hidden="true" />
+          <span className="mx-2 font-Quicksand">Menu</span>
+          <span className="sr-only">Menu</span>
+        </NavigationItem>
+      );
+    return (
       <NavigationItem
         css="border-t-2"
         onClick={() => setIsFilterSideMenuOpen(prevState => !prevState)}
@@ -49,22 +61,41 @@ const GuestNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
         <span className={`mx-2 font-${themeFont}`}>Dietaries</span>
         <span className="sr-only">Settings</span>
       </NavigationItem>
-      {renderAuthNavigationItem()}
-      {data?.currentUser ? (
-        <NavigationItem to={`${routes.settings}/${restaurantSlug}/restaurant`}>
+    );
+  };
+
+  const renderSignUpButton = () => {
+    if (data?.currentUser) return null;
+    return (
+      <NavigationItem to={routes.signUp}>
+        <PlusCircleIcon className="h-6 w-6 text-white" aria-hidden="true" />
+        <span className={`mx-2 font-${themeFont}`}>Sign Up</span>
+        <span className="sr-only">Sign Up</span>
+      </NavigationItem>
+    );
+  };
+
+  const renderSettingsButton = () => {
+    if (!isOnSettingsPage && data?.currentUser) {
+      return (
+        <NavigationItem to={`${routes.restaurants}/${restaurantSlug}/settings/restaurant`}>
           <AdjustmentsIcon className="h-6 w-6 text-white" aria-hidden="true" />
           <span className={`mx-2 font-${themeFont}`}>Settings</span>
           <span className="sr-only">Settings</span>
         </NavigationItem>
-      ) : (
-        <NavigationItem to={routes.signUp}>
-          <PlusCircleIcon className="h-6 w-6 text-white" aria-hidden="true" />
-          <span className={`mx-2 font-${themeFont}`}>Sign Up</span>
-          <span className="sr-only">Sign Up</span>
-        </NavigationItem>
-      )}
+      );
+    }
+    return null;
+  };
+
+  return (
+    <Navigation>
+      {renderDietariesNavigationItem()}
+      {renderAuthNavigationItem()}
+      {renderSettingsButton()}
+      {renderSignUpButton()}
     </Navigation>
   );
 };
 
-export { GuestNavigation };
+export { MainNavigation };
