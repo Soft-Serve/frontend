@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Loader from "react-loader-spinner";
 import type { FC } from "react";
 import { GlobalContext, useRestaurantContext } from "@contexts";
-import { useRestaurantQuery } from "src/shared";
+import { useRestaurantThemeQuery } from "./RestaurantTheme.query";
 
 const GlobalProvider: FC = ({ children }) => {
   const [menuID, setMenuID] = useState(0);
@@ -11,7 +11,7 @@ const GlobalProvider: FC = ({ children }) => {
   const [currentUser, setCurrentUser] = useState("");
   const { restaurantSlug, setThemeColour, setThemeTint, setThemeFont } = useRestaurantContext();
 
-  const { loading } = useRestaurantQuery({
+  const { loading } = useRestaurantThemeQuery({
     variables: {
       restaurantSlug,
     },
@@ -21,7 +21,6 @@ const GlobalProvider: FC = ({ children }) => {
       setThemeColour(completedData?.restaurant?.colour);
       setThemeTint(completedData?.restaurant?.tint);
       setThemeFont(completedData?.restaurant?.font || "Quicksand");
-      setActiveMenu(completedData?.restaurant?.name);
     },
   });
 
