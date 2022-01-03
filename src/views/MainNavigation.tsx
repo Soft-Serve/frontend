@@ -15,6 +15,7 @@ interface Props {
 const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
   const { pathname } = useLocation();
   const isOnSettingsPage = pathname.includes("settings");
+  const isOnSignInPage = pathname.includes("sign-in");
 
   const navigate = useNavigate();
   const { restaurantSlug, themeFont } = useRestaurantContext();
@@ -27,15 +28,20 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
     navigate(`${routes.restaurants}/${restaurantSlug}/sign-in`);
+    window.location.reload();
   };
 
-  const renderAuthNavigationItem = () => {
-    return data?.currentUser ? (
-      <NavigationItem onClick={signUserOut}>
-        <LogoutSVG className="h-5 w-5 text-white" aria-hidden="true" />
-        <span className={`mx-2 font-${themeFont}`}>Sign Out</span>
-      </NavigationItem>
-    ) : (
+  const renderSiginButton = () => {
+    if (isOnSignInPage) {
+      return (
+        <NavigationItem to={`${routes.restaurants}/${restaurantSlug}`}>
+          <MenuSVG className="h-6 w-6 text-white" aria-hidden="true" />
+          <span className={`mx-2 font-${themeFont}`}>Restaurant</span>
+          <span className="sr-only">Menu</span>
+        </NavigationItem>
+      );
+    }
+    return (
       <NavigationItem to={`${routes.restaurants}/${restaurantSlug}/sign-in`}>
         <LoginSVG className="h-6 w-6 text-white" aria-hidden="true" />
         <span className={`mx-2 font-${themeFont}`}>Sign In</span>
@@ -43,12 +49,24 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
     );
   };
 
+  const renderAuthNavigationItem = () => {
+    if (data?.currentUser) {
+      return (
+        <NavigationItem onClick={signUserOut}>
+          <LogoutSVG className="h-5 w-5 text-white" aria-hidden="true" />
+          <span className={`mx-2 font-${themeFont}`}>Sign Out</span>
+        </NavigationItem>
+      );
+    }
+    return renderSiginButton();
+  };
+
   const renderDietariesNavigationItem = () => {
     if (isOnSettingsPage)
       return (
         <NavigationItem css="border-t-2" to={`${routes.restaurants}/${restaurantSlug}`}>
           <MenuSVG className="h-6 w-6 text-white" aria-hidden="true" />
-          <span className="mx-2 font-Quicksand">Menu</span>
+          <span className={`mx-2 font-${themeFont}`}>Menu</span>
           <span className="sr-only">Menu</span>
         </NavigationItem>
       );
@@ -67,7 +85,7 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
   const renderSignUpButton = () => {
     if (data?.currentUser) return null;
     return (
-      <NavigationItem to={routes.signUp}>
+      <NavigationItem to={`${routes.restaurants}/${restaurantSlug}/sign-up`}>
         <PlusCircleIcon className="h-6 w-6 text-white" aria-hidden="true" />
         <span className={`mx-2 font-${themeFont}`}>Sign Up</span>
         <span className="sr-only">Sign Up</span>

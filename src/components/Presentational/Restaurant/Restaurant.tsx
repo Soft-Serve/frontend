@@ -4,7 +4,7 @@ import { useGlobalContext, useRestaurantContext } from "src/contexts";
 import { classnames } from "tailwindcss-classnames";
 import { Items, Menus, CategoriesContainer, WelcomePage, MobileSubHeader } from "@presentational";
 import { useRestaurantQuery, useMenusQuery, RESTAURANT_QUERY } from "@shared";
-import { Container, BoxSection, Footer, HeroBanner } from "@base";
+import { Container, BoxSection, HeroBanner } from "@base";
 
 import { SkeletonRestaurant } from "./SkeletonRestaurant";
 import { useUpdateRestaurantOnboarding } from "./UpdateRestaurantOnboarding.mutation";
@@ -87,7 +87,6 @@ const Restaurant: FC = () => {
           </BoxSection>
           {renderItems()}
         </Container>
-        <Footer />
       </>
     );
   }

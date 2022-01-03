@@ -32,7 +32,7 @@ const MenusList: FC<Props> = ({ menus, handleModal, loading }) => {
             <ListItem key={menu.id}>
               <Link
                 className="w-full py-2 cursor-pointer"
-                to={`${routes.settings}/${restaurantSlug}/items?menu=${menu.name}`}
+                to={`${routes.restaurants}/${restaurantSlug}/settings/items?menu=${menu.name}`}
               >
                 <div className="flex-1 flex items-end">
                   <span className="font-bold text-gray-900 font-Quicksand">{menu.name}</span>

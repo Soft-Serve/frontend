@@ -35,7 +35,7 @@ const CategoryList: FC<Props> = ({ categories, handleModal, loading, activeMenu 
               <ListItem key={category.id}>
                 <Link
                   className="w-full py-2 cursor-pointer"
-                  to={`${routes.settings}/${restaurantSlug}/items?menu=${activeMenu?.name}&category=${category.name}`}
+                  to={`${routes.restaurants}/${restaurantSlug}/settings/items?menu=${activeMenu?.name}&category=${category.name}`}
                 >
                   <div className="flex-1 flex items-end">
                     <span className="font-bold font-Quicksand">{category.name}</span>

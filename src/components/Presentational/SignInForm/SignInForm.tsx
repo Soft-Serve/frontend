@@ -18,6 +18,7 @@ const SignInForm: FC = () => {
       localStorage.setItem(uid, completedData.signIn.uid);
       localStorage.setItem(clientToken, completedData.signIn.client);
       navigate(`/restaurants/${completedData?.signIn?.restaurant_slug}`);
+      window.location.reload();
     },
 
     onError: () => setIsLoginSuccessFull(false),

@@ -20,7 +20,11 @@ const BannerSettings: FC = () => {
     skip: !restaurantSlug,
   });
 
-  const { data: restaurantData, loading: restaurantLoading } = useRestaurantQuery();
+  const { data: restaurantData, loading: restaurantLoading } = useRestaurantQuery({
+    variables: {
+      restaurantSlug,
+    },
+  });
 
   const { photoFile, setPhotoFile } = useUploadPhoto();
   if (loading || restaurantLoading) return <SkeletonBannerSettings />;

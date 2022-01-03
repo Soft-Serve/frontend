@@ -27,12 +27,15 @@ interface MappableObject {
 type Param = {
   id: string;
 };
+interface Props {
+  isOpen: boolean;
+  onClose: any;
+}
 
-const SettingsPage: FC = () => {
+const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
   const { id } = useParams<Param>() as Param;
 
   const { width } = useViewport();
-  const [isSubNavOpen, setIsSubNavOpen] = useState(false);
   const [selected, setSelected] = useState(id);
 
   const restaurant = <RestaurantSettings />;
@@ -65,7 +68,7 @@ const SettingsPage: FC = () => {
 
   const handleSetSelected = (value: any) => {
     setSelected(value);
-    setIsSubNavOpen(false);
+    onClose(false);
   };
 
   const renderMobileFooter = () => {
@@ -78,8 +81,8 @@ const SettingsPage: FC = () => {
       <SettingsMobileSubNavigation
         selected={selected}
         setSelected={handleSetSelected}
-        isOpen={isSubNavOpen}
-        onClose={setIsSubNavOpen}
+        isOpen={isOpen}
+        onClose={onClose}
       />
       <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
         <SettingsWrapper>
