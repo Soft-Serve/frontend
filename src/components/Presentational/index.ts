@@ -46,3 +46,7 @@ export { PostNewUserForm } from "./PostNewUserForm";
 export { UpdateRestaurantFontForm } from "./UpdateRestaurantFontForm";
 export { ItemModal } from "./ItemModal";
 export { AddDietaryForm } from "./AddDietaryForm";
+export { AllergyModal } from "./AllergyModal";
+export { MenuSlideOver } from "./MenuSlideOver";
+export { AllergyFiltersSideMenu } from "./AllergyFiltersSideMenu";
+export { MobileSubHeader } from "./MobileSubHeader";

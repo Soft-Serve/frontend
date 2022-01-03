@@ -1,1 +1,0 @@
-export { SignUpNavigation } from "./SignUpNavigation";

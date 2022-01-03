@@ -6,8 +6,11 @@ import { Link } from "react-router-dom";
 import { useRestaurantContext } from "src/contexts";
 
 const CurrentUserAvatar: FC = () => {
-  const { data } = useCurrentUserQuery();
   const { restaurantSlug } = useRestaurantContext();
+  const { data } = useCurrentUserQuery({
+    skip: !restaurantSlug,
+  });
+
   return (
     <div className="flex-shrink-0 flex border-t border-blue-gray-200 p-4">
       <Link to={`${routes.settings}/${restaurantSlug}`} className="flex-shrink-0 group block">

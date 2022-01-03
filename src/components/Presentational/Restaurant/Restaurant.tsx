@@ -1,10 +1,11 @@
 import React from "react";
 import type { FC } from "react";
 import { useGlobalContext, useRestaurantContext } from "src/contexts";
-import { Items, Menus, CategoriesContainer, WelcomePage } from "@presentational";
-import { useRestaurantQuery, useMenusQuery, RESTAURANT_QUERY } from "@shared";
-import { Container, BoxSection, Footer, HeroBanner } from "@base";
 import { classnames } from "tailwindcss-classnames";
+import { Items, Menus, CategoriesContainer, WelcomePage, MobileSubHeader } from "@presentational";
+import { useRestaurantQuery, useMenusQuery, RESTAURANT_QUERY } from "@shared";
+import { Container, BoxSection, HeroBanner } from "@base";
+
 import { SkeletonRestaurant } from "./SkeletonRestaurant";
 import { useUpdateRestaurantOnboarding } from "./UpdateRestaurantOnboarding.mutation";
 
@@ -75,19 +76,17 @@ const Restaurant: FC = () => {
   if (data?.restaurant) {
     return (
       <>
-        <div className="lg:block hidden">
-          <HeroBanner />
-        </div>
+        <HeroBanner />
         <Container>
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
             <div className="w-full lg:flex hidden">
               <Menus themeFont={themeFont} />
             </div>
             <CategoriesContainer />
+            <MobileSubHeader />
           </BoxSection>
           {renderItems()}
         </Container>
-        <Footer />
       </>
     );
   }

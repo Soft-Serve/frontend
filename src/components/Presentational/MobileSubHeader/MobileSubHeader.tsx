@@ -4,7 +4,7 @@ import { Categories } from "@presentational";
 import { useCategoriesQuery } from "@shared";
 import { useGlobalContext } from "@contexts";
 
-const GuestMobileSubHeader: FC = () => {
+const MobileSubHeader: FC = () => {
   const { menuID, setCategoryID } = useGlobalContext();
 
   const { data, loading } = useCategoriesQuery({
@@ -41,4 +41,4 @@ const GuestMobileSubHeader: FC = () => {
   );
 };
 
-export { GuestMobileSubHeader };
+export { MobileSubHeader };

@@ -34,7 +34,9 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen }) => {
     slug: "",
   });
 
-  const { data: userData, loading: userLoading } = useCurrentUserQuery();
+  const { data: userData, loading: userLoading } = useCurrentUserQuery({
+    skip: !restaurantSlug,
+  });
   const [isFirstNameDirty, setIsFirstNameDirty] = useState(false);
   const [isLastNameDirty, setIsLastNameDirty] = useState(false);
   const [isEmailDirty, setIsEmailDirty] = useState(false);

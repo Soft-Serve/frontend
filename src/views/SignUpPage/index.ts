@@ -1,1 +1,0 @@
-export { SignUpMainPage } from "./SignUpMainPage";
