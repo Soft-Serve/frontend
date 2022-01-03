@@ -2,12 +2,13 @@ import type { FC } from "react";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Toaster } from "react-hot-toast";
+import Loader from "react-loader-spinner";
 
 import { SettingsSubMenu } from "@presentational";
 import { useViewport } from "@hooks";
 import { Footer, TabContent } from "@base";
+import { useCurrentUserQuery } from "@shared";
 import { classnames } from "tailwindcss-classnames";
-
 import { SettingsMobileSubNavigation } from "./SettingsMobileSubNavigation";
 import { AccountSettings } from "./AccountSettings";
 import { UsersSettings } from "./UsersSettings";
@@ -34,6 +35,7 @@ interface Props {
 
 const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
   const { id } = useParams<Param>() as Param;
+  const { data, loading } = useCurrentUserQuery();
 
   const { width } = useViewport();
   const [selected, setSelected] = useState(id);
@@ -76,28 +78,38 @@ const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
     return <Footer />;
   };
 
-  return (
-    <>
-      <SettingsMobileSubNavigation
-        selected={selected}
-        setSelected={handleSetSelected}
-        isOpen={isOpen}
-        onClose={onClose}
-      />
-      <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
-        <SettingsWrapper>
-          <SettingsSubMenu
-            selected={selected}
-            setSelected={setSelected}
-            className="hidden lg:block flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 xl:flex xl:flex-col "
-          />
-          <TabContent>{renderSettingsTab()}</TabContent>
+  if (loading)
+    return (
+      <div className="flex w-screen h-screen justify-center items-center">
+        <Loader type="Grid" color="#000000" height={150} width={150} />
+      </div>
+    );
+
+  if (data?.currentUser) {
+    return (
+      <>
+        <SettingsMobileSubNavigation
+          selected={selected}
+          setSelected={handleSetSelected}
+          isOpen={isOpen}
+          onClose={onClose}
+        />
+        <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
+          <SettingsWrapper>
+            <SettingsSubMenu
+              selected={selected}
+              setSelected={setSelected}
+              className="hidden lg:block flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 xl:flex xl:flex-col "
+            />
+            <TabContent>{renderSettingsTab()}</TabContent>
+          </SettingsWrapper>
+          {renderMobileFooter()}
         </SettingsWrapper>
-        {renderMobileFooter()}
-      </SettingsWrapper>
-      <Toaster />
-    </>
-  );
+        <Toaster />
+      </>
+    );
+  }
+  return null;
 };
 
 export { SettingsPage };
