@@ -17,8 +17,8 @@ import {
 import { Link } from "react-router-dom";
 import { Popover, Transition } from "@headlessui/react";
 import { FacebookSVG, FullLogoSVG, InstagramSVG, TwitterSVG } from "@svgs";
-import DestopImage from "./desktop.png";
-import settingsImage from "./settings.png";
+import DesktopImage from "./desktop.png";
+import menuImage from "./menu_image.png";
 import bellaCiaoSettings from "./bella_ciao_settings.png";
 import cafeMontySettings from "./cafe_monty_settings.png";
 import computer from "./computer.png";
@@ -94,10 +94,6 @@ const features = [
     icon: CogIcon,
   },
 ];
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 const LandingPage: FC = () => {
   const [isMonthly, setIsMonthly] = useState(true);
@@ -276,23 +272,17 @@ const LandingPage: FC = () => {
                 </div>
               </div>
               <div className="mt-12 sm:mt-16 lg:mt-0">
-                <div className="flex pl-4 -mr-48 sm:pl-6 md:-mr-16 lg:px-0 lg:m-0 lg:relative lg:h-full">
-                  <img className="" src={bellaCiaoSettings} alt="Inbox user interface" />
-                  <img className="" src={cafeMontySettings} alt="Inbox user interface" />
+                <div className="flex justify-around flex-wrap">
+                  <img className="max-h-96 p-2" src={bellaCiaoSettings} alt="Tablet settings" />
+                  <img className="max-h-96 p-2" src={cafeMontySettings} alt="Phone settings" />
                 </div>
               </div>
             </div>
           </div>
           <div className="relative py-28 bg-red-400 ">
             <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:gap-24">
-              <div className="mt-12 sm:mt-16 lg:mt-0">
-                <div className="pl-4 -mr-48 sm:pl-6 md:-mr-16 lg:px-0 lg:m-0 lg:relative lg:h-full">
-                  <img
-                    className="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
-                    src={settingsImage}
-                    alt="Inbox user interface"
-                  />
-                </div>
+              <div className="flex justify-center mt-12 sm:mt-16 lg:mt-0">
+                <img className="max-h-96" src={menuImage} alt="Sample menu image" />
               </div>
               <div className="px-4 max-w-xl mx-auto sm:px-6 lg:py-16 lg:max-w-none lg:mx-0 lg:px-0">
                 <div>
@@ -356,7 +346,7 @@ const LandingPage: FC = () => {
                 <div className="pr-4 -ml-48 sm:pr-6 md:-ml-16 lg:px-0 lg:m-0 lg:relative lg:h-full">
                   <img
                     className="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none"
-                    src={DestopImage}
+                    src={DesktopImage}
                     alt="Customer profile user interface"
                   />
                 </div>
