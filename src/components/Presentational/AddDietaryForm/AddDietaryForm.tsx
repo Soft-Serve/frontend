@@ -1,31 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import type { FC } from "react";
 import { Button } from "@base";
 import { Item, useAllergiesQuery, useDietaryQuery } from "@shared";
 import { useRestaurantContext } from "@contexts";
-import { RadioGroup } from "@headlessui/react";
-import { intersection } from "@utility";
-
-const memoryOptions = [
-  { name: "4 GB", inStock: true },
-  { name: "8 GB", inStock: true },
-  { name: "16 GB", inStock: true },
-  { name: "32 GB", inStock: true },
-  { name: "64 GB", inStock: true },
-  { name: "128 GB", inStock: false },
-];
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 interface Props {
   item?: Item;
+  onCompleted?: (state: boolean) => void;
 }
 
-const AddDietaryForm: FC<Props> = ({ item }) => {
-  const [mem, setMem] = useState(memoryOptions[2]);
-  const { restaurantSlug } = useRestaurantContext();
+const AddDietaryForm: FC<Props> = ({ item, onCompleted }) => {
+  const { restaurantSlug, themeColour, themeTint } = useRestaurantContext();
 
   const { data: itemDietariesData } = useDietaryQuery({
     variables: {
@@ -40,51 +25,42 @@ const AddDietaryForm: FC<Props> = ({ item }) => {
     },
   });
 
-  const isAllergyActiveWithinItem = () => {
-    if (itemDietariesData?.dietaries?.length && addDietariesData?.allergies?.length) {
-      return intersection(addDietariesData?.allergies, itemDietariesData?.dietaries);
-    }
-    return false;
-  };
+  const isAllergyActive = (name: string) =>
+    !!itemDietariesData?.dietaries?.find(allergy => allergy.name === name);
 
   return (
     <div>
-      <div>
-        <div className="flex items-center justify-between">
-          <h2 className="text-sm font-medium text-gray-900">RAM</h2>
-          <a href="/" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-            See performance specs
-          </a>
+      <fieldset>
+        <legend className="text-lg font-bold text-gray-900 font-Quicksand">
+          Dietary Restrictions
+        </legend>
+        <div className="mt-4 border-t border-b border-gray-200 divide-y divide-gray-200">
+          {addDietariesData?.allergies?.map(allergy => (
+            <div key={allergy.id} className="relative flex items-start py-4 w-full">
+              <div className="w-full flex-1 text-sm">
+                <label
+                  htmlFor={`person-${allergy.id}`}
+                  className="font-medium text-gray-700 select-none cursor-pointer w-full"
+                >
+                  {allergy.name}
+                </label>
+              </div>
+              <div className="ml-3 flex items-center h-5">
+                <input
+                  checked={isAllergyActive(allergy.name)}
+                  id={`person-${allergy.id}`}
+                  name={`person-${allergy.id}`}
+                  type="checkbox"
+                  className={`focus:ring-${themeColour}-${themeTint} h-4 w-4 text-${themeColour}-${themeTint} border-gray-300 rounded`}
+                />
+              </div>
+            </div>
+          ))}
         </div>
-
-        <RadioGroup value={mem} onChange={setMem} className="mt-2">
-          <RadioGroup.Label className="sr-only">Choose a memory option</RadioGroup.Label>
-          <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
-            {addDietariesData?.allergies?.map(option => (
-              <RadioGroup.Option
-                key={option.name}
-                value={option}
-                className={({ active, checked }) =>
-                  classNames(
-                    isAllergyActiveWithinItem()
-                      ? "cursor-pointer focus:outline-none"
-                      : "opacity-25 cursor-not-allowed",
-                    active ? "ring-2 ring-offset-2 ring-indigo-500" : "",
-                    checked
-                      ? "bg-indigo-600 border-transparent text-white hover:bg-indigo-700"
-                      : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50",
-                    "border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                  )
-                }
-                disabled={!isAllergyActiveWithinItem()}
-              >
-                <RadioGroup.Label as="p">{option.name}</RadioGroup.Label>
-              </RadioGroup.Option>
-            ))}
-          </div>
-        </RadioGroup>
-      </div>
-      <Button>hello</Button>
+      </fieldset>
+      <Button onClick={() => onCompleted?.(false)} size="XL" isFullwidth css="mt-2">
+        Close
+      </Button>
     </div>
   );
 };

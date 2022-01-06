@@ -18,8 +18,8 @@ const SignInPage: FC = () => {
 
   if (loading)
     return (
-      <div className="flex w-screen h-screen justify-center items-center">
-        <Loader type="Grid" color="#000000" height={150} width={150} />
+      <div className="flex w-screen h-screen justify-center items-center ">
+        <Loader type="MutatingDots" height={130} width={130} />
       </div>
     );
 

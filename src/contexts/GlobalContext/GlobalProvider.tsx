@@ -27,7 +27,7 @@ const GlobalProvider: FC = ({ children }) => {
   if (loading) {
     return (
       <div className="flex w-screen h-screen justify-center items-center">
-        <Loader type="Grid" color="#000000" height={150} width={150} />
+        <Loader type="MutatingDots" height={120} width={120} />
       </div>
     );
   }

@@ -83,7 +83,7 @@ const ItemSettings: FC = () => {
     />
   );
 
-  const addDietary = <AddDietaryForm item={activeItem} />;
+  const addDietary = <AddDietaryForm onCompleted={setIsModalOpen} item={activeItem} />;
 
   const mapModalForms = {
     deleteItem,

@@ -18,7 +18,7 @@ const AccountSettings: FC = () => {
   }
 
   if (data?.currentUser) {
-    const { first_name, last_name, email, id } = data.currentUser;
+    const { first_name, last_name, email, id } = data?.currentUser;
     return (
       <TabWrapper>
         <Card css="mb-4">
