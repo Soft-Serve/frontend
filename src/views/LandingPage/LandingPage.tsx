@@ -282,7 +282,7 @@ const LandingPage: FC = () => {
           <div className="relative py-28 bg-red-400 ">
             <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:gap-24">
               <div className="flex justify-center mt-12 sm:mt-16 lg:mt-0">
-                <img className="max-h-96" src={menuImage} alt="Sample menu" />
+                <img className="max-h-96 p-2" src={menuImage} alt="Sample menu" />
               </div>
               <div className="px-4 max-w-xl mx-auto sm:px-6 lg:py-16 lg:max-w-none lg:mx-0 lg:px-0">
                 <div>
