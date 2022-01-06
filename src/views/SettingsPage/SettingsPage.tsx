@@ -7,8 +7,11 @@ import Loader from "react-loader-spinner";
 import { SettingsSubMenu } from "@presentational";
 import { useViewport } from "@hooks";
 import { Footer, TabContent } from "@base";
+import { Navigate } from "react-router-dom";
 import { useCurrentUserQuery } from "@shared";
+import { useRestaurantContext } from "@contexts";
 import { classnames } from "tailwindcss-classnames";
+import { routes } from "@routes";
 import { SettingsMobileSubNavigation } from "./SettingsMobileSubNavigation";
 import { AccountSettings } from "./AccountSettings";
 import { UsersSettings } from "./UsersSettings";
@@ -36,6 +39,7 @@ interface Props {
 const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
   const { id } = useParams<Param>() as Param;
   const { data, loading } = useCurrentUserQuery();
+  const { restaurantSlug } = useRestaurantContext();
 
   const { width } = useViewport();
   const [selected, setSelected] = useState(id);
@@ -80,36 +84,36 @@ const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
 
   if (loading)
     return (
-      <div className="flex w-screen h-screen justify-center items-center">
-        <Loader type="Grid" color="#000000" height={150} width={150} />
+      <div className="flex w-screen h-screen justify-center items-center ">
+        <Loader type="MutatingDots" height={130} width={130} />
       </div>
     );
 
-  if (data?.currentUser) {
-    return (
-      <>
-        <SettingsMobileSubNavigation
-          selected={selected}
-          setSelected={handleSetSelected}
-          isOpen={isOpen}
-          onClose={onClose}
-        />
-        <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
-          <SettingsWrapper>
-            <SettingsSubMenu
-              selected={selected}
-              setSelected={setSelected}
-              className="hidden lg:block flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 xl:flex xl:flex-col "
-            />
-            <TabContent>{renderSettingsTab()}</TabContent>
-          </SettingsWrapper>
-          {renderMobileFooter()}
-        </SettingsWrapper>
-        <Toaster />
-      </>
-    );
+  if (!data?.currentUser) {
+    return <Navigate to={`${routes.restaurants}/${restaurantSlug}`} />;
   }
-  return null;
+  return (
+    <>
+      <SettingsMobileSubNavigation
+        selected={selected}
+        setSelected={handleSetSelected}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
+      <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
+        <SettingsWrapper>
+          <SettingsSubMenu
+            selected={selected}
+            setSelected={setSelected}
+            className="hidden lg:block flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 xl:flex xl:flex-col "
+          />
+          <TabContent>{renderSettingsTab()}</TabContent>
+        </SettingsWrapper>
+        {renderMobileFooter()}
+      </SettingsWrapper>
+      <Toaster />
+    </>
+  );
 };
 
 export { SettingsPage };

@@ -7,6 +7,7 @@ import { useRestaurantContext } from "src/contexts";
 
 const CurrentUserAvatar: FC = () => {
   const { restaurantSlug } = useRestaurantContext();
+
   const { data } = useCurrentUserQuery({
     skip: !restaurantSlug,
   });

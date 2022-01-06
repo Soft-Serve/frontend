@@ -1,22 +1,24 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import type { FC } from "react";
-import { Input, Button } from "@base";
+import { Input, Button, PasswordInput } from "@base";
 import { uid, accessToken, clientToken } from "@constants";
-import { LogoSVG } from "@svgs";
 import { useNavigate } from "react-router";
-import { isBasicEmailRegexValid, isEmailAtValid, isEmailDotValid } from "src/utility";
+import { LogoSVG } from "@svgs";
+import { useRestaurantContext } from "@contexts";
+import { isBasicEmailRegexValid, isEmailAtValid, isEmailDotValid } from "@utility";
 import { useViewport } from "@hooks";
 import { useSignInFormMutation } from "./SignInForm.mutation";
 
 const SignInForm: FC = () => {
+  const { themeColour, themeTint } = useRestaurantContext();
   const [isLoginSuccesFull, setIsLoginSuccessFull] = useState(true);
   const { width } = useViewport();
   const navigate = useNavigate();
   const [signIn, { loading }] = useSignInFormMutation({
     onCompleted: completedData => {
-      localStorage.setItem(accessToken, completedData.signIn.access_token);
-      localStorage.setItem(uid, completedData.signIn.uid);
-      localStorage.setItem(clientToken, completedData.signIn.client);
+      localStorage.setItem(accessToken, completedData?.signIn?.access_token);
+      localStorage.setItem(uid, completedData?.signIn?.uid);
+      localStorage.setItem(clientToken, completedData?.signIn?.client);
       navigate(`/restaurants/${completedData?.signIn?.restaurant_slug}`);
       window.location.reload();
     },
@@ -82,16 +84,21 @@ const SignInForm: FC = () => {
 
   const renderCTA = () => {
     if (isSmallerThenTablet)
-      return <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in</h2>;
+      return <h2 className="text-center text-3xl font-extrabold text-gray-900">Sign in</h2>;
     return (
       <>
-        <LogoSVG />
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        <LogoSVG className={`text-${themeColour}-${themeTint}`} />
+        <h2 className="text-center text-3xl font-extrabold text-gray-900">
           Sign in to your account
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Or{" "}
-          <a href="/sign-up" className="font-medium text-red-400 hover:text-red-500">
+          <a
+            href="/sign-up"
+            className={`font-bold text-${themeColour}-${themeTint} hover:text-${themeColour}-${
+              themeTint + 100
+            }`}
+          >
             start your 14-day free trial
           </a>
         </p>
@@ -104,7 +111,7 @@ const SignInForm: FC = () => {
       <div className="sm:mx-auto sm:w-full sm:max-w-md flex justify-center flex-col items-center">
         {renderCTA()}
       </div>
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <Input
@@ -116,13 +123,11 @@ const SignInForm: FC = () => {
               labelText="Email"
               required
             />
-            <Input
+            <PasswordInput
               type="password"
               errors={[renderLoginError()]}
               onChange={handleChange}
-              name="password"
               value={input.password}
-              labelText="Password"
               required
             />
 
