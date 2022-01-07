@@ -4,9 +4,8 @@ import { useGlobalContext, useRestaurantContext } from "src/contexts";
 import { classnames } from "tailwindcss-classnames";
 import { Items, Menus, CategoriesContainer, WelcomePage, MobileSubHeader } from "@presentational";
 import { useRestaurantQuery, useMenusQuery, RESTAURANT_QUERY } from "@shared";
-import { Container, BoxSection, HeroBanner } from "@base";
+import { Container, BoxSection, HeroBanner, LoadingScreen } from "@base";
 
-import { SkeletonRestaurant } from "./SkeletonRestaurant";
 import { useUpdateRestaurantOnboarding } from "./UpdateRestaurantOnboarding.mutation";
 
 const Restaurant: FC = () => {
@@ -37,7 +36,7 @@ const Restaurant: FC = () => {
     ],
   });
 
-  if (loading || menusLoading) return <SkeletonRestaurant />;
+  if (loading || menusLoading) return <LoadingScreen />;
 
   const hideWelcomePage = () => {
     updateRestaurantOnboarding({

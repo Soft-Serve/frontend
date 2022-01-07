@@ -1,18 +1,22 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { ApolloProvider } from "@apollo/client";
-import { LazyLandingPage, Main } from "@views";
+import { Main } from "@views";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { LoadingScreen } from "@base";
 import { routes } from "@routes";
 import { client } from "./client";
 
 const App = () => {
+  const LandingPage = lazy(() => import("./views/LandingPage"));
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Routes>
-          <Route path="/" element={<LazyLandingPage />} />
-          <Route path={`${routes.restaurants}/:id/*`} element={<Main />} />
-        </Routes>
+        <Suspense fallback={<LoadingScreen />}>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path={`${routes.restaurants}/:id/*`} element={<Main />} />
+          </Routes>
+        </Suspense>
       </Router>
     </ApolloProvider>
   );

@@ -1,8 +1,7 @@
 import React, { Suspense, useState, lazy } from "react";
 import type { FC } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Loader from "react-loader-spinner";
-import { Footer } from "@base";
+import { Footer, LoadingScreen } from "@base";
 import { MenuSlideOver, AllergyModal, AllergyFiltersSideMenu, Restaurant } from "@presentational";
 import { MenuPage } from "./MenuPage";
 import { MainNavigation } from "./MainNavigation";
@@ -10,6 +9,9 @@ import { MainMobileHeader } from "./MainMobileHeader";
 import { Providers } from "./Providers";
 
 const Main: FC = () => {
+  const SettingsPage = lazy(() => import("./SettingsPage/DefaultSettingsPage"));
+  const SignInPage = lazy(() => import("./SignInPage/DefaultSignInPage"));
+  const SignUpPage = lazy(() => import("./SignUpPage/DefaultSignUpPage"));
   const { pathname } = useLocation();
   const isOnSettingsPage = pathname.includes("settings");
 
@@ -17,15 +19,6 @@ const Main: FC = () => {
   const [isFiterSideMenuOpen, setIsFilterSideMenuOpen] = useState(false);
   const [isMenuSlideOverOpen, setIsMenuSlideOverOpen] = useState(false);
   const [isSubNavOpen, setIsSubNavOpen] = useState(false);
-  const SettingsPage = lazy(() => import("./SettingsPage/DefaultSettingsPage"));
-  const SignInPage = lazy(() => import("./SignInPage/DefaultSignInPage"));
-  const SignUpPage = lazy(() => import("./SignUpPage/DefaultSignUpPage"));
-
-  const LoadingScreen = (
-    <div className="flex w-screen h-screen justify-center items-center ">
-      <Loader type="MutatingDots" height={130} width={130} />
-    </div>
-  );
 
   const renderFooter = () => {
     if (isOnSettingsPage) return null;
@@ -44,7 +37,7 @@ const Main: FC = () => {
           setIsMenuSlideOverOpen={setIsMenuSlideOverOpen}
           setIsFilterSideMenuOpen={setIsFilterSideMenuOpen}
         >
-          <Suspense fallback={LoadingScreen}>
+          <Suspense fallback={<LoadingScreen />}>
             <Routes>
               <Route path="/" element={<Restaurant />} />
               <Route

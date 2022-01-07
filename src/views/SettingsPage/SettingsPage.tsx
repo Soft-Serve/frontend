@@ -2,11 +2,10 @@ import type { FC } from "react";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Toaster } from "react-hot-toast";
-import Loader from "react-loader-spinner";
 
 import { SettingsSubMenu } from "@presentational";
 import { useViewport } from "@hooks";
-import { Footer, TabContent } from "@base";
+import { Footer, LoadingScreen, TabContent } from "@base";
 import { Navigate } from "react-router-dom";
 import { useCurrentUserQuery } from "@shared";
 import { useRestaurantContext } from "@contexts";
@@ -82,12 +81,7 @@ const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
     return <Footer />;
   };
 
-  if (loading)
-    return (
-      <div className="flex w-screen h-screen justify-center items-center ">
-        <Loader type="MutatingDots" height={130} width={130} />
-      </div>
-    );
+  if (loading) return <LoadingScreen />;
 
   if (!data?.currentUser) {
     return <Navigate to={`${routes.restaurants}/${restaurantSlug}`} />;

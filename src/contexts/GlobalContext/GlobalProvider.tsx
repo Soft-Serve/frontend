@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Loader from "react-loader-spinner";
 import type { FC } from "react";
 import { GlobalContext, useRestaurantContext } from "@contexts";
+import { LoadingScreen } from "@base";
 import { useRestaurantThemeQuery } from "./RestaurantTheme.query";
 
 const GlobalProvider: FC = ({ children }) => {
@@ -25,11 +25,7 @@ const GlobalProvider: FC = ({ children }) => {
   });
 
   if (loading) {
-    return (
-      <div className="flex w-screen h-screen justify-center items-center">
-        <Loader type="MutatingDots" height={120} width={120} />
-      </div>
-    );
+    return <LoadingScreen />;
   }
   return (
     <GlobalContext.Provider

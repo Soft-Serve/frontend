@@ -1,1 +1,1 @@
-export { LazyLandingPage } from "./LazyLandingPage";
+export { LandingPage as default } from "./LandingPage";
