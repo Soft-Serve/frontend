@@ -12,7 +12,7 @@ interface Props {
 }
 
 const MenuSlideOver: FC<Props> = ({ isOpen, onClose }) => {
-  const { themeTint, themeColour, themeFont } = useRestaurantContext();
+  const { themeTint, themeColour, themeFont, restaurantSlug } = useRestaurantContext();
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" static className="fixed inset-0 flex z-40" open={isOpen} onClose={onClose}>
@@ -59,10 +59,16 @@ const MenuSlideOver: FC<Props> = ({ isOpen, onClose }) => {
             </Transition.Child>
             <div className="pt-5 pb-4 h-full">
               <div className="flex-shrink-0 flex items-center px-4">
-                <RestaurantLogo dimensions={60} borderColor="black" borderWidth={1} />
+                <RestaurantLogo
+                  restaurantSlug={restaurantSlug}
+                  dimensions={60}
+                  borderColor="black"
+                  borderWidth={1}
+                />
               </div>
               <nav aria-label="Sidebar" className="mt-5">
                 <MenusMobileNavigation
+                  restaurantSlug={restaurantSlug}
                   themeFont={themeFont}
                   themeColour={themeColour}
                   themeTint={themeTint}

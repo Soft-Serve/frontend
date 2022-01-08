@@ -7,7 +7,6 @@ import { ChevronRightIcon, PencilIcon } from "@heroicons/react/solid";
 
 import { Link } from "react-router-dom";
 import { routes } from "@routes";
-import { useRestaurantContext } from "@contexts";
 
 enum ModalForms {
   UpdateMenu = "updateMenu",
@@ -20,9 +19,16 @@ interface Props {
   loading: boolean;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
-const MenusList: FC<Props> = ({ menus, handleModal, loading, themeColour, themeTint }) => {
-  const { restaurantSlug } = useRestaurantContext();
+const MenusList: FC<Props> = ({
+  menus,
+  handleModal,
+  loading,
+  themeColour,
+  themeTint,
+  restaurantSlug,
+}) => {
   if (loading) {
     return <SkeletonList />;
   }

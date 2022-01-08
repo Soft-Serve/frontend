@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import type { FC } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
-import { useRestaurantContext } from "@contexts";
 import { Category, Item, Menu, useCategoriesQuery, useItemsQuery, useMenusQuery } from "@shared";
 import { Button, Card, CardContent, Grid, Modal, Tab, Tabs, TabWrapper } from "@base";
 import { SearchIcon, PlusCircleIcon } from "@heroicons/react/solid";
@@ -22,10 +21,10 @@ interface Props {
   themeColour: string;
   themeTint: number;
   themeFont: string;
+  restaurantSlug: string;
 }
 
-const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont }) => {
-  const { restaurantSlug } = useRestaurantContext();
+const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurantSlug }) => {
   const params = useGetParams();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,7 +33,6 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont }) => {
     variables: {
       restaurantSlug,
     },
-    skip: !restaurantSlug,
   });
 
   const [activeMenu, setActiveMenu] = useState(menuData?.menus?.[0]);
@@ -100,7 +98,15 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont }) => {
     />
   );
 
-  const addDietary = <AddDietaryForm onCompleted={setIsModalOpen} item={activeItem} />;
+  const addDietary = (
+    <AddDietaryForm
+      restaurantSlug={restaurantSlug}
+      themeColour={themeColour}
+      themeTint={themeTint}
+      onCompleted={setIsModalOpen}
+      item={activeItem}
+    />
+  );
 
   const mapModalForms = {
     deleteItem,

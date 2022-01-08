@@ -6,6 +6,7 @@ import {
   MobileNavigationProfile,
   AllergyLegend,
 } from "@presentational";
+import { useRestaurantContext } from "@contexts";
 
 interface Props {
   isOpen: boolean;
@@ -13,10 +14,23 @@ interface Props {
 }
 
 const AllergyFiltersSideMenu: FC<Props> = ({ isOpen, onClose }) => {
+  const { themeColour, themeTint, themeFont, restaurantSlug } = useRestaurantContext();
+
   return (
-    <MobileNavigation isOpen={isOpen} onClose={onClose}>
-      <MobileNavigationWrapper>
-        <AllergyLegend />
+    <MobileNavigation
+      restaurantSlug={restaurantSlug}
+      themeColour={themeColour}
+      themeTint={themeTint}
+      isOpen={isOpen}
+      onClose={onClose}
+    >
+      <MobileNavigationWrapper themeColour={themeColour} themeTint={themeTint}>
+        <AllergyLegend
+          restaurantSlug={restaurantSlug}
+          themeColour={themeColour}
+          themeFont={themeFont}
+          themeTint={themeTint}
+        />
       </MobileNavigationWrapper>
       <MobileNavigationProfile />
     </MobileNavigation>

@@ -3,7 +3,6 @@ import type { FC } from "react";
 
 import { RadioTile, RadioTiles } from "@base";
 import { SUB_NAVIGATION } from "@constants";
-import { useRestaurantContext } from "@contexts";
 import { Link } from "react-router-dom";
 import { routes } from "@routes";
 
@@ -12,11 +11,17 @@ interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLEleme
   setSelected: any;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
-const SettingsSubMenu: FC<Props> = ({ selected, setSelected, themeTint, themeColour, ...rest }) => {
-  const { restaurantSlug } = useRestaurantContext();
-
+const SettingsSubMenu: FC<Props> = ({
+  selected,
+  restaurantSlug,
+  setSelected,
+  themeTint,
+  themeColour,
+  ...rest
+}) => {
   const capatalize = ([firstLetter, ...restOfWord]: string) =>
     [firstLetter.toUpperCase(), ...restOfWord].join("");
 

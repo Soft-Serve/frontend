@@ -2,11 +2,10 @@ import type { FC } from "react";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Toaster } from "react-hot-toast";
-
 import { SettingsSubMenu } from "@presentational";
+import { Navigate } from "react-router-dom";
 import { useViewport } from "@hooks";
 import { Footer, LoadingScreen, TabContent } from "@base";
-import { Navigate } from "react-router-dom";
 import { useCurrentUserQuery } from "@shared";
 import { useRestaurantContext } from "@contexts";
 import { classnames } from "tailwindcss-classnames";
@@ -37,25 +36,63 @@ interface Props {
 
 const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
   const { id } = useParams<Param>() as Param;
-  const { data, loading } = useCurrentUserQuery();
   const { restaurantSlug, themeColour, themeTint, themeFont } = useRestaurantContext();
+  const { data, loading } = useCurrentUserQuery({
+    skip: !restaurantSlug,
+  });
 
   const { width } = useViewport();
   const [selected, setSelected] = useState(id);
 
-  const restaurant = <RestaurantSettings themeColour={themeColour} themeTint={themeTint} />;
-  const banner = (
-    <BannerSettings themeFont={themeFont} themeColour={themeColour} themeTint={themeTint} />
+  const restaurant = (
+    <RestaurantSettings
+      restaurantSlug={restaurantSlug}
+      themeColour={themeColour}
+      themeTint={themeTint}
+    />
   );
-  const users = <UsersSettings themeColour={themeColour} themeTint={themeTint} />;
-  const menus = <MenuSettings themeColour={themeColour} themeTint={themeTint} />;
-  const dietaries = <AllergiesSettings themeColour={themeColour} themeTint={themeTint} />;
+  const banner = (
+    <BannerSettings
+      restaurantSlug={restaurantSlug}
+      themeFont={themeFont}
+      themeColour={themeColour}
+      themeTint={themeTint}
+    />
+  );
+  const users = (
+    <UsersSettings
+      restaurantSlug={restaurantSlug}
+      themeColour={themeColour}
+      themeTint={themeTint}
+    />
+  );
+  const menus = (
+    <MenuSettings restaurantSlug={restaurantSlug} themeColour={themeColour} themeTint={themeTint} />
+  );
+  const dietaries = (
+    <AllergiesSettings
+      restaurantSlug={restaurantSlug}
+      themeColour={themeColour}
+      themeTint={themeTint}
+    />
+  );
   const items = (
-    <ItemSettings themeFont={themeFont} themeColour={themeColour} themeTint={themeTint} />
+    <ItemSettings
+      restaurantSlug={restaurantSlug}
+      themeFont={themeFont}
+      themeColour={themeColour}
+      themeTint={themeTint}
+    />
   );
   const account = <AccountSettings themeColour={themeColour} themeTint={themeTint} />;
   const billing = <BillingSettings />;
-  const categories = <CategorySettings themeColour={themeColour} themeTint={themeTint} />;
+  const categories = (
+    <CategorySettings
+      restaurantSlug={restaurantSlug}
+      themeColour={themeColour}
+      themeTint={themeTint}
+    />
+  );
 
   const SettingsMap = {
     restaurant,
@@ -93,6 +130,7 @@ const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
   return (
     <>
       <SettingsMobileSubNavigation
+        restaurantSlug={restaurantSlug}
         themeColour={themeColour}
         themeTint={themeTint}
         selected={selected}
@@ -103,6 +141,7 @@ const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
       <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
         <SettingsWrapper>
           <SettingsSubMenu
+            restaurantSlug={restaurantSlug}
             themeColour={themeColour}
             themeTint={themeTint}
             selected={selected}

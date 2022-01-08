@@ -3,14 +3,13 @@ import type { FC } from "react";
 import { useCurrentUserQuery } from "@shared";
 import { routes } from "src/routes";
 import { Link } from "react-router-dom";
-import { useRestaurantContext } from "src/contexts";
 
-const CurrentUserAvatar: FC = () => {
-  const { restaurantSlug } = useRestaurantContext();
+interface Props {
+  restaurantSlug: string;
+}
 
-  const { data } = useCurrentUserQuery({
-    skip: !restaurantSlug,
-  });
+const CurrentUserAvatar: FC<Props> = ({ restaurantSlug }) => {
+  const { data } = useCurrentUserQuery();
 
   return (
     <div className="flex-shrink-0 flex border-t border-blue-gray-200 p-4">

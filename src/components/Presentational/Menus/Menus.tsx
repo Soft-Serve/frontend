@@ -2,7 +2,7 @@ import React from "react";
 import type { FC } from "react";
 import { Tab, Tabs, Container, BoxSection, Button } from "@base";
 import { FullLogoSVG } from "@svgs";
-import { useGlobalContext, useRestaurantContext } from "src/contexts";
+import { useGlobalContext } from "src/contexts";
 import { useMenusQuery } from "@shared";
 import { routes } from "src/routes";
 import Skeleton from "react-loading-skeleton";
@@ -12,17 +12,16 @@ interface Props {
   themeFont: string;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
-const Menus: FC<Props> = ({ themeFont, themeColour, themeTint }) => {
+const Menus: FC<Props> = ({ themeFont, themeColour, themeTint, restaurantSlug }) => {
   const navigate = useNavigate();
   const { setMenuID, setActiveMenu, menuID } = useGlobalContext();
-  const { restaurantSlug } = useRestaurantContext();
 
   const { data, error, loading } = useMenusQuery({
     variables: {
       restaurantSlug,
     },
-    skip: !restaurantSlug,
     onCompleted: completedData => {
       if (completedData?.menus?.length > 0) {
         setMenuID(completedData.menus[0].id);

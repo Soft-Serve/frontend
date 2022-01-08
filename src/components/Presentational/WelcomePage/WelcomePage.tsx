@@ -10,6 +10,7 @@ interface Props {
   hideWelcomePage: () => void;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
 const WelcomePage: FC<Props> = ({
@@ -19,6 +20,7 @@ const WelcomePage: FC<Props> = ({
   hideWelcomePage,
   themeColour,
   themeTint,
+  restaurantSlug,
 }) => {
   return (
     <div className="flex-column">
@@ -31,7 +33,14 @@ const WelcomePage: FC<Props> = ({
         To start building your virtual menu follow the steps below:
       </h3>
       <div className="p-20 flex justify-center">
-        <Steps hasMenus={hasMenus} hasItems={hasItems} hasStyles={hasStyles} />
+        <Steps
+          restaurantSlug={restaurantSlug}
+          themeColour={themeColour}
+          themeTint={themeTint}
+          hasMenus={hasMenus}
+          hasItems={hasItems}
+          hasStyles={hasStyles}
+        />
       </div>
       <div className="p-20 flex justify-center">
         <Button themeColour={themeColour} themeTint={themeTint} size="XL" onClick={hideWelcomePage}>

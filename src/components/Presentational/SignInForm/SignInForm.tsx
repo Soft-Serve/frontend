@@ -22,7 +22,6 @@ const SignInForm: FC<Props> = ({ themeColour, themeTint }) => {
       localStorage.setItem(uid, completedData?.signIn?.uid);
       localStorage.setItem(clientToken, completedData?.signIn?.client);
       navigate(`/restaurants/${completedData?.signIn?.restaurant_slug}`);
-      window.location.reload();
     },
 
     onError: () => setIsLoginSuccessFull(false),
@@ -128,6 +127,8 @@ const SignInForm: FC<Props> = ({ themeColour, themeTint }) => {
               required
             />
             <PasswordInput
+              themeColour={themeColour}
+              themeTint={themeTint}
               type="password"
               errors={[renderLoginError()]}
               onChange={handleChange}

@@ -7,9 +7,10 @@ import { useViewport } from "@hooks";
 interface Props {
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
-const CreateNewUserForm: FC<Props> = ({ themeTint, themeColour }) => {
+const CreateNewUserForm: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => {
   const { width } = useViewport();
   const isSmallerThenTablet = width < 500;
 
@@ -32,7 +33,11 @@ const CreateNewUserForm: FC<Props> = ({ themeTint, themeColour }) => {
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <PostNewUserForm themeColour={themeColour} themeTint={themeTint} />
+          <PostNewUserForm
+            restaurantSlug={restaurantSlug}
+            themeColour={themeColour}
+            themeTint={themeTint}
+          />
         </div>
       </div>
     </>

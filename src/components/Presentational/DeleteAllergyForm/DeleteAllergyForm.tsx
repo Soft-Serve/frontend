@@ -2,7 +2,6 @@ import React, { FormEvent } from "react";
 import type { FC } from "react";
 import { ALLERGIES_QUERY, Allergy } from "@shared";
 import type { AllergyData } from "@shared";
-import { useRestaurantContext } from "@contexts";
 import { Button, Column, Columns } from "@base";
 
 import { XIcon } from "@heroicons/react/solid";
@@ -13,11 +12,16 @@ interface Props {
   themeTint: number;
   onCompleted?: (state: boolean) => void;
   selectedAllergy: Allergy;
+  restaurantSlug: string;
 }
 
-const DeleteAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy, themeColour, themeTint }) => {
-  const { restaurantSlug } = useRestaurantContext();
-
+const DeleteAllergyForm: FC<Props> = ({
+  onCompleted,
+  selectedAllergy,
+  themeColour,
+  themeTint,
+  restaurantSlug,
+}) => {
   const [deleteAllergy] = useDeleteAllergyMutation({
     onCompleted: () => onCompleted?.(false),
     update(cache, { data: deletedAllergyData }) {

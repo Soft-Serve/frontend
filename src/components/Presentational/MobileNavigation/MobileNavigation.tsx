@@ -4,14 +4,22 @@ import { Dialog, Transition } from "@headlessui/react";
 import { RestaurantLogo } from "@presentational";
 import { XIcon } from "@heroicons/react/solid";
 import { Button } from "@base";
-import { useRestaurantContext } from "@contexts";
 
 interface Props {
   isOpen: boolean;
   onClose: any;
+  themeColour: string;
+  themeTint: number;
+  restaurantSlug: string;
 }
-const MobileNavigation: FC<Props> = ({ isOpen, onClose, children }) => {
-  const { themeColour, themeTint } = useRestaurantContext();
+const MobileNavigation: FC<Props> = ({
+  isOpen,
+  onClose,
+  children,
+  themeTint,
+  themeColour,
+  restaurantSlug,
+}) => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -69,7 +77,12 @@ const MobileNavigation: FC<Props> = ({ isOpen, onClose, children }) => {
               <div
                 className={`flex-shrink-0 flex items-center px-4 bg-${themeColour}-${themeTint} pt-4 pb-4`}
               >
-                <RestaurantLogo dimensions={60} borderColor="white" borderWidth={2} />
+                <RestaurantLogo
+                  restaurantSlug={restaurantSlug}
+                  dimensions={60}
+                  borderColor="white"
+                  borderWidth={2}
+                />
               </div>
               <nav aria-label="Sidebar" className="h-full">
                 {children}

@@ -5,7 +5,6 @@ import { MENUS_QUERY, Menu } from "@shared";
 import type { MenusData } from "@shared";
 import { XIcon } from "@heroicons/react/solid";
 import toast from "react-hot-toast";
-import { useRestaurantContext } from "src/contexts";
 import { useDeleteMenuMutation } from "./DeleteForm.mutation";
 
 interface Props {
@@ -13,10 +12,16 @@ interface Props {
   selectedMenu?: Menu;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
-const DeleteMenuForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, themeTint }) => {
-  const { restaurantSlug } = useRestaurantContext();
+const DeleteMenuForm: FC<Props> = ({
+  onCompleted,
+  selectedMenu,
+  themeColour,
+  themeTint,
+  restaurantSlug,
+}) => {
   const onSuccess = () => toast.custom(<Notification header="Menu succesfully deleted!" />);
 
   const [deleteMenu, { loading }] = useDeleteMenuMutation({

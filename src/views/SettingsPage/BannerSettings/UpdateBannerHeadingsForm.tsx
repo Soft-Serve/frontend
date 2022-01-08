@@ -3,7 +3,6 @@ import type { FC, ChangeEvent } from "react";
 import { Button, Input } from "@base";
 import { useViewport } from "@hooks";
 import { BANNERS_QUERY } from "@shared";
-import { useRestaurantContext } from "@contexts";
 import { useUpdateBannerHeaders } from "./UpdateBannerHeadings.mutation";
 
 interface Props {
@@ -13,6 +12,7 @@ interface Props {
   restaurantId?: number;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
 type StateMap = {
@@ -20,6 +20,7 @@ type StateMap = {
 };
 
 const UpdateBannerHeadingsForm: FC<Props> = ({
+  restaurantSlug,
   header,
   subHeader,
   id,
@@ -29,7 +30,6 @@ const UpdateBannerHeadingsForm: FC<Props> = ({
 }) => {
   const { width } = useViewport();
   const [updateBannerHeaders] = useUpdateBannerHeaders();
-  const { restaurantSlug } = useRestaurantContext();
 
   const isTablet = width < 550;
   const bannerHeadings = {

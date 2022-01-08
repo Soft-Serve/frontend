@@ -2,16 +2,22 @@ import React from "react";
 import type { FC } from "react";
 import { Button } from "@base";
 import { Item, useAllergiesQuery, useDietaryQuery } from "@shared";
-import { useRestaurantContext } from "@contexts";
 
 interface Props {
   item?: Item;
   onCompleted?: (state: boolean) => void;
+  themeColour: string;
+  themeTint: number;
+  restaurantSlug: string;
 }
 
-const AddDietaryForm: FC<Props> = ({ item, onCompleted }) => {
-  const { restaurantSlug, themeColour, themeTint } = useRestaurantContext();
-
+const AddDietaryForm: FC<Props> = ({
+  item,
+  onCompleted,
+  themeColour,
+  themeTint,
+  restaurantSlug,
+}) => {
   const { data: itemDietariesData } = useDietaryQuery({
     variables: {
       itemID: item?.id || 0,

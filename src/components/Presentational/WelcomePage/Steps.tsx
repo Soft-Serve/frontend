@@ -1,6 +1,5 @@
 import React from "react";
 import type { FC } from "react";
-import { useRestaurantContext } from "src/contexts";
 
 import { CheckIcon } from "@heroicons/react/solid";
 import { routes } from "src/routes";
@@ -17,11 +16,19 @@ interface Props {
   hasMenus: boolean;
   hasItems: boolean;
   hasStyles: boolean;
+  themeColour: string;
+  themeTint: number;
+  restaurantSlug: string;
 }
 
-const Steps: FC<Props> = ({ hasMenus, hasItems, hasStyles }) => {
-  const { themeColour, themeTint, restaurantSlug } = useRestaurantContext();
-
+const Steps: FC<Props> = ({
+  hasMenus,
+  hasItems,
+  hasStyles,
+  themeTint,
+  themeColour,
+  restaurantSlug,
+}) => {
   const itemStatus = () => {
     if (!hasMenus) return "upcoming";
 

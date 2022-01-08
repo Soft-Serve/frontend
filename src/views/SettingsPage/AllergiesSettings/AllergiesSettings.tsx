@@ -10,8 +10,9 @@ import { SettingsHeader } from "../SettingsHeader";
 interface Props {
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
-const AllergiesSettings: FC<Props> = ({ themeTint, themeColour }) => {
+const AllergiesSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => {
   const [isPostModalOpen, setIsPostModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
@@ -40,6 +41,7 @@ const AllergiesSettings: FC<Props> = ({ themeTint, themeColour }) => {
     <TabWrapper>
       <Modal isOpen={isPostModalOpen} onClose={setIsPostModalOpen}>
         <PostAllergyForm
+          restaurantSlug={restaurantSlug}
           themeColour={themeColour}
           themeTint={themeTint}
           onCompleted={setIsPostModalOpen}
@@ -48,6 +50,7 @@ const AllergiesSettings: FC<Props> = ({ themeTint, themeColour }) => {
 
       <Modal isOpen={isDeleteModalOpen} onClose={setIsDeleteModalOpen}>
         <DeleteAllergyForm
+          restaurantSlug={restaurantSlug}
           themeColour={themeColour}
           themeTint={themeTint}
           onCompleted={setIsDeleteModalOpen}
@@ -57,6 +60,7 @@ const AllergiesSettings: FC<Props> = ({ themeTint, themeColour }) => {
 
       <Modal isOpen={isUpdateModalOpen} onClose={setIsUpdateModalOpen}>
         <UpdateAllergyForm
+          restaurantSlug={restaurantSlug}
           themeColour={themeColour}
           themeTint={themeTint}
           onCompleted={setIsUpdateModalOpen}
@@ -80,6 +84,7 @@ const AllergiesSettings: FC<Props> = ({ themeTint, themeColour }) => {
         </CardContent>
       </Card>
       <AllergiesList
+        restaurantSlug={restaurantSlug}
         themeColour={themeColour}
         themeTint={themeTint}
         handleDeleteItem={handleDeleteItem}

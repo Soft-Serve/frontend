@@ -2,14 +2,14 @@ import React from "react";
 import type { FC } from "react";
 import { Menu } from "@headlessui/react";
 import { classnames, TArg } from "tailwindcss-classnames";
-import { useRestaurantContext } from "src/contexts";
 
 interface Props {
   onClick?: any;
+  themeColour: string;
+  themeTint: number;
 }
 
-const KebabDropdownItem: FC<Props> = ({ children, onClick }) => {
-  const { themeColour, themeTint } = useRestaurantContext();
+const KebabDropdownItem: FC<Props> = ({ children, onClick, themeColour, themeTint }) => {
   const aciveFontColor = `text-${themeColour}-${themeTint}` as TArg;
   const activeStyles = classnames(
     "bg-white",

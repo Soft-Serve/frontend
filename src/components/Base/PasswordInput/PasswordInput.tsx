@@ -1,12 +1,13 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes, ReactNode, useState } from "react";
 import { classnames, TArg } from "tailwindcss-classnames";
 import type { FC } from "react";
-import { useRestaurantContext } from "@contexts";
 
 interface Props extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   labelText?: string;
   errors?: ReactNode[];
   css?: TArg;
+  themeColour: string;
+  themeTint: number;
 }
 
 const PasswordInput: FC<Props> = ({
@@ -19,6 +20,8 @@ const PasswordInput: FC<Props> = ({
   disabled,
   css,
   required,
+  themeTint,
+  themeColour,
   autoComplete = "off",
   ...rest
 }) => {
@@ -31,8 +34,6 @@ const PasswordInput: FC<Props> = ({
   const renderErrorMessages = () => {
     return errors?.slice(0, 2).map(error => <p key={`error-item-${error}`}>{error}</p>);
   };
-
-  const { themeColour, themeTint } = useRestaurantContext();
 
   return (
     <div>

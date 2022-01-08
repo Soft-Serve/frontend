@@ -178,6 +178,8 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, theme
       </div>
       <form noValidate onSubmit={handleSubmit} className="mt-4 flex flex-col">
         <Dropdown
+          themeColour={themeColour}
+          themeTint={themeTint}
           required
           label="Category"
           defaultValue="Select category"

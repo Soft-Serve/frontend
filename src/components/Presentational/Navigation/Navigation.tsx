@@ -1,10 +1,13 @@
 import React from "react";
 import type { FC } from "react";
 import { RestaurantLogo } from "@presentational";
-import { useRestaurantContext } from "@contexts";
 
-const Navigation: FC = ({ children }) => {
-  const { themeColour, themeTint } = useRestaurantContext();
+interface Props {
+  themeColour: string;
+  themeTint: number;
+  restaurantSlug: string;
+}
+const Navigation: FC<Props> = ({ children, themeTint, themeColour, restaurantSlug }) => {
   return (
     <div className="hidden lg:flex lg:flex-shrink-0">
       <div className="flex flex-col">
@@ -13,7 +16,7 @@ const Navigation: FC = ({ children }) => {
             <div
               className={`"flex-shrink-0 bg-${themeColour}-${themeTint} py-4 flex items-center justify-center w-44`}
             >
-              <RestaurantLogo dimensions={70} />
+              <RestaurantLogo restaurantSlug={restaurantSlug} dimensions={70} />
             </div>
             <nav aria-label="Sidebar" className="py-6 flex flex-col items-center">
               {children}

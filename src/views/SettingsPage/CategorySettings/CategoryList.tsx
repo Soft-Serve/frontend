@@ -5,7 +5,6 @@ import { Button, Card, CardContent, List, ListItem, SkeletonList } from "@base";
 import { Category, Menu } from "@shared";
 import { DeleteSVG } from "@svgs";
 import { routes } from "@routes";
-import { useRestaurantContext } from "@contexts";
 import { ChevronRightIcon, PencilIcon } from "@heroicons/react/solid";
 
 enum ModalForms {
@@ -20,6 +19,7 @@ interface Props {
   loading: boolean;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 const CategoryList: FC<Props> = ({
   categories,
@@ -27,10 +27,9 @@ const CategoryList: FC<Props> = ({
   loading,
   activeMenu,
   themeColour,
+  restaurantSlug,
   themeTint,
 }) => {
-  const { restaurantSlug } = useRestaurantContext();
-
   if (loading) {
     return <SkeletonList />;
   }

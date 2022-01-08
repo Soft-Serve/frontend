@@ -12,6 +12,7 @@ interface Props {
   setSelected: any;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
 const SettingsMobileSubNavigation: FC<Props> = ({
@@ -21,6 +22,7 @@ const SettingsMobileSubNavigation: FC<Props> = ({
   setSelected,
   themeColour,
   themeTint,
+  restaurantSlug,
 }) => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -73,6 +75,7 @@ const SettingsMobileSubNavigation: FC<Props> = ({
               </div>
             </Transition.Child>
             <SettingsSubMenu
+              restaurantSlug={restaurantSlug}
               themeColour={themeColour}
               themeTint={themeTint}
               selected={selected}

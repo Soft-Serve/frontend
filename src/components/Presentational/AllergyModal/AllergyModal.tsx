@@ -10,13 +10,18 @@ interface Props {
   isOpen: boolean;
 }
 const AllergyModal: FC<Props> = ({ setIsFilterSideMenuOpen, isOpen }) => {
-  const { themeColour, themeTint } = useRestaurantContext();
+  const { themeColour, themeTint, themeFont, restaurantSlug } = useRestaurantContext();
 
   const bgColour = `bg-${themeColour}-${themeTint}` as TArg;
 
   return (
     <Modal css={bgColour} onClose={setIsFilterSideMenuOpen} isOpen={isOpen}>
-      <AllergyLegend />
+      <AllergyLegend
+        restaurantSlug={restaurantSlug}
+        themeColour={themeColour}
+        themeFont={themeFont}
+        themeTint={themeTint}
+      />
       <Button
         themeColour={themeColour}
         themeTint={themeTint}

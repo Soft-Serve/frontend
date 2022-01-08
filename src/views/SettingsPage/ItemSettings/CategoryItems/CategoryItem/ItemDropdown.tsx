@@ -19,9 +19,15 @@ const ItemDropdown: FC<Props> = ({
 }) => {
   return (
     <KebabDropdown themeColour={themeColour} themeTint={themeTint}>
-      <KebabDropdownItem onClick={handleUpdate}>Edit Item</KebabDropdownItem>
-      <KebabDropdownItem onClick={handleDelete}>Delete Item</KebabDropdownItem>
-      <KebabDropdownItem onClick={handleAllergies}>Add Dietary</KebabDropdownItem>
+      <KebabDropdownItem themeColour={themeColour} themeTint={themeTint} onClick={handleUpdate}>
+        Edit Item
+      </KebabDropdownItem>
+      <KebabDropdownItem themeColour={themeColour} themeTint={themeTint} onClick={handleDelete}>
+        Delete Item
+      </KebabDropdownItem>
+      <KebabDropdownItem themeColour={themeColour} themeTint={themeTint} onClick={handleAllergies}>
+        Add Dietary
+      </KebabDropdownItem>
     </KebabDropdown>
   );
 };

@@ -8,8 +8,9 @@ import { SettingsHeader } from "../SettingsHeader";
 interface Props {
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
-const UsersSettings: FC<Props> = ({ themeTint, themeColour }) => {
+const UsersSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handlePostItem = () => {
@@ -34,6 +35,7 @@ const UsersSettings: FC<Props> = ({ themeTint, themeColour }) => {
             </Button>
           </div>
           <PostNewUserForm
+            restaurantSlug={restaurantSlug}
             themeColour={themeColour}
             themeTint={themeTint}
             setIsModalOpen={setIsModalOpen}
@@ -57,7 +59,7 @@ const UsersSettings: FC<Props> = ({ themeTint, themeColour }) => {
       </Card>
       <div className="w-full mt-10">
         <div className="mt-5 md:mt-0 md:col-span-2">
-          <UsersList />
+          <UsersList restaurantSlug={restaurantSlug} />
         </div>
       </div>
     </TabWrapper>

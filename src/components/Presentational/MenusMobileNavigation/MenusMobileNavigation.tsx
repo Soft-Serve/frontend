@@ -2,7 +2,7 @@ import React from "react";
 import type { FC } from "react";
 
 import { RadioTile, RadioTiles } from "@base";
-import { useGlobalContext, useRestaurantContext } from "src/contexts";
+import { useGlobalContext } from "src/contexts";
 import { useMenusQuery } from "src/shared";
 
 interface Props {
@@ -10,22 +10,22 @@ interface Props {
   themeColour: string;
   themeTint: number;
   themeFont: string;
+  restaurantSlug: string;
 }
 const MenusMobileNavigation: FC<Props> = ({
   themeColour,
   themeTint,
   themeFont,
   closeMenu,
+  restaurantSlug,
   ...rest
 }) => {
-  const { restaurantSlug } = useRestaurantContext();
   const { setMenuID, menuID } = useGlobalContext();
 
   const { data } = useMenusQuery({
     variables: {
       restaurantSlug,
     },
-    skip: !restaurantSlug,
   });
 
   const isActiveMenu = data?.menus?.find(menu => menu.id === menuID);

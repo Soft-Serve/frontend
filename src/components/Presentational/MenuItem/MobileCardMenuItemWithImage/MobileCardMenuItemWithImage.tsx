@@ -48,6 +48,8 @@ const MobileCardMenuItemWithImage: FC<Props> = ({ item, themeTint, themeColour, 
           photoUrl={item?.photo}
         />
         <Dietaries
+          themeColour={themeColour}
+          themeTint={themeTint}
           css={classnames("justify-end", "absolute", "top-0", "left-0")}
           itemAvailable={item.available}
           itemID={item.id}

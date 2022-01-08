@@ -1,14 +1,17 @@
 import React, { FC } from "react";
 import { BreadCrumbsNavigation, DietarySvg, Toggle } from "@base";
-import { useAllergyContext, useRestaurantContext } from "@contexts";
+import { useAllergyContext } from "@contexts";
 import { Allergy, useAllergiesQuery } from "@shared";
 import { ACTION_TYPES } from "src/contexts/AllergyContext/types";
 import Skeleton from "react-loading-skeleton";
 
-const AllergyLegend: FC = () => {
-  const { themeColour, themeTint, themeFont } = useRestaurantContext();
-  const { restaurantSlug } = useRestaurantContext();
-
+interface Props {
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
+  restaurantSlug: string;
+}
+const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restaurantSlug }) => {
   const { dispatch, activeAllergies } = useAllergyContext();
 
   const isAllergyActive = (currentAllergy: Allergy) =>
@@ -25,7 +28,6 @@ const AllergyLegend: FC = () => {
       restaurantSlug,
       active: true,
     },
-    skip: !restaurantSlug,
   });
 
   const renderAllergies = () => {

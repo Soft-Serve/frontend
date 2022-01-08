@@ -13,7 +13,6 @@ import {
   isPasswordSixChar,
 } from "@utility";
 import { useNavigate } from "react-router-dom";
-import { useRestaurantContext } from "@contexts";
 import { useCurrentUserQuery, USERS_QUERY } from "@shared";
 import { useSignUpFormMutation } from "../SignUpForm/SignUpForm.mutation";
 
@@ -21,11 +20,11 @@ interface Props {
   setIsModalOpen?: (state: boolean) => void;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
-const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint }) => {
+const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, restaurantSlug }) => {
   const navigate = useNavigate();
-  const { restaurantSlug } = useRestaurantContext();
   const [input, setInput] = useState({
     first_name: "",
     last_name: "",

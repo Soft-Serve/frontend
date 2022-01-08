@@ -193,7 +193,7 @@ const MainMobileHeader: FC<Props> = ({
           className={`bg-${themeColour}-${themeTint} py-2 flex items-center justify-between sm:px-6`}
         >
           <div className="items-center sm:flex hidden">
-            <RestaurantLogo dimensions={50} />
+            <RestaurantLogo restaurantSlug={restaurantSlug} dimensions={50} />
           </div>
           <div className="flex items-center justify-end w-full ml-2">
             {renderDietaryButton()}

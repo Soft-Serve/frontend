@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import type { FC } from "react";
 import { Button, Card, CardContent, Modal, Tab, Tabs, TabWrapper } from "@base";
-import { useRestaurantContext } from "src/contexts";
 import { useCategoriesQuery, useMenusQuery, Category } from "@shared";
 import {
   UpdateCategoryForm,
@@ -23,16 +22,14 @@ enum ModalForms {
 interface Props {
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
-const CategorySettings: FC<Props> = ({ themeTint, themeColour }) => {
-  const { restaurantSlug } = useRestaurantContext();
-
+const CategorySettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => {
   const { data, loading: menusLoading } = useMenusQuery({
     variables: {
       restaurantSlug,
     },
-    skip: !restaurantSlug,
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -147,6 +144,7 @@ const CategorySettings: FC<Props> = ({ themeTint, themeColour }) => {
       </Card>
       {renderMenusTabs()}
       <CategoryList
+        restaurantSlug={restaurantSlug}
         themeColour={themeColour}
         themeTint={themeTint}
         activeMenu={activeMenu}

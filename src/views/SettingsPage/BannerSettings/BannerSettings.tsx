@@ -6,7 +6,6 @@ import { useBannersQuery, useRestaurantQuery } from "@shared";
 import { Card, CardContent, HeroBanner, TabWrapper, UploadImageBox } from "@base";
 import { classnames } from "tailwindcss-classnames";
 import { useUploadPhoto } from "@hooks";
-import { useRestaurantContext } from "@contexts";
 import { SettingsHeader } from "../SettingsHeader";
 import { UpdateBannerHeadingsForm } from "./UpdateBannerHeadingsForm";
 import { SkeletonBannerSettings } from "./SkeletonBannerSettings";
@@ -15,14 +14,13 @@ interface Props {
   themeColour: string;
   themeTint: number;
   themeFont: string;
+  restaurantSlug: string;
 }
-const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont }) => {
-  const { restaurantSlug } = useRestaurantContext();
+const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug }) => {
   const { data, loading } = useBannersQuery({
     variables: {
       restaurantSlug,
     },
-    skip: !restaurantSlug,
   });
 
   const { data: restaurantData, loading: restaurantLoading } = useRestaurantQuery({
@@ -42,11 +40,16 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont }) => {
         </CardContent>
       </Card>
       <Card>
-        <HeroBanner themeColour={themeColour} themeFont={themeFont} />
+        <HeroBanner
+          restaurantSlug={restaurantSlug}
+          themeColour={themeColour}
+          themeFont={themeFont}
+        />
       </Card>
 
       <Card css={classnames("flex-col", "mt-4")}>
         <UpdateBannerHeadingsForm
+          restaurantSlug={restaurantSlug}
           themeColour={themeColour}
           themeTint={themeTint}
           restaurantId={restaurantData?.restaurant?.id}

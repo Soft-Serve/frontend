@@ -47,7 +47,12 @@ const CardMenuItemWithoutImage: FC<Props> = ({ item, themeFont, themeColour, the
           <div>
             <div className="flex items-center justify-between py-2">
               <p className={`font-bold font-${themeFont} truncate`}>{item?.name}</p>
-              <Dietaries itemAvailable={item.available} itemID={item.id} />
+              <Dietaries
+                themeColour={themeColour}
+                themeTint={themeTint}
+                itemAvailable={item.available}
+                itemID={item.id}
+              />
             </div>
             <p
               className={`font-${themeFont} italic text-gray-600  text-sm break-words text-ellipsis overflow-hidden`}

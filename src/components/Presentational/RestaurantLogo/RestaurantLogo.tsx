@@ -1,7 +1,6 @@
 import React from "react";
 import type { FC } from "react";
 import { FullLogoSVG } from "@svgs";
-import { useRestaurantContext } from "@contexts";
 import { useRestaurantQuery } from "@shared";
 import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/base";
@@ -14,15 +13,19 @@ interface Props {
   dimensions: number;
   borderColor?: string;
   borderWidth?: number;
+  restaurantSlug: string;
 }
 
-const RestaurantLogo: FC<Props> = ({ dimensions, borderColor = "white", borderWidth = 3 }) => {
-  const { restaurantSlug } = useRestaurantContext();
+const RestaurantLogo: FC<Props> = ({
+  dimensions,
+  borderColor = "white",
+  borderWidth = 3,
+  restaurantSlug,
+}) => {
   const { data: restaurantData } = useRestaurantQuery({
     variables: {
       restaurantSlug,
     },
-    skip: !restaurantSlug,
   });
   const cld = new Cloudinary({
     cloud: {

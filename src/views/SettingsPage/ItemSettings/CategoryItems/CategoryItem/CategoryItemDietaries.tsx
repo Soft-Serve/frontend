@@ -2,16 +2,24 @@ import React from "react";
 import { TArg } from "tailwindcss-classnames";
 import type { FC } from "react";
 import { useDietaryQuery } from "@shared";
-import { useRestaurantContext } from "@contexts";
 import { DietarySvg } from "@base";
 
 interface Props {
   itemID: number;
   itemAvailable?: boolean;
   css?: TArg;
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
 }
-const CategoryItemDietaries: FC<Props> = ({ itemID, itemAvailable, css }) => {
-  const { themeColour, themeTint, themeFont } = useRestaurantContext();
+const CategoryItemDietaries: FC<Props> = ({
+  itemID,
+  itemAvailable,
+  css,
+  themeColour,
+  themeTint,
+  themeFont,
+}) => {
   const { data } = useDietaryQuery({
     variables: {
       itemID,

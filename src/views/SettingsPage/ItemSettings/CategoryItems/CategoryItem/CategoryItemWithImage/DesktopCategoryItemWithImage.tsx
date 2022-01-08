@@ -79,7 +79,12 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
           <p className="font-Quicksand italic text-gray-600 mt-2 text-sm break-words text-ellipsis overflow-hidden">
             {item.available ? item.description : "** Temporarily unavailable  **"}
           </p>
-          <CategoryItemDietaries itemID={item?.id} />
+          <CategoryItemDietaries
+            themeFont={themeFont}
+            themeColour={themeColour}
+            themeTint={themeTint}
+            itemID={item?.id}
+          />
         </div>
         <ItemPrice
           themeFont={themeFont}

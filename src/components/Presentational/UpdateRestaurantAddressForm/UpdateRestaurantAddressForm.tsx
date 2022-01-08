@@ -4,7 +4,6 @@ import type { FC } from "react";
 import { Button, Grid, Input, Notification } from "@base";
 import { RESTAURANT_QUERY } from "@shared";
 import { useViewport } from "@hooks";
-import { useRestaurantContext } from "@contexts";
 import { useUpdateRestaurantAddress } from "./UpdateRestaurantAddress.mutation";
 
 interface Props {
@@ -17,6 +16,7 @@ interface Props {
   province: string;
   postalCode: string;
   id: number;
+  restaurantSlug: string;
 }
 
 type StateMap = {
@@ -31,6 +31,7 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
   province,
   postalCode,
   themeColour,
+  restaurantSlug,
   themeTint,
   id,
 }) => {
@@ -44,7 +45,6 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
   } as StateMap;
 
   const [input, setInput] = useState(address);
-  const { restaurantSlug } = useRestaurantContext();
   const { width } = useViewport();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

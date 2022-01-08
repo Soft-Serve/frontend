@@ -8,8 +8,10 @@ import { useCurrentUserQuery } from "@shared";
 import { MenuPage } from "../MenuPage";
 
 const SignInPage: FC = () => {
-  const { data, loading } = useCurrentUserQuery();
-  const { themeTint, themeColour } = useRestaurantContext();
+  const { themeTint, themeColour, restaurantSlug } = useRestaurantContext();
+  const { data, loading } = useCurrentUserQuery({
+    skip: !restaurantSlug,
+  });
 
   if (loading) return <LoadingScreen />;
 

@@ -4,7 +4,6 @@ import { Button, Modal, Notification } from "@base";
 import toast from "react-hot-toast";
 
 import { ColourPicker } from "@presentational";
-import { useRestaurantContext } from "@contexts";
 import { RESTAURANT_QUERY } from "@shared";
 import { useViewport } from "@hooks";
 import { useUpdateRestaurantTheme } from "./UpdateRestautantTheme.mutation";
@@ -12,8 +11,11 @@ import { useUpdateRestaurantTheme } from "./UpdateRestautantTheme.mutation";
 interface Props {
   id: number;
   logo: string;
+  themeColour: string;
+  themeTint: number;
   restaurantName: string;
   restaurantThemeColour: string;
+  restaurantSlug: string;
   restaurantThemeTint: number;
 }
 
@@ -21,9 +23,11 @@ const UpdateRestaurantThemeForm: FC<Props> = ({
   id,
   restaurantThemeColour,
   restaurantThemeTint,
+  themeColour,
+  themeTint,
+  restaurantSlug,
 }) => {
   const [isColourModalOpen, setIsColourModalOpen] = useState(false);
-  const { themeColour, themeTint, restaurantSlug } = useRestaurantContext();
   const { width } = useViewport();
   const onSuccess = () => toast.custom(<Notification header="Theme succesfully updated!" />);
 

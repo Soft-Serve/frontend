@@ -1,6 +1,5 @@
 import React from "react";
 import type { FC } from "react";
-import { useRestaurantContext } from "src/contexts";
 import { useAllergiesQuery } from "@shared";
 import Skeleton from "react-loading-skeleton";
 import { Button, Card, CardContent, List, ListItem } from "@base";
@@ -12,6 +11,7 @@ interface Props {
   handleDeleteItem: any;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
 const AllergiesList: FC<Props> = ({
@@ -19,9 +19,8 @@ const AllergiesList: FC<Props> = ({
   handleUpdateItem,
   themeTint,
   themeColour,
+  restaurantSlug,
 }) => {
-  const { restaurantSlug } = useRestaurantContext();
-
   const { data, loading } = useAllergiesQuery({
     variables: {
       restaurantSlug,

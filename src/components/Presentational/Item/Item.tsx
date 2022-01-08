@@ -38,7 +38,7 @@ const Item: FC<Props> = ({ item, themeColour, themeTint, themeFont }) => {
   return (
     <Card key={item.id} withPadding={false}>
       <Column isFullwidth css={classnames("flex", "justify-end", "h-1")}>
-        <Dietaries itemID={item.id} />
+        <Dietaries themeColour={themeColour} themeTint={themeTint} itemID={item.id} />
       </Column>
       <Columns>
         <Column isMarginLess flexBehavior="initial">

@@ -1,13 +1,9 @@
 import React from "react";
 import type { FC } from "react";
 import { useCurrentUserQuery } from "@shared";
-import { useRestaurantContext } from "@contexts";
 
 const MobileNavigationProfile: FC = () => {
-  const { restaurantSlug } = useRestaurantContext();
-  const { data } = useCurrentUserQuery({
-    skip: !restaurantSlug,
-  });
+  const { data } = useCurrentUserQuery();
 
   if (!data?.currentUser) return null;
 

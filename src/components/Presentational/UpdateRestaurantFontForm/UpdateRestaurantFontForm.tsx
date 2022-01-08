@@ -14,9 +14,11 @@ function classNames(...classes: string[]) {
 
 interface Props {
   id: number;
+  themeColour: string;
+  themeTint: number;
 }
-const UpdateRestaurantFontForm: FC<Props> = ({ id }) => {
-  const { themeFont, setThemeFont, themeColour, themeTint } = useRestaurantContext();
+const UpdateRestaurantFontForm: FC<Props> = ({ id, themeTint, themeColour }) => {
+  const { themeFont, setThemeFont } = useRestaurantContext();
 
   const [updateFont] = useUpdateRestaurantFont();
 
@@ -37,7 +39,7 @@ const UpdateRestaurantFontForm: FC<Props> = ({ id }) => {
       <RadioGroup.Label className="text-sm font-bold text-gray-900 font-Quicksand">
         Theme font
       </RadioGroup.Label>
-      <ExampleItem />
+      <ExampleItem themeFont={themeFont} themeColour={themeColour} themeTint={themeTint} />
       <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
         {FONTS.map(font => (
           <RadioGroup.Option

@@ -3,22 +3,26 @@ import type { FC } from "react";
 import { Button, Input } from "@base";
 import { ALLERGIES_QUERY } from "@shared";
 import type { AllergyData, Allergy } from "@shared";
-import { useRestaurantContext } from "@contexts";
 import { XIcon } from "@heroicons/react/solid";
 import { useUpdateAllergyMutation } from "./UpdateAllergy.mutation";
 
 interface Props {
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
   onCompleted?: (state: boolean) => void;
   selectedAllergy: Allergy;
 }
 
-const UpdateAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy, themeTint, themeColour }) => {
+const UpdateAllergyForm: FC<Props> = ({
+  onCompleted,
+  selectedAllergy,
+  themeTint,
+  themeColour,
+  restaurantSlug,
+}) => {
   const [name, setName] = useState(selectedAllergy.name);
   const [filterName, setFilterName] = useState(selectedAllergy.filter_name);
-
-  const { restaurantSlug } = useRestaurantContext();
 
   const [updateAllergy] = useUpdateAllergyMutation({
     onCompleted: () => onCompleted?.(false),

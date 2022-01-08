@@ -1,17 +1,16 @@
 import React from "react";
 import type { FC } from "react";
-import { useRestaurantContext } from "src/contexts";
 import { useUsersQuery } from "@shared";
 import { Card, CardContent, List, ListItem, SkeletonList } from "@base";
 
-const UsersList: FC = () => {
-  const { restaurantSlug } = useRestaurantContext();
-
+interface Props {
+  restaurantSlug: string;
+}
+const UsersList: FC<Props> = ({ restaurantSlug }) => {
   const { data, loading } = useUsersQuery({
     variables: {
       restaurantSlug,
     },
-    skip: !restaurantSlug,
   });
 
   if (loading) {

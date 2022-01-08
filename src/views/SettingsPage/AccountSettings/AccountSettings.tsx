@@ -3,7 +3,6 @@ import type { FC } from "react";
 
 import { UpdateCurrentUserForm } from "@presentational";
 import { useCurrentUserQuery } from "@shared";
-import { useRestaurantContext } from "@contexts";
 import { Card, CardContent, TabWrapper } from "@base";
 import { SettingsHeader } from "../SettingsHeader";
 
@@ -13,10 +12,7 @@ interface Props {
 }
 
 const AccountSettings: FC<Props> = ({ themeColour, themeTint }) => {
-  const { restaurantSlug } = useRestaurantContext();
-  const { data, loading } = useCurrentUserQuery({
-    skip: !restaurantSlug,
-  });
+  const { data, loading } = useCurrentUserQuery();
 
   if (loading) {
     return <p>loading</p>;

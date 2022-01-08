@@ -1,7 +1,6 @@
 import React from "react";
 import type { FC } from "react";
 import Skeleton from "react-loading-skeleton";
-import { useRestaurantContext } from "src/contexts";
 import { useBannersQuery } from "@shared";
 import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/base";
@@ -9,15 +8,15 @@ import { Cloudinary } from "@cloudinary/base";
 interface Props {
   themeColour: string;
   themeFont: string;
+  restaurantSlug: string;
 }
-const HeroBanner: FC<Props> = ({ themeColour, themeFont }) => {
+const HeroBanner: FC<Props> = ({ themeColour, themeFont, restaurantSlug }) => {
   const cld = new Cloudinary({
     cloud: {
       cloudName: "softserve",
     },
   });
 
-  const { restaurantSlug } = useRestaurantContext();
   const { data, loading } = useBannersQuery({
     variables: {
       restaurantSlug,

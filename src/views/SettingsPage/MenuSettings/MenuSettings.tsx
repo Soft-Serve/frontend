@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import type { FC } from "react";
 import { Button, Card, CardContent, Modal, TabWrapper } from "@base";
-import { useRestaurantContext } from "@contexts";
 import { useRestaurantQuery, useMenusQuery, Menu } from "@shared";
 import { DeleteMenuForm, PostMenuForm, UpdateMenuForm } from "src/components/Presentational";
 import { PlusCircleIcon } from "@heroicons/react/solid";
@@ -17,11 +16,10 @@ enum ModalForms {
 interface Props {
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
-const MenuSettings: FC<Props> = ({ themeTint, themeColour }) => {
-  const { restaurantSlug } = useRestaurantContext();
-
+const MenuSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => {
   const { data: restaurantData } = useRestaurantQuery({
     variables: {
       restaurantSlug,
@@ -33,7 +31,6 @@ const MenuSettings: FC<Props> = ({ themeTint, themeColour }) => {
     variables: {
       restaurantSlug,
     },
-    skip: !restaurantSlug,
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -52,6 +49,7 @@ const MenuSettings: FC<Props> = ({ themeTint, themeColour }) => {
 
   const postMenu = (
     <PostMenuForm
+      restaurantSlug={restaurantSlug}
       themeColour={themeColour}
       themeTint={themeTint}
       onCompleted={setIsModalOpen}
@@ -60,6 +58,7 @@ const MenuSettings: FC<Props> = ({ themeTint, themeColour }) => {
   );
   const deleteMenu = (
     <DeleteMenuForm
+      restaurantSlug={restaurantSlug}
       themeColour={themeColour}
       themeTint={themeTint}
       selectedMenu={activeMenu}
@@ -68,6 +67,7 @@ const MenuSettings: FC<Props> = ({ themeTint, themeColour }) => {
   );
   const updateMenu = (
     <UpdateMenuForm
+      restaurantSlug={restaurantSlug}
       themeColour={themeColour}
       themeTint={themeTint}
       selectedMenu={activeMenu}
@@ -103,6 +103,7 @@ const MenuSettings: FC<Props> = ({ themeTint, themeColour }) => {
         </CardContent>
       </Card>
       <MenusList
+        restaurantSlug={restaurantSlug}
         themeColour={themeColour}
         themeTint={themeTint}
         loading={loading}

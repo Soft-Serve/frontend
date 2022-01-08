@@ -3,7 +3,6 @@ import type { FC } from "react";
 import { Button, Input } from "@base";
 import { ALLERGIES_QUERY, useRestaurantQuery } from "@shared";
 import type { AllergyData } from "@shared";
-import { useRestaurantContext } from "src/contexts";
 import { XIcon } from "@heroicons/react/solid";
 import { usePostAllergyMutation } from "./PostAllergy.mutation";
 
@@ -11,12 +10,12 @@ interface Props {
   onCompleted?: (state: boolean) => void;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
-const PostAllergyForm: FC<Props> = ({ onCompleted, themeColour, themeTint }) => {
+const PostAllergyForm: FC<Props> = ({ onCompleted, themeColour, themeTint, restaurantSlug }) => {
   const [name, setName] = useState("");
   const [filterName, setFilterName] = useState("");
-  const { restaurantSlug } = useRestaurantContext();
   const { data } = useRestaurantQuery({
     variables: {
       restaurantSlug,

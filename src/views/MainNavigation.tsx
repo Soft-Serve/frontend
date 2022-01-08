@@ -18,7 +18,7 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
   const isOnSignInPage = pathname.includes("sign-in");
 
   const navigate = useNavigate();
-  const { restaurantSlug, themeFont } = useRestaurantContext();
+  const { restaurantSlug, themeFont, themeColour, themeTint } = useRestaurantContext();
   const { data } = useCurrentUserQuery({
     skip: !restaurantSlug,
   });
@@ -34,7 +34,11 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
   const renderSiginButton = () => {
     if (isOnSignInPage) {
       return (
-        <NavigationItem to={`${routes.restaurants}/${restaurantSlug}`}>
+        <NavigationItem
+          themeColour={themeColour}
+          themeTint={themeTint}
+          to={`${routes.restaurants}/${restaurantSlug}`}
+        >
           <MenuSVG className="h-6 w-6 text-white" aria-hidden="true" />
           <span className={`mx-2 font-${themeFont}`}>Restaurant</span>
           <span className="sr-only">Menu</span>
@@ -42,7 +46,11 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
       );
     }
     return (
-      <NavigationItem to={`${routes.restaurants}/${restaurantSlug}/sign-in`}>
+      <NavigationItem
+        themeColour={themeColour}
+        themeTint={themeTint}
+        to={`${routes.restaurants}/${restaurantSlug}/sign-in`}
+      >
         <LoginSVG className="h-6 w-6 text-white" aria-hidden="true" />
         <span className={`mx-2 font-${themeFont}`}>Sign In</span>
       </NavigationItem>
@@ -52,7 +60,7 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
   const renderAuthNavigationItem = () => {
     if (data?.currentUser) {
       return (
-        <NavigationItem onClick={signUserOut}>
+        <NavigationItem themeColour={themeColour} themeTint={themeTint} onClick={signUserOut}>
           <LogoutSVG className="h-5 w-5 text-white" aria-hidden="true" />
           <span className={`mx-2 font-${themeFont}`}>Sign Out</span>
         </NavigationItem>
@@ -64,7 +72,12 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
   const renderDietariesNavigationItem = () => {
     if (isOnSettingsPage)
       return (
-        <NavigationItem css="border-t-2" to={`${routes.restaurants}/${restaurantSlug}`}>
+        <NavigationItem
+          themeColour={themeColour}
+          themeTint={themeTint}
+          css="border-t-2"
+          to={`${routes.restaurants}/${restaurantSlug}`}
+        >
           <MenuSVG className="h-6 w-6 text-white" aria-hidden="true" />
           <span className={`mx-2 font-${themeFont}`}>Menu</span>
           <span className="sr-only">Menu</span>
@@ -72,6 +85,8 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
       );
     return (
       <NavigationItem
+        themeColour={themeColour}
+        themeTint={themeTint}
         css="border-t-2"
         onClick={() => setIsFilterSideMenuOpen(prevState => !prevState)}
       >
@@ -85,7 +100,11 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
   const renderSignUpButton = () => {
     if (data?.currentUser) return null;
     return (
-      <NavigationItem to={`${routes.restaurants}/${restaurantSlug}/sign-up`}>
+      <NavigationItem
+        themeColour={themeColour}
+        themeTint={themeTint}
+        to={`${routes.restaurants}/${restaurantSlug}/sign-up`}
+      >
         <PlusCircleIcon className="h-6 w-6 text-white" aria-hidden="true" />
         <span className={`mx-2 font-${themeFont}`}>Sign Up</span>
         <span className="sr-only">Sign Up</span>
@@ -96,7 +115,11 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
   const renderSettingsButton = () => {
     if (!isOnSettingsPage && data?.currentUser) {
       return (
-        <NavigationItem to={`${routes.restaurants}/${restaurantSlug}/settings/restaurant`}>
+        <NavigationItem
+          themeColour={themeColour}
+          themeTint={themeTint}
+          to={`${routes.restaurants}/${restaurantSlug}/settings/restaurant`}
+        >
           <AdjustmentsIcon className="h-6 w-6 text-white" aria-hidden="true" />
           <span className={`mx-2 font-${themeFont}`}>Settings</span>
           <span className="sr-only">Settings</span>
@@ -107,7 +130,7 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
   };
 
   return (
-    <Navigation>
+    <Navigation restaurantSlug={restaurantSlug} themeColour={themeColour} themeTint={themeTint}>
       {renderDietariesNavigationItem()}
       {renderAuthNavigationItem()}
       {renderSettingsButton()}

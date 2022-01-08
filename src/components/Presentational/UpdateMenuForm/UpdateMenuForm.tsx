@@ -5,7 +5,6 @@ import { Button, Input, Notification } from "@base";
 import { MENUS_QUERY } from "@shared";
 import type { MenusData, Menu } from "@shared";
 import { XIcon } from "@heroicons/react/solid";
-import { useRestaurantContext } from "src/contexts";
 import { isNameValid, isNameOnlyNumbers, isNameInputValid, hasBeginningWhiteSpace } from "@utility";
 import { useUpdateMenuMutation } from "./UpdateMenu.mutation";
 
@@ -14,10 +13,16 @@ interface Props {
   selectedMenu?: Menu;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
-const UpdateMenuForm: FC<Props> = ({ onCompleted, selectedMenu, themeTint, themeColour }) => {
-  const { restaurantSlug } = useRestaurantContext();
+const UpdateMenuForm: FC<Props> = ({
+  onCompleted,
+  selectedMenu,
+  themeTint,
+  themeColour,
+  restaurantSlug,
+}) => {
   const [input, setInput] = useState(selectedMenu);
   const [isInputDirty, setIsInputDirty] = useState(false);
   const onSuccess = () => toast.custom(<Notification header="Menu succesfully updated!" />);

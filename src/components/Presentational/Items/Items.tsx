@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import type { FC } from "react";
-import { useGlobalContext, useViewportContext, useRestaurantContext } from "@contexts";
+import { useGlobalContext, useViewportContext } from "@contexts";
 import { useNavigate } from "react-router-dom";
 import { Container, Grid, BoxSection, Button } from "@base";
 import { MenuItem, ItemModal } from "@presentational";
@@ -12,13 +12,13 @@ interface Props {
   themeColour: string;
   themeTint: number;
   themeFont: string;
+  restaurantSlug: string;
 }
-const Items: FC<Props> = ({ themeTint, themeColour, themeFont }) => {
+const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug }) => {
   const navigate = useNavigate();
   const { categoryID } = useGlobalContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { width } = useViewportContext();
-  const { restaurantSlug } = useRestaurantContext();
   const { data, loading, error } = useItemsQuery({
     variables: {
       categoryID,
@@ -98,6 +98,7 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont }) => {
           ))}
         </Grid>
         <ItemModal
+          themeFont={themeFont}
           themeColour={themeColour}
           themeTint={themeTint}
           isOpen={isModalOpen}

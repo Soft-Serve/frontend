@@ -3,15 +3,16 @@ import type { FC } from "react";
 import { useGlobalContext, useRestaurantContext } from "src/contexts";
 import { classnames } from "tailwindcss-classnames";
 import { Items, Menus, CategoriesContainer, WelcomePage, MobileSubHeader } from "@presentational";
-import { useRestaurantQuery, useMenusQuery, RESTAURANT_QUERY } from "@shared";
+import { useMenusQuery, RESTAURANT_QUERY } from "@shared";
 import { Container, BoxSection, HeroBanner, LoadingScreen } from "@base";
 
 import { useUpdateRestaurantOnboarding } from "./UpdateRestaurantOnboarding.mutation";
+import { useRestaurantOnboardingQuery } from "./RestaurantOnboarding.query";
 
 const Restaurant: FC = () => {
   const { restaurantSlug, themeFont, themeColour, themeTint } = useRestaurantContext();
   const { categoryID } = useGlobalContext();
-  const { data, error, loading } = useRestaurantQuery({
+  const { data, error, loading } = useRestaurantOnboardingQuery({
     variables: {
       restaurantSlug,
     },
@@ -51,7 +52,14 @@ const Restaurant: FC = () => {
 
   const renderItems = () => {
     if (!categoryID) return null;
-    return <Items themeFont={themeFont} themeColour={themeColour} themeTint={themeTint} />;
+    return (
+      <Items
+        restaurantSlug={restaurantSlug}
+        themeFont={themeFont}
+        themeColour={themeColour}
+        themeTint={themeTint}
+      />
+    );
   };
 
   if (
@@ -62,6 +70,7 @@ const Restaurant: FC = () => {
       <Container>
         <BoxSection withPadding css={classnames("lg:py-10")}>
           <WelcomePage
+            restaurantSlug={restaurantSlug}
             themeColour={themeColour}
             themeTint={themeTint}
             hasMenus={menusData?.menus.length !== 0}
@@ -74,14 +83,23 @@ const Restaurant: FC = () => {
     );
   }
 
-  if (data?.restaurant) {
+  if (data?.restaurant.has_items) {
     return (
       <>
-        <HeroBanner themeColour={themeColour} themeFont={themeFont} />
+        <HeroBanner
+          restaurantSlug={restaurantSlug}
+          themeColour={themeColour}
+          themeFont={themeFont}
+        />
         <Container>
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
             <div className="w-full lg:flex hidden">
-              <Menus themeColour={themeColour} themeTint={themeTint} themeFont={themeFont} />
+              <Menus
+                restaurantSlug={restaurantSlug}
+                themeColour={themeColour}
+                themeTint={themeTint}
+                themeFont={themeFont}
+              />
             </div>
             <CategoriesContainer
               themeColour={themeColour}

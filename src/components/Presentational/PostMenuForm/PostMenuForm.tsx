@@ -3,7 +3,6 @@ import { Button, Input, Notification } from "@base";
 import { XIcon } from "@heroicons/react/solid";
 import type { FC } from "react";
 import { MENUS_QUERY } from "@shared";
-import { useRestaurantContext } from "@contexts";
 import toast from "react-hot-toast";
 import { isNameValid, isNameOnlyNumbers, isNameInputValid, hasBeginningWhiteSpace } from "@utility";
 import { usePostMenuMutation } from "./PostMenu.mutation";
@@ -13,10 +12,16 @@ interface Props {
   restaurantID: number;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
-const PostMenuForm: FC<Props> = ({ onCompleted, restaurantID, themeTint, themeColour }) => {
-  const { restaurantSlug } = useRestaurantContext();
+const PostMenuForm: FC<Props> = ({
+  onCompleted,
+  restaurantID,
+  themeTint,
+  themeColour,
+  restaurantSlug,
+}) => {
   const [isInputDirty, setIsInputDirty] = useState(false);
   const onSuccess = () => toast.custom(<Notification header="Menu succesfully added!" />);
 

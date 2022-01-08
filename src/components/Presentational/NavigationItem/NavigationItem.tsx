@@ -2,21 +2,20 @@ import React from "react";
 import type { FC } from "react";
 import { NavLink, NavLinkProps } from "react-router-dom";
 import { classnames, TArg } from "tailwindcss-classnames";
-import { useRestaurantContext } from "@contexts";
 import { generateThemeColours } from "src/utility";
 import { base, button } from "./styles";
 
 type To = NavLinkProps["to"];
 
 interface Props {
+  themeColour: string;
+  themeTint: number;
   to?: To;
   onClick?: () => void;
   css?: TArg;
 }
 
-const NavigationItem: FC<Props> = ({ children, to, onClick, css }) => {
-  const { themeColour, themeTint } = useRestaurantContext();
-
+const NavigationItem: FC<Props> = ({ children, to, onClick, css, themeTint, themeColour }) => {
   if (onClick) {
     return (
       <button

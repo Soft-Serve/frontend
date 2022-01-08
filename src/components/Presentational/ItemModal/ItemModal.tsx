@@ -3,7 +3,6 @@ import type { FC } from "react";
 import { Modal, Button } from "@base";
 import { Item } from "@shared";
 import { ItemImage, ItemPrice } from "@presentational";
-import { useRestaurantContext } from "src/contexts";
 import { ModalDietaries } from "./ModalDietaries";
 
 interface Props {
@@ -12,10 +11,10 @@ interface Props {
   item?: Item;
   themeColour: string;
   themeTint: number;
+  themeFont: string;
 }
 
-const ItemModal: FC<Props> = ({ isOpen, onClose, item, themeTint, themeColour }) => {
-  const { themeFont } = useRestaurantContext();
+const ItemModal: FC<Props> = ({ isOpen, onClose, item, themeTint, themeColour, themeFont }) => {
   if (item) {
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -48,7 +47,13 @@ const ItemModal: FC<Props> = ({ isOpen, onClose, item, themeTint, themeColour })
               />
             </div>
             <div className="w-full">
-              <ModalDietaries itemAvailable={item?.available} itemID={item.id} />
+              <ModalDietaries
+                themeFont={themeFont}
+                themeColour={themeColour}
+                themeTint={themeTint}
+                itemAvailable={item?.available}
+                itemID={item.id}
+              />
             </div>
           </div>
         </div>

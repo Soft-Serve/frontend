@@ -1,10 +1,14 @@
 import React from "react";
 import type { FC } from "react";
-import { useRestaurantContext, useViewportContext } from "@contexts";
+import { useViewportContext } from "@contexts";
 
-const ExampleItem: FC = () => {
+interface Props {
+  themeColour: string;
+  themeFont: string;
+  themeTint: number;
+}
+const ExampleItem: FC<Props> = ({ themeFont, themeColour, themeTint }) => {
   const { width } = useViewportContext();
-  const { themeFont, themeColour, themeTint } = useRestaurantContext();
 
   const item = {
     id: 10,
