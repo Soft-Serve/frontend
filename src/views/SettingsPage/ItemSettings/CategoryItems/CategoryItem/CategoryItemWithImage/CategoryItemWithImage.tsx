@@ -6,6 +6,9 @@ import { MobileCategoryItemWithImage } from "./MobileCategoryItemWithImage";
 import { DesktopCategoryItemWithImage } from "./DesktopCategoryItemWithImage";
 
 interface Props {
+  themeFont: string;
+  themeColour: string;
+  themeTint: number;
   handleAddDietary: (item: Item) => void;
   handleDeleteItem: (item: Item, categoryID: number) => void;
   handleUpdateItem: (item: Item, categoryID: number) => void;
@@ -14,10 +17,13 @@ interface Props {
 }
 
 const CategoryItemWithImage: FC<Props> = ({
+  themeFont,
   handleDeleteItem,
   categoryID,
   handleUpdateItem,
   handleAddDietary,
+  themeTint,
+  themeColour,
   item,
 }) => {
   const { width } = useViewportContext();
@@ -25,6 +31,9 @@ const CategoryItemWithImage: FC<Props> = ({
   if (width > 1023 && width < 1140) {
     return (
       <MobileCategoryItemWithImage
+        themeFont={themeFont}
+        themeColour={themeColour}
+        themeTint={themeTint}
         item={item}
         handleAddDietary={handleAddDietary}
         handleDeleteItem={handleDeleteItem}
@@ -37,6 +46,9 @@ const CategoryItemWithImage: FC<Props> = ({
   if (width < 515) {
     return (
       <MobileCategoryItemWithImage
+        themeFont={themeFont}
+        themeColour={themeColour}
+        themeTint={themeTint}
         item={item}
         handleAddDietary={handleAddDietary}
         handleDeleteItem={handleDeleteItem}
@@ -47,6 +59,9 @@ const CategoryItemWithImage: FC<Props> = ({
   }
   return (
     <DesktopCategoryItemWithImage
+      themeFont={themeFont}
+      themeColour={themeColour}
+      themeTint={themeTint}
       item={item}
       handleAddDietary={handleAddDietary}
       handleDeleteItem={handleDeleteItem}

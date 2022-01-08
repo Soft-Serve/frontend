@@ -1,6 +1,5 @@
 import React from "react";
 import type { FC } from "react";
-import { useRestaurantContext } from "src/contexts";
 import { Button } from "@base";
 import { Steps } from "./Steps";
 
@@ -9,11 +8,18 @@ interface Props {
   hasItems: boolean;
   hasStyles: boolean;
   hideWelcomePage: () => void;
+  themeColour: string;
+  themeTint: number;
 }
 
-const WelcomePage: FC<Props> = ({ hasMenus, hasItems, hasStyles, hideWelcomePage }) => {
-  const { themeColour, themeTint } = useRestaurantContext();
-
+const WelcomePage: FC<Props> = ({
+  hasMenus,
+  hasItems,
+  hasStyles,
+  hideWelcomePage,
+  themeColour,
+  themeTint,
+}) => {
   return (
     <div className="flex-column">
       <h2
@@ -28,7 +34,7 @@ const WelcomePage: FC<Props> = ({ hasMenus, hasItems, hasStyles, hideWelcomePage
         <Steps hasMenus={hasMenus} hasItems={hasItems} hasStyles={hasStyles} />
       </div>
       <div className="p-20 flex justify-center">
-        <Button size="XL" onClick={hideWelcomePage}>
+        <Button themeColour={themeColour} themeTint={themeTint} size="XL" onClick={hideWelcomePage}>
           skip for now
         </Button>
       </div>

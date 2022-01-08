@@ -1,13 +1,17 @@
 import React from "react";
 import type { FC } from "react";
-import { SignInForm } from "@presentational";
 import { Navigate } from "react-router-dom";
-import { BoxSection, Container, Notification } from "@base";
+import { SignInForm } from "@presentational";
+import { useRestaurantContext } from "@contexts";
+import { BoxSection, Container, LoadingScreen, Notification } from "@base";
 import { useCurrentUserQuery } from "@shared";
 import { MenuPage } from "../MenuPage";
 
 const SignInPage: FC = () => {
-  const { data } = useCurrentUserQuery();
+  const { data, loading } = useCurrentUserQuery();
+  const { themeTint, themeColour } = useRestaurantContext();
+
+  if (loading) return <LoadingScreen />;
 
   const flash = () => (
     <Notification header="Account verified!" subHeader="You can now sign in to your account" />
@@ -23,7 +27,7 @@ const SignInPage: FC = () => {
       {accountConfirmed() && flash()}
       <Container>
         <BoxSection>
-          <SignInForm />
+          <SignInForm themeColour={themeColour} themeTint={themeTint} />
         </BoxSection>
       </Container>
     </MenuPage>

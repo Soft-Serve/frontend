@@ -2,10 +2,12 @@ import React, { Fragment } from "react";
 import type { FC } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
-import { useRestaurantContext } from "src/contexts";
 
-const KebabDropdown: FC = ({ children }) => {
-  const { themeTint, themeColour } = useRestaurantContext();
+interface Props {
+  themeColour: string;
+  themeTint: number;
+}
+const KebabDropdown: FC<Props> = ({ children, themeTint, themeColour }) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>

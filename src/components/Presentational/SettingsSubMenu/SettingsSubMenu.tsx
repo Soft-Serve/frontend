@@ -10,10 +10,12 @@ import { routes } from "@routes";
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
   selected: string;
   setSelected: any;
+  themeColour: string;
+  themeTint: number;
 }
 
-const SettingsSubMenu: FC<Props> = ({ selected, setSelected, ...rest }) => {
-  const { themeColour, themeTint, restaurantSlug } = useRestaurantContext();
+const SettingsSubMenu: FC<Props> = ({ selected, setSelected, themeTint, themeColour, ...rest }) => {
+  const { restaurantSlug } = useRestaurantContext();
 
   const capatalize = ([firstLetter, ...restOfWord]: string) =>
     [firstLetter.toUpperCase(), ...restOfWord].join("");
@@ -29,7 +31,7 @@ const SettingsSubMenu: FC<Props> = ({ selected, setSelected, ...rest }) => {
             key={item.name}
             to={`${routes.restaurants}/${restaurantSlug}/settings/${item.name}`}
           >
-            <RadioTile value={item.name}>
+            <RadioTile themeColour={themeColour} themeTint={themeTint} value={item.name}>
               <item.icon
                 className={`flex-shrink-0 -mt-0.5 h-6 w-6 text-${themeColour}-${themeTint}`}
                 aria-hidden="true"

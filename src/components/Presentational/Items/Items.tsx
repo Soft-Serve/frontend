@@ -8,12 +8,17 @@ import { routes } from "@routes";
 import { Item, useItemsQuery } from "@shared";
 import Skeleton from "react-loading-skeleton";
 
-const Items: FC = () => {
+interface Props {
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
+}
+const Items: FC<Props> = ({ themeTint, themeColour, themeFont }) => {
   const navigate = useNavigate();
   const { categoryID } = useGlobalContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { width } = useViewportContext();
-  const { restaurantSlug, themeColour, themeTint } = useRestaurantContext();
+  const { restaurantSlug } = useRestaurantContext();
   const { data, loading, error } = useItemsQuery({
     variables: {
       categoryID,
@@ -50,12 +55,16 @@ const Items: FC = () => {
             </p>
             <div className={`flex justify-around w-full ${themeColour}-${themeTint}`}>
               <Button
+                themeColour={themeColour}
+                themeTint={themeTint}
                 size="XL"
                 onClick={() => navigate(`${routes.settings}/${restaurantSlug}/categories`)}
               >
                 Create categories
               </Button>
               <Button
+                themeColour={themeColour}
+                themeTint={themeTint}
                 size="XL"
                 onClick={() => navigate(`${routes.settings}/${restaurantSlug}/items`)}
               >
@@ -79,11 +88,22 @@ const Items: FC = () => {
               role="button"
               key={item.id}
             >
-              <MenuItem item={item} />
+              <MenuItem
+                themeColour={themeColour}
+                themeFont={themeFont}
+                themeTint={themeTint}
+                item={item}
+              />
             </div>
           ))}
         </Grid>
-        <ItemModal isOpen={isModalOpen} onClose={setIsModalOpen} item={selectedItem} />
+        <ItemModal
+          themeColour={themeColour}
+          themeTint={themeTint}
+          isOpen={isModalOpen}
+          onClose={setIsModalOpen}
+          item={selectedItem}
+        />
       </>
     </Container>
   );

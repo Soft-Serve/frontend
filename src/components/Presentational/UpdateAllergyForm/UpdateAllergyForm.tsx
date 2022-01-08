@@ -8,11 +8,13 @@ import { XIcon } from "@heroicons/react/solid";
 import { useUpdateAllergyMutation } from "./UpdateAllergy.mutation";
 
 interface Props {
+  themeColour: string;
+  themeTint: number;
   onCompleted?: (state: boolean) => void;
   selectedAllergy: Allergy;
 }
 
-const UpdateAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy }) => {
+const UpdateAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy, themeTint, themeColour }) => {
   const [name, setName] = useState(selectedAllergy.name);
   const [filterName, setFilterName] = useState(selectedAllergy.filter_name);
 
@@ -72,7 +74,13 @@ const UpdateAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy }) => {
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           update dietary
         </h3>
-        <Button onClick={() => onCompleted?.(false)} size="S" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onClick={() => onCompleted?.(false)}
+          size="S"
+          colour="accent"
+        >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
@@ -80,6 +88,8 @@ const UpdateAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy }) => {
       <form onSubmit={handleSubmit} className="mt-4 flex-col sm:flex sm:max-w-md">
         <div>
           <Input
+            themeColour={themeColour}
+            themeTint={themeTint}
             labelText="Name"
             onChange={e => setName(e.target.value)}
             value={name}
@@ -89,6 +99,8 @@ const UpdateAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy }) => {
             required
           />
           <Input
+            themeColour={themeColour}
+            themeTint={themeTint}
             labelText="Filter name"
             value={filterName}
             onChange={e => setFilterName(e.target.value)}
@@ -99,7 +111,13 @@ const UpdateAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy }) => {
           />
         </div>
         <div className="mt-4 rounded-md sm:flex-shrink-0">
-          <Button isFullwidth size="XXL" type="submit">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            isFullwidth
+            size="XXL"
+            type="submit"
+          >
             Update
           </Button>
         </div>

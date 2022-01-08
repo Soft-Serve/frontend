@@ -7,9 +7,18 @@ import { useMenusQuery } from "src/shared";
 
 interface Props {
   closeMenu: any;
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
 }
-const MenusMobileNavigation: FC<Props> = ({ closeMenu, ...rest }) => {
-  const { restaurantSlug, themeFont } = useRestaurantContext();
+const MenusMobileNavigation: FC<Props> = ({
+  themeColour,
+  themeTint,
+  themeFont,
+  closeMenu,
+  ...rest
+}) => {
+  const { restaurantSlug } = useRestaurantContext();
   const { setMenuID, menuID } = useGlobalContext();
 
   const { data } = useMenusQuery({
@@ -34,7 +43,7 @@ const MenusMobileNavigation: FC<Props> = ({ closeMenu, ...rest }) => {
         }}
       >
         {data?.menus?.map(menu => (
-          <RadioTile value={menu} key={menu.id}>
+          <RadioTile themeColour={themeColour} themeTint={themeTint} value={menu} key={menu.id}>
             <div className="ml-3 text-sm">
               <p className="text-blue-gray-900">
                 <span

@@ -12,9 +12,11 @@ import { useUpdateMenuMutation } from "./UpdateMenu.mutation";
 interface Props {
   onCompleted?: (state: boolean) => void;
   selectedMenu?: Menu;
+  themeColour: string;
+  themeTint: number;
 }
 
-const UpdateMenuForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
+const UpdateMenuForm: FC<Props> = ({ onCompleted, selectedMenu, themeTint, themeColour }) => {
   const { restaurantSlug } = useRestaurantContext();
   const [input, setInput] = useState(selectedMenu);
   const [isInputDirty, setIsInputDirty] = useState(false);
@@ -99,13 +101,21 @@ const UpdateMenuForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           Change Menu name
         </h3>
-        <Button onClick={() => onCompleted?.(false)} size="S" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onClick={() => onCompleted?.(false)}
+          size="S"
+          colour="accent"
+        >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
 
       <form onSubmit={handleSubmit} className="w-full">
         <Input
+          themeColour={themeColour}
+          themeTint={themeTint}
           onBlur={() => {
             setIsInputDirty(true);
           }}
@@ -119,7 +129,15 @@ const UpdateMenuForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
           required
         />
         <div className="mt-3">
-          <Button disabled={!isFormValid} loading={loading} isFullwidth size="XXL" type="submit">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            disabled={!isFormValid}
+            loading={loading}
+            isFullwidth
+            size="XXL"
+            type="submit"
+          >
             Update
           </Button>
         </div>

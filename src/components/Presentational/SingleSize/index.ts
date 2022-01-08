@@ -1,1 +1,0 @@
-export { SingleSize } from "./SingleSize";

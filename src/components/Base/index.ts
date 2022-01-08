@@ -5,7 +5,6 @@ export { Title } from "./Title";
 export { Toggle } from "./Toggle";
 export { Card, CardContent } from "./Card";
 export { Header } from "./Header";
-export { SlideOver } from "./SlideOver";
 export { Button } from "./Button";
 export { Input } from "./Input";
 export { RadioTile, RadioTiles } from "./RadioTile";

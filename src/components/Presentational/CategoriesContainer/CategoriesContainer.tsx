@@ -4,7 +4,12 @@ import { Categories } from "@presentational";
 import { useCategoriesQuery } from "@shared";
 import { useGlobalContext } from "@contexts";
 
-const CategoriesContainer: FC = () => {
+interface Props {
+  themeFont: string;
+  themeColour: string;
+  themeTint: number;
+}
+const CategoriesContainer: FC<Props> = ({ themeFont, themeTint, themeColour }) => {
   const { menuID, setCategoryID } = useGlobalContext();
 
   const { data, loading } = useCategoriesQuery({
@@ -22,7 +27,14 @@ const CategoriesContainer: FC = () => {
   return (
     <div className="w-full flex-wrap lg:flex hidden">
       <div className="mt-4 mb-2 flex items-center">
-        <Categories setCategoryID={setCategoryID} loading={loading} categories={data?.categories} />
+        <Categories
+          themeColour={themeColour}
+          themeTint={themeTint}
+          themeFont={themeFont}
+          setCategoryID={setCategoryID}
+          loading={loading}
+          categories={data?.categories}
+        />
       </div>
     </div>
   );

@@ -11,9 +11,17 @@ interface Props {
   onCompleted?: (state: boolean) => void;
   menuID: number;
   selectedCategory?: Category;
+  themeColour: string;
+  themeTint: number;
 }
 
-const DeleteCategoryForm: FC<Props> = ({ onCompleted, menuID, selectedCategory }) => {
+const DeleteCategoryForm: FC<Props> = ({
+  onCompleted,
+  menuID,
+  selectedCategory,
+  themeTint,
+  themeColour,
+}) => {
   const onSuccess = () => toast.custom(<Notification header="Category succesfully removed!" />);
   const [deleteCategory] = useDeleteCategoryMutation({
     onCompleted: () => {
@@ -67,7 +75,13 @@ const DeleteCategoryForm: FC<Props> = ({ onCompleted, menuID, selectedCategory }
           Catgeory:{" "}
           <span className="font-bold underline text-red-400">{selectedCategory?.name}</span>
         </h3>
-        <Button onClick={() => onCompleted?.(false)} size="S" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onClick={() => onCompleted?.(false)}
+          size="S"
+          colour="accent"
+        >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
@@ -77,6 +91,8 @@ const DeleteCategoryForm: FC<Props> = ({ onCompleted, menuID, selectedCategory }
       <div className="flex items-center mt-4">
         <div className="flex-1 mr-2">
           <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
             colour="accent"
             onClick={() => onCompleted?.(false)}
             size="M"
@@ -88,7 +104,14 @@ const DeleteCategoryForm: FC<Props> = ({ onCompleted, menuID, selectedCategory }
           </Button>
         </div>
         <div className="flex-1 mr-2">
-          <Button size="LG" isFullwidth type="submit" css="text-center">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            size="LG"
+            isFullwidth
+            type="submit"
+            css="text-center"
+          >
             Delete Category
           </Button>
         </div>

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import type { FC } from "react";
+import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 import { useRestaurantContext } from "@contexts";
 import { Category, Item, Menu, useCategoriesQuery, useItemsQuery, useMenusQuery } from "@shared";
 import { Button, Card, CardContent, Grid, Modal, Tab, Tabs, TabWrapper } from "@base";
 import { SearchIcon, PlusCircleIcon } from "@heroicons/react/solid";
-import Skeleton from "react-loading-skeleton";
 import { AddDietaryForm, DeleteItemForm, PostItemForm, UpdateItemForm } from "@presentational";
 import { useGetParams } from "@utility";
 import { CategoryItems } from "./CategoryItems";
@@ -18,8 +18,14 @@ enum ModalForms {
   AddDietary = "addDietary",
 }
 
-const ItemSettings: FC = () => {
-  const { themeColour, themeTint, restaurantSlug } = useRestaurantContext();
+interface Props {
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
+}
+
+const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont }) => {
+  const { restaurantSlug } = useRestaurantContext();
   const params = useGetParams();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -67,16 +73,27 @@ const ItemSettings: FC = () => {
 
   const deleteItem = (
     <DeleteItemForm
+      themeColour={themeColour}
+      themeTint={themeTint}
       onCompleted={setIsModalOpen}
       deletedItem={activeItem}
       categoryID={categoryIDForDeleteItem}
     />
   );
 
-  const postItem = <PostItemForm selectedMenu={activeMenu} onCompleted={setIsModalOpen} />;
+  const postItem = (
+    <PostItemForm
+      themeColour={themeColour}
+      themeTint={themeTint}
+      selectedMenu={activeMenu}
+      onCompleted={setIsModalOpen}
+    />
+  );
 
   const updateItem = (
     <UpdateItemForm
+      themeColour={themeColour}
+      themeTint={themeTint}
       selectedMenu={activeMenu}
       selectedItem={activeItem}
       onCompleted={setIsModalOpen}
@@ -135,6 +152,8 @@ const ItemSettings: FC = () => {
       <Tabs>
         {menuData?.menus?.map((menu, index) => (
           <Tab
+            themeTint={themeTint}
+            themeColour={themeColour}
             themeFont="Quicksand"
             onClick={() => handleActiveMenu(menu)}
             numOfTabs={menuData.menus.length}
@@ -163,7 +182,12 @@ const ItemSettings: FC = () => {
         <CardContent css="flex-col">
           <div className="flex w-full items-center justify-between mb-4">
             <SettingsHeader>Items</SettingsHeader>
-            <Button onClick={handlePostItem} size="XXL">
+            <Button
+              themeColour={themeColour}
+              themeTint={themeTint}
+              onClick={handlePostItem}
+              size="XXL"
+            >
               Add Item
               <PlusCircleIcon className="w-5 h-5 ml-2" />
             </Button>
@@ -204,6 +228,9 @@ const ItemSettings: FC = () => {
         <Grid size="SM">
           {filteredCategories(categoryData?.categories)?.map(category => (
             <CategoryItems
+              themeFont={themeFont}
+              themeColour={themeColour}
+              themeTint={themeTint}
               handleAddDietary={handleAddDietary}
               handleUpdateItem={handleUpdateItem}
               searchValue={searchValue}

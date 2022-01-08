@@ -18,8 +18,10 @@ interface Props {
   menus?: Menu[];
   handleModal: (modalForm: ModalForms, menu: Menu) => void;
   loading: boolean;
+  themeColour: string;
+  themeTint: number;
 }
-const MenusList: FC<Props> = ({ menus, handleModal, loading }) => {
+const MenusList: FC<Props> = ({ menus, handleModal, loading, themeColour, themeTint }) => {
   const { restaurantSlug } = useRestaurantContext();
   if (loading) {
     return <SkeletonList />;
@@ -42,6 +44,8 @@ const MenusList: FC<Props> = ({ menus, handleModal, loading }) => {
               <div className="ml-4 flex flex-col lg:flex-row">
                 <div className="w-full sm:mr-2 my-1">
                   <Button
+                    themeColour={themeColour}
+                    themeTint={themeTint}
                     isFullwidth
                     size="S"
                     onClick={() => handleModal(ModalForms.UpdateMenu, menu)}
@@ -52,6 +56,8 @@ const MenusList: FC<Props> = ({ menus, handleModal, loading }) => {
                 </div>
                 <div className="w-full my-1">
                   <Button
+                    themeColour={themeColour}
+                    themeTint={themeTint}
                     isFullwidth
                     colour="accent"
                     size="S"

@@ -14,7 +14,12 @@ enum ModalForms {
   DeleteMenu = "deleteMenu",
 }
 
-const MenuSettings: FC = () => {
+interface Props {
+  themeColour: string;
+  themeTint: number;
+}
+
+const MenuSettings: FC<Props> = ({ themeTint, themeColour }) => {
   const { restaurantSlug } = useRestaurantContext();
 
   const { data: restaurantData } = useRestaurantQuery({
@@ -45,9 +50,30 @@ const MenuSettings: FC = () => {
 
   if (!restaurantID) return <div>loading</div>;
 
-  const postMenu = <PostMenuForm onCompleted={setIsModalOpen} restaurantID={restaurantID} />;
-  const deleteMenu = <DeleteMenuForm selectedMenu={activeMenu} onCompleted={setIsModalOpen} />;
-  const updateMenu = <UpdateMenuForm selectedMenu={activeMenu} onCompleted={setIsModalOpen} />;
+  const postMenu = (
+    <PostMenuForm
+      themeColour={themeColour}
+      themeTint={themeTint}
+      onCompleted={setIsModalOpen}
+      restaurantID={restaurantID}
+    />
+  );
+  const deleteMenu = (
+    <DeleteMenuForm
+      themeColour={themeColour}
+      themeTint={themeTint}
+      selectedMenu={activeMenu}
+      onCompleted={setIsModalOpen}
+    />
+  );
+  const updateMenu = (
+    <UpdateMenuForm
+      themeColour={themeColour}
+      themeTint={themeTint}
+      selectedMenu={activeMenu}
+      onCompleted={setIsModalOpen}
+    />
+  );
 
   const forms = {
     postMenu,
@@ -65,13 +91,24 @@ const MenuSettings: FC = () => {
       <Card css="mb-4">
         <CardContent>
           <SettingsHeader>Menus</SettingsHeader>
-          <Button size="XXL" onClick={() => handleMenuModal(ModalForms.PostMenu)}>
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            size="XXL"
+            onClick={() => handleMenuModal(ModalForms.PostMenu)}
+          >
             Add Menu
             <PlusCircleIcon className="w-5 h-5 ml-2" />
           </Button>
         </CardContent>
       </Card>
-      <MenusList loading={loading} handleModal={handleMenuModal} menus={data?.menus} />
+      <MenusList
+        themeColour={themeColour}
+        themeTint={themeTint}
+        loading={loading}
+        handleModal={handleMenuModal}
+        menus={data?.menus}
+      />
     </TabWrapper>
   );
 };

@@ -10,9 +10,16 @@ import { PencilIcon } from "@heroicons/react/solid";
 interface Props {
   handleUpdateItem: any;
   handleDeleteItem: any;
+  themeColour: string;
+  themeTint: number;
 }
 
-const AllergiesList: FC<Props> = ({ handleDeleteItem, handleUpdateItem }) => {
+const AllergiesList: FC<Props> = ({
+  handleDeleteItem,
+  handleUpdateItem,
+  themeTint,
+  themeColour,
+}) => {
   const { restaurantSlug } = useRestaurantContext();
 
   const { data, loading } = useAllergiesQuery({
@@ -46,13 +53,21 @@ const AllergiesList: FC<Props> = ({ handleDeleteItem, handleUpdateItem }) => {
               </div>
               <div className="ml-4 flex flex-col sm:flex-row">
                 <div className="w-full sm:mr-2 my-1">
-                  <Button isFullwidth size="S" onClick={() => handleUpdateItem(allergy)}>
+                  <Button
+                    themeColour={themeColour}
+                    themeTint={themeTint}
+                    isFullwidth
+                    size="S"
+                    onClick={() => handleUpdateItem(allergy)}
+                  >
                     Edit
                     <PencilIcon className="w-5 h-5 ml-2" />
                   </Button>
                 </div>
                 <div className="w-full my-1">
                   <Button
+                    themeColour={themeColour}
+                    themeTint={themeTint}
                     isFullwidth
                     colour="accent"
                     size="S"

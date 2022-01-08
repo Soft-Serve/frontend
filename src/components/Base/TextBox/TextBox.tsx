@@ -1,7 +1,6 @@
 import React, { DetailedHTMLProps, TextareaHTMLAttributes, ReactNode } from "react";
 import { TArg } from "tailwindcss-classnames";
 import type { FC } from "react";
-import { useRestaurantContext } from "@contexts";
 import * as styles from "./styles";
 
 interface Props
@@ -9,6 +8,8 @@ interface Props
   labelText?: string;
   errors?: ReactNode[];
   css?: TArg;
+  themeColour: string;
+  themeTint: number;
 }
 
 const TextBox: FC<Props> = ({
@@ -20,6 +21,8 @@ const TextBox: FC<Props> = ({
   disabled,
   css,
   required,
+  themeColour,
+  themeTint,
   autoComplete = "off",
   ...rest
 }) => {
@@ -31,8 +34,6 @@ const TextBox: FC<Props> = ({
   const renderErrorMessages = () => {
     return errors?.slice(0, 2).map(error => <p key={`error-item-${error}`}>{error}</p>);
   };
-
-  const { themeColour, themeTint } = useRestaurantContext();
 
   return (
     <div>

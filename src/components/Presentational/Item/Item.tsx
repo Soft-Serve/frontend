@@ -1,17 +1,20 @@
 import React from "react";
 import type { FC } from "react";
+import { classnames } from "tailwindcss-classnames";
 import { Card, Columns, Title, Column } from "@base";
 import { useAllergyContext } from "@contexts";
 import { intersection } from "@utility";
 import { Dietaries, ItemImage, ItemPrice } from "@presentational";
 import { useItemSizeQuery, Item as ItemInterface, useDietaryQuery } from "@shared";
-import { classnames } from "tailwindcss-classnames";
 
 interface Props {
   item: ItemInterface;
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
 }
 
-const Item: FC<Props> = ({ item }) => {
+const Item: FC<Props> = ({ item, themeColour, themeTint, themeFont }) => {
   const { data, error, loading } = useDietaryQuery({
     variables: {
       itemID: item.id,
@@ -51,7 +54,12 @@ const Item: FC<Props> = ({ item }) => {
             )}
           </div>
           <div className="flex w-full py-2 flex-wrap h-auto items-start m-0">
-            <ItemPrice itemID={item.id} />
+            <ItemPrice
+              themeFont={themeFont}
+              themeColour={themeColour}
+              themeTint={themeTint}
+              itemID={item.id}
+            />
           </div>
         </Column>
       </Columns>

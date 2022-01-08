@@ -19,9 +19,11 @@ import { useSignUpFormMutation } from "../SignUpForm/SignUpForm.mutation";
 
 interface Props {
   setIsModalOpen?: (state: boolean) => void;
+  themeColour: string;
+  themeTint: number;
 }
 
-const PostNewUserForm: FC<Props> = ({ setIsModalOpen }) => {
+const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint }) => {
   const navigate = useNavigate();
   const { restaurantSlug } = useRestaurantContext();
   const [input, setInput] = useState({
@@ -130,6 +132,8 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen }) => {
       {!userData?.currentUser && (
         <>
           <Input
+            themeColour={themeColour}
+            themeTint={themeTint}
             required
             value={input.name}
             onChange={handleChange}
@@ -141,6 +145,8 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen }) => {
             id="name"
           />
           <Input
+            themeColour={themeColour}
+            themeTint={themeTint}
             required
             value={input.slug}
             onChange={handleChange}
@@ -154,6 +160,8 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen }) => {
         </>
       )}
       <Input
+        themeColour={themeColour}
+        themeTint={themeTint}
         required
         value={input.first_name}
         onChange={handleChange}
@@ -166,6 +174,8 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen }) => {
       />
 
       <Input
+        themeColour={themeColour}
+        themeTint={themeTint}
         required
         value={input.last_name}
         onChange={handleChange}
@@ -178,6 +188,8 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen }) => {
       />
 
       <Input
+        themeColour={themeColour}
+        themeTint={themeTint}
         required
         value={input.email}
         onChange={handleChange}
@@ -191,6 +203,8 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen }) => {
       />
 
       <Input
+        themeColour={themeColour}
+        themeTint={themeTint}
         required
         value={input.password}
         onChange={handleChange}
@@ -203,6 +217,8 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen }) => {
       />
 
       <Input
+        themeColour={themeColour}
+        themeTint={themeTint}
         required
         value={input.password_confirmation}
         onChange={handleChange}
@@ -216,7 +232,15 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen }) => {
         name="password_confirmation"
         id="password_confirmation"
       />
-      <Button disabled={!isFormValid()} css="mt-4" isFullwidth size="XXL" type="submit">
+      <Button
+        themeTint={themeTint}
+        themeColour={themeColour}
+        disabled={!isFormValid()}
+        css="mt-4"
+        isFullwidth
+        size="XXL"
+        type="submit"
+      >
         Sign up
       </Button>
     </form>

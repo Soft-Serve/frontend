@@ -6,14 +6,18 @@ import { useBannersQuery } from "@shared";
 import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/base";
 
-const HeroBanner: FC = () => {
+interface Props {
+  themeColour: string;
+  themeFont: string;
+}
+const HeroBanner: FC<Props> = ({ themeColour, themeFont }) => {
   const cld = new Cloudinary({
     cloud: {
       cloudName: "softserve",
     },
   });
 
-  const { themeColour, restaurantSlug, themeFont } = useRestaurantContext();
+  const { restaurantSlug } = useRestaurantContext();
   const { data, loading } = useBannersQuery({
     variables: {
       restaurantSlug,

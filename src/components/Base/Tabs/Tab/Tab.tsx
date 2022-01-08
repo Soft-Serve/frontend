@@ -1,20 +1,31 @@
 import React from "react";
 import type { FC } from "react";
 import { Button } from "@base";
-import { useRestaurantContext } from "@contexts";
 import { buildTabTextStyles, buildTabStyles } from "./styles";
 
 interface Props {
+  themeColour: string;
+  themeTint: number;
   isActive: boolean;
   tabIndex: number;
   numOfTabs: number;
   onClick: () => void;
   themeFont: string;
 }
-const Tab: FC<Props> = ({ children, tabIndex, numOfTabs, isActive, onClick, themeFont }) => {
-  const { themeColour, themeTint } = useRestaurantContext();
+const Tab: FC<Props> = ({
+  children,
+  tabIndex,
+  numOfTabs,
+  isActive,
+  onClick,
+  themeFont,
+  themeColour,
+  themeTint,
+}) => {
   return (
     <Button
+      themeColour={themeColour}
+      themeTint={themeTint}
       onClick={onClick}
       className={buildTabStyles(isActive, tabIndex, numOfTabs)}
       aria-current={isActive ? "page" : undefined}

@@ -4,7 +4,12 @@ import { Categories } from "@presentational";
 import { useCategoriesQuery } from "@shared";
 import { useGlobalContext } from "@contexts";
 
-const MobileSubHeader: FC = () => {
+interface Props {
+  themeFont: string;
+  themeColour: string;
+  themeTint: number;
+}
+const MobileSubHeader: FC<Props> = ({ themeFont, themeColour, themeTint }) => {
   const { menuID, setCategoryID } = useGlobalContext();
 
   const { data, loading } = useCategoriesQuery({
@@ -31,6 +36,9 @@ const MobileSubHeader: FC = () => {
       <div className="flex overflow-x-scroll my-2 hide-scroll-bar">
         <div className="flex flex-nowrap mx-2">
           <Categories
+            themeColour={themeColour}
+            themeTint={themeTint}
+            themeFont={themeFont}
             setCategoryID={setCategoryID}
             loading={loading}
             categories={data?.categories}

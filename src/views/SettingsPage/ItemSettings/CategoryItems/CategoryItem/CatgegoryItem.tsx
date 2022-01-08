@@ -5,6 +5,9 @@ import { CategoryItemWithImage } from "./CategoryItemWithImage";
 import { CategoryItemWithoutImage } from "./CategoryItemWithoutImage";
 
 interface Props {
+  themeFont: string;
+  themeColour: string;
+  themeTint: number;
   handleAddDietary: (item: Item) => void;
   handleDeleteItem: (item: Item, categoryID: number) => void;
   handleUpdateItem: (item: Item, categoryID: number) => void;
@@ -13,15 +16,21 @@ interface Props {
 }
 
 const CategoryItem: FC<Props> = ({
+  themeFont,
   handleDeleteItem,
   categoryID,
   handleUpdateItem,
   item,
   handleAddDietary,
+  themeColour,
+  themeTint,
 }) => {
   if (item?.photo) {
     return (
       <CategoryItemWithImage
+        themeFont={themeFont}
+        themeColour={themeColour}
+        themeTint={themeTint}
         item={item}
         handleAddDietary={handleAddDietary}
         handleDeleteItem={handleDeleteItem}
@@ -33,6 +42,9 @@ const CategoryItem: FC<Props> = ({
 
   return (
     <CategoryItemWithoutImage
+      themeFont={themeFont}
+      themeColour={themeColour}
+      themeTint={themeTint}
       item={item}
       handleAddDietary={handleAddDietary}
       handleDeleteItem={handleDeleteItem}

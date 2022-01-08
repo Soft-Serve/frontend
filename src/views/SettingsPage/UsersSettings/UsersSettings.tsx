@@ -5,7 +5,11 @@ import { UsersList, PostNewUserForm } from "@presentational";
 import { Button, Card, CardContent, Modal, TabWrapper } from "@base";
 import { SettingsHeader } from "../SettingsHeader";
 
-const UsersSettings: FC = () => {
+interface Props {
+  themeColour: string;
+  themeTint: number;
+}
+const UsersSettings: FC<Props> = ({ themeTint, themeColour }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handlePostItem = () => {
@@ -19,18 +23,33 @@ const UsersSettings: FC = () => {
             <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
               Add new user
             </h3>
-            <Button onClick={() => setIsModalOpen(false)} size="S" colour="accent">
+            <Button
+              themeColour={themeColour}
+              themeTint={themeTint}
+              onClick={() => setIsModalOpen(false)}
+              size="S"
+              colour="accent"
+            >
               <XIcon className="w-5 h-5" />
             </Button>
           </div>
-          <PostNewUserForm setIsModalOpen={setIsModalOpen} />
+          <PostNewUserForm
+            themeColour={themeColour}
+            themeTint={themeTint}
+            setIsModalOpen={setIsModalOpen}
+          />
         </div>
       </Modal>
 
       <Card css="mb-4">
         <CardContent>
           <SettingsHeader>Users</SettingsHeader>
-          <Button onClick={handlePostItem} size="XXL">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            onClick={handlePostItem}
+            size="XXL"
+          >
             Add User
             <UserAddIcon className="w-5 h-5 ml-2" />
           </Button>

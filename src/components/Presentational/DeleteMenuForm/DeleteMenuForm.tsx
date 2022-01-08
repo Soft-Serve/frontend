@@ -11,9 +11,11 @@ import { useDeleteMenuMutation } from "./DeleteForm.mutation";
 interface Props {
   onCompleted?: (state: boolean) => void;
   selectedMenu?: Menu;
+  themeColour: string;
+  themeTint: number;
 }
 
-const DeleteMenuForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
+const DeleteMenuForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, themeTint }) => {
   const { restaurantSlug } = useRestaurantContext();
   const onSuccess = () => toast.custom(<Notification header="Menu succesfully deleted!" />);
 
@@ -64,7 +66,13 @@ const DeleteMenuForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           Menu name: <span className="font-bold underline text-red-400">{selectedMenu?.name}</span>
         </h3>
-        <Button onClick={() => onCompleted?.(false)} size="S" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onClick={() => onCompleted?.(false)}
+          size="S"
+          colour="accent"
+        >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
@@ -74,6 +82,8 @@ const DeleteMenuForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
       <div className="flex mt-4">
         <div className="w-full mr-2">
           <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
             colour="accent"
             onClick={() => onCompleted?.(false)}
             size="M"
@@ -85,7 +95,15 @@ const DeleteMenuForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
           </Button>
         </div>
         <div className="w-full">
-          <Button loading={loading} size="LG" isFullwidth type="submit" css="text-center">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            loading={loading}
+            size="LG"
+            isFullwidth
+            type="submit"
+            css="text-center"
+          >
             Delete
           </Button>
         </div>

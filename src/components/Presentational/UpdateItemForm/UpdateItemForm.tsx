@@ -26,9 +26,11 @@ interface Props {
   onCompleted?: (state: boolean) => void;
   selectedMenu?: Menu;
   selectedItem?: Item;
+  themeColour: string;
+  themeTint: number;
 }
 
-const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem }) => {
+const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, themeTint }) => {
   const { data: itemSizeData } = useItemSizeQuery({
     variables: {
       itemID: selectedItem?.id || 0,
@@ -150,12 +152,20 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem }) => {
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           Update {input.name}
         </h3>
-        <Button onClick={() => onCompleted?.(false)} size="S" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onClick={() => onCompleted?.(false)}
+          size="S"
+          colour="accent"
+        >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col">
         <Input
+          themeColour={themeColour}
+          themeTint={themeTint}
           errors={[inputNameError()]}
           onChange={handleInputChange}
           labelText="Name:"
@@ -167,6 +177,8 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem }) => {
         />
         <div className="mt-4">
           <TextBox
+            themeColour={themeColour}
+            themeTint={themeTint}
             labelText="Description"
             onChange={handleInputChange}
             value={input.description}
@@ -175,6 +187,8 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem }) => {
           />
         </div>
         <MultiSize
+          themeColour={themeColour}
+          themeTint={themeTint}
           onChange={onSizeChange}
           addSize={onAddSize}
           deleteSize={onDeleteSize}
@@ -182,6 +196,8 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem }) => {
         />
         <div className="mt-4 rounded-md sm:flex-shrink-0">
           <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
             loading={updateLoading}
             disabled={!isFormValid}
             isFullwidth

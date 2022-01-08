@@ -37,6 +37,8 @@ const MainMobileHeader: FC<Props> = ({
     if (!isOnSignInPage && !isOnSignUpPage && !isOnSettingsPage) {
       return (
         <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
           size={buttonSize}
           themeFont={themeFont}
           css="mr-2"
@@ -55,7 +57,14 @@ const MainMobileHeader: FC<Props> = ({
     if (!data?.currentUser) return null;
     return (
       <Link to={`${routes.restaurants}/${restaurantSlug}/settings/restaurant`}>
-        <Button themeFont={themeFont} size={buttonSize} css="mr-2" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          themeFont={themeFont}
+          size={buttonSize}
+          css="mr-2"
+          colour="accent"
+        >
           Settings
         </Button>
       </Link>
@@ -67,6 +76,8 @@ const MainMobileHeader: FC<Props> = ({
     }
     return (
       <Button
+        themeColour={themeColour}
+        themeTint={themeTint}
         size={buttonSize}
         themeFont={themeFont}
         css="mr-2"
@@ -91,7 +102,14 @@ const MainMobileHeader: FC<Props> = ({
     if (isOnSignInPage) {
       return (
         <Link to={`${routes.restaurants}/${restaurantSlug}/sign-up`}>
-          <Button themeFont={themeFont} size={buttonSize} css="mr-2" colour="accent">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            themeFont={themeFont}
+            size={buttonSize}
+            css="mr-2"
+            colour="accent"
+          >
             Sign Up
             <span className="sr-only">Sign up</span>
           </Button>
@@ -100,7 +118,14 @@ const MainMobileHeader: FC<Props> = ({
     }
     return (
       <Link to={`${routes.restaurants}/${restaurantSlug}/sign-in`}>
-        <Button themeFont={themeFont} size={buttonSize} css="mr-2" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          themeFont={themeFont}
+          size={buttonSize}
+          css="mr-2"
+          colour="accent"
+        >
           Sign In
           <span className="sr-only">Sign in</span>
         </Button>
@@ -112,6 +137,8 @@ const MainMobileHeader: FC<Props> = ({
     if (data?.currentUser) {
       return (
         <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
           onClick={() => signUserOut()}
           themeFont={themeFont}
           size={buttonSize}
@@ -130,7 +157,14 @@ const MainMobileHeader: FC<Props> = ({
     if (isOnSignInPage || isOnSignUpPage || isOnSettingsPage) {
       return (
         <Link to={`${routes.restaurants}/${restaurantSlug}`}>
-          <Button themeFont={themeFont} size={buttonSize} css="mr-2" colour="accent">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            themeFont={themeFont}
+            size={buttonSize}
+            css="mr-2"
+            colour="accent"
+          >
             Restaurant
           </Button>
         </Link>
@@ -138,6 +172,8 @@ const MainMobileHeader: FC<Props> = ({
     }
     return (
       <Button
+        themeColour={themeColour}
+        themeTint={themeTint}
         size={buttonSize}
         themeFont={themeFont}
         css="mr-2"

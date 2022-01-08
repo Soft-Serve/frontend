@@ -7,7 +7,12 @@ import { useRestaurantContext } from "@contexts";
 import { Card, CardContent, TabWrapper } from "@base";
 import { SettingsHeader } from "../SettingsHeader";
 
-const AccountSettings: FC = () => {
+interface Props {
+  themeColour: string;
+  themeTint: number;
+}
+
+const AccountSettings: FC<Props> = ({ themeColour, themeTint }) => {
   const { restaurantSlug } = useRestaurantContext();
   const { data, loading } = useCurrentUserQuery({
     skip: !restaurantSlug,
@@ -30,6 +35,8 @@ const AccountSettings: FC = () => {
         <div className="w-full mt-10">
           <div className="mt-5 md:mt-0 md:col-span-2">
             <UpdateCurrentUserForm
+              themeColour={themeColour}
+              themeTint={themeTint}
               firstName={first_name}
               lastName={last_name}
               email={email}

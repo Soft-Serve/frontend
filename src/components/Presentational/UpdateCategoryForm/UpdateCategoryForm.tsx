@@ -13,9 +13,17 @@ interface Props {
   onCompleted: (state: boolean) => void;
   menuID: number;
   selectedCategory?: Category;
+  themeColour: string;
+  themeTint: number;
 }
 
-const UpdateCategoryForm: FC<Props> = ({ onCompleted, menuID, selectedCategory }) => {
+const UpdateCategoryForm: FC<Props> = ({
+  onCompleted,
+  menuID,
+  selectedCategory,
+  themeColour,
+  themeTint,
+}) => {
   const [input, setInput] = useState(selectedCategory);
   const [isInputDirty, setIsInputDirty] = useState(false);
   const onSuccess = () => toast.custom(<Notification header="Category succesfully updated!" />);
@@ -93,13 +101,21 @@ const UpdateCategoryForm: FC<Props> = ({ onCompleted, menuID, selectedCategory }
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           add new category
         </h3>
-        <Button onClick={() => onCompleted?.(false)} size="S" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onClick={() => onCompleted?.(false)}
+          size="S"
+          colour="accent"
+        >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
       <form onSubmit={handleSubmit} className="w-full">
         <div className="mt-4 w-full">
           <Input
+            themeColour={themeColour}
+            themeTint={themeTint}
             errors={[inputError()]}
             labelText="Category name:"
             onChange={e => {
@@ -123,17 +139,29 @@ const UpdateCategoryForm: FC<Props> = ({ onCompleted, menuID, selectedCategory }
           }
         >
           <div className="flex my-4">
-            <RadioTile css="w-full" value="food">
+            <RadioTile themeColour={themeColour} themeTint={themeTint} css="w-full" value="food">
               <span className="block text-sm font-medium w-full text-center">Food</span>
             </RadioTile>
 
-            <RadioTile css={classnames("w-full", "ml-4")} value="beverage">
+            <RadioTile
+              themeColour={themeColour}
+              themeTint={themeTint}
+              css={classnames("w-full", "ml-4")}
+              value="beverage"
+            >
               <span className="block text-sm font-medium w-full text-center">Beverage</span>
             </RadioTile>
           </div>
         </RadioTiles>
         <div className="mt-3 w-full">
-          <Button disabled={!isFormValid} isFullwidth size="XXL" type="submit">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            disabled={!isFormValid}
+            isFullwidth
+            size="XXL"
+            type="submit"
+          >
             Update Category
           </Button>
         </div>

@@ -9,10 +9,12 @@ import { useUpdateRestaurantSlug } from "./UpdateRestaurantSlug.mutation";
 interface Props {
   slug: string;
   id: number;
+  themeColour: string;
+  themeTint: number;
 }
 const slugRegex = new RegExp(/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/);
 
-const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id }) => {
+const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id, themeColour, themeTint }) => {
   const [slugState, setSlugState] = useState(slug);
   const { width } = useViewport();
 
@@ -26,7 +28,13 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id }) => {
     if (!isValidSlug) return null;
     return (
       <div className="px-4 py-3  text-right sm:px-6 mt-4">
-        <Button size="XXL" isFullwidth={isTablet} type="submit">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          size="XXL"
+          isFullwidth={isTablet}
+          type="submit"
+        >
           <span className="font-Quicksand font-bold">Update</span>
         </Button>
       </div>
@@ -79,6 +87,8 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id }) => {
   return (
     <form className="p-4" onSubmit={handleSubmit}>
       <AttachedLabelInput
+        themeColour={themeColour}
+        themeTint={themeTint}
         label="Slug"
         attachedLabel="www.softserveapp.com/restaurants/"
         id="slug"

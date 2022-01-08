@@ -65,7 +65,14 @@ const UpdateRestaurantThemeForm: FC<Props> = ({
     if (isThemeUpdated) {
       return (
         <div className="px-4 py-3  text-right sm:px-6 mt-4">
-          <Button loading={loading} isFullwidth={isTablet} size="XXL" type="submit">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            loading={loading}
+            isFullwidth={isTablet}
+            size="XXL"
+            type="submit"
+          >
             Update
           </Button>
         </div>
@@ -81,6 +88,8 @@ const UpdateRestaurantThemeForm: FC<Props> = ({
           Select Restaurant Theme Colour
         </h3>
         <ColourPicker
+          themeColour={themeColour}
+          themeTint={themeTint}
           setTheme={setCurrentThemeColour}
           setTint={setCurrentThemeTint}
           onClose={setIsColourModalOpen}

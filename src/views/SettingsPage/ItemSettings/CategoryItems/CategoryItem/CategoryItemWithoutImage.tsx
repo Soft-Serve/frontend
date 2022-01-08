@@ -7,6 +7,9 @@ import { useUpdateItemAvailability } from "./UpdateItemAvailability.mutation";
 import { ItemDropdown } from "./ItemDropdown";
 
 interface Props {
+  themeFont: string;
+  themeColour: string;
+  themeTint: number;
   handleAddDietary: (item: Item) => void;
   handleDeleteItem: (item: Item, categoryID: number) => void;
   handleUpdateItem: (item: Item, categoryID: number) => void;
@@ -15,6 +18,9 @@ interface Props {
 }
 
 const CategoryItemWithoutImage: FC<Props> = ({
+  themeFont,
+  themeTint,
+  themeColour,
   handleDeleteItem,
   categoryID,
   handleUpdateItem,
@@ -49,9 +55,16 @@ const CategoryItemWithoutImage: FC<Props> = ({
           </div>
           <div className="flex items-center">
             <div className="mx-2">
-              <Toggle isEnabled={isItemAvailable} handleClick={handleToggle} />
+              <Toggle
+                themeColour={themeColour}
+                themeTint={themeTint}
+                isEnabled={isItemAvailable}
+                handleClick={handleToggle}
+              />
             </div>
             <ItemDropdown
+              themeColour={themeColour}
+              themeTint={themeTint}
               handleAllergies={() => handleAddDietary(item)}
               handleDelete={() => handleDeleteItem(item, categoryID)}
               handleUpdate={() => handleUpdateItem(item, categoryID)}
@@ -61,7 +74,14 @@ const CategoryItemWithoutImage: FC<Props> = ({
         <p className="font-Quicksand italic text-gray-600 mt-2 text-sm break-words text-ellipsis overflow-hidden mb-2">
           {item.available ? item.description : "** Temporarily unavailable  **"}
         </p>
-        <ItemPrice position="end" withImage itemID={item.id} />
+        <ItemPrice
+          themeColour={themeColour}
+          themeTint={themeTint}
+          themeFont={themeFont}
+          position="end"
+          withImage
+          itemID={item.id}
+        />
       </div>
     </div>
   );

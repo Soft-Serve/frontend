@@ -18,8 +18,17 @@ interface Props {
   categories?: Category[];
   handleModal: (modalForm: ModalForms, category?: Category) => void;
   loading: boolean;
+  themeColour: string;
+  themeTint: number;
 }
-const CategoryList: FC<Props> = ({ categories, handleModal, loading, activeMenu }) => {
+const CategoryList: FC<Props> = ({
+  categories,
+  handleModal,
+  loading,
+  activeMenu,
+  themeColour,
+  themeTint,
+}) => {
   const { restaurantSlug } = useRestaurantContext();
 
   if (loading) {
@@ -45,6 +54,8 @@ const CategoryList: FC<Props> = ({ categories, handleModal, loading, activeMenu 
                 <div className="ml-4 flex flex-col sm:flex-row">
                   <div className="w-full sm:mr-2 my-1">
                     <Button
+                      themeColour={themeColour}
+                      themeTint={themeTint}
                       isFullwidth
                       size="S"
                       onClick={() => handleModal(ModalForms.UpdateCategory, category)}
@@ -55,6 +66,8 @@ const CategoryList: FC<Props> = ({ categories, handleModal, loading, activeMenu 
                   </div>
                   <div className="w-full my-1">
                     <Button
+                      themeColour={themeColour}
+                      themeTint={themeTint}
                       isFullwidth
                       colour="accent"
                       size="S"

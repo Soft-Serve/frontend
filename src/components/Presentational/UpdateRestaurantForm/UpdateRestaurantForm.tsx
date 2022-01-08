@@ -14,15 +14,22 @@ import type { Restaurant } from "./UpdateRestaurant.mutation";
 
 interface Props {
   restaurant: Restaurant;
+  themeColour: string;
+  themeTint: number;
 }
 
-const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
+const UpdateRestaurantForm: FC<Props> = ({ restaurant, themeTint, themeColour }) => {
   const { photoFile, setPhotoFile } = useUploadPhoto();
 
   return (
     <>
       <Card withPadding={false} css={classnames("flex-col")}>
-        <UpdateRestaurantSlugForm id={restaurant.id} slug={restaurant.slug} />
+        <UpdateRestaurantSlugForm
+          themeColour={themeColour}
+          themeTint={themeTint}
+          id={restaurant.id}
+          slug={restaurant.slug}
+        />
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>
         <UpdateRestaurantThemeForm
@@ -44,11 +51,18 @@ const UpdateRestaurantForm: FC<Props> = ({ restaurant }) => {
           <div className="m-2">
             <ItemImage photoUrl={restaurant.logo} />
           </div>
-          <UploadImageBox onChange={setPhotoFile} imageFile={photoFile} />
+          <UploadImageBox
+            themeColour={themeColour}
+            themeTint={themeTint}
+            onChange={setPhotoFile}
+            imageFile={photoFile}
+          />
         </div>
       </Card>
       <Card css="mt-4">
         <UpdateRestaurantAddressForm
+          themeColour={themeColour}
+          themeTint={themeTint}
           restaurantName={restaurant.name}
           id={restaurant.id}
           addressLineOne={restaurant.address_line_1}

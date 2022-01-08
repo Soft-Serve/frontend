@@ -5,6 +5,8 @@ import { colors } from "@constants";
 import { useRestaurantContext } from "@contexts";
 
 interface Props {
+  themeColour: string;
+  themeTint: number;
   onClose: (state: boolean) => void;
   setTheme: Dispatch<SetStateAction<string>>;
   setTint: Dispatch<SetStateAction<number>>;
@@ -25,7 +27,7 @@ const camelCaseFormatter = (name: string) => {
 };
 const colourMap = Object.entries(colors);
 
-const ColourPicker: FC<Props> = ({ onClose, setTheme, setTint }) => {
+const ColourPicker: FC<Props> = ({ onClose, setTheme, setTint, themeTint, themeColour }) => {
   const { setThemeColour, setThemeTint } = useRestaurantContext();
 
   return (
@@ -65,7 +67,14 @@ const ColourPicker: FC<Props> = ({ onClose, setTheme, setTint }) => {
           </div>
         ))}
       </div>
-      <Button css="mt-4" onClick={() => onClose(false)} size="XXL" isFullwidth>
+      <Button
+        themeColour={themeColour}
+        themeTint={themeTint}
+        css="mt-4"
+        onClick={() => onClose(false)}
+        size="XXL"
+        isFullwidth
+      >
         close
       </Button>
     </div>

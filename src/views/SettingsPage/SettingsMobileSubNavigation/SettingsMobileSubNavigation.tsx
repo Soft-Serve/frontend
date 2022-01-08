@@ -10,9 +10,18 @@ interface Props {
   onClose: any;
   selected: string;
   setSelected: any;
+  themeColour: string;
+  themeTint: number;
 }
 
-const SettingsMobileSubNavigation: FC<Props> = ({ isOpen, onClose, selected, setSelected }) => {
+const SettingsMobileSubNavigation: FC<Props> = ({
+  isOpen,
+  onClose,
+  selected,
+  setSelected,
+  themeColour,
+  themeTint,
+}) => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -53,13 +62,19 @@ const SettingsMobileSubNavigation: FC<Props> = ({ isOpen, onClose, selected, set
               leaveTo="opacity-0"
             >
               <div className="absolute top-0 right-0 pt-4 mr-4">
-                <Button onClick={() => onClose(false)}>
+                <Button
+                  themeColour={themeColour}
+                  themeTint={themeTint}
+                  onClick={() => onClose(false)}
+                >
                   <span className="sr-only">Close sidebar</span>
                   <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
                 </Button>
               </div>
             </Transition.Child>
             <SettingsSubMenu
+              themeColour={themeColour}
+              themeTint={themeTint}
               selected={selected}
               setSelected={setSelected}
               className="flex-shrink-0 w-full bg-white border-r border-blue-gray-200 flex flex-col"

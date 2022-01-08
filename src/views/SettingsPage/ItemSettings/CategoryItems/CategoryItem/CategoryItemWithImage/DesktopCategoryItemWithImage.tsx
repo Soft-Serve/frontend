@@ -13,6 +13,9 @@ interface Props {
   handleUpdateItem: (item: Item, categoryID: number) => void;
   categoryID: number;
   item: Item;
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
 }
 
 const DesktopCategoryItemWithImage: FC<Props> = ({
@@ -20,6 +23,9 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
   categoryID,
   handleUpdateItem,
   handleAddDietary,
+  themeColour,
+  themeTint,
+  themeFont,
   item,
 }) => {
   const [isItemAvailable, setIsItemAvailable] = useState(item.available);
@@ -54,9 +60,16 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
             <h4 className="font-bold font-Quicksand inline-flex flex-wrap">{item?.name}</h4>
             <div className="flex items-center">
               <div className="mx-2">
-                <Toggle isEnabled={isItemAvailable} handleClick={handleToggle} />
+                <Toggle
+                  themeColour={themeColour}
+                  themeTint={themeTint}
+                  isEnabled={isItemAvailable}
+                  handleClick={handleToggle}
+                />
               </div>
               <ItemDropdown
+                themeColour={themeColour}
+                themeTint={themeTint}
                 handleAllergies={() => handleAddDietary(item)}
                 handleDelete={() => handleDeleteItem(item, categoryID)}
                 handleUpdate={() => handleUpdateItem(item, categoryID)}
@@ -68,7 +81,14 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
           </p>
           <CategoryItemDietaries itemID={item?.id} />
         </div>
-        <ItemPrice position="end" withImage itemID={item.id} />
+        <ItemPrice
+          themeFont={themeFont}
+          themeColour={themeColour}
+          themeTint={themeTint}
+          position="end"
+          withImage
+          itemID={item.id}
+        />
       </div>
     </div>
   );

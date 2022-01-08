@@ -2,18 +2,19 @@ import React from "react";
 import type { FC } from "react";
 import { Item, useDietaryQuery } from "@shared";
 import { Dietaries, ItemPrice } from "@presentational";
-import { useAllergyContext, useRestaurantContext } from "@contexts";
+import { useAllergyContext } from "@contexts";
 import { intersection } from "@utility";
 import { Card, CardContent } from "@base";
 import { SkeletonMenuItemWithoutImage } from "./SkeletonMenuItemWithoutImage";
 
 interface Props {
   item: Pick<Item, "description" | "name" | "id" | "available">;
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
 }
 
-const CardMenuItemWithoutImage: FC<Props> = ({ item }) => {
-  const { themeFont } = useRestaurantContext();
-
+const CardMenuItemWithoutImage: FC<Props> = ({ item, themeFont, themeColour, themeTint }) => {
   const { data, error, loading } = useDietaryQuery({
     variables: {
       itemID: item.id,
@@ -28,7 +29,16 @@ const CardMenuItemWithoutImage: FC<Props> = ({ item }) => {
   if (loading) return <SkeletonMenuItemWithoutImage />;
   if (error) return <span>error</span>;
 
-  const renderPrice = () => item?.available && <ItemPrice withImage itemID={item.id} />;
+  const renderPrice = () =>
+    item?.available && (
+      <ItemPrice
+        themeFont={themeFont}
+        themeColour={themeColour}
+        themeTint={themeTint}
+        withImage
+        itemID={item.id}
+      />
+    );
 
   return (
     <Card withPadding={false}>

@@ -9,7 +9,7 @@ import { Container, BoxSection, HeroBanner, LoadingScreen } from "@base";
 import { useUpdateRestaurantOnboarding } from "./UpdateRestaurantOnboarding.mutation";
 
 const Restaurant: FC = () => {
-  const { restaurantSlug, themeFont } = useRestaurantContext();
+  const { restaurantSlug, themeFont, themeColour, themeTint } = useRestaurantContext();
   const { categoryID } = useGlobalContext();
   const { data, error, loading } = useRestaurantQuery({
     variables: {
@@ -51,7 +51,7 @@ const Restaurant: FC = () => {
 
   const renderItems = () => {
     if (!categoryID) return null;
-    return <Items />;
+    return <Items themeFont={themeFont} themeColour={themeColour} themeTint={themeTint} />;
   };
 
   if (
@@ -62,6 +62,8 @@ const Restaurant: FC = () => {
       <Container>
         <BoxSection withPadding css={classnames("lg:py-10")}>
           <WelcomePage
+            themeColour={themeColour}
+            themeTint={themeTint}
             hasMenus={menusData?.menus.length !== 0}
             hasItems={!!data?.restaurant?.has_items}
             hasStyles={!!data?.restaurant?.has_styles}
@@ -75,14 +77,22 @@ const Restaurant: FC = () => {
   if (data?.restaurant) {
     return (
       <>
-        <HeroBanner />
+        <HeroBanner themeColour={themeColour} themeFont={themeFont} />
         <Container>
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
             <div className="w-full lg:flex hidden">
-              <Menus themeFont={themeFont} />
+              <Menus themeColour={themeColour} themeTint={themeTint} themeFont={themeFont} />
             </div>
-            <CategoriesContainer />
-            <MobileSubHeader />
+            <CategoriesContainer
+              themeColour={themeColour}
+              themeTint={themeTint}
+              themeFont={themeFont}
+            />
+            <MobileSubHeader
+              themeColour={themeColour}
+              themeTint={themeTint}
+              themeFont={themeFont}
+            />
           </BoxSection>
           {renderItems()}
         </Container>

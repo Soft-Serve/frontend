@@ -18,6 +18,8 @@ const AllergyModal: FC<Props> = ({ setIsFilterSideMenuOpen, isOpen }) => {
     <Modal css={bgColour} onClose={setIsFilterSideMenuOpen} isOpen={isOpen}>
       <AllergyLegend />
       <Button
+        themeColour={themeColour}
+        themeTint={themeTint}
         onClick={() => setIsFilterSideMenuOpen(prevState => !prevState)}
         size="XXL"
         colour="accent"

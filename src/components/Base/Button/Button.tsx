@@ -1,12 +1,13 @@
 import React, { ButtonHTMLAttributes, FC } from "react";
 import { TArg } from "tailwindcss-classnames";
 import { LoadingSVG } from "@svgs";
-import { useRestaurantContext } from "src/contexts";
 import { Sizes } from "./types";
 import { buildStyles, loadingStyles } from "./styles";
 import type { Colours } from "./styles";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  themeColour: string;
+  themeTint: number;
   type?: "button" | "submit";
   size?: Sizes;
   colour?: Colours;
@@ -26,9 +27,10 @@ const Button: FC<Props> = ({
   loading,
   disabled,
   themeFont = "Quicksand",
+  themeColour = "red",
+  themeTint = 400,
   ...rest
 }) => {
-  const { themeColour, themeTint } = useRestaurantContext();
   const renderButtonContent = () => {
     if (loading) return <LoadingSVG className={loadingStyles(colour)} />;
     return <>{children}</>;

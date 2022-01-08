@@ -58,7 +58,11 @@ const AllergyLegend: FC = () => {
                   {allergy.filter_name}
                 </span>
               </div>
-              <Toggle isEnabled={isAllergyActive(allergy)} />
+              <Toggle
+                themeColour={themeColour}
+                themeTint={themeTint}
+                isEnabled={isAllergyActive(allergy)}
+              />
             </div>
           </div>
         ))}

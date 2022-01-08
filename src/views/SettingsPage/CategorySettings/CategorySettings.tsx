@@ -20,7 +20,12 @@ enum ModalForms {
   DeleteCategory = "deleteCategory",
 }
 
-const CategorySettings: FC = () => {
+interface Props {
+  themeColour: string;
+  themeTint: number;
+}
+
+const CategorySettings: FC<Props> = ({ themeTint, themeColour }) => {
   const { restaurantSlug } = useRestaurantContext();
 
   const { data, loading: menusLoading } = useMenusQuery({
@@ -64,10 +69,17 @@ const CategorySettings: FC = () => {
   };
 
   const postCategory = (
-    <PostCategoryForm menuID={activeMenu?.id ? activeMenu.id : 0} onCompleted={setIsModalOpen} />
+    <PostCategoryForm
+      themeColour={themeColour}
+      themeTint={themeTint}
+      menuID={activeMenu?.id ? activeMenu.id : 0}
+      onCompleted={setIsModalOpen}
+    />
   );
   const updateCategory = (
     <UpdateCategoryForm
+      themeColour={themeColour}
+      themeTint={themeTint}
       menuID={activeMenu?.id ? activeMenu.id : 0}
       onCompleted={setIsModalOpen}
       selectedCategory={activeCategory}
@@ -76,6 +88,8 @@ const CategorySettings: FC = () => {
 
   const deleteCategory = (
     <DeleteCategoryForm
+      themeColour={themeColour}
+      themeTint={themeTint}
       menuID={activeMenu?.id ? activeMenu.id : 0}
       onCompleted={setIsModalOpen}
       selectedCategory={activeCategory}
@@ -96,6 +110,8 @@ const CategorySettings: FC = () => {
       <Tabs>
         {data?.menus.map((menu, index) => (
           <Tab
+            themeColour={themeColour}
+            themeTint={themeTint}
             themeFont="Quicksand"
             onClick={() => setActiveMenu(menu)}
             numOfTabs={data.menus.length}
@@ -118,7 +134,12 @@ const CategorySettings: FC = () => {
       <Card css="mb-4">
         <CardContent>
           <SettingsHeader>Categories</SettingsHeader>
-          <Button size="XXL" onClick={() => handleModal(ModalForms.PostCategory)}>
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            size="XXL"
+            onClick={() => handleModal(ModalForms.PostCategory)}
+          >
             Add Category
             <ViewGridAddIcon className="w-5 h-5 ml-2" />
           </Button>
@@ -126,6 +147,8 @@ const CategorySettings: FC = () => {
       </Card>
       {renderMenusTabs()}
       <CategoryList
+        themeColour={themeColour}
+        themeTint={themeTint}
         activeMenu={activeMenu}
         loading={loading}
         handleModal={handleModal}

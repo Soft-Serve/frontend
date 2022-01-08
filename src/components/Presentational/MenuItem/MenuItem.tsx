@@ -8,18 +8,38 @@ import { MobileCardMenuItemWithImage } from "./MobileCardMenuItemWithImage";
 
 interface Props {
   item: Item;
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
 }
 
-const MenuItem: FC<Props> = ({ item }) => {
+const MenuItem: FC<Props> = ({ item, themeTint, themeColour, themeFont }) => {
   const { width } = useViewportContext();
   if (item.photo && item.photo.length) {
     return width < 515 ? (
-      <MobileCardMenuItemWithImage item={item} />
+      <MobileCardMenuItemWithImage
+        themeFont={themeFont}
+        themeColour={themeColour}
+        themeTint={themeTint}
+        item={item}
+      />
     ) : (
-      <CardMenuItemWithImage item={item} />
+      <CardMenuItemWithImage
+        themeFont={themeFont}
+        themeColour={themeColour}
+        themeTint={themeTint}
+        item={item}
+      />
     );
   }
-  return <CardMenuItemWithoutImage item={item} />;
+  return (
+    <CardMenuItemWithoutImage
+      themeFont={themeFont}
+      themeColour={themeColour}
+      themeTint={themeTint}
+      item={item}
+    />
+  );
 };
 
 export { MenuItem };

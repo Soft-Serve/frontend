@@ -3,15 +3,18 @@ import type { FC } from "react";
 import { classnames } from "tailwindcss-classnames";
 import { Item, useDietaryQuery } from "@shared";
 import { Dietaries, ItemImage, ItemPrice } from "@presentational";
-import { useAllergyContext, useRestaurantContext } from "@contexts";
+import { useAllergyContext } from "@contexts";
 import { intersection } from "@utility";
 import { SkeletonMenuItemWithImage } from "./SkeletonMenuItemWithImage";
 
 interface Props {
   item: Pick<Item, "description" | "name" | "photo" | "id" | "available">;
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
 }
 
-const CardMenuItemWithImage: FC<Props> = ({ item }) => {
+const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeTint }) => {
   const { data, error, loading } = useDietaryQuery({
     variables: {
       itemID: item.id,
@@ -20,15 +23,22 @@ const CardMenuItemWithImage: FC<Props> = ({ item }) => {
 
   const { activeAllergies } = useAllergyContext();
 
-  const { themeFont } = useRestaurantContext();
-
   if (data?.dietaries && intersection(activeAllergies, data?.dietaries)) {
     return null;
   }
   if (loading) return <SkeletonMenuItemWithImage />;
   if (error) return <span>error</span>;
 
-  const renderPrice = () => item?.available && <ItemPrice withImage itemID={item.id} />;
+  const renderPrice = () =>
+    item?.available && (
+      <ItemPrice
+        themeFont={themeFont}
+        themeColour={themeColour}
+        themeTint={themeTint}
+        withImage
+        itemID={item.id}
+      />
+    );
 
   return (
     <div key={item.id} className="flex rounded-lg shadow-lg overflow-hidden">

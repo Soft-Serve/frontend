@@ -1,6 +1,5 @@
 import { Button } from "@base";
 import React, { FC } from "react";
-import { useRestaurantContext } from "@contexts";
 import { buildButtonStyles, buildWrapperStyles, buildToggleStyles } from "./style";
 
 import { ReactComponent as CheckmarkSVG } from "./svgs/checkmark.svg";
@@ -9,12 +8,15 @@ import { ReactComponent as CloseSVG } from "./svgs/close.svg";
 interface Props {
   isEnabled: boolean;
   handleClick?: () => void;
+  themeColour: string;
+  themeTint: number;
 }
 
-const Toggle: FC<Props> = ({ isEnabled, handleClick }) => {
-  const { themeColour, themeTint } = useRestaurantContext();
+const Toggle: FC<Props> = ({ isEnabled, handleClick, themeColour, themeTint }) => {
   return (
     <Button
+      themeColour={themeColour}
+      themeTint={themeTint}
       colour="transparant"
       onClick={handleClick}
       className={buildButtonStyles(isEnabled, themeColour, themeTint)}

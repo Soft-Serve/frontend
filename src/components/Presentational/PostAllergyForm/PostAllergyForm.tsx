@@ -9,9 +9,11 @@ import { usePostAllergyMutation } from "./PostAllergy.mutation";
 
 interface Props {
   onCompleted?: (state: boolean) => void;
+  themeColour: string;
+  themeTint: number;
 }
 
-const PostAllergyForm: FC<Props> = ({ onCompleted }) => {
+const PostAllergyForm: FC<Props> = ({ onCompleted, themeColour, themeTint }) => {
   const [name, setName] = useState("");
   const [filterName, setFilterName] = useState("");
   const { restaurantSlug } = useRestaurantContext();
@@ -73,7 +75,13 @@ const PostAllergyForm: FC<Props> = ({ onCompleted }) => {
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           add new dietary
         </h3>
-        <Button onClick={() => onCompleted?.(false)} size="S" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onClick={() => onCompleted?.(false)}
+          size="S"
+          colour="accent"
+        >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
@@ -81,6 +89,8 @@ const PostAllergyForm: FC<Props> = ({ onCompleted }) => {
       <form onSubmit={handleSubmit} className="mt-4 flex-col sm:flex sm:max-w-md">
         <div>
           <Input
+            themeColour={themeColour}
+            themeTint={themeTint}
             labelText="Name"
             onChange={e => setName(e.target.value)}
             value={name}
@@ -90,6 +100,8 @@ const PostAllergyForm: FC<Props> = ({ onCompleted }) => {
             required
           />
           <Input
+            themeColour={themeColour}
+            themeTint={themeTint}
             labelText="Filter name"
             value={filterName}
             onChange={e => setFilterName(e.target.value)}
@@ -100,7 +112,13 @@ const PostAllergyForm: FC<Props> = ({ onCompleted }) => {
           />
         </div>
         <div className="mt-4 rounded-md sm:flex-shrink-0">
-          <Button isFullwidth size="XXL" type="submit">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            isFullwidth
+            size="XXL"
+            type="submit"
+          >
             Add
           </Button>
         </div>

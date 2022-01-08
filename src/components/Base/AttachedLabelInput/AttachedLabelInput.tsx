@@ -1,18 +1,25 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import type { FC } from "react";
 import { useViewport } from "@hooks";
-import { useRestaurantContext } from "@contexts";
 
 interface Props extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   label: string;
   attachedLabel: string;
+  themeColour: string;
+  themeTint: number;
 }
-const AttachedLabelInput: FC<Props> = ({ label, attachedLabel, id, ...rest }) => {
+const AttachedLabelInput: FC<Props> = ({
+  label,
+  attachedLabel,
+  themeTint,
+  themeColour,
+  id,
+  ...rest
+}) => {
   const { width } = useViewport();
   const isViewPortBigSize = width < 1140 && width > 1023;
 
   const isViewportSmalllerThenTablet = width < 527;
-  const { themeColour, themeTint } = useRestaurantContext();
 
   if (isViewPortBigSize || isViewportSmalllerThenTablet) {
     return (

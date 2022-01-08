@@ -13,13 +13,22 @@ interface Props {
   lastName: string;
   email: string;
   id: number;
+  themeColour: string;
+  themeTint: number;
 }
 
 type StateMap = {
   [key: string]: string;
 };
 
-const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) => {
+const UpdateCurrentUserForm: FC<Props> = ({
+  firstName,
+  lastName,
+  email,
+  id,
+  themeTint,
+  themeColour,
+}) => {
   const currentUser = {
     firstName,
     lastName,
@@ -102,6 +111,8 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
           <div className="grid grid-cols-6 gap-6">
             <div className="col-span-6 sm:col-span-3">
               <Input
+                themeColour={themeColour}
+                themeTint={themeTint}
                 labelText="First name"
                 errors={[nameErrors(state.firstName, isFirstNameDirty)]}
                 onBlur={() => setIsFirstNameDirty(true)}
@@ -116,6 +127,8 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
 
             <div className="col-span-6 sm:col-span-3">
               <Input
+                themeColour={themeColour}
+                themeTint={themeTint}
                 labelText="Last name"
                 errors={[nameErrors(state.lastName, isLastNameDirty)]}
                 onBlur={() => setIsLastNameDirty(true)}
@@ -130,6 +143,8 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
 
             <div className="col-span-10 sm:col-span-5">
               <Input
+                themeColour={themeColour}
+                themeTint={themeTint}
                 labelText="Email"
                 readOnly
                 value={state.email}
@@ -143,7 +158,14 @@ const UpdateCurrentUserForm: FC<Props> = ({ firstName, lastName, email, id }) =>
         </div>
         {isCurrentUserUpdated() && (
           <div className="px-4 py-3 bg-white text-right sm:px-6">
-            <Button isFullwidth={isTablet} disabled={!isFormValid} size="XL" type="submit">
+            <Button
+              themeColour={themeColour}
+              themeTint={themeTint}
+              isFullwidth={isTablet}
+              disabled={!isFormValid}
+              size="XL"
+              type="submit"
+            >
               Update
             </Button>
           </div>

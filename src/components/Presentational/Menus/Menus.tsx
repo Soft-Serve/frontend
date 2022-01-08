@@ -10,11 +10,13 @@ import { useNavigate } from "react-router";
 
 interface Props {
   themeFont: string;
+  themeColour: string;
+  themeTint: number;
 }
-const Menus: FC<Props> = ({ themeFont }) => {
+const Menus: FC<Props> = ({ themeFont, themeColour, themeTint }) => {
   const navigate = useNavigate();
   const { setMenuID, setActiveMenu, menuID } = useGlobalContext();
-  const { restaurantSlug, themeColour, themeTint } = useRestaurantContext();
+  const { restaurantSlug } = useRestaurantContext();
 
   const { data, error, loading } = useMenusQuery({
     variables: {
@@ -36,6 +38,8 @@ const Menus: FC<Props> = ({ themeFont }) => {
       <Tabs>
         {data?.menus.map((menu, index) => (
           <Tab
+            themeColour={themeColour}
+            themeTint={themeTint}
             themeFont={themeFont}
             onClick={() => setMenuID(menu.id)}
             numOfTabs={data.menus.length}
@@ -59,7 +63,12 @@ const Menus: FC<Props> = ({ themeFont }) => {
           <h2 className={`m-8 text-center text-2xl font-bold  text-${themeColour}-${themeTint}`}>
             Looks like you do not have any menus yet
           </h2>
-          <Button size="XL" onClick={() => navigate(`${routes.settings}/${restaurantSlug}/menus`)}>
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            size="XL"
+            onClick={() => navigate(`${routes.settings}/${restaurantSlug}/menus`)}
+          >
             Add a menu
           </Button>
         </div>

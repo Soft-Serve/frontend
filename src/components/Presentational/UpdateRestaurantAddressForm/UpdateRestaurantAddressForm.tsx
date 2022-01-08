@@ -8,6 +8,8 @@ import { useRestaurantContext } from "@contexts";
 import { useUpdateRestaurantAddress } from "./UpdateRestaurantAddress.mutation";
 
 interface Props {
+  themeColour: string;
+  themeTint: number;
   restaurantName: string;
   addressLineOne: string;
   addressLineTwo: string;
@@ -28,6 +30,8 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
   city,
   province,
   postalCode,
+  themeColour,
+  themeTint,
   id,
 }) => {
   const address = {
@@ -90,7 +94,14 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
     if (isAddressUpdated()) {
       return (
         <div className="px-4 py-3  text-right sm:px-6 mt-4">
-          <Button loading={loading} size="XXL" isFullwidth={width < 1024} type="submit">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            loading={loading}
+            size="XXL"
+            isFullwidth={width < 1024}
+            type="submit"
+          >
             <span className="font-Quicksand">Update</span>
           </Button>
         </div>
@@ -110,6 +121,8 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
     <form onSubmit={handleSubmit} className="w-full">
       <Grid size={gridSize()}>
         <Input
+          themeColour={themeColour}
+          themeTint={themeTint}
           value={input.restaurantName || ""}
           onChange={handleChange}
           labelText="Restaurant name"
@@ -119,6 +132,8 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
         />
 
         <Input
+          themeColour={themeColour}
+          themeTint={themeTint}
           labelText="Address line 1"
           type="text"
           name="addressLineOne"
@@ -128,6 +143,8 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
         />
 
         <Input
+          themeColour={themeColour}
+          themeTint={themeTint}
           labelText="Address line 2"
           type="text"
           name="addressLineTwo"
@@ -138,6 +155,8 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
         />
 
         <Input
+          themeColour={themeColour}
+          themeTint={themeTint}
           labelText="City"
           type="text"
           name="city"
@@ -147,6 +166,8 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
         />
 
         <Input
+          themeColour={themeColour}
+          themeTint={themeTint}
           labelText="Province"
           type="text"
           name="province"
@@ -156,6 +177,8 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
         />
 
         <Input
+          themeColour={themeColour}
+          themeTint={themeTint}
           labelText="Postal code"
           type="text"
           name="postalCode"

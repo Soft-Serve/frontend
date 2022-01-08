@@ -2,18 +2,20 @@ import React, { FormEvent } from "react";
 import type { FC } from "react";
 import { ALLERGIES_QUERY, Allergy } from "@shared";
 import type { AllergyData } from "@shared";
-import { useRestaurantContext } from "src/contexts";
+import { useRestaurantContext } from "@contexts";
 import { Button, Column, Columns } from "@base";
 
 import { XIcon } from "@heroicons/react/solid";
 import { useDeleteAllergyMutation } from "./DeleteAllergy.mutation";
 
 interface Props {
+  themeColour: string;
+  themeTint: number;
   onCompleted?: (state: boolean) => void;
   selectedAllergy: Allergy;
 }
 
-const DeleteAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy }) => {
+const DeleteAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy, themeColour, themeTint }) => {
   const { restaurantSlug } = useRestaurantContext();
 
   const [deleteAllergy] = useDeleteAllergyMutation({
@@ -70,7 +72,13 @@ const DeleteAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy }) => {
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           Dietary: <span className="font-bold underline text-red-400">{selectedAllergy.name}</span>
         </h3>
-        <Button onClick={() => onCompleted?.(false)} size="S" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onClick={() => onCompleted?.(false)}
+          size="S"
+          colour="accent"
+        >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
@@ -81,6 +89,8 @@ const DeleteAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy }) => {
       <Columns>
         <Column isFullwidth>
           <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
             colour="accent"
             onClick={() => onCompleted?.(false)}
             size="M"
@@ -92,7 +102,14 @@ const DeleteAllergyForm: FC<Props> = ({ onCompleted, selectedAllergy }) => {
           </Button>
         </Column>
         <Column isFullwidth>
-          <Button size="LG" isFullwidth type="submit" css="text-center">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            size="LG"
+            isFullwidth
+            type="submit"
+            css="text-center"
+          >
             Delete
           </Button>
         </Column>

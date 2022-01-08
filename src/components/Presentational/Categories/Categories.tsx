@@ -2,7 +2,7 @@ import React, { SetStateAction } from "react";
 import type { FC } from "react";
 import { RadioTile, RadioTiles } from "@base";
 import { Category } from "@shared";
-import { useGlobalContext, useRestaurantContext } from "@contexts";
+import { useGlobalContext } from "@contexts";
 import { classnames } from "tailwindcss-classnames";
 import { SkeletonCategories } from "./SkeletonCategories";
 
@@ -10,11 +10,20 @@ interface Props {
   categories?: Category[];
   loading?: boolean;
   setCategoryID: (value: SetStateAction<number>) => void;
+  themeFont: string;
+  themeColour: string;
+  themeTint: number;
 }
 
-const Categories: FC<Props> = ({ categories, loading, setCategoryID }) => {
+const Categories: FC<Props> = ({
+  categories,
+  loading,
+  setCategoryID,
+  themeFont,
+  themeTint,
+  themeColour,
+}) => {
   const { categoryID } = useGlobalContext();
-  const { themeFont } = useRestaurantContext();
   if (loading) return <SkeletonCategories />;
 
   return (
@@ -25,6 +34,8 @@ const Categories: FC<Props> = ({ categories, loading, setCategoryID }) => {
       <div className="flex">
         {categories?.map(category => (
           <RadioTile
+            themeColour={themeColour}
+            themeTint={themeTint}
             value={category}
             key={category.id}
             css={classnames("rounded-md", "mx-2", "whitespace-nowrap")}

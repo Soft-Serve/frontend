@@ -9,9 +9,17 @@ interface Props {
   onCompleted?: (state: boolean) => void;
   categoryID?: number;
   deletedItem?: Item;
+  themeColour: string;
+  themeTint: number;
 }
 
-const DeleteItemForm: FC<Props> = ({ onCompleted, categoryID, deletedItem }) => {
+const DeleteItemForm: FC<Props> = ({
+  onCompleted,
+  categoryID,
+  deletedItem,
+  themeTint,
+  themeColour,
+}) => {
   const [deleteItem, { loading }] = useDeleteItemMutation({
     onCompleted: () => onCompleted?.(false),
     update(cache, { data: deletedItemData }) {
@@ -58,7 +66,13 @@ const DeleteItemForm: FC<Props> = ({ onCompleted, categoryID, deletedItem }) => 
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           Item name: <span className="font-bold underline text-red-400">{deletedItem?.name}</span>
         </h3>
-        <Button onClick={() => onCompleted?.(false)} size="S" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onClick={() => onCompleted?.(false)}
+          size="S"
+          colour="accent"
+        >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
@@ -69,6 +83,8 @@ const DeleteItemForm: FC<Props> = ({ onCompleted, categoryID, deletedItem }) => 
       <div className="flex items-center mt-4">
         <div className="flex-1 mr-2">
           <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
             colour="accent"
             onClick={() => onCompleted?.(false)}
             size="M"
@@ -79,7 +95,15 @@ const DeleteItemForm: FC<Props> = ({ onCompleted, categoryID, deletedItem }) => 
           </Button>
         </div>
         <div className="flex-1 ml-2">
-          <Button loading={loading} size="LG" isFullwidth type="submit" css="text-center">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            loading={loading}
+            size="LG"
+            isFullwidth
+            type="submit"
+            css="text-center"
+          >
             Delete
           </Button>
         </div>

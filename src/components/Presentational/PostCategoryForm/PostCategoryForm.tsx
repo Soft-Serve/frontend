@@ -11,9 +11,11 @@ import { usePostCategoryMutation } from "./PostCategory.mutation";
 interface Props {
   onCompleted?: (state: boolean) => void;
   menuID: number;
+  themeColour: string;
+  themeTint: number;
 }
 
-const PostCategoryForm: FC<Props> = ({ onCompleted, menuID }) => {
+const PostCategoryForm: FC<Props> = ({ onCompleted, menuID, themeTint, themeColour }) => {
   const [name, setName] = useState("");
   const [isNameDirty, setIsNameDirty] = useState(false);
   const [categoryType, setCategoryType] = useState("food");
@@ -84,13 +86,21 @@ const PostCategoryForm: FC<Props> = ({ onCompleted, menuID }) => {
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           add new category
         </h3>
-        <Button onClick={() => onCompleted?.(false)} size="S" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onClick={() => onCompleted?.(false)}
+          size="S"
+          colour="accent"
+        >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
       <form onSubmit={handleSubmit} className="w-full">
         <div className="mt-4 w-full">
           <Input
+            themeColour={themeColour}
+            themeTint={themeTint}
             errors={[nameError()]}
             onBlur={() => {
               if (name.length) setIsNameDirty(true);
@@ -109,17 +119,29 @@ const PostCategoryForm: FC<Props> = ({ onCompleted, menuID }) => {
         </div>
         <RadioTiles value={categoryType} onChange={value => setCategoryType(value)}>
           <div className="flex my-4">
-            <RadioTile css="w-full" value="food">
+            <RadioTile themeTint={themeTint} themeColour={themeColour} css="w-full" value="food">
               <span className="block text-sm font-medium w-full text-center">Food</span>
             </RadioTile>
 
-            <RadioTile css={classnames("w-full", "ml-4")} value="beverage">
+            <RadioTile
+              themeColour={themeColour}
+              themeTint={themeTint}
+              css={classnames("w-full", "ml-4")}
+              value="beverage"
+            >
               <span className="block text-sm font-medium w-full text-center">Beverage</span>
             </RadioTile>
           </div>
         </RadioTiles>
         <div className="mt-3 w-full">
-          <Button disabled={!isFormValid} isFullwidth size="XXL" type="submit">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            disabled={!isFormValid}
+            isFullwidth
+            size="XXL"
+            type="submit"
+          >
             Add Category
           </Button>
         </div>

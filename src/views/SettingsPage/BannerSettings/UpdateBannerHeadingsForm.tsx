@@ -11,13 +11,22 @@ interface Props {
   subHeader?: string;
   id?: number;
   restaurantId?: number;
+  themeColour: string;
+  themeTint: number;
 }
 
 type StateMap = {
   [key: string]: string;
 };
 
-const UpdateBannerHeadingsForm: FC<Props> = ({ header, subHeader, id, restaurantId }) => {
+const UpdateBannerHeadingsForm: FC<Props> = ({
+  header,
+  subHeader,
+  id,
+  restaurantId,
+  themeColour,
+  themeTint,
+}) => {
   const { width } = useViewport();
   const [updateBannerHeaders] = useUpdateBannerHeaders();
   const { restaurantSlug } = useRestaurantContext();
@@ -74,6 +83,8 @@ const UpdateBannerHeadingsForm: FC<Props> = ({ header, subHeader, id, restaurant
           <div className="grid grid-cols-6 gap-6">
             <div className="col-span-6 sm:col-span-3">
               <Input
+                themeColour={themeColour}
+                themeTint={themeTint}
                 onChange={handleChange}
                 value={state.header}
                 labelText="Header"
@@ -86,6 +97,8 @@ const UpdateBannerHeadingsForm: FC<Props> = ({ header, subHeader, id, restaurant
 
             <div className="col-span-6 sm:col-span-3">
               <Input
+                themeColour={themeColour}
+                themeTint={themeTint}
                 onChange={handleChange}
                 value={state.subHeader}
                 labelText="SubHeader"
@@ -99,7 +112,13 @@ const UpdateBannerHeadingsForm: FC<Props> = ({ header, subHeader, id, restaurant
         </div>
         {isFieldsUpdated() && (
           <div className="px-4 py-3 bg-white text-right sm:px-6">
-            <Button isFullwidth={isTablet} size="XL" type="submit">
+            <Button
+              themeColour={themeColour}
+              themeTint={themeTint}
+              isFullwidth={isTablet}
+              size="XL"
+              type="submit"
+            >
               Update
             </Button>
           </div>

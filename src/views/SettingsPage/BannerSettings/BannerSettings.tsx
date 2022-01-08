@@ -11,7 +11,12 @@ import { SettingsHeader } from "../SettingsHeader";
 import { UpdateBannerHeadingsForm } from "./UpdateBannerHeadingsForm";
 import { SkeletonBannerSettings } from "./SkeletonBannerSettings";
 
-const BannerSettings: FC = () => {
+interface Props {
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
+}
+const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont }) => {
   const { restaurantSlug } = useRestaurantContext();
   const { data, loading } = useBannersQuery({
     variables: {
@@ -37,11 +42,13 @@ const BannerSettings: FC = () => {
         </CardContent>
       </Card>
       <Card>
-        <HeroBanner />
+        <HeroBanner themeColour={themeColour} themeFont={themeFont} />
       </Card>
 
       <Card css={classnames("flex-col", "mt-4")}>
         <UpdateBannerHeadingsForm
+          themeColour={themeColour}
+          themeTint={themeTint}
           restaurantId={restaurantData?.restaurant?.id}
           subHeader={data?.banners?.[0]?.sub_header}
           header={data?.banners?.[0]?.header}
@@ -60,7 +67,12 @@ const BannerSettings: FC = () => {
               }
             />
           </div>
-          <UploadImageBox onChange={setPhotoFile} imageFile={photoFile} />
+          <UploadImageBox
+            themeColour={themeColour}
+            themeTint={themeTint}
+            onChange={setPhotoFile}
+            imageFile={photoFile}
+          />
         </div>
       </Card>
     </TabWrapper>

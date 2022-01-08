@@ -4,13 +4,15 @@ import { Input, Button, PasswordInput } from "@base";
 import { uid, accessToken, clientToken } from "@constants";
 import { useNavigate } from "react-router";
 import { LogoSVG } from "@svgs";
-import { useRestaurantContext } from "@contexts";
 import { isBasicEmailRegexValid, isEmailAtValid, isEmailDotValid } from "@utility";
 import { useViewport } from "@hooks";
 import { useSignInFormMutation } from "./SignInForm.mutation";
 
-const SignInForm: FC = () => {
-  const { themeColour, themeTint } = useRestaurantContext();
+interface Props {
+  themeColour: string;
+  themeTint: number;
+}
+const SignInForm: FC<Props> = ({ themeColour, themeTint }) => {
   const [isLoginSuccesFull, setIsLoginSuccessFull] = useState(true);
   const { width } = useViewport();
   const navigate = useNavigate();
@@ -108,13 +110,15 @@ const SignInForm: FC = () => {
 
   return (
     <>
-      <div className="sm:mx-auto sm:w-full sm:max-w-md flex justify-center flex-col items-center">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md flex justify-center flex-col items-center mt-10">
         {renderCTA()}
       </div>
       <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <Input
+              themeColour={themeColour}
+              themeTint={themeTint}
               errors={[renderEmailErrors()]}
               onBlur={handleEmailOnBlur}
               onChange={handleChange}
@@ -140,7 +144,14 @@ const SignInForm: FC = () => {
             </div>
 
             <div>
-              <Button loading={loading} isFullwidth size="XXL" type="submit">
+              <Button
+                themeColour={themeColour}
+                themeTint={themeTint}
+                loading={loading}
+                isFullwidth
+                size="XXL"
+                type="submit"
+              >
                 Sign in
               </Button>
             </div>

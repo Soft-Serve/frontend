@@ -38,20 +38,24 @@ interface Props {
 const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
   const { id } = useParams<Param>() as Param;
   const { data, loading } = useCurrentUserQuery();
-  const { restaurantSlug } = useRestaurantContext();
+  const { restaurantSlug, themeColour, themeTint, themeFont } = useRestaurantContext();
 
   const { width } = useViewport();
   const [selected, setSelected] = useState(id);
 
-  const restaurant = <RestaurantSettings />;
-  const banner = <BannerSettings />;
-  const users = <UsersSettings />;
-  const menus = <MenuSettings />;
-  const dietaries = <AllergiesSettings />;
-  const items = <ItemSettings />;
-  const account = <AccountSettings />;
+  const restaurant = <RestaurantSettings themeColour={themeColour} themeTint={themeTint} />;
+  const banner = (
+    <BannerSettings themeFont={themeFont} themeColour={themeColour} themeTint={themeTint} />
+  );
+  const users = <UsersSettings themeColour={themeColour} themeTint={themeTint} />;
+  const menus = <MenuSettings themeColour={themeColour} themeTint={themeTint} />;
+  const dietaries = <AllergiesSettings themeColour={themeColour} themeTint={themeTint} />;
+  const items = (
+    <ItemSettings themeFont={themeFont} themeColour={themeColour} themeTint={themeTint} />
+  );
+  const account = <AccountSettings themeColour={themeColour} themeTint={themeTint} />;
   const billing = <BillingSettings />;
-  const categories = <CategorySettings />;
+  const categories = <CategorySettings themeColour={themeColour} themeTint={themeTint} />;
 
   const SettingsMap = {
     restaurant,
@@ -89,6 +93,8 @@ const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
   return (
     <>
       <SettingsMobileSubNavigation
+        themeColour={themeColour}
+        themeTint={themeTint}
         selected={selected}
         setSelected={handleSetSelected}
         isOpen={isOpen}
@@ -97,6 +103,8 @@ const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
       <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
         <SettingsWrapper>
           <SettingsSubMenu
+            themeColour={themeColour}
+            themeTint={themeTint}
             selected={selected}
             setSelected={setSelected}
             className="hidden lg:block flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 xl:flex xl:flex-col "

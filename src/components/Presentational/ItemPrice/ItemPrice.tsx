@@ -2,9 +2,11 @@ import React from "react";
 import type { FC } from "react";
 import { useItemSizeQuery } from "@shared";
 import Skeleton from "react-loading-skeleton";
-import { useRestaurantContext } from "src/contexts";
 
 interface Props {
+  themeFont: string;
+  themeColour: string;
+  themeTint: number;
   itemID: number;
   withImage?: boolean;
   position?: "end" | "start";
@@ -15,8 +17,14 @@ const formatter = new Intl.NumberFormat("en-US", {
   currency: "USD",
 });
 
-const ItemPrice: FC<Props> = ({ itemID, withImage, position = "end" }) => {
-  const { themeColour, themeFont, themeTint } = useRestaurantContext();
+const ItemPrice: FC<Props> = ({
+  itemID,
+  withImage,
+  position = "end",
+  themeColour,
+  themeTint,
+  themeFont,
+}) => {
   const { data, error, loading } = useItemSizeQuery({
     variables: {
       itemID,

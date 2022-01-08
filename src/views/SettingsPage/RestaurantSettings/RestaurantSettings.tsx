@@ -6,7 +6,11 @@ import { useRestaurantContext } from "@contexts";
 import { Card, CardContent, TabWrapper } from "@base";
 import { SettingsHeader } from "../SettingsHeader";
 
-const RestaurantSettings: FC = () => {
+interface Props {
+  themeColour: string;
+  themeTint: number;
+}
+const RestaurantSettings: FC<Props> = ({ themeTint, themeColour }) => {
   const { restaurantSlug } = useRestaurantContext();
 
   const { data, loading } = useRestaurantQuery({
@@ -28,7 +32,11 @@ const RestaurantSettings: FC = () => {
         </Card>
         <div className="w-full mt-10">
           <div className="mt-5 md:mt-0 md:col-span-2">
-            <UpdateRestaurantForm restaurant={data.restaurant} />
+            <UpdateRestaurantForm
+              themeColour={themeColour}
+              themeTint={themeTint}
+              restaurant={data.restaurant}
+            />
           </div>
         </div>
       </TabWrapper>

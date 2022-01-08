@@ -21,9 +21,11 @@ import { usePostItemMutation } from "./PostItem.mutation";
 interface Props {
   onCompleted?: (state: boolean) => void;
   selectedMenu?: Menu;
+  themeColour: string;
+  themeTint: number;
 }
 
-const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
+const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, themeTint }) => {
   const { photoFile, setPhotoFile, fetchPhoto } = useUploadPhoto();
   const [isInputNameDirty, setIsInputNameDirty] = useState(false);
   const onSuccess = () => toast.custom(<Notification header="Item succesfully added!" />);
@@ -164,7 +166,13 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           add new item
         </h3>
-        <Button onClick={() => onCompleted?.(false)} size="S" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onClick={() => onCompleted?.(false)}
+          size="S"
+          colour="accent"
+        >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
@@ -179,6 +187,8 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
         />
         <div className="mt-4">
           <Input
+            themeColour={themeColour}
+            themeTint={themeTint}
             onBlur={() => {
               if (input.name.length) {
                 setIsInputNameDirty(true);
@@ -196,6 +206,8 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
         </div>
         <div className="mt-4">
           <TextBox
+            themeColour={themeColour}
+            themeTint={themeTint}
             labelText="Description"
             onChange={handleInputChange}
             value={input.description}
@@ -204,18 +216,33 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu }) => {
           />
         </div>
         <MultiSize
+          themeColour={themeColour}
+          themeTint={themeTint}
           onChange={onSizeChange}
           addSize={onAddSize}
           deleteSize={onDeleteSize}
           sizes={input.sizes}
         />
-        <UploadImageBox onChange={setPhotoFile} imageFile={photoFile} />
+        <UploadImageBox
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onChange={setPhotoFile}
+          imageFile={photoFile}
+        />
         <Tooltip
           css={classnames("w-full")}
           isDisabled={!!activeCategory?.name}
           tooltipText={tooltiptext}
         >
-          <Button loading={loading} disabled={!isFormValid} isFullwidth size="XXL" type="submit">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            loading={loading}
+            disabled={!isFormValid}
+            isFullwidth
+            size="XXL"
+            type="submit"
+          >
             Add Item
           </Button>
         </Tooltip>

@@ -6,11 +6,19 @@ interface Props {
   handleUpdate: any;
   handleDelete: any;
   handleAllergies?: any;
+  themeColour: string;
+  themeTint: number;
 }
 
-const ItemDropdown: FC<Props> = ({ handleAllergies, handleDelete, handleUpdate }) => {
+const ItemDropdown: FC<Props> = ({
+  handleAllergies,
+  handleDelete,
+  handleUpdate,
+  themeColour,
+  themeTint,
+}) => {
   return (
-    <KebabDropdown>
+    <KebabDropdown themeColour={themeColour} themeTint={themeTint}>
       <KebabDropdownItem onClick={handleUpdate}>Edit Item</KebabDropdownItem>
       <KebabDropdownItem onClick={handleDelete}>Delete Item</KebabDropdownItem>
       <KebabDropdownItem onClick={handleAllergies}>Add Dietary</KebabDropdownItem>

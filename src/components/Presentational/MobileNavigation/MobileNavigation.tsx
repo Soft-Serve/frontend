@@ -54,7 +54,12 @@ const MobileNavigation: FC<Props> = ({ isOpen, onClose, children }) => {
               leaveTo="opacity-0"
             >
               <div className="absolute top-0 right-0 mr-4 pt-4">
-                <Button colour="accent" onClick={() => onClose(false)}>
+                <Button
+                  themeColour={themeColour}
+                  themeTint={themeTint}
+                  colour="accent"
+                  onClick={() => onClose(false)}
+                >
                   <span className="sr-only">Close sidebar</span>
                   <XIcon className="h-6 w-6" aria-hidden="true" />
                 </Button>

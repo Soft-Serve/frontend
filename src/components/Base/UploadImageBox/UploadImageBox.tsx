@@ -1,15 +1,15 @@
 import React from "react";
 import type { FC } from "react";
 import { UploadImageSVG } from "@svgs";
-import { useRestaurantContext } from "@contexts";
 
 interface Props {
   onChange: (value: File | undefined) => void;
   imageFile?: File;
+  themeColour: string;
+  themeTint: number;
 }
 
-const UploadImageBox: FC<Props> = ({ onChange, imageFile }) => {
-  const { themeColour, themeTint } = useRestaurantContext();
+const UploadImageBox: FC<Props> = ({ onChange, imageFile, themeTint, themeColour }) => {
   return (
     <div
       className={`my-6 max-w-lg flex justify-center px-3 pt-2 pb-2 border-2 border-${themeColour}-${themeTint} border-dashed rounded-md`}

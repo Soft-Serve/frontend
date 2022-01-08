@@ -10,9 +10,11 @@ interface Props {
   isOpen: boolean;
   onClose: (state: boolean) => void;
   item?: Item;
+  themeColour: string;
+  themeTint: number;
 }
 
-const ItemModal: FC<Props> = ({ isOpen, onClose, item }) => {
+const ItemModal: FC<Props> = ({ isOpen, onClose, item, themeTint, themeColour }) => {
   const { themeFont } = useRestaurantContext();
   if (item) {
     return (
@@ -36,7 +38,14 @@ const ItemModal: FC<Props> = ({ isOpen, onClose, item }) => {
               >
                 {item.available ? item.description : "** Temporarily unavailable  **"}
               </p>
-              <ItemPrice withImage position="start" itemID={item?.id} />
+              <ItemPrice
+                themeFont={themeFont}
+                themeColour={themeColour}
+                themeTint={themeTint}
+                withImage
+                position="start"
+                itemID={item?.id}
+              />
             </div>
             <div className="w-full">
               <ModalDietaries itemAvailable={item?.available} itemID={item.id} />
@@ -44,7 +53,13 @@ const ItemModal: FC<Props> = ({ isOpen, onClose, item }) => {
           </div>
         </div>
         <div className="flex justify-end items-end w-full mt-4">
-          <Button isFullwidth onClick={() => onClose(false)} size="XXL">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            isFullwidth
+            onClick={() => onClose(false)}
+            size="XXL"
+          >
             Close
           </Button>
         </div>

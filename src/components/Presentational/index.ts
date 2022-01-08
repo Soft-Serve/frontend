@@ -20,7 +20,6 @@ export { UpdateItemForm } from "./UpdateItemForm";
 export { CurrentUserAvatar } from "./CurrentUserAvatar";
 export { SettingsSubMenu } from "./SettingsSubMenu";
 export { MultiSize } from "./MultiSize";
-export { SingleSize } from "./SingleSize";
 export { CreateNewUserForm } from "./CreateNewUserForm";
 export { UpdateCurrentUserForm } from "./UpdateCurrentUserForm";
 export { UpdateRestaurantForm } from "./UpdateRestaurantForm";

@@ -4,6 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/solid";
 import { MenusMobileNavigation, RestaurantLogo } from "@presentational";
 import { Button } from "@base";
+import { useRestaurantContext } from "src/contexts";
 
 interface Props {
   isOpen: boolean;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const MenuSlideOver: FC<Props> = ({ isOpen, onClose }) => {
+  const { themeTint, themeColour, themeFont } = useRestaurantContext();
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" static className="fixed inset-0 flex z-40" open={isOpen} onClose={onClose}>
@@ -45,7 +47,11 @@ const MenuSlideOver: FC<Props> = ({ isOpen, onClose }) => {
               leaveTo="opacity-0"
             >
               <div className="absolute top-0 right-0 mr-2 pt-4">
-                <Button onClick={() => onClose(prevState => !prevState)}>
+                <Button
+                  themeColour={themeColour}
+                  themeTint={themeTint}
+                  onClick={() => onClose(prevState => !prevState)}
+                >
                   <span className="sr-only">Close sidebar</span>
                   <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
                 </Button>
@@ -56,7 +62,12 @@ const MenuSlideOver: FC<Props> = ({ isOpen, onClose }) => {
                 <RestaurantLogo dimensions={60} borderColor="black" borderWidth={1} />
               </div>
               <nav aria-label="Sidebar" className="mt-5">
-                <MenusMobileNavigation closeMenu={onClose} />
+                <MenusMobileNavigation
+                  themeFont={themeFont}
+                  themeColour={themeColour}
+                  themeTint={themeTint}
+                  closeMenu={onClose}
+                />
               </nav>
             </div>
           </div>

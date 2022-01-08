@@ -4,6 +4,9 @@ import { Category, Item, useItemsQuery } from "@shared";
 import { CategoryItem, SkeletonCategoryItem } from "./CategoryItem";
 
 interface Props {
+  themeFont: string;
+  themeColour: string;
+  themeTint: number;
   handleAddDietary: (item: Item) => void;
   handleDeleteItem: (item: Item, categoryID: number) => void;
   handleUpdateItem: (item: Item, categoryID: number) => void;
@@ -12,11 +15,14 @@ interface Props {
   activeCategory?: Category;
 }
 const CategoryItems: FC<Props> = ({
+  themeFont,
   handleDeleteItem,
   categoryID,
   searchValue,
   handleUpdateItem,
   handleAddDietary,
+  themeColour,
+  themeTint,
 }) => {
   const { data, loading } = useItemsQuery({
     variables: {
@@ -43,6 +49,9 @@ const CategoryItems: FC<Props> = ({
     <>
       {filterdItems?.map(item => (
         <CategoryItem
+          themeFont={themeFont}
+          themeColour={themeColour}
+          themeTint={themeTint}
           categoryID={categoryID}
           key={item.id}
           item={item}

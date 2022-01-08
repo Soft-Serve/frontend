@@ -11,9 +11,11 @@ import { usePostMenuMutation } from "./PostMenu.mutation";
 interface Props {
   onCompleted?: (state: boolean) => void;
   restaurantID: number;
+  themeColour: string;
+  themeTint: number;
 }
 
-const PostMenuForm: FC<Props> = ({ onCompleted, restaurantID }) => {
+const PostMenuForm: FC<Props> = ({ onCompleted, restaurantID, themeTint, themeColour }) => {
   const { restaurantSlug } = useRestaurantContext();
   const [isInputDirty, setIsInputDirty] = useState(false);
   const onSuccess = () => toast.custom(<Notification header="Menu succesfully added!" />);
@@ -66,13 +68,21 @@ const PostMenuForm: FC<Props> = ({ onCompleted, restaurantID }) => {
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           add new menu
         </h3>
-        <Button onClick={() => onCompleted?.(false)} size="S" colour="accent">
+        <Button
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onClick={() => onCompleted?.(false)}
+          size="S"
+          colour="accent"
+        >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
 
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col w-full">
         <Input
+          themeColour={themeColour}
+          themeTint={themeTint}
           autoFocus
           errors={[inputError()]}
           onBlur={() => {
@@ -91,7 +101,15 @@ const PostMenuForm: FC<Props> = ({ onCompleted, restaurantID }) => {
           required
         />
         <div className="my-2">
-          <Button disabled={!isFormValid} loading={loading} isFullwidth size="XXL" type="submit">
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            disabled={!isFormValid}
+            loading={loading}
+            isFullwidth
+            size="XXL"
+            type="submit"
+          >
             Add Menu
           </Button>
         </div>

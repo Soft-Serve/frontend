@@ -58,7 +58,14 @@ const AddDietaryForm: FC<Props> = ({ item, onCompleted }) => {
           ))}
         </div>
       </fieldset>
-      <Button onClick={() => onCompleted?.(false)} size="XL" isFullwidth css="mt-2">
+      <Button
+        themeColour={themeColour}
+        themeTint={themeTint}
+        onClick={() => onCompleted?.(false)}
+        size="XL"
+        isFullwidth
+        css="mt-2"
+      >
         Close
       </Button>
     </div>

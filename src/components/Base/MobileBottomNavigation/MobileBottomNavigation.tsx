@@ -1,9 +1,11 @@
 import React from "react";
 import type { FC } from "react";
-import { useRestaurantContext } from "src/contexts";
 
-const MobileBottomNavigation: FC = ({ children }) => {
-  const { themeColour, themeTint } = useRestaurantContext();
+interface Props {
+  themeColour: string;
+  themeTint: number;
+}
+const MobileBottomNavigation: FC<Props> = ({ children, themeTint, themeColour }) => {
   return (
     <section
       id="bottom-navigation"

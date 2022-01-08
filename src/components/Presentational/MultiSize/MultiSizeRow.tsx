@@ -5,6 +5,8 @@ import { TrashIcon } from "@heroicons/react/solid";
 import { ItemSize } from "src/shared";
 
 interface Props {
+  themeColour: string;
+  themeTint: number;
   size: Pick<ItemSize, "price" | "unit" | "id">;
   disableDeleteButton?: boolean;
   deleteSize: (id: string) => void;
@@ -12,7 +14,15 @@ interface Props {
   onChange: (e: ChangeEvent<HTMLInputElement>, id: string) => void;
 }
 
-const MultiSizeRow: FC<Props> = ({ size, deleteSize, index, onChange, disableDeleteButton }) => {
+const MultiSizeRow: FC<Props> = ({
+  size,
+  deleteSize,
+  index,
+  onChange,
+  disableDeleteButton,
+  themeTint,
+  themeColour,
+}) => {
   const isPriceValid = () => !!size.price;
   const [isPriceDirty, setIsPriceDirty] = useState(false);
 
@@ -40,6 +50,8 @@ const MultiSizeRow: FC<Props> = ({ size, deleteSize, index, onChange, disableDel
       <div className="flex items-center justify-between w-full p-2">
         <div className="w-40">
           <Input
+            themeColour={themeColour}
+            themeTint={themeTint}
             onChange={e => onChange(e, size?.id || "")}
             value={size.unit}
             placeholder="5 OZ"
@@ -51,6 +63,8 @@ const MultiSizeRow: FC<Props> = ({ size, deleteSize, index, onChange, disableDel
         </div>
         <div className="mx-2">
           <Input
+            themeColour={themeColour}
+            themeTint={themeTint}
             placeholder="27.00"
             min={0}
             step={0.1}
@@ -65,6 +79,8 @@ const MultiSizeRow: FC<Props> = ({ size, deleteSize, index, onChange, disableDel
         </div>
         <div className="w-16">
           <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
             disabled={disableDeleteButton}
             onClick={() => deleteSize(size?.id || "")}
             size="S"

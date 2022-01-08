@@ -8,6 +8,9 @@ import { ItemDropdown } from "../ItemDropdown";
 import { CategoryItemDietaries } from "../CategoryItemDietaries";
 
 interface Props {
+  themeFont: string;
+  themeColour: string;
+  themeTint: number;
   handleAddDietary: (item: Item) => void;
   handleDeleteItem: (item: Item, categoryID: number) => void;
   handleUpdateItem: (item: Item, categoryID: number) => void;
@@ -16,6 +19,9 @@ interface Props {
 }
 
 const MobileCategoryItemWithImage: FC<Props> = ({
+  themeFont,
+  themeColour,
+  themeTint,
   handleDeleteItem,
   categoryID,
   handleUpdateItem,
@@ -54,6 +60,8 @@ const MobileCategoryItemWithImage: FC<Props> = ({
       </div>
       <div className="absolute top-1 right-1">
         <ItemDropdown
+          themeColour={themeColour}
+          themeTint={themeTint}
           handleAllergies={() => handleAddDietary(item)}
           handleDelete={() => handleDeleteItem(item, categoryID)}
           handleUpdate={() => handleUpdateItem(item, categoryID)}
@@ -62,7 +70,12 @@ const MobileCategoryItemWithImage: FC<Props> = ({
       <div className="flex-1 bg-white p-2 flex flex-col justify-between">
         <div className="flex w-full justify-between">
           <p className="font-bold font-Quicksand">{item?.name}</p>
-          <Toggle isEnabled={isItemAvailable} handleClick={handleToggle} />
+          <Toggle
+            themeColour={themeColour}
+            themeTint={themeTint}
+            isEnabled={isItemAvailable}
+            handleClick={handleToggle}
+          />
         </div>
         <p className="font-Quicksand italic text-gray-600 mt-2 text-sm break-words text-ellipsis overflow-hidden">
           {item.available ? item.description : "** Temporarily unavailable  **"}
@@ -71,7 +84,14 @@ const MobileCategoryItemWithImage: FC<Props> = ({
       </div>
 
       <div className="flex items-center justify-between px-2 bg-white">
-        <ItemPrice position="end" withImage itemID={item.id} />
+        <ItemPrice
+          themeColour={themeColour}
+          themeFont={themeFont}
+          themeTint={themeTint}
+          position="end"
+          withImage
+          itemID={item.id}
+        />
       </div>
     </div>
   );
