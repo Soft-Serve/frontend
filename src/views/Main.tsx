@@ -9,8 +9,9 @@ import { MainMobileHeader } from "./MainMobileHeader";
 import { Providers } from "./Providers";
 import { SignInPage } from "./SignInPage/SignInPage";
 
+const SettingsPage = lazy(() => import("./SettingsPage/DefaultSettingsPage"));
+
 const Main: FC = () => {
-  const SettingsPage = lazy(() => import("./SettingsPage/DefaultSettingsPage"));
   const { pathname } = useLocation();
   const isOnSettingsPage = pathname.includes("settings");
 

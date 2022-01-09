@@ -6,11 +6,11 @@ import { LoadingScreen } from "@base";
 import { routes } from "@routes";
 import { client } from "./client";
 
-const App = () => {
-  const LandingPage = lazy(() => import("./views/LandingPage"));
-  const SignUpPage = lazy(() => import("./views/SignUpPage/DefaultSignUpPage"));
-  const ConfirmEmailPage = lazy(() => import("./views/ConfirmEmailPage/DefaultConfirmEmailPage"));
+const LandingPage = lazy(() => import("./views/LandingPage"));
+const SignUpPage = lazy(() => import("./views/SignUpPage/DefaultSignUpPage"));
+const ConfirmEmailPage = lazy(() => import("./views/ConfirmEmailPage/DefaultConfirmEmailPage"));
 
+const App = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
