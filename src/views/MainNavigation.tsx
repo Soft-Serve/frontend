@@ -6,7 +6,7 @@ import { LoginSVG, LogoutSVG, MenuSVG } from "@svgs";
 import { routes } from "@routes";
 import { useCurrentUserQuery, useSignOutMutation } from "@shared";
 import { useRestaurantContext } from "@contexts";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
@@ -17,7 +17,6 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
   const isOnSettingsPage = pathname.includes("settings");
   const isOnSignInPage = pathname.includes("sign-in");
 
-  const navigate = useNavigate();
   const { restaurantSlug, themeFont, themeColour, themeTint } = useRestaurantContext();
   const { data } = useCurrentUserQuery({
     skip: !restaurantSlug,
@@ -27,8 +26,7 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
   const signUserOut = () => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
-    navigate(`${routes.restaurants}/${restaurantSlug}/sign-in`);
-    window.location.reload();
+    window.location.assign(`${routes.restaurants}/${restaurantSlug}/sign-in`);
   };
 
   const renderSiginButton = () => {

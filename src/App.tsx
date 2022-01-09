@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LoadingScreen } from "@base";
 import { routes } from "@routes";
 import { client } from "./client";
+import { PageNotFound } from "./views/PageNotFound";
 
 const LandingPage = lazy(() => import("./views/LandingPage"));
 const SignUpPage = lazy(() => import("./views/SignUpPage/DefaultSignUpPage"));
@@ -16,6 +17,7 @@ const App = () => {
       <Router>
         <Suspense fallback={<LoadingScreen />}>
           <Routes>
+            <Route path="*" element={<PageNotFound />} />
             <Route path="/" element={<LandingPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
             <Route path="/confirm" element={<ConfirmEmailPage />} />

@@ -2,7 +2,6 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import type { FC } from "react";
 import { Input, Button, PasswordInput } from "@base";
 import { uid, accessToken, clientToken } from "@constants";
-import { useNavigate } from "react-router";
 import { LogoSVG } from "@svgs";
 import { isBasicEmailRegexValid, isEmailAtValid, isEmailDotValid } from "@utility";
 import { useViewport } from "@hooks";
@@ -15,14 +14,12 @@ interface Props {
 const SignInForm: FC<Props> = ({ themeColour, themeTint }) => {
   const [isLoginSuccesFull, setIsLoginSuccessFull] = useState(true);
   const { width } = useViewport();
-  const navigate = useNavigate();
   const [signIn, { loading }] = useSignInFormMutation({
     onCompleted: completedData => {
       localStorage.setItem(accessToken, completedData?.signIn?.access_token);
       localStorage.setItem(uid, completedData?.signIn?.uid);
       localStorage.setItem(clientToken, completedData?.signIn?.client);
-      navigate(`/restaurants/${completedData?.signIn?.restaurant_slug}`);
-      window.location.reload();
+      window.location.assign(`/restaurants/${completedData?.signIn?.restaurant_slug}`);
     },
 
     onError: () => setIsLoginSuccessFull(false),

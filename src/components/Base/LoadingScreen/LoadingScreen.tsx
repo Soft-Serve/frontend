@@ -11,7 +11,7 @@ const LoadingScreen: FC = () => {
         <div className="w-5 h-5 bg-white rounded-full animate-bounce" />
       </div>
       <span className="mt-4 text-xl font-Quicksand w-full text-center">
-        Loading page, this might take a minute...
+        Loading page, we recommend you connect to the wifi to speed this up!
       </span>
     </div>
   );

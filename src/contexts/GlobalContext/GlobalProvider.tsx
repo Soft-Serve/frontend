@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import type { FC } from "react";
+import { useNavigate } from "react-router";
 import { GlobalContext, useRestaurantContext } from "@contexts";
 import { LoadingScreen } from "@base";
 import { useRestaurantThemeQuery } from "./RestaurantTheme.query";
@@ -10,6 +11,7 @@ const GlobalProvider: FC = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState("");
   const [currentUser, setCurrentUser] = useState("");
   const { restaurantSlug, setThemeColour, setThemeTint, setThemeFont } = useRestaurantContext();
+  const navigate = useNavigate();
 
   const { loading } = useRestaurantThemeQuery({
     variables: {
@@ -17,11 +19,16 @@ const GlobalProvider: FC = ({ children }) => {
     },
     skip: !restaurantSlug,
     onCompleted: completedData => {
-      setMenuID(completedData?.restaurant?.id);
-      setThemeColour(completedData?.restaurant?.colour);
-      setThemeTint(completedData?.restaurant?.tint);
-      setThemeFont(completedData?.restaurant?.font || "Quicksand");
+      if (completedData?.restaurant) {
+        setMenuID(completedData?.restaurant?.id);
+        setThemeColour(completedData?.restaurant?.colour);
+        setThemeTint(completedData?.restaurant?.tint);
+        setThemeFont(completedData?.restaurant?.font || "Quicksand");
+      } else {
+        navigate("/*");
+      }
     },
+    onError: () => navigate("/*"),
   });
 
   if (loading) {
