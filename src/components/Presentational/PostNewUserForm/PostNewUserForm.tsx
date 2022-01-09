@@ -13,8 +13,7 @@ import {
   isPasswordSixChar,
 } from "@utility";
 import { useNavigate } from "react-router-dom";
-import { useCurrentUserQuery, USERS_QUERY } from "@shared";
-import { useSignUpFormMutation } from "../SignUpForm/SignUpForm.mutation";
+import { useCurrentUserQuery, USERS_QUERY, useSignUpFormMutation } from "@shared";
 
 interface Props {
   setIsModalOpen?: (state: boolean) => void;
@@ -23,9 +22,23 @@ interface Props {
   restaurantSlug: string;
 }
 
+interface MappableObject {
+  [key: string]: string;
+}
+
+interface InputState extends MappableObject {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+  name: string;
+  slug: string;
+}
+
 const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, restaurantSlug }) => {
   const navigate = useNavigate();
-  const [input, setInput] = useState({
+  const [input, setInput] = useState<InputState>({
     first_name: "",
     last_name: "",
     email: "",
@@ -35,9 +48,6 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
     slug: "",
   });
 
-  const { data: userData, loading: userLoading } = useCurrentUserQuery({
-    skip: !restaurantSlug,
-  });
   const [isFirstNameDirty, setIsFirstNameDirty] = useState(false);
   const [isLastNameDirty, setIsLastNameDirty] = useState(false);
   const [isEmailDirty, setIsEmailDirty] = useState(false);
@@ -46,6 +56,9 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
   const [isNameDirty, setIsNameDirty] = useState(false);
   const [isSlugDirty, setIsSlugDirty] = useState(false);
 
+  const { data: userData, loading: userLoading } = useCurrentUserQuery({
+    skip: !restaurantSlug,
+  });
   const [signUp] = useSignUpFormMutation({
     onCompleted: () => {
       if (userData?.currentUser && setIsModalOpen) {
@@ -149,7 +162,7 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
             required
             value={input.slug}
             onChange={handleChange}
-            onBlur={() => handleBlur(input.slug, setIsSlugDirty)}
+            onBlur={() => handleBlur(input.name, setIsSlugDirty)}
             errors={[getNameErrors(input.slug, isSlugDirty)]}
             labelText="Slug"
             type="text"

@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { Fab } from "react-tiny-fab";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Toaster } from "react-hot-toast";
@@ -8,6 +9,7 @@ import { useViewport } from "@hooks";
 import { Footer, LoadingScreen, TabContent } from "@base";
 import { useCurrentUserQuery } from "@shared";
 import { useRestaurantContext } from "@contexts";
+import { AdjustmentsIcon } from "@heroicons/react/solid";
 import { classnames } from "tailwindcss-classnames";
 import { routes } from "@routes";
 import { SettingsMobileSubNavigation } from "./SettingsMobileSubNavigation";
@@ -21,6 +23,7 @@ import { RestaurantSettings } from "./RestaurantSettings";
 import { SettingsWrapper } from "./SettingsWrapper";
 import { CategorySettings } from "./CategorySettings";
 import { BannerSettings } from "./BannerSettings/BannerSettings";
+import "react-tiny-fab/dist/styles.css";
 
 interface MappableObject {
   [key: string]: JSX.Element;
@@ -29,13 +32,10 @@ interface MappableObject {
 type Param = {
   id: string;
 };
-interface Props {
-  isOpen: boolean;
-  onClose: any;
-}
 
-const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
+const SettingsPage: FC = () => {
   const { id } = useParams<Param>() as Param;
+  const [isOpen, onClose] = useState(false);
   const { restaurantSlug, themeColour, themeTint, themeFont } = useRestaurantContext();
   const { data, loading } = useCurrentUserQuery({
     skip: !restaurantSlug,
@@ -129,6 +129,12 @@ const SettingsPage: FC<Props> = ({ isOpen, onClose }) => {
   }
   return (
     <>
+      <div className="lg:hidden block">
+        <Fab
+          onClick={() => onClose(prevState => !prevState)}
+          icon={<AdjustmentsIcon className={`bg-${themeColour}-${themeTint} rounded-full`} />}
+        />
+      </div>
       <SettingsMobileSubNavigation
         restaurantSlug={restaurantSlug}
         themeColour={themeColour}

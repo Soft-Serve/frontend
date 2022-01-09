@@ -1,6 +1,6 @@
 import { ItemSize } from "@shared";
 
-const isNameValid = (name: string) => !!name.length;
+const isNameValid = (name: string) => name && name.length > 0;
 const isPriceInvalid = (sizes: ItemSize[]) => !!sizes.filter(sizeData => !sizeData.price).length;
 const isUnitValid = (sizes: ItemSize[]) => !!sizes.filter(size => size.unit.length);
 const basicNameRegex = new RegExp(/^(?!\s)(?!.*\s$)(?=.*[a-zA-Z0-9])[a-zA-Z0-9 '~?!]{2,}$/);

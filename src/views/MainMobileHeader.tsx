@@ -11,14 +11,12 @@ import { useViewport } from "src/hooks";
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
   setIsMenuSlideOverOpen: Dispatch<SetStateAction<boolean>>;
-  setisSubSettingsSlideOverOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const MainMobileHeader: FC<Props> = ({
   children,
   setIsFilterSideMenuOpen,
   setIsMenuSlideOverOpen,
-  setisSubSettingsSlideOverOpen,
 }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -74,20 +72,7 @@ const MainMobileHeader: FC<Props> = ({
     if (!isOnSettingsPage) {
       return renderSettingsButton();
     }
-    return (
-      <Button
-        themeColour={themeColour}
-        themeTint={themeTint}
-        size={buttonSize}
-        themeFont={themeFont}
-        css="mr-2"
-        colour="accent"
-        onClick={() => setisSubSettingsSlideOverOpen(prevState => !prevState)}
-      >
-        Settings Menu
-        <span className="sr-only">SettingsMenu</span>
-      </Button>
-    );
+    return null;
   };
 
   const [signOut] = useSignOutMutation();
@@ -101,7 +86,7 @@ const MainMobileHeader: FC<Props> = ({
   const renderSignInButton = () => {
     if (isOnSignInPage) {
       return (
-        <Link to={`${routes.restaurants}/${restaurantSlug}/sign-up`}>
+        <Link to="/sign-up">
           <Button
             themeColour={themeColour}
             themeTint={themeTint}

@@ -7,18 +7,16 @@ import { MenuPage } from "./MenuPage";
 import { MainNavigation } from "./MainNavigation";
 import { MainMobileHeader } from "./MainMobileHeader";
 import { Providers } from "./Providers";
+import { SignInPage } from "./SignInPage/SignInPage";
 
 const Main: FC = () => {
   const SettingsPage = lazy(() => import("./SettingsPage/DefaultSettingsPage"));
-  const SignInPage = lazy(() => import("./SignInPage/DefaultSignInPage"));
-  const SignUpPage = lazy(() => import("./SignUpPage/DefaultSignUpPage"));
   const { pathname } = useLocation();
   const isOnSettingsPage = pathname.includes("settings");
 
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [isFiterSideMenuOpen, setIsFilterSideMenuOpen] = useState(false);
   const [isMenuSlideOverOpen, setIsMenuSlideOverOpen] = useState(false);
-  const [isSubNavOpen, setIsSubNavOpen] = useState(false);
 
   const renderFooter = () => {
     if (isOnSettingsPage) return null;
@@ -33,19 +31,14 @@ const Main: FC = () => {
         <MenuSlideOver isOpen={isMenuSlideOverOpen} onClose={setIsMenuSlideOverOpen} />
         <MainNavigation setIsFilterSideMenuOpen={setIsFilterModalOpen} />
         <MainMobileHeader
-          setisSubSettingsSlideOverOpen={setIsSubNavOpen}
           setIsMenuSlideOverOpen={setIsMenuSlideOverOpen}
           setIsFilterSideMenuOpen={setIsFilterSideMenuOpen}
         >
           <Suspense fallback={<LoadingScreen />}>
             <Routes>
               <Route path="/" element={<Restaurant />} />
-              <Route
-                path="settings/:id"
-                element={<SettingsPage isOpen={isSubNavOpen} onClose={setIsSubNavOpen} />}
-              />
+              <Route path="settings/:id" element={<SettingsPage />} />
               <Route path="sign-in" element={<SignInPage />} />
-              <Route path="sign-up" element={<SignUpPage />} />
             </Routes>
           </Suspense>
           {renderFooter()}

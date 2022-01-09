@@ -130,12 +130,6 @@ const LandingPage: FC = () => {
             </Popover.Group>
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
               <Link
-                to="/sign-in"
-                className="whitespace-nowrap text-base font-bold px-4 py-2  text-white rounded-md hover:text-red-400 hover:bg-white"
-              >
-                Sign in
-              </Link>
-              <Link
                 to="/sign-up"
                 className="ml-8 whitespace-nowrap inline-flex items-center justify-center bg-white origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-red-400 hover:bg-red-400 hover:text-white font-Quicksand  font-bold"
               >
@@ -185,9 +179,6 @@ const LandingPage: FC = () => {
                     </Link>
                     <p className="mt-6 text-center text-base font-medium text-gray-900 font-Quicksand">
                       Existing customer?
-                      <Link to="/sign-in" className="text-gray-900">
-                        Sign in
-                      </Link>
                     </p>
                   </div>
                 </div>

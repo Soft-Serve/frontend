@@ -100,11 +100,7 @@ const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
   const renderSignUpButton = () => {
     if (data?.currentUser) return null;
     return (
-      <NavigationItem
-        themeColour={themeColour}
-        themeTint={themeTint}
-        to={`${routes.restaurants}/${restaurantSlug}/sign-up`}
-      >
+      <NavigationItem themeColour={themeColour} themeTint={themeTint} to="/sign-up">
         <PlusCircleIcon className="h-6 w-6 text-white" aria-hidden="true" />
         <span className={`mx-2 font-${themeFont}`}>Sign Up</span>
         <span className="sr-only">Sign Up</span>

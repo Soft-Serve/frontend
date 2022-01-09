@@ -8,9 +8,11 @@ interface Props extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
   css?: TArg;
   themeColour: string;
   themeTint: number;
+  name: string;
 }
 
 const PasswordInput: FC<Props> = ({
+  value,
   errors,
   labelText,
   type,
@@ -26,19 +28,26 @@ const PasswordInput: FC<Props> = ({
   ...rest
 }) => {
   const [isPassword, setIsPassword] = useState(true);
+  const borderColour = `border-${themeColour}-${themeTint}` as TArg;
+
   const hasErrors = () => {
     if (!errors) return false;
     return errors.filter(e => !!e).length > 0;
   };
 
   const renderErrorMessages = () => {
-    return errors?.slice(0, 2).map(error => <p key={`error-item-${error}`}>{error}</p>);
+    return (
+      errors
+        ?.slice(0, 2)
+        // eslint-disable-next-line react/no-array-index-key
+        .map((error, index) => <p key={`error-item-${name}-${index}`}>{error}</p>)
+    );
   };
 
   return (
     <div>
       <label className={classnames("block", "text-sm", "font-bold", "text-gray-700")}>
-        <span className="font-Quicksand">Password</span>
+        <span className="font-Quicksand">{labelText || "Password"}</span>
         <span className="text-red-600 ml-1">*</span>
       </label>
       <div className="relative w-full mt-2">
@@ -46,23 +55,23 @@ const PasswordInput: FC<Props> = ({
           <input
             onClick={() => setIsPassword(prevState => !prevState)}
             className="hidden"
-            id="toggle"
+            id={`toggle${name}`}
             type="checkbox"
           />
           <label
             className={`bg-gray-300 hover:bg-${themeColour}-${themeTint} hover:text-white rounded px-2 py-1 text-sm text-gray-600 font-Quicksand cursor-pointer `}
-            htmlFor="toggle"
+            htmlFor={`toggle${name}`}
           >
             {isPassword ? "show" : "hide"}
           </label>
         </div>
         <input
+          value={value}
           type={isPassword ? "password" : "text"}
           disabled={disabled}
-          name="password"
-          className={`appearance-none border-2 rounded-md border-${themeColour}-${themeTint}  w-full py-2 px-3 leading-tight bg-gray-50 focus:outline-none focus:border-${themeColour}-${themeTint} focus:bg-white text-gray-700 pr-16 `}
-          id="password"
+          className={`block w-full shadow-sm sm:text-smfocus:ring-${themeColour}-${themeTint} focus:border-${themeColour}-${themeTint} rounded-md ${borderColour} border-2`}
           autoComplete={autoComplete}
+          name={name}
           {...rest}
         />
       </div>

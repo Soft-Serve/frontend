@@ -16,3 +16,4 @@ export type { Allergy, AllergyData } from "./Allergies.query";
 export { useAllergiesQuery, ALLERGIES_QUERY } from "./Allergies.query";
 export { useDietaryQuery } from "./Dietaries.query";
 export { useSignOutMutation } from "./SignOut.mutation";
+export { useSignUpFormMutation } from "./SignUp.mutation";

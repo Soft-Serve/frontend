@@ -2,7 +2,7 @@ import type { MutationHookOptions } from "@apollo/client";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 
-const SIGN_IN_FORM_MUTATION = gql`
+const SIGN_UP_MUTATION = gql`
   mutation SignUpFormMutation($input: input) {
     signUp(input: $input) @rest(type: User, path: "auth", method: "POST") {
       __typename
@@ -34,6 +34,6 @@ interface Variables {
 }
 
 const useSignUpFormMutation = (options?: MutationHookOptions<SignUpFormData, Variables>) =>
-  useMutation<SignUpFormData, Variables>(SIGN_IN_FORM_MUTATION, options);
+  useMutation<SignUpFormData, Variables>(SIGN_UP_MUTATION, options);
 
 export { useSignUpFormMutation };
