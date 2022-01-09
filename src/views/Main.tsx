@@ -2,7 +2,7 @@ import React, { Suspense, useState, lazy } from "react";
 import type { FC } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Footer, LoadingScreen } from "@base";
-import { MenuSlideOver, AllergyModal, AllergyFiltersSideMenu } from "@presentational";
+import { MenuSlideOver, AllergyModal, AllergyFiltersSideMenu, Restaurant } from "@presentational";
 import { MenuPage } from "./MenuPage";
 import { MainNavigation } from "./MainNavigation";
 import { MainMobileHeader } from "./MainMobileHeader";
@@ -10,9 +10,6 @@ import { Providers } from "./Providers";
 
 const SettingsPage = lazy(() => import("./SettingsPage/DefaultSettingsPage"));
 const SignInPage = lazy(() => import("./SignInPage/DefaultSignInPage"));
-const RestaurantPage = lazy(
-  () => import("../components/Presentational/Restaurant/RestaurantDefault")
-);
 
 const Main: FC = () => {
   const { pathname } = useLocation();
@@ -40,7 +37,7 @@ const Main: FC = () => {
         >
           <Suspense fallback={<LoadingScreen />}>
             <Routes>
-              <Route path="/" element={<RestaurantPage />} />
+              <Route path="/" element={<Restaurant />} />
               <Route path="settings/:id" element={<SettingsPage />} />
               <Route path="sign-in" element={<SignInPage />} />
             </Routes>
