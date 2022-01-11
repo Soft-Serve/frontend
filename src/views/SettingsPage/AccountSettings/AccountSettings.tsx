@@ -19,7 +19,7 @@ const AccountSettings: FC<Props> = ({ themeColour, themeTint }) => {
   }
 
   if (data?.currentUser) {
-    const { first_name, last_name, email, id } = data?.currentUser;
+    const { first_name: firstName, last_name: lastName, email, id } = data?.currentUser;
     return (
       <TabWrapper>
         <Card css="mb-4">
@@ -33,8 +33,8 @@ const AccountSettings: FC<Props> = ({ themeColour, themeTint }) => {
             <UpdateCurrentUserForm
               themeColour={themeColour}
               themeTint={themeTint}
-              firstName={first_name}
-              lastName={last_name}
+              firstName={firstName}
+              lastName={lastName}
               email={email}
               id={id}
             />

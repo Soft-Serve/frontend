@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import { buildStyles, SIZE_TYPES } from "./styles";
+import { buildStyles, SizeTypes } from "./styles";
 
 interface Props {
-  size: SIZE_TYPES;
+  size: SizeTypes;
   mobileColumns?: number;
 }
 const Grid: FC<Props> = ({ children, size, mobileColumns }) => {

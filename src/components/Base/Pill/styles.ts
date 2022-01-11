@@ -36,11 +36,11 @@ const PILL_SIZES = {
   XL,
 };
 
-type COLOUR_TYPES = keyof typeof COLOUR_MAP | undefined;
-type SIZE_TYPES = keyof typeof PILL_SIZES | undefined;
+type ColourTypes = keyof typeof COLOUR_MAP | undefined;
+type SizeTypes = keyof typeof PILL_SIZES | undefined;
 
-const buildStyles = (size: SIZE_TYPES, colour: COLOUR_TYPES) =>
+const buildStyles = (size: SizeTypes, colour: ColourTypes) =>
   classnames(base, PILL_SIZES[size || "SM"], COLOUR_MAP[colour || "success"]);
 
 export { buildStyles };
-export type { COLOUR_TYPES, SIZE_TYPES };
+export type { ColourTypes, SizeTypes };
