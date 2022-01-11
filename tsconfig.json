@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "baseUrl": ".",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "downlevelIteration": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
+    "baseUrl": ".",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -30,8 +34,9 @@
       "@svgs": ["src/svgs/"],
       "@constants": ["src/constants/"],
       "@utility": ["src/utility/"]
-
     }
   },
-  "include": ["src", ".eslintrc.js", "tailwind.config.js", "postcss.config.js", "tsdx.config.js"]
+  "include": [
+    "src"
+  ]
 }

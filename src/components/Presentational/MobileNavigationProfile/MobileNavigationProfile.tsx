@@ -9,10 +9,10 @@ const MobileNavigationProfile: FC = () => {
 
   const renderName = () => {
     if (data?.currentUser?.first_name.length && data?.currentUser.last_name.length) {
-      const { first_name, last_name } = data?.currentUser;
+      const { first_name: firstName, last_name: lastName } = data?.currentUser;
       return (
         <p className="text-sm font-medium text-white">
-          {first_name} {last_name}
+          {firstName} {lastName}
         </p>
       );
     }

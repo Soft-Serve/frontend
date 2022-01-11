@@ -13,11 +13,11 @@ const column = {
 };
 
 type TextDirection = "center" | " right " | "left";
-type flexBehavior = "default" | "initial" | "auto" | "none";
+type FlexBehavior = "default" | "initial" | "auto" | "none";
 
 const buildStyles = (
   textDirection: TextDirection = "left",
-  flexBehavior: flexBehavior = "default",
+  flexBehavior: FlexBehavior = "default",
   css?: TArg,
   isFullwidth?: boolean,
   isMarginLess = false

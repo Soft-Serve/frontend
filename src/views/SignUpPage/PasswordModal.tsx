@@ -27,7 +27,7 @@ const PasswordModal: FC<Props> = ({ open, setOpen, input }) => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const [password_confirmation, setPasswordConfirmation] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [isPasswordDirty, setIsPasswordDirty] = useState(false);
   const [isPasswordConfirmationDirty, setIsPasswordConfirmationDirty] = useState(false);
 
@@ -48,7 +48,7 @@ const PasswordModal: FC<Props> = ({ open, setOpen, input }) => {
     signUp({
       variables: {
         input: {
-          password_confirmation,
+          password_confirmation: passwordConfirmation,
           password,
           ...input,
         },
@@ -66,7 +66,7 @@ const PasswordModal: FC<Props> = ({ open, setOpen, input }) => {
 
   const getPasswordConfirmationErrors = () => {
     if (!isPasswordConfirmationDirty) return null;
-    if (!isPasswordConfirmd(password, password_confirmation))
+    if (!isPasswordConfirmd(password, passwordConfirmation))
       return <span>Passwords dont match</span>;
     return null;
   };
@@ -74,7 +74,7 @@ const PasswordModal: FC<Props> = ({ open, setOpen, input }) => {
   const isFormValid = () =>
     isNameInputValid(password) &&
     isPasswordSixChar(password) &&
-    isPasswordConfirmd(password, password_confirmation);
+    isPasswordConfirmd(password, passwordConfirmation);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -134,11 +134,11 @@ const PasswordModal: FC<Props> = ({ open, setOpen, input }) => {
                         onChange={e => setPasswordConfirmation(e.target.value)}
                         id="password_confirmation"
                         name="password_confirmation"
-                        value={password_confirmation}
+                        value={passwordConfirmation}
                         themeColour="red"
                         themeTint={400}
                         errors={[
-                          getPasswordErrors(password_confirmation, isPasswordConfirmationDirty),
+                          getPasswordErrors(passwordConfirmation, isPasswordConfirmationDirty),
                           getPasswordConfirmationErrors(),
                         ]}
                       />

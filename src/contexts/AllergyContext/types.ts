@@ -1,4 +1,4 @@
-enum ACTION_TYPES {
+enum ActionTypes {
   ADD = "add",
   REMOVE = "remove",
 }
@@ -10,11 +10,11 @@ interface Allergy {
 }
 
 interface Action {
-  type: ACTION_TYPES;
+  type: ActionTypes;
   payload: Allergy;
 }
 
 type Dispatch = (action: Action) => void;
 
 export type { Action, Allergy, Dispatch };
-export { ACTION_TYPES };
+export { ActionTypes };

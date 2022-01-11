@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import { classnames } from "tailwindcss-classnames";
-import { buildStyles, SIZE_TYPES, COLOUR_TYPES } from "./styles";
+import { buildStyles, SizeTypes, ColourTypes } from "./styles";
 
 interface Props {
-  type?: COLOUR_TYPES;
-  size?: SIZE_TYPES;
+  type?: ColourTypes;
+  size?: SizeTypes;
 }
 
 const Pill: FC<Props> = ({ children, type, size }) => {

@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { BreadCrumbsNavigation, DietarySvg, Toggle } from "@base";
 import { useAllergyContext } from "@contexts";
 import { Allergy, useAllergiesQuery } from "@shared";
-import { ACTION_TYPES } from "src/contexts/AllergyContext/types";
+import { ActionTypes } from "src/contexts/AllergyContext/types";
 import Skeleton from "react-loading-skeleton";
 
 interface Props {
@@ -19,8 +19,8 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
 
   const handleClick = (allergy: Allergy) => {
     return isAllergyActive(allergy)
-      ? dispatch({ type: ACTION_TYPES.REMOVE, payload: allergy })
-      : dispatch({ type: ACTION_TYPES.ADD, payload: allergy });
+      ? dispatch({ type: ActionTypes.REMOVE, payload: allergy })
+      : dispatch({ type: ActionTypes.ADD, payload: allergy });
   };
 
   const { data, loading } = useAllergiesQuery({

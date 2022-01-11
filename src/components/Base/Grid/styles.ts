@@ -15,12 +15,12 @@ const SIZE_MAP = {
   XXL,
 };
 
-type SIZE_TYPES = keyof typeof SIZE_MAP;
+type SizeTypes = keyof typeof SIZE_MAP;
 
-const buildStyles = (size: SIZE_TYPES, mobileColumns?: number) => {
+const buildStyles = (size: SizeTypes, mobileColumns?: number) => {
   const mobileStyles = `grid-cols-${mobileColumns || 1}` as TArg;
   return classnames(base, SIZE_MAP[size], mobileStyles);
 };
 
 export { buildStyles };
-export type { SIZE_TYPES };
+export type { SizeTypes };
