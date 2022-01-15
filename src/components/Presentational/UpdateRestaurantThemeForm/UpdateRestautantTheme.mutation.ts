@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 export const UPDATE_RESTAURANT_THENE = gql`
   mutation UpdateRestaurantTheme($input: input) {
     updateRestaurantTheme(input: $input)
-      @rest(type: Item, path: "restaurants/{args.input.id}", method: "PATCH") {
+      @rest(type: Restaurant, path: "restaurants/{args.input.id}", method: "PATCH") {
       __typename
       id
       colour

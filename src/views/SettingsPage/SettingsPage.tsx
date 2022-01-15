@@ -7,8 +7,7 @@ import { SettingsSubMenu } from "@presentational";
 import { Navigate } from "react-router-dom";
 import { useViewport } from "@hooks";
 import { Footer, LoadingScreen, TabContent } from "@base";
-import { useCurrentUserQuery } from "@shared";
-import { useRestaurantContext } from "@contexts";
+import { useCurrentUserQuery, useRestaurantThemeQuery } from "@shared";
 import { AdjustmentsIcon } from "@heroicons/react/solid";
 import { classnames } from "tailwindcss-classnames";
 import { routes } from "@routes";
@@ -33,12 +32,18 @@ type Param = {
   id: string;
 };
 
-const SettingsPage: FC = () => {
+interface Props {
+  restaurantSlug: string;
+}
+
+const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
   const { id } = useParams<Param>() as Param;
   const [isOpen, onClose] = useState(false);
-  const { restaurantSlug, themeColour, themeTint, themeFont } = useRestaurantContext();
-  const { data, loading } = useCurrentUserQuery({
-    skip: !restaurantSlug,
+  const { data, loading } = useCurrentUserQuery();
+  const { data: themeData } = useRestaurantThemeQuery({
+    variables: {
+      restaurantSlug,
+    },
   });
 
   const { width } = useViewport();
@@ -47,50 +52,60 @@ const SettingsPage: FC = () => {
   const restaurant = (
     <RestaurantSettings
       restaurantSlug={restaurantSlug}
-      themeColour={themeColour}
-      themeTint={themeTint}
+      themeFont={themeData?.restaurant?.font || "Quicksand"}
+      themeColour={themeData?.restaurant?.colour || "red"}
+      themeTint={themeData?.restaurant?.tint || 400}
     />
   );
   const banner = (
     <BannerSettings
       restaurantSlug={restaurantSlug}
-      themeFont={themeFont}
-      themeColour={themeColour}
-      themeTint={themeTint}
+      themeFont={themeData?.restaurant?.font || "Quicksand"}
+      themeColour={themeData?.restaurant?.colour || "red"}
+      themeTint={themeData?.restaurant?.tint || 400}
     />
   );
   const users = (
     <UsersSettings
       restaurantSlug={restaurantSlug}
-      themeColour={themeColour}
-      themeTint={themeTint}
+      themeColour={themeData?.restaurant?.colour || "red"}
+      themeTint={themeData?.restaurant?.tint || 400}
     />
   );
   const menus = (
-    <MenuSettings restaurantSlug={restaurantSlug} themeColour={themeColour} themeTint={themeTint} />
+    <MenuSettings
+      restaurantSlug={restaurantSlug}
+      themeColour={themeData?.restaurant?.colour || "red"}
+      themeTint={themeData?.restaurant?.tint || 400}
+    />
   );
   const dietaries = (
     <AllergiesSettings
       restaurantSlug={restaurantSlug}
-      themeColour={themeColour}
-      themeTint={themeTint}
+      themeColour={themeData?.restaurant?.colour || "red"}
+      themeTint={themeData?.restaurant?.tint || 400}
     />
   );
   const items = (
     <ItemSettings
       restaurantSlug={restaurantSlug}
-      themeFont={themeFont}
-      themeColour={themeColour}
-      themeTint={themeTint}
+      themeFont={themeData?.restaurant?.font || "Quicksand"}
+      themeColour={themeData?.restaurant?.colour || "red"}
+      themeTint={themeData?.restaurant?.tint || 400}
     />
   );
-  const account = <AccountSettings themeColour={themeColour} themeTint={themeTint} />;
+  const account = (
+    <AccountSettings
+      themeColour={themeData?.restaurant?.colour || "red"}
+      themeTint={themeData?.restaurant?.tint || 400}
+    />
+  );
   const billing = <BillingSettings />;
   const categories = (
     <CategorySettings
       restaurantSlug={restaurantSlug}
-      themeColour={themeColour}
-      themeTint={themeTint}
+      themeColour={themeData?.restaurant?.colour || "red"}
+      themeTint={themeData?.restaurant?.tint || 400}
     />
   );
 
@@ -119,7 +134,12 @@ const SettingsPage: FC = () => {
 
   const renderMobileFooter = () => {
     if (width > 1024) return null;
-    return <Footer />;
+    return (
+      <Footer
+        themeColour={themeData?.restaurant?.colour || "red"}
+        themeTint={themeData?.restaurant?.tint || 400}
+      />
+    );
   };
 
   if (loading) return <LoadingScreen />;
@@ -132,13 +152,19 @@ const SettingsPage: FC = () => {
       <div className="lg:hidden block">
         <Fab
           onClick={() => onClose(prevState => !prevState)}
-          icon={<AdjustmentsIcon className={`bg-${themeColour}-${themeTint} rounded-full`} />}
+          icon={
+            <AdjustmentsIcon
+              className={`bg-${themeData?.restaurant?.colour || "red"}-${
+                themeData?.restaurant?.tint || 400
+              } rounded-full`}
+            />
+          }
         />
       </div>
       <SettingsMobileSubNavigation
         restaurantSlug={restaurantSlug}
-        themeColour={themeColour}
-        themeTint={themeTint}
+        themeColour={themeData?.restaurant?.colour || "red"}
+        themeTint={themeData?.restaurant?.tint || 400}
         selected={selected}
         setSelected={handleSetSelected}
         isOpen={isOpen}
@@ -148,13 +174,18 @@ const SettingsPage: FC = () => {
         <SettingsWrapper>
           <SettingsSubMenu
             restaurantSlug={restaurantSlug}
-            themeColour={themeColour}
-            themeTint={themeTint}
+            themeColour={themeData?.restaurant?.colour || "red"}
+            themeTint={themeData?.restaurant?.tint || 400}
             selected={selected}
             setSelected={setSelected}
             className="hidden lg:block flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 xl:flex xl:flex-col "
           />
-          <TabContent>{renderSettingsTab()}</TabContent>
+          <TabContent
+            themeColour={themeData?.restaurant?.colour || "red"}
+            themeTint={themeData?.restaurant?.tint || 400}
+          >
+            {renderSettingsTab()}
+          </TabContent>
         </SettingsWrapper>
         {renderMobileFooter()}
       </SettingsWrapper>

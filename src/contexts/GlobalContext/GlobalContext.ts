@@ -7,8 +7,6 @@ interface GlobalContextData {
   setCategoryID: Dispatch<SetStateAction<number>>;
   activeMenu: string;
   setActiveMenu: Dispatch<SetStateAction<string>>;
-  currentUser: any;
-  setCurrentUser: Dispatch<SetStateAction<any>>;
 }
 
 const GlobalContext = createContext<GlobalContextData | null>(null);

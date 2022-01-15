@@ -1,7 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useRestaurantContext } from "src/contexts";
 import { useCurrentUserQuery, useSignOutMutation } from "@shared";
 import { Button } from "@base";
 import { RestaurantLogo } from "@presentational";
@@ -11,22 +10,27 @@ import { useViewport } from "src/hooks";
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
   setIsMenuSlideOverOpen: Dispatch<SetStateAction<boolean>>;
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
+  restaurantSlug: string;
 }
 
 const MainMobileHeader: FC<Props> = ({
   children,
   setIsFilterSideMenuOpen,
   setIsMenuSlideOverOpen,
+  restaurantSlug,
+  themeTint,
+  themeColour,
+  themeFont,
 }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { themeColour, themeTint, themeFont, restaurantSlug } = useRestaurantContext();
   const { width } = useViewport();
   const isLargerThenSmallMobile = width > 410;
   const buttonSize = isLargerThenSmallMobile ? "LG" : "S";
-  const { data } = useCurrentUserQuery({
-    skip: !restaurantSlug,
-  });
+  const { data } = useCurrentUserQuery();
   const isOnSignInPage = pathname.includes("sign-in");
   const isOnSignUpPage = pathname.includes("sign-up");
   const isOnSettingsPage = pathname.includes("settings");

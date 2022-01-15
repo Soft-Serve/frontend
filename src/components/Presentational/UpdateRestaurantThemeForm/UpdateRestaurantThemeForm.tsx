@@ -1,12 +1,11 @@
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import type { FC } from "react";
-import { Button, Modal, Notification } from "@base";
+import { Modal, Notification } from "@base";
 import toast from "react-hot-toast";
 
 import { ColourPicker } from "@presentational";
-import { RESTAURANT_QUERY } from "@shared";
-import { useViewport } from "@hooks";
 import { useUpdateRestaurantTheme } from "./UpdateRestautantTheme.mutation";
+import { RestaurantThemeData, RESTAURANT_THEME_QUERY } from "@shared";
 
 interface Props {
   id: number;
@@ -19,70 +18,43 @@ interface Props {
   restaurantThemeTint: number;
 }
 
-const UpdateRestaurantThemeForm: FC<Props> = ({
-  id,
-  restaurantThemeColour,
-  restaurantThemeTint,
-  themeColour,
-  themeTint,
-  restaurantSlug,
-}) => {
+const UpdateRestaurantThemeForm: FC<Props> = ({ id, themeColour, themeTint, restaurantSlug }) => {
   const [isColourModalOpen, setIsColourModalOpen] = useState(false);
-  const { width } = useViewport();
   const onSuccess = () => toast.custom(<Notification header="Theme succesfully updated!" />);
-
-  const [currentThemeColour, setCurrentThemeColour] = useState(themeColour);
-  const [currentThemeTint, setCurrentThemeTint] = useState(themeTint);
-
-  const isTablet = width < 592;
-
-  const isThemeColourUpdated = restaurantThemeColour !== themeColour;
-  const isThemeTintUpdated = restaurantThemeTint !== themeTint;
-  const isThemeUpdated = isThemeColourUpdated || isThemeTintUpdated;
-
-  const [updateRestaurantTheme, { loading }] = useUpdateRestaurantTheme({
+  const [updateRestaurantTheme] = useUpdateRestaurantTheme({
     onCompleted: () => onSuccess(),
-    refetchQueries: [
-      {
-        query: RESTAURANT_QUERY,
+    update(cache, { data: updatedTheme }) {
+      const { restaurant } = cache.readQuery({
+        query: RESTAURANT_THEME_QUERY,
         variables: {
           restaurantSlug,
         },
-      },
-    ],
+      }) as RestaurantThemeData;
+      cache.writeQuery({
+        query: RESTAURANT_THEME_QUERY,
+        variables: {
+          restaurantSlug,
+        },
+        data: {
+          restaurant: {
+            ...updatedTheme?.updateRestaurantTheme,
+            font: restaurant?.font,
+          },
+        },
+      });
+    },
   });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (colour: string, tint: number) => {
     updateRestaurantTheme({
       variables: {
         input: {
           id,
-          tint: currentThemeTint,
-          colour: currentThemeColour,
+          tint,
+          colour,
         },
       },
     });
-  };
-
-  const renderUpdateSlugButton = () => {
-    if (isThemeUpdated) {
-      return (
-        <div className="px-4 py-3  text-right sm:px-6 mt-4">
-          <Button
-            themeColour={themeColour}
-            themeTint={themeTint}
-            loading={loading}
-            isFullwidth={isTablet}
-            size="XXL"
-            type="submit"
-          >
-            Update
-          </Button>
-        </div>
-      );
-    }
-    return null;
   };
 
   return (
@@ -92,30 +64,26 @@ const UpdateRestaurantThemeForm: FC<Props> = ({
           Select Restaurant Theme Colour
         </h3>
         <ColourPicker
+          handleSubmit={handleSubmit}
           themeColour={themeColour}
           themeTint={themeTint}
-          setTheme={setCurrentThemeColour}
-          setTint={setCurrentThemeTint}
           onClose={setIsColourModalOpen}
         />
       </Modal>
-      <form onSubmit={handleSubmit}>
-        <div className="flex items-end">
-          <div>
-            <span className="font-bold text-gray-900 text-sm font-Quicksand">Theme Colour</span>
-            <div
-              onKeyDown={() => setIsColourModalOpen(prevState => !prevState)}
-              tabIndex={0}
-              role="button"
-              onClick={() => setIsColourModalOpen(prevState => !prevState)}
-              className={`w-20 h-20 bg-${themeColour}-${themeTint} mr-4 rounded-md mt-2`}
-            >
-              <span className="sr-only">colour</span>
-            </div>
+      <div className="flex items-end">
+        <div>
+          <span className="font-bold text-gray-900 text-sm font-Quicksand">Theme Colour</span>
+          <div
+            onKeyDown={() => setIsColourModalOpen(prevState => !prevState)}
+            tabIndex={0}
+            role="button"
+            onClick={() => setIsColourModalOpen(prevState => !prevState)}
+            className={`w-20 h-20 bg-${themeColour}-${themeTint} mr-4 rounded-md mt-2`}
+          >
+            <span className="sr-only">colour</span>
           </div>
-          {renderUpdateSlugButton()}
         </div>
-      </form>
+      </div>
     </>
   );
 };

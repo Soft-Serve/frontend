@@ -55,8 +55,5 @@ module.exports = {
   plugins: [
     // eslint-disable-next-line global-require
     require("@tailwindcss/forms"),
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/aspect-ratio"),
-    // ...
   ],
 };

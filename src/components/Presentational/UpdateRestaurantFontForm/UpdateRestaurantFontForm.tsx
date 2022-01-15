@@ -2,9 +2,9 @@ import React from "react";
 import type { FC } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/solid";
-import { useRestaurantContext } from "@contexts";
 import { useUpdateRestaurantFont } from "./UpdateRestaurantFont.mutation";
 import { ExampleItem } from "./ExampleItem";
+import { RESTAURANT_THEME_QUERY } from "@shared";
 
 const FONTS = ["Sans", "Arima", "Baskerville", "Cardo", "Oswald", "Quicksand", "Raleway"];
 
@@ -16,14 +16,28 @@ interface Props {
   id: number;
   themeColour: string;
   themeTint: number;
+  themeFont: string;
+  restaurantSlug: string;
 }
-const UpdateRestaurantFontForm: FC<Props> = ({ id, themeTint, themeColour }) => {
-  const { themeFont, setThemeFont } = useRestaurantContext();
-
-  const [updateFont] = useUpdateRestaurantFont();
+const UpdateRestaurantFontForm: FC<Props> = ({
+  id,
+  themeTint,
+  themeColour,
+  themeFont,
+  restaurantSlug,
+}) => {
+  const [updateFont] = useUpdateRestaurantFont({
+    refetchQueries: [
+      {
+        query: RESTAURANT_THEME_QUERY,
+        variables: {
+          restaurantSlug,
+        },
+      },
+    ],
+  });
 
   const handleChange = (font: string) => {
-    setThemeFont(font);
     updateFont({
       variables: {
         input: {

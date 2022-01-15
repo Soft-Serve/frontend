@@ -4,15 +4,24 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/solid";
 import { MenusMobileNavigation, RestaurantLogo } from "@presentational";
 import { Button } from "@base";
-import { useRestaurantContext } from "src/contexts";
 
 interface Props {
   isOpen: boolean;
   onClose: Dispatch<SetStateAction<boolean>>;
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
+  restaurantSlug: string;
 }
 
-const MenuSlideOver: FC<Props> = ({ isOpen, onClose }) => {
-  const { themeTint, themeColour, themeFont, restaurantSlug } = useRestaurantContext();
+const MenuSlideOver: FC<Props> = ({
+  isOpen,
+  onClose,
+  themeColour,
+  themeTint,
+  themeFont,
+  restaurantSlug,
+}) => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" static className="fixed inset-0 flex z-40" open={isOpen} onClose={onClose}>

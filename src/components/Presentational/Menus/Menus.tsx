@@ -24,15 +24,15 @@ const Menus: FC<Props> = ({ themeFont, themeColour, themeTint, restaurantSlug })
     },
     onCompleted: completedData => {
       if (completedData?.menus?.length > 0) {
-        setMenuID(completedData.menus[0].id);
-        setActiveMenu(completedData.menus[0].name);
+        setMenuID(completedData?.menus?.[0]?.id);
+        setActiveMenu(completedData?.menus?.[0]?.name);
       }
     },
   });
 
   if (error) return <p>error</p>;
   if (loading) return <Skeleton height={40} />;
-  if (data?.menus && data?.menus.length) {
+  if (data?.menus && data?.menus?.length) {
     return (
       <Tabs>
         {data?.menus.map((menu, index) => (

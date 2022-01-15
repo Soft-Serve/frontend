@@ -17,6 +17,7 @@ interface Props {
   themeColour: string;
   themeTint: number;
   restaurantSlug: string;
+  themeFont: string;
 }
 
 const UpdateRestaurantForm: FC<Props> = ({
@@ -24,6 +25,7 @@ const UpdateRestaurantForm: FC<Props> = ({
   themeTint,
   themeColour,
   restaurantSlug,
+  themeFont,
 }) => {
   const { photoFile, setPhotoFile } = useUploadPhoto();
 
@@ -51,6 +53,8 @@ const UpdateRestaurantForm: FC<Props> = ({
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>
         <UpdateRestaurantFontForm
+          themeFont={themeFont}
+          restaurantSlug={restaurantSlug}
           themeColour={themeColour}
           themeTint={themeTint}
           id={restaurant.id}

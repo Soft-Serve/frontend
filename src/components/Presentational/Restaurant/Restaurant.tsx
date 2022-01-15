@@ -1,17 +1,28 @@
 import React from "react";
 import type { FC } from "react";
-import { useGlobalContext, useRestaurantContext } from "src/contexts";
 import { classnames } from "tailwindcss-classnames";
 import { Items, Menus, CategoriesContainer, WelcomePage, MobileSubHeader } from "@presentational";
-import { useMenusQuery, RESTAURANT_QUERY } from "@shared";
+import { useMenusQuery, RESTAURANT_QUERY, useRestaurantThemeQuery } from "@shared";
 import { Container, BoxSection, HeroBanner, LoadingScreen } from "@base";
 
 import { useUpdateRestaurantOnboarding } from "./UpdateRestaurantOnboarding.mutation";
 import { useRestaurantOnboardingQuery } from "./RestaurantOnboarding.query";
+import { useParams } from "react-router-dom";
+
+type Param = {
+  id: string;
+};
 
 const Restaurant: FC = () => {
-  const { restaurantSlug, themeFont, themeColour, themeTint } = useRestaurantContext();
-  const { categoryID } = useGlobalContext();
+  const { id: restaurantSlug } = useParams<Param>() as Param;
+
+  const { data: themeData } = useRestaurantThemeQuery({
+    variables: {
+      restaurantSlug,
+    },
+    skip: !restaurantSlug,
+  });
+
   const { data, error, loading } = useRestaurantOnboardingQuery({
     variables: {
       restaurantSlug,
@@ -23,7 +34,6 @@ const Restaurant: FC = () => {
     variables: {
       restaurantSlug,
     },
-    skip: !restaurantSlug,
   });
 
   const [updateRestaurantOnboarding] = useUpdateRestaurantOnboarding({
@@ -51,13 +61,12 @@ const Restaurant: FC = () => {
   };
 
   const renderItems = () => {
-    if (!categoryID) return null;
     return (
       <Items
         restaurantSlug={restaurantSlug}
-        themeFont={themeFont}
-        themeColour={themeColour}
-        themeTint={themeTint}
+        themeFont={themeData?.restaurant?.font || "Quicksand"}
+        themeColour={themeData?.restaurant?.colour || "red"}
+        themeTint={themeData?.restaurant?.tint || 400}
       />
     );
   };
@@ -71,8 +80,8 @@ const Restaurant: FC = () => {
         <BoxSection withPadding css={classnames("lg:py-10")}>
           <WelcomePage
             restaurantSlug={restaurantSlug}
-            themeColour={themeColour}
-            themeTint={themeTint}
+            themeColour={themeData?.restaurant?.colour || "red"}
+            themeTint={themeData?.restaurant?.tint || 400}
             hasMenus={menusData?.menus.length !== 0}
             hasItems={!!data?.restaurant?.has_items}
             hasStyles={!!data?.restaurant?.has_styles}
@@ -88,28 +97,28 @@ const Restaurant: FC = () => {
       <>
         <HeroBanner
           restaurantSlug={restaurantSlug}
-          themeColour={themeColour}
-          themeFont={themeFont}
+          themeColour={themeData?.restaurant?.colour || "red"}
+          themeFont={themeData?.restaurant?.font || "Quicksand"}
         />
         <Container>
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
             <div className="w-full lg:flex hidden">
               <Menus
                 restaurantSlug={restaurantSlug}
-                themeColour={themeColour}
-                themeTint={themeTint}
-                themeFont={themeFont}
+                themeFont={themeData?.restaurant?.font || "Quicksand"}
+                themeColour={themeData?.restaurant?.colour || "red"}
+                themeTint={themeData?.restaurant?.tint || 400}
               />
             </div>
             <CategoriesContainer
-              themeColour={themeColour}
-              themeTint={themeTint}
-              themeFont={themeFont}
+              themeFont={themeData?.restaurant?.font || "Quicksand"}
+              themeColour={themeData?.restaurant?.colour || "red"}
+              themeTint={themeData?.restaurant?.tint || 400}
             />
             <MobileSubHeader
-              themeColour={themeColour}
-              themeTint={themeTint}
-              themeFont={themeFont}
+              themeFont={themeData?.restaurant?.font || "Quicksand"}
+              themeColour={themeData?.restaurant?.colour || "red"}
+              themeTint={themeData?.restaurant?.tint || 400}
             />
           </BoxSection>
           {renderItems()}

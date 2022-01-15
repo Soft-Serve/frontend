@@ -9,8 +9,9 @@ interface Props {
   themeColour: string;
   themeTint: number;
   restaurantSlug: string;
+  themeFont: string;
 }
-const RestaurantSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => {
+const RestaurantSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug, themeFont }) => {
   const { data, loading } = useRestaurantQuery({
     variables: {
       restaurantSlug,
@@ -30,6 +31,7 @@ const RestaurantSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug 
         <div className="w-full mt-10">
           <div className="mt-5 md:mt-0 md:col-span-2">
             <UpdateRestaurantForm
+              themeFont={themeFont}
               restaurantSlug={restaurantSlug}
               themeColour={themeColour}
               themeTint={themeTint}

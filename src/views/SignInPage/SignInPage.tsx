@@ -1,12 +1,20 @@
 import React from "react";
 import type { FC } from "react";
 import { SignInForm } from "@presentational";
-import { useRestaurantContext } from "@contexts";
 import { BoxSection, Container, Notification } from "@base";
 import { MenuPage } from "../MenuPage";
+import { useRestaurantThemeQuery } from "@shared";
 
-const SignInPage: FC = () => {
-  const { themeTint, themeColour } = useRestaurantContext();
+interface Props {
+  restaurantSlug: string;
+}
+
+const SignInPage: FC<Props> = ({ restaurantSlug }) => {
+  const { data } = useRestaurantThemeQuery({
+    variables: {
+      restaurantSlug,
+    },
+  });
 
   const flash = () => (
     <Notification header="Account verified!" subHeader="You can now sign in to your account" />
@@ -19,7 +27,10 @@ const SignInPage: FC = () => {
       {accountConfirmed() && flash()}
       <Container>
         <BoxSection>
-          <SignInForm themeColour={themeColour} themeTint={themeTint} />
+          <SignInForm
+            themeTint={data?.restaurant?.tint || 400}
+            themeColour={data?.restaurant?.colour || "red"}
+          />
         </BoxSection>
       </Container>
     </MenuPage>

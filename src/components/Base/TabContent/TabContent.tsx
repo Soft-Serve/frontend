@@ -4,12 +4,17 @@ import { useViewport } from "@hooks";
 import { Footer } from "@base";
 import { container, wrapper } from "./styles";
 
-const TabContent: FC = ({ children }) => {
+interface Props {
+  themeColour: string;
+  themeTint: number;
+}
+
+const TabContent: FC<Props> = ({ children, themeTint, themeColour }) => {
   const { width } = useViewport();
 
   const renderDesktopFooter = () => {
     if (width < 1024) return null;
-    return <Footer />;
+    return <Footer themeColour={themeColour} themeTint={themeTint} />;
   };
 
   return (

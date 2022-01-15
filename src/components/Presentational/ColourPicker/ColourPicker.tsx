@@ -1,15 +1,13 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import type { FC } from "react";
 import { Button } from "@base";
-import { colors } from "@constants";
-import { useRestaurantContext } from "@contexts";
+import { colorsMap } from "@constants";
 
 interface Props {
   themeColour: string;
   themeTint: number;
   onClose: (state: boolean) => void;
-  setTheme: Dispatch<SetStateAction<string>>;
-  setTint: Dispatch<SetStateAction<number>>;
+  handleSubmit: (colour: string, tint: number) => void;
 }
 
 const capatalize = ([firstLetter, ...restOfWord]: string) =>
@@ -25,11 +23,13 @@ const camelCaseFormatter = (name: string) => {
     findUpperCaseIndex(name.split(""))
   )}`;
 };
-const colourMap = Object.entries(colors);
+const colourMap = Object.entries(colorsMap);
 
-const ColourPicker: FC<Props> = ({ onClose, setTheme, setTint, themeTint, themeColour }) => {
-  const { setThemeColour, setThemeTint } = useRestaurantContext();
-
+const ColourPicker: FC<Props> = ({ onClose, themeTint, themeColour, handleSubmit }) => {
+  const handleClick = (colour: string, tailWindNumber: string) => {
+    handleSubmit(colour, Number(tailWindNumber));
+    onClose(false);
+  };
   return (
     <div>
       <div className=" h-96 overflow-y-auto mb-2">
@@ -43,20 +43,8 @@ const ColourPicker: FC<Props> = ({ onClose, setTheme, setTint, themeTint, themeC
                 <div
                   tabIndex={0}
                   role="button"
-                  onKeyDown={() => {
-                    setThemeColour(colour);
-                    setThemeTint(Number(tailWindNumber));
-                    setTheme(colour);
-                    setTint(Number(tailWindNumber));
-                    onClose(false);
-                  }}
-                  onClick={() => {
-                    setThemeColour(colour);
-                    setThemeTint(Number(tailWindNumber));
-                    setTheme(colour);
-                    setTint(Number(tailWindNumber));
-                    onClose(false);
-                  }}
+                  onKeyDown={() => handleClick(colour, tailWindNumber)}
+                  onClick={() => handleClick(colour, tailWindNumber)}
                   key={tailWindNumber}
                   className={`bg-${colour}-${tailWindNumber} w-14 h-14 rounded-md m-2 `}
                 >

@@ -1,17 +1,25 @@
 import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { AllergyLegend } from "@presentational";
-import { useRestaurantContext } from "@contexts";
 import { Modal, Button } from "@base";
-import { TArg } from "tailwindcss-classnames";
+import type { TArg } from "tailwindcss-classnames";
 
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
   isOpen: boolean;
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
+  restaurantSlug: string;
 }
-const AllergyModal: FC<Props> = ({ setIsFilterSideMenuOpen, isOpen }) => {
-  const { themeColour, themeTint, themeFont, restaurantSlug } = useRestaurantContext();
-
+const AllergyModal: FC<Props> = ({
+  setIsFilterSideMenuOpen,
+  isOpen,
+  restaurantSlug,
+  themeTint,
+  themeColour,
+  themeFont,
+}) => {
   const bgColour = `bg-${themeColour}-${themeTint}` as TArg;
 
   return (

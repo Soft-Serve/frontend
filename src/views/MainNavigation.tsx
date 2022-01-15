@@ -5,22 +5,28 @@ import { Navigation, NavigationItem } from "@presentational";
 import { LoginSVG, LogoutSVG, MenuSVG } from "@svgs";
 import { routes } from "@routes";
 import { useCurrentUserQuery, useSignOutMutation } from "@shared";
-import { useRestaurantContext } from "@contexts";
 import { useLocation } from "react-router-dom";
 
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
+  restaurantSlug: string;
 }
 
-const MainNavigation: FC<Props> = ({ setIsFilterSideMenuOpen }) => {
+const MainNavigation: FC<Props> = ({
+  setIsFilterSideMenuOpen,
+  restaurantSlug,
+  themeFont,
+  themeTint,
+  themeColour,
+}) => {
   const { pathname } = useLocation();
   const isOnSettingsPage = pathname.includes("settings");
   const isOnSignInPage = pathname.includes("sign-in");
 
-  const { restaurantSlug, themeFont, themeColour, themeTint } = useRestaurantContext();
-  const { data } = useCurrentUserQuery({
-    skip: !restaurantSlug,
-  });
+  const { data } = useCurrentUserQuery();
   const [signOut] = useSignOutMutation();
 
   const signUserOut = () => {

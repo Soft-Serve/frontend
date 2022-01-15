@@ -6,16 +6,24 @@ import {
   MobileNavigationProfile,
   AllergyLegend,
 } from "@presentational";
-import { useRestaurantContext } from "@contexts";
 
 interface Props {
   isOpen: boolean;
   onClose: any;
+  themeColour: string;
+  themeTint: number;
+  themeFont: string;
+  restaurantSlug: string;
 }
 
-const AllergyFiltersSideMenu: FC<Props> = ({ isOpen, onClose }) => {
-  const { themeColour, themeTint, themeFont, restaurantSlug } = useRestaurantContext();
-
+const AllergyFiltersSideMenu: FC<Props> = ({
+  isOpen,
+  onClose,
+  themeColour,
+  themeTint,
+  restaurantSlug,
+  themeFont,
+}) => {
   return (
     <MobileNavigation
       restaurantSlug={restaurantSlug}
