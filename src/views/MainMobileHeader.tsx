@@ -6,6 +6,7 @@ import { Button } from "@base";
 import { RestaurantLogo } from "@presentational";
 import { routes } from "@routes";
 import { useViewport } from "@hooks";
+import { clientToken } from "@constants";
 
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
@@ -34,6 +35,7 @@ const MainMobileHeader: FC<Props> = ({
   const isOnSignInPage = pathname.includes("sign-in");
   const isOnSignUpPage = pathname.includes("sign-up");
   const isOnSettingsPage = pathname.includes("settings");
+  const hasUser = !!localStorage.getItem(clientToken);
 
   const renderDietaryButton = () => {
     if (!isOnSignInPage && !isOnSignUpPage && !isOnSettingsPage) {
@@ -56,21 +58,22 @@ const MainMobileHeader: FC<Props> = ({
   };
 
   const renderSettingsButton = () => {
-    if (!data?.currentUser) return null;
-    return (
-      <Link to={`${routes.restaurants}/${restaurantSlug}/settings/restaurant`}>
-        <Button
-          themeColour={themeColour}
-          themeTint={themeTint}
-          themeFont={themeFont}
-          size={buttonSize}
-          css="mr-2"
-          colour="accent"
-        >
-          Settings
-        </Button>
-      </Link>
-    );
+    if (data?.currentUser || hasUser)
+      return (
+        <Link to={`${routes.restaurants}/${restaurantSlug}/settings/restaurant`}>
+          <Button
+            themeColour={themeColour}
+            themeTint={themeTint}
+            themeFont={themeFont}
+            size={buttonSize}
+            css="mr-2"
+            colour="accent"
+          >
+            Settings
+          </Button>
+        </Link>
+      );
+    return null;
   };
   const renderSettingsNav = () => {
     if (!isOnSettingsPage) {
@@ -83,8 +86,8 @@ const MainMobileHeader: FC<Props> = ({
   const signUserOut = () => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
-    navigate(`${routes.restaurants}/${restaurantSlug}/sign-in`);
     window.location.reload();
+    navigate(`${routes.restaurants}/${restaurantSlug}/sign-in`);
   };
 
   const renderSignInButton = () => {
@@ -123,7 +126,7 @@ const MainMobileHeader: FC<Props> = ({
   };
 
   const renderAuthButton = () => {
-    if (data?.currentUser) {
+    if (data?.currentUser || hasUser) {
       return (
         <Button
           themeColour={themeColour}

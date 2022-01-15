@@ -3,6 +3,7 @@ import type { FC, Dispatch, SetStateAction } from "react";
 import { AdjustmentsIcon, FilterIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import { Navigation, NavigationItem } from "@presentational";
 import { LoginSVG, LogoutSVG, MenuSVG } from "@svgs";
+import { clientToken } from "@constants";
 import { routes } from "@routes";
 import { useCurrentUserQuery, useSignOutMutation } from "@shared";
 import { useLocation } from "react-router-dom";
@@ -27,6 +28,8 @@ const MainNavigation: FC<Props> = ({
   const isOnSignInPage = pathname.includes("sign-in");
 
   const { data } = useCurrentUserQuery();
+  const hasUser = !!localStorage.getItem(clientToken);
+
   const [signOut] = useSignOutMutation();
 
   const signUserOut = () => {
@@ -62,7 +65,7 @@ const MainNavigation: FC<Props> = ({
   };
 
   const renderAuthNavigationItem = () => {
-    if (data?.currentUser) {
+    if (data?.currentUser || hasUser) {
       return (
         <NavigationItem themeColour={themeColour} themeTint={themeTint} onClick={signUserOut}>
           <LogoutSVG className="h-5 w-5 text-white" aria-hidden="true" />
@@ -102,7 +105,7 @@ const MainNavigation: FC<Props> = ({
   };
 
   const renderSignUpButton = () => {
-    if (data?.currentUser) return null;
+    if (data?.currentUser || hasUser) return null;
     return (
       <NavigationItem themeColour={themeColour} themeTint={themeTint} to="/sign-up">
         <PlusCircleIcon className="h-6 w-6 text-white" aria-hidden="true" />
@@ -113,7 +116,7 @@ const MainNavigation: FC<Props> = ({
   };
 
   const renderSettingsButton = () => {
-    if (!isOnSettingsPage && data?.currentUser) {
+    if ((!isOnSettingsPage && data?.currentUser) || hasUser) {
       return (
         <NavigationItem
           themeColour={themeColour}

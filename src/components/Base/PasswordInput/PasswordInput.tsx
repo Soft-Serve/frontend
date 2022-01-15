@@ -28,7 +28,6 @@ const PasswordInput: FC<Props> = ({
   ...rest
 }) => {
   const [isPassword, setIsPassword] = useState(true);
-  const borderColour = `border-${themeColour}-${themeTint}` as TArg;
 
   const hasErrors = () => {
     if (!errors) return false;
@@ -69,7 +68,7 @@ const PasswordInput: FC<Props> = ({
           value={value}
           type={isPassword ? "password" : "text"}
           disabled={disabled}
-          className={`block w-full shadow-sm sm:text-smfocus:ring-${themeColour}-${themeTint} focus:border-${themeColour}-${themeTint} rounded-md ${borderColour} border-2`}
+          className={`block w-full shadow-sm sm:text-sm focus:ring-${themeColour}-${themeTint} focus:border-${themeColour}-${themeTint} rounded-md border-2 shadow-md `}
           autoComplete={autoComplete}
           name={name}
           {...rest}

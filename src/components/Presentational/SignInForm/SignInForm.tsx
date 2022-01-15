@@ -6,6 +6,7 @@ import { LogoSVG } from "@svgs";
 import { isBasicEmailRegexValid, isEmailAtValid, isEmailDotValid } from "@utility";
 import { useViewport } from "@hooks";
 import { useSignInFormMutation } from "./SignInForm.mutation";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   themeColour: string;
@@ -13,13 +14,14 @@ interface Props {
 }
 const SignInForm: FC<Props> = ({ themeColour, themeTint }) => {
   const [isLoginSuccesFull, setIsLoginSuccessFull] = useState(true);
+  const navigate = useNavigate();
   const { width } = useViewport();
   const [signIn, { loading }] = useSignInFormMutation({
     onCompleted: completedData => {
       localStorage.setItem(accessToken, completedData?.signIn?.access_token);
       localStorage.setItem(uid, completedData?.signIn?.uid);
       localStorage.setItem(clientToken, completedData?.signIn?.client);
-      window.location.assign(`/restaurants/${completedData?.signIn?.restaurant_slug}`);
+      navigate(`/restaurants/${completedData?.signIn?.restaurant_slug}`);
     },
 
     onError: () => setIsLoginSuccessFull(false),

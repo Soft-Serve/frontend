@@ -7,7 +7,7 @@ module.exports = {
     {
       pattern:
         /bg-(red|green|blue|rose|pink|fuchsia|purple|violet|indigo|sky|cyan|teal|emerald|green|lime|yellow|amber|orange|slate|gray|zinc|neutral|stone)-(400|500|600|700|800|900)/,
-      variants: ["lg", "hover", "focus", "lg:hover", "ring"],
+      variants: ["lg", "hover", "focus", "lg:hover"],
     },
     {
       pattern: /font-(Sans|Arima|Baskerville|Cardo|Oswald|Quicksand|Raleway)/,
