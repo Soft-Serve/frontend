@@ -5,7 +5,7 @@ import { useCurrentUserQuery, useSignOutMutation } from "@shared";
 import { Button } from "@base";
 import { RestaurantLogo } from "@presentational";
 import { routes } from "@routes";
-import { useViewport } from "src/hooks";
+import { useViewport } from "@hooks";
 
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;

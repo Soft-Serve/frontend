@@ -1,10 +1,8 @@
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useEffect } from "react";
 import type { FC } from "react";
-import { RadioTile, RadioTiles } from "@base";
 import { Category } from "@shared";
-import { useGlobalContext } from "@contexts";
-import { classnames } from "tailwindcss-classnames";
 import { SkeletonCategories } from "./SkeletonCategories";
+import { RadioGroup } from "@headlessui/react";
 
 interface Props {
   categories?: Category[];
@@ -13,6 +11,11 @@ interface Props {
   themeFont: string;
   themeColour: string;
   themeTint: number;
+  categoryID: number;
+}
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
 }
 
 const Categories: FC<Props> = ({
@@ -22,29 +25,49 @@ const Categories: FC<Props> = ({
   themeFont,
   themeTint,
   themeColour,
+  categoryID,
 }) => {
-  const { categoryID } = useGlobalContext();
-  if (loading) return <SkeletonCategories />;
+  useEffect(() => {
+    if (categories?.[0]?.id) setCategoryID(categories?.[0]?.id);
+  }, [setCategoryID, categories]);
 
+  if (loading) return <SkeletonCategories />;
   return (
-    <RadioTiles
-      value={categories?.find(category => category?.id === categoryID)}
-      onChange={currentCategory => setCategoryID(currentCategory.id)}
-    >
-      <div className="flex">
-        {categories?.map(category => (
-          <RadioTile
-            themeColour={themeColour}
-            themeTint={themeTint}
-            value={category}
-            key={category.id}
-            css={classnames("rounded-md", "mx-2", "whitespace-nowrap")}
-          >
-            <span className={`font-${themeFont}`}>{category.name}</span>
-          </RadioTile>
-        ))}
-      </div>
-    </RadioTiles>
+    <div className="flex ">
+      <RadioGroup
+        value={categories?.find(cat => cat?.id === categoryID)}
+        onChange={currentCategory => setCategoryID(currentCategory?.id || 0)}
+        className="mt-2"
+      >
+        <RadioGroup.Label className="sr-only">Choose a memory option</RadioGroup.Label>
+        <div className="flex w-full ">
+          {categories?.map(option => (
+            <RadioGroup.Option
+              key={option.name}
+              value={option}
+              className={({ active, checked }) =>
+                classNames(
+                  option.id ? "cursor-pointer focus:outline-none" : "opacity-25 cursor-not-allowed",
+                  active ? `"ring-2 ring-offset-2 ring-${themeColour}-${themeTint}"` : "",
+                  checked
+                    ? `bg-${themeColour}-${themeTint} border-transparent text-white hover:bg-${themeColour}-${
+                        themeTint + 100
+                      }`
+                    : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50",
+                  "border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1 mx-2"
+                )
+              }
+            >
+              <RadioGroup.Label as="p">
+                <span className={`font-${themeFont} font-bold text-sm whitespace-nowrap`}>
+                  {option.name}
+                </span>
+              </RadioGroup.Label>
+            </RadioGroup.Option>
+          ))}
+        </div>
+      </RadioGroup>
+    </div>
   );
 };
 

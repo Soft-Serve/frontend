@@ -1,8 +1,7 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import type { FC } from "react";
 import { Tab, Tabs, Container, BoxSection, Button } from "@base";
 import { FullLogoSVG } from "@svgs";
-import { useGlobalContext } from "src/contexts";
 import { useMenusQuery } from "@shared";
 import { routes } from "src/routes";
 import Skeleton from "react-loading-skeleton";
@@ -13,10 +12,20 @@ interface Props {
   themeColour: string;
   themeTint: number;
   restaurantSlug: string;
+  setMenuID: Dispatch<SetStateAction<number>>;
+  setActiveMenu: Dispatch<SetStateAction<string>>;
+  menuID: number;
 }
-const Menus: FC<Props> = ({ themeFont, themeColour, themeTint, restaurantSlug }) => {
+const Menus: FC<Props> = ({
+  themeFont,
+  themeColour,
+  themeTint,
+  restaurantSlug,
+  setActiveMenu,
+  setMenuID,
+  menuID,
+}) => {
   const navigate = useNavigate();
-  const { setMenuID, setActiveMenu, menuID } = useGlobalContext();
 
   const { data, error, loading } = useMenusQuery({
     variables: {
@@ -29,6 +38,11 @@ const Menus: FC<Props> = ({ themeFont, themeColour, themeTint, restaurantSlug })
       }
     },
   });
+
+  useEffect(() => {
+    if (data?.menus?.[0].name) setActiveMenu(data?.menus?.[0].name);
+    if (data?.menus?.[0].id) setMenuID(data?.menus?.[0].id);
+  }, [setActiveMenu, setMenuID, data?.menus]);
 
   if (error) return <p>error</p>;
   if (loading) return <Skeleton height={40} />;

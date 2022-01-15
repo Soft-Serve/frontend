@@ -19,12 +19,13 @@ type Param = {
 const Main: FC = () => {
   const { pathname } = useLocation();
   const { id: restaurantSlug } = useParams<Param>() as Param;
-
   const isOnSettingsPage = pathname.includes("settings");
-
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [isFiterSideMenuOpen, setIsFilterSideMenuOpen] = useState(false);
   const [isMenuSlideOverOpen, setIsMenuSlideOverOpen] = useState(false);
+  const [menuID, setMenuID] = useState(0);
+  const [categoryID, setCategoryID] = useState(0);
+  const [activeMenu, setActiveMenu] = useState("");
 
   const { data, loading } = useRestaurantThemeQuery({
     variables: {
@@ -67,6 +68,8 @@ const Main: FC = () => {
           setIsFilterSideMenuOpen={setIsFilterModalOpen}
         />
         <MenuSlideOver
+          menuID={menuID}
+          setMenuID={setMenuID}
           themeTint={data?.restaurant?.tint || 400}
           restaurantSlug={restaurantSlug}
           themeFont={data?.restaurant?.font || "Quicksand"}
@@ -91,7 +94,19 @@ const Main: FC = () => {
         >
           <Suspense fallback={<LoadingScreen />}>
             <Routes>
-              <Route path="/" element={<Restaurant />} />
+              <Route
+                path="/"
+                element={
+                  <Restaurant
+                    categoryID={categoryID}
+                    activeMenu={activeMenu}
+                    menuID={menuID}
+                    setActiveMenu={setActiveMenu}
+                    setCategoryID={setCategoryID}
+                    setMenuID={setMenuID}
+                  />
+                }
+              />
               <Route
                 path="settings/:id"
                 element={<SettingsPage restaurantSlug={restaurantSlug} />}

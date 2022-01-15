@@ -56,7 +56,7 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
           itemID={item.id}
         />
       </div>
-      <div className="flex-1 bg-white p-4 flex flex-col justify-between">
+      <div className="flex-1 bg-white p-2 flex flex-col justify-between">
         <div>
           <p className={`font-bold font-${themeFont}`}>{item?.name}</p>
           <p

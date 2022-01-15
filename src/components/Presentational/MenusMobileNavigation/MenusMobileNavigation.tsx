@@ -1,9 +1,8 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 
 import { RadioTile, RadioTiles } from "@base";
-import { useGlobalContext } from "src/contexts";
-import { useMenusQuery } from "src/shared";
+import { useMenusQuery } from "@shared";
 
 interface Props {
   closeMenu: any;
@@ -11,6 +10,8 @@ interface Props {
   themeTint: number;
   themeFont: string;
   restaurantSlug: string;
+  setMenuID: Dispatch<SetStateAction<number>>;
+  menuID: number;
 }
 const MenusMobileNavigation: FC<Props> = ({
   themeColour,
@@ -18,10 +19,11 @@ const MenusMobileNavigation: FC<Props> = ({
   themeFont,
   closeMenu,
   restaurantSlug,
+  setMenuID,
+  menuID,
+
   ...rest
 }) => {
-  const { setMenuID, menuID } = useGlobalContext();
-
   const { data } = useMenusQuery({
     variables: {
       restaurantSlug,

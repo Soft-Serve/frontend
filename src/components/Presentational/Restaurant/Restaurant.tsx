@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { classnames } from "tailwindcss-classnames";
 import { Items, Menus, CategoriesContainer, WelcomePage, MobileSubHeader } from "@presentational";
@@ -13,7 +13,16 @@ type Param = {
   id: string;
 };
 
-const Restaurant: FC = () => {
+interface Props {
+  menuID: number;
+  setMenuID: Dispatch<SetStateAction<number>>;
+  categoryID: number;
+  setCategoryID: Dispatch<SetStateAction<number>>;
+  activeMenu: string;
+  setActiveMenu: Dispatch<SetStateAction<string>>;
+}
+
+const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID, setActiveMenu }) => {
   const { id: restaurantSlug } = useParams<Param>() as Param;
 
   const { data: themeData } = useRestaurantThemeQuery({
@@ -63,6 +72,7 @@ const Restaurant: FC = () => {
   const renderItems = () => {
     return (
       <Items
+        categoryID={categoryID}
         restaurantSlug={restaurantSlug}
         themeFont={themeData?.restaurant?.font || "Quicksand"}
         themeColour={themeData?.restaurant?.colour || "red"}
@@ -104,6 +114,9 @@ const Restaurant: FC = () => {
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
             <div className="w-full lg:flex hidden">
               <Menus
+                setActiveMenu={setActiveMenu}
+                setMenuID={setMenuID}
+                menuID={menuID}
                 restaurantSlug={restaurantSlug}
                 themeFont={themeData?.restaurant?.font || "Quicksand"}
                 themeColour={themeData?.restaurant?.colour || "red"}
@@ -111,11 +124,17 @@ const Restaurant: FC = () => {
               />
             </div>
             <CategoriesContainer
+              categoryID={categoryID}
+              menuID={menuID}
+              setCategoryID={setCategoryID}
               themeFont={themeData?.restaurant?.font || "Quicksand"}
               themeColour={themeData?.restaurant?.colour || "red"}
               themeTint={themeData?.restaurant?.tint || 400}
             />
             <MobileSubHeader
+              menuID={menuID}
+              categoryID={categoryID}
+              setCategoryID={setCategoryID}
               themeFont={themeData?.restaurant?.font || "Quicksand"}
               themeColour={themeData?.restaurant?.colour || "red"}
               themeTint={themeData?.restaurant?.tint || 400}

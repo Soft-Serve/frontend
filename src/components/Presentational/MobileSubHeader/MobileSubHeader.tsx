@@ -1,17 +1,24 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { Categories } from "@presentational";
 import { useCategoriesQuery } from "@shared";
-import { useGlobalContext } from "@contexts";
 
 interface Props {
   themeFont: string;
   themeColour: string;
   themeTint: number;
+  categoryID: number;
+  setCategoryID: Dispatch<SetStateAction<number>>;
+  menuID: number;
 }
-const MobileSubHeader: FC<Props> = ({ themeFont, themeColour, themeTint }) => {
-  const { menuID, setCategoryID } = useGlobalContext();
-
+const MobileSubHeader: FC<Props> = ({
+  themeFont,
+  themeColour,
+  themeTint,
+  categoryID,
+  setCategoryID,
+  menuID,
+}) => {
   const { data, loading } = useCategoriesQuery({
     variables: {
       menuID,
@@ -36,6 +43,7 @@ const MobileSubHeader: FC<Props> = ({ themeFont, themeColour, themeTint }) => {
       <div className="flex overflow-x-scroll my-2 hide-scroll-bar">
         <div className="flex flex-nowrap mx-2">
           <Categories
+            categoryID={categoryID}
             themeColour={themeColour}
             themeTint={themeTint}
             themeFont={themeFont}

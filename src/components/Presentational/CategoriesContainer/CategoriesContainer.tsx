@@ -1,22 +1,30 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { Categories } from "@presentational";
 import { useCategoriesQuery } from "@shared";
-import { useGlobalContext } from "@contexts";
 
 interface Props {
   themeFont: string;
   themeColour: string;
   themeTint: number;
+  menuID: number;
+  setCategoryID: Dispatch<SetStateAction<number>>;
+  categoryID: number;
 }
-const CategoriesContainer: FC<Props> = ({ themeFont, themeTint, themeColour }) => {
-  const { menuID, setCategoryID } = useGlobalContext();
-
+const CategoriesContainer: FC<Props> = ({
+  themeFont,
+  themeTint,
+  themeColour,
+  menuID,
+  setCategoryID,
+  categoryID,
+}) => {
   const { data, loading } = useCategoriesQuery({
     variables: {
       menuID,
     },
     skip: !menuID,
+
     onCompleted: completedData => setCategoryID(completedData?.categories[0]?.id),
   });
 
@@ -28,6 +36,7 @@ const CategoriesContainer: FC<Props> = ({ themeFont, themeTint, themeColour }) =
     <div className="w-full flex-wrap lg:flex hidden">
       <div className="mt-4 mb-2 flex items-center">
         <Categories
+          categoryID={categoryID}
           themeColour={themeColour}
           themeTint={themeTint}
           themeFont={themeFont}

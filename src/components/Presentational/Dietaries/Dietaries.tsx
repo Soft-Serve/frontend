@@ -29,7 +29,7 @@ const Dietaries: FC<Props> = ({ itemID, itemAvailable, css, themeColour, themeTi
           dietary,
           iconColour,
           themeTint,
-          classnames("mx-1", "bg-white", "rounded-md", "w-8", "h-8", "p-2")
+          classnames("mx-1", "rounded-md", "w-8", "h-8", "p-2")
         )
       )}
     </div>

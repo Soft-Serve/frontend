@@ -12,6 +12,8 @@ interface Props {
   themeTint: number;
   themeFont: string;
   restaurantSlug: string;
+  menuID: number;
+  setMenuID: Dispatch<SetStateAction<number>>;
 }
 
 const MenuSlideOver: FC<Props> = ({
@@ -21,6 +23,8 @@ const MenuSlideOver: FC<Props> = ({
   themeTint,
   themeFont,
   restaurantSlug,
+  menuID,
+  setMenuID,
 }) => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -77,6 +81,8 @@ const MenuSlideOver: FC<Props> = ({
               </div>
               <nav aria-label="Sidebar" className="mt-5">
                 <MenusMobileNavigation
+                  menuID={menuID}
+                  setMenuID={setMenuID}
                   restaurantSlug={restaurantSlug}
                   themeFont={themeFont}
                   themeColour={themeColour}

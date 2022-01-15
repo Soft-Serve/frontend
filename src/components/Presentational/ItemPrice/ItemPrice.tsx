@@ -53,7 +53,7 @@ const ItemPrice: FC<Props> = ({
       const singlePrice = Number(data?.itemSizes[0]?.price);
 
       return (
-        <div className={`w-full flex bg-white my-2 font-${themeFont} text-sm justify-${position}`}>
+        <div className={`w-full flex bg-white font-${themeFont} text-sm justify-${position}`}>
           <p
             className={`text-white p-2 bg-${themeColour}-${themeTint} rounded-md font-bold inline-flex`}
           >
@@ -65,7 +65,7 @@ const ItemPrice: FC<Props> = ({
 
     return (
       <div
-        className={`text-white font-${themeFont} my-2 bg-${themeColour}-${themeTint} rounded-md font-bold flex flex-col text-sm`}
+        className={`text-white font-${themeFont}  bg-${themeColour}-${themeTint} rounded-md font-bold flex flex-col text-sm`}
       >
         {data?.itemSizes?.map(item => (
           <p className="w-full inline-flex justify-between" key={item?.id}>

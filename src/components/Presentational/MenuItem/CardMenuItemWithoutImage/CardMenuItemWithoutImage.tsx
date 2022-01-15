@@ -4,7 +4,6 @@ import { Item, useDietaryQuery } from "@shared";
 import { Dietaries, ItemPrice } from "@presentational";
 import { useAllergyContext } from "@contexts";
 import { intersection } from "@utility";
-import { Card, CardContent } from "@base";
 import { SkeletonMenuItemWithoutImage } from "./SkeletonMenuItemWithoutImage";
 
 interface Props {
@@ -41,29 +40,27 @@ const CardMenuItemWithoutImage: FC<Props> = ({ item, themeFont, themeColour, the
     );
 
   return (
-    <Card withPadding={false}>
-      <CardContent>
-        <div className="flex-1 bg-white px-4 flex flex-col justify-between relative">
-          <div>
-            <div className="flex items-center justify-between py-2">
-              <p className={`font-bold font-${themeFont} truncate`}>{item?.name}</p>
-              <Dietaries
-                themeColour={themeColour}
-                themeTint={themeTint}
-                itemAvailable={item.available}
-                itemID={item.id}
-              />
-            </div>
-            <p
-              className={`font-${themeFont} italic text-gray-600  text-sm break-words text-ellipsis overflow-hidden`}
-            >
-              {item.available ? item.description : "** Temporarily unavailable  **"}
-            </p>
-            {renderPrice()}
+    <div key={item.id} className="flex rounded-lg shadow-lg overflow-hidden">
+      <div className="flex-1 bg-white p-2 flex flex-col justify-between relative">
+        <div>
+          <div className="flex items-center justify-between py-2">
+            <p className={`font-bold font-${themeFont} truncate`}>{item?.name}</p>
+            <Dietaries
+              themeColour={themeColour}
+              themeTint={themeTint}
+              itemAvailable={item.available}
+              itemID={item.id}
+            />
           </div>
+          <p
+            className={`font-${themeFont} italic text-gray-600  text-sm break-words text-ellipsis overflow-hidden`}
+          >
+            {item.available ? item.description : "** Temporarily unavailable  **"}
+          </p>
+          {renderPrice()}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 
