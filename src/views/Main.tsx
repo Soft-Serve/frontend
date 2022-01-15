@@ -3,14 +3,14 @@ import type { FC } from "react";
 import { Route, Routes, useLocation, useParams } from "react-router-dom";
 import { Footer, LoadingScreen } from "@base";
 import { MenuSlideOver, AllergyModal, AllergyFiltersSideMenu, Restaurant } from "@presentational";
+import { useRestaurantThemeQuery } from "@shared";
 import { MenuPage } from "./MenuPage";
 import { MainNavigation } from "./MainNavigation";
 import { MainMobileHeader } from "./MainMobileHeader";
+import { SignInPage } from "./SignInPage";
 import { Providers } from "./Providers";
-import { useRestaurantThemeQuery } from "@shared";
 
 const SettingsPage = lazy(() => import("./SettingsPage/DefaultSettingsPage"));
-const SignInPage = lazy(() => import("./SignInPage/DefaultSignInPage"));
 
 type Param = {
   id: string;
