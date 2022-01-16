@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { AllergyLegend } from "@presentational";
 import { Modal, Button } from "@base";
-import type { TArg } from "tailwindcss-classnames";
 
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
@@ -20,10 +19,8 @@ const AllergyModal: FC<Props> = ({
   themeColour,
   themeFont,
 }) => {
-  const bgColour = `bg-${themeColour}-${themeTint}` as TArg;
-
   return (
-    <Modal css={bgColour} onClose={setIsFilterSideMenuOpen} isOpen={isOpen}>
+    <Modal onClose={setIsFilterSideMenuOpen} isOpen={isOpen}>
       <AllergyLegend
         restaurantSlug={restaurantSlug}
         themeColour={themeColour}

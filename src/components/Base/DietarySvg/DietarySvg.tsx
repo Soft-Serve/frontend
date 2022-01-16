@@ -32,7 +32,7 @@ const Components: DietaryMap = {
 const DietarySvg = (dietary: Dietary, themeColour: string, themeTint: number, css?: TArg) => {
   const { name, id } = dietary;
   if (typeof Components[name] !== "undefined") {
-    return React.createElement(Components[dietary.name], {
+    return React.createElement(Components[name], {
       key: id,
       className: buildSvgStyles(themeColour, themeTint, css),
     });

@@ -7455,11 +7455,6 @@ react-router@6.2.1:
   dependencies:
     history "^5.2.0"
 
-react-tiny-fab@^4.0.4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/react-tiny-fab/-/react-tiny-fab-4.0.4.tgz#0b293b403893a6a4fe689493818d498f277d62bb"
-  integrity sha512-PxT6gEnIQR2vFfeIaa1Oq4PRX+cIEDbEfbS6PyevWCQngrKfqjMKPEcZOaaURaUclB9u3RilgjkaBUQFVlbWcg==
-
 react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"

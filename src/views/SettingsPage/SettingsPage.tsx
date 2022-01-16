@@ -1,14 +1,13 @@
 import type { FC } from "react";
-import { Fab } from "react-tiny-fab";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Toaster } from "react-hot-toast";
 import { SettingsSubMenu } from "@presentational";
 import { Navigate } from "react-router-dom";
 import { useViewport } from "@hooks";
-import { Footer, LoadingScreen, TabContent } from "@base";
+import { Button, Footer, LoadingScreen, TabContent } from "@base";
 import { useCurrentUserQuery, useRestaurantThemeQuery } from "@shared";
-import { AdjustmentsIcon } from "@heroicons/react/solid";
+import { ChevronRightIcon } from "@heroicons/react/solid";
 import { classnames } from "tailwindcss-classnames";
 import { routes } from "@routes";
 import { SettingsMobileSubNavigation } from "./SettingsMobileSubNavigation";
@@ -22,7 +21,6 @@ import { RestaurantSettings } from "./RestaurantSettings";
 import { SettingsWrapper } from "./SettingsWrapper";
 import { CategorySettings } from "./CategorySettings";
 import { BannerSettings } from "./BannerSettings/BannerSettings";
-import "react-tiny-fab/dist/styles.css";
 
 interface MappableObject {
   [key: string]: JSX.Element;
@@ -149,17 +147,17 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
   }
   return (
     <>
-      <div className="lg:hidden block">
-        <Fab
+      <div className="lg:hidden block mt-4 ml-4">
+        <Button
+          css={classnames("items-center")}
+          size="XL"
           onClick={() => onClose(prevState => !prevState)}
-          icon={
-            <AdjustmentsIcon
-              className={`bg-${themeData?.restaurant?.colour || "red"}-${
-                themeData?.restaurant?.tint || 400
-              } rounded-full`}
-            />
-          }
-        />
+          themeColour={themeData?.restaurant?.colour || "red"}
+          themeTint={themeData?.restaurant?.tint || 400}
+        >
+          Settings
+          <ChevronRightIcon className="text-white w-5 h-5" />
+        </Button>
       </div>
       <SettingsMobileSubNavigation
         restaurantSlug={restaurantSlug}

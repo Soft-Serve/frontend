@@ -68,7 +68,7 @@ const PasswordInput: FC<Props> = ({
           value={value}
           type={isPassword ? "password" : "text"}
           disabled={disabled}
-          className={`block w-full shadow-sm sm:text-sm focus:ring-${themeColour}-${themeTint} focus:border-${themeColour}-${themeTint} rounded-md border-2 shadow-md `}
+          className={`block w-full shadow-sm sm:text-sm focus:ring-${themeColour}-${themeTint} focus:border-${themeColour}-${themeTint} rounded-md border-2 shadow-md border-${themeColour}-${themeTint}`}
           autoComplete={autoComplete}
           name={name}
           {...rest}

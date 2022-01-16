@@ -25,7 +25,6 @@ export { ListItem, List, SkeletonList } from "./List";
 export { TextBox } from "./TextBox";
 export { HeroBanner } from "./HeroBanner";
 export { Notification } from "./Notification";
-export { FloatingMenu } from "./FloatingMenu";
 export { AttachedLabelInput } from "./AttachedLabelInput";
 export { TabWrapper } from "./TabWrapper";
 export { KebabDropdown, KebabDropdownItem } from "./KebabDropdown";

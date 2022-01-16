@@ -4,6 +4,7 @@ import { useAllergyContext } from "@contexts";
 import { Allergy, useAllergiesQuery } from "@shared";
 import { ActionTypes } from "src/contexts/AllergyContext/types";
 import Skeleton from "react-loading-skeleton";
+import { classnames } from "tailwindcss-classnames";
 
 interface Props {
   themeColour: string;
@@ -46,19 +47,24 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
     return (
       <>
         {data?.allergies?.map(allergy => (
-          <div key={allergy.id} className={`w-full bg-${themeColour}-${themeTint}`}>
+          <div key={allergy.id} className={`w-full`}>
             <div
-              className="flex whitespace-nowrap rounded-md p-2 items-center w-full bg-white my-2 justify-between "
+              className={`flex whitespace-nowrap rounded-md p-2 items-center w-full bg-white my-2 justify-between border-2 border-${themeColour}-${themeTint}`}
               onKeyDown={() => handleClick(allergy)}
               role="button"
               onClick={() => handleClick(allergy)}
               tabIndex={0}
             >
-              <div>
-                {DietarySvg(allergy, themeColour, themeTint)}
-                <span className={`text-sm font-medium text-gray-900 mx-2 font-${themeFont}`}>
-                  {allergy.filter_name}
-                </span>
+              <div key={allergy.id} className="inline-flex items-center">
+                <div className="flex items-center">
+                  {DietarySvg(
+                    allergy,
+                    themeColour,
+                    themeTint,
+                    classnames("mx-1", "text-white", "w-8", "h-8", "p-2")
+                  )}
+                  <span className={`font-${themeFont} font-bold ml-2`}>{allergy.name}</span>
+                </div>
               </div>
               <Toggle
                 themeColour={themeColour}
@@ -76,9 +82,7 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
 
   return (
     <BreadCrumbsNavigation>
-      <div className={`w-full bg-${themeColour}-${themeTint} flex flex-col`}>
-        {renderAllergies()}
-      </div>
+      <div className={`w-full  flex flex-col`}>{renderAllergies()}</div>
     </BreadCrumbsNavigation>
   );
 };

@@ -51,7 +51,7 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
         <Dietaries
           themeColour={themeColour}
           themeTint={themeTint}
-          css={classnames("justify-end", "absolute", "top-0", "left-0")}
+          css={classnames("justify-end", "absolute", "top-1", "left-1")}
           itemAvailable={item.available}
           itemID={item.id}
         />

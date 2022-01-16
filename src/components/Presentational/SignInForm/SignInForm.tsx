@@ -84,8 +84,7 @@ const SignInForm: FC<Props> = ({ themeColour, themeTint }) => {
   const isSmallerThenTablet = width < 500;
 
   const renderCTA = () => {
-    if (isSmallerThenTablet)
-      return <h2 className="text-center text-3xl font-extrabold text-gray-900">Sign in</h2>;
+    if (isSmallerThenTablet) return null;
     return (
       <>
         <LogoSVG className={`text-${themeColour}-${themeTint}`} />
@@ -114,6 +113,9 @@ const SignInForm: FC<Props> = ({ themeColour, themeTint }) => {
       </div>
       <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          {isSmallerThenTablet && (
+            <h2 className="text-center text-3xl font-extrabold text-gray-900 mt-2 mb-8">Sign in</h2>
+          )}
           <form className="space-y-6" onSubmit={handleSubmit}>
             <Input
               themeColour={themeColour}

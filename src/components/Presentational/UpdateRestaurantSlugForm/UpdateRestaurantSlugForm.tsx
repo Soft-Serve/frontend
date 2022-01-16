@@ -90,7 +90,7 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id, themeColour, themeTint 
         themeColour={themeColour}
         themeTint={themeTint}
         label="Slug"
-        attachedLabel="www.softserveapp.com/restaurants/"
+        attachedLabel="softserveapp.com/restaurants/"
         id="slug"
         value={slugState}
         onChange={e => setSlugState(e.target.value)}

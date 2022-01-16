@@ -53,7 +53,7 @@ const CardMenuItemWithoutImage: FC<Props> = ({ item, themeFont, themeColour, the
             />
           </div>
           <p
-            className={`font-${themeFont} italic text-gray-600  text-sm break-words text-ellipsis overflow-hidden`}
+            className={`font-${themeFont} italic text-gray-600  text-sm break-words text-ellipsis overflow-hidden mb-4`}
           >
             {item.available ? item.description : "** Temporarily unavailable  **"}
           </p>

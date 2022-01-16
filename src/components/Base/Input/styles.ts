@@ -39,11 +39,12 @@ const buildThemeStyles = (colour: string, tint: number) => {
   return classnames(borderColour, focusColour, focusborderColour);
 };
 
-const buildStyles = (isDisabled: boolean, themeColour: string, themeTint: number, css?: TArg) =>
-  classnames(
+const buildStyles = (isDisabled: boolean, themeColour: string, themeTint: number, css?: TArg) => {
+  return classnames(
     { [disabled]: isDisabled, [input]: !isDisabled },
     buildThemeStyles(themeColour, themeTint),
     css
   );
+};
 
 export { label, buildStyles };

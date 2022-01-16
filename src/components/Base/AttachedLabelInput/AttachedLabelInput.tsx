@@ -29,7 +29,7 @@ const AttachedLabelInput: FC<Props> = ({
         </label>
         <div className="mt-2 flex flex-col">
           <span
-            className={`items-center p-3 rounded-t-md border-r-0 border-2 border-${themeColour}-${themeTint}  text-white bg-${themeColour}-${themeTint} sm:text-sm font-bold font-Quicksand`}
+            className={`items-center p-3 rounded-t-md border-r-0 border-2 border-${themeColour}-${themeTint}  text-white bg-${themeColour}-${themeTint} text-sm font-bold font-Quicksand`}
           >
             {attachedLabel}
           </span>

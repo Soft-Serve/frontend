@@ -23,15 +23,19 @@ const Dietaries: FC<Props> = ({ itemID, itemAvailable, css, themeColour, themeTi
   if (!data?.dietaries?.length) return null;
 
   return (
-    <div className={`flex items-center p-2 ${css}`}>
-      {data?.dietaries.map(dietary =>
-        DietarySvg(
-          dietary,
-          iconColour,
-          themeTint,
-          classnames("mx-1", "rounded-md", "w-8", "h-8", "p-2")
-        )
-      )}
+    <div className={`flex flex-col items-start ${css || ""}`}>
+      {data?.dietaries.map(dietary => (
+        <div key={dietary.id} className="inline-flex items-center">
+          <div>
+            {DietarySvg(
+              dietary,
+              iconColour,
+              themeTint,
+              classnames("mx-1", "text-white", "w-8", "h-8", "p-2", css)
+            )}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
