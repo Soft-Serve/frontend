@@ -10,6 +10,7 @@ import { client } from "./client";
 const LandingPage = lazy(() => import("./views/LandingPage"));
 const SignUpPage = lazy(() => import("./views/SignUpPage/DefaultSignUpPage"));
 const ConfirmEmailPage = lazy(() => import("./views/ConfirmEmailPage/DefaultConfirmEmailPage"));
+const ResetPasswordPage = lazy(() => import("./views/ResetPasswordPage/DefaultResetPasswordPage"));
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/" element={<LandingPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
             <Route path="/confirm" element={<ConfirmEmailPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route path={`${routes.restaurants}/:id/*`} element={<Main />} />
           </Routes>
         </Suspense>
