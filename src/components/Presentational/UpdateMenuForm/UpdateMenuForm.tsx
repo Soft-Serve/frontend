@@ -103,21 +103,20 @@ const UpdateMenuForm: FC<Props> = ({
   return (
     <div>
       <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
-          Change Menu name
+        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4 font-Quicksand">
+          Update Menu name
         </h3>
         <Button
           themeColour={themeColour}
           themeTint={themeTint}
           onClick={() => onCompleted?.(false)}
           size="S"
-          colour="accent"
         >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
 
-      <form onSubmit={handleSubmit} className="w-full">
+      <form onSubmit={handleSubmit} className="w-full my-8">
         <Input
           themeColour={themeColour}
           themeTint={themeTint}
@@ -133,7 +132,7 @@ const UpdateMenuForm: FC<Props> = ({
           id="menu-name"
           required
         />
-        <div className="mt-3">
+        <div className="mt-8">
           <Button
             themeColour={themeColour}
             themeTint={themeTint}

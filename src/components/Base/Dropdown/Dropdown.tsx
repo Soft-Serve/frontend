@@ -35,7 +35,7 @@ const Dropdown: FC<Props> = ({
     return errors?.slice(0, 2).map(error => <p key={`error-item-${error}`}>{error}</p>);
   };
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <Listbox value={value} onChange={onChange}>
         {({ open }) => (
           <>
@@ -43,7 +43,7 @@ const Dropdown: FC<Props> = ({
               {label || value ? value?.name : defaultValue}
             </Listbox.Label>
             {label && (
-              <Listbox.Label className=" text-sm font-medium text-gray-700 mb-2">
+              <Listbox.Label className=" text-sm font-bold text-gray-700 mb-2">
                 {label} {required && <span className="text-red-600">*</span>}
               </Listbox.Label>
             )}
@@ -59,9 +59,7 @@ const Dropdown: FC<Props> = ({
                     className={`relative inline-flex items-center bg-white border-2 py-2 pl-3 pr-4  border-${themeColour}-${themeTint} rounded-l-md shadow-sm text-${themeColour}-${themeTint} focus:outline-none`}
                   >
                     <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                    <p className="ml-2.5 text-sm font-medium">
-                      {value ? value?.name : defaultValue}
-                    </p>
+                    <p className="ml-2.5 text-sm font-bold">{value ? value?.name : defaultValue}</p>
                   </Listbox.Button>
                   <Listbox.Button
                     className={`relative inline-flex items-center bg-${themeColour}-${themeTint} p-2 rounded-l-none rounded-r-md text-sm font-medium text-${themeColour}-${themeTint} hover:bg-${themeColour}-${
@@ -83,7 +81,7 @@ const Dropdown: FC<Props> = ({
               >
                 <Listbox.Options
                   static
-                  className="origin-top-right absolute z-10 right-0 mt-2 w-72 rounded-md shadow-lg overflow-hidden bg-white divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  className="origin-top-left absolute z-10  mt-2 w-72 rounded-md shadow-lg overflow-hidden bg-white divide-y divide-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none"
                 >
                   {data?.map((option: any) => (
                     <Listbox.Option
@@ -94,9 +92,7 @@ const Dropdown: FC<Props> = ({
                       {({ selected, active }) => (
                         <div className="flex flex-col">
                           <div className="flex justify-between">
-                            <p className={selected ? "font-semibold" : "font-normal"}>
-                              {option.name}
-                            </p>
+                            <p className={selected ? "font-bold" : "font-normal"}>{option.name}</p>
                             {selected ? (
                               <span
                                 className={

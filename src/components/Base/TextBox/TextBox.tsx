@@ -42,7 +42,8 @@ const TextBox: FC<Props> = ({
       </label>
       {labelText && (
         <label htmlFor={name} className={styles.label}>
-          {labelText} {required && <span className="text-red-600">*</span>}
+          <span className="font-Quicksand">{labelText}</span>
+          {required && <span className="text-red-600">*</span>}
         </label>
       )}
       <textarea

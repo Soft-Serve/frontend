@@ -72,21 +72,22 @@ const DeleteCategoryForm: FC<Props> = ({
     <form noValidate onSubmit={handleSubmit}>
       <div className="flex justify-between items-center">
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
-          Catgeory:{" "}
-          <span className="font-bold underline text-red-400">{selectedCategory?.name}</span>
+          Catgeory name:{" "}
+          <span className={`font-bold underline text-${themeColour}-${themeTint}`}>
+            {selectedCategory?.name}
+          </span>
         </h3>
         <Button
           themeColour={themeColour}
           themeTint={themeTint}
           onClick={() => onCompleted?.(false)}
           size="S"
-          colour="accent"
         >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
-      <p className="mt-4 text-base text-gray-400">
-        Are you sure ? You will delete all items within this menu
+      <p className="my-8 text-base text-gray-900 font-Quicksand underline">
+        All items within this menu will be deleted!
       </p>
       <div className="flex items-center mt-4">
         <div className="flex-1 mr-2">
@@ -112,7 +113,7 @@ const DeleteCategoryForm: FC<Props> = ({
             type="submit"
             css="text-center"
           >
-            Delete Category
+            Delete
           </Button>
         </div>
       </div>

@@ -98,15 +98,14 @@ const UpdateCategoryForm: FC<Props> = ({
   return (
     <div>
       <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
-          add new category
+        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4 font-Quicksand">
+          edit category
         </h3>
         <Button
           themeColour={themeColour}
           themeTint={themeTint}
           onClick={() => onCompleted?.(false)}
           size="S"
-          colour="accent"
         >
           <XIcon className="w-5 h-5" />
         </Button>
@@ -138,9 +137,11 @@ const UpdateCategoryForm: FC<Props> = ({
             setInput(prevState => prevState && { ...prevState, category_type: value })
           }
         >
-          <div className="flex my-4">
+          <div className="flex my-8">
             <RadioTile themeColour={themeColour} themeTint={themeTint} css="w-full" value="food">
-              <span className="block text-sm font-medium w-full text-center">Food</span>
+              <span className="block text-sm font-medium w-full text-center font-Quicksand">
+                Food
+              </span>
             </RadioTile>
 
             <RadioTile
@@ -149,11 +150,13 @@ const UpdateCategoryForm: FC<Props> = ({
               css={classnames("w-full", "ml-4")}
               value="beverage"
             >
-              <span className="block text-sm font-medium w-full text-center">Beverage</span>
+              <span className="block text-sm font-medium w-full text-center font-Quicksand">
+                Beverage
+              </span>
             </RadioTile>
           </div>
         </RadioTiles>
-        <div className="mt-3 w-full">
+        <div className="mt-8 w-full">
           <Button
             themeColour={themeColour}
             themeTint={themeTint}
@@ -162,7 +165,7 @@ const UpdateCategoryForm: FC<Props> = ({
             size="XXL"
             type="submit"
           >
-            Update Category
+            Update
           </Button>
         </div>
       </form>

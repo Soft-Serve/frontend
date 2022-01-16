@@ -69,22 +69,24 @@ const DeleteMenuForm: FC<Props> = ({
     <form noValidate onSubmit={handleDeleteMenu}>
       <div className="flex justify-between items-center">
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
-          Menu name: <span className="font-bold underline text-red-400">{selectedMenu?.name}</span>
+          Menu name:{" "}
+          <span className={`font-bold underline text-${themeColour}-${themeTint}`}>
+            {selectedMenu?.name}
+          </span>
         </h3>
         <Button
           themeColour={themeColour}
           themeTint={themeTint}
           onClick={() => onCompleted?.(false)}
           size="S"
-          colour="accent"
         >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
-      <p className="mt-4 text-base text-gray-400">
-        Are you sure ? You will delete all categories and items within this menu
+      <p className="my-8 text-base text-gray-900 font-Quicksand underline">
+        All items and categories within this menu will be deleted!
       </p>
-      <div className="flex mt-4">
+      <div className="flex items-center mt-4">
         <div className="w-full mr-2">
           <Button
             themeColour={themeColour}

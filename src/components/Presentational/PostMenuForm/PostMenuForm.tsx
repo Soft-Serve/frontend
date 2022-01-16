@@ -70,7 +70,7 @@ const PostMenuForm: FC<Props> = ({
   return (
     <div>
       <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
+        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4 font-Quicksand">
           add new menu
         </h3>
         <Button
@@ -78,13 +78,12 @@ const PostMenuForm: FC<Props> = ({
           themeTint={themeTint}
           onClick={() => onCompleted?.(false)}
           size="S"
-          colour="accent"
         >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-4 flex flex-col w-full">
+      <form onSubmit={handleSubmit} className="my-8 w-full">
         <Input
           themeColour={themeColour}
           themeTint={themeTint}
@@ -105,7 +104,7 @@ const PostMenuForm: FC<Props> = ({
           id="menu-name"
           required
         />
-        <div className="my-2">
+        <div className="mt-8">
           <Button
             themeColour={themeColour}
             themeTint={themeTint}

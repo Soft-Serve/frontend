@@ -12,13 +12,7 @@ import {
 import { Button, Input, TextBox } from "@base";
 import { XIcon } from "@heroicons/react/solid";
 import { MultiSize } from "@presentational";
-import {
-  isBasicNameValid,
-  isNameInputValid,
-  isNameOnlyNumbers,
-  isNameValid,
-  isPriceInvalid,
-} from "@utility";
+import { isNameInputValid, isNameOnlyNumbers, isNameValid, isPriceInvalid } from "@utility";
 import { v4 as uuidv4 } from "uuid";
 import { useUpdateItemMutation } from "./UpdateItem.mutation";
 
@@ -114,7 +108,7 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
   const inputNameError = () => {
     const { name } = input;
     if (!isNameValid(name)) return <span>Name is required</span>;
-    if (!isBasicNameValid(name)) return <span>Name not valid</span>;
+    if (!isNameInputValid(name)) return <span>Name not valid</span>;
     if (isNameOnlyNumbers(name)) return <span>Name cannot only contain numbers</span>;
     return null;
   };
@@ -147,7 +141,7 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
   const isFormValid = isNameInputValid(input.name) && sizes && !isPriceInvalid(sizes);
 
   return (
-    <div>
+    <div className="font-Quicksand">
       <div className="flex justify-between items-center">
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
           Update {input.name}
@@ -157,7 +151,6 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
           themeTint={themeTint}
           onClick={() => onCompleted?.(false)}
           size="S"
-          colour="accent"
         >
           <XIcon className="w-5 h-5" />
         </Button>

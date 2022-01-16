@@ -1,12 +1,12 @@
 import React from "react";
 import type { FC } from "react";
-import { Button, Card, CardContent, List, ListItem, SkeletonList } from "@base";
+import { Card, CardContent, List, ListItem, SkeletonList } from "@base";
 import { Menu } from "@shared";
-import { DeleteSVG } from "@svgs";
-import { ChevronRightIcon, PencilIcon } from "@heroicons/react/solid";
+import { ChevronRightIcon } from "@heroicons/react/solid";
 
 import { Link } from "react-router-dom";
 import { routes } from "@routes";
+import { MenuDropdown } from "./MenuDropdown";
 
 enum ModalForms {
   UpdateMenu = "updateMenu",
@@ -33,7 +33,7 @@ const MenusList: FC<Props> = ({
     return <SkeletonList />;
   }
   return (
-    <Card>
+    <Card css="overflow-visible">
       <CardContent>
         <List>
           {menus?.map(menu => (
@@ -48,31 +48,12 @@ const MenusList: FC<Props> = ({
                 </div>
               </Link>
               <div className="ml-4 flex flex-col lg:flex-row">
-                <div className="w-full sm:mr-2 my-1">
-                  <Button
-                    themeColour={themeColour}
-                    themeTint={themeTint}
-                    isFullwidth
-                    size="S"
-                    onClick={() => handleModal(ModalForms.UpdateMenu, menu)}
-                  >
-                    Edit
-                    <PencilIcon className="w-5 h-5 ml-2" />
-                  </Button>
-                </div>
-                <div className="w-full my-1">
-                  <Button
-                    themeColour={themeColour}
-                    themeTint={themeTint}
-                    isFullwidth
-                    colour="accent"
-                    size="S"
-                    onClick={() => handleModal(ModalForms.DeleteMenu, menu)}
-                  >
-                    Delete
-                    <DeleteSVG className="w-5 h-5 ml-2" />
-                  </Button>
-                </div>
+                <MenuDropdown
+                  themeColour={themeColour}
+                  themeTint={themeTint}
+                  handleDelete={() => handleModal(ModalForms.DeleteMenu, menu)}
+                  handleUpdate={() => handleModal(ModalForms.UpdateMenu, menu)}
+                />
               </div>
             </ListItem>
           ))}

@@ -1,11 +1,12 @@
 import React from "react";
 import type { FC } from "react";
 import { Link } from "react-router-dom";
-import { Button, Card, CardContent, List, ListItem, SkeletonList } from "@base";
+import { Card, CardContent, List, ListItem, SkeletonList } from "@base";
 import { Category, Menu } from "@shared";
-import { DeleteSVG } from "@svgs";
 import { routes } from "@routes";
-import { ChevronRightIcon, PencilIcon } from "@heroicons/react/solid";
+import { ChevronRightIcon } from "@heroicons/react/solid";
+import { CategoryDropdown } from "./CategoryDropdown";
+import { classnames } from "tailwindcss-classnames";
 
 enum ModalForms {
   UpdateCategory = "updateCategory",
@@ -34,7 +35,7 @@ const CategoryList: FC<Props> = ({
     return <SkeletonList />;
   }
   return (
-    <Card css="mt-4">
+    <Card css={classnames("mt-4", "overflow-visible")}>
       <CardContent>
         <List>
           {categories
@@ -51,31 +52,12 @@ const CategoryList: FC<Props> = ({
                   </div>
                 </Link>
                 <div className="ml-4 flex flex-col sm:flex-row">
-                  <div className="w-full sm:mr-2 my-1">
-                    <Button
-                      themeColour={themeColour}
-                      themeTint={themeTint}
-                      isFullwidth
-                      size="S"
-                      onClick={() => handleModal(ModalForms.UpdateCategory, category)}
-                    >
-                      Edit
-                      <PencilIcon className="w-5 h-5 ml-2" />
-                    </Button>
-                  </div>
-                  <div className="w-full my-1">
-                    <Button
-                      themeColour={themeColour}
-                      themeTint={themeTint}
-                      isFullwidth
-                      colour="accent"
-                      size="S"
-                      onClick={() => handleModal(ModalForms.DeleteCategory, category)}
-                    >
-                      Delete
-                      <DeleteSVG className="w-5 h-5 ml-2" />
-                    </Button>
-                  </div>
+                  <CategoryDropdown
+                    themeColour={themeColour}
+                    themeTint={themeTint}
+                    handleDelete={() => handleModal(ModalForms.DeleteCategory, category)}
+                    handleUpdate={() => handleModal(ModalForms.UpdateCategory, category)}
+                  />
                 </div>
               </ListItem>
             ))}

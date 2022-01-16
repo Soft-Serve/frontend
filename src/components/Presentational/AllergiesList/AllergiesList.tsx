@@ -2,9 +2,9 @@ import React from "react";
 import type { FC } from "react";
 import { useAllergiesQuery } from "@shared";
 import Skeleton from "react-loading-skeleton";
-import { Button, Card, CardContent, List, ListItem } from "@base";
-import { DeleteSVG } from "@svgs";
-import { PencilIcon } from "@heroicons/react/solid";
+import { Card, CardContent, List, ListItem } from "@base";
+import { AllergiesDropdown } from "./AllergiesDropdown";
+import { classnames } from "tailwindcss-classnames";
 
 interface Props {
   handleUpdateItem: any;
@@ -42,7 +42,7 @@ const AllergiesList: FC<Props> = ({
   }
 
   return (
-    <Card css="mt-4">
+    <Card css={classnames("mt-4", "overflow-visible")}>
       <CardContent>
         <List>
           {data?.allergies?.map(allergy => (
@@ -51,31 +51,12 @@ const AllergiesList: FC<Props> = ({
                 <span className="ml-2 flex-1 w-0 font-bold font-Quicksand">{`${allergy.name} / ${allergy.filter_name}`}</span>
               </div>
               <div className="ml-4 flex flex-col sm:flex-row">
-                <div className="w-full sm:mr-2 my-1">
-                  <Button
-                    themeColour={themeColour}
-                    themeTint={themeTint}
-                    isFullwidth
-                    size="S"
-                    onClick={() => handleUpdateItem(allergy)}
-                  >
-                    Edit
-                    <PencilIcon className="w-5 h-5 ml-2" />
-                  </Button>
-                </div>
-                <div className="w-full my-1">
-                  <Button
-                    themeColour={themeColour}
-                    themeTint={themeTint}
-                    isFullwidth
-                    colour="accent"
-                    size="S"
-                    onClick={() => handleDeleteItem(allergy)}
-                  >
-                    Delete
-                    <DeleteSVG className="w-5 h-5 ml-2" />
-                  </Button>
-                </div>
+                <AllergiesDropdown
+                  themeColour={themeColour}
+                  themeTint={themeTint}
+                  handleDelete={() => handleDeleteItem(allergy)}
+                  handleUpdate={() => handleUpdateItem(allergy)}
+                />
               </div>
             </ListItem>
           ))}

@@ -1,6 +1,6 @@
 import React, { Suspense, useState, lazy } from "react";
 import type { FC } from "react";
-import { Route, Routes, useLocation, useParams } from "react-router-dom";
+import { Route, Routes, useLocation, useParams, Navigate } from "react-router-dom";
 import { Footer, LoadingScreen } from "@base";
 import { MenuSlideOver, AllergyModal, AllergyFiltersSideMenu, Restaurant } from "@presentational";
 import { useRestaurantThemeQuery } from "@shared";
@@ -33,10 +33,6 @@ const Main: FC = () => {
     skip: !restaurantSlug,
   });
 
-  if (loading) {
-    return <LoadingScreen />;
-  }
-
   const renderFooter = () => {
     if (isOnSettingsPage) return null;
     return (
@@ -46,6 +42,14 @@ const Main: FC = () => {
       />
     );
   };
+
+  if (!loading && !data?.restaurant) {
+    return <Navigate to="/not-found" />;
+  }
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <MenuPage>

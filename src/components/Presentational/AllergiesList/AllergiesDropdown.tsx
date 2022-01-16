@@ -1,24 +1,17 @@
 import React from "react";
 import type { FC } from "react";
 import { KebabDropdown, KebabDropdownItem } from "@base";
-import { PencilIcon, PlusCircleIcon } from "@heroicons/react/solid";
+import { PencilIcon } from "@heroicons/react/solid";
 import { DeleteSVG } from "@svgs";
 
 interface Props {
   handleUpdate: any;
   handleDelete: any;
-  handleAllergies?: any;
   themeColour: string;
   themeTint: number;
 }
 
-const ItemDropdown: FC<Props> = ({
-  handleAllergies,
-  handleDelete,
-  handleUpdate,
-  themeColour,
-  themeTint,
-}) => {
+const AllergiesDropdown: FC<Props> = ({ handleDelete, handleUpdate, themeColour, themeTint }) => {
   return (
     <KebabDropdown themeColour={themeColour} themeTint={themeTint}>
       <KebabDropdownItem themeColour={themeColour} themeTint={themeTint} onClick={handleUpdate}>
@@ -33,14 +26,8 @@ const ItemDropdown: FC<Props> = ({
           <DeleteSVG className="w-5 h-5 ml-2" />
         </span>
       </KebabDropdownItem>
-      <KebabDropdownItem themeColour={themeColour} themeTint={themeTint} onClick={handleAllergies}>
-        <span className="flex items-center">
-          Add Dietary
-          <PlusCircleIcon className="w-5 h-5 ml-2" />
-        </span>
-      </KebabDropdownItem>
     </KebabDropdown>
   );
 };
 
-export { ItemDropdown };
+export { AllergiesDropdown };

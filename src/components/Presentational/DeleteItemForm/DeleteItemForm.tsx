@@ -62,26 +62,28 @@ const DeleteItemForm: FC<Props> = ({
 
   return (
     <form noValidate onSubmit={handleSubmit}>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center font-Quicksand">
         <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
-          Item name: <span className="font-bold underline text-red-400">{deletedItem?.name}</span>
+          Item name:{" "}
+          <span className={`font-bold underline text-${themeColour}-${themeTint}`}>
+            {deletedItem?.name}
+          </span>
         </h3>
         <Button
           themeColour={themeColour}
           themeTint={themeTint}
           onClick={() => onCompleted?.(false)}
           size="S"
-          colour="accent"
         >
           <XIcon className="w-5 h-5" />
         </Button>
       </div>
-      <p className="mt-4 text-base text-gray-400">
-        Are you sure ? This item will be removed from the menu
+      <p className="my-8 text-base text-gray-900 font-Quicksand underline">
+        This item will be removed from the menu
       </p>
 
       <div className="flex items-center mt-4">
-        <div className="flex-1 mr-2">
+        <div className="w-full mr-2">
           <Button
             themeColour={themeColour}
             themeTint={themeTint}
@@ -94,7 +96,7 @@ const DeleteItemForm: FC<Props> = ({
             Cancel
           </Button>
         </div>
-        <div className="flex-1 ml-2">
+        <div className="w-full">
           <Button
             themeColour={themeColour}
             themeTint={themeTint}
