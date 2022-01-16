@@ -45,7 +45,7 @@ const CategoryItemWithoutImage: FC<Props> = ({
 
   return (
     <div key={item.id} className="flex rounded-lg shadow-lg overflow-visible relative">
-      <div className="flex-1 bg-white flex flex-col justify-between p-4">
+      <div className="flex-1 bg-white flex flex-col justify-between p-2 pb-0">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <h4 className="font-bold font-Quicksand mr-2">{item?.name}</h4>

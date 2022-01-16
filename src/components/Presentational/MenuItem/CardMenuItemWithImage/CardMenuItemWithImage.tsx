@@ -41,7 +41,7 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
     );
 
   return (
-    <div key={item.id} className="flex rounded-lg shadow-lg overflow-hidden">
+    <div key={item.id} className="flex rounded-md shadow-md overflow-hidden">
       <div className="flex-shrink-0 h-full w-56 relative">
         <ItemImage
           className="inset-0 w-full h-full object-cover"
@@ -56,7 +56,7 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
           itemID={item.id}
         />
       </div>
-      <div className="flex-1 bg-white p-2 flex flex-col justify-between">
+      <div className="flex-1 bg-white p-2 pb-0 flex flex-col justify-between">
         <div>
           <p className={`font-bold font-${themeFont}`}>{item?.name}</p>
           <p

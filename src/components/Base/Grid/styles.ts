@@ -1,6 +1,6 @@
 import { classnames, TArg } from "tailwindcss-classnames";
 
-const base = classnames("grid", "gap-6");
+const base = classnames("grid", "gap-4");
 const XXL = classnames("sm:grid-cols-2", "md:grid-cols-4", "lg:grid-cols-6");
 const XL = classnames("sm:grid-cols-2", "lg:grid-cols-4");
 const LG = classnames("sm:grid-cols-2", "lg:grid-cols-3");

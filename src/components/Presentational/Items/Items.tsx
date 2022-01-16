@@ -28,7 +28,10 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
 
   const [selectedItem, setSelectedItem] = useState(data?.items?.[0]);
 
-  const renderGridSize = () => (width < 1340 ? "SM" : "M");
+  const getGridSize = () => {
+    if (width < 1450) return "M";
+    return "LG";
+  };
 
   const handleClick = (item: Item) => {
     setSelectedItem(item);
@@ -79,8 +82,8 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
   }
   return (
     <Container>
-      <>
-        <Grid size={renderGridSize()}>
+      <div className="w-full my-2">
+        <Grid size={getGridSize()}>
           {data?.items?.map(item => (
             <div
               tabIndex={0}
@@ -106,7 +109,7 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
           onClose={setIsModalOpen}
           item={selectedItem}
         />
-      </>
+      </div>
     </Container>
   );
 };

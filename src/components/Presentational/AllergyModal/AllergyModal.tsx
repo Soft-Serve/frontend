@@ -32,7 +32,6 @@ const AllergyModal: FC<Props> = ({
         themeTint={themeTint}
         onClick={() => setIsFilterSideMenuOpen(prevState => !prevState)}
         size="XXL"
-        colour="accent"
         isFullwidth
       >
         close

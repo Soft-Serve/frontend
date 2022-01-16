@@ -45,7 +45,7 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
   };
 
   return (
-    <div key={item.id} className="flex rounded-lg shadow-lg overflow-visible relative">
+    <div key={item.id} className="flex rounded-md shadow-md overflow-hidden relative">
       <div className="flex-shrink-0 h-full w-56 relative">
         <ItemImage className="inset-0 w-full h-full object-cover" photoUrl={item?.photo} />
         <div className="flex items-center absolute top-3 left-1">
@@ -54,7 +54,7 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
           </Pill>
         </div>
       </div>
-      <div className="flex-1 bg-white flex flex-col p-2 justify-between">
+      <div className="flex-1 bg-white flex flex-col p-2 pb-0 justify-between">
         <div className="w-full">
           <div className="w-full flex justify-between items-center">
             <h4 className="font-bold font-Quicksand inline-flex flex-wrap">{item?.name}</h4>

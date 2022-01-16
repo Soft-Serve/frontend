@@ -40,7 +40,7 @@ const MobileCardMenuItemWithImage: FC<Props> = ({ item, themeTint, themeColour, 
     );
 
   return (
-    <div key={item.id} className="flex flex-col rounded-lg shadow-lg overflow-hidden">
+    <div key={item.id} className="flex flex-col rounded-md shadow-md overflow-hidden">
       <div className="flex-shrink-0 h-40 relative">
         <ItemImage
           className="inset-0 w-full h-full object-cover"
@@ -65,7 +65,7 @@ const MobileCardMenuItemWithImage: FC<Props> = ({ item, themeTint, themeColour, 
           {item.available ? item.description : "** Temporarily unavailable  **"}
         </p>
       </div>
-      <div className="w-full bg-white p-2">{renderPrice()}</div>
+      <div className="w-full bg-white p-2 pb-0">{renderPrice()}</div>
     </div>
   );
 };

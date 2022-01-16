@@ -45,7 +45,7 @@ const MobileCategoryItemWithImage: FC<Props> = ({
   };
 
   return (
-    <div key={item.id} className="flex flex-col rounded-lg shadow-lg overflow-visible relative">
+    <div key={item.id} className="flex flex-col rounded-md shadow-md overflow-hidden relative">
       <div className="flex-shrink-0 h-40">
         <ItemImage
           className="inset-0 w-full h-full object-cover"
