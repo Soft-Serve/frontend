@@ -1,33 +1,22 @@
 import React from "react";
-import type { FC } from "react";
-import { Item, useDietaryQuery } from "@shared";
+import type { FC, DetailedHTMLProps } from "react";
+import { Item } from "@shared";
 import { Dietaries, ItemPrice } from "@presentational";
-import { useAllergyContext } from "@contexts";
-import { intersection } from "@utility";
-import { SkeletonMenuItemWithoutImage } from "./SkeletonMenuItemWithoutImage";
 
-interface Props {
+interface Props extends DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   item: Pick<Item, "description" | "name" | "id" | "available">;
   themeColour: string;
   themeTint: number;
   themeFont: string;
 }
 
-const CardMenuItemWithoutImage: FC<Props> = ({ item, themeFont, themeColour, themeTint }) => {
-  const { data, error, loading } = useDietaryQuery({
-    variables: {
-      itemID: item.id,
-    },
-  });
-
-  const { activeAllergies } = useAllergyContext();
-
-  if (data?.dietaries && intersection(activeAllergies, data?.dietaries)) {
-    return null;
-  }
-  if (loading) return <SkeletonMenuItemWithoutImage />;
-  if (error) return <span>error</span>;
-
+const CardMenuItemWithoutImage: FC<Props> = ({
+  item,
+  themeFont,
+  themeColour,
+  themeTint,
+  ...rest
+}) => {
   const renderPrice = () =>
     item?.available && (
       <ItemPrice
@@ -40,7 +29,7 @@ const CardMenuItemWithoutImage: FC<Props> = ({ item, themeFont, themeColour, the
     );
 
   return (
-    <div key={item.id} className="flex rounded-lg shadow-lg overflow-hidden">
+    <div key={item.id} className="flex rounded-lg shadow-lg overflow-hidden" {...rest}>
       <div className="flex-1 bg-white p-2 pb-0 flex flex-col justify-between relative">
         <div>
           <div className="flex items-center justify-between py-2 ">

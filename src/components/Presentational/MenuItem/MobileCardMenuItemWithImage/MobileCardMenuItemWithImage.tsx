@@ -1,33 +1,23 @@
 import React from "react";
-import type { FC } from "react";
-import { Item, useDietaryQuery } from "@shared";
+import type { FC, DetailedHTMLProps } from "react";
+import { Item } from "@shared";
 import { Dietaries, ItemImage, ItemPrice } from "@presentational";
-import { useAllergyContext } from "@contexts";
-import { intersection } from "@utility";
 import { classnames } from "tailwindcss-classnames";
 
-interface Props {
+interface Props extends DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   item: Pick<Item, "description" | "name" | "photo" | "id" | "available">;
   themeColour: string;
   themeTint: number;
   themeFont: string;
 }
 
-const MobileCardMenuItemWithImage: FC<Props> = ({ item, themeTint, themeColour, themeFont }) => {
-  const { data, error, loading } = useDietaryQuery({
-    variables: {
-      itemID: item.id,
-    },
-  });
-
-  const { activeAllergies } = useAllergyContext();
-
-  if (data?.dietaries && intersection(activeAllergies, data?.dietaries)) {
-    return null;
-  }
-  if (loading) return <span>Loading</span>;
-  if (error) return <span>error</span>;
-
+const MobileCardMenuItemWithImage: FC<Props> = ({
+  item,
+  themeTint,
+  themeColour,
+  themeFont,
+  ...rest
+}) => {
   const renderPrice = () =>
     item?.available && (
       <ItemPrice
@@ -40,7 +30,7 @@ const MobileCardMenuItemWithImage: FC<Props> = ({ item, themeTint, themeColour, 
     );
 
   return (
-    <div key={item.id} className="flex flex-col rounded-md shadow-md overflow-hidden">
+    <div key={item.id} className="flex flex-col rounded-md shadow-md overflow-hidden" {...rest}>
       <div className="flex-shrink-0 h-40 relative">
         <ItemImage
           className="inset-0 w-full h-full object-cover"

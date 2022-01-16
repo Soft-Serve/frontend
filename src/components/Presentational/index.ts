@@ -1,7 +1,6 @@
 export { Categories } from "./Categories";
 export { Dietaries } from "./Dietaries";
 export { Items } from "./Items";
-export { Item } from "./Item";
 export { Restaurant } from "./Restaurant";
 export { Menus } from "./Menus";
 export { PostAllergyForm } from "./PostAllergyForm";
