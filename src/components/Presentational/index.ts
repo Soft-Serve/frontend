@@ -17,6 +17,7 @@ export { UpdateMenuForm } from "./UpdateMenuForm";
 export { PostItemForm } from "./PostItemForm";
 export { DeleteItemForm } from "./DeleteItemForm";
 export { UpdateItemForm } from "./UpdateItemForm";
+export { ForgotPasswordForm } from "./ForgotPasswordForm";
 export { ResetPasswordForm } from "./ResetPasswordForm";
 export { CurrentUserAvatar } from "./CurrentUserAvatar";
 export { SettingsSubMenu } from "./SettingsSubMenu";

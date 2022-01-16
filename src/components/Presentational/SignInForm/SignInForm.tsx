@@ -142,7 +142,10 @@ const SignInForm: FC<Props> = ({ themeColour, themeTint }) => {
 
             <div className="flex items-center justify-between">
               <div className="text-sm">
-                <a href="/" className="font-medium text-gray-700 hover:text-gray-900 underline">
+                <a
+                  href="/forgot-password"
+                  className="font-medium text-gray-700 hover:text-gray-900 underline"
+                >
                   Forgot your password?
                 </a>
               </div>
