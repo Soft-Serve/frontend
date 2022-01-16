@@ -135,6 +135,12 @@ const LandingPage: FC = () => {
               >
                 Sign up
               </Link>
+              <Link
+                to="/sign-in"
+                className="ml-8 whitespace-nowrap inline-flex items-center justify-center bg-white origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-red-400 hover:bg-red-400 hover:text-white font-Quicksand  font-bold"
+              >
+                Sign in
+              </Link>
             </div>
           </div>
 

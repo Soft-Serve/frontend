@@ -7,7 +7,6 @@ import { useRestaurantThemeQuery } from "@shared";
 import { MenuPage } from "./MenuPage";
 import { MainNavigation } from "./MainNavigation";
 import { MainMobileHeader } from "./MainMobileHeader";
-import { SignInPage } from "./SignInPage";
 import { Providers } from "./Providers";
 
 const SettingsPage = lazy(() => import("./SettingsPage/DefaultSettingsPage"));
@@ -111,7 +110,6 @@ const Main: FC = () => {
                 path="settings/:id"
                 element={<SettingsPage restaurantSlug={restaurantSlug} />}
               />
-              <Route path="sign-in" element={<SignInPage restaurantSlug={restaurantSlug} />} />
             </Routes>
           </Suspense>
           {renderFooter()}

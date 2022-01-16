@@ -35,7 +35,7 @@ const MainNavigation: FC<Props> = ({
   const signUserOut = () => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
-    window.location.assign(`${routes.restaurants}/${restaurantSlug}/sign-in`);
+    window.location.assign(`${routes.restaurants}/${restaurantSlug}`);
   };
 
   const renderSiginButton = () => {
@@ -53,11 +53,7 @@ const MainNavigation: FC<Props> = ({
       );
     }
     return (
-      <NavigationItem
-        themeColour={themeColour}
-        themeTint={themeTint}
-        to={`${routes.restaurants}/${restaurantSlug}/sign-in`}
-      >
+      <NavigationItem themeColour={themeColour} themeTint={themeTint} to={`/sign-in`}>
         <LoginSVG className="h-6 w-6 text-white" aria-hidden="true" />
         <span className={`mx-2 font-${themeFont}`}>Sign In</span>
       </NavigationItem>

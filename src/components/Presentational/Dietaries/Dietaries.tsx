@@ -23,7 +23,7 @@ const Dietaries: FC<Props> = ({ itemID, itemAvailable, css, themeColour, themeTi
   if (!data?.dietaries?.length) return null;
 
   return (
-    <div className={`flex flex-col items-start ${css || ""}`}>
+    <div className={`flex items-start ${css || ""}`}>
       {data?.dietaries.map(dietary => (
         <div key={dietary.id} className="inline-flex items-center">
           <div>

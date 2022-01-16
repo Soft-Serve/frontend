@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useCurrentUserQuery, useSignOutMutation } from "@shared";
 import { Button } from "@base";
 import { RestaurantLogo } from "@presentational";
@@ -26,7 +26,6 @@ const MainMobileHeader: FC<Props> = ({
   themeColour,
   themeFont,
 }) => {
-  const navigate = useNavigate();
   const { pathname } = useLocation();
   const { width } = useViewport();
   const isLargerThenSmallMobile = width > 410;
@@ -86,8 +85,7 @@ const MainMobileHeader: FC<Props> = ({
   const signUserOut = () => {
     localStorage.clear();
     signOut({ variables: { input: {} } });
-    window.location.reload();
-    navigate(`${routes.restaurants}/${restaurantSlug}/sign-in`);
+    window.location.assign(`${routes.restaurants}/${restaurantSlug}`);
   };
 
   const renderSignInButton = () => {
@@ -109,7 +107,7 @@ const MainMobileHeader: FC<Props> = ({
       );
     }
     return (
-      <Link to={`${routes.restaurants}/${restaurantSlug}/sign-in`}>
+      <Link to={`/sign-in`}>
         <Button
           themeColour={themeColour}
           themeTint={themeTint}

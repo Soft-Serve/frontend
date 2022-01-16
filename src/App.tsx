@@ -6,6 +6,7 @@ import { LoadingScreen } from "@base";
 import { Main, PageNotFound } from "@views";
 import { routes } from "@routes";
 import { client } from "./client";
+import { SignInPage } from "@views";
 
 const LandingPage = lazy(() => import("./views/LandingPage"));
 const SignUpPage = lazy(() => import("./views/SignUpPage/DefaultSignUpPage"));
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/sign-up" element={<SignUpPage />} />
             <Route path="/confirm" element={<ConfirmEmailPage />} />
             <Route path={`${routes.restaurants}/:id/*`} element={<Main />} />
+            <Route path="sign-in" element={<SignInPage />} />
           </Routes>
         </Suspense>
       </Router>
