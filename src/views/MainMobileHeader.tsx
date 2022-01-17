@@ -1,12 +1,17 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, Fragment, SetStateAction } from "react";
 import type { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useCurrentUserQuery, useSignOutMutation } from "@shared";
 import { Button } from "@base";
 import { RestaurantLogo } from "@presentational";
 import { routes } from "@routes";
-import { useViewport } from "@hooks";
 import { clientToken } from "@constants";
+import { Menu, Transition } from "@headlessui/react";
+import { MenuIcon } from "@heroicons/react/solid";
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
 
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
@@ -27,58 +32,74 @@ const MainMobileHeader: FC<Props> = ({
   themeFont,
 }) => {
   const { pathname } = useLocation();
-  const { width } = useViewport();
-  const isLargerThenSmallMobile = width > 410;
-  const buttonSize = isLargerThenSmallMobile ? "LG" : "S";
   const { data } = useCurrentUserQuery();
-  const isOnSignInPage = pathname.includes("sign-in");
-  const isOnSignUpPage = pathname.includes("sign-up");
+
   const isOnSettingsPage = pathname.includes("settings");
   const hasUser = !!localStorage.getItem(clientToken);
 
   const renderDietaryButton = () => {
-    if (!isOnSignInPage && !isOnSignUpPage && !isOnSettingsPage) {
-      return (
-        <Button
-          themeColour={themeColour}
-          themeTint={themeTint}
-          size={buttonSize}
-          themeFont={themeFont}
-          css="mr-2"
-          colour="accent"
-          onClick={() => setIsFilterSideMenuOpen(prevState => !prevState)}
-        >
-          Dietaries
-          <span className="sr-only">Filters List</span>
-        </Button>
-      );
-    }
-    return null;
+    if (isOnSettingsPage) return null;
+    return (
+      <Button
+        themeColour={themeColour}
+        themeTint={themeTint}
+        size="LG"
+        themeFont={themeFont}
+        css="mr-2"
+        colour="accent"
+        onClick={() => setIsFilterSideMenuOpen(prevState => !prevState)}
+      >
+        Dietaries
+        <span className="sr-only">Filters List</span>
+      </Button>
+    );
   };
 
   const renderSettingsButton = () => {
     if (data?.currentUser || hasUser)
       return (
-        <Link to={`${routes.restaurants}/${restaurantSlug}/settings/restaurant`}>
-          <Button
-            themeColour={themeColour}
-            themeTint={themeTint}
-            themeFont={themeFont}
-            size={buttonSize}
-            css="mr-2"
-            colour="accent"
-          >
-            Settings
-          </Button>
-        </Link>
+        <Menu.Item>
+          {({ active }) => (
+            <Link
+              to={`${routes.restaurants}/${restaurantSlug}/settings/restaurant`}
+              className={classNames(
+                active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                "block px-4 py-2 text-sm"
+              )}
+            >
+              Settings
+            </Link>
+          )}
+        </Menu.Item>
       );
-    return null;
   };
+
   const renderSettingsNav = () => {
     if (!isOnSettingsPage) {
       return renderSettingsButton();
+    } else {
+      return (
+        <Menu.Item>
+          {({ active }) => (
+            <Link
+              to={`${routes.restaurants}/${restaurantSlug}`}
+              className={classNames(
+                active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                "block px-4 py-2 text-sm"
+              )}
+            >
+              Restaurant menu
+            </Link>
+          )}
+        </Menu.Item>
+      );
     }
-    return null;
+  };
+
+  const renderLogo = () => {
+    if (!data?.currentUser || hasUser) {
+      return <RestaurantLogo restaurantSlug={restaurantSlug} dimensions={50} />;
+    }
   };
 
   const [signOut] = useSignOutMutation();
@@ -89,82 +110,65 @@ const MainMobileHeader: FC<Props> = ({
   };
 
   const renderSignInButton = () => {
-    if (isOnSignInPage) {
-      return (
-        <Link to="/sign-up">
-          <Button
-            themeColour={themeColour}
-            themeTint={themeTint}
-            themeFont={themeFont}
-            size={buttonSize}
-            css="mr-2"
-            colour="accent"
-          >
-            Sign Up
-            <span className="sr-only">Sign up</span>
-          </Button>
-        </Link>
-      );
-    }
     return (
-      <Link to={`/sign-in`}>
-        <Button
-          themeColour={themeColour}
-          themeTint={themeTint}
-          themeFont={themeFont}
-          size={buttonSize}
-          css="mr-2"
-          colour="accent"
-        >
-          Sign In
-          <span className="sr-only">Sign in</span>
-        </Button>
-      </Link>
+      <Menu.Item>
+        {({ active }) => (
+          <Link
+            to={"/sign-in"}
+            className={classNames(
+              active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+              "block px-4 py-2 text-sm"
+            )}
+          >
+            Sign in
+          </Link>
+        )}
+      </Menu.Item>
     );
   };
 
   const renderAuthButton = () => {
     if (data?.currentUser || hasUser) {
       return (
-        <Button
-          themeColour={themeColour}
-          themeTint={themeTint}
-          onClick={() => signUserOut()}
-          themeFont={themeFont}
-          size={buttonSize}
-          css="mr-2"
-          colour="accent"
-        >
-          Sign Out
-          <span className="sr-only">Sign in</span>
-        </Button>
+        <Menu.Item>
+          {({ active }) => (
+            <div
+              onClick={signUserOut}
+              className={classNames(
+                active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                "block px-4 py-2 text-sm"
+              )}
+            >
+              Sign out
+            </div>
+          )}
+        </Menu.Item>
       );
     }
     return renderSignInButton();
   };
 
-  const renderMenuButton = () => {
-    if (isOnSignInPage || isOnSignUpPage || isOnSettingsPage) {
+  const renderUser = () => {
+    if (data?.currentUser || hasUser) {
       return (
-        <Link to={`${routes.restaurants}/${restaurantSlug}`}>
-          <Button
-            themeColour={themeColour}
-            themeTint={themeTint}
-            themeFont={themeFont}
-            size={buttonSize}
-            css="mr-2"
-            colour="accent"
-          >
-            Restaurant
-          </Button>
-        </Link>
+        <div className="px-4 py-3">
+          <p className="text-sm">Signed in as</p>
+          <p className="text-sm font-bold text-gray-900 truncate">{data?.currentUser?.email}</p>
+        </div>
       );
+    }
+    return null;
+  };
+
+  const renderMenuButton = () => {
+    if (isOnSettingsPage) {
+      return null;
     }
     return (
       <Button
         themeColour={themeColour}
         themeTint={themeTint}
-        size={buttonSize}
+        size="LG"
         themeFont={themeFont}
         css="mr-2"
         colour="accent"
@@ -177,19 +181,43 @@ const MainMobileHeader: FC<Props> = ({
   };
 
   return (
-    <div className="flex-1 min-w-0 flex flex-col overflow-y-auto">
+    <div className={`flex-1 min-w-0 flex flex-col overflow-y-auto font-${themeFont}`}>
       <div className="lg:hidden">
         <div
           className={`bg-${themeColour}-${themeTint} py-2 flex items-center justify-between sm:px-6`}
         >
-          <div className="items-center sm:flex hidden">
-            <RestaurantLogo restaurantSlug={restaurantSlug} dimensions={50} />
-          </div>
+          <div className="mx-2">{renderLogo()}</div>
           <div className="flex items-center justify-end w-full ml-2">
             {renderDietaryButton()}
             {renderMenuButton()}
-            {renderSettingsNav()}
-            {renderAuthButton()}
+
+            <Menu as="div" className="relative inline-block mr-2">
+              <div>
+                <Menu.Button
+                  className={`inline-flex justify-center w-full rounded-md border-2 shadow-sm px-4 py-2 bg-${themeColour}-${themeTint} text-sm font-medium text-gray-700  focus:outline-none focus:ring-2`}
+                >
+                  <MenuIcon className={`w-5 h-5 text-white`} />
+                </Menu.Button>
+              </div>
+
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items
+                  className={`origin-top-right absolute right-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-300 focus:outline-none z-50 `}
+                >
+                  {renderUser()}
+                  <div className="py-1">{renderSettingsNav()}</div>
+                  <div className="py-1">{renderAuthButton()}</div>
+                </Menu.Items>
+              </Transition>
+            </Menu>
           </div>
         </div>
       </div>
