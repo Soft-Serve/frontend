@@ -52,7 +52,7 @@ const UsersSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) =>
             onClick={handlePostItem}
             size="XXL"
           >
-            Add User
+            Add
             <UserAddIcon className="w-5 h-5 ml-2" />
           </Button>
         </CardContent>

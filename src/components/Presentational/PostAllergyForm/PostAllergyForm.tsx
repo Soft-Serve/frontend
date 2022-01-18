@@ -88,6 +88,7 @@ const PostAllergyForm: FC<Props> = ({ onCompleted, themeColour, themeTint, resta
       <form onSubmit={handleSubmit} className="mt-4 flex-col sm:flex sm:max-w-md">
         <div>
           <Input
+            css="mb-4"
             themeColour={themeColour}
             themeTint={themeTint}
             labelText="Name"
@@ -99,6 +100,7 @@ const PostAllergyForm: FC<Props> = ({ onCompleted, themeColour, themeTint, resta
             required
           />
           <Input
+            css="mb-4"
             themeColour={themeColour}
             themeTint={themeTint}
             labelText="Filter name"

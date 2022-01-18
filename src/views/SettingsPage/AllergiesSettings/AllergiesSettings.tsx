@@ -78,7 +78,7 @@ const AllergiesSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
             size="XXL"
             type="button"
           >
-            Add Dietary
+            Add
             <FilterIcon className="w-5 h-5 ml-2" />
           </Button>
         </CardContent>

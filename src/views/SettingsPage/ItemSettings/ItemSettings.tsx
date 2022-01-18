@@ -194,7 +194,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
               onClick={handlePostItem}
               size="XXL"
             >
-              Add Item
+              Add
               <PlusCircleIcon className="w-5 h-5 ml-2" />
             </Button>
           </div>

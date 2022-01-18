@@ -97,7 +97,7 @@ const MenuSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => 
             size="XXL"
             onClick={() => handleMenuModal(ModalForms.PostMenu)}
           >
-            Add Menu
+            Add
             <PlusCircleIcon className="w-5 h-5 ml-2" />
           </Button>
         </CardContent>

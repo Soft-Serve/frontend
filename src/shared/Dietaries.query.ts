@@ -36,4 +36,4 @@ interface Variables {
 const useDietaryQuery = (options?: QueryHookOptions<DietaryData, Variables>) =>
   useQuery<DietaryData, Variables>(DIETARIES_QUERY, options);
 
-export { useDietaryQuery };
+export { useDietaryQuery, DIETARIES_QUERY };

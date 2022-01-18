@@ -1,7 +1,7 @@
 import React from "react";
 import type { FC } from "react";
 import { KebabDropdown, KebabDropdownItem } from "@base";
-import { PencilIcon, PlusCircleIcon } from "@heroicons/react/solid";
+import { PencilIcon, FilterIcon } from "@heroicons/react/solid";
 import { DeleteSVG } from "@svgs";
 
 interface Props {
@@ -35,8 +35,8 @@ const ItemDropdown: FC<Props> = ({
       </KebabDropdownItem>
       <KebabDropdownItem themeColour={themeColour} themeTint={themeTint} onClick={handleAllergies}>
         <span className="flex items-center">
-          Add Dietary
-          <PlusCircleIcon className="w-5 h-5 ml-2" />
+          Update Dietaries
+          <FilterIcon className="w-5 h-5 ml-2" />
         </span>
       </KebabDropdownItem>
     </KebabDropdown>
