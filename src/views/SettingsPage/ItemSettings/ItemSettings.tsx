@@ -186,7 +186,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
       </Modal>
       <Card css="mb-4">
         <CardContent css="flex-col">
-          <div className="flex w-full items-center justify-between mb-4">
+          <div className="mb-4 flex w-full items-center justify-between">
             <SettingsHeader>Items</SettingsHeader>
             <Button
               themeColour={themeColour}
@@ -195,7 +195,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
               size="XXL"
             >
               Add
-              <PlusCircleIcon className="w-5 h-5 ml-2" />
+              <PlusCircleIcon className="ml-2 h-5 w-5" />
             </Button>
           </div>
         </CardContent>
@@ -203,17 +203,17 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
       {renderMenusTabs()}
       <Card css="mt-4">
         <CardContent>
-          <div className="flex flex-col w-full">
-            <div className="w-full flex items-center ">
+          <div className="flex w-full flex-col">
+            <div className="flex w-full items-center ">
               <label
                 htmlFor="search"
-                className="block text-sm font-bold text-gray-900 ml-4 font-Quicksand"
+                className="ml-4 block font-Quicksand text-sm font-bold text-gray-900"
               >
                 Search items
               </label>
-              <div className="flex-1 min-w-0 ml-4 mt-1">
+              <div className="ml-4 mt-1 min-w-0 flex-1">
                 <div className="relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                     <SearchIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                   </div>
                   <input
@@ -222,7 +222,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
                     type="search"
                     name="search"
                     id="search"
-                    className={`focus:ring-${themeColour}-${themeTint} focus:border-${themeColour}-${themeTint} block w-full pl-10 sm:text-sm border-2 border-${themeColour}-${themeTint} rounded-md h-full py-2 focus:outline-none`}
+                    className={`focus:ring-${themeColour}-${themeTint} focus:border-${themeColour}-${themeTint} block w-full border-2 pl-10 sm:text-sm border-${themeColour}-${themeTint} h-full rounded-md py-2 focus:outline-none`}
                   />
                 </div>
               </div>

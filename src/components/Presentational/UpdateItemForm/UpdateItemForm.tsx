@@ -142,8 +142,8 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
 
   return (
     <div className="font-Quicksand">
-      <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
+      <div className="flex items-center justify-between">
+        <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
           Update {input.name}
         </h3>
         <Button
@@ -152,7 +152,7 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
           onClick={() => onCompleted?.(false)}
           size="S"
         >
-          <XIcon className="w-5 h-5" />
+          <XIcon className="h-5 w-5" />
         </Button>
       </div>
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col">

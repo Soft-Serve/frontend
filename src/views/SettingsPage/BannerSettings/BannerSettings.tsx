@@ -57,10 +57,10 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
           header={data?.banners?.[0]?.header}
           id={data?.banners?.[0]?.id}
         />
-        <label className="text-sm font-bold text-gray-900 block my-4 font-Quicksand">
+        <label className="my-4 block font-Quicksand text-sm font-bold text-gray-900">
           Hero image
         </label>
-        <div className="flex items-center w-full justify-between flex-wrap">
+        <div className="flex w-full flex-wrap items-center justify-between">
           <div className="m-2">
             <ItemImage
               photoUrl={

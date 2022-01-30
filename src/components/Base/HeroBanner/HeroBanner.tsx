@@ -31,12 +31,12 @@ const HeroBanner: FC<Props> = ({ themeColour, themeFont, restaurantSlug }) => {
   return (
     <div className="w-full">
       <div className="relative w-full">
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100 w-full" />
-        <div className=" w-full mx-auto">
+        <div className="absolute inset-x-0 bottom-0 h-1/2 w-full bg-gray-100" />
+        <div className=" mx-auto w-full">
           <div className="relative  md:overflow-hidden">
             <div className="overflow-hidden">
               <AdvancedImage
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover"
                 cldImg={cldImage}
               />
               <div className={`absolute inset-0 bg-${themeColour}-200 mix-blend-multiply`} />

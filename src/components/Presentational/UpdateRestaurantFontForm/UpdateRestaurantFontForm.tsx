@@ -50,7 +50,7 @@ const UpdateRestaurantFontForm: FC<Props> = ({
 
   return (
     <RadioGroup value={themeFont} onChange={handleChange}>
-      <RadioGroup.Label className="text-sm font-bold text-gray-900 font-Quicksand">
+      <RadioGroup.Label className="font-Quicksand text-sm font-bold text-gray-900">
         Theme font
       </RadioGroup.Label>
       <ExampleItem themeFont={themeFont} themeColour={themeColour} themeTint={themeTint} />
@@ -63,13 +63,13 @@ const UpdateRestaurantFontForm: FC<Props> = ({
               classNames(
                 checked ? "border-transparent" : "border-gray-300",
                 active ? `ring-2 ring-${themeColour}-${themeTint}` : "",
-                "relative bg-white border rounded-lg shadow-sm p-4 flex cursor-pointer focus:outline-none"
+                "relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none"
               )
             }
           >
             {({ checked, active }) => (
               <>
-                <div className="flex-1 flex">
+                <div className="flex flex-1">
                   <div className="flex flex-col">
                     <RadioGroup.Label
                       as="span"
@@ -90,7 +90,7 @@ const UpdateRestaurantFontForm: FC<Props> = ({
                   className={classNames(
                     active ? "border" : "border-2",
                     checked ? `border-${themeColour}-${themeTint}` : "border-transparent",
-                    "absolute -inset-px rounded-lg pointer-events-none"
+                    "pointer-events-none absolute -inset-px rounded-lg"
                   )}
                   aria-hidden="true"
                 />

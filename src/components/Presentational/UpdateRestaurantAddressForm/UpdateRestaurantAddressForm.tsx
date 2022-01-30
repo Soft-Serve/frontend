@@ -93,7 +93,7 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
   const renderUpdateSlugButton = () => {
     if (isAddressUpdated()) {
       return (
-        <div className="px-4 py-3  text-right sm:px-6 mt-4">
+        <div className="mt-4 px-4  py-3 text-right sm:px-6">
           <Button
             themeColour={themeColour}
             themeTint={themeTint}

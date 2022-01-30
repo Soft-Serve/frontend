@@ -27,8 +27,8 @@ const SettingsSubMenu: FC<Props> = ({
 
   return (
     <nav aria-label="Sections" {...rest}>
-      <div className="flex-shrink-0 h-16 px-6 border-b border-blue-gray-200 flex items-center">
-        <p className="text-lg font-bold text-blue-gray-900 font-Quicksand">Settings</p>
+      <div className="border-blue-gray-200 flex h-16 flex-shrink-0 items-center border-b px-6">
+        <p className="text-blue-gray-900 font-Quicksand text-lg font-bold">Settings</p>
       </div>
       <RadioTiles value={selected} onChange={setSelected}>
         {SUB_NAVIGATION.map(item => (
@@ -38,14 +38,14 @@ const SettingsSubMenu: FC<Props> = ({
           >
             <RadioTile themeColour={themeColour} themeTint={themeTint} value={item.name}>
               <item.icon
-                className={`flex-shrink-0 -mt-0.5 h-6 w-6 text-${themeColour}-${themeTint}`}
+                className={`-mt-0.5 h-6 w-6 flex-shrink-0 text-${themeColour}-${themeTint}`}
                 aria-hidden="true"
               />
               <div className="ml-3 text-sm">
-                <p className="font-bold text-blue-gray-900 font-Quicksand">
+                <p className="text-blue-gray-900 font-Quicksand font-bold">
                   {capatalize(item.name)}
                 </p>
-                <p className="mt-1 text-gray-500 font-Quicksand">{item.description}</p>
+                <p className="mt-1 font-Quicksand text-gray-500">{item.description}</p>
               </div>
             </RadioTile>
           </Link>

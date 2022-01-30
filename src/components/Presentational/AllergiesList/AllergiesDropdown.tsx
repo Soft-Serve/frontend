@@ -17,13 +17,13 @@ const AllergiesDropdown: FC<Props> = ({ handleDelete, handleUpdate, themeColour,
       <KebabDropdownItem themeColour={themeColour} themeTint={themeTint} onClick={handleUpdate}>
         <span className="flex items-center">
           Edit
-          <PencilIcon className="w-5 h-5 ml-2" />
+          <PencilIcon className="ml-2 h-5 w-5" />
         </span>
       </KebabDropdownItem>
       <KebabDropdownItem themeColour={themeColour} themeTint={themeTint} onClick={handleDelete}>
         <span className="flex items-center">
           Delete
-          <DeleteSVG className="w-5 h-5 ml-2" />
+          <DeleteSVG className="ml-2 h-5 w-5" />
         </span>
       </KebabDropdownItem>
     </KebabDropdown>

@@ -12,8 +12,8 @@ const CurrentUserAvatar: FC<Props> = ({ restaurantSlug }) => {
   const { data } = useCurrentUserQuery();
 
   return (
-    <div className="flex-shrink-0 flex border-t border-blue-gray-200 p-4">
-      <Link to={`${routes.settings}/${restaurantSlug}`} className="flex-shrink-0 group block">
+    <div className="border-blue-gray-200 flex flex-shrink-0 border-t p-4">
+      <Link to={`${routes.settings}/${restaurantSlug}`} className="group block flex-shrink-0">
         <div className="flex items-center">
           <div>
             <img
@@ -23,10 +23,10 @@ const CurrentUserAvatar: FC<Props> = ({ restaurantSlug }) => {
             />
           </div>
           <div className="ml-3">
-            <p className="text-base font-medium text-blue-gray-700 group-hover:text-blue-gray-900">
+            <p className="text-blue-gray-700 group-hover:text-blue-gray-900 text-base font-medium">
               {data?.currentUser?.first_name} <span>{data?.currentUser?.last_name}</span>
             </p>
-            <p className="text-sm font-medium text-blue-gray-500 group-hover:text-blue-gray-700">
+            <p className="text-blue-gray-500 group-hover:text-blue-gray-700 text-sm font-medium">
               Account Settings
             </p>
           </div>

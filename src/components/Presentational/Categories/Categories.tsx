@@ -47,19 +47,19 @@ const Categories: FC<Props> = ({
               value={option}
               className={({ active, checked }) =>
                 classNames(
-                  option.id ? "cursor-pointer focus:outline-none" : "opacity-25 cursor-not-allowed",
+                  option.id ? "cursor-pointer focus:outline-none" : "cursor-not-allowed opacity-25",
                   active ? `"ring-2 ring-offset-2 ring-${themeColour}-${themeTint}"` : "",
                   checked
                     ? `bg-${themeColour}-${themeTint} border-transparent text-white hover:bg-${themeColour}-${
                         themeTint + 100
                       }`
-                    : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50",
-                  "border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1 mx-2"
+                    : "border-gray-200 bg-white text-gray-900 hover:bg-gray-50",
+                  "mx-2 flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1"
                 )
               }
             >
               <RadioGroup.Label as="p">
-                <span className={`font-${themeFont} font-bold text-sm whitespace-nowrap`}>
+                <span className={`font-${themeFont} whitespace-nowrap text-sm font-bold`}>
                   {option.name}
                 </span>
               </RadioGroup.Label>

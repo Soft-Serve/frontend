@@ -33,7 +33,7 @@ const CategoriesContainer: FC<Props> = ({
   }
 
   return (
-    <div className="w-full flex-wrap lg:flex hidden">
+    <div className="hidden w-full flex-wrap lg:flex">
       <div className="mt-4 mb-2 flex items-center">
         <Categories
           categoryID={categoryID}

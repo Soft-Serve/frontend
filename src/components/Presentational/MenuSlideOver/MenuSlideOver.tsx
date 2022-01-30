@@ -28,7 +28,7 @@ const MenuSlideOver: FC<Props> = ({
 }) => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
-      <Dialog as="div" static className="fixed inset-0 flex z-40" open={isOpen} onClose={onClose}>
+      <Dialog as="div" static className="fixed inset-0 z-40 flex" open={isOpen} onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="transition-opacity ease-linear duration-300"
@@ -38,7 +38,7 @@ const MenuSlideOver: FC<Props> = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Dialog.Overlay className="fixed inset-0 bg-blue-gray-600 bg-opacity-75" />
+          <Dialog.Overlay className="bg-blue-gray-600 fixed inset-0 bg-opacity-75" />
         </Transition.Child>
         <Transition.Child
           as={Fragment}
@@ -49,7 +49,7 @@ const MenuSlideOver: FC<Props> = ({
           leaveFrom="translate-x-0"
           leaveTo="-translate-x-full"
         >
-          <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white shadow-xl rounded-r-md focus:outline-none">
+          <div className="relative flex w-full max-w-xs flex-1 flex-col rounded-r-md bg-white shadow-xl focus:outline-none">
             <Transition.Child
               as={Fragment}
               enter="ease-in-out duration-300"
@@ -70,8 +70,8 @@ const MenuSlideOver: FC<Props> = ({
                 </Button>
               </div>
             </Transition.Child>
-            <div className="pt-5 pb-4 h-full">
-              <div className="flex-shrink-0 flex items-center px-4">
+            <div className="h-full pt-5 pb-4">
+              <div className="flex flex-shrink-0 items-center px-4">
                 <RestaurantLogo
                   restaurantSlug={restaurantSlug}
                   dimensions={60}
@@ -93,7 +93,7 @@ const MenuSlideOver: FC<Props> = ({
             </div>
           </div>
         </Transition.Child>
-        <div className="flex-shrink-0 w-14" aria-hidden="true" />
+        <div className="w-14 flex-shrink-0" aria-hidden="true" />
       </Dialog>
     </Transition.Root>
   );

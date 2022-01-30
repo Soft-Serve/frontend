@@ -20,19 +20,19 @@ const ExampleItem: FC<Props> = ({ themeFont, themeColour, themeTint }) => {
 
   if (width < 515) {
     return (
-      <div key={item.id} className="flex flex-col rounded-lg  overflow-hidden relative my-4">
-        <div className="flex-1 bg-white p-2 flex flex-col justify-between">
+      <div key={item.id} className="relative my-4 flex  flex-col overflow-hidden rounded-lg">
+        <div className="flex flex-1 flex-col justify-between bg-white p-2">
           <div className="flex w-full justify-between">
             <p className={`font-bold font-${themeFont}`}>{item?.name}</p>
           </div>
           <p
-            className={`font-${themeFont} italic text-gray-600 mt-2 text-sm break-words text-ellipsis overflow-hidden`}
+            className={`font-${themeFont} mt-2 overflow-hidden text-ellipsis break-words text-sm italic text-gray-600`}
           >
             {item.available ? item.description : "** Temporarily unavailable  **"}
           </p>
-          <div className={`w-full flex bg-white my-2 font-${themeFont} text-sm justify-end`}>
+          <div className={`my-2 flex w-full bg-white font-${themeFont} justify-end text-sm`}>
             <p
-              className={`text-white p-2 bg-${themeColour}-${themeTint} rounded-md font-bold inline-flex`}
+              className={`p-2 text-white bg-${themeColour}-${themeTint} inline-flex rounded-md font-bold`}
             >
               $16.00
             </p>
@@ -42,19 +42,19 @@ const ExampleItem: FC<Props> = ({ themeFont, themeColour, themeTint }) => {
     );
   }
   return (
-    <div key={item.id} className="flex rounded-lg  overflow-hidden relative my-4 shadow-md">
-      <div className="flex-1 bg-white p-4 flex flex-col justify-between">
+    <div key={item.id} className="relative my-4  flex overflow-hidden rounded-lg shadow-md">
+      <div className="flex flex-1 flex-col justify-between bg-white p-4">
         <div>
           <p className={`font-bold font-${themeFont}`}>{item?.name}</p>
           <p
-            className={`font-${themeFont} italic text-gray-600 mt-2 text-sm break-words text-ellipsis overflow-hidden`}
+            className={`font-${themeFont} mt-2 overflow-hidden text-ellipsis break-words text-sm italic text-gray-600`}
           >
             {item.available ? item.description : "** Temporarily unavailable  **"}
           </p>
         </div>
-        <div className={`w-full flex bg-white my-2 font-${themeFont} text-sm justify-end`}>
+        <div className={`my-2 flex w-full bg-white font-${themeFont} justify-end text-sm`}>
           <p
-            className={`text-white p-2 bg-${themeColour}-${themeTint} rounded-md font-bold inline-flex`}
+            className={`p-2 text-white bg-${themeColour}-${themeTint} inline-flex rounded-md font-bold`}
           >
             $16.00
           </p>

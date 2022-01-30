@@ -12,13 +12,13 @@ interface Props {
 const UploadImageBox: FC<Props> = ({ onChange, imageFile, themeTint, themeColour }) => {
   return (
     <div
-      className={`my-6 max-w-lg flex justify-center px-3 pt-2 pb-2 border-2 border-${themeColour}-${themeTint} border-dashed rounded-md`}
+      className={`my-6 flex max-w-lg justify-center border-2 px-3 pt-2 pb-2 border-${themeColour}-${themeTint} rounded-md border-dashed`}
     >
       <div className="space-y-0.5 text-center">
-        <div className="flex text-sm text-gray-600 w-full">
+        <div className="flex w-full text-sm text-gray-600">
           <label
             htmlFor="file-upload"
-            className="relative cursor-pointer bg-white rounded-md font-medium text-gray-900 hover:text-gray-900 focus-within:outline-none w-full  px-24"
+            className="relative w-full cursor-pointer rounded-md bg-white px-24 font-medium text-gray-900 focus-within:outline-none  hover:text-gray-900"
           >
             <UploadImageSVG />
             <span className="text-center font-Quicksand font-bold">Upload a photo</span>
@@ -32,7 +32,7 @@ const UploadImageBox: FC<Props> = ({ onChange, imageFile, themeTint, themeColour
             />
           </label>
         </div>
-        <p className="text-xs text-gray-500 text-center font-Quicksand">
+        <p className="text-center font-Quicksand text-xs text-gray-500">
           {imageFile?.name || "PNG, JPG, GIF up to 10MB"}
         </p>
       </div>

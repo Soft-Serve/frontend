@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 const SettingsHeader: FC = ({ children }) => {
   return (
-    <h2 className="text-3xl mr-4  font-extrabold text-gray-900 mb-2 font-Quicksand">{children}</h2>
+    <h2 className="mr-4 mb-2  font-Quicksand text-3xl font-extrabold text-gray-900">{children}</h2>
   );
 };
 

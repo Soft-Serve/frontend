@@ -79,7 +79,7 @@ const UpdateBannerHeadingsForm: FC<Props> = ({
   return (
     <form onSubmit={handleSubmit}>
       <div className="overflow-hidden">
-        <div className="py-5 bg-white">
+        <div className="bg-white py-5">
           <div className="grid grid-cols-6 gap-6">
             <div className="col-span-6 sm:col-span-3">
               <Input
@@ -111,7 +111,7 @@ const UpdateBannerHeadingsForm: FC<Props> = ({
           </div>
         </div>
         {isFieldsUpdated() && (
-          <div className="px-4 py-3 bg-white text-right sm:px-6">
+          <div className="bg-white px-4 py-3 text-right sm:px-6">
             <Button
               themeColour={themeColour}
               themeTint={themeTint}

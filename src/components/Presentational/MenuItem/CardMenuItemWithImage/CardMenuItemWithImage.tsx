@@ -24,10 +24,10 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
     );
 
   return (
-    <div key={item.id} className="flex rounded-md shadow-md overflow-hidden" {...rest}>
-      <div className="flex-shrink-0 h-full w-56 relative">
+    <div key={item.id} className="flex overflow-hidden rounded-md shadow-md" {...rest}>
+      <div className="relative h-full w-56 flex-shrink-0">
         <ItemImage
-          className="inset-0 w-full h-full object-cover"
+          className="inset-0 h-full w-full object-cover"
           unavailable={!item.available}
           photoUrl={item?.photo}
         />
@@ -39,11 +39,11 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
           itemID={item.id}
         />
       </div>
-      <div className="flex-1 bg-white p-2 pb-0 flex flex-col justify-between">
+      <div className="flex flex-1 flex-col justify-between bg-white p-2 pb-0">
         <div>
           <p className={`font-bold font-${themeFont}`}>{item?.name}</p>
           <p
-            className={`font-${themeFont} italic text-gray-600 mt-2 text-sm break-words text-ellipsis overflow-hidden`}
+            className={`font-${themeFont} mt-2 overflow-hidden text-ellipsis break-words text-sm italic text-gray-600`}
           >
             {item.available ? item.description : "** Temporarily unavailable  **"}
           </p>

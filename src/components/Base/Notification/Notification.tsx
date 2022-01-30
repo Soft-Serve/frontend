@@ -11,7 +11,7 @@ interface Props {
 
 const Notification: FC<Props> = ({ header, subHeader }) => {
   return (
-    <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+    <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
       <div className="p-4">
         <div className="flex items-start">
           <div className="flex-shrink-0">
@@ -21,10 +21,10 @@ const Notification: FC<Props> = ({ header, subHeader }) => {
             <p className="text-sm font-medium text-gray-900">{header}</p>
             <p className="mt-1 text-sm text-gray-500">{subHeader}</p>
           </div>
-          <div className="ml-4 flex-shrink-0 flex">
+          <div className="ml-4 flex flex-shrink-0">
             <button
               onClick={() => toast.remove()}
-              className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               <span className="sr-only">Close</span>
               <XIcon className="h-5 w-5" aria-hidden="true" />

@@ -47,7 +47,7 @@ const MultiSizeRow: FC<Props> = ({
 
   return (
     <>
-      <div className="flex items-center justify-between w-full p-2">
+      <div className="flex w-full items-center justify-between p-2">
         <div className="w-40">
           <Input
             themeColour={themeColour}
@@ -87,13 +87,13 @@ const MultiSizeRow: FC<Props> = ({
             colour="accent"
             css="border-none"
           >
-            <TrashIcon className="w-5 h-5" />
+            <TrashIcon className="h-5 w-5" />
           </Button>
         </div>
       </div>
       {hasErrors() && (
         <div
-          className="m-2 text-sm text-white font-bold p-2 text-center bg-red-600 rounded-md"
+          className="m-2 rounded-md bg-red-600 p-2 text-center text-sm font-bold text-white"
           id="email-error"
         >
           {renderErrorMessages(index)}

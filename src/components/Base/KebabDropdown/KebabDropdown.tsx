@@ -12,7 +12,7 @@ const KebabDropdown: FC<Props> = ({ children, themeTint, themeColour }) => {
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button
-          className={`bg-white  flex items-center p-2 text-gray-900 hover:text-white hover:bg-${themeColour}-${themeTint} rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-${themeColour}-${themeTint}`}
+          className={`flex  items-center bg-white p-2 text-gray-900 hover:text-white hover:bg-${themeColour}-${themeTint} rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-${themeColour}-${themeTint}`}
         >
           <span className="sr-only">Open options</span>
           <DotsVerticalIcon className="h-5 w-5" aria-hidden="true" />
@@ -28,7 +28,7 @@ const KebabDropdown: FC<Props> = ({ children, themeTint, themeColour }) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+        <Menu.Items className="absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className={`py-2 px-2 bg-${themeColour}-${themeTint} rounded-md`}>{children}</div>
         </Menu.Items>
       </Transition>

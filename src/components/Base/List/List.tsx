@@ -4,9 +4,9 @@ import type { FC } from "react";
 const List: FC = ({ children }) => {
   return (
     <div className="w-full">
-      <div className="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
-        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-4">
-          <ul className=" rounded-md divide-y-2 divide-gray-200">{children}</ul>
+      <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+        <dd className="mt-1 text-sm text-gray-900 sm:col-span-4 sm:mt-0">
+          <ul className=" divide-y-2 divide-gray-200 rounded-md">{children}</ul>
         </dd>
       </div>
     </div>

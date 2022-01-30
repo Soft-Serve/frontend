@@ -85,7 +85,7 @@ const Tooltip: FC<Props> = ({ children, tooltipText, isDisabled, position = "top
       onMouseLeave={handleMouseLeave}
     >
       <div className={buildStyles(css)} style={PostionsMap[position]} ref={tipRef}>
-        <div style={PointerMap[position]} className="bg-black h-3 w-3 absolute" />
+        <div style={PointerMap[position]} className="absolute h-3 w-3 bg-black" />
         {tooltipText}
       </div>
       {children}

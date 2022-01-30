@@ -47,8 +47,8 @@ const AllergiesList: FC<Props> = ({
         <List>
           {data?.allergies?.map(allergy => (
             <ListItem key={allergy.id}>
-              <div className="w-0 flex-1 flex items-center">
-                <span className="ml-2 flex-1 w-0 font-bold font-Quicksand">{`${allergy.name} / ${allergy.filter_name}`}</span>
+              <div className="flex w-0 flex-1 items-center">
+                <span className="ml-2 w-0 flex-1 font-Quicksand font-bold">{`${allergy.name} / ${allergy.filter_name}`}</span>
               </div>
               <div className="ml-4 flex flex-col sm:flex-row">
                 <AllergiesDropdown

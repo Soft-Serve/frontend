@@ -28,8 +28,8 @@ const RestaurantSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug,
             <SettingsHeader>Restaurant</SettingsHeader>
           </CardContent>
         </Card>
-        <div className="w-full mt-10">
-          <div className="mt-5 md:mt-0 md:col-span-2">
+        <div className="mt-10 w-full">
+          <div className="mt-5 md:col-span-2 md:mt-0">
             <UpdateRestaurantForm
               themeFont={themeFont}
               restaurantSlug={restaurantSlug}

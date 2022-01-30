@@ -33,9 +33,9 @@ const MenusMobileNavigation: FC<Props> = ({
   const isActiveMenu = data?.menus?.find(menu => menu.id === menuID);
 
   return (
-    <nav aria-label="Sections" {...rest} className="flex flex-col justify-between h-full">
-      <div className="flex-shrink-0 h-16 px-6 border-b border-blue-gray-200 flex items-center">
-        <p className={`text-lg font-bold text-blue-gray-900 font-${themeFont}`}>Select Menu</p>
+    <nav aria-label="Sections" {...rest} className="flex h-full flex-col justify-between">
+      <div className="border-blue-gray-200 flex h-16 flex-shrink-0 items-center border-b px-6">
+        <p className={`text-blue-gray-900 text-lg font-bold font-${themeFont}`}>Select Menu</p>
       </div>
       <RadioTiles
         value={isActiveMenu}

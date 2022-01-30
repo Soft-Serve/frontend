@@ -45,19 +45,19 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
   };
 
   return (
-    <div key={item.id} className="flex rounded-md shadow-md overflow-hidden relative">
-      <div className="flex-shrink-0 h-full w-56 relative">
-        <ItemImage className="inset-0 w-full h-full object-cover" photoUrl={item?.photo} />
-        <div className="flex items-center absolute top-3 left-1">
+    <div key={item.id} className="relative flex overflow-hidden rounded-md shadow-md">
+      <div className="relative h-full w-56 flex-shrink-0">
+        <ItemImage className="inset-0 h-full w-full object-cover" photoUrl={item?.photo} />
+        <div className="absolute top-3 left-1 flex items-center">
           <Pill type={isItemAvailable ? "success" : "error"}>
             {isItemAvailable ? "Available" : "86"}
           </Pill>
         </div>
       </div>
-      <div className="flex-1 bg-white flex flex-col p-2 pb-0 justify-between">
+      <div className="flex flex-1 flex-col justify-between bg-white p-2 pb-0">
         <div className="w-full">
-          <div className="w-full flex justify-between items-center">
-            <h4 className="font-bold font-Quicksand inline-flex flex-wrap">{item?.name}</h4>
+          <div className="flex w-full items-center justify-between">
+            <h4 className="inline-flex flex-wrap font-Quicksand font-bold">{item?.name}</h4>
             <div className="flex items-center">
               <div className="mx-2">
                 <Toggle
@@ -76,7 +76,7 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
               />
             </div>
           </div>
-          <p className="font-Quicksand italic text-gray-600 mt-2 text-sm break-words text-ellipsis overflow-hidden">
+          <p className="mt-2 overflow-hidden text-ellipsis break-words font-Quicksand text-sm italic text-gray-600">
             {item.available ? item.description : "** Temporarily unavailable  **"}
           </p>
           <CategoryItemDietaries

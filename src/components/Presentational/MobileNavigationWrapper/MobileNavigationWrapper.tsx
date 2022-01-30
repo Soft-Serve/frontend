@@ -7,8 +7,8 @@ interface Props {
 }
 const MobileNavigationWrapper: FC<Props> = ({ children, themeTint, themeColour }) => {
   return (
-    <div className={`flex-1 flex flex-col bg-${themeColour}-${themeTint} h-full`}>
-      <div className="flex-1 flex flex-col pb-4 overflow-y-auto">
+    <div className={`flex flex-1 flex-col bg-${themeColour}-${themeTint} h-full`}>
+      <div className="flex flex-1 flex-col overflow-y-auto pb-4">
         <div className={`flex-1 space-y-1 bg-${themeColour}-${themeTint}`} aria-label="Sidebar">
           {children}
         </div>

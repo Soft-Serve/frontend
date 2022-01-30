@@ -3,9 +3,9 @@ import type { FC } from "react";
 
 const Tabs: FC = ({ children }) => {
   return (
-    <div className="sm:block w-full">
+    <div className="w-full sm:block">
       <nav
-        className="relative z-0 rounded-md shadow-md flex divide-x divide-gray-300 justify-items-center items-center bg-white"
+        className="relative z-0 flex items-center justify-items-center divide-x divide-gray-300 rounded-md bg-white shadow-md"
         aria-label="Tabs"
       >
         {children}

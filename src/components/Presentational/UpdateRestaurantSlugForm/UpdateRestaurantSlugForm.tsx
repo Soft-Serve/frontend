@@ -27,7 +27,7 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id, themeColour, themeTint 
   const renderUpdateSlugButton = () => {
     if (!isValidSlug) return null;
     return (
-      <div className="px-4 py-3  text-right sm:px-6 mt-4">
+      <div className="mt-4 px-4  py-3 text-right sm:px-6">
         <Button
           themeColour={themeColour}
           themeTint={themeTint}
@@ -66,7 +66,7 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id, themeColour, themeTint 
     if (isNameOnlyNumbers(slugState)) {
       return (
         <div
-          className="mt-2 text-sm text-white font-bold p-2 text-center bg-red-600 rounded-md"
+          className="mt-2 rounded-md bg-red-600 p-2 text-center text-sm font-bold text-white"
           id="email-error"
         >
           Slug can not only contain numbers
@@ -76,7 +76,7 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id, themeColour, themeTint 
     if (isBasicSlugValid(slugState)) return null;
     return (
       <div
-        className="mt-2 text-sm text-white font-bold p-2 text-center bg-red-600 rounded-md"
+        className="mt-2 rounded-md bg-red-600 p-2 text-center text-sm font-bold text-white"
         id="email-error"
       >
         slug can not end with dash or contain any spaces

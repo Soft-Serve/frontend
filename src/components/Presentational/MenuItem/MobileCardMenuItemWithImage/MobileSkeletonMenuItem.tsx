@@ -5,11 +5,11 @@ import Skeleton from "react-loading-skeleton";
 
 const MobileSkeletonMenuItem: FC = () => {
   return (
-    <div className="flex flex-col rounded-md shadow-md overflow-hidden">
-      <div className="flex-shrink-0 h-40 relative">
+    <div className="flex flex-col overflow-hidden rounded-md shadow-md">
+      <div className="relative h-40 flex-shrink-0">
         <Skeleton className="h-40 w-40" />
       </div>
-      <div className="flex-1 bg-white p-4 flex flex-col justify-between">
+      <div className="flex flex-1 flex-col justify-between bg-white p-4">
         <div className="flex w-full justify-between">
           <Skeleton width={20} height={20} />
         </div>

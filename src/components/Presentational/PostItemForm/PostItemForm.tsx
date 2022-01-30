@@ -155,15 +155,15 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, theme
   };
 
   const tooltiptext = (
-    <span className="text-center px-5 text-white justify-center w-full text-sm font-semibold font-Quicksand">
+    <span className="w-full justify-center px-5 text-center font-Quicksand text-sm font-semibold text-white">
       Category is required
     </span>
   );
 
   return (
     <div className="font-Quicksand">
-      <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
+      <div className="flex items-center justify-between">
+        <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
           add new item
         </h3>
         <Button
@@ -172,7 +172,7 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, theme
           onClick={() => onCompleted?.(false)}
           size="S"
         >
-          <XIcon className="w-5 h-5" />
+          <XIcon className="h-5 w-5" />
         </Button>
       </div>
       <form noValidate onSubmit={handleSubmit} className="mt-4 flex flex-col">

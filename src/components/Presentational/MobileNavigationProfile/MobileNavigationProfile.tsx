@@ -24,7 +24,7 @@ const MobileNavigationProfile: FC = () => {
       const firstNameFirstLetter = data?.currentUser?.first_name.charAt(0).toUpperCase();
       const lastNameFirstLetter = data?.currentUser?.last_name.charAt(0).toUpperCase();
       return (
-        <span className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-500">
+        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-500">
           <span className="font-medium leading-none text-white">
             {firstNameFirstLetter}
             {lastNameFirstLetter}
@@ -36,8 +36,8 @@ const MobileNavigationProfile: FC = () => {
   };
 
   return (
-    <div className="flex-shrink-0 flex p-4 bg-gray-800 absolute w-full bottom-0 rounded-t-md ">
-      <a href="/" className="flex-shrink-0 w-full group block">
+    <div className="absolute bottom-0 flex w-full flex-shrink-0 rounded-t-md bg-gray-800 p-4 ">
+      <a href="/" className="group block w-full flex-shrink-0">
         <div className="flex items-center">
           {renderAvatar()}
           <div className="ml-3">{renderName()}</div>

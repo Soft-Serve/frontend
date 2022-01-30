@@ -24,8 +24,8 @@ const UsersList: FC<Props> = ({ restaurantSlug }) => {
           {data?.users.map(user => (
             <ListItem key={user?.id}>
               <div className="ml-3">
-                <p className="text-sm font-bold text-gray-900 font-Quicksand">{`${user?.first_name} ${user?.last_name}`}</p>
-                <p className="text-sm text-gray-500 font-Quicksand">{user?.email}</p>
+                <p className="font-Quicksand text-sm font-bold text-gray-900">{`${user?.first_name} ${user?.last_name}`}</p>
+                <p className="font-Quicksand text-sm text-gray-500">{user?.email}</p>
               </div>
             </ListItem>
           ))}

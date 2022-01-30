@@ -17,16 +17,16 @@ interface Props {
 
 const MultiSize: FC<Props> = ({ addSize, sizes, deleteSize, onChange, themeColour, themeTint }) => {
   return (
-    <div className={`border-2 border-${themeColour}-${themeTint} rounded-md mt-4`}>
+    <div className={`border-2 border-${themeColour}-${themeTint} mt-4 rounded-md`}>
       <div
-        className={`flex items-center justify-between w-full p-2 border-b-2 border-${themeColour}-${themeTint}`}
+        className={`flex w-full items-center justify-between border-b-2 p-2 border-${themeColour}-${themeTint}`}
       >
-        <span className="text-gray-900 font-bold text-sm ml-2">Unit</span>
-        <span className="text-gray-900  font-bold text-sm">
+        <span className="ml-2 text-sm font-bold text-gray-900">Unit</span>
+        <span className="text-sm  font-bold text-gray-900">
           Price <span className="text-red-500">*</span>
         </span>
         <Button themeColour={themeColour} themeTint={themeTint} colour="primary" onClick={addSize}>
-          <PlusIcon className="w-5 h-5" />
+          <PlusIcon className="h-5 w-5" />
         </Button>
       </div>
       {sizes?.map((size, index) => (

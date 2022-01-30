@@ -47,9 +47,9 @@ const PasswordInput: FC<Props> = ({
     <div>
       <label className={classnames("block", "text-sm", "font-bold", "text-gray-700")}>
         <span className="font-Quicksand">{labelText || "Password"}</span>
-        <span className="text-red-600 ml-1">*</span>
+        <span className="ml-1 text-red-600">*</span>
       </label>
-      <div className="relative w-full mt-2">
+      <div className="relative mt-2 w-full">
         <div className="absolute inset-y-0 right-0 flex items-center px-2">
           <input
             onClick={() => setIsPassword(prevState => !prevState)}
@@ -58,7 +58,7 @@ const PasswordInput: FC<Props> = ({
             type="checkbox"
           />
           <label
-            className={`bg-gray-300 hover:bg-${themeColour}-${themeTint} hover:text-white rounded px-2 py-1 text-sm text-gray-600 font-Quicksand cursor-pointer `}
+            className={`bg-gray-300 hover:bg-${themeColour}-${themeTint} cursor-pointer rounded px-2 py-1 font-Quicksand text-sm text-gray-600 hover:text-white `}
             htmlFor={`toggle${name}`}
           >
             {isPassword ? "show" : "hide"}
@@ -76,7 +76,7 @@ const PasswordInput: FC<Props> = ({
       </div>
       {hasErrors() && (
         <div
-          className="mt-2 text-sm text-white font-bold p-2 text-center bg-red-600 rounded-md"
+          className="mt-2 rounded-md bg-red-600 p-2 text-center text-sm font-bold text-white"
           id="email-error"
         >
           {renderErrorMessages()}

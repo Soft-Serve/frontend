@@ -42,7 +42,7 @@ const Button: FC<Props> = ({
       className={buildStyles(themeColour, themeTint, size, colour, isFullwidth, disabled, css)}
       {...rest}
     >
-      <span className={`font-${themeFont} font-bold inline-flex items-center`}>
+      <span className={`font-${themeFont} inline-flex items-center font-bold`}>
         {renderButtonContent()}
       </span>
     </button>

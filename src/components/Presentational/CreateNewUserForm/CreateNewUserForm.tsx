@@ -28,7 +28,7 @@ const CreateNewUserForm: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
   };
   return (
     <>
-      <div className="sm:mx-auto sm:w-full sm:max-w-md flex justify-center flex-col items-center">
+      <div className="flex flex-col items-center justify-center sm:mx-auto sm:w-full sm:max-w-md">
         {renderCTA()}
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">

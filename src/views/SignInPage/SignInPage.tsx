@@ -19,29 +19,29 @@ const SignInPage: FC = () => {
     <>
       <header>
         <Popover className="relative bg-red-400">
-          <div className="flex justify-between items-center max-w-7xl mx-auto px-4 py-2 sm:px-6 md:justify-start md:space-x-10 lg:px-8">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 md:justify-start md:space-x-10 lg:px-8">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <a href="/">
                 <span className="sr-only">Soft Serve Logo</span>
                 <FullLogoSVG className="w-20 fill-current stroke-current text-white" />
               </a>
             </div>
-            <div className="-mr-2 -my-2 md:hidden">
-              <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-400">
+            <div className="-my-2 -mr-2 md:hidden">
+              <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-400">
                 <span className="sr-only">Open menu</span>
                 <MenuIcon className="h-6 w-6" aria-hidden="true" />
               </Popover.Button>
             </div>
-            <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+            <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
               <Link
                 to="/sign-up"
-                className="ml-8 whitespace-nowrap inline-flex items-center justify-center bg-white origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-red-400 hover:bg-red-400 hover:text-white font-Quicksand  font-bold"
+                className="origin-border ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-white px-4 py-2 font-Quicksand text-base font-medium font-bold text-red-400 shadow-sm hover:bg-red-400  hover:text-white"
               >
                 Sign up
               </Link>
               <Link
                 to="/"
-                className="ml-8 whitespace-nowrap inline-flex items-center justify-center bg-white origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-red-400 hover:bg-red-400 hover:text-white font-Quicksand  font-bold"
+                className="origin-border ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-white px-4 py-2 font-Quicksand text-base font-medium font-bold text-red-400 shadow-sm hover:bg-red-400  hover:text-white"
               >
                 Home
               </Link>
@@ -59,10 +59,10 @@ const SignInPage: FC = () => {
           >
             <Popover.Panel
               focus
-              className="absolute z-30 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+              className="absolute inset-x-0 top-0 z-30 origin-top-right transform p-2 transition md:hidden"
             >
-              <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
-                <div className="pt-5 pb-6 px-5">
+              <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+                <div className="px-5 pt-5 pb-6">
                   <div className="flex items-center justify-between">
                     <div>
                       <img
@@ -72,7 +72,7 @@ const SignInPage: FC = () => {
                       />
                     </div>
                     <div className="-mr-2">
-                      <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-900">
+                      <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-900">
                         <span className="sr-only">Close menu</span>
                         <XIcon className="h-6 w-6" aria-hidden="true" />
                       </Popover.Button>
@@ -83,17 +83,17 @@ const SignInPage: FC = () => {
                   <div className="mt-6">
                     <Link
                       to="/"
-                      className="ml-8 whitespace-nowrap inline-flex items-center justify-center bg-white origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-red-400 hover:bg-red-400 hover:text-white font-Quicksand  font-bold"
+                      className="origin-border ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-white px-4 py-2 font-Quicksand text-base font-medium font-bold text-red-400 shadow-sm hover:bg-red-400  hover:text-white"
                     >
                       Home
                     </Link>
                     <Link
                       to="/sign-up"
-                      className="w-full flex items-center justify-center bg-red-400 bg-origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base text-white hover:from-red-700 hover:to-red-700 font-Quicksand font-bold"
+                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-400 bg-origin-border px-4 py-2 font-Quicksand text-base font-bold text-white shadow-sm hover:from-red-700 hover:to-red-700"
                     >
                       Sign up
                     </Link>
-                    <p className="mt-6 text-center text-base font-medium text-gray-900 font-Quicksand">
+                    <p className="mt-6 text-center font-Quicksand text-base font-medium text-gray-900">
                       Existing customer?
                     </p>
                   </div>

@@ -112,7 +112,7 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID, s
         />
         <Container>
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
-            <div className="w-full lg:flex hidden">
+            <div className="hidden w-full lg:flex">
               <Menus
                 setActiveMenu={setActiveMenu}
                 setMenuID={setMenuID}

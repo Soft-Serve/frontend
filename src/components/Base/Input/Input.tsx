@@ -58,7 +58,7 @@ const Input: FC<Props> = ({
       />
       {hasErrors() && (
         <div
-          className="mt-2 text-sm text-white font-bold p-2 text-center bg-red-600 rounded-md"
+          className="mt-2 rounded-md bg-red-600 p-2 text-center text-sm font-bold text-white"
           id="email-error"
         >
           {renderErrorMessages()}

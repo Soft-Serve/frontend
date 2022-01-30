@@ -27,7 +27,7 @@ const KebabDropdownItem: FC<Props> = ({ children, onClick, themeColour, themeTin
       {({ active }) => (
         <button
           onClick={onClick}
-          className={`font-Quicksand font-bold text-sm text-${themeColour}-${themeTint} border-2 border-white rounded-md my-1 ${classnames(
+          className={`font-Quicksand text-sm font-bold text-${themeColour}-${themeTint} my-1 rounded-md border-2 border-white ${classnames(
             active ? activeStyles : nonActiveStyles
           )}`}
         >

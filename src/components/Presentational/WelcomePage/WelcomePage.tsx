@@ -29,10 +29,10 @@ const WelcomePage: FC<Props> = ({
       >
         Welcome Kristine!
       </h2>
-      <h3 className="px-4 text-center text-lg font-semibold text-gray-900 tracking-tight">
+      <h3 className="px-4 text-center text-lg font-semibold tracking-tight text-gray-900">
         To start building your virtual menu follow the steps below:
       </h3>
-      <div className="p-20 flex justify-center">
+      <div className="flex justify-center p-20">
         <Steps
           restaurantSlug={restaurantSlug}
           themeColour={themeColour}
@@ -42,7 +42,7 @@ const WelcomePage: FC<Props> = ({
           hasStyles={hasStyles}
         />
       </div>
-      <div className="p-20 flex justify-center">
+      <div className="flex justify-center p-20">
         <Button themeColour={themeColour} themeTint={themeTint} size="XL" onClick={hideWelcomePage}>
           skip for now
         </Button>

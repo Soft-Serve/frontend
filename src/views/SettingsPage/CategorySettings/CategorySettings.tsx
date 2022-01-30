@@ -138,7 +138,7 @@ const CategorySettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug })
             onClick={() => handleModal(ModalForms.PostCategory)}
           >
             Add
-            <ViewGridAddIcon className="w-5 h-5 ml-2" />
+            <ViewGridAddIcon className="ml-2 h-5 w-5" />
           </Button>
         </CardContent>
       </Card>

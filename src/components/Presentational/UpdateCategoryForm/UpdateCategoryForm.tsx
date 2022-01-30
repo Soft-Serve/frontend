@@ -97,8 +97,8 @@ const UpdateCategoryForm: FC<Props> = ({
 
   return (
     <div>
-      <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4 font-Quicksand">
+      <div className="flex items-center justify-between">
+        <h3 className="mr-4 font-Quicksand text-sm font-semibold uppercase tracking-wider text-gray-900">
           edit category
         </h3>
         <Button
@@ -107,7 +107,7 @@ const UpdateCategoryForm: FC<Props> = ({
           onClick={() => onCompleted?.(false)}
           size="S"
         >
-          <XIcon className="w-5 h-5" />
+          <XIcon className="h-5 w-5" />
         </Button>
       </div>
       <form onSubmit={handleSubmit} className="w-full">
@@ -137,9 +137,9 @@ const UpdateCategoryForm: FC<Props> = ({
             setInput(prevState => prevState && { ...prevState, category_type: value })
           }
         >
-          <div className="flex my-8">
+          <div className="my-8 flex">
             <RadioTile themeColour={themeColour} themeTint={themeTint} css="w-full" value="food">
-              <span className="block text-sm font-medium w-full text-center font-Quicksand">
+              <span className="block w-full text-center font-Quicksand text-sm font-medium">
                 Food
               </span>
             </RadioTile>
@@ -150,7 +150,7 @@ const UpdateCategoryForm: FC<Props> = ({
               css={classnames("w-full", "ml-4")}
               value="beverage"
             >
-              <span className="block text-sm font-medium w-full text-center font-Quicksand">
+              <span className="block w-full text-center font-Quicksand text-sm font-medium">
                 Beverage
               </span>
             </RadioTile>

@@ -43,12 +43,12 @@ const CategoryList: FC<Props> = ({
             ?.map(category => (
               <ListItem key={category.id}>
                 <Link
-                  className="w-full py-2 cursor-pointer"
+                  className="w-full cursor-pointer py-2"
                   to={`${routes.restaurants}/${restaurantSlug}/settings/items?menu=${activeMenu?.name}&category=${category.name}`}
                 >
-                  <div className="flex-1 flex items-end">
-                    <span className="font-bold font-Quicksand">{category.name}</span>
-                    <ChevronRightIcon className="w-5 h-5" />
+                  <div className="flex flex-1 items-end">
+                    <span className="font-Quicksand font-bold">{category.name}</span>
+                    <ChevronRightIcon className="h-5 w-5" />
                   </div>
                 </Link>
                 <div className="ml-4 flex flex-col sm:flex-row">

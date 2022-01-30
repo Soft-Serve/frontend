@@ -49,7 +49,7 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
         {data?.allergies?.map(allergy => (
           <div key={allergy.id} className={`w-full`}>
             <div
-              className={`flex whitespace-nowrap rounded-md p-2 items-center w-full bg-white my-2 justify-between border-2 border-${themeColour}-${themeTint}`}
+              className={`my-2 flex w-full items-center justify-between whitespace-nowrap rounded-md border-2 bg-white p-2 border-${themeColour}-${themeTint}`}
               onKeyDown={() => handleClick(allergy)}
               role="button"
               onClick={() => handleClick(allergy)}
@@ -63,7 +63,7 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
                     themeTint,
                     classnames("mx-1", "text-white", "w-8", "h-8", "p-2")
                   )}
-                  <span className={`font-${themeFont} font-bold ml-2`}>{allergy.name}</span>
+                  <span className={`font-${themeFont} ml-2 font-bold`}>{allergy.name}</span>
                 </div>
               </div>
               <Toggle
@@ -82,7 +82,7 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
 
   return (
     <BreadCrumbsNavigation>
-      <div className={`w-full  flex flex-col`}>{renderAllergies()}</div>
+      <div className={`flex  w-full flex-col`}>{renderAllergies()}</div>
     </BreadCrumbsNavigation>
   );
 };

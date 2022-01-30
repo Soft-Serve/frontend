@@ -19,9 +19,9 @@ const UsersSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) =>
   return (
     <TabWrapper>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
-        <div className="max-w-xl w-full">
-          <div className="flex justify-between items-center">
-            <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
+        <div className="w-full max-w-xl">
+          <div className="flex items-center justify-between">
+            <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
               Add new user
             </h3>
             <Button
@@ -31,7 +31,7 @@ const UsersSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) =>
               size="S"
               colour="accent"
             >
-              <XIcon className="w-5 h-5" />
+              <XIcon className="h-5 w-5" />
             </Button>
           </div>
           <PostNewUserForm
@@ -53,12 +53,12 @@ const UsersSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) =>
             size="XXL"
           >
             Add
-            <UserAddIcon className="w-5 h-5 ml-2" />
+            <UserAddIcon className="ml-2 h-5 w-5" />
           </Button>
         </CardContent>
       </Card>
-      <div className="w-full mt-10">
-        <div className="mt-5 md:mt-0 md:col-span-2">
+      <div className="mt-10 w-full">
+        <div className="mt-5 md:col-span-2 md:mt-0">
           <UsersList restaurantSlug={restaurantSlug} />
         </div>
       </div>

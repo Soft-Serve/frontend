@@ -9,9 +9,9 @@ const MobileBottomNavigation: FC<Props> = ({ children, themeTint, themeColour })
   return (
     <section
       id="bottom-navigation"
-      className={`lg:hidden block fixed inset-x-0 bottom-0 z-10 bg-${themeColour}-${themeTint} shadow-md rounded-t-md`}
+      className={`fixed inset-x-0 bottom-0 z-10 block lg:hidden bg-${themeColour}-${themeTint} rounded-t-md shadow-md`}
     >
-      <div className="w-full flex justify-center items-center p-2">{children}</div>
+      <div className="flex w-full items-center justify-center p-2">{children}</div>
     </section>
   );
 };

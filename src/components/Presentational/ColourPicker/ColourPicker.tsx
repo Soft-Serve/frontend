@@ -32,13 +32,13 @@ const ColourPicker: FC<Props> = ({ onClose, themeTint, themeColour, handleSubmit
   };
   return (
     <div>
-      <div className=" h-96 overflow-y-auto mb-2">
+      <div className=" mb-2 h-96 overflow-y-auto">
         {colourMap.map(([colour, value]) => (
           <div className="my-4" key={colour}>
-            <span className="text-sm font-bold text-gray-900 mx-2 font-Quicksand">
+            <span className="mx-2 font-Quicksand text-sm font-bold text-gray-900">
               {camelCaseFormatter(colour)}
             </span>
-            <div className="flex items-center flex-wrap">
+            <div className="flex flex-wrap items-center">
               {Object.entries(value).map(([tailWindNumber, hexColour]) => (
                 <div
                   tabIndex={0}
@@ -46,7 +46,7 @@ const ColourPicker: FC<Props> = ({ onClose, themeTint, themeColour, handleSubmit
                   onKeyDown={() => handleClick(colour, tailWindNumber)}
                   onClick={() => handleClick(colour, tailWindNumber)}
                   key={tailWindNumber}
-                  className={`bg-${colour}-${tailWindNumber} w-14 h-14 rounded-md m-2 `}
+                  className={`bg-${colour}-${tailWindNumber} m-2 h-14 w-14 rounded-md `}
                 >
                   <span className="sr-only">{hexColour}</span>
                 </div>

@@ -82,8 +82,8 @@ const PostCategoryForm: FC<Props> = ({ onCompleted, menuID, themeTint, themeColo
   };
   return (
     <div>
-      <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4 font-Quicksand">
+      <div className="flex items-center justify-between">
+        <h3 className="mr-4 font-Quicksand text-sm font-semibold uppercase tracking-wider text-gray-900">
           add new category
         </h3>
         <Button
@@ -92,7 +92,7 @@ const PostCategoryForm: FC<Props> = ({ onCompleted, menuID, themeTint, themeColo
           onClick={() => onCompleted?.(false)}
           size="S"
         >
-          <XIcon className="w-5 h-5" />
+          <XIcon className="h-5 w-5" />
         </Button>
       </div>
       <form onSubmit={handleSubmit} className="w-full">
@@ -117,9 +117,9 @@ const PostCategoryForm: FC<Props> = ({ onCompleted, menuID, themeTint, themeColo
           />
         </div>
         <RadioTiles value={categoryType} onChange={value => setCategoryType(value)}>
-          <div className="flex my-4">
+          <div className="my-4 flex">
             <RadioTile themeTint={themeTint} themeColour={themeColour} css="w-full" value="food">
-              <span className="block text-sm font-medium w-full text-center font-Quicksand">
+              <span className="block w-full text-center font-Quicksand text-sm font-medium">
                 Food
               </span>
             </RadioTile>
@@ -129,7 +129,7 @@ const PostCategoryForm: FC<Props> = ({ onCompleted, menuID, themeTint, themeColo
               css={classnames("w-full", "ml-4")}
               value="beverage"
             >
-              <span className="block text-sm font-medium w-full text-center font-Quicksand">
+              <span className="block w-full text-center font-Quicksand text-sm font-medium">
                 Beverage
               </span>
             </RadioTile>

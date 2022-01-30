@@ -11,14 +11,14 @@ const Navigation: FC<Props> = ({ children, themeTint, themeColour, restaurantSlu
   return (
     <div className="hidden lg:flex lg:flex-shrink-0">
       <div className="flex flex-col">
-        <div className={`flex flex-col h-0 flex-1 overflow-y-auto bg-${themeColour}-${themeTint} `}>
-          <div className="flex-1 flex flex-col">
+        <div className={`flex h-0 flex-1 flex-col overflow-y-auto bg-${themeColour}-${themeTint} `}>
+          <div className="flex flex-1 flex-col">
             <div
-              className={`"flex-shrink-0 bg-${themeColour}-${themeTint} py-4 flex items-center justify-center w-44`}
+              className={`"flex-shrink-0 bg-${themeColour}-${themeTint} flex w-44 items-center justify-center py-4`}
             >
               <RestaurantLogo restaurantSlug={restaurantSlug} dimensions={70} />
             </div>
-            <nav aria-label="Sidebar" className="py-6 flex flex-col items-center">
+            <nav aria-label="Sidebar" className="flex flex-col items-center py-6">
               {children}
             </nav>
           </div>

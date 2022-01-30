@@ -24,18 +24,18 @@ const AttachedLabelInput: FC<Props> = ({
   if (isViewPortBigSize || isViewportSmalllerThenTablet) {
     return (
       <div className="flex flex-col">
-        <label htmlFor={id} className="block text-sm font-bold text-gray-900 font-Quicksand">
+        <label htmlFor={id} className="block font-Quicksand text-sm font-bold text-gray-900">
           {label}
         </label>
         <div className="mt-2 flex flex-col">
           <span
-            className={`items-center p-3 rounded-t-md border-r-0 border-2 border-${themeColour}-${themeTint}  text-white bg-${themeColour}-${themeTint} text-sm font-bold font-Quicksand`}
+            className={`items-center rounded-t-md border-2 border-r-0 p-3 border-${themeColour}-${themeTint}  text-white bg-${themeColour}-${themeTint} font-Quicksand text-sm font-bold`}
           >
             {attachedLabel}
           </span>
           <input
             id={id}
-            className={`flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-b-md focus:ring-${themeColour}-${themeTint} focus:border-${themeColour}-${themeTint} sm:text-sm border-2 border-${themeColour}-${themeTint}`}
+            className={`block w-full min-w-0 flex-1 rounded-none rounded-b-md px-3 py-2 focus:ring-${themeColour}-${themeTint} focus:border-${themeColour}-${themeTint} border-2 sm:text-sm border-${themeColour}-${themeTint}`}
             {...rest}
           />
         </div>
@@ -44,18 +44,18 @@ const AttachedLabelInput: FC<Props> = ({
   }
   return (
     <div className="flex flex-col">
-      <label htmlFor={id} className="block text-sm font-bold text-gray-900 font-Quicksand">
+      <label htmlFor={id} className="block font-Quicksand text-sm font-bold text-gray-900">
         {label}
       </label>
       <div className="mt-2 flex rounded-md shadow-sm">
         <span
-          className={`inline-flex  items-center px-3 rounded-l-md  border-r-0 border-2 border-${themeColour}-${themeTint}  text-white bg-${themeColour}-${themeTint}  sm:text-sm font-bold font-Quicksand`}
+          className={`inline-flex  items-center rounded-l-md border-2  border-r-0 px-3 border-${themeColour}-${themeTint}  text-white bg-${themeColour}-${themeTint}  font-Quicksand font-bold sm:text-sm`}
         >
           {attachedLabel}
         </span>
         <input
           id={id}
-          className={`flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-${themeColour}-${themeTint} focus:border-${themeColour}-${themeTint} sm:text-sm border-2 border-${themeColour}-${themeTint}`}
+          className={`block w-full min-w-0 flex-1 rounded-none rounded-r-md px-3 py-2 focus:ring-${themeColour}-${themeTint} focus:border-${themeColour}-${themeTint} border-2 sm:text-sm border-${themeColour}-${themeTint}`}
           {...rest}
         />
       </div>

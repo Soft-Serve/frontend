@@ -35,11 +35,11 @@ const ItemPrice: FC<Props> = ({
     if (withImage && data?.itemSizes?.length && data.itemSizes.length > 1) {
       return (
         <div
-          className={`text-white font-${themeFont} font-bold flex flex-wrap bg-white text-sm justify-${position}`}
+          className={`text-white font-${themeFont} flex flex-wrap bg-white text-sm font-bold justify-${position}`}
         >
           {data?.itemSizes?.map(item => (
             <p
-              className={`inline-flex justify-between mr-2 last:mr-0 bg-${themeColour}-${themeTint} p-2 rounded-md mb-2`}
+              className={`mr-2 inline-flex justify-between last:mr-0 bg-${themeColour}-${themeTint} mb-2 rounded-md p-2`}
               key={item?.id}
             >
               <span className="mr-2 ">{item?.unit}</span>
@@ -53,9 +53,9 @@ const ItemPrice: FC<Props> = ({
       const singlePrice = Number(data?.itemSizes[0]?.price);
 
       return (
-        <div className={`w-full flex bg-white font-${themeFont} text-sm justify-${position} mb-2`}>
+        <div className={`flex w-full bg-white font-${themeFont} text-sm justify-${position} mb-2`}>
           <p
-            className={`text-white p-2 bg-${themeColour}-${themeTint} rounded-md font-bold inline-flex`}
+            className={`p-2 text-white bg-${themeColour}-${themeTint} inline-flex rounded-md font-bold`}
           >
             {formatter.format(singlePrice)}
           </p>
@@ -65,10 +65,10 @@ const ItemPrice: FC<Props> = ({
 
     return (
       <div
-        className={`text-white font-${themeFont}  bg-${themeColour}-${themeTint} rounded-md font-bold flex flex-col text-sm `}
+        className={`text-white font-${themeFont}  bg-${themeColour}-${themeTint} flex flex-col rounded-md text-sm font-bold `}
       >
         {data?.itemSizes?.map(item => (
-          <p className="w-full inline-flex justify-between" key={item?.id}>
+          <p className="inline-flex w-full justify-between" key={item?.id}>
             <span className="mr-2">{item?.unit}</span>
             <span>{formatter.format(Number(item?.price))}</span>
           </p>

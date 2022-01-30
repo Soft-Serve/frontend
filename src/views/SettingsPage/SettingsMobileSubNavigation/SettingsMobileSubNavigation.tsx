@@ -29,7 +29,7 @@ const SettingsMobileSubNavigation: FC<Props> = ({
       <Dialog
         as="div"
         static
-        className="fixed inset-0 flex z-40 lg:hidden"
+        className="fixed inset-0 z-40 flex lg:hidden"
         open={isOpen}
         onClose={onClose}
       >
@@ -42,7 +42,7 @@ const SettingsMobileSubNavigation: FC<Props> = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Dialog.Overlay className="fixed inset-0 bg-blue-gray-600 bg-opacity-75" />
+          <Dialog.Overlay className="bg-blue-gray-600 fixed inset-0 bg-opacity-75" />
         </Transition.Child>
         <Transition.Child
           as={Fragment}
@@ -53,7 +53,7 @@ const SettingsMobileSubNavigation: FC<Props> = ({
           leaveFrom="translate-x-0"
           leaveTo="-translate-x-full"
         >
-          <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white focus:outline-none">
+          <div className="relative flex w-full max-w-xs flex-1 flex-col bg-white focus:outline-none">
             <Transition.Child
               as={Fragment}
               enter="ease-in-out duration-300"
@@ -63,7 +63,7 @@ const SettingsMobileSubNavigation: FC<Props> = ({
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="absolute top-0 right-0 pt-4 mr-4">
+              <div className="absolute top-0 right-0 mr-4 pt-4">
                 <Button
                   themeColour={themeColour}
                   themeTint={themeTint}
@@ -80,11 +80,11 @@ const SettingsMobileSubNavigation: FC<Props> = ({
               themeTint={themeTint}
               selected={selected}
               setSelected={setSelected}
-              className="flex-shrink-0 w-full bg-white border-r border-blue-gray-200 flex flex-col"
+              className="border-blue-gray-200 flex w-full flex-shrink-0 flex-col border-r bg-white"
             />
           </div>
         </Transition.Child>
-        <div className="flex-shrink-0 w-14" aria-hidden="true" />
+        <div className="w-14 flex-shrink-0" aria-hidden="true" />
       </Dialog>
     </Transition.Root>
   );

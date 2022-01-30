@@ -7,11 +7,11 @@ const SkeletonMenuItemWithoutImage: FC = () => {
   return (
     <Card withPadding={false}>
       <CardContent>
-        <div className="flex flex-col h-full justify-between w-full p-4">
+        <div className="flex h-full w-full flex-col justify-between p-4">
           <div>
             <div className="flex items-center justify-between">
               <Skeleton width={100} height={10} />
-              <div className="mt-2 mx-2 ">
+              <div className="mx-2 mt-2 ">
                 <Skeleton className="m-2" count={2} width={30} height={30} />
               </div>
             </div>

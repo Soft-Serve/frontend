@@ -147,7 +147,7 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
   }
   return (
     <>
-      <div className="lg:hidden block mt-4 ml-4">
+      <div className="mt-4 ml-4 block lg:hidden">
         <Button
           css={classnames("items-center")}
           size="XL"
@@ -156,7 +156,7 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
           themeTint={themeData?.restaurant?.tint || 400}
         >
           Settings
-          <ChevronRightIcon className="text-white w-5 h-5" />
+          <ChevronRightIcon className="h-5 w-5 text-white" />
         </Button>
       </div>
       <SettingsMobileSubNavigation
@@ -176,7 +176,7 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
             themeTint={themeData?.restaurant?.tint || 400}
             selected={selected}
             setSelected={setSelected}
-            className="hidden lg:block flex-shrink-0 w-96 bg-white border-r border-blue-gray-200 xl:flex xl:flex-col "
+            className="border-blue-gray-200 hidden w-96 flex-shrink-0 border-r bg-white lg:block xl:flex xl:flex-col "
           />
           <TabContent
             themeColour={themeData?.restaurant?.colour || "red"}

@@ -61,10 +61,10 @@ const UpdateRestaurantForm: FC<Props> = ({
         />
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>
-        <label className="text-sm font-bold text-gray-900 block my-4 font-Quicksand">
+        <label className="my-4 block font-Quicksand text-sm font-bold text-gray-900">
           Restaurant Logo
         </label>
-        <div className="flex items-center w-full justify-between flex-wrap">
+        <div className="flex w-full flex-wrap items-center justify-between">
           <div className="m-2">
             <ItemImage photoUrl={restaurant.logo} />
           </div>

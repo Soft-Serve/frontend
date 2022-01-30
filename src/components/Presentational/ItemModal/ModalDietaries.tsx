@@ -32,7 +32,7 @@ const ModalDietaries: FC<Props> = ({
 
   return (
     <div className={`flex flex-col items-start ${css || ""}`}>
-      <p className={`font-${themeFont} underline text-sm`}>this menu item contains:</p>
+      <p className={`font-${themeFont} text-sm underline`}>this menu item contains:</p>
       {data?.dietaries.map(dietary => (
         <div key={dietary.id} className="inline-flex items-center">
           <div>

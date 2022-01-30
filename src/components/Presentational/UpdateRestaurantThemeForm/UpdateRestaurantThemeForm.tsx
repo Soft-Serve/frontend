@@ -60,7 +60,7 @@ const UpdateRestaurantThemeForm: FC<Props> = ({ id, themeColour, themeTint, rest
   return (
     <>
       <Modal isOpen={isColourModalOpen} onClose={setIsColourModalOpen}>
-        <h3 className="text-sm font-bold text-gray-900 tracking-wider uppercase mr-4 font-Quicksand ">
+        <h3 className="mr-4 font-Quicksand text-sm font-bold uppercase tracking-wider text-gray-900 ">
           Select Restaurant Theme Colour
         </h3>
         <ColourPicker
@@ -72,13 +72,13 @@ const UpdateRestaurantThemeForm: FC<Props> = ({ id, themeColour, themeTint, rest
       </Modal>
       <div className="flex items-end">
         <div>
-          <span className="font-bold text-gray-900 text-sm font-Quicksand">Theme Colour</span>
+          <span className="font-Quicksand text-sm font-bold text-gray-900">Theme Colour</span>
           <div
             onKeyDown={() => setIsColourModalOpen(prevState => !prevState)}
             tabIndex={0}
             role="button"
             onClick={() => setIsColourModalOpen(prevState => !prevState)}
-            className={`w-20 h-20 bg-${themeColour}-${themeTint} mr-4 rounded-md mt-2`}
+            className={`h-20 w-20 bg-${themeColour}-${themeTint} mr-4 mt-2 rounded-md`}
           >
             <span className="sr-only">colour</span>
           </div>

@@ -49,15 +49,15 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
     return (
       <Container>
         <BoxSection>
-          <div className="sm:mx-auto sm:w-full sm:max-w-md flex justify-center flex-col items-center">
-            <h4 className={`m-8 text-center text-bold text-2xl ${themeColour}-${themeTint}`}>
+          <div className="flex flex-col items-center justify-center sm:mx-auto sm:w-full sm:max-w-md">
+            <h4 className={`text-bold m-8 text-center text-2xl ${themeColour}-${themeTint}`}>
               No menu items yet!
             </h4>
             <p className={`mb-8 text-center ${themeColour}-${themeTint}`}>
               You can either add items directly to the menu or create <strong>categories</strong>{" "}
               and add items to each categories.
             </p>
-            <div className={`flex justify-around w-full ${themeColour}-${themeTint}`}>
+            <div className={`flex w-full justify-around ${themeColour}-${themeTint}`}>
               <Button
                 themeColour={themeColour}
                 themeTint={themeTint}
@@ -82,7 +82,7 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
   }
   return (
     <Container>
-      <div className="w-full my-2">
+      <div className="my-2 w-full">
         <Grid size={getGridSize()}>
           {data?.items?.map(item => (
             <div

@@ -18,22 +18,22 @@ const ItemModal: FC<Props> = ({ isOpen, onClose, item, themeTint, themeColour, t
   if (item) {
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <div className="flex w-full h-full sm:flex-row flex-col">
+        <div className="flex h-full w-full flex-col sm:flex-row">
           {item?.photo && (
-            <div className="flex-shrink-0 h-full sm:w-56 w-full mr-2">
+            <div className="mr-2 h-full w-full flex-shrink-0 sm:w-56">
               <ItemImage
-                className="inset-0 w-full h-full object-cover  rounded-md"
+                className="inset-0 h-full w-full rounded-md  object-cover"
                 unavailable={!item.available}
                 photoUrl={item?.photo}
               />
             </div>
           )}
-          <div className=" flex flex-col w-full h-auto justify-between">
+          <div className=" flex h-auto w-full flex-col justify-between">
             <div>
               <p className={`font-bold font-${themeFont}`}>{item?.name}</p>
 
               <p
-                className={`font-${themeFont} italic text-gray-600 mt-2 text-sm break-words text-ellipsis overflow-hidden`}
+                className={`font-${themeFont} mt-2 overflow-hidden text-ellipsis break-words text-sm italic text-gray-600`}
               >
                 {item.available ? item.description : "** Temporarily unavailable  **"}
               </p>
@@ -57,7 +57,7 @@ const ItemModal: FC<Props> = ({ isOpen, onClose, item, themeTint, themeColour, t
             </div>
           </div>
         </div>
-        <div className="flex justify-end items-end w-full mt-4">
+        <div className="mt-4 flex w-full items-end justify-end">
           <Button
             themeColour={themeColour}
             themeTint={themeTint}

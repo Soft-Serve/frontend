@@ -29,8 +29,8 @@ const CardMenuItemWithoutImage: FC<Props> = ({
     );
 
   return (
-    <div key={item.id} className="flex rounded-lg shadow-lg overflow-hidden" {...rest}>
-      <div className="flex-1 bg-white p-2 pb-0 flex flex-col justify-between relative">
+    <div key={item.id} className="flex overflow-hidden rounded-lg shadow-lg" {...rest}>
+      <div className="relative flex flex-1 flex-col justify-between bg-white p-2 pb-0">
         <div>
           <div className="flex items-center justify-between py-2 ">
             <p className={`font-bold font-${themeFont} truncate`}>{item?.name}</p>
@@ -42,7 +42,7 @@ const CardMenuItemWithoutImage: FC<Props> = ({
             />
           </div>
           <p
-            className={`font-${themeFont} italic text-gray-600  text-sm break-words text-ellipsis overflow-hidden mb-4`}
+            className={`font-${themeFont} mb-4 overflow-hidden  text-ellipsis break-words text-sm italic text-gray-600`}
           >
             {item.available ? item.description : "** Temporarily unavailable  **"}
           </p>

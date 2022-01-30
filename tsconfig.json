@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "baseUrl": ".",
     "skipLibCheck": true,
@@ -36,7 +32,5 @@
       "@utility": ["src/utility/"]
     }
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

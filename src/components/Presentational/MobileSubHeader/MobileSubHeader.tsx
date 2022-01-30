@@ -38,10 +38,10 @@ const MobileSubHeader: FC<Props> = ({
   return (
     <nav
       aria-label="Breadcrumb"
-      className="bg-white border-b lg:hidden sticky top-0 z-40 shadow-lg"
+      className="sticky top-0 z-40 border-b bg-white shadow-lg lg:hidden"
     >
-      <div className="flex overflow-x-scroll my-2 hide-scroll-bar">
-        <div className="flex flex-nowrap mx-2">
+      <div className="hide-scroll-bar my-2 flex overflow-x-scroll">
+        <div className="mx-2 flex flex-nowrap">
           <Categories
             categoryID={categoryID}
             themeColour={themeColour}

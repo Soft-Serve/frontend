@@ -25,7 +25,7 @@ const MobileNavigation: FC<Props> = ({
       <Dialog
         as="div"
         static
-        className="fixed inset-0 flex z-40 lg:hidden"
+        className="fixed inset-0 z-40 flex lg:hidden"
         open={isOpen}
         onClose={onClose}
       >
@@ -38,7 +38,7 @@ const MobileNavigation: FC<Props> = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Dialog.Overlay className="fixed inset-0 bg-blue-gray-600 bg-opacity-75" />
+          <Dialog.Overlay className="bg-blue-gray-600 fixed inset-0 bg-opacity-75" />
         </Transition.Child>
         <Transition.Child
           as={Fragment}
@@ -50,7 +50,7 @@ const MobileNavigation: FC<Props> = ({
           leaveTo="-translate-x-full"
         >
           <div
-            className={`relative flex-1 flex flex-col max-w-xs w-full bg-${themeColour}-${themeTint} focus:outline-none`}
+            className={`relative flex w-full max-w-xs flex-1 flex-col bg-${themeColour}-${themeTint} focus:outline-none`}
           >
             <Transition.Child
               as={Fragment}
@@ -75,7 +75,7 @@ const MobileNavigation: FC<Props> = ({
             </Transition.Child>
             <div className="h-full">
               <div
-                className={`flex-shrink-0 flex items-center px-4 bg-${themeColour}-${themeTint} pt-4 pb-4`}
+                className={`flex flex-shrink-0 items-center px-4 bg-${themeColour}-${themeTint} pt-4 pb-4`}
               >
                 <RestaurantLogo
                   restaurantSlug={restaurantSlug}

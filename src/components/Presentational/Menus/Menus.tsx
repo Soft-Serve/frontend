@@ -69,7 +69,7 @@ const Menus: FC<Props> = ({
   return (
     <Container>
       <BoxSection>
-        <div className="sm:mx-auto sm:w-full sm:max-w-md flex justify-center flex-col items-center">
+        <div className="flex flex-col items-center justify-center sm:mx-auto sm:w-full sm:max-w-md">
           <FullLogoSVG
             className={`w-36 fill-current stroke-current text-${themeColour}-${themeTint}`}
           />

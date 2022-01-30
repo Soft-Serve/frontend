@@ -39,12 +39,12 @@ const MenusList: FC<Props> = ({
           {menus?.map(menu => (
             <ListItem key={menu.id}>
               <Link
-                className="w-full py-2 cursor-pointer"
+                className="w-full cursor-pointer py-2"
                 to={`${routes.restaurants}/${restaurantSlug}/settings/items?menu=${menu.name}`}
               >
-                <div className="flex-1 flex items-end">
-                  <span className="font-bold text-gray-900 font-Quicksand">{menu.name}</span>
-                  <ChevronRightIcon className="w-5 h-5" />
+                <div className="flex flex-1 items-end">
+                  <span className="font-Quicksand font-bold text-gray-900">{menu.name}</span>
+                  <ChevronRightIcon className="h-5 w-5" />
                 </div>
               </Link>
               <div className="ml-4 flex flex-col lg:flex-row">
