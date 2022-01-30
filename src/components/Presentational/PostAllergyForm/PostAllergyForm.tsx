@@ -1,8 +1,7 @@
 import React, { useState, FormEvent } from "react";
 import type { FC } from "react";
 import { Button, Input } from "@base";
-import { ALLERGIES_QUERY, useRestaurantQuery } from "@shared";
-import type { AllergyData } from "@shared";
+import { AllergiesData, ALLERGIES_QUERY, useRestaurantQuery } from "@shared";
 import { XIcon } from "@heroicons/react/solid";
 import { usePostAllergyMutation } from "./PostAllergy.mutation";
 
@@ -31,7 +30,7 @@ const PostAllergyForm: FC<Props> = ({ onCompleted, themeColour, themeTint, resta
           restaurantSlug,
           active: false,
         },
-      }) as AllergyData;
+      }) as AllergiesData;
       cache.writeQuery({
         query: ALLERGIES_QUERY,
         variables: {
@@ -70,8 +69,8 @@ const PostAllergyForm: FC<Props> = ({ onCompleted, themeColour, themeTint, resta
 
   return (
     <div>
-      <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
+      <div className="flex items-center justify-between">
+        <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
           add new dietary
         </h3>
         <Button
@@ -81,7 +80,7 @@ const PostAllergyForm: FC<Props> = ({ onCompleted, themeColour, themeTint, resta
           size="S"
           colour="accent"
         >
-          <XIcon className="w-5 h-5" />
+          <XIcon className="h-5 w-5" />
         </Button>
       </div>
 

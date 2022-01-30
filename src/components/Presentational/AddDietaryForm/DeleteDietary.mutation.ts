@@ -10,6 +10,9 @@ const DELETE_DIETARY_MUTATION = gql`
         method: "DELETE"
       ) {
       id
+      name
+      menu_item_id
+      dietary_id
     }
   }
 `;
@@ -19,9 +22,9 @@ interface Dietary {
   name: string;
   menu_item_id: number;
   dietary_id: number;
-  __typename: string;
 }
-interface DietaryData {
+interface DeleteDietaryData {
+  __typename: string;
   dietary: Dietary;
 }
 
@@ -32,8 +35,8 @@ interface Variables {
   };
 }
 
-const useDeleteDietaryMutation = (options?: MutationHookOptions<DietaryData, Variables>) =>
-  useMutation<DietaryData, Variables>(DELETE_DIETARY_MUTATION, options);
+const useDeleteDietaryMutation = (options?: MutationHookOptions<DeleteDietaryData, Variables>) =>
+  useMutation<DeleteDietaryData, Variables>(DELETE_DIETARY_MUTATION, options);
 
-export type { Dietary, DietaryData };
+export type { Dietary, DeleteDietaryData };
 export { useDeleteDietaryMutation, DELETE_DIETARY_MUTATION };

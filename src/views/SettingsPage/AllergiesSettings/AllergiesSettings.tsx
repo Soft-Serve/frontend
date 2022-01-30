@@ -20,6 +20,8 @@ const AllergiesSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
     name: "",
     id: 0,
     __typename: "",
+    menu_item_id: 0,
+    dietary_id: 0,
     filter_name: "",
   });
 
@@ -79,7 +81,7 @@ const AllergiesSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
             type="button"
           >
             Add
-            <FilterIcon className="w-5 h-5 ml-2" />
+            <FilterIcon className="ml-2 h-5 w-5" />
           </Button>
         </CardContent>
       </Card>

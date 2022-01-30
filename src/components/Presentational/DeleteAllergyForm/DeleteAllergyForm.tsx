@@ -1,11 +1,12 @@
 import React, { FormEvent } from "react";
 import type { FC } from "react";
 import { ALLERGIES_QUERY, Allergy } from "@shared";
-import type { AllergyData } from "@shared";
 import { Button, Column, Columns } from "@base";
 
 import { XIcon } from "@heroicons/react/solid";
-import { useDeleteAllergyMutation } from "./DeleteAllergy.mutation";
+import { DeleteAllergyData, useDeleteAllergyMutation } from "./DeleteAllergy.mutation";
+import { MutationUpdaterFn } from "@apollo/client";
+import { AllergiesData } from "src/shared/Allergies.query";
 
 interface Props {
   themeColour: string;
@@ -22,29 +23,32 @@ const DeleteAllergyForm: FC<Props> = ({
   themeTint,
   restaurantSlug,
 }) => {
-  const [deleteAllergy] = useDeleteAllergyMutation({
-    onCompleted: () => onCompleted?.(false),
-    update(cache, { data: deletedAllergyData }) {
-      const { allergies } = cache.readQuery({
-        query: ALLERGIES_QUERY,
-        variables: {
-          restaurantSlug,
-          active: false,
-        },
-      }) as AllergyData;
-      cache.writeQuery({
+  const updateCache: MutationUpdaterFn<DeleteAllergyData> = (cache, result) => {
+    const currentData = cache.readQuery<AllergiesData>({
+      query: ALLERGIES_QUERY,
+      variables: {
+        restaurantSlug,
+        active: false,
+      },
+    });
+    if (currentData?.allergies && result.data?.deleteAllergy) {
+      const { allergies } = currentData;
+      const { deleteAllergy } = result?.data;
+      cache.writeQuery<AllergiesData>({
         query: ALLERGIES_QUERY,
         variables: {
           restaurantSlug,
           active: false,
         },
         data: {
-          allergies: allergies.filter(
-            allergy => allergy.id !== deletedAllergyData?.deleteAllergy.id
-          ),
+          allergies: allergies.filter(allergy => allergy.id !== deleteAllergy.id),
         },
       });
-    },
+    }
+  };
+  const [deleteAllergy] = useDeleteAllergyMutation({
+    onCompleted: () => onCompleted?.(false),
+    update: updateCache,
   });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -72,9 +76,9 @@ const DeleteAllergyForm: FC<Props> = ({
 
   return (
     <form noValidate onSubmit={handleSubmit}>
-      <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
-          Dietary: <span className="font-bold underline text-red-400">{selectedAllergy.name}</span>
+      <div className="flex items-center justify-between">
+        <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
+          Dietary: <span className="font-bold text-red-400 underline">{selectedAllergy.name}</span>
         </h3>
         <Button
           themeColour={themeColour}
@@ -83,7 +87,7 @@ const DeleteAllergyForm: FC<Props> = ({
           size="S"
           colour="accent"
         >
-          <XIcon className="w-5 h-5" />
+          <XIcon className="h-5 w-5" />
         </Button>
       </div>
       <p className="mt-4 text-base text-gray-400">

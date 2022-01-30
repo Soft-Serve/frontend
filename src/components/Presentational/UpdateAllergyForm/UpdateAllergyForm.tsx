@@ -2,9 +2,10 @@ import React, { useState, FormEvent } from "react";
 import type { FC } from "react";
 import { Button, Input } from "@base";
 import { ALLERGIES_QUERY } from "@shared";
-import type { AllergyData, Allergy } from "@shared";
+import type { Allergy } from "@shared";
 import { XIcon } from "@heroicons/react/solid";
 import { useUpdateAllergyMutation } from "./UpdateAllergy.mutation";
+import { AllergiesData } from "src/shared/Allergies.query";
 
 interface Props {
   themeColour: string;
@@ -33,7 +34,7 @@ const UpdateAllergyForm: FC<Props> = ({
           restaurantSlug,
           active: false,
         },
-      }) as AllergyData;
+      }) as AllergiesData;
       cache.writeQuery({
         query: ALLERGIES_QUERY,
         data: {
@@ -74,8 +75,8 @@ const UpdateAllergyForm: FC<Props> = ({
 
   return (
     <div>
-      <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
+      <div className="flex items-center justify-between">
+        <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
           update dietary
         </h3>
         <Button
@@ -85,7 +86,7 @@ const UpdateAllergyForm: FC<Props> = ({
           size="S"
           colour="accent"
         >
-          <XIcon className="w-5 h-5" />
+          <XIcon className="h-5 w-5" />
         </Button>
       </div>
 

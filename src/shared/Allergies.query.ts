@@ -12,6 +12,8 @@ const ALLERGIES_QUERY = gql`
       name
       filter_name
       __typename
+      menu_item_id
+      dietary_id
     }
   }
 `;
@@ -21,9 +23,11 @@ interface Allergy {
   id: number;
   name: string;
   filter_name: string;
+  menu_item_id: number;
+  dietary_id: number;
 }
 
-interface AllergyData {
+interface AllergiesData {
   allergies: Allergy[];
 }
 
@@ -32,8 +36,8 @@ interface Variables {
   active: boolean;
 }
 
-const useAllergiesQuery = (options?: QueryHookOptions<AllergyData, Variables>) =>
-  useQuery<AllergyData, Variables>(ALLERGIES_QUERY, options);
+const useAllergiesQuery = (options?: QueryHookOptions<AllergiesData, Variables>) =>
+  useQuery<AllergiesData, Variables>(ALLERGIES_QUERY, options);
 
-export type { Allergy, AllergyData };
+export type { Allergy, AllergiesData };
 export { useAllergiesQuery, ALLERGIES_QUERY };

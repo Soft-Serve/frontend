@@ -33,4 +33,5 @@ const useDeleteAllergyMutation = (options?: MutationHookOptions<DeleteAllergyDat
   return useMutation<DeleteAllergyData, Variables>(DELETE_ALLERGY_MUTATION, options);
 };
 
+export type { DeleteAllergyData };
 export { useDeleteAllergyMutation };

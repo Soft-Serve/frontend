@@ -20,7 +20,7 @@ const AddDietaryForm: FC<Props> = ({
   themeTint,
   restaurantSlug,
 }) => {
-  const { data: itemDietariesData } = useDietaryQuery({
+  const { data: itemDietariesData, loading } = useDietaryQuery({
     variables: {
       itemID: item?.id || 0,
     },
@@ -59,21 +59,22 @@ const AddDietaryForm: FC<Props> = ({
     !!itemDietariesData?.dietaries?.find(allergy => allergy.name === name);
 
   const handleChange = (dietaryID: string, name: string) => {
-    if (!isAllergyActive(name)) {
-      postDietary({
-        variables: {
-          input: {
-            menu_id: item?.id || 0,
-            dietary_id: Number(dietaryID),
-          },
-        },
-      });
-    } else {
+    console.log(isAllergyActive(name));
+    if (isAllergyActive(name)) {
       deleteDietary({
         variables: {
           input: {
             menu_item_id: item?.id || 0,
             dietary: itemDietariesData?.dietaries?.find(allergy => allergy.name === name),
+          },
+        },
+      });
+    } else {
+      postDietary({
+        variables: {
+          input: {
+            menu_id: item?.id || 0,
+            dietary_id: Number(dietaryID),
           },
         },
       });
@@ -83,33 +84,33 @@ const AddDietaryForm: FC<Props> = ({
   return (
     <div>
       <fieldset>
-        <legend className="text-lg font-bold text-gray-900 font-Quicksand">
+        <legend className="font-Quicksand text-lg font-bold text-gray-900">
           Dietary Restrictions
         </legend>
         <div className={`mt-4  border-t  border-${themeColour}-${themeTint}  cursor-pointer`}>
           {restaurantDietariesData?.allergies?.map(allergy => (
             <div
-              onClick={() => handleChange(allergy.id.toString(), allergy.name)}
               key={allergy.id}
-              className={`relative flex items-start py-4 w-full border-b  border-${themeColour}-${themeTint}`}
+              className={`relative flex w-full items-start border-b py-4  border-${themeColour}-${themeTint}`}
             >
               <div className="w-full flex-1 text-sm">
                 <label
                   htmlFor={`person-${allergy.id}`}
-                  className="font-bold text-gray-700 select-none cursor-pointer w-full font-Quicksand"
+                  className="inline-flex w-full cursor-pointer select-none font-Quicksand font-bold text-gray-700"
                 >
                   {allergy.name}
                 </label>
               </div>
-              <div className="ml-3 flex items-center h-5">
+              <div className="ml-3 flex h-5 items-center">
                 <input
+                  disabled={loading}
                   value={allergy.id}
                   onChange={e => handleChange(e.target.value, allergy.name)}
                   checked={isAllergyActive(allergy.name)}
                   id={`person-${allergy.id}`}
                   name={`person-${allergy.id}`}
                   type="checkbox"
-                  className={`focus:ring-${themeColour}-${themeTint} h-4 w-4 text-${themeColour}-${themeTint} border-gray-300 rounded`}
+                  className={`focus:ring-${themeColour}-${themeTint} h-4 w-4 text-${themeColour}-${themeTint} rounded border-gray-300`}
                 />
               </div>
             </div>

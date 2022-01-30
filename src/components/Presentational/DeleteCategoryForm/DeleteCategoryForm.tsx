@@ -70,8 +70,8 @@ const DeleteCategoryForm: FC<Props> = ({
 
   return (
     <form noValidate onSubmit={handleSubmit}>
-      <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase mr-4">
+      <div className="flex items-center justify-between">
+        <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
           Catgeory name:{" "}
           <span className={`font-bold underline text-${themeColour}-${themeTint}`}>
             {selectedCategory?.name}
@@ -83,14 +83,14 @@ const DeleteCategoryForm: FC<Props> = ({
           onClick={() => onCompleted?.(false)}
           size="S"
         >
-          <XIcon className="w-5 h-5" />
+          <XIcon className="h-5 w-5" />
         </Button>
       </div>
-      <p className="my-8 text-base text-gray-900 font-Quicksand underline">
+      <p className="my-8 font-Quicksand text-base text-gray-900 underline">
         All items within this menu will be deleted!
       </p>
-      <div className="flex items-center mt-4">
-        <div className="flex-1 mr-2">
+      <div className="mt-4 flex items-center">
+        <div className="mr-2 flex-1">
           <Button
             themeColour={themeColour}
             themeTint={themeTint}
@@ -98,13 +98,12 @@ const DeleteCategoryForm: FC<Props> = ({
             onClick={() => onCompleted?.(false)}
             size="M"
             isFullwidth
-            type="submit"
             css="text-center"
           >
             Cancel
           </Button>
         </div>
-        <div className="flex-1 mr-2">
+        <div className="mr-2 flex-1">
           <Button
             themeColour={themeColour}
             themeTint={themeTint}

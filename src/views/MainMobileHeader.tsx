@@ -153,7 +153,7 @@ const MainMobileHeader: FC<Props> = ({
       return (
         <div className="px-4 py-3">
           <p className="text-sm">Signed in as</p>
-          <p className="text-sm font-bold text-gray-900 truncate">{data?.currentUser?.email}</p>
+          <p className="truncate text-sm font-bold text-gray-900">{data?.currentUser?.email}</p>
         </div>
       );
     }
@@ -181,22 +181,22 @@ const MainMobileHeader: FC<Props> = ({
   };
 
   return (
-    <div className={`flex-1 min-w-0 flex flex-col overflow-y-auto font-${themeFont}`}>
+    <div className={`flex min-w-0 flex-1 flex-col overflow-y-auto font-${themeFont}`}>
       <div className="lg:hidden">
         <div
-          className={`bg-${themeColour}-${themeTint} py-2 flex items-center justify-between sm:px-6`}
+          className={`bg-${themeColour}-${themeTint} flex items-center justify-between py-2 sm:px-6`}
         >
           <div className="mx-2">{renderLogo()}</div>
-          <div className="flex items-center justify-end w-full ml-2">
+          <div className="ml-2 flex w-full items-center justify-end">
             {renderDietaryButton()}
             {renderMenuButton()}
 
-            <Menu as="div" className="relative inline-block mr-2">
+            <Menu as="div" className="relative mr-2 inline-block">
               <div>
                 <Menu.Button
-                  className={`inline-flex justify-center w-full rounded-md border-2 shadow-sm px-4 py-2 bg-${themeColour}-${themeTint} text-sm font-medium text-gray-700  focus:outline-none focus:ring-2`}
+                  className={`inline-flex w-full justify-center rounded-md border-2 px-4 py-2 shadow-sm bg-${themeColour}-${themeTint} text-sm font-medium text-gray-700  focus:outline-none focus:ring-2`}
                 >
-                  <MenuIcon className={`w-5 h-5 text-white`} />
+                  <MenuIcon className={`h-5 w-5 text-white`} />
                 </Menu.Button>
               </div>
 
@@ -210,7 +210,7 @@ const MainMobileHeader: FC<Props> = ({
                 leaveTo="transform opacity-0 scale-95"
               >
                 <Menu.Items
-                  className={`origin-top-right absolute right-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-300 focus:outline-none z-50 `}
+                  className={`absolute right-0 z-50 w-56 origin-top-right divide-y divide-gray-300 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none `}
                 >
                   {renderUser()}
                   <div className="py-1">{renderSettingsNav()}</div>

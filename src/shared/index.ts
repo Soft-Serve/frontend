@@ -12,7 +12,7 @@ export { useBannersQuery, BANNERS_QUERY } from "./Banners.query";
 export type { BannersData, Banner } from "./Banners.query";
 export { useItemsQuery, ITEMS_QUERY } from "./Items.query";
 export type { ItemsData, Item, ItemSize } from "./Items.query";
-export type { Allergy, AllergyData } from "./Allergies.query";
+export type { Allergy, AllergiesData } from "./Allergies.query";
 export { useAllergiesQuery, ALLERGIES_QUERY } from "./Allergies.query";
 export { useDietaryQuery, DIETARIES_QUERY } from "./Dietaries.query";
 export { useSignOutMutation } from "./SignOut.mutation";

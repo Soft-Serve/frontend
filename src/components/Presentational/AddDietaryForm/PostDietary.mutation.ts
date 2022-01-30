@@ -10,15 +10,25 @@ const POST_DIETARY_MUTATION = gql`
         method: "POST"
       ) {
       id
+      name
+      filter_name
+      __typename
+      menu_item_id
+      dietary_id
     }
   }
 `;
 
 interface Dietary {
+  __typename: string;
   id: number;
+  name: string;
+  filter_name: string;
+  menu_item_id: number;
+  dietary_id: number;
 }
 
-interface DietaryData {
+interface PostDietaryData {
   dietary: Dietary;
 }
 
@@ -29,8 +39,8 @@ interface Variables {
   };
 }
 
-const usePostDietaryMutation = (options?: MutationHookOptions<DietaryData, Variables>) =>
-  useMutation<DietaryData, Variables>(POST_DIETARY_MUTATION, options);
+const usePostDietaryMutation = (options?: MutationHookOptions<PostDietaryData, Variables>) =>
+  useMutation<PostDietaryData, Variables>(POST_DIETARY_MUTATION, options);
 
-export type { Dietary, DietaryData };
+export type { Dietary, PostDietaryData };
 export { usePostDietaryMutation, POST_DIETARY_MUTATION };
