@@ -4,6 +4,7 @@ import { Button, Input } from "@base";
 import { useViewport } from "@hooks";
 import { BANNERS_QUERY } from "@shared";
 import { useUpdateBannerHeaders } from "./UpdateBannerHeadings.mutation";
+import { useCreateNewBannerHeaders } from "./CreateNewBannerHeadings.mutation";
 
 interface Props {
   header?: string;
@@ -13,6 +14,7 @@ interface Props {
   themeColour: string;
   themeTint: number;
   restaurantSlug: string;
+  photo?: string;
 }
 
 type StateMap = {
@@ -20,6 +22,7 @@ type StateMap = {
 };
 
 const UpdateBannerHeadingsForm: FC<Props> = ({
+  photo,
   restaurantSlug,
   header,
   subHeader,
@@ -29,7 +32,8 @@ const UpdateBannerHeadingsForm: FC<Props> = ({
   themeTint,
 }) => {
   const { width } = useViewport();
-  const [updateBannerHeaders] = useUpdateBannerHeaders();
+  const [updateBannerHeaders, { loading }] = useUpdateBannerHeaders();
+  const [createNewBanner, { loading: createLoading }] = useCreateNewBannerHeaders();
 
   const isTablet = width < 550;
   const bannerHeadings = {
@@ -56,24 +60,45 @@ const UpdateBannerHeadingsForm: FC<Props> = ({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updateBannerHeaders({
-      variables: {
-        input: {
-          header: state.header,
-          sub_header: state.subHeader,
-          id: id || 0,
-          restaurantId: restaurantId || 0,
-        },
-      },
-      refetchQueries: [
-        {
-          query: BANNERS_QUERY,
-          variables: {
-            restaurantSlug,
+    if (id) {
+      updateBannerHeaders({
+        variables: {
+          input: {
+            header: state.header,
+            sub_header: state.subHeader,
+            id: id || 0,
+            restaurantId: restaurantId || 0,
           },
         },
-      ],
-    });
+        refetchQueries: [
+          {
+            query: BANNERS_QUERY,
+            variables: {
+              restaurantSlug,
+            },
+          },
+        ],
+      });
+    } else {
+      createNewBanner({
+        variables: {
+          input: {
+            header: state.header,
+            sub_header: state.subHeader,
+            restaurant_id: restaurantId || 0,
+            photo: photo || "",
+          },
+        },
+        refetchQueries: [
+          {
+            query: BANNERS_QUERY,
+            variables: {
+              restaurantSlug,
+            },
+          },
+        ],
+      });
+    }
   };
 
   return (
@@ -113,6 +138,7 @@ const UpdateBannerHeadingsForm: FC<Props> = ({
         {isFieldsUpdated() && (
           <div className="bg-white px-4 py-3 text-right sm:px-6">
             <Button
+              loading={loading || createLoading}
               themeColour={themeColour}
               themeTint={themeTint}
               isFullwidth={isTablet}

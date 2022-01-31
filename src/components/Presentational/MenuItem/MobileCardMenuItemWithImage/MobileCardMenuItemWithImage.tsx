@@ -2,7 +2,6 @@ import React from "react";
 import type { FC, DetailedHTMLProps } from "react";
 import { Item } from "@shared";
 import { Dietaries, ItemImage, ItemPrice } from "@presentational";
-import { classnames } from "tailwindcss-classnames";
 
 interface Props extends DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   item: Pick<Item, "description" | "name" | "photo" | "id" | "available">;
@@ -37,13 +36,14 @@ const MobileCardMenuItemWithImage: FC<Props> = ({
           unavailable={!item.available}
           photoUrl={item?.photo}
         />
-        <Dietaries
-          themeColour={themeColour}
-          themeTint={themeTint}
-          css={classnames("justify-end", "absolute", "top-1", "left-1")}
-          itemAvailable={item.available}
-          itemID={item.id}
-        />
+        <div className="absolute top-1 left-1">
+          <Dietaries
+            themeColour={themeColour}
+            themeTint={themeTint}
+            itemAvailable={item.available}
+            itemID={item.id}
+          />
+        </div>
       </div>
       <div className="flex flex-1 flex-col justify-between bg-white p-4">
         <div className="flex w-full justify-between">

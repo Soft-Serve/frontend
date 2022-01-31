@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import type { FC } from "react";
 import { Item } from "@shared";
 import { Pill, Toggle } from "@base";
-import { ItemPrice } from "@presentational";
+import { Dietaries, ItemPrice } from "@presentational";
 import { useUpdateItemAvailability } from "./UpdateItemAvailability.mutation";
 import { ItemDropdown } from "./ItemDropdown";
 
@@ -71,6 +71,12 @@ const CategoryItemWithoutImage: FC<Props> = ({
             />
           </div>
         </div>
+        <Dietaries
+          themeColour={themeColour}
+          themeTint={themeTint}
+          itemAvailable={item.available}
+          itemID={item.id}
+        />
         <p className="mt-2 mb-2 overflow-hidden text-ellipsis break-words font-Quicksand text-sm italic text-gray-600">
           {item.available ? item.description : "** Temporarily unavailable  **"}
         </p>
