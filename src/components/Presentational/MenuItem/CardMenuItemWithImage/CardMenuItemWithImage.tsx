@@ -1,6 +1,5 @@
 import React from "react";
 import type { FC, DetailedHTMLProps } from "react";
-import { classnames } from "tailwindcss-classnames";
 import { Item } from "@shared";
 import { Dietaries, ItemImage, ItemPrice } from "@presentational";
 
@@ -31,13 +30,14 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
           unavailable={!item.available}
           photoUrl={item?.photo}
         />
-        <Dietaries
-          themeColour={themeColour}
-          themeTint={themeTint}
-          css={classnames("justify-end", "absolute", "top-1", "left-1")}
-          itemAvailable={item.available}
-          itemID={item.id}
-        />
+        <div className="absolute top-1 left-1">
+          <Dietaries
+            themeColour={themeColour}
+            themeTint={themeTint}
+            itemAvailable={item.available}
+            itemID={item.id}
+          />
+        </div>
       </div>
       <div className="flex flex-1 flex-col justify-between bg-white p-2 pb-0">
         <div>
