@@ -78,7 +78,6 @@ const PostAllergyForm: FC<Props> = ({ onCompleted, themeColour, themeTint, resta
           themeTint={themeTint}
           onClick={() => onCompleted?.(false)}
           size="S"
-          colour="accent"
         >
           <XIcon className="h-5 w-5" />
         </Button>
@@ -119,7 +118,7 @@ const PostAllergyForm: FC<Props> = ({ onCompleted, themeColour, themeTint, resta
             size="XXL"
             type="submit"
           >
-            Add
+            Add Dietary
           </Button>
         </div>
       </form>

@@ -24,7 +24,6 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
     },
   });
 
-  console.log(data?.banners);
   const { data: restaurantData, loading: restaurantLoading } = useRestaurantQuery({
     variables: {
       restaurantSlug,
@@ -36,23 +35,25 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
 
   const handleUpdatePhoto = async () => {
     const photo = await fetchPhoto();
-    updatePhoto({
-      variables: {
-        input: {
-          id: data?.banners?.[0]?.id || 0,
-          restaurantId: restaurantData?.restaurant?.id || 0,
-          photo,
-        },
-      },
-      refetchQueries: [
-        {
-          query: BANNERS_QUERY,
-          variables: {
-            restaurantSlug,
+    if (data?.banners?.[0]?.photo) {
+      updatePhoto({
+        variables: {
+          input: {
+            id: data?.banners?.[0]?.id || 0,
+            restaurantId: restaurantData?.restaurant?.id || 0,
+            photo,
           },
         },
-      ],
-    });
+        refetchQueries: [
+          {
+            query: BANNERS_QUERY,
+            variables: {
+              restaurantSlug,
+            },
+          },
+        ],
+      });
+    }
   };
   if (loading || restaurantLoading) return <SkeletonBannerSettings />;
 

@@ -29,7 +29,6 @@ const UsersSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) =>
               themeTint={themeTint}
               onClick={() => setIsModalOpen(false)}
               size="S"
-              colour="accent"
             >
               <XIcon className="h-5 w-5" />
             </Button>
