@@ -84,7 +84,6 @@ const UpdateAllergyForm: FC<Props> = ({
           themeTint={themeTint}
           onClick={() => onCompleted?.(false)}
           size="S"
-          colour="accent"
         >
           <XIcon className="h-5 w-5" />
         </Button>

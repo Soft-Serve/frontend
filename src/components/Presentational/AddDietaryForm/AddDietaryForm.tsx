@@ -5,6 +5,10 @@ import { DIETARIES_QUERY, Item, useAllergiesQuery, useDietaryQuery } from "@shar
 import { usePostDietaryMutation } from "./PostDietary.mutation";
 import { useDeleteDietaryMutation } from "./DeleteDietary.mutation";
 
+interface Payload {
+  dietaryID: string;
+  name: string;
+}
 interface Props {
   item?: Item;
   onCompleted?: (state: boolean) => void;
@@ -33,7 +37,8 @@ const AddDietaryForm: FC<Props> = ({
     },
   });
 
-  const [postDietary] = usePostDietaryMutation({
+  const [postDietary, { loading: isPostLoading }] = usePostDietaryMutation({
+    notifyOnNetworkStatusChange: true,
     refetchQueries: [
       {
         query: DIETARIES_QUERY,
@@ -44,7 +49,8 @@ const AddDietaryForm: FC<Props> = ({
     ],
   });
 
-  const [deleteDietary] = useDeleteDietaryMutation({
+  const [deleteDietary, { loading: isDeleteLoading }] = useDeleteDietaryMutation({
+    notifyOnNetworkStatusChange: true,
     refetchQueries: [
       {
         query: DIETARIES_QUERY,
@@ -58,27 +64,29 @@ const AddDietaryForm: FC<Props> = ({
   const isAllergyActive = (name: string) =>
     !!itemDietariesData?.dietaries?.find(allergy => allergy.name === name);
 
-  const handleChange = (dietaryID: string, name: string) => {
-    console.log(isAllergyActive(name));
-    if (isAllergyActive(name)) {
-      deleteDietary({
-        variables: {
-          input: {
-            menu_item_id: item?.id || 0,
-            dietary: itemDietariesData?.dietaries?.find(allergy => allergy.name === name),
-          },
+  const handleDelete = (name: string) =>
+    deleteDietary({
+      variables: {
+        input: {
+          menu_item_id: item?.id || 0,
+          dietary: itemDietariesData?.dietaries?.find(allergy => allergy.name === name),
         },
-      });
-    } else {
-      postDietary({
-        variables: {
-          input: {
-            menu_id: item?.id || 0,
-            dietary_id: Number(dietaryID),
-          },
+      },
+    });
+
+  const handlePost = (dietaryID: string) =>
+    postDietary({
+      variables: {
+        input: {
+          menu_id: item?.id || 0,
+          dietary_id: Number(dietaryID),
         },
-      });
-    }
+      },
+    });
+
+  const handleChange = (payload: Payload) => {
+    const { name, dietaryID } = payload || {};
+    return isAllergyActive(name) ? handleDelete(name) : handlePost(dietaryID);
   };
 
   return (
@@ -87,33 +95,27 @@ const AddDietaryForm: FC<Props> = ({
         <legend className="font-Quicksand text-lg font-bold text-gray-900">
           Dietary Restrictions
         </legend>
-        <div className={`mt-4  border-t  border-${themeColour}-${themeTint}  cursor-pointer`}>
+        <div className={`mt-4  border-t  border-${themeColour}-${themeTint}`}>
           {restaurantDietariesData?.allergies?.map(allergy => (
-            <div
-              key={allergy.id}
-              className={`relative flex w-full items-start border-b py-4  border-${themeColour}-${themeTint}`}
+            <label
+              htmlFor={`person-${allergy.id}`}
+              className={`flex w-full ${
+                isPostLoading || isDeleteLoading ? "cursor-wait" : "cursor-pointer"
+              } select-none justify-between border-b font-Quicksand font-bold text-gray-700  border-${themeColour}-${themeTint} items-center py-4`}
             >
-              <div className="w-full flex-1 text-sm">
-                <label
-                  htmlFor={`person-${allergy.id}`}
-                  className="inline-flex w-full cursor-pointer select-none font-Quicksand font-bold text-gray-700"
-                >
-                  {allergy.name}
-                </label>
-              </div>
-              <div className="ml-3 flex h-5 items-center">
-                <input
-                  disabled={loading}
-                  value={allergy.id}
-                  onChange={e => handleChange(e.target.value, allergy.name)}
-                  checked={isAllergyActive(allergy.name)}
-                  id={`person-${allergy.id}`}
-                  name={`person-${allergy.id}`}
-                  type="checkbox"
-                  className={`focus:ring-${themeColour}-${themeTint} h-4 w-4 text-${themeColour}-${themeTint} rounded border-gray-300`}
-                />
-              </div>
-            </div>
+              {allergy.name}
+
+              <input
+                disabled={loading || isPostLoading || isDeleteLoading}
+                value={allergy.id}
+                onChange={e => handleChange({ dietaryID: e.target.value, name: allergy.name })}
+                checked={isAllergyActive(allergy.name)}
+                id={`person-${allergy.id}`}
+                name={`person-${allergy.id}`}
+                type="checkbox"
+                className={`focus:ring-${themeColour}-${themeTint} h-4 w-4 text-${themeColour}-${themeTint} cursor-pointer rounded border-gray-300`}
+              />
+            </label>
           ))}
         </div>
       </fieldset>

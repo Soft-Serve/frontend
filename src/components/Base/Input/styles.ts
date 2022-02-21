@@ -1,6 +1,6 @@
 import { classnames, TArg } from "tailwindcss-classnames";
 
-const label = classnames("block", "text-sm", "font-medium", "text-gray-700");
+const label = classnames("block", "text-sm", "font-medium", "text-gray-700", "mt-2");
 
 const input = classnames(
   "py-2",

@@ -215,6 +215,7 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
       />
 
       <Input
+        css="mt-4"
         themeColour={themeColour}
         themeTint={themeTint}
         required
@@ -229,6 +230,7 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
       />
 
       <Input
+        css="mt-4"
         themeColour={themeColour}
         themeTint={themeTint}
         required
@@ -253,7 +255,7 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
         size="XXL"
         type="submit"
       >
-        Sign up
+        Add new user
       </Button>
     </form>
   );
