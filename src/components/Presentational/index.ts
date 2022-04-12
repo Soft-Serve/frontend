@@ -50,3 +50,4 @@ export { AllergyModal } from "./AllergyModal";
 export { MenuSlideOver } from "./MenuSlideOver";
 export { AllergyFiltersSideMenu } from "./AllergyFiltersSideMenu";
 export { MobileSubHeader } from "./MobileSubHeader";
+export { ItemModalPreview } from "./ItemModalPreview";

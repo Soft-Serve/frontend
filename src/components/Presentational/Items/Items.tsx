@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { useViewportContext } from "@contexts";
 import { useNavigate } from "react-router-dom";
 import { Container, Grid, BoxSection, Button } from "@base";
-import { MenuItem, ItemModal } from "@presentational";
+import { MenuItem, ItemModalPreview } from "@presentational";
 import { routes } from "@routes";
 import { Item, useItemsQuery } from "@shared";
 import Skeleton from "react-loading-skeleton";
@@ -101,7 +101,7 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
             </div>
           ))}
         </Grid>
-        <ItemModal
+        <ItemModalPreview
           themeFont={themeFont}
           themeColour={themeColour}
           themeTint={themeTint}
