@@ -131,13 +131,13 @@ const LandingPage: FC = () => {
             <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
               <Link
                 to="/sign-up"
-                className="origin-border ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-white px-4 py-2 font-Quicksand text-base font-medium font-bold text-red-400 shadow-sm hover:bg-red-400  hover:text-white"
+                className="origin-border ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-white px-4 py-2 font-Quicksand text-base  font-bold text-red-400 shadow-sm hover:bg-red-400  hover:text-white"
               >
                 Sign up
               </Link>
               <Link
                 to="/sign-in"
-                className="origin-border ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-white px-4 py-2 font-Quicksand text-base font-medium font-bold text-red-400 shadow-sm hover:bg-red-400  hover:text-white"
+                className="origin-border ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-white px-4 py-2 font-Quicksand text-base  font-bold text-red-400 shadow-sm hover:bg-red-400  hover:text-white"
               >
                 Sign in
               </Link>
