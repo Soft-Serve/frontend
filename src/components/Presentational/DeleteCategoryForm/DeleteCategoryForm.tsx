@@ -23,27 +23,32 @@ const DeleteCategoryForm: FC<Props> = ({
   themeColour,
 }) => {
   const onSuccess = () => toast.custom(<Notification header="Category succesfully removed!" />);
+
   const [deleteCategory] = useDeleteCategoryMutation({
     onCompleted: () => {
       onCompleted?.(false);
       onSuccess();
     },
+
     update(cache, { data: deletedCategoryData }) {
-      const { categories } = cache.readQuery({
-        query: CATEGORIES_QUERY,
-        variables: {
-          menuID,
-        },
-      }) as CategoriesData;
-      cache.writeQuery({
+      const { categories } =
+        cache.readQuery<CategoriesData>({
+          query: CATEGORIES_QUERY,
+          variables: {
+            menuID,
+          },
+        }) ?? {};
+
+      cache.writeQuery<CategoriesData>({
         query: CATEGORIES_QUERY,
         variables: {
           menuID,
         },
         data: {
-          categories: categories.filter(
-            category => category.id !== deletedCategoryData?.deleteCategory.id
-          ),
+          categories:
+            categories?.filter(
+              category => category.id !== deletedCategoryData?.deleteCategory.id
+            ) || [],
         },
       });
     },

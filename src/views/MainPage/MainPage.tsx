@@ -4,18 +4,18 @@ import { Route, Routes, useLocation, useParams, Navigate } from "react-router-do
 import { Footer, LoadingScreen } from "@base";
 import { MenuSlideOver, AllergyModal, AllergyFiltersSideMenu, Restaurant } from "@presentational";
 import { useRestaurantThemeQuery } from "@shared";
-import { MenuPage } from "./MenuPage";
+import { MenuPage } from "../MenuPage";
+import { Providers } from "./Providers";
 import { MainNavigation } from "./MainNavigation";
 import { MainMobileHeader } from "./MainMobileHeader";
-import { Providers } from "./Providers";
 
-const SettingsPage = lazy(() => import("./SettingsPage/DefaultSettingsPage"));
+const SettingsPage = lazy(() => import("../SettingsPage/DefaultSettingsPage"));
 
 type Param = {
   id: string;
 };
 
-const Main: FC = () => {
+const MainPage: FC = () => {
   const { pathname } = useLocation();
   const { id: restaurantSlug } = useParams<Param>() as Param;
   const isOnSettingsPage = pathname.includes("settings");
@@ -123,4 +123,4 @@ const Main: FC = () => {
   );
 };
 
-export { Main };
+export { MainPage };

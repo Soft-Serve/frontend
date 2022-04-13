@@ -16,21 +16,27 @@ interface Props {
 
 const ItemModal: FC<Props> = ({ isOpen, onClose, item, themeTint, themeColour, themeFont }) => {
   if (item) {
+    const renderPhoto = () => {
+      if (item.photo) {
+        return (
+          <div className="mr-2 h-full w-full flex-shrink-0 sm:w-56">
+            <ItemImage
+              className="inset-0 h-full w-full rounded-md  object-cover"
+              unavailable={!item.available}
+              photoUrl={item.photo}
+            />
+          </div>
+        );
+      }
+      return null;
+    };
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
         <div className="flex h-full w-full flex-col sm:flex-row">
-          {item?.photo && (
-            <div className="mr-2 h-full w-full flex-shrink-0 sm:w-56">
-              <ItemImage
-                className="inset-0 h-full w-full rounded-md  object-cover"
-                unavailable={!item.available}
-                photoUrl={item?.photo}
-              />
-            </div>
-          )}
+          {renderPhoto()}
           <div className=" flex h-auto w-full flex-col justify-between">
             <div>
-              <p className={`font-bold font-${themeFont}`}>{item?.name}</p>
+              <p className={`font-bold font-${themeFont}`}>{item.name}</p>
 
               <p
                 className={`font-${themeFont} mt-2 overflow-hidden text-ellipsis break-words text-sm italic text-gray-600`}
@@ -51,7 +57,7 @@ const ItemModal: FC<Props> = ({ isOpen, onClose, item, themeTint, themeColour, t
                 themeFont={themeFont}
                 themeColour={themeColour}
                 themeTint={themeTint}
-                itemAvailable={item?.available}
+                itemAvailable={item.available}
                 itemID={item.id}
               />
             </div>

@@ -5,6 +5,7 @@ import { RadioTile, RadioTiles } from "@base";
 import { SUB_NAVIGATION } from "@constants";
 import { Link } from "react-router-dom";
 import { routes } from "@routes";
+import { capatalize } from "@utility";
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
   selected: string;
@@ -22,9 +23,6 @@ const SettingsSubMenu: FC<Props> = ({
   themeColour,
   ...rest
 }) => {
-  const capatalize = ([firstLetter, ...restOfWord]: string) =>
-    [firstLetter.toUpperCase(), ...restOfWord].join("");
-
   return (
     <nav aria-label="Sections" {...rest}>
       <div className="border-blue-gray-200 flex h-16 flex-shrink-0 items-center border-b px-6">

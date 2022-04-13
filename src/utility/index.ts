@@ -6,7 +6,7 @@ export {
   isBasicEmailValid,
   isEmailRegexValid,
   isBasicEmailRegexValid,
-} from "./EmailValidation";
+} from "./emailValidation";
 
 export {
   isNameValid,
@@ -17,11 +17,11 @@ export {
   isNameInputValid,
   isBasicPriceValid,
   hasBeginningWhiteSpace,
-} from "./MenuValidation";
+} from "./menuValidation";
 
 export { intersection } from "./intersection";
 export { generateThemeColours, generateThemeAccentColours } from "./generateThemeStyles";
 export { useGetParams } from "./useGetParams";
-export { isPasswordSixChar, isPasswordConfirmd } from "./PasswordValidation";
+export { isPasswordSixChar, isPasswordConfirmd } from "./passwordValidation";
 
-export { debounce } from "./debounce";
+export { capatalize } from "./capatalize";

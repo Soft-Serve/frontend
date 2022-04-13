@@ -23,19 +23,21 @@ const DeleteItemForm: FC<Props> = ({
   const [deleteItem, { loading }] = useDeleteItemMutation({
     onCompleted: () => onCompleted?.(false),
     update(cache, { data: deletedItemData }) {
-      const { items } = cache.readQuery({
-        query: ITEMS_QUERY,
-        variables: {
-          categoryID,
-        },
-      }) as ItemsData;
-      cache.writeQuery({
+      const { items } =
+        cache.readQuery<ItemsData>({
+          query: ITEMS_QUERY,
+          variables: {
+            categoryID,
+          },
+        }) ?? {};
+
+      cache.writeQuery<ItemsData>({
         query: ITEMS_QUERY,
         variables: {
           categoryID,
         },
         data: {
-          items: items.filter(item => item.id !== deletedItemData?.deleteItem?.id),
+          items: items?.filter(item => item.id !== deletedItemData?.deleteItem?.id) || [],
         },
       });
     },

@@ -23,7 +23,7 @@ const DeleteAllergyForm: FC<Props> = ({
   themeTint,
   restaurantSlug,
 }) => {
-  const updateCache: MutationUpdaterFn<DeleteAllergyData> = (cache, result) => {
+  const update: MutationUpdaterFn<DeleteAllergyData> = (cache, result) => {
     const currentData = cache.readQuery<AllergiesData>({
       query: ALLERGIES_QUERY,
       variables: {
@@ -31,9 +31,11 @@ const DeleteAllergyForm: FC<Props> = ({
         active: false,
       },
     });
+
     if (currentData?.allergies && result.data?.deleteAllergy) {
-      const { allergies } = currentData;
-      const { deleteAllergy } = result?.data;
+      const { allergies } = currentData ?? {};
+      const { deleteAllergy } = result?.data ?? {};
+
       cache.writeQuery<AllergiesData>({
         query: ALLERGIES_QUERY,
         variables: {
@@ -46,9 +48,10 @@ const DeleteAllergyForm: FC<Props> = ({
       });
     }
   };
+
   const [deleteAllergy] = useDeleteAllergyMutation({
     onCompleted: () => onCompleted?.(false),
-    update: updateCache,
+    update,
   });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

@@ -96,6 +96,7 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, theme
           categoryID: activeCategory?.id,
         },
       }) as ItemsData;
+
       cache.writeQuery({
         query: ITEMS_QUERY,
         variables: {

@@ -3,12 +3,12 @@ import { ApolloProvider } from "@apollo/client";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LoadingScreen } from "@base";
-import { Main, PageNotFound } from "@views";
+import { MainPage, PageNotFound } from "@views";
 import { routes } from "@routes";
 import { client } from "./client";
 import { SignInPage } from "@views";
 
-const LandingPage = lazy(() => import("./views/LandingPage"));
+const LandingPage = lazy(() => import("./views/LandingPage/DefaultLandingPage"));
 const SignUpPage = lazy(() => import("./views/SignUpPage/DefaultSignUpPage"));
 const ConfirmEmailPage = lazy(() => import("./views/ConfirmEmailPage/DefaultConfirmEmailPage"));
 const ResetPasswordPage = lazy(() => import("./views/ResetPasswordPage/DefaultResetPasswordPage"));
@@ -22,14 +22,14 @@ const App = () => {
       <Router>
         <Suspense fallback={<LoadingScreen />}>
           <Routes>
-            <Route path="*" element={<PageNotFound />} />
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/sign-up" element={<SignUpPage />} />
-            <Route path="/confirm" element={<ConfirmEmailPage />} />
-            <Route path="/reset-password" element={<ResetPasswordPage />} />
-            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-            <Route path={`${routes.restaurants}/:id/*`} element={<Main />} />
-            <Route path="sign-in" element={<SignInPage />} />
+            <Route path={routes.pageNotFound} element={<PageNotFound />} />
+            <Route path={routes.home} element={<LandingPage />} />
+            <Route path={routes.signIn} element={<SignInPage />} />
+            <Route path={routes.signUp} element={<SignUpPage />} />
+            <Route path={routes.confirm} element={<ConfirmEmailPage />} />
+            <Route path={routes.resetPassword} element={<ResetPasswordPage />} />
+            <Route path={routes.forgotPassword} element={<ForgotPasswordPage />} />
+            <Route path={`${routes.restaurants}/:id/*`} element={<MainPage />} />
           </Routes>
         </Suspense>
       </Router>

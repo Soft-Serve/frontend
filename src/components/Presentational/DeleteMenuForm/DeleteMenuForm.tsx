@@ -30,19 +30,21 @@ const DeleteMenuForm: FC<Props> = ({
       onSuccess();
     },
     update(cache, { data: deletedMenuData }) {
-      const { menus } = cache.readQuery({
-        query: MENUS_QUERY,
-        variables: {
-          restaurantSlug,
-        },
-      }) as MenusData;
-      cache.writeQuery({
+      const { menus } =
+        cache.readQuery<MenusData>({
+          query: MENUS_QUERY,
+          variables: {
+            restaurantSlug,
+          },
+        }) ?? {};
+
+      cache.writeQuery<MenusData>({
         query: MENUS_QUERY,
         variables: {
           restaurantSlug,
         },
         data: {
-          menus: menus.filter(menu => menu.id !== deletedMenuData?.deleteMenu.id),
+          menus: menus?.filter(menu => menu.id !== deletedMenuData?.deleteMenu.id) || [],
         },
       });
     },

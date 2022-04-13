@@ -40,31 +40,32 @@ const Menus: FC<Props> = ({
   });
 
   useEffect(() => {
-    if (data?.menus?.[0].name) setActiveMenu(data?.menus?.[0].name);
-    if (data?.menus?.[0].id) setMenuID(data?.menus?.[0].id);
+    if (data?.menus?.[0].name) setActiveMenu(data.menus[0].name);
+    if (data?.menus?.[0].id) setMenuID(data.menus[0].id);
   }, [setActiveMenu, setMenuID, data?.menus]);
 
   if (error) return <p>error</p>;
+
   if (loading) return <Skeleton height={40} />;
-  if (data?.menus && data?.menus?.length) {
-    return (
-      <Tabs>
-        {data?.menus.map((menu, index) => (
-          <Tab
-            themeColour={themeColour}
-            themeTint={themeTint}
-            themeFont={themeFont}
-            onClick={() => setMenuID(menu.id)}
-            numOfTabs={data.menus.length}
-            tabIndex={index}
-            isActive={menu.id === menuID}
-            key={menu.id}
-          >
-            {menu.name}
-          </Tab>
-        ))}
-      </Tabs>
-    );
+
+  const renderTabs = () =>
+    data?.menus.map((menu, index) => (
+      <Tab
+        themeColour={themeColour}
+        themeTint={themeTint}
+        themeFont={themeFont}
+        onClick={() => setMenuID(menu.id)}
+        numOfTabs={data.menus.length}
+        tabIndex={index}
+        isActive={menu.id === menuID}
+        key={menu.id}
+      >
+        {menu.name}
+      </Tab>
+    ));
+
+  if (data?.menus?.length) {
+    return <Tabs>{renderTabs()}</Tabs>;
   }
   return (
     <Container>

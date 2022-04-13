@@ -4,19 +4,20 @@ import { AllergyContext } from "@contexts";
 import type { Allergy, Action } from "./types";
 import { ActionTypes } from "./types";
 
+const reducer = (activeAllergies: Allergy[], action: Action) => {
+  switch (action.type) {
+    case ActionTypes.ADD:
+      return [...activeAllergies, action.payload];
+
+    case ActionTypes.REMOVE:
+      return [...activeAllergies.filter(activeAllergy => activeAllergy.id !== action.payload.id)];
+
+    default:
+      return activeAllergies;
+  }
+};
+
 const AllergyProvider: FC = ({ children }) => {
-  const reducer = (activeAllergies: Allergy[], action: Action) => {
-    switch (action.type) {
-      case ActionTypes.ADD:
-        return [...activeAllergies, action.payload];
-
-      case ActionTypes.REMOVE:
-        return [...activeAllergies.filter(activeAllergy => activeAllergy.id !== action.payload.id)];
-
-      default:
-        return activeAllergies;
-    }
-  };
   const [activeAllergies, dispatch] = useReducer(reducer, []);
 
   const isAllergyActive = (allergy: Allergy) => {

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import type { FC } from "react";
 import { Button, Input } from "@base";
 import {
@@ -14,6 +14,16 @@ import {
 } from "@utility";
 import { useNavigate } from "react-router-dom";
 import { useCurrentUserQuery, USERS_QUERY, useSignUpFormMutation } from "@shared";
+
+enum FieldNames {
+  FIRST_NAME = "first_name",
+  LAST_NAME = "last_name",
+  EMAIL = "email",
+  PASSWORD = "password",
+  PASSWORD_CONFIRMATION = "password_confirmation",
+  NAME = "name",
+  SLUG = "slug",
+}
 
 interface Props {
   setIsModalOpen?: (state: boolean) => void;
@@ -36,6 +46,8 @@ interface InputState extends MappableObject {
   slug: string;
 }
 
+const { FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, PASSWORD_CONFIRMATION, NAME, SLUG } = FieldNames;
+
 const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, restaurantSlug }) => {
   const navigate = useNavigate();
   const [input, setInput] = useState<InputState>({
@@ -48,13 +60,7 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
     slug: "",
   });
 
-  const [isFirstNameDirty, setIsFirstNameDirty] = useState(false);
-  const [isLastNameDirty, setIsLastNameDirty] = useState(false);
-  const [isEmailDirty, setIsEmailDirty] = useState(false);
-  const [isPasswordDirty, setIsPasswordDirty] = useState(false);
-  const [isPasswordConfirmationDirty, setIsPasswordConfirmationDirty] = useState(false);
-  const [isNameDirty, setIsNameDirty] = useState(false);
-  const [isSlugDirty, setIsSlugDirty] = useState(false);
+  const [touchedFields, setTouchedFields] = useState<MappableObject>({});
 
   const { data: userData, loading: userLoading } = useCurrentUserQuery({
     skip: !restaurantSlug,
@@ -78,9 +84,8 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
     ],
   });
 
-  const handleBlur = (state: string, setDirty: Dispatch<SetStateAction<boolean>>) => {
-    if (state.length) setDirty(true);
-  };
+  const handleBlur = (field: string) =>
+    setTouchedFields(prevTouchedFields => ({ ...prevTouchedFields, [field]: field }));
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -104,7 +109,7 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
   };
 
   const getEmailErrors = () => {
-    if (!isEmailDirty) return null;
+    if (!touchedFields[EMAIL]) return null;
     if (!isEmailAtValid(input.email)) return <span>@ is required</span>;
     if (!isEmailDotValid(input.email)) return <span>Dot is required</span>;
     if (!isBasicEmailRegexValid(input.email)) return <span>Email is not valid</span>;
@@ -119,7 +124,7 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
   };
 
   const getPasswordConfirmationErrors = () => {
-    if (!isPasswordConfirmationDirty) return null;
+    if (!touchedFields[PASSWORD_CONFIRMATION]) return null;
     if (!isPasswordConfirmd(input.password, input.password_confirmation))
       return <span>Passwords dont match</span>;
     return null;
@@ -149,12 +154,12 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
             required
             value={input.name}
             onChange={handleChange}
-            onBlur={() => handleBlur(input.name, setIsNameDirty)}
-            errors={[getNameErrors(input.name, isNameDirty)]}
+            onBlur={() => handleBlur(NAME)}
+            errors={[getNameErrors(input.name, !!touchedFields[NAME])]}
             labelText="Restaurant name"
             type="text"
-            name="name"
-            id="name"
+            name={NAME}
+            id={NAME}
           />
           <Input
             themeColour={themeColour}
@@ -162,12 +167,12 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
             required
             value={input.slug}
             onChange={handleChange}
-            onBlur={() => handleBlur(input.name, setIsSlugDirty)}
-            errors={[getNameErrors(input.slug, isSlugDirty)]}
+            onBlur={() => handleBlur(SLUG)}
+            errors={[getNameErrors(input.slug, !!touchedFields[SLUG])]}
             labelText="Slug"
             type="text"
-            name="slug"
-            id="slug"
+            name={SLUG}
+            id={SLUG}
           />
         </>
       )}
@@ -177,12 +182,12 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
         required
         value={input.first_name}
         onChange={handleChange}
-        onBlur={() => handleBlur(input.first_name, setIsFirstNameDirty)}
-        errors={[getNameErrors(input.first_name, isFirstNameDirty)]}
+        onBlur={() => handleBlur(FIRST_NAME)}
+        errors={[getNameErrors(input.first_name, !!touchedFields[FIRST_NAME])]}
         labelText="First name"
         type="text"
-        name="first_name"
-        id="first_name"
+        name={FIRST_NAME}
+        id={FIRST_NAME}
       />
 
       <Input
@@ -191,12 +196,12 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
         required
         value={input.last_name}
         onChange={handleChange}
-        onBlur={() => handleBlur(input.last_name, setIsLastNameDirty)}
-        errors={[getNameErrors(input.last_name, isLastNameDirty)]}
+        onBlur={() => handleBlur(LAST_NAME)}
+        errors={[getNameErrors(input.last_name, !!touchedFields[LAST_NAME])]}
         labelText="Last name"
         type="text"
-        name="last_name"
-        id="last_name"
+        name={LAST_NAME}
+        id={LAST_NAME}
       />
 
       <Input
@@ -205,13 +210,13 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
         required
         value={input.email}
         onChange={handleChange}
-        onBlur={() => handleBlur(input.email, setIsEmailDirty)}
+        onBlur={() => handleBlur(EMAIL)}
         errors={[getEmailErrors()]}
         labelText="Email"
         autoComplete="email"
         type="email"
-        name="email"
-        id="email"
+        name={EMAIL}
+        id={EMAIL}
       />
 
       <Input
@@ -221,12 +226,12 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
         required
         value={input.password}
         onChange={handleChange}
-        onBlur={() => handleBlur(input.password, setIsPasswordDirty)}
-        errors={[getPasswordErrors(input.password, isPasswordDirty)]}
+        onBlur={() => handleBlur(PASSWORD)}
+        errors={[getPasswordErrors(input.password, !!touchedFields[PASSWORD])]}
         labelText="Password"
         type="password"
-        name="password"
-        id="password"
+        name={PASSWORD}
+        id={PASSWORD}
       />
 
       <Input
@@ -236,15 +241,15 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
         required
         value={input.password_confirmation}
         onChange={handleChange}
-        onBlur={() => handleBlur(input.password_confirmation, setIsPasswordConfirmationDirty)}
+        onBlur={() => handleBlur(PASSWORD_CONFIRMATION)}
         errors={[
-          getPasswordErrors(input.password_confirmation, isPasswordConfirmationDirty),
+          getPasswordErrors(input.password_confirmation, !!touchedFields[PASSWORD_CONFIRMATION]),
           getPasswordConfirmationErrors(),
         ]}
         labelText="Confirm password"
         type="password"
-        name="password_confirmation"
-        id="password_confirmation"
+        name={PASSWORD_CONFIRMATION}
+        id={PASSWORD_CONFIRMATION}
       />
       <Button
         themeTint={themeTint}
