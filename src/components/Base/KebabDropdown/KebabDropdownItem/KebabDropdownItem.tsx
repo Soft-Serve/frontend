@@ -2,6 +2,7 @@ import React from "react";
 import type { FC } from "react";
 import { Menu } from "@headlessui/react";
 import { classnames, TArg } from "tailwindcss-classnames";
+import { activeStyles, nonActiveStyles } from "./styles";
 
 interface Props {
   onClick?: any;
@@ -11,16 +12,6 @@ interface Props {
 
 const KebabDropdownItem: FC<Props> = ({ children, onClick, themeColour, themeTint }) => {
   const aciveFontColor = `text-${themeColour}-${themeTint}` as TArg;
-  const activeStyles = classnames(
-    "bg-white",
-    "w-full",
-    "p-2",
-    "w-full",
-    "text-left",
-    "rounded-md",
-    aciveFontColor
-  );
-  const nonActiveStyles = classnames("p-2", "w-full", "text-left", "text-white");
 
   return (
     <Menu.Item>
@@ -28,7 +19,7 @@ const KebabDropdownItem: FC<Props> = ({ children, onClick, themeColour, themeTin
         <button
           onClick={onClick}
           className={`font-Quicksand text-sm font-bold text-${themeColour}-${themeTint} my-1 rounded-md border-2 border-white ${classnames(
-            active ? activeStyles : nonActiveStyles
+            active ? activeStyles(aciveFontColor) : nonActiveStyles
           )}`}
         >
           {children}

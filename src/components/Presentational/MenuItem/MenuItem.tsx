@@ -1,5 +1,5 @@
 import React from "react";
-import type { FC } from "react";
+import type { FC, DetailedHTMLProps, HTMLAttributes } from "react";
 import { useAllergyContext, useViewportContext } from "@contexts";
 import { Item, useDietaryQuery } from "@shared";
 import { CardMenuItemWithImage } from "./CardMenuItemWithImage";
@@ -8,14 +8,14 @@ import { MobileCardMenuItemWithImage, MobileSkeletonMenuItem } from "./MobileCar
 import { intersection } from "@utility";
 import { ThemeFonts } from "@base";
 
-interface Props {
+interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   item: Item;
   themeColour: string;
   themeTint: number;
   themeFont: ThemeFonts;
 }
 
-const MenuItem: FC<Props> = ({ item, themeTint, themeColour, themeFont }) => {
+const MenuItem: FC<Props> = ({ item, themeTint, themeColour, themeFont, ...rest }) => {
   const { width } = useViewportContext();
   const { activeAllergies } = useAllergyContext();
 
@@ -29,15 +29,18 @@ const MenuItem: FC<Props> = ({ item, themeTint, themeColour, themeFont }) => {
     return null;
   }
 
+  const isMobile = width < 515;
+
   if (loading) return <MobileSkeletonMenuItem />;
 
-  if (item.photo && item.photo.length) {
-    return width < 515 ? (
+  const renderItemWithImage = () =>
+    isMobile ? (
       <MobileCardMenuItemWithImage
         themeFont={themeFont}
         themeColour={themeColour}
         themeTint={themeTint}
         item={item}
+        {...rest}
       />
     ) : (
       <CardMenuItemWithImage
@@ -45,15 +48,18 @@ const MenuItem: FC<Props> = ({ item, themeTint, themeColour, themeFont }) => {
         themeColour={themeColour}
         themeTint={themeTint}
         item={item}
+        {...rest}
       />
     );
-  }
+
+  if (item.photo && item.photo.length) renderItemWithImage();
   return (
     <CardMenuItemWithoutImage
       themeFont={themeFont}
       themeColour={themeColour}
       themeTint={themeTint}
       item={item}
+      {...rest}
     />
   );
 };

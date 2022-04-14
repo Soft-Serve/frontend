@@ -85,20 +85,17 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
       <div className="my-2 w-full">
         <Grid size={getGridSize()}>
           {data?.items?.map(item => (
-            <div
+            <MenuItem
+              key={item.id}
+              themeColour={themeColour}
+              themeFont={themeFont}
+              themeTint={themeTint}
+              item={item}
               tabIndex={0}
               onKeyDown={() => handleClick(item)}
               onClick={() => handleClick(item)}
               role="button"
-              key={item.id}
-            >
-              <MenuItem
-                themeColour={themeColour}
-                themeFont={themeFont}
-                themeTint={themeTint}
-                item={item}
-              />
-            </div>
+            />
           ))}
         </Grid>
         <ItemModal
