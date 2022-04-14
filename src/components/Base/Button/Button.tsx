@@ -4,6 +4,7 @@ import { LoadingSVG } from "@svgs";
 import { Sizes } from "./types";
 import { buildStyles, loadingStyles } from "./styles";
 import type { Colours } from "./styles";
+import { FontsMap } from "@base";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   themeColour: string;
@@ -26,7 +27,7 @@ const Button: FC<Props> = ({
   css,
   loading,
   disabled,
-  themeFont = "Quicksand",
+  themeFont = FontsMap.Quicksand,
   themeColour = "red",
   themeTint = 400,
   ...rest
