@@ -1,14 +1,14 @@
 import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { AllergyLegend } from "@presentational";
-import { Modal, Button } from "@base";
+import { Modal, Button, ThemeFonts } from "@base";
 
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
   isOpen: boolean;
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
   restaurantSlug: string;
 }
 const AllergyModal: FC<Props> = ({

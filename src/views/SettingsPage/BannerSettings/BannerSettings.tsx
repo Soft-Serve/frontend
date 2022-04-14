@@ -3,7 +3,15 @@ import type { FC } from "react";
 
 import { ItemImage } from "@presentational";
 import { BANNERS_QUERY, useBannersQuery, useRestaurantQuery } from "@shared";
-import { Button, Card, CardContent, HeroBanner, TabWrapper, UploadImageBox } from "@base";
+import {
+  Button,
+  Card,
+  CardContent,
+  HeroBanner,
+  TabWrapper,
+  ThemeFonts,
+  UploadImageBox,
+} from "@base";
 import { classnames } from "tailwindcss-classnames";
 import { useUploadPhoto } from "@hooks";
 import { SettingsHeader } from "../SettingsHeader";
@@ -14,7 +22,7 @@ import { useUpdateBannerImageMutation } from "./UpdateBannerImage.mutation";
 interface Props {
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
   restaurantSlug: string;
 }
 const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug }) => {

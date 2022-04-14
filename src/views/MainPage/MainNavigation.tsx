@@ -7,12 +7,13 @@ import { clientToken } from "@constants";
 import { routes } from "@routes";
 import { useCurrentUserQuery, useSignOutMutation } from "@shared";
 import { useLocation } from "react-router-dom";
+import { ThemeFonts } from "@base";
 
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
   restaurantSlug: string;
 }
 

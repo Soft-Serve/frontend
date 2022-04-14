@@ -3,14 +3,14 @@ import type { FC } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/solid";
 import { MenusMobileNavigation, RestaurantLogo } from "@presentational";
-import { Button } from "@base";
+import { Button, ThemeFonts } from "@base";
 
 interface Props {
   isOpen: boolean;
   onClose: Dispatch<SetStateAction<boolean>>;
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
   restaurantSlug: string;
   menuID: number;
   setMenuID: Dispatch<SetStateAction<number>>;

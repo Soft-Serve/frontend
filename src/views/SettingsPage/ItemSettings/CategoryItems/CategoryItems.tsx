@@ -2,9 +2,10 @@ import React from "react";
 import type { FC } from "react";
 import { Category, Item, useItemsQuery } from "@shared";
 import { CategoryItem, SkeletonCategoryItem } from "./CategoryItem";
+import { ThemeFonts } from "@base";
 
 interface Props {
-  themeFont: string;
+  themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
   handleAddDietary: (item: Item) => void;

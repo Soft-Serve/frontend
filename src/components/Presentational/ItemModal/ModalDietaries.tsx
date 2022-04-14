@@ -2,7 +2,7 @@ import React from "react";
 import { classnames, TArg } from "tailwindcss-classnames";
 import type { FC } from "react";
 import { useDietaryQuery } from "@shared";
-import { DietarySvg } from "@base";
+import { DietarySvg, ThemeFonts } from "@base";
 
 interface Props {
   itemID: number;
@@ -10,7 +10,7 @@ interface Props {
   css?: TArg;
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
 }
 const ModalDietaries: FC<Props> = ({
   itemID,

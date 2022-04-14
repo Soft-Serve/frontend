@@ -4,9 +4,10 @@ import { Item } from "@shared";
 import { useViewportContext } from "@contexts";
 import { MobileCategoryItemWithImage } from "./MobileCategoryItemWithImage";
 import { DesktopCategoryItemWithImage } from "./DesktopCategoryItemWithImage";
+import { ThemeFonts } from "@base";
 
 interface Props {
-  themeFont: string;
+  themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
   handleAddDietary: (item: Item) => void;

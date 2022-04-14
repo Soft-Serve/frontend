@@ -3,9 +3,10 @@ import type { FC } from "react";
 import { Item } from "@shared";
 import { CategoryItemWithImage } from "./CategoryItemWithImage";
 import { CategoryItemWithoutImage } from "./CategoryItemWithoutImage";
+import { ThemeFonts } from "@base";
 
 interface Props {
-  themeFont: string;
+  themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
   handleAddDietary: (item: Item) => void;

@@ -12,6 +12,39 @@ interface Props {
   css?: TArg;
 }
 
+const PostionsMap = {
+  right: {
+    left: "100%",
+    opacity: 0,
+  },
+  left: {
+    right: "100%",
+    opacity: 0,
+  },
+  top: {
+    bottom: "100%",
+    opacity: 0,
+    left: "50%",
+    transform: "translateX(-50%)",
+  },
+};
+
+const PointerMap = {
+  right: {
+    left: "-6px",
+    transform: "rotate(45deg)",
+  },
+  left: {
+    right: "-6px",
+    transform: "rotate(45deg)",
+  },
+  top: {
+    bottom: "-6px",
+    right: "50%",
+    transform: "rotate(45deg)",
+  },
+};
+
 const Tooltip: FC<Props> = ({ children, tooltipText, isDisabled, position = "top", css }) => {
   const tipRef = createRef<HTMLDivElement>();
 
@@ -44,39 +77,6 @@ const Tooltip: FC<Props> = ({ children, tooltipText, isDisabled, position = "top
   if (isDisabled) {
     return <>{children}</>;
   }
-
-  const PostionsMap = {
-    right: {
-      left: "100%",
-      opacity: 0,
-    },
-    left: {
-      right: "100%",
-      opacity: 0,
-    },
-    top: {
-      bottom: "100%",
-      opacity: 0,
-      left: "50%",
-      transform: "translateX(-50%)",
-    },
-  };
-
-  const PointerMap = {
-    right: {
-      left: "-6px",
-      transform: "rotate(45deg)",
-    },
-    left: {
-      right: "-6px",
-      transform: "rotate(45deg)",
-    },
-    top: {
-      bottom: "-6px",
-      right: "50%",
-      transform: "rotate(45deg)",
-    },
-  };
 
   return (
     <div

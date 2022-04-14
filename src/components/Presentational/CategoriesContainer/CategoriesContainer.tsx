@@ -2,9 +2,10 @@ import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { Categories } from "@presentational";
 import { useCategoriesQuery } from "@shared";
+import { ThemeFonts } from "@base";
 
 interface Props {
-  themeFont: string;
+  themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
   menuID: number;

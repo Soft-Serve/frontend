@@ -1,6 +1,6 @@
 import React from "react";
 import type { FC } from "react";
-import { Modal, Button } from "@base";
+import { Modal, Button, ThemeFonts } from "@base";
 import { Item } from "@shared";
 import { ItemImage, ItemPrice } from "@presentational";
 import { ModalDietaries } from "./ModalDietaries";
@@ -11,7 +11,7 @@ interface Props {
   item?: Item;
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
 }
 
 const ItemModal: FC<Props> = ({ isOpen, onClose, item, themeTint, themeColour, themeFont }) => {

@@ -1,14 +1,14 @@
 import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 
-import { RadioTile, RadioTiles } from "@base";
+import { RadioTile, RadioTiles, ThemeFonts } from "@base";
 import { useMenusQuery } from "@shared";
 
 interface Props {
   closeMenu: any;
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
   restaurantSlug: string;
   setMenuID: Dispatch<SetStateAction<number>>;
   menuID: number;

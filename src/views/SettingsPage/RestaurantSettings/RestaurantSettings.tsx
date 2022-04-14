@@ -2,14 +2,14 @@ import React from "react";
 import type { FC } from "react";
 import { UpdateRestaurantForm } from "@presentational";
 import { useRestaurantQuery } from "@shared";
-import { Card, CardContent, TabWrapper } from "@base";
+import { Card, CardContent, TabWrapper, ThemeFonts } from "@base";
 import { SettingsHeader } from "../SettingsHeader";
 
 interface Props {
   themeColour: string;
   themeTint: number;
   restaurantSlug: string;
-  themeFont: string;
+  themeFont: ThemeFonts;
 }
 const RestaurantSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug, themeFont }) => {
   const { data, loading } = useRestaurantQuery({

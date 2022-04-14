@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { SettingsSubMenu } from "@presentational";
 import { Navigate } from "react-router-dom";
 import { useViewport } from "@hooks";
-import { Button, Footer, LoadingScreen, TabContent } from "@base";
+import { Button, FontsMap, Footer, LoadingScreen, TabContent } from "@base";
 import { useCurrentUserQuery, useRestaurantThemeQuery } from "@shared";
 import { ChevronRightIcon } from "@heroicons/react/solid";
 import { classnames } from "tailwindcss-classnames";
@@ -50,7 +50,7 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
   const restaurant = (
     <RestaurantSettings
       restaurantSlug={restaurantSlug}
-      themeFont={themeData?.restaurant?.font || "Quicksand"}
+      themeFont={themeData?.restaurant?.font || FontsMap.Quicksand}
       themeColour={themeData?.restaurant?.colour || "red"}
       themeTint={themeData?.restaurant?.tint || 400}
     />
@@ -58,7 +58,7 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
   const banner = (
     <BannerSettings
       restaurantSlug={restaurantSlug}
-      themeFont={themeData?.restaurant?.font || "Quicksand"}
+      themeFont={themeData?.restaurant?.font || FontsMap.Quicksand}
       themeColour={themeData?.restaurant?.colour || "red"}
       themeTint={themeData?.restaurant?.tint || 400}
     />
@@ -87,7 +87,7 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
   const items = (
     <ItemSettings
       restaurantSlug={restaurantSlug}
-      themeFont={themeData?.restaurant?.font || "Quicksand"}
+      themeFont={themeData?.restaurant?.font || FontsMap.Quicksand}
       themeColour={themeData?.restaurant?.colour || "red"}
       themeTint={themeData?.restaurant?.tint || 400}
     />

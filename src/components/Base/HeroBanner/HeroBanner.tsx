@@ -4,10 +4,11 @@ import Skeleton from "react-loading-skeleton";
 import { useBannersQuery } from "@shared";
 import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/base";
+import { ThemeFonts } from "@base";
 
 interface Props {
   themeColour: string;
-  themeFont: string;
+  themeFont: ThemeFonts;
   restaurantSlug: string;
 }
 const HeroBanner: FC<Props> = ({ themeColour, themeFont, restaurantSlug }) => {

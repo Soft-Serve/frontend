@@ -3,7 +3,7 @@ import type { FC } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 import { Category, Item, Menu, useCategoriesQuery, useItemsQuery, useMenusQuery } from "@shared";
-import { Button, Card, CardContent, Grid, Modal, Tab, Tabs, TabWrapper } from "@base";
+import { Button, Card, CardContent, Grid, Modal, Tab, Tabs, TabWrapper, ThemeFonts } from "@base";
 import { SearchIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import { AddDietaryForm, DeleteItemForm, PostItemForm, UpdateItemForm } from "@presentational";
 import { useGetParams } from "@utility";
@@ -20,7 +20,7 @@ enum ModalForms {
 interface Props {
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
   restaurantSlug: string;
 }
 

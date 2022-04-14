@@ -1,7 +1,7 @@
 export { Grid } from "./Grid";
 export { Pill } from "./Pill";
 export { Container } from "./Container";
-export { Title } from "./Title";
+export { Typography } from "./Typography";
 export { Toggle } from "./Toggle";
 export { Card, CardContent } from "./Card";
 export { Header } from "./Header";
@@ -30,3 +30,6 @@ export { TabWrapper } from "./TabWrapper";
 export { KebabDropdown, KebabDropdownItem } from "./KebabDropdown";
 export { PasswordInput } from "./PasswordInput";
 export { LoadingScreen } from "./LoadingScreen";
+export { ItemCard } from "../Base/ItemCard";
+export type { ThemeFonts } from "./Typography";
+export { FontsMap } from "./Typography";

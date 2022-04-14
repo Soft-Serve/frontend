@@ -2,9 +2,10 @@ import React from "react";
 import type { FC } from "react";
 import { useItemSizeQuery } from "@shared";
 import Skeleton from "react-loading-skeleton";
+import { ThemeFonts } from "@base";
 
 interface Props {
-  themeFont: string;
+  themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
   itemID: number;

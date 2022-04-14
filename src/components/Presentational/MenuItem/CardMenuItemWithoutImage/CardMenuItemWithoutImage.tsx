@@ -2,12 +2,14 @@ import React from "react";
 import type { FC, DetailedHTMLProps } from "react";
 import { Item } from "@shared";
 import { Dietaries, ItemPrice } from "@presentational";
+import { ItemCard, ThemeFonts, Typography } from "@base";
+import { classnames } from "tailwindcss-classnames";
 
 interface Props extends DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   item: Pick<Item, "description" | "name" | "id" | "available">;
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
 }
 
 const CardMenuItemWithoutImage: FC<Props> = ({
@@ -29,11 +31,13 @@ const CardMenuItemWithoutImage: FC<Props> = ({
     );
 
   return (
-    <div key={item.id} className="flex overflow-hidden rounded-lg shadow-lg" {...rest}>
+    <ItemCard {...rest}>
       <div className="relative flex flex-1 flex-col justify-between bg-white p-2 pb-0">
         <div>
           <div className="flex items-center justify-between py-2 ">
-            <p className={`font-bold font-${themeFont} truncate`}>{item?.name}</p>
+            <Typography css={classnames("font-bold", "truncate")} themeFont={themeFont} type="h5">
+              {item?.name}
+            </Typography>
             <Dietaries
               themeColour={themeColour}
               themeTint={themeTint}
@@ -41,15 +45,17 @@ const CardMenuItemWithoutImage: FC<Props> = ({
               itemID={item.id}
             />
           </div>
-          <p
-            className={`font-${themeFont} mb-4 overflow-hidden  text-ellipsis break-words text-sm italic text-gray-600`}
+          <Typography
+            css={classnames("mb-4", "break-words", "italic")}
+            themeFont={themeFont}
+            type="h6"
           >
             {item.available ? item.description : "** Temporarily unavailable  **"}
-          </p>
+          </Typography>
           {renderPrice()}
         </div>
       </div>
-    </div>
+    </ItemCard>
   );
 };
 

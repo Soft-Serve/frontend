@@ -4,12 +4,13 @@ import { Category } from "@shared";
 import { SkeletonCategories } from "./SkeletonCategories";
 import { RadioGroup } from "@headlessui/react";
 import { useStyles } from "./styles";
+import { ThemeFonts } from "@base";
 
 interface Props {
   categories?: Category[];
   loading?: boolean;
   setCategoryID: (value: SetStateAction<number>) => void;
-  themeFont: string;
+  themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
   categoryID: number;

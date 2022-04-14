@@ -1,6 +1,6 @@
 import React from "react";
 import type { FC } from "react";
-import { Button } from "@base";
+import { Button, ThemeFonts } from "@base";
 import { buildTabTextStyles, buildTabStyles } from "./styles";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   tabIndex: number;
   numOfTabs: number;
   onClick: () => void;
-  themeFont: string;
+  themeFont: ThemeFonts;
 }
 const Tab: FC<Props> = ({
   children,

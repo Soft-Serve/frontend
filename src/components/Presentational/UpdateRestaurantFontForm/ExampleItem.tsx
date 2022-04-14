@@ -1,10 +1,11 @@
 import React from "react";
 import type { FC } from "react";
 import { useViewportContext } from "@contexts";
+import { ThemeFonts } from "@base";
 
 interface Props {
   themeColour: string;
-  themeFont: string;
+  themeFont: ThemeFonts;
   themeTint: number;
 }
 const ExampleItem: FC<Props> = ({ themeFont, themeColour, themeTint }) => {

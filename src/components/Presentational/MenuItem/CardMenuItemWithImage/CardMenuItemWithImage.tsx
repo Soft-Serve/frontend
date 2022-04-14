@@ -2,12 +2,14 @@ import React from "react";
 import type { FC, DetailedHTMLProps } from "react";
 import { Item } from "@shared";
 import { Dietaries, ItemImage, ItemPrice } from "@presentational";
+import { ItemCard, ThemeFonts, Typography } from "@base";
+import { classnames } from "tailwindcss-classnames";
 
 interface Props extends DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   item: Pick<Item, "description" | "name" | "photo" | "id" | "available">;
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
 }
 
 const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeTint, ...rest }) => {
@@ -23,8 +25,8 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
     );
 
   return (
-    <div key={item.id} className="flex overflow-hidden rounded-md shadow-md" {...rest}>
-      <div className="relative h-full w-56 flex-shrink-0">
+    <ItemCard {...rest}>
+      <div className="mw-56 relative h-full flex-shrink-0">
         <ItemImage
           className="inset-0 h-full w-full object-cover"
           unavailable={!item.available}
@@ -41,16 +43,20 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
       </div>
       <div className="flex flex-1 flex-col justify-between bg-white p-2 pb-0">
         <div>
-          <p className={`font-bold font-${themeFont}`}>{item?.name}</p>
-          <p
-            className={`font-${themeFont} mt-2 overflow-hidden text-ellipsis break-words text-sm italic text-gray-600`}
+          <Typography css={classnames("font-bold", "truncate")} themeFont={themeFont} type="h5">
+            {item?.name}
+          </Typography>
+          <Typography
+            css={classnames("mt-2", "break-words", "italic")}
+            type="h6"
+            themeFont={themeFont}
           >
             {item.available ? item.description : "** Temporarily unavailable  **"}
-          </p>
+          </Typography>
         </div>
         {renderPrice()}
       </div>
-    </div>
+    </ItemCard>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import type { FC } from "react";
 import { useViewportContext } from "@contexts";
 import { useNavigate } from "react-router-dom";
-import { Container, Grid, BoxSection, Button } from "@base";
+import { Container, Grid, BoxSection, Button, ThemeFonts } from "@base";
 import { MenuItem, ItemModal } from "@presentational";
 import { routes } from "@routes";
 import { Item, useItemsQuery } from "@shared";
@@ -11,7 +11,7 @@ import Skeleton from "react-loading-skeleton";
 interface Props {
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
   restaurantSlug: string;
   categoryID: number;
 }

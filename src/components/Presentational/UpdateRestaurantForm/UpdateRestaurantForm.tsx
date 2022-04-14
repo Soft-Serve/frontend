@@ -1,7 +1,7 @@
 import React from "react";
 import type { FC } from "react";
 import { classnames } from "tailwindcss-classnames";
-import { Card, UploadImageBox } from "@base";
+import { Card, ThemeFonts, UploadImageBox } from "@base";
 import { useUploadPhoto } from "@hooks";
 import {
   ItemImage,
@@ -17,7 +17,7 @@ interface Props {
   themeColour: string;
   themeTint: number;
   restaurantSlug: string;
-  themeFont: string;
+  themeFont: ThemeFonts;
 }
 
 const UpdateRestaurantForm: FC<Props> = ({

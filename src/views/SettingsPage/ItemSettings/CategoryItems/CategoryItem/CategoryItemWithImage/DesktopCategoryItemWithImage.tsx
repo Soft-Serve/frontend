@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import type { FC } from "react";
 import { Item } from "@shared";
-import { Pill, Toggle } from "@base";
+import { Pill, ThemeFonts, Toggle } from "@base";
 import { ItemPrice, ItemImage } from "@presentational";
 import { useUpdateItemAvailability } from "../UpdateItemAvailability.mutation";
 import { ItemDropdown } from "../ItemDropdown";
@@ -15,7 +15,7 @@ interface Props {
   item: Item;
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
 }
 
 const DesktopCategoryItemWithImage: FC<Props> = ({

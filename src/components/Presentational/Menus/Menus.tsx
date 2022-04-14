@@ -1,14 +1,15 @@
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import type { FC } from "react";
-import { Tab, Tabs, Container, BoxSection, Button } from "@base";
+import { Tab, Tabs, Container, BoxSection, Button, Typography, ThemeFonts } from "@base";
 import { FullLogoSVG } from "@svgs";
 import { useMenusQuery } from "@shared";
 import { routes } from "src/routes";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router";
+import { classnames } from "tailwindcss-classnames";
 
 interface Props {
-  themeFont: string;
+  themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
   restaurantSlug: string;
@@ -74,9 +75,13 @@ const Menus: FC<Props> = ({
           <FullLogoSVG
             className={`w-36 fill-current stroke-current text-${themeColour}-${themeTint}`}
           />
-          <h2 className={`m-8 text-center text-2xl font-bold  text-${themeColour}-${themeTint}`}>
+          <Typography
+            css={classnames("font-bold", "m-8", "text-center", "text-2xl")}
+            themeFont={themeFont}
+            type="h2"
+          >
             Looks like you do not have any menus yet
-          </h2>
+          </Typography>
           <Button
             themeColour={themeColour}
             themeTint={themeTint}

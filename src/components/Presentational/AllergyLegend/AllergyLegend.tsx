@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { BreadCrumbsNavigation, DietarySvg, Toggle } from "@base";
+import { BreadCrumbsNavigation, DietarySvg, ThemeFonts, Toggle } from "@base";
 import { useAllergyContext } from "@contexts";
 import { Allergy, useAllergiesQuery } from "@shared";
 import { ActionTypes } from "src/contexts/AllergyContext/types";
@@ -9,7 +9,7 @@ import { classnames } from "tailwindcss-classnames";
 interface Props {
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
   restaurantSlug: string;
 }
 const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restaurantSlug }) => {

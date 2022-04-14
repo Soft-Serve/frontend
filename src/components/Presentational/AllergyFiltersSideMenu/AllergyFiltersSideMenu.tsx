@@ -6,13 +6,14 @@ import {
   MobileNavigationProfile,
   AllergyLegend,
 } from "@presentational";
+import type { ThemeFonts } from "@base";
 
 interface Props {
   isOpen: boolean;
   onClose: any;
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
   restaurantSlug: string;
 }
 

@@ -6,12 +6,13 @@ import { CardMenuItemWithImage } from "./CardMenuItemWithImage";
 import { CardMenuItemWithoutImage } from "./CardMenuItemWithoutImage";
 import { MobileCardMenuItemWithImage, MobileSkeletonMenuItem } from "./MobileCardMenuItemWithImage";
 import { intersection } from "@utility";
+import { ThemeFonts } from "@base";
 
 interface Props {
   item: Item;
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
 }
 
 const MenuItem: FC<Props> = ({ item, themeTint, themeColour, themeFont }) => {

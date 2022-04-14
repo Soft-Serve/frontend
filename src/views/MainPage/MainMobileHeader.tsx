@@ -2,7 +2,7 @@ import React, { Dispatch, Fragment, SetStateAction } from "react";
 import type { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useCurrentUserQuery, useSignOutMutation } from "@shared";
-import { Button } from "@base";
+import { Button, ThemeFonts } from "@base";
 import { RestaurantLogo } from "@presentational";
 import { routes } from "@routes";
 import { clientToken } from "@constants";
@@ -18,7 +18,7 @@ interface Props {
   setIsMenuSlideOverOpen: Dispatch<SetStateAction<boolean>>;
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
   restaurantSlug: string;
 }
 

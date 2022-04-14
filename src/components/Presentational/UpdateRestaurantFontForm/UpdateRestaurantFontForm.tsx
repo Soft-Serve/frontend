@@ -5,6 +5,7 @@ import { CheckCircleIcon } from "@heroicons/react/solid";
 import { useUpdateRestaurantFont } from "./UpdateRestaurantFont.mutation";
 import { ExampleItem } from "./ExampleItem";
 import { RESTAURANT_THEME_QUERY } from "@shared";
+import { ThemeFonts } from "@base";
 
 const FONTS = ["Sans", "Arima", "Baskerville", "Cardo", "Oswald", "Quicksand", "Raleway"];
 
@@ -16,7 +17,7 @@ interface Props {
   id: number;
   themeColour: string;
   themeTint: number;
-  themeFont: string;
+  themeFont: ThemeFonts;
   restaurantSlug: string;
 }
 const UpdateRestaurantFontForm: FC<Props> = ({

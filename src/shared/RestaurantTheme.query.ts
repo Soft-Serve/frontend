@@ -1,6 +1,7 @@
 import type { QueryHookOptions } from "@apollo/client";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/client";
+import { ThemeFonts } from "@base";
 
 const RESTAURANT_THEME_QUERY = gql`
   query RestaurantThemeQuery($restaurantSlug: string!) {
@@ -20,7 +21,7 @@ interface Theme {
   id: number;
   colour: string;
   tint: number;
-  font: string;
+  font: ThemeFonts;
 }
 
 interface RestaurantThemeData {
