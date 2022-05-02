@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import type { FC } from "react";
 
 import { ItemImage } from "@presentational";
@@ -18,6 +18,7 @@ import { SettingsHeader } from "../SettingsHeader";
 import { UpdateBannerHeadingsForm } from "./UpdateBannerHeadingsForm";
 import { SkeletonBannerSettings } from "./SkeletonBannerSettings";
 import { useUpdateBannerImageMutation } from "./UpdateBannerImage.mutation";
+import { useCreateNewBannerImage } from "./CreateBannerImagePhoto.mutation";
 
 interface Props {
   themeColour: string;
@@ -26,6 +27,7 @@ interface Props {
   restaurantSlug: string;
 }
 const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { data, loading } = useBannersQuery({
     variables: {
       restaurantSlug,
@@ -38,10 +40,13 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
     },
   });
 
-  const [updatePhoto, { loading: imageLoading }] = useUpdateBannerImageMutation();
+  const [updatePhoto] = useUpdateBannerImageMutation({ onCompleted: () => setIsLoading(false) });
+  const [createPhoto] = useCreateNewBannerImage({ onCompleted: () => setIsLoading(false) });
+
   const { photoFile, setPhotoFile, fetchPhoto } = useUploadPhoto();
 
   const handleUpdatePhoto = async () => {
+    setIsLoading(true);
     const photo = await fetchPhoto();
     if (data?.banners?.[0]?.photo) {
       updatePhoto({
@@ -49,6 +54,24 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
           input: {
             id: data?.banners?.[0]?.id || 0,
             restaurantId: restaurantData?.restaurant?.id || 0,
+            photo,
+          },
+        },
+        refetchQueries: [
+          {
+            query: BANNERS_QUERY,
+            variables: {
+              restaurantSlug,
+            },
+          },
+        ],
+      });
+    } else {
+      createPhoto({
+        variables: {
+          input: {
+            header: data?.banners?.[0].header || restaurantSlug,
+            restaurant_id: restaurantData?.restaurant?.id || 0,
             photo,
           },
         },
@@ -114,9 +137,9 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
           />
         </div>
         <Button
-          loading={imageLoading}
+          loading={isLoading}
           onClick={handleUpdatePhoto}
-          disabled={!photoFile}
+          disabled={!photoFile || isLoading}
           size="XXL"
           themeColour={themeColour}
           themeTint={themeTint}

@@ -11,7 +11,7 @@ module.exports = {
     },
     {
       pattern:
-        /bg-(red|green|blue|rose|pink|fuchsia|purple|violet|indigo|sky|cyan|teal|emerald|green|lime|yellow|amber|orange|slate|gray|zinc|neutral|stone)-(400|500|600|700|800|900)/,
+        /bg-(red|green|blue|rose|pink|fuchsia|purple|violet|indigo|sky|cyan|teal|emerald|green|lime|yellow|amber|orange|slate|gray|zinc|neutral|stone)-(100|200|300|400|500|600|700|800|900)/,
       variants: ["hover", "focus"],
     },
     {

@@ -40,7 +40,9 @@ const HeroBanner: FC<Props> = ({ themeColour, themeFont, restaurantSlug }) => {
                 className="absolute inset-0 h-full w-full object-cover"
                 cldImg={cldImage}
               />
-              <div className={`absolute inset-0 bg-${themeColour}-200 mix-blend-multiply`} />
+              <div
+                className={`absolute inset-0 bg-${themeColour}-400 mix-blend-multiply brightness-75`}
+              />
             </div>
             <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
               <h1 className="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import type { FC } from "react";
 import { useViewportContext } from "@contexts";
 import { useNavigate } from "react-router-dom";
 import { Container, Grid, BoxSection, Button, ThemeFonts } from "@base";
-import { MenuItem, ItemModal } from "@presentational";
+import { MenuItem } from "@presentational";
 import { routes } from "@routes";
-import { Item, useItemsQuery } from "@shared";
+import { useItemsQuery } from "@shared";
 import Skeleton from "react-loading-skeleton";
 
 interface Props {
@@ -17,7 +17,6 @@ interface Props {
 }
 const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, categoryID }) => {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { width } = useViewportContext();
   const { data, loading, error } = useItemsQuery({
     variables: {
@@ -26,16 +25,9 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
     skip: !categoryID,
   });
 
-  const [selectedItem, setSelectedItem] = useState(data?.items?.[0]);
-
   const getGridSize = () => {
     if (width < 1450) return "M";
     return "LG";
-  };
-
-  const handleClick = (item: Item) => {
-    setSelectedItem(item);
-    setIsModalOpen(prevState => !prevState);
   };
 
   if (loading)
@@ -92,20 +84,10 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
               themeTint={themeTint}
               item={item}
               tabIndex={0}
-              onKeyDown={() => handleClick(item)}
-              onClick={() => handleClick(item)}
               role="button"
             />
           ))}
         </Grid>
-        <ItemModal
-          themeFont={themeFont}
-          themeColour={themeColour}
-          themeTint={themeTint}
-          isOpen={isModalOpen}
-          onClose={setIsModalOpen}
-          item={selectedItem}
-        />
       </div>
     </Container>
   );

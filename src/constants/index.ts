@@ -8,6 +8,7 @@ import {
   FilterIcon,
   ViewGridIcon,
   PhotographIcon,
+  QrcodeIcon,
 } from "@heroicons/react/solid";
 
 interface ColourObject {
@@ -70,6 +71,12 @@ export const SUB_NAVIGATION = [
     name: "dietaries",
     description: "View and modify dietary filters",
     icon: FilterIcon,
+    current: false,
+  },
+  {
+    name: "QR",
+    description: "print your QR code",
+    icon: QrcodeIcon,
     current: false,
   },
   {

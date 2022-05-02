@@ -1,0 +1,1 @@
+export { QRCodeSettings } from "./QRCodeSettings";

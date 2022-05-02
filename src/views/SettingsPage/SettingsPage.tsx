@@ -21,7 +21,7 @@ import { RestaurantSettings } from "./RestaurantSettings";
 import { SettingsWrapper } from "./SettingsWrapper";
 import { CategorySettings } from "./CategorySettings";
 import { BannerSettings } from "./BannerSettings/BannerSettings";
-
+import { QRCodeSettings } from "./QRCodeSettings";
 interface MappableObject {
   [key: string]: JSX.Element;
 }
@@ -46,6 +46,10 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
 
   const { width } = useViewport();
   const [selected, setSelected] = useState(id);
+
+  useEffect(() => {
+    setSelected(id);
+  }, [id]);
 
   const restaurant = (
     <RestaurantSettings
@@ -106,6 +110,13 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
       themeTint={themeData?.restaurant?.tint || 400}
     />
   );
+  const QR = (
+    <QRCodeSettings
+      themeColour={themeData?.restaurant?.colour || "red"}
+      themeTint={themeData?.restaurant?.tint || 400}
+      restaurantSlug={restaurantSlug}
+    />
+  );
 
   const SettingsMap = {
     restaurant,
@@ -117,13 +128,10 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
     users,
     dietaries,
     categories,
+    QR,
   } as MappableObject;
 
   const renderSettingsTab = () => SettingsMap[id];
-
-  useEffect(() => {
-    setSelected(id);
-  }, [id]);
 
   const handleSetSelected = (value: any) => {
     setSelected(value);
@@ -147,7 +155,7 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
   }
   return (
     <>
-      <div className="mt-4 ml-4 block lg:hidden">
+      <div className="mt-4 ml-4 block print:hidden lg:hidden">
         <Button
           css={classnames("items-center")}
           size="XL"
