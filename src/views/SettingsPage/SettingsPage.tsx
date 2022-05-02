@@ -150,54 +150,54 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
 
   if (loading) return <LoadingScreen />;
 
-  if (!data?.currentUser) {
-    return <Navigate to={`${routes.restaurants}/${restaurantSlug}`} />;
-  }
-  return (
-    <>
-      <div className="mt-4 ml-4 block print:hidden lg:hidden">
-        <Button
-          css={classnames("items-center")}
-          size="XL"
-          onClick={() => onClose(prevState => !prevState)}
-          themeColour={themeData?.restaurant?.colour || "red"}
-          themeTint={themeData?.restaurant?.tint || 400}
-        >
-          Settings
-          <ChevronRightIcon className="h-5 w-5 text-white" />
-        </Button>
-      </div>
-      <SettingsMobileSubNavigation
-        restaurantSlug={restaurantSlug}
-        themeColour={themeData?.restaurant?.colour || "red"}
-        themeTint={themeData?.restaurant?.tint || 400}
-        selected={selected}
-        setSelected={handleSetSelected}
-        isOpen={isOpen}
-        onClose={onClose}
-      />
-      <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
-        <SettingsWrapper>
-          <SettingsSubMenu
-            restaurantSlug={restaurantSlug}
-            themeColour={themeData?.restaurant?.colour || "red"}
-            themeTint={themeData?.restaurant?.tint || 400}
-            selected={selected}
-            setSelected={setSelected}
-            className="border-blue-gray-200 hidden w-96 flex-shrink-0 border-r bg-white lg:block xl:flex xl:flex-col "
-          />
-          <TabContent
+  if (data?.currentUser) {
+    return (
+      <>
+        <div className="mt-4 ml-4 block print:hidden lg:hidden">
+          <Button
+            css={classnames("items-center")}
+            size="XL"
+            onClick={() => onClose(prevState => !prevState)}
             themeColour={themeData?.restaurant?.colour || "red"}
             themeTint={themeData?.restaurant?.tint || 400}
           >
-            {renderSettingsTab()}
-          </TabContent>
+            Settings
+            <ChevronRightIcon className="h-5 w-5 text-white" />
+          </Button>
+        </div>
+        <SettingsMobileSubNavigation
+          restaurantSlug={restaurantSlug}
+          themeColour={themeData?.restaurant?.colour || "red"}
+          themeTint={themeData?.restaurant?.tint || 400}
+          selected={selected}
+          setSelected={handleSetSelected}
+          isOpen={isOpen}
+          onClose={onClose}
+        />
+        <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
+          <SettingsWrapper>
+            <SettingsSubMenu
+              restaurantSlug={restaurantSlug}
+              themeColour={themeData?.restaurant?.colour || "red"}
+              themeTint={themeData?.restaurant?.tint || 400}
+              selected={selected}
+              setSelected={setSelected}
+              className="border-blue-gray-200 hidden w-96 flex-shrink-0 border-r bg-white lg:block xl:flex xl:flex-col "
+            />
+            <TabContent
+              themeColour={themeData?.restaurant?.colour || "red"}
+              themeTint={themeData?.restaurant?.tint || 400}
+            >
+              {renderSettingsTab()}
+            </TabContent>
+          </SettingsWrapper>
+          {renderMobileFooter()}
         </SettingsWrapper>
-        {renderMobileFooter()}
-      </SettingsWrapper>
-      <Toaster />
-    </>
-  );
+        <Toaster />
+      </>
+    );
+  }
+  return <Navigate to={routes.signIn} />;
 };
 
 export { SettingsPage };

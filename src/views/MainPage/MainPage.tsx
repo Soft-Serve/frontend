@@ -43,84 +43,84 @@ const MainPage: FC = () => {
     );
   };
 
-  if (!loading && !data?.restaurant) {
-    return <Navigate to="/not-found" />;
-  }
-
   if (loading) {
     return <LoadingScreen />;
   }
 
-  return (
-    <MenuPage>
-      <Providers>
-        <AllergyFiltersSideMenu
-          themeTint={data?.restaurant?.tint || 400}
-          restaurantSlug={restaurantSlug}
-          themeFont={data?.restaurant?.font || "Quicksand"}
-          themeColour={data?.restaurant?.colour || "red"}
-          isOpen={isFiterSideMenuOpen}
-          onClose={setIsFilterSideMenuOpen}
-        />
-        <AllergyModal
-          themeTint={data?.restaurant?.tint || 400}
-          restaurantSlug={restaurantSlug}
-          themeFont={data?.restaurant?.font || "Quicksand"}
-          themeColour={data?.restaurant?.colour || "red"}
-          isOpen={isFilterModalOpen}
-          setIsFilterSideMenuOpen={setIsFilterModalOpen}
-        />
-        <MenuSlideOver
-          menuID={menuID}
-          setMenuID={setMenuID}
-          themeTint={data?.restaurant?.tint || 400}
-          restaurantSlug={restaurantSlug}
-          themeFont={data?.restaurant?.font || "Quicksand"}
-          themeColour={data?.restaurant?.colour || "red"}
-          isOpen={isMenuSlideOverOpen}
-          onClose={setIsMenuSlideOverOpen}
-        />
-        <MainNavigation
-          themeTint={data?.restaurant?.tint || 400}
-          restaurantSlug={restaurantSlug}
-          themeFont={data?.restaurant?.font || "Quicksand"}
-          themeColour={data?.restaurant?.colour || "red"}
-          setIsFilterSideMenuOpen={setIsFilterModalOpen}
-        />
-        <MainMobileHeader
-          themeTint={data?.restaurant?.tint || 400}
-          restaurantSlug={restaurantSlug}
-          themeFont={data?.restaurant?.font || "Quicksand"}
-          themeColour={data?.restaurant?.colour || "red"}
-          setIsMenuSlideOverOpen={setIsMenuSlideOverOpen}
-          setIsFilterSideMenuOpen={setIsFilterSideMenuOpen}
-        >
-          <Suspense fallback={<LoadingScreen />}>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Restaurant
-                    categoryID={categoryID}
-                    activeMenu={activeMenu}
-                    menuID={menuID}
-                    setActiveMenu={setActiveMenu}
-                    setCategoryID={setCategoryID}
-                    setMenuID={setMenuID}
-                  />
-                }
-              />
-              <Route
-                path="settings/:id"
-                element={<SettingsPage restaurantSlug={restaurantSlug} />}
-              />
-            </Routes>
-          </Suspense>
-          {renderFooter()}
-        </MainMobileHeader>
-      </Providers>
-    </MenuPage>
-  );
+  if (data?.restaurant) {
+    return (
+      <MenuPage>
+        <Providers>
+          <AllergyFiltersSideMenu
+            themeTint={data?.restaurant?.tint || 400}
+            restaurantSlug={restaurantSlug}
+            themeFont={data?.restaurant?.font || "Quicksand"}
+            themeColour={data?.restaurant?.colour || "red"}
+            isOpen={isFiterSideMenuOpen}
+            onClose={setIsFilterSideMenuOpen}
+          />
+          <AllergyModal
+            themeTint={data?.restaurant?.tint || 400}
+            restaurantSlug={restaurantSlug}
+            themeFont={data?.restaurant?.font || "Quicksand"}
+            themeColour={data?.restaurant?.colour || "red"}
+            isOpen={isFilterModalOpen}
+            setIsFilterSideMenuOpen={setIsFilterModalOpen}
+          />
+          <MenuSlideOver
+            menuID={menuID}
+            setMenuID={setMenuID}
+            themeTint={data?.restaurant?.tint || 400}
+            restaurantSlug={restaurantSlug}
+            themeFont={data?.restaurant?.font || "Quicksand"}
+            themeColour={data?.restaurant?.colour || "red"}
+            isOpen={isMenuSlideOverOpen}
+            onClose={setIsMenuSlideOverOpen}
+          />
+          <MainNavigation
+            themeTint={data?.restaurant?.tint || 400}
+            restaurantSlug={restaurantSlug}
+            themeFont={data?.restaurant?.font || "Quicksand"}
+            themeColour={data?.restaurant?.colour || "red"}
+            setIsFilterSideMenuOpen={setIsFilterModalOpen}
+          />
+          <MainMobileHeader
+            themeTint={data?.restaurant?.tint || 400}
+            restaurantSlug={restaurantSlug}
+            themeFont={data?.restaurant?.font || "Quicksand"}
+            themeColour={data?.restaurant?.colour || "red"}
+            setIsMenuSlideOverOpen={setIsMenuSlideOverOpen}
+            setIsFilterSideMenuOpen={setIsFilterSideMenuOpen}
+          >
+            <Suspense fallback={<LoadingScreen />}>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <Restaurant
+                      categoryID={categoryID}
+                      activeMenu={activeMenu}
+                      menuID={menuID}
+                      setActiveMenu={setActiveMenu}
+                      setCategoryID={setCategoryID}
+                      setMenuID={setMenuID}
+                    />
+                  }
+                />
+                <Route
+                  path="settings/:id"
+                  element={<SettingsPage restaurantSlug={restaurantSlug} />}
+                />
+              </Routes>
+            </Suspense>
+            {renderFooter()}
+          </MainMobileHeader>
+        </Providers>
+      </MenuPage>
+    );
+  }
+
+  return <Navigate to="/not-found" />;
 };
 
 export { MainPage };

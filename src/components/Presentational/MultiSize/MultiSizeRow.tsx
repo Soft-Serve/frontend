@@ -5,6 +5,7 @@ import { TrashIcon } from "@heroicons/react/solid";
 import { ItemSize } from "src/shared";
 
 interface Props {
+  numberOfSizes: number;
   themeColour: string;
   themeTint: number;
   size: Pick<ItemSize, "price" | "unit" | "id">;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const MultiSizeRow: FC<Props> = ({
+  numberOfSizes,
   size,
   deleteSize,
   index,
@@ -50,6 +52,7 @@ const MultiSizeRow: FC<Props> = ({
       <div className="flex w-full items-center justify-between p-2">
         <div className="w-40">
           <Input
+            disabled={numberOfSizes === 1}
             themeColour={themeColour}
             themeTint={themeTint}
             onChange={e => onChange(e, size?.id || "")}

@@ -1,11 +1,15 @@
 import React from "react";
 import type { FC } from "react";
 import { useCurrentUserQuery } from "@shared";
+import { Navigate } from "react-router-dom";
+import { routes } from "@routes";
 
 const MobileNavigationProfile: FC = () => {
   const { data } = useCurrentUserQuery();
 
-  if (!data?.currentUser) return null;
+  if (!data?.currentUser) {
+    return <Navigate to={routes.signIn} />;
+  }
 
   const renderName = () => {
     if (data?.currentUser?.first_name.length && data?.currentUser.last_name.length) {

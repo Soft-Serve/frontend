@@ -39,13 +39,13 @@ const RestaurantLogo: FC<Props> = ({
     .roundCorners(byRadius(10))
     .effect(outline().mode(outer()).width(borderWidth).color(borderColor));
   return (
-    <>
+    <div className="print:hidden">
       {logo ? (
         <AdvancedImage cldImg={cldImage} />
       ) : (
         <FullLogoSVG className="w-20 fill-current stroke-current text-white" />
       )}
-    </>
+    </div>
   );
 };
 

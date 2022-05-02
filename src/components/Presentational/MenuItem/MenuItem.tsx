@@ -25,13 +25,8 @@ const MenuItem: FC<Props> = ({ item, themeTint, themeColour, themeFont, ...rest 
     },
   });
 
-  if (!loading && data?.dietaries && intersection(activeAllergies, data?.dietaries)) {
-    return null;
-  }
-
   const isMobile = width < 515;
-
-  if (loading) return <MobileSkeletonMenuItem />;
+  const hasImage = !!item?.photo?.length;
 
   const renderItemWithImage = () =>
     isMobile ? (
@@ -52,8 +47,7 @@ const MenuItem: FC<Props> = ({ item, themeTint, themeColour, themeFont, ...rest 
       />
     );
 
-  if (item.photo && item.photo.length) renderItemWithImage();
-  return (
+  const renderItemWithoutImage = () => (
     <CardMenuItemWithoutImage
       themeFont={themeFont}
       themeColour={themeColour}
@@ -62,6 +56,14 @@ const MenuItem: FC<Props> = ({ item, themeTint, themeColour, themeFont, ...rest 
       {...rest}
     />
   );
+
+  if (loading) return <MobileSkeletonMenuItem />;
+
+  if (!loading && data?.dietaries && intersection(activeAllergies, data?.dietaries)) {
+    return null;
+  }
+
+  return hasImage ? renderItemWithImage() : renderItemWithoutImage();
 };
 
 export { MenuItem };

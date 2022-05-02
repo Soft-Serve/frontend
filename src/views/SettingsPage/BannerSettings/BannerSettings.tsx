@@ -70,7 +70,8 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
       createPhoto({
         variables: {
           input: {
-            header: data?.banners?.[0].header || restaurantSlug,
+            header:
+              data?.banners?.[0]?.header || restaurantData?.restaurant?.name || restaurantSlug,
             restaurant_id: restaurantData?.restaurant?.id || 0,
             photo,
           },

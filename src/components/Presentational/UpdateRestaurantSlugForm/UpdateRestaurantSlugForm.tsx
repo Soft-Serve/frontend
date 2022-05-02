@@ -5,6 +5,9 @@ import { AttachedLabelInput, Button, Notification } from "@base";
 import { useViewport } from "@hooks";
 import { isNameOnlyNumbers } from "@utility";
 import { useUpdateRestaurantSlug } from "./UpdateRestaurantSlug.mutation";
+import { useNavigate } from "react-router-dom";
+import { routes } from "src/routes";
+import { RESTAURANT_THEME_QUERY } from "src/shared";
 
 interface Props {
   slug: string;
@@ -17,7 +20,7 @@ const slugRegex = new RegExp(/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/);
 const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id, themeColour, themeTint }) => {
   const [slugState, setSlugState] = useState(slug);
   const { width } = useViewport();
-
+  const navigate = useNavigate();
   const isTablet = width < 550;
   const isBasicSlugValid = (newSlug: string) => slugRegex.test(newSlug);
   const isSlugUpdated = slugState !== slug;
@@ -43,16 +46,25 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id, themeColour, themeTint 
 
   const onSuccess = () => toast.custom(<Notification header="Slug succesfully updated!" />);
 
-  const [updateRestaurantSlug] = useUpdateRestaurantSlug({
-    onCompleted: completedData => {
-      window.location.assign(`/settings/${completedData?.updateRestaurantSlug?.slug}/restaurant`);
+  const [changeRestaurantSlug] = useUpdateRestaurantSlug({
+    refetchQueries: [
+      {
+        query: RESTAURANT_THEME_QUERY,
+        variables: {
+          restaurantSlug: slug,
+        },
+      },
+    ],
+    onCompleted: ({ updateRestaurantSlug }) => {
+      navigate(`/restaurants/${updateRestaurantSlug.slug}/settings/restaurant`);
+      navigate(0);
       onSuccess();
     },
   });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updateRestaurantSlug({
+    changeRestaurantSlug({
       variables: {
         input: {
           slug: slugState,

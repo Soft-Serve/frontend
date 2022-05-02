@@ -40,6 +40,7 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
     menu_category_id: selectedItem?.menu_category_id || 0,
     id: selectedItem?.id || 0,
     __typename: "Item",
+    photo: selectedItem?.photo || "",
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

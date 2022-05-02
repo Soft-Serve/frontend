@@ -143,6 +143,7 @@ const UpdateCurrentUserForm: FC<Props> = ({
 
             <div className="col-span-10 sm:col-span-5">
               <Input
+                disabled
                 themeColour={themeColour}
                 themeTint={themeTint}
                 labelText="Email"

@@ -11,6 +11,7 @@ export const UPDATE_ITEM_MUTATIOM = gql`
       name
       description
       sizes
+      photo
       available
       menu_category_id
       __typename
@@ -24,6 +25,7 @@ interface Item {
   available: boolean;
   description: string;
   sizes: ItemSize[];
+  photo: string;
   menu_category_id: number;
   __typename: string;
 }

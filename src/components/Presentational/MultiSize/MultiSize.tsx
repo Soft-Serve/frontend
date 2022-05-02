@@ -31,6 +31,7 @@ const MultiSize: FC<Props> = ({ addSize, sizes, deleteSize, onChange, themeColou
       </div>
       {sizes?.map((size, index) => (
         <MultiSizeRow
+          numberOfSizes={sizes.length}
           themeColour={themeColour}
           themeTint={themeTint}
           onChange={onChange}
