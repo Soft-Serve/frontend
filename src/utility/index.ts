@@ -17,7 +17,7 @@ export {
   isNameInputValid,
   isBasicPriceValid,
   hasBeginningWhiteSpace,
-} from "./menuValidation";
+} from "./validations";
 
 export { intersection } from "./intersection";
 export { generateThemeColours, generateThemeAccentColours } from "./generateThemeStyles";

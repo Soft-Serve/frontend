@@ -6,8 +6,6 @@ import { useViewport } from "@hooks";
 import { isNameOnlyNumbers } from "@utility";
 import { useUpdateRestaurantSlug } from "./UpdateRestaurantSlug.mutation";
 import { useNavigate } from "react-router-dom";
-import { routes } from "src/routes";
-import { RESTAURANT_THEME_QUERY } from "src/shared";
 
 interface Props {
   slug: string;
@@ -47,16 +45,8 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id, themeColour, themeTint 
   const onSuccess = () => toast.custom(<Notification header="Slug succesfully updated!" />);
 
   const [changeRestaurantSlug] = useUpdateRestaurantSlug({
-    refetchQueries: [
-      {
-        query: RESTAURANT_THEME_QUERY,
-        variables: {
-          restaurantSlug: slug,
-        },
-      },
-    ],
     onCompleted: ({ updateRestaurantSlug }) => {
-      navigate(`/restaurants/${updateRestaurantSlug.slug}/settings/restaurant`);
+      navigate(`/restaurants/${updateRestaurantSlug.slug}/settings/restaurant`, { replace: true });
       navigate(0);
       onSuccess();
     },
