@@ -2,7 +2,7 @@ import React from "react";
 import type { FC } from "react";
 import { NavLink, NavLinkProps } from "react-router-dom";
 import { classnames, TArg } from "tailwindcss-classnames";
-import { generateThemeColours } from "src/utility";
+import { generateThemeColours } from "@utility";
 import { base, button } from "./styles";
 
 type To = NavLinkProps["to"];

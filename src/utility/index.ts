@@ -6,9 +6,6 @@ export {
   isBasicEmailValid,
   isEmailRegexValid,
   isBasicEmailRegexValid,
-} from "./emailValidation";
-
-export {
   isNameValid,
   isPriceInvalid,
   isUnitValid,
@@ -17,11 +14,12 @@ export {
   isNameInputValid,
   isBasicPriceValid,
   hasBeginningWhiteSpace,
+  isPasswordSixChar,
+  isPasswordConfirmd,
 } from "./validations";
 
 export { intersection } from "./intersection";
 export { generateThemeColours, generateThemeAccentColours } from "./generateThemeStyles";
 export { useGetParams } from "./useGetParams";
-export { isPasswordSixChar, isPasswordConfirmd } from "./passwordValidation";
 
 export { capatalize } from "./capatalize";
