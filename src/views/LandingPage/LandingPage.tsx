@@ -293,8 +293,8 @@ const LandingPage: FC = () => {
                       Create bespoke menus
                     </h2>
                     <p className="mt-4 font-Quicksand text-lg text-white">
-                      With custom a custom colour, logo, banner and font and optional images of your
-                      dishes every Soft Serve menu is completely unique.
+                      With a custom logo, banner, font, colours & images every Soft Serve menu is
+                      completely unique.
                     </p>
                     <div className="mt-6">
                       <a
