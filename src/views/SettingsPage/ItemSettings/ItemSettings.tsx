@@ -51,7 +51,6 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
     variables: {
       restaurantSlug,
     },
-
     onCompleted: completedData => setActiveMenu(completedData?.menus?.[0]),
   });
 
