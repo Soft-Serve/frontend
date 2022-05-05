@@ -24,7 +24,6 @@ const MainPage: FC = () => {
   const [isMenuSlideOverOpen, setIsMenuSlideOverOpen] = useState(false);
   const [menuID, setMenuID] = useState(0);
   const [categoryID, setCategoryID] = useState(0);
-  const [activeMenu, setActiveMenu] = useState("");
 
   const { data, loading } = useRestaurantThemeQuery({
     variables: {
@@ -99,9 +98,7 @@ const MainPage: FC = () => {
                   element={
                     <Restaurant
                       categoryID={categoryID}
-                      activeMenu={activeMenu}
                       menuID={menuID}
-                      setActiveMenu={setActiveMenu}
                       setCategoryID={setCategoryID}
                       setMenuID={setMenuID}
                     />

@@ -2,7 +2,6 @@ import React from "react";
 import type { FC } from "react";
 
 import { CheckIcon } from "@heroicons/react/solid";
-import { routes } from "src/routes";
 import { Link } from "react-router-dom";
 
 interface Step {
@@ -49,20 +48,20 @@ const Steps: FC<Props> = ({
     {
       name: "Customize menu design",
       description: "Choose your menu colour, logo and banner",
-      href: `${routes.settings}/${restaurantSlug}/restaurant`,
+      href: `/restaurants/${restaurantSlug}/settings/restaurant`,
       status: hasStyles || hasMenus || hasItems ? "complete" : "current",
     },
     {
       name: "Create menus",
       description: "Add your restaurant's menu names",
-      href: `${routes.settings}/${restaurantSlug}/menus`,
+      href: `/restaurants/${restaurantSlug}/settings/menus`,
       status: menuStatus(),
     },
     {
       name: "Add categories & items",
       description:
         "Add categories and items to your menus. Menus can be created without categories if you do not wish to use them.",
-      href: `${routes.settings}/${restaurantSlug}/categories`,
+      href: `/restaurants/${restaurantSlug}/settings/categories`,
       status: itemStatus(),
     },
   ];
@@ -136,7 +135,7 @@ const Steps: FC<Props> = ({
             aria-hidden="true"
           />
         )}
-        <a href={step.href} className="group relative flex items-start">
+        <Link to={step.href} className="group relative flex items-start">
           <span className="flex h-9 items-center" aria-hidden="true">
             <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white group-hover:border-gray-400">
               <span className="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-gray-300" />
@@ -148,7 +147,7 @@ const Steps: FC<Props> = ({
             </span>
             <span className="text-sm text-gray-500">{step.description}</span>
           </span>
-        </a>
+        </Link>
       </>
     );
   };

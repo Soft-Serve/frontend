@@ -33,3 +33,4 @@ export { LoadingScreen } from "./LoadingScreen";
 export { ItemCard } from "../Base/ItemCard";
 export type { ThemeFonts } from "./Typography";
 export { FontsMap } from "./Typography";
+export { Alert } from "./Alert";

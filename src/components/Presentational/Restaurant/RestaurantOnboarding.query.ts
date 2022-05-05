@@ -11,6 +11,7 @@ const RESTAURANT_ONBOARDING_QUERY = gql`
       has_items
       has_styles
       onboarding_done
+      name
     }
   }
 `;
@@ -20,6 +21,7 @@ interface Restaurant {
   has_items: boolean;
   has_styles: boolean;
   onboarding_done: boolean;
+  name: string;
 }
 
 interface RestaurantOnBoardingData {

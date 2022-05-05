@@ -83,6 +83,22 @@ const MenuSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => 
 
   const renderModalForm = () => forms[action];
 
+  const renderMenus = () => {
+    if (data?.menus?.length) {
+      return (
+        <MenusList
+          restaurantSlug={restaurantSlug}
+          themeColour={themeColour}
+          themeTint={themeTint}
+          loading={loading}
+          handleModal={handleMenuModal}
+          menus={data?.menus}
+        />
+      );
+    }
+    return null;
+  };
+
   return (
     <TabWrapper>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
@@ -102,14 +118,7 @@ const MenuSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => 
           </Button>
         </CardContent>
       </Card>
-      <MenusList
-        restaurantSlug={restaurantSlug}
-        themeColour={themeColour}
-        themeTint={themeTint}
-        loading={loading}
-        handleModal={handleMenuModal}
-        menus={data?.menus}
-      />
+      {renderMenus()}
     </TabWrapper>
   );
 };

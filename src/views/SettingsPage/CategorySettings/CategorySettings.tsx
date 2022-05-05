@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import type { FC } from "react";
-import { Button, Card, CardContent, Modal, Tab, Tabs, TabWrapper } from "@base";
-import { useCategoriesQuery, useMenusQuery, Category } from "@shared";
+import { Alert, Button, Card, CardContent, Modal, Tab, Tabs, TabWrapper } from "@base";
+import { useCategoriesQuery, useMenusQuery, Category, Menu } from "@shared";
 import {
   UpdateCategoryForm,
   DeleteCategoryForm,
   PostCategoryForm,
 } from "src/components/Presentational";
 import Skeleton from "react-loading-skeleton";
-import { ViewGridAddIcon } from "@heroicons/react/solid";
+import { ChevronRightIcon, ViewGridAddIcon } from "@heroicons/react/solid";
 
 import { CategoryList } from "./CategoryList";
 import { SettingsHeader } from "../SettingsHeader";
+import { Link } from "react-router-dom";
 
 enum ModalForms {
   PostCategory = "postCategory",
@@ -26,36 +27,25 @@ interface Props {
 }
 
 const CategorySettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [action, setAction] = useState<ModalForms>(ModalForms.PostCategory);
+  const [activeMenu, setActiveMenu] = useState<Menu>();
+  const [activeCategory, setActiveCategory] = useState<Category>();
+
   const { data, loading: menusLoading } = useMenusQuery({
     variables: {
       restaurantSlug,
     },
+    onCompleted: completedData => setActiveMenu(completedData?.menus?.[0]),
   });
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [action, setAction] = useState<ModalForms>(ModalForms.PostCategory);
-  const [activeMenu, setActiveMenu] = useState(data?.menus?.[0]);
-
-  useEffect(() => {
-    if (data?.menus?.length) {
-      setActiveMenu(data.menus[0]);
-    }
-  }, [data]);
 
   const { data: categoriesData, loading } = useCategoriesQuery({
     variables: {
       menuID: activeMenu?.id || 0,
     },
     skip: !activeMenu?.id,
+    onCompleted: completedData => setActiveCategory(completedData?.categories?.[0]),
   });
-
-  const [activeCategory, setActiveCategory] = useState(categoriesData?.categories?.[0]);
-
-  useEffect(() => {
-    if (categoriesData?.categories?.length) {
-      setActiveCategory(categoriesData?.categories?.[0]);
-    }
-  }, [categoriesData]);
 
   const handleModal = (modalForm: ModalForms, category?: Category) => {
     if (category) {
@@ -103,23 +93,54 @@ const CategorySettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug })
 
   const renderMenusTabs = () => {
     if (menusLoading) return <Skeleton className="my-2" height={50} />;
+    if (data?.menus?.length) {
+      return (
+        <Tabs>
+          {data?.menus.map((menu, index) => (
+            <Tab
+              themeColour={themeColour}
+              themeTint={themeTint}
+              themeFont="Quicksand"
+              onClick={() => setActiveMenu(menu)}
+              numOfTabs={data.menus.length}
+              tabIndex={index}
+              isActive={menu.id === activeMenu?.id}
+              key={menu.id}
+            >
+              {menu.name}
+            </Tab>
+          ))}
+        </Tabs>
+      );
+    }
+    return null;
+  };
+
+  const renderCategories = () => {
+    if (categoriesData?.categories?.length && categoriesData?.categories.length > 1) {
+      return (
+        <CategoryList
+          restaurantSlug={restaurantSlug}
+          themeColour={themeColour}
+          themeTint={themeTint}
+          activeMenu={activeMenu}
+          loading={loading}
+          handleModal={handleModal}
+          categories={categoriesData?.categories}
+        />
+      );
+    }
+  };
+
+  const renderAlert = () => {
+    if (loading || categoriesData?.categories?.length) return null;
     return (
-      <Tabs>
-        {data?.menus.map((menu, index) => (
-          <Tab
-            themeColour={themeColour}
-            themeTint={themeTint}
-            themeFont="Quicksand"
-            onClick={() => setActiveMenu(menu)}
-            numOfTabs={data.menus.length}
-            tabIndex={index}
-            isActive={menu.id === activeMenu?.id}
-            key={menu.id}
-          >
-            {menu.name}
-          </Tab>
-        ))}
-      </Tabs>
+      <Alert type="warning">
+        <Link className="flex" to={`/restaurants/${restaurantSlug}/settings/menus`}>
+          Create a new Menu first before creating a new category
+          <ChevronRightIcon className="h-5 w-5 " />
+        </Link>
+      </Alert>
     );
   };
 
@@ -132,6 +153,7 @@ const CategorySettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug })
         <CardContent>
           <SettingsHeader>Categories</SettingsHeader>
           <Button
+            disabled={!data?.menus?.length}
             themeColour={themeColour}
             themeTint={themeTint}
             size="XXL"
@@ -143,15 +165,8 @@ const CategorySettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug })
         </CardContent>
       </Card>
       {renderMenusTabs()}
-      <CategoryList
-        restaurantSlug={restaurantSlug}
-        themeColour={themeColour}
-        themeTint={themeTint}
-        activeMenu={activeMenu}
-        loading={loading}
-        handleModal={handleModal}
-        categories={categoriesData?.categories}
-      />
+      {renderCategories()}
+      {renderAlert()}
     </TabWrapper>
   );
 };
