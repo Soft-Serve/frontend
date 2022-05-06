@@ -42,6 +42,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<Menu>();
   const [searchValue, setSearchValue] = useState("");
+  const [activeItem, setActiveItem] = useState<Item>();
   const [categoryIDForDeleteItem, setCategoryIDForDeleteItem] = useState(0);
   const [action, setAction] = useState<ModalForms>(ModalForms.PostItem);
   const menuParam = params.get("menu");
@@ -66,9 +67,8 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
       categoryID: categoryData?.categories?.[0]?.id || 0,
     },
     skip: !categoryData?.categories?.[0]?.id,
+    onCompleted: completedData => setActiveItem(completedData?.items?.[0]),
   });
-
-  const [activeItem, setActiveItem] = useState(itemsData?.items?.[0]);
 
   useEffect(() => {
     if (menuParam) {
@@ -82,7 +82,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
       themeColour={themeColour}
       themeTint={themeTint}
       onCompleted={setIsModalOpen}
-      deletedItem={activeItem}
+      deletedItem={activeItem || itemsData?.items?.[0]}
       categoryID={categoryIDForDeleteItem}
     />
   );
@@ -102,7 +102,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
       themeColour={themeColour}
       themeTint={themeTint}
       selectedMenu={activeMenu}
-      selectedItem={activeItem}
+      selectedItem={activeItem || itemsData?.items?.[0]}
       onCompleted={setIsModalOpen}
     />
   );
@@ -113,7 +113,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
       themeColour={themeColour}
       themeTint={themeTint}
       onCompleted={setIsModalOpen}
-      item={activeItem}
+      item={activeItem || itemsData?.items?.[0]}
     />
   );
 
