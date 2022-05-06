@@ -6,6 +6,7 @@ interface Props {
   themeColour: string;
   themeTint: number;
   restaurantSlug: string;
+  children: React.ReactNode;
 }
 const Navigation: FC<Props> = ({ children, themeTint, themeColour, restaurantSlug }) => {
   return (

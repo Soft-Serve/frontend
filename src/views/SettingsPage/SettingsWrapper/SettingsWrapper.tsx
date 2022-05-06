@@ -5,6 +5,7 @@ import { buildStyles } from "./styles";
 
 interface Props {
   css?: TArg;
+  children: React.ReactNode;
 }
 const SettingsWrapper: FC<Props> = ({ children, css }) => {
   return <div className={buildStyles(css)}>{children}</div>;

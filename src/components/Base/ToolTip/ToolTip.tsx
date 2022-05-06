@@ -10,6 +10,7 @@ interface Props {
   isDisabled?: boolean;
   position?: Position;
   css?: TArg;
+  children: React.ReactNode;
 }
 
 const PostionsMap = {

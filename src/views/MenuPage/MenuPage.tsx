@@ -2,7 +2,11 @@ import React from "react";
 import type { FC } from "react";
 import { page } from "./styles";
 
-const MenuPage: FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const MenuPage: FC<Props> = ({ children }) => {
   return <section className={page}>{children}</section>;
 };
 

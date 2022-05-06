@@ -6,6 +6,7 @@ import { container, wrapper } from "./styles";
 interface Props {
   css?: TArg;
   withPadding?: boolean;
+  children: React.ReactNode;
 }
 
 const BoxSection: FC<Props> = ({ children, css, withPadding = true }) => {

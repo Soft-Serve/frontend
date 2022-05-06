@@ -13,6 +13,7 @@ interface Props {
   to?: To;
   onClick?: () => void;
   css?: TArg;
+  children: React.ReactNode;
 }
 
 const NavigationItem: FC<Props> = ({ children, to, onClick, css, themeTint, themeColour }) => {

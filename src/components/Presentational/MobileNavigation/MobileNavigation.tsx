@@ -11,6 +11,7 @@ interface Props {
   themeColour: string;
   themeTint: number;
   restaurantSlug: string;
+  children: React.ReactNode;
 }
 const MobileNavigation: FC<Props> = ({
   isOpen,

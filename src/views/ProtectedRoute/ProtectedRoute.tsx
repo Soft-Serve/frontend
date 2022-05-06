@@ -7,6 +7,7 @@ import { PageNotFound } from "../PageNotFound";
 interface Props {
   user?: User;
   restaurantID: number;
+  children: React.ReactNode;
 }
 const ProtectedRoute: FC<Props> = ({ user, children, restaurantID }) => {
   const isUserValid = user?.restaurant_id === restaurantID;

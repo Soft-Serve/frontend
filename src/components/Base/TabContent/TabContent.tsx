@@ -7,6 +7,7 @@ import { container, wrapper } from "./styles";
 interface Props {
   themeColour: string;
   themeTint: number;
+  children: React.ReactNode;
 }
 
 const TabContent: FC<Props> = ({ children, themeTint, themeColour }) => {

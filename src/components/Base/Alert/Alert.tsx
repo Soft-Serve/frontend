@@ -18,6 +18,7 @@ export type StyleTypes = keyof typeof Styles;
 
 interface Props {
   type: StyleTypes;
+  children: React.ReactNode;
 }
 
 const warning = <ExclamationIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" />;

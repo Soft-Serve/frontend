@@ -11,6 +11,7 @@ interface Props {
   numOfTabs: number;
   onClick: () => void;
   themeFont: ThemeFonts;
+  children: React.ReactNode;
 }
 const Tab: FC<Props> = ({
   children,

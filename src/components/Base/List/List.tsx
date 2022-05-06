@@ -1,7 +1,10 @@
 import React from "react";
 import type { FC } from "react";
 
-const List: FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+const List: FC<Props> = ({ children }) => {
   return (
     <div className="w-full">
       <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">

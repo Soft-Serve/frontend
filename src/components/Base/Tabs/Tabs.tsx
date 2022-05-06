@@ -1,7 +1,10 @@
 import React from "react";
 import type { FC } from "react";
+interface Props {
+  children: React.ReactNode;
+}
 
-const Tabs: FC = ({ children }) => {
+const Tabs: FC<Props> = ({ children }) => {
   return (
     <div className="w-full sm:block">
       <nav

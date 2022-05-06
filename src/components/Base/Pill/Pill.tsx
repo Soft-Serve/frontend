@@ -5,6 +5,7 @@ import { buildStyles, SizeTypes, ColourTypes } from "./styles";
 interface Props {
   type?: ColourTypes;
   size?: SizeTypes;
+  children: React.ReactNode;
 }
 
 const Pill: FC<Props> = ({ children, type, size }) => {

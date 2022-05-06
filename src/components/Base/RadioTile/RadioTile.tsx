@@ -11,6 +11,7 @@ interface Props {
   css?: TArg;
   themeColour: string;
   themeTint: number;
+  children: React.ReactNode;
 }
 
 const RadioTile: FC<Props> = ({

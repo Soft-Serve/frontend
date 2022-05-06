@@ -6,6 +6,7 @@ import { DotsVerticalIcon } from "@heroicons/react/solid";
 interface Props {
   themeColour: string;
   themeTint: number;
+  children: React.ReactNode;
 }
 const KebabDropdown: FC<Props> = ({ children, themeTint, themeColour }) => {
   return (

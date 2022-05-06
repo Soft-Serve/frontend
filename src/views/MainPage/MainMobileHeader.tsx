@@ -20,6 +20,7 @@ interface Props {
   themeTint: number;
   themeFont: ThemeFonts;
   restaurantSlug: string;
+  children: React.ReactNode;
 }
 
 const MainMobileHeader: FC<Props> = ({

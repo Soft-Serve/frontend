@@ -8,6 +8,7 @@ interface Props {
   onClick?: any;
   themeColour: string;
   themeTint: number;
+  children: React.ReactNode;
 }
 
 const KebabDropdownItem: FC<Props> = ({ children, onClick, themeColour, themeTint }) => {

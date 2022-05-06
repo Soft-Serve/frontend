@@ -4,6 +4,7 @@ import type { FC } from "react";
 interface Props {
   themeColour: string;
   themeTint: number;
+  children: React.ReactNode;
 }
 const MobileNavigationWrapper: FC<Props> = ({ children, themeTint, themeColour }) => {
   return (

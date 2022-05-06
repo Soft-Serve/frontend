@@ -7,6 +7,7 @@ interface Props {
   isOpen: boolean;
   onClose: (state: boolean) => void;
   css?: TArg;
+  children: React.ReactNode;
 }
 
 const Modal: FC<Props> = ({ children, isOpen, onClose, css }) => {

@@ -1,7 +1,9 @@
 import React from "react";
 import type { FC } from "react";
-
-const BreadCrumbsNavigation: FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+const BreadCrumbsNavigation: FC<Props> = ({ children }) => {
   return (
     <nav aria-label="Breadcrumb" className="mb-4 w-full overflow-x-scroll rounded-lg p-3">
       {children}

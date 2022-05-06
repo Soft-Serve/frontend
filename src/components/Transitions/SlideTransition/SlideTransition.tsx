@@ -5,6 +5,7 @@ import { transition, getFromStyles, getToStyles } from "./styles";
 interface Props {
   isVisible: boolean;
   direction?: "x" | "y";
+  children: React.ReactNode;
 }
 
 const SlideTransition: FC<Props> = ({ children, isVisible, direction = "x" }) => {

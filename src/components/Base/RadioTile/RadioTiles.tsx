@@ -5,6 +5,7 @@ import type { FC } from "react";
 interface Props {
   value: any;
   onChange: (e: any) => void;
+  children: React.ReactNode;
 }
 const RadioTiles: FC<Props> = ({ value, onChange, children }) => {
   return (

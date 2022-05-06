@@ -17,7 +17,11 @@ const reducer = (activeAllergies: Allergy[], action: Action) => {
   }
 };
 
-const AllergyProvider: FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const AllergyProvider: FC<Props> = ({ children }) => {
   const [activeAllergies, dispatch] = useReducer(reducer, []);
 
   const isAllergyActive = (allergy: Allergy) => {
