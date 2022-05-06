@@ -15,6 +15,9 @@ const ResetPasswordPage = lazy(() => import("./views/ResetPasswordPage/DefaultRe
 const ForgotPasswordPage = lazy(
   () => import("./views/ForgotPasswordPage/DefaultForgotPasswordPage")
 );
+const ForgotPasswordEmailSentPage = lazy(
+  () => import("./views/ForgotPasswordEmailSentPage/DefaultForgotPasswordEmailSentPage")
+);
 
 const App = () => {
   return (
@@ -29,6 +32,10 @@ const App = () => {
             <Route path={routes.confirm} element={<ConfirmEmailPage />} />
             <Route path={routes.resetPassword} element={<ResetPasswordPage />} />
             <Route path={routes.forgotPassword} element={<ForgotPasswordPage />} />
+            <Route
+              path={routes.forgotPasswordEmailSent}
+              element={<ForgotPasswordEmailSentPage />}
+            />
             <Route path={`${routes.restaurants}/:id/*`} element={<MainPage />} />
           </Routes>
         </Suspense>

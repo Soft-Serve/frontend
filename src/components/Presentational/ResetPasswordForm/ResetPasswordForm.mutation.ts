@@ -4,43 +4,28 @@ import { useMutation } from "@apollo/client";
 
 const RESET_PASSWORD_FORM_MUTATION = gql`
   mutation ResetPasswordFormMutation($input: input) {
-    resetPassword(input: $input) @rest(type: User, path: "auth/sign_in", method: "POST") {
+    resetPassword(input: $input) @rest(type: User, path: "auth/password", method: "PATCH") {
       __typename
-      id
-      email
-      first_name
-      last_name
-      role
-      uid
-      client
-      access_token
-      restaurant_id
-      restaurant_slug
     }
   }
 `;
 
 interface User {
-  data: any;
-  id: number;
-  restaurant_id: number;
-  restaurant_slug: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  role: string;
   __typename: string;
-  uid: string;
-  access_token: string;
-  client: string;
 }
 
 interface ResetPasswordFormData {
   signIn: User;
 }
 
+interface ResetPasswordInput {
+  password: string;
+  password_confirmation: string;
+  email: string;
+}
+
 interface Variables {
-  input: Record<string, unknown>;
+  input: ResetPasswordInput;
 }
 
 const useResetPasswordFormMutation = (

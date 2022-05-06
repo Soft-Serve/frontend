@@ -7,6 +7,7 @@ export const routes = {
   confirm: "/confirm",
   settings: "/settings",
   resetPassword: "/reset-password",
+  forgotPasswordEmailSent: "/forgot-password-email-sent",
   forgotPassword: "/forgot-password",
   pageNotFound: "*",
 };
