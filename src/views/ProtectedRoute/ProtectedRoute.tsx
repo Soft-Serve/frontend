@@ -11,8 +11,8 @@ interface Props {
 const ProtectedRoute: FC<Props> = ({ user, children, restaurantID }) => {
   const isUserValid = user?.restaurant_id === restaurantID;
   if (user && isUserValid) return <>{children}</>;
+  else if (user && !isUserValid) return <PageNotFound />;
   else if (!user) return <Navigate to={routes.signIn} replace />;
-  if (user && !isUserValid) return <PageNotFound />;
   return null;
 };
 

@@ -60,7 +60,7 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID })
       setCategoryID(completedData?.categories?.filter(cat => cat.name !== "No category")?.[0]?.id),
   });
 
-  if (loading || menusLoading || userLoading || categoryLoading) return <LoadingScreen />;
+  if (loading || userLoading) return <LoadingScreen />;
 
   const renderItems = () => {
     return (
