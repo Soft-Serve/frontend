@@ -3,9 +3,15 @@ import type { FC } from "react";
 import { Button, Input } from "@base";
 import { isBasicEmailRegexValid, isEmailAtValid, isEmailDotValid } from "@utility";
 import { useForgotPasswordFormMutation } from "./ForgotPasswordForm.mutation";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPasswordForm: FC = () => {
-  const [forgotPassword, { loading }] = useForgotPasswordFormMutation();
+  const navigate = useNavigate();
+  const [forgotPassword, { loading }] = useForgotPasswordFormMutation({
+    onCompleted: () => {
+      navigate("/forgot-password-email-sent");
+    },
+  });
   const [isEmailDirty, setIsEmailDirty] = useState(false);
   const [input, setInput] = useState({
     email: "",

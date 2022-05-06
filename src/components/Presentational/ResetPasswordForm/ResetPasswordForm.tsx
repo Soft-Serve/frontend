@@ -1,17 +1,41 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import type { FC } from "react";
+import { useGetParams } from "@utility";
 import { Button, PasswordInput } from "@base";
 import { useResetPasswordFormMutation } from "./ResetPasswordForm.mutation";
+import { accessToken, uid, clientToken } from "src/constants";
+import { useSignInFormMutation } from "../SignInForm/SignInForm.mutation";
+import { useNavigate } from "react-router-dom";
 
 const ResetPasswordForm: FC = () => {
-  const [isLoginSuccesFul, setIsLoginSuccessFull] = useState(true);
-  const [signIn, { loading }] = useResetPasswordFormMutation({
-    onError: () => setIsLoginSuccessFull(false),
-  });
+  const params = useGetParams();
+  const navigate = useNavigate();
+  const [passwordIsValid, setPasswordIsValid] = useState(true);
 
   const [input, setInput] = useState({
     password_confirmation: "",
     password: "",
+  });
+
+  const [signIn, { loading: signInLoading }] = useSignInFormMutation({
+    onCompleted: completedData => {
+      navigate(`/restaurants/${completedData?.signIn?.restaurant_slug}`);
+    },
+  });
+
+  const [resetPassword, { loading }] = useResetPasswordFormMutation({
+    onCompleted: () => {
+      signIn({
+        variables: {
+          input: {
+            email: params.get("uid"),
+            password: input.password,
+          },
+        },
+      });
+    },
+
+    onError: () => setPasswordIsValid(false),
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +46,7 @@ const ResetPasswordForm: FC = () => {
   const isFormValid = !!input.password_confirmation && !!input.password;
 
   const renderLoginError = () => {
-    if (!isLoginSuccesFul) {
+    if (!passwordIsValid) {
       return <span>Password is invalid</span>;
     }
     return null;
@@ -31,10 +55,19 @@ const ResetPasswordForm: FC = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (isFormValid) {
-      setIsLoginSuccessFull(true);
-      signIn({
+      localStorage.setItem(accessToken, params.get("access-token") || "");
+      localStorage.setItem(uid, params.get("uid") || "");
+      localStorage.setItem(clientToken, params.get("client") || "");
+
+      setPasswordIsValid(true);
+
+      resetPassword({
         variables: {
-          input,
+          input: {
+            password: input.password,
+            password_confirmation: input.password_confirmation,
+            email: params.get("uid") || "",
+          },
         },
       });
     }
@@ -76,7 +109,7 @@ const ResetPasswordForm: FC = () => {
               <Button
                 themeColour="red"
                 themeTint={400}
-                loading={loading}
+                loading={loading || signInLoading}
                 isFullwidth
                 size="XXL"
                 type="submit"
