@@ -34,6 +34,7 @@ const CategoryList: FC<Props> = ({
   if (loading) {
     return <SkeletonList />;
   }
+
   return (
     <Card css={classnames("mt-4", "overflow-visible")}>
       <CardContent>

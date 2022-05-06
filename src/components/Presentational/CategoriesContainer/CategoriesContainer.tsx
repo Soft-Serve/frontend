@@ -1,10 +1,12 @@
 import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { Categories } from "@presentational";
-import { useCategoriesQuery } from "@shared";
+import { Category } from "@shared";
 import { ThemeFonts } from "@base";
 
 interface Props {
+  isCategoriesLoading: boolean;
+  categories: Category[];
   themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
@@ -13,23 +15,15 @@ interface Props {
   categoryID: number;
 }
 const CategoriesContainer: FC<Props> = ({
+  isCategoriesLoading,
+  categories,
   themeFont,
   themeTint,
   themeColour,
-  menuID,
   setCategoryID,
   categoryID,
 }) => {
-  const { data, loading } = useCategoriesQuery({
-    variables: {
-      menuID,
-    },
-    skip: !menuID,
-
-    onCompleted: completedData => setCategoryID(completedData?.categories[0]?.id),
-  });
-
-  if (data?.categories && data?.categories?.length <= 1) {
+  if (categories.length < 1) {
     return null;
   }
 
@@ -42,8 +36,8 @@ const CategoriesContainer: FC<Props> = ({
           themeTint={themeTint}
           themeFont={themeFont}
           setCategoryID={setCategoryID}
-          loading={loading}
-          categories={data?.categories}
+          loading={isCategoriesLoading}
+          categories={categories}
         />
       </div>
     </div>

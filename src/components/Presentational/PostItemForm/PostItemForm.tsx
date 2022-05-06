@@ -1,7 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import type { FC, ChangeEvent, FormEvent } from "react";
-import { Item, ItemsData, ItemSize, ITEMS_QUERY, Menu, useCategoriesQuery } from "@shared";
-import { Button, Dropdown, Input, UploadImageBox, Tooltip, TextBox, Notification } from "@base";
+import {
+  Category,
+  Item,
+  ItemsData,
+  ItemSize,
+  ITEMS_QUERY,
+  Menu,
+  useCategoriesQuery,
+} from "@shared";
+import { Button, Input, UploadImageBox, Tooltip, TextBox, Notification, Dropdown } from "@base";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 import { classnames } from "tailwindcss-classnames";
@@ -17,15 +25,24 @@ import {
   hasBeginningWhiteSpace,
 } from "@utility";
 import { usePostItemMutation } from "./PostItem.mutation";
+import { RESTAURANT_ONBOARDING_QUERY } from "../Restaurant/RestaurantOnboarding.query";
 
 interface Props {
+  restaurantSlug: string;
   onCompleted?: (state: boolean) => void;
   selectedMenu?: Menu;
   themeColour: string;
   themeTint: number;
 }
 
-const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, themeTint }) => {
+const PostItemForm: FC<Props> = ({
+  onCompleted,
+  selectedMenu,
+  themeColour,
+  themeTint,
+  restaurantSlug,
+}) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { photoFile, setPhotoFile, fetchPhoto } = useUploadPhoto();
   const [isInputNameDirty, setIsInputNameDirty] = useState(false);
   const onSuccess = () => toast.custom(<Notification header="Item succesfully added!" />);
@@ -36,15 +53,12 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, theme
     },
   });
 
-  const [activeCategory, setActiveCategory] = useState(categoryData?.categories?.[0]);
+  const filteredCategories =
+    categoryData?.categories && categoryData.categories.length > 1
+      ? categoryData.categories.filter(cat => cat.name !== "No category")
+      : categoryData?.categories ?? [];
 
-  useEffect(() => {
-    if (categoryData?.categories?.length === 1) {
-      setActiveCategory(categoryData?.categories?.[0]);
-    } else {
-      setActiveCategory(undefined);
-    }
-  }, [selectedMenu, categoryData?.categories]);
+  const [activeCategory, setActiveCategory] = useState(() => filteredCategories[0]);
 
   const size: ItemSize = {
     price: "",
@@ -64,6 +78,14 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, theme
     sizes: [size],
     __typename: "Item",
   });
+
+  const handleCategoryChange = (category: Category) => {
+    setActiveCategory(category);
+    setInput(prevState => ({
+      ...prevState,
+      menu_category_id: category.id,
+    }));
+  };
 
   const onSizeChange = (e: ChangeEvent<HTMLInputElement>, id: string) => {
     const { name, value } = e.target;
@@ -85,8 +107,17 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, theme
     }));
 
   const [postItem, { loading }] = usePostItemMutation({
+    refetchQueries: [
+      {
+        query: RESTAURANT_ONBOARDING_QUERY,
+        variables: {
+          restaurantSlug,
+        },
+      },
+    ],
     onCompleted: () => {
       onCompleted?.(false);
+      setIsLoading(false);
       onSuccess();
     },
     update(cache, { data: newPostItemData }) {
@@ -134,6 +165,7 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, theme
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isFormValid) {
+      setIsLoading(true);
       const photo = await fetchPhoto();
       postItem({
         variables: {
@@ -184,8 +216,8 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, theme
           label="Category"
           defaultValue="Select category"
           value={activeCategory}
-          onChange={setActiveCategory}
-          data={categoryData?.categories}
+          onChange={(cat: Category) => handleCategoryChange(cat)}
+          data={filteredCategories}
         />
         <div className="mt-4">
           <Input
@@ -239,7 +271,7 @@ const PostItemForm: FC<Props> = ({ onCompleted, selectedMenu, themeColour, theme
           <Button
             themeColour={themeColour}
             themeTint={themeTint}
-            loading={loading}
+            loading={loading || isLoading}
             disabled={!isFormValid}
             isFullwidth
             size="XXL"

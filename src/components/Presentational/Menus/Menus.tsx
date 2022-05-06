@@ -1,62 +1,45 @@
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { Tab, Tabs, Container, BoxSection, Button, Typography, ThemeFonts } from "@base";
 import { FullLogoSVG } from "@svgs";
-import { useMenusQuery } from "@shared";
+import { Menu } from "@shared";
 import { routes } from "src/routes";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router";
 import { classnames } from "tailwindcss-classnames";
 
 interface Props {
+  menus: Menu[];
+  isMenuLoading: boolean;
   themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
   restaurantSlug: string;
   setMenuID: Dispatch<SetStateAction<number>>;
-  setActiveMenu: Dispatch<SetStateAction<string>>;
   menuID: number;
 }
 const Menus: FC<Props> = ({
+  isMenuLoading,
+  menus,
   themeFont,
   themeColour,
   themeTint,
   restaurantSlug,
-  setActiveMenu,
   setMenuID,
   menuID,
 }) => {
   const navigate = useNavigate();
 
-  const { data, error, loading } = useMenusQuery({
-    variables: {
-      restaurantSlug,
-    },
-    onCompleted: completedData => {
-      if (completedData?.menus?.length > 0) {
-        setMenuID(completedData?.menus?.[0]?.id);
-        setActiveMenu(completedData?.menus?.[0]?.name);
-      }
-    },
-  });
-
-  useEffect(() => {
-    if (data?.menus?.[0].name) setActiveMenu(data.menus[0].name);
-    if (data?.menus?.[0].id) setMenuID(data.menus[0].id);
-  }, [setActiveMenu, setMenuID, data?.menus]);
-
-  if (error) return <p>error</p>;
-
-  if (loading) return <Skeleton height={40} />;
+  if (isMenuLoading) return <Skeleton height={40} />;
 
   const renderTabs = () =>
-    data?.menus.map((menu, index) => (
+    menus.map((menu, index) => (
       <Tab
         themeColour={themeColour}
         themeTint={themeTint}
         themeFont={themeFont}
         onClick={() => setMenuID(menu.id)}
-        numOfTabs={data.menus.length}
+        numOfTabs={menus.length}
         tabIndex={index}
         isActive={menu.id === menuID}
         key={menu.id}
@@ -65,7 +48,7 @@ const Menus: FC<Props> = ({
       </Tab>
     ));
 
-  if (data?.menus?.length) {
+  if (menus.length) {
     return <Tabs>{renderTabs()}</Tabs>;
   }
   return (

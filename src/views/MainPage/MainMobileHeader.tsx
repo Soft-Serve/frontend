@@ -210,7 +210,7 @@ const MainMobileHeader: FC<Props> = ({
                 leaveTo="transform opacity-0 scale-95"
               >
                 <Menu.Items
-                  className={`absolute right-0 z-50 w-56 origin-top-right divide-y divide-gray-300 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none `}
+                  className={`absolute right-0 z-50 w-56 origin-top-right divide-y divide-gray-300 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
                 >
                   {renderUser()}
                   <div className="py-1">{renderSettingsNav()}</div>

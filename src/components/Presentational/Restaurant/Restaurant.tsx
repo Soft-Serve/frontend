@@ -2,10 +2,14 @@ import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { classnames } from "tailwindcss-classnames";
 import { Items, Menus, CategoriesContainer, WelcomePage, MobileSubHeader } from "@presentational";
-import { useMenusQuery, RESTAURANT_QUERY, useRestaurantThemeQuery } from "@shared";
+import {
+  useMenusQuery,
+  useRestaurantThemeQuery,
+  useCurrentUserQuery,
+  useCategoriesQuery,
+} from "@shared";
 import { Container, BoxSection, HeroBanner, LoadingScreen } from "@base";
 
-import { useUpdateRestaurantOnboarding } from "./UpdateRestaurantOnboarding.mutation";
 import { useRestaurantOnboardingQuery } from "./RestaurantOnboarding.query";
 import { useParams } from "react-router-dom";
 
@@ -18,12 +22,12 @@ interface Props {
   setMenuID: Dispatch<SetStateAction<number>>;
   categoryID: number;
   setCategoryID: Dispatch<SetStateAction<number>>;
-  activeMenu: string;
-  setActiveMenu: Dispatch<SetStateAction<string>>;
 }
 
-const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID, setActiveMenu }) => {
+const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID }) => {
   const { id: restaurantSlug } = useParams<Param>() as Param;
+
+  const { data: currentUser, loading: userLoading } = useCurrentUserQuery();
 
   const { data: themeData } = useRestaurantThemeQuery({
     variables: {
@@ -43,31 +47,20 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID, s
     variables: {
       restaurantSlug,
     },
+    skip: !restaurantSlug,
+    onCompleted: completedData => setMenuID(completedData?.menus?.[0]?.id),
   });
 
-  const [updateRestaurantOnboarding] = useUpdateRestaurantOnboarding({
-    refetchQueries: [
-      {
-        query: RESTAURANT_QUERY,
-        variables: {
-          restaurantSlug,
-        },
-      },
-    ],
+  const { data: categoryData, loading: categoryLoading } = useCategoriesQuery({
+    variables: {
+      menuID,
+    },
+    skip: !menuID,
+    onCompleted: completedData =>
+      setCategoryID(completedData?.categories?.filter(cat => cat.name !== "No category")?.[0]?.id),
   });
 
-  if (loading || menusLoading) return <LoadingScreen />;
-
-  const hideWelcomePage = () => {
-    updateRestaurantOnboarding({
-      variables: {
-        input: {
-          id: restaurantSlug,
-          onboarding_done: true,
-        },
-      },
-    });
-  };
+  if (loading || menusLoading || userLoading || categoryLoading) return <LoadingScreen />;
 
   const renderItems = () => {
     return (
@@ -89,13 +82,15 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID, s
       <Container>
         <BoxSection withPadding css={classnames("lg:py-10")}>
           <WelcomePage
+            restaurantName={data?.restaurant?.name}
+            isAdmin={!!currentUser?.currentUser}
+            adminName={currentUser?.currentUser?.first_name}
             restaurantSlug={restaurantSlug}
             themeColour={themeData?.restaurant?.colour || "red"}
             themeTint={themeData?.restaurant?.tint || 400}
             hasMenus={menusData?.menus.length !== 0}
             hasItems={!!data?.restaurant?.has_items}
             hasStyles={!!data?.restaurant?.has_styles}
-            hideWelcomePage={hideWelcomePage}
           />
         </BoxSection>
       </Container>
@@ -103,6 +98,8 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID, s
   }
 
   if (data?.restaurant.has_items) {
+    const categories = categoryData?.categories?.filter(cat => cat.name !== "No category") ?? [];
+
     return (
       <>
         <HeroBanner
@@ -114,7 +111,8 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID, s
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
             <div className="hidden w-full lg:flex">
               <Menus
-                setActiveMenu={setActiveMenu}
+                isMenuLoading={menusLoading}
+                menus={menusData?.menus ?? []}
                 setMenuID={setMenuID}
                 menuID={menuID}
                 restaurantSlug={restaurantSlug}
@@ -124,6 +122,8 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID, s
               />
             </div>
             <CategoriesContainer
+              categories={categories}
+              isCategoriesLoading={categoryLoading}
               categoryID={categoryID}
               menuID={menuID}
               setCategoryID={setCategoryID}
@@ -132,6 +132,8 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID, s
               themeTint={themeData?.restaurant?.tint || 400}
             />
             <MobileSubHeader
+              categories={categories}
+              isCategoriesLoading={categoryLoading}
               menuID={menuID}
               categoryID={categoryID}
               setCategoryID={setCategoryID}

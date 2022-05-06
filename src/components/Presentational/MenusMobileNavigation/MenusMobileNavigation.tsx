@@ -21,7 +21,6 @@ const MenusMobileNavigation: FC<Props> = ({
   restaurantSlug,
   setMenuID,
   menuID,
-
   ...rest
 }) => {
   const { data } = useMenusQuery({
@@ -33,7 +32,7 @@ const MenusMobileNavigation: FC<Props> = ({
   const isActiveMenu = data?.menus?.find(menu => menu.id === menuID);
 
   return (
-    <nav aria-label="Sections" {...rest} className="flex h-full flex-col justify-between">
+    <nav aria-label="Sections" {...rest} className="z-50 flex h-full flex-col justify-between">
       <div className="border-blue-gray-200 flex h-16 flex-shrink-0 items-center border-b px-6">
         <p className={`text-blue-gray-900 text-lg font-bold font-${themeFont}`}>Select Menu</p>
       </div>

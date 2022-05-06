@@ -1,14 +1,26 @@
 import React, { useEffect, useState } from "react";
 import type { FC } from "react";
 import Skeleton from "react-loading-skeleton";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Category, Item, Menu, useCategoriesQuery, useItemsQuery, useMenusQuery } from "@shared";
-import { Button, Card, CardContent, Grid, Modal, Tab, Tabs, TabWrapper, ThemeFonts } from "@base";
-import { SearchIcon, PlusCircleIcon } from "@heroicons/react/solid";
+import {
+  Alert,
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  Modal,
+  Tab,
+  Tabs,
+  TabWrapper,
+  ThemeFonts,
+} from "@base";
+import { PlusCircleIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import { AddDietaryForm, DeleteItemForm, PostItemForm, UpdateItemForm } from "@presentational";
 import { useGetParams } from "@utility";
 import { CategoryItems } from "./CategoryItems";
 import { SettingsHeader } from "../SettingsHeader";
+import { SearchBar } from "./SearchBar";
 
 enum ModalForms {
   PostItem = "postItem",
@@ -28,19 +40,22 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
   const params = useGetParams();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<Menu>();
+  const [searchValue, setSearchValue] = useState("");
+  const [activeItem, setActiveItem] = useState<Item>();
+  const [categoryIDForDeleteItem, setCategoryIDForDeleteItem] = useState(0);
+  const [action, setAction] = useState<ModalForms>(ModalForms.PostItem);
+  const menuParam = params.get("menu");
+  const categoryParam = params.get("category");
 
   const { data: menuData, loading: menuLoading } = useMenusQuery({
     variables: {
       restaurantSlug,
     },
+    onCompleted: completedData => setActiveMenu(completedData?.menus?.[0]),
   });
 
-  const [activeMenu, setActiveMenu] = useState(menuData?.menus?.[0]);
-  const [searchValue, setSearchValue] = useState("");
-  const [categoryIDForDeleteItem, setCategoryIDForDeleteItem] = useState(0);
-  const [action, setAction] = useState<ModalForms>(ModalForms.PostItem);
-
-  const { data: categoryData } = useCategoriesQuery({
+  const { data: categoryData, loading } = useCategoriesQuery({
     variables: {
       menuID: activeMenu?.id || 0,
     },
@@ -52,35 +67,29 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
       categoryID: categoryData?.categories?.[0]?.id || 0,
     },
     skip: !categoryData?.categories?.[0]?.id,
+    onCompleted: completedData => setActiveItem(completedData?.items?.[0]),
   });
-
-  const [activeItem, setActiveItem] = useState(itemsData?.items?.[0]);
-  useEffect(() => {
-    setActiveMenu(menuData?.menus[0]);
-  }, [menuData?.menus]);
-
-  const menuParam = params.get("menu");
-  const categoryParam = params.get("category");
 
   useEffect(() => {
     if (menuParam) {
       const selectedMenu = menuData?.menus?.find(menu => menu.name === menuParam);
       setActiveMenu(selectedMenu);
     }
-  }, [menuData?.menus, menuParam]);
+  }, [menuParam]);
 
   const deleteItem = (
     <DeleteItemForm
       themeColour={themeColour}
       themeTint={themeTint}
       onCompleted={setIsModalOpen}
-      deletedItem={activeItem}
+      deletedItem={activeItem || itemsData?.items?.[0]}
       categoryID={categoryIDForDeleteItem}
     />
   );
 
   const postItem = (
     <PostItemForm
+      restaurantSlug={restaurantSlug}
       themeColour={themeColour}
       themeTint={themeTint}
       selectedMenu={activeMenu}
@@ -93,7 +102,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
       themeColour={themeColour}
       themeTint={themeTint}
       selectedMenu={activeMenu}
-      selectedItem={activeItem}
+      selectedItem={activeItem || itemsData?.items?.[0]}
       onCompleted={setIsModalOpen}
     />
   );
@@ -104,7 +113,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
       themeColour={themeColour}
       themeTint={themeTint}
       onCompleted={setIsModalOpen}
-      item={activeItem}
+      item={activeItem || itemsData?.items?.[0]}
     />
   );
 
@@ -179,6 +188,27 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
     return categories?.filter(category => category.name === categoryParam);
   };
 
+  const renderSearchBar = () => {
+    if (loading) return null;
+    if (categoryData?.categories?.length) {
+      <SearchBar
+        themeColour={themeColour}
+        themeTint={themeTint}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />;
+    } else {
+      return (
+        <Alert type="warning">
+          <Link className="flex" to={`/restaurants/${restaurantSlug}/settings/menus`}>
+            Create a new Menu first before creating a new item
+            <ChevronRightIcon className="h-5 w-5 " />
+          </Link>
+        </Alert>
+      );
+    }
+  };
+
   return (
     <TabWrapper>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
@@ -189,6 +219,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
           <div className="mb-4 flex w-full items-center justify-between">
             <SettingsHeader>Items</SettingsHeader>
             <Button
+              disabled={!categoryData?.categories?.length}
               themeColour={themeColour}
               themeTint={themeTint}
               onClick={handlePostItem}
@@ -201,35 +232,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
         </CardContent>
       </Card>
       {renderMenusTabs()}
-      <Card css="mt-4">
-        <CardContent>
-          <div className="flex w-full flex-col">
-            <div className="flex w-full items-center ">
-              <label
-                htmlFor="search"
-                className="ml-4 block font-Quicksand text-sm font-bold text-gray-900"
-              >
-                Search items
-              </label>
-              <div className="ml-4 mt-1 min-w-0 flex-1">
-                <div className="relative rounded-md shadow-sm">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                    <SearchIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                  </div>
-                  <input
-                    value={searchValue}
-                    onChange={e => setSearchValue(e.target.value)}
-                    type="search"
-                    name="search"
-                    id="search"
-                    className={`focus:ring-${themeColour}-${themeTint} focus:border-${themeColour}-${themeTint} block w-full border-2 pl-10 sm:text-sm border-${themeColour}-${themeTint} h-full rounded-md py-2 focus:outline-none`}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      {renderSearchBar()}
       <div className="mt-8">
         <Grid size="SM">
           {filteredCategories(categoryData?.categories)?.map(category => (

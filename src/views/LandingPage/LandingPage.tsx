@@ -22,6 +22,7 @@ import menuImage from "./menu_image.png";
 import bellaCiaoSettings from "./bella_ciao_settings.png";
 import cafeMontySettings from "./cafe_monty_settings.png";
 import computer from "./computer.png";
+import { routes } from "src/routes";
 
 const navigation = {
   main: [
@@ -297,12 +298,12 @@ const LandingPage: FC = () => {
                       dishes every Soft Serve menu is completely unique.
                     </p>
                     <div className="mt-6">
-                      <a
-                        href="/"
+                      <Link
+                        to={routes.signUp}
                         className="inline-flex rounded-md border border-transparent bg-white bg-origin-border px-4 py-2 font-Quicksand text-base font-bold text-red-400 shadow-sm hover:from-red-700 hover:to-red-700"
                       >
                         Start free trial
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -459,12 +460,12 @@ const LandingPage: FC = () => {
                       )}
                       <div className="mt-8">
                         <div className="rounded-md shadow">
-                          <a
-                            href="/"
+                          <Link
+                            to={routes.signUp}
                             className="flex items-center justify-center rounded-md border border-transparent bg-gray-800 px-5 py-3 font-Quicksand text-base font-medium text-white hover:bg-gray-900"
                           >
                             Start free trial
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>

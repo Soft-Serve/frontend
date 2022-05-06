@@ -28,7 +28,7 @@ const MenuSlideOver: FC<Props> = ({
 }) => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
-      <Dialog as="div" static className="fixed inset-0 z-40 flex" open={isOpen} onClose={onClose}>
+      <Dialog as="div" static className="fixed inset-0 z-50 flex" open={isOpen} onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="transition-opacity ease-linear duration-300"

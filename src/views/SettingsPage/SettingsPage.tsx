@@ -3,13 +3,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Toaster } from "react-hot-toast";
 import { SettingsSubMenu } from "@presentational";
-import { Navigate } from "react-router-dom";
 import { useViewport } from "@hooks";
-import { Button, FontsMap, Footer, LoadingScreen, TabContent } from "@base";
-import { useCurrentUserQuery, useRestaurantThemeQuery } from "@shared";
+import { Button, FontsMap, Footer, TabContent } from "@base";
+import { useRestaurantThemeQuery } from "@shared";
 import { ChevronRightIcon } from "@heroicons/react/solid";
 import { classnames } from "tailwindcss-classnames";
-import { routes } from "@routes";
 import { SettingsMobileSubNavigation } from "./SettingsMobileSubNavigation";
 import { AccountSettings } from "./AccountSettings";
 import { UsersSettings } from "./UsersSettings";
@@ -37,7 +35,6 @@ interface Props {
 const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
   const { id } = useParams<Param>() as Param;
   const [isOpen, onClose] = useState(false);
-  const { data, loading } = useCurrentUserQuery();
   const { data: themeData } = useRestaurantThemeQuery({
     variables: {
       restaurantSlug,
@@ -133,7 +130,7 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
 
   const renderSettingsTab = () => SettingsMap[id];
 
-  const handleSetSelected = (value: any) => {
+  const handleSetSelected = (value: string) => {
     setSelected(value);
     onClose(false);
   };
@@ -148,56 +145,51 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
     );
   };
 
-  if (loading) return <LoadingScreen />;
-
-  if (data?.currentUser) {
-    return (
-      <>
-        <div className="mt-4 ml-4 block print:hidden lg:hidden">
-          <Button
-            css={classnames("items-center")}
-            size="XL"
-            onClick={() => onClose(prevState => !prevState)}
+  return (
+    <>
+      <div className="mt-4 ml-4 block print:hidden lg:hidden">
+        <Button
+          css={classnames("items-center")}
+          size="XL"
+          onClick={() => onClose(prevState => !prevState)}
+          themeColour={themeData?.restaurant?.colour || "red"}
+          themeTint={themeData?.restaurant?.tint || 400}
+        >
+          Settings
+          <ChevronRightIcon className="h-5 w-5 text-white" />
+        </Button>
+      </div>
+      <SettingsMobileSubNavigation
+        restaurantSlug={restaurantSlug}
+        themeColour={themeData?.restaurant?.colour || "red"}
+        themeTint={themeData?.restaurant?.tint || 400}
+        selected={selected}
+        setSelected={handleSetSelected}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
+      <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
+        <SettingsWrapper>
+          <SettingsSubMenu
+            restaurantSlug={restaurantSlug}
+            themeColour={themeData?.restaurant?.colour || "red"}
+            themeTint={themeData?.restaurant?.tint || 400}
+            selected={selected}
+            setSelected={setSelected}
+            className="border-blue-gray-200 hidden w-96 flex-shrink-0 border-r bg-white lg:block xl:flex xl:flex-col "
+          />
+          <TabContent
             themeColour={themeData?.restaurant?.colour || "red"}
             themeTint={themeData?.restaurant?.tint || 400}
           >
-            Settings
-            <ChevronRightIcon className="h-5 w-5 text-white" />
-          </Button>
-        </div>
-        <SettingsMobileSubNavigation
-          restaurantSlug={restaurantSlug}
-          themeColour={themeData?.restaurant?.colour || "red"}
-          themeTint={themeData?.restaurant?.tint || 400}
-          selected={selected}
-          setSelected={handleSetSelected}
-          isOpen={isOpen}
-          onClose={onClose}
-        />
-        <SettingsWrapper css={classnames("overflow-y-auto", "flex-col")}>
-          <SettingsWrapper>
-            <SettingsSubMenu
-              restaurantSlug={restaurantSlug}
-              themeColour={themeData?.restaurant?.colour || "red"}
-              themeTint={themeData?.restaurant?.tint || 400}
-              selected={selected}
-              setSelected={setSelected}
-              className="border-blue-gray-200 hidden w-96 flex-shrink-0 border-r bg-white lg:block xl:flex xl:flex-col "
-            />
-            <TabContent
-              themeColour={themeData?.restaurant?.colour || "red"}
-              themeTint={themeData?.restaurant?.tint || 400}
-            >
-              {renderSettingsTab()}
-            </TabContent>
-          </SettingsWrapper>
-          {renderMobileFooter()}
+            {renderSettingsTab()}
+          </TabContent>
         </SettingsWrapper>
-        <Toaster />
-      </>
-    );
-  }
-  return <Navigate to={routes.signIn} />;
+        {renderMobileFooter()}
+      </SettingsWrapper>
+      <Toaster />
+    </>
+  );
 };
 
 export { SettingsPage };

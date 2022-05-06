@@ -13,7 +13,6 @@ const link = new RestLink({
   headers: {
     Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.",
     "Content-Type": "application/json; charset=utf-8",
-    "Access-Control-Allow-Origin": "*",
   },
 });
 

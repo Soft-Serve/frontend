@@ -3,11 +3,12 @@ import type { FC } from "react";
 import { Route, Routes, useLocation, useParams, Navigate } from "react-router-dom";
 import { Footer, LoadingScreen } from "@base";
 import { MenuSlideOver, AllergyModal, AllergyFiltersSideMenu, Restaurant } from "@presentational";
-import { useRestaurantThemeQuery } from "@shared";
+import { useCurrentUserQuery, useRestaurantThemeQuery } from "@shared";
 import { MenuPage } from "../MenuPage";
 import { Providers } from "./Providers";
 import { MainNavigation } from "./MainNavigation";
 import { MainMobileHeader } from "./MainMobileHeader";
+import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 
 const SettingsPage = lazy(() => import("../SettingsPage/DefaultSettingsPage"));
 
@@ -24,8 +25,7 @@ const MainPage: FC = () => {
   const [isMenuSlideOverOpen, setIsMenuSlideOverOpen] = useState(false);
   const [menuID, setMenuID] = useState(0);
   const [categoryID, setCategoryID] = useState(0);
-  const [activeMenu, setActiveMenu] = useState("");
-
+  const { data: userData, loading: userLoading } = useCurrentUserQuery();
   const { data, loading } = useRestaurantThemeQuery({
     variables: {
       restaurantSlug,
@@ -43,7 +43,7 @@ const MainPage: FC = () => {
     );
   };
 
-  if (loading) {
+  if (loading || userLoading) {
     return <LoadingScreen />;
   }
 
@@ -99,9 +99,7 @@ const MainPage: FC = () => {
                   element={
                     <Restaurant
                       categoryID={categoryID}
-                      activeMenu={activeMenu}
                       menuID={menuID}
-                      setActiveMenu={setActiveMenu}
                       setCategoryID={setCategoryID}
                       setMenuID={setMenuID}
                     />
@@ -109,7 +107,14 @@ const MainPage: FC = () => {
                 />
                 <Route
                   path="settings/:id"
-                  element={<SettingsPage restaurantSlug={restaurantSlug} />}
+                  element={
+                    <ProtectedRoute
+                      restaurantID={data?.restaurant?.id || 0}
+                      user={userData?.currentUser}
+                    >
+                      <SettingsPage restaurantSlug={restaurantSlug} />
+                    </ProtectedRoute>
+                  }
                 />
               </Routes>
             </Suspense>
@@ -120,7 +125,7 @@ const MainPage: FC = () => {
     );
   }
 
-  return <Navigate to="/not-found" />;
+  return <Navigate to="/not-found" replace />;
 };
 
 export { MainPage };

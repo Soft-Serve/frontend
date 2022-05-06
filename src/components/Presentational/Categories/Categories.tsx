@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect } from "react";
+import React, { SetStateAction } from "react";
 import type { FC } from "react";
 import { Category } from "@shared";
 import { SkeletonCategories } from "./SkeletonCategories";
@@ -7,7 +7,7 @@ import { useStyles } from "./styles";
 import { ThemeFonts } from "@base";
 
 interface Props {
-  categories?: Category[];
+  categories: Category[];
   loading?: boolean;
   setCategoryID: (value: SetStateAction<number>) => void;
   themeFont: ThemeFonts;
@@ -34,14 +34,12 @@ const Categories: FC<Props> = ({
     themeTint
   );
 
-  useEffect(() => {
-    if (categories?.[0]?.id) setCategoryID(categories?.[0]?.id);
-  }, [setCategoryID, categories]);
+  const handleChange = (cat: Category) => setCategoryID(cat.id);
 
   if (loading) return <SkeletonCategories />;
 
   const renderCategories = () =>
-    categories?.map(option => (
+    categories.map(option => (
       <RadioGroup.Option
         key={option.name}
         value={option}
@@ -65,11 +63,11 @@ const Categories: FC<Props> = ({
   return (
     <div className="flex ">
       <RadioGroup
-        value={categories?.find(cat => cat?.id === categoryID)}
-        onChange={currentCategory => setCategoryID(currentCategory?.id || 0)}
+        value={categories.find(cat => cat.id === categoryID)}
+        onChange={handleChange}
         className="mt-2"
       >
-        <RadioGroup.Label className="sr-only">Choose a memory option</RadioGroup.Label>
+        <RadioGroup.Label className="sr-only">Choose a category</RadioGroup.Label>
         <div className="flex w-full ">{renderCategories()}</div>
       </RadioGroup>
     </div>

@@ -25,7 +25,7 @@ const MobileNavigation: FC<Props> = ({
       <Dialog
         as="div"
         static
-        className="fixed inset-0 z-40 flex lg:hidden"
+        className="fixed inset-0 z-50 flex lg:hidden"
         open={isOpen}
         onClose={onClose}
       >
