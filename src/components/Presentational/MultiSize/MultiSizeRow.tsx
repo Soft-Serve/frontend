@@ -3,6 +3,7 @@ import type { FC, ChangeEvent } from "react";
 import { Input, Button } from "@base";
 import { TrashIcon } from "@heroicons/react/solid";
 import { ItemSize } from "src/shared";
+import { classnames } from "tailwindcss-classnames";
 
 interface Props {
   numberOfSizes: number;
@@ -47,24 +48,30 @@ const MultiSizeRow: FC<Props> = ({
     return errors.filter(e => !!e).length > 0;
   };
 
+  const renderSizeInput = () => {
+    if (numberOfSizes === 1) return null;
+    return (
+      <div className="w-40">
+        <Input
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onChange={e => onChange(e, size?.id || "")}
+          value={size.unit}
+          placeholder="5 OZ"
+          type="text"
+          name="unit"
+          id="unit"
+          required
+        />
+      </div>
+    );
+  };
+
   return (
     <>
       <div className="flex w-full items-center justify-between p-2">
-        <div className="w-40">
-          <Input
-            disabled={numberOfSizes === 1}
-            themeColour={themeColour}
-            themeTint={themeTint}
-            onChange={e => onChange(e, size?.id || "")}
-            value={size.unit}
-            placeholder="5 OZ"
-            type="text"
-            name="unit"
-            id="unit"
-            required
-          />
-        </div>
-        <div className="mx-2">
+        {renderSizeInput()}
+        <div className={classnames("mx-2", { ["w-full"]: numberOfSizes === 1 })}>
           <Input
             themeColour={themeColour}
             themeTint={themeTint}
@@ -88,7 +95,7 @@ const MultiSizeRow: FC<Props> = ({
             onClick={() => deleteSize(size?.id || "")}
             size="S"
             colour="accent"
-            css="border-none"
+            css={classnames("border-none", "mt-2")}
           >
             <TrashIcon className="h-5 w-5" />
           </Button>

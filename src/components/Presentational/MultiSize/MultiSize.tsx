@@ -16,12 +16,18 @@ interface Props {
 }
 
 const MultiSize: FC<Props> = ({ addSize, sizes, deleteSize, onChange, themeColour, themeTint }) => {
+  const renderSizeLabel = () => {
+    if (sizes && sizes.length > 1) {
+      return <span className="ml-2 text-sm font-bold text-gray-900">Unit</span>;
+    }
+    return null;
+  };
   return (
     <div className={`border-2 border-${themeColour}-${themeTint} mt-4 rounded-md`}>
       <div
         className={`flex w-full items-center justify-between border-b-2 p-2 border-${themeColour}-${themeTint}`}
       >
-        <span className="ml-2 text-sm font-bold text-gray-900">Unit</span>
+        {renderSizeLabel()}
         <span className="text-sm  font-bold text-gray-900">
           Price <span className="text-red-500">*</span>
         </span>

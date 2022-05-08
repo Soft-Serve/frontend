@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import type { FC } from "react";
 import { AdvancedImage, lazyload, placeholder } from "@cloudinary/react";
 import { Cloudinary, CloudinaryImage } from "@cloudinary/base";
+
 import { fill } from "@cloudinary/base/actions/resize";
 import { Plugins } from "@cloudinary/html";
 import { Effect } from "@cloudinary/base/actions/effect";

@@ -101,7 +101,7 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
     });
   };
 
-  const onAddSize = () => setSizes(prevSizes => [...(prevSizes || []), { ...size }]);
+  const onAddSize = () => setSizes(prevSizes => [...(prevSizes || []), { ...size, id: uuidv4() }]);
 
   const onDeleteSize = (id: string) =>
     setSizes(prevSizes => prevSizes?.filter(currentSize => currentSize.id !== id));

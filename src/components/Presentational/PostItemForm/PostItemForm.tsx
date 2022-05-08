@@ -98,7 +98,10 @@ const PostItemForm: FC<Props> = ({
   };
 
   const onAddSize = () =>
-    setInput(prevState => ({ ...prevState, sizes: [...prevState.sizes, { ...size }] }));
+    setInput(prevState => ({
+      ...prevState,
+      sizes: [...prevState.sizes, { ...size, id: uuidv4() }],
+    }));
 
   const onDeleteSize = (id: string) =>
     setInput(prevState => ({
