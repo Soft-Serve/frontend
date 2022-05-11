@@ -26,7 +26,7 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
 
   return (
     <ItemCard {...rest}>
-      <div className="mw-56 relative h-full flex-shrink-0">
+      <div className="relative h-full flex-shrink-0">
         <ItemImage
           className="inset-0 h-full w-full object-cover"
           unavailable={!item.available}

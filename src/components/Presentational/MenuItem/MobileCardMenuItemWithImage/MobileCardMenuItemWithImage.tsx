@@ -1,7 +1,7 @@
 import React from "react";
 import type { FC, DetailedHTMLProps, HTMLAttributes } from "react";
 import { Item } from "@shared";
-import { Dietaries, ItemImage, ItemPrice } from "@presentational";
+import { Dietaries, ItemPrice, ItemImage } from "@presentational";
 import { ItemCard, ThemeFonts, Typography } from "@base";
 import { classnames } from "tailwindcss-classnames";
 
@@ -32,9 +32,9 @@ const MobileCardMenuItemWithImage: FC<Props> = ({
 
   return (
     <ItemCard isVertical {...rest}>
-      <div className="relative h-40 flex-shrink-0">
+      <div className="aspect-w-1 aspect-h-1 relative w-full overflow-hidden rounded-t-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
         <ItemImage
-          className="inset-0 h-full w-full object-cover"
+          className="h-full w-full object-cover object-center lg:h-full lg:w-full"
           unavailable={!item.available}
           photoUrl={item?.photo}
         />
@@ -47,6 +47,7 @@ const MobileCardMenuItemWithImage: FC<Props> = ({
           />
         </div>
       </div>
+
       <div className="flex flex-1 flex-col justify-between bg-white p-4">
         <Typography css={classnames("font-bold", "truncate")} themeFont={themeFont} type="h5">
           {item?.name}

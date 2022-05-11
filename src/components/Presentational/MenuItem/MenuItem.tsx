@@ -25,7 +25,7 @@ const MenuItem: FC<Props> = ({ item, themeTint, themeColour, themeFont, ...rest 
     },
   });
 
-  const isMobile = width < 515;
+  const isMobile = width < 412;
   const hasImage = !!item?.photo?.length;
 
   const renderItemWithImage = () =>

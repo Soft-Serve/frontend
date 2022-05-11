@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import type { FC } from "react";
-import { AdvancedImage, lazyload, placeholder } from "@cloudinary/react";
+import { AdvancedImage, lazyload, placeholder, responsive } from "@cloudinary/react";
 import { Cloudinary, CloudinaryImage } from "@cloudinary/base";
 
 import { fill } from "@cloudinary/base/actions/resize";
@@ -34,7 +34,11 @@ const ItemImage: FC<Props> = memo(function ItemImage({ photoUrl, unavailable, ..
 
   if (photoUrl) {
     return (
-      <AdvancedImage {...rest} cldImg={cldImage} plugins={[lazyload(), placeholder("blur")]} />
+      <AdvancedImage
+        {...rest}
+        cldImg={cldImage}
+        plugins={[lazyload(), responsive(), placeholder("blur")]}
+      />
     );
   }
   return null;

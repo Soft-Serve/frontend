@@ -37,7 +37,7 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
       </Container>
     );
   if (error) return <p>error</p>;
-  if (data?.items.length === 0) {
+  if (data?.items?.length === 0 && !loading) {
     return (
       <Container>
         <NoItemsCTA
