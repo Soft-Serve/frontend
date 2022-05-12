@@ -68,7 +68,8 @@ const features = [
   },
   {
     name: "Filter by allergies",
-    description: "Make ordering easier for servers and guests with our dietary filters.",
+    description:
+      "Dietary restrictions can make eating out a challenge. Make it easy for guests with our dietary filters.",
     icon: FilterIcon,
   },
   {
@@ -84,8 +85,7 @@ const features = [
   },
   {
     name: "Easy onboarding",
-    description:
-      "Don't spend hours adding menu items manually. Add them to our excel spreadsheet and we will upload them for you within 24 hours.",
+    description: "Send us your menu, we'll do the rest.",
     icon: EmojiHappyIcon,
   },
   {
@@ -208,19 +208,16 @@ const LandingPage: FC = () => {
               </div>
               <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
                 <h1 className="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                  <span className="block font-Quicksand text-white">modern software</span>
-                  <span className="block font-Quicksand text-red-200">
-                    for the service industry
-                  </span>
+                  <span className="block font-Quicksand text-white">our menu,</span>
+                  <span className="block font-Quicksand text-red-200">your restaurant's brand</span>
                 </h1>
                 <p className="mx-auto mt-6 max-w-lg text-center  font-Quicksand text-xl text-red-200 sm:max-w-3xl">
-                  Our virtual menu is completely customizable to encapsulate the look and feel of
-                  your restaurant brand.
+                  modern software for the service industry.
                 </p>
                 <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
                   <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
                     <Link
-                      to="/sign-up"
+                      to={routes.signUp}
                       className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 font-Quicksand text-base font-bold text-red-400 shadow-sm hover:bg-indigo-50 sm:px-8"
                     >
                       Start free trial
@@ -258,7 +255,7 @@ const LandingPage: FC = () => {
                     </p>
                     <div className="mt-6">
                       <a
-                        href="/"
+                        href={routes.signUp}
                         className="inline-flex rounded-md border border-transparent bg-red-400 bg-origin-border px-4 py-2 font-Quicksand text-base font-bold text-white shadow-sm hover:from-red-700 hover:to-red-700"
                       >
                         Start free trial
@@ -289,11 +286,11 @@ const LandingPage: FC = () => {
                   </div>
                   <div className="mt-6">
                     <h2 className="font-Quicksand text-3xl font-extrabold tracking-tight text-white">
-                      Create bespoke menus
+                      Create unique menus
                     </h2>
                     <p className="mt-4 font-Quicksand text-lg text-white">
-                      With custom a custom colour, logo, banner and font and optional images of your
-                      dishes every Soft Serve menu is completely unique.
+                      With a custom colour, logo, banner and font, no 2 SoftServe menus look the
+                      same.
                     </p>
                     <div className="mt-6">
                       <Link
@@ -329,10 +326,10 @@ const LandingPage: FC = () => {
                     </p>
                     <div className="mt-6">
                       <a
-                        href="/"
+                        href={routes.signUp}
                         className="inline-flex rounded-md border border-transparent bg-red-400 bg-origin-border px-4 py-2 font-Quicksand text-base font-bold text-white shadow-sm"
                       >
-                        Get in touch
+                        Start free trial
                       </a>
                     </div>
                   </div>
@@ -383,7 +380,7 @@ const LandingPage: FC = () => {
                     30 day free trial with no commitment
                   </h2>
                   <p className="mt-4 font-Quicksand text-xl text-gray-600">
-                    No credit card information required. Try Soft Serve risk free and see how it
+                    No credit card information required. Try SoftServe risk free and see how it
                     facilitates a seamless customer experience.
                   </p>
                 </div>
@@ -396,7 +393,7 @@ const LandingPage: FC = () => {
                   <div className="mx-auto max-w-lg overflow-hidden rounded-lg shadow-lg lg:flex lg:max-w-none">
                     <div className="flex-1 bg-white px-6 py-8 lg:p-12">
                       <h3 className="font-Quicksand text-2xl font-extrabold text-gray-900 sm:text-3xl">
-                        Simple no-tricks pricing
+                        Transparent pricing
                       </h3>
                       <div className="mt-8">
                         <div className="flex items-center">
