@@ -66,7 +66,7 @@ const UpdateRestaurantForm: FC<Props> = ({
         </label>
         <div className="flex w-full flex-wrap items-center justify-between">
           <div className="m-2">
-            <ItemImage photoUrl={restaurant.logo} />
+            <ItemImage width={208} photoUrl={restaurant.logo} />
           </div>
           <UploadImageBox
             themeColour={themeColour}

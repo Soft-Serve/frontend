@@ -4,6 +4,7 @@ import { Item } from "@shared";
 import { Dietaries, ItemImage, ItemPrice } from "@presentational";
 import { ItemCard, ThemeFonts, Typography } from "@base";
 import { classnames } from "tailwindcss-classnames";
+import { useViewport } from "src/hooks";
 
 interface Props extends DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   item: Pick<Item, "description" | "name" | "photo" | "id" | "available">;
@@ -13,6 +14,7 @@ interface Props extends DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, 
 }
 
 const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeTint, ...rest }) => {
+  const { width } = useViewport();
   const renderPrice = () =>
     item?.available && (
       <ItemPrice
@@ -28,6 +30,7 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
     <ItemCard {...rest}>
       <div className=" h-auto w-24 flex-shrink-0 xxs:w-28 xs:w-52">
         <ItemImage
+          width={width > 475 ? 208 : 140}
           className="inset-0 h-full w-full object-cover"
           unavailable={!item.available}
           photoUrl={item?.photo}
