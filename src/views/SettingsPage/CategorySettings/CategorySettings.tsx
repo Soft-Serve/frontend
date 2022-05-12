@@ -120,7 +120,6 @@ const CategorySettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug })
     if (categoriesData?.categories?.length && categoriesData?.categories.length > 1) {
       return (
         <CategoryList
-          restaurantSlug={restaurantSlug}
           themeColour={themeColour}
           themeTint={themeTint}
           activeMenu={activeMenu}

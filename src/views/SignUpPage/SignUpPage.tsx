@@ -186,17 +186,16 @@ const SignUpPage: FC = () => {
               focus
               className="absolute inset-x-0 top-0 z-30 origin-top-right transform p-2 transition md:hidden"
             >
-              <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+              <div className="divide-y-2 divide-red-400 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="px-5 pt-5 pb-6">
                   <div className="flex items-center justify-between">
                     <div className="flex justify-start lg:w-0 lg:flex-1">
-                      <a href="/">
-                        <span className="sr-only">Soft Serve Logo</span>
-                        <FullLogoSVG className="w-20 fill-current stroke-current text-white" />
-                      </a>
+                      <div>
+                        <FullLogoSVG className="w-20 fill-current stroke-current text-red-400" />
+                      </div>
                     </div>
                     <div className="-mr-2">
-                      <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-900">
+                      <Popover.Button className="inline-flex items-center justify-center rounded-md bg-red-400 p-2 text-white hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-400">
                         <span className="sr-only">Close menu</span>
                         <XIcon className="h-6 w-6" aria-hidden="true" />
                       </Popover.Button>
@@ -204,14 +203,18 @@ const SignUpPage: FC = () => {
                   </div>
                 </div>
                 <div className="py-6 px-5">
-                  <div className="mt-6">
-                    <Link
-                      to="/"
-                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-400 bg-origin-border px-4 py-2 font-Quicksand text-base font-bold text-white shadow-sm hover:from-red-700 hover:to-red-700"
-                    >
-                      Home
-                    </Link>
-                  </div>
+                  <Link
+                    to="/sign-in"
+                    className="mb-4 flex w-full items-center justify-center rounded-md border border-transparent bg-red-400 bg-origin-border px-4 py-2 font-Quicksand text-base font-bold text-white shadow-sm hover:from-red-700 hover:to-red-700"
+                  >
+                    Sign in
+                  </Link>
+                  <Link
+                    to="/"
+                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-400 bg-origin-border px-4 py-2 font-Quicksand text-base font-bold text-white shadow-sm hover:from-red-700 hover:to-red-700"
+                  >
+                    Home
+                  </Link>
                 </div>
               </div>
             </Popover.Panel>
@@ -220,15 +223,18 @@ const SignUpPage: FC = () => {
       </header>
       <main>
         <div className="relative bg-white">
-          <div className="lg:absolute lg:inset-0">
-            <div className="m-8 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-              <img
-                className="h-56 w-full rounded-md object-cover shadow-md lg:absolute lg:h-full"
-                src={manager}
-                alt=""
-              />
+          <div className="hidden lg:block">
+            <div className="lg:absolute lg:inset-0">
+              <div className="m-8 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+                <img
+                  className="h-56 w-full rounded-md object-cover shadow-md lg:absolute lg:h-full"
+                  src={manager}
+                  alt=""
+                />
+              </div>
             </div>
           </div>
+
           <div className="relative py-8 px-4 sm:py-24 sm:px-6 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:px-8 lg:py-8">
             <div className="lg:pr-8">
               <div className="mx-auto max-w-md sm:max-w-lg lg:mx-0">

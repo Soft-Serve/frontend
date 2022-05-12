@@ -59,20 +59,18 @@ const SignInPage: FC = () => {
           >
             <Popover.Panel
               focus
-              className="absolute inset-x-0 top-0 z-30 origin-top-right transform p-2 transition md:hidden"
+              className="absolute inset-x-0 top-0 z-50 origin-top-right transform p-2 transition md:hidden"
             >
-              <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+              <div className="divide-y-2 divide-red-400 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="px-5 pt-5 pb-6">
                   <div className="flex items-center justify-between">
-                    <div>
-                      <img
-                        className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark-purple-600-to-indigo-600.svg"
-                        alt="Workflow"
-                      />
+                    <div className="flex justify-start lg:w-0 lg:flex-1">
+                      <div>
+                        <FullLogoSVG className="w-20 fill-current stroke-current text-red-400" />
+                      </div>
                     </div>
                     <div className="-mr-2">
-                      <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-900">
+                      <Popover.Button className="inline-flex items-center justify-center rounded-md bg-red-400 p-2 text-white hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-400">
                         <span className="sr-only">Close menu</span>
                         <XIcon className="h-6 w-6" aria-hidden="true" />
                       </Popover.Button>
@@ -80,23 +78,18 @@ const SignInPage: FC = () => {
                   </div>
                 </div>
                 <div className="py-6 px-5">
-                  <div className="mt-6">
-                    <Link
-                      to="/"
-                      className="origin-border ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-white px-4 py-2 font-Quicksand text-base font-bold text-red-400 shadow-sm hover:bg-red-400  hover:text-white"
-                    >
-                      Home
-                    </Link>
-                    <Link
-                      to="/sign-up"
-                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-400 bg-origin-border px-4 py-2 font-Quicksand text-base font-bold text-white shadow-sm hover:from-red-700 hover:to-red-700"
-                    >
-                      Sign up
-                    </Link>
-                    <p className="mt-6 text-center font-Quicksand text-base font-medium text-gray-900">
-                      Existing customer?
-                    </p>
-                  </div>
+                  <Link
+                    to="/sign-up"
+                    className="mb-4 flex w-full items-center justify-center rounded-md border border-transparent bg-red-400 bg-origin-border px-4 py-2 font-Quicksand text-base font-bold text-white shadow-sm hover:from-red-700 hover:to-red-700"
+                  >
+                    Sign up
+                  </Link>
+                  <Link
+                    to="/"
+                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-400 bg-origin-border px-4 py-2 font-Quicksand text-base font-bold text-white shadow-sm hover:from-red-700 hover:to-red-700"
+                  >
+                    Home
+                  </Link>
                 </div>
               </div>
             </Popover.Panel>

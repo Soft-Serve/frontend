@@ -45,15 +45,13 @@ const MenuSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => 
     setIsModalOpen(true);
   };
 
-  if (!restaurantID) return <div>loading</div>;
-
   const postMenu = (
     <PostMenuForm
       restaurantSlug={restaurantSlug}
       themeColour={themeColour}
       themeTint={themeTint}
       onCompleted={setIsModalOpen}
-      restaurantID={restaurantID}
+      restaurantID={restaurantID || 0}
     />
   );
   const deleteMenu = (

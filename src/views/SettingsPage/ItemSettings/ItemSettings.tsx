@@ -55,9 +55,11 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
     onCompleted: completedData => setActiveMenu(completedData?.menus?.[0]),
   });
 
+  const selectedMenu = menuData?.menus?.find(menu => menu.name === menuParam);
+
   const { data: categoryData, loading } = useCategoriesQuery({
     variables: {
-      menuID: activeMenu?.id || 0,
+      menuID: selectedMenu ? selectedMenu.id : activeMenu?.id || 0,
     },
     skip: !activeMenu?.id,
   });
@@ -66,13 +68,12 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
     variables: {
       categoryID: categoryData?.categories?.[0]?.id || 0,
     },
-    skip: !categoryData?.categories?.[0]?.id,
+    skip: !categoryData?.categories?.[0],
     onCompleted: completedData => setActiveItem(completedData?.items?.[0]),
   });
 
   useEffect(() => {
     if (menuParam) {
-      const selectedMenu = menuData?.menus?.find(menu => menu.name === menuParam);
       setActiveMenu(selectedMenu);
     }
   }, [menuParam]);
@@ -191,12 +192,14 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
   const renderSearchBar = () => {
     if (loading) return null;
     if (categoryData?.categories?.length) {
-      <SearchBar
-        themeColour={themeColour}
-        themeTint={themeTint}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />;
+      return (
+        <SearchBar
+          themeColour={themeColour}
+          themeTint={themeTint}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
+      );
     } else {
       return (
         <Alert type="warning">
