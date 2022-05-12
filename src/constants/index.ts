@@ -79,12 +79,12 @@ export const SUB_NAVIGATION = [
     icon: QrcodeIcon,
     current: false,
   },
-  {
-    name: "billing",
-    description: "View and modify your billing information",
-    icon: CreditCardIcon,
-    current: false,
-  },
+  // {
+  //   name: "billing",
+  //   description: "View and modify your billing information",
+  //   icon: CreditCardIcon,
+  //   current: false,
+  // },
 ];
 
 export const colorsMap = {

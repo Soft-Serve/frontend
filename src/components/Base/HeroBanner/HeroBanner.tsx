@@ -49,12 +49,14 @@ const HeroBanner: FC<Props> = ({ themeColour, themeFont, restaurantSlug }) => {
                 <span className={`block text-white font-${themeFont}`}>
                   {data?.banners?.[0]?.header}
                 </span>
+              </h1>
+              <h3 className="text-md text-center text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
                 {data?.banners?.[0]?.sub_header && (
                   <span className={`block text-white font-${themeFont}`}>
                     {data?.banners?.[0]?.sub_header}
                   </span>
                 )}
-              </h1>
+              </h3>
             </div>
           </div>
         </div>
