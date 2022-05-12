@@ -26,31 +26,31 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
 
   return (
     <ItemCard {...rest}>
-      <div className="relative h-full flex-shrink-0">
+      <div className=" h-auto w-24 flex-shrink-0 xxs:w-28 xs:w-52">
         <ItemImage
           className="inset-0 h-full w-full object-cover"
           unavailable={!item.available}
           photoUrl={item?.photo}
         />
-        <div className="absolute top-1 left-1">
-          <Dietaries
-            themeColour={themeColour}
-            themeTint={themeTint}
-            itemAvailable={item.available}
-            itemID={item.id}
-          />
-        </div>
       </div>
       <div className="flex flex-1 flex-col justify-between bg-white p-2 pb-0">
         <div>
-          <Typography css={classnames("font-bold", "truncate")} themeFont={themeFont} type="h5">
-            {item?.name}
-          </Typography>
-          <Typography
-            css={classnames("mt-2", "break-words", "italic")}
-            type="h6"
-            themeFont={themeFont}
-          >
+          <div className="flex w-full justify-between">
+            <Typography
+              css={classnames("font-bold", "mr-2", "mb-2")}
+              themeFont={themeFont}
+              type="h5"
+            >
+              {item?.name}
+            </Typography>
+            <Dietaries
+              themeColour={themeColour}
+              themeTint={themeTint}
+              itemAvailable={item.available}
+              itemID={item.id}
+            />
+          </div>
+          <Typography css={classnames("my-4", "break-words")} type="h6" themeFont={themeFont}>
             {item.available ? item.description : "** Temporarily unavailable  **"}
           </Typography>
         </div>

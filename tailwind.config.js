@@ -60,6 +60,11 @@ module.exports = {
         Raleway: ["Raleway", "sans-serif"],
       },
     },
+    screens: {
+      xxs: "400px",
+      xs: "475px",
+      ...defaultTheme.screens,
+    },
   },
   corePlugins: {
     aspectRatio: false,

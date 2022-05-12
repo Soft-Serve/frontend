@@ -1,11 +1,14 @@
 import React, { FC } from "react";
+import type { TArg } from "tailwindcss-classnames";
+import { baseStyles } from "./styles";
 
 interface Props {
   children: React.ReactNode;
+  css?: TArg;
 }
 
-const Container: FC<Props> = ({ children }) => {
-  return <div className="mx-auto w-full flex-1 p-2 sm:px-6 lg:px-8">{children}</div>;
+const Container: FC<Props> = ({ children, css }) => {
+  return <div className={baseStyles(css)}>{children}</div>;
 };
 
 export { Container };

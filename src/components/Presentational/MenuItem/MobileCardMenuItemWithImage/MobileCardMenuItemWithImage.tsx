@@ -32,9 +32,9 @@ const MobileCardMenuItemWithImage: FC<Props> = ({
 
   return (
     <ItemCard isVertical {...rest}>
-      <div className="aspect-w-1 aspect-h-1 relative w-full overflow-hidden rounded-t-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+      <div className="aspect-auto relative w-full overflow-hidden rounded-t-md bg-white">
         <ItemImage
-          className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+          className="w-full object-fill object-center"
           unavailable={!item.available}
           photoUrl={item?.photo}
         />

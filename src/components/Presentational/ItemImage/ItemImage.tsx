@@ -3,9 +3,11 @@ import type { FC } from "react";
 import { AdvancedImage, lazyload, placeholder, responsive } from "@cloudinary/react";
 import { Cloudinary, CloudinaryImage } from "@cloudinary/base";
 
-import { fill } from "@cloudinary/base/actions/resize";
+import { fill, thumbnail, scale } from "@cloudinary/base/actions/resize";
 import { Plugins } from "@cloudinary/html";
 import { Effect } from "@cloudinary/base/actions/effect";
+import { quality } from "@cloudinary/base/actions/delivery";
+import { auto } from "@cloudinary/base/qualifiers/quality";
 
 export interface ImgProps {
   cldImg: CloudinaryImage;
@@ -26,7 +28,7 @@ const ItemImage: FC<Props> = memo(function ItemImage({ photoUrl, unavailable, ..
   });
 
   const cldImage = cld.image(photoUrl);
-  cldImage.resize(fill().width(160).height(160));
+  cldImage.resize(scale().width(200).height(200)).delivery(quality(auto()));
 
   if (unavailable) {
     cldImage.effect(Effect.grayscale());
