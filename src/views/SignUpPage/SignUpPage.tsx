@@ -235,13 +235,15 @@ const SignUpPage: FC = () => {
             </div>
           </div>
 
-          <div className="relative py-8 px-4 sm:py-24 sm:px-6 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:px-8 lg:py-8">
+          <div className="lg:max-w-å7xl relative py-8 px-4 sm:py-24 sm:px-6 lg:mx-auto lg:grid lg:grid-cols-2 lg:px-8 lg:py-8">
             <div className="lg:pr-8">
               <div className="mx-auto max-w-md sm:max-w-lg lg:mx-0">
-                <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Sign up now!</h2>
+                <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+                  Start free trial
+                </h2>
                 <p className="mt-4 text-lg text-gray-400 sm:mt-3">
-                  we just need some basic information to get you started, once you have signed up
-                  you can send us your menu and we will get you all started
+                  We just need some basic information to get you started, no credit card information
+                  required!
                 </p>
                 <form
                   noValidate
