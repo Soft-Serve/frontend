@@ -3,7 +3,6 @@ import {
   ClipboardListIcon,
   CogIcon,
   HomeIcon,
-  CreditCardIcon,
   UserIcon,
   FilterIcon,
   ViewGridIcon,
