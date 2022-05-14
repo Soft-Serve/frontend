@@ -6,6 +6,7 @@ export const UPDATE_RESTAURANT_ADDRESS = gql`
   mutation UpdateRestaurant($input: input) {
     updatedRestaurant(input: $input)
       @rest(type: Item, path: "restaurants/{args.input.id}", method: "PATCH") {
+      name
       id
       address_line_1
       address_line_2
@@ -18,6 +19,7 @@ export const UPDATE_RESTAURANT_ADDRESS = gql`
 
 interface Restaurant {
   id: number;
+  name: string;
   address_line_1: string;
   address_line_2: string;
   city: string;

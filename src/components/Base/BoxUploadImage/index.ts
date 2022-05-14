@@ -1,0 +1,1 @@
+export { BoxUploadImage } from "./BoxUploadImage";

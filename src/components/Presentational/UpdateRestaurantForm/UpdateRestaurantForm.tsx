@@ -61,6 +61,8 @@ const UpdateRestaurantForm: FC<Props> = ({
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>
         <UpdateRestaurantLogo
+          restaurantSlug={restaurantSlug}
+          id={restaurant.id}
           logo={restaurant?.logo}
           themeColour={themeColour}
           themeTint={themeTint}

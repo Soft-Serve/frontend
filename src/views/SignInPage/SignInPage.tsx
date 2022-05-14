@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import type { FC } from "react";
 import { SignInForm } from "@presentational";
-import { BoxSection, Container, Notification } from "@base";
+import { Alert, BoxSection, Container } from "@base";
 import { MenuPage } from "../MenuPage";
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/solid";
@@ -9,11 +9,12 @@ import { Link } from "react-router-dom";
 import { FullLogoSVG } from "src/svgs";
 
 const SignInPage: FC = () => {
-  const flash = () => (
-    <Notification header="Account verified!" subHeader="You can now sign in to your account" />
-  );
+  const isAccountConfirmed = window.location.search === "?account_confirmation_success=true";
 
-  const accountConfirmed = () => window.location.search === "?account_confirmation_success=true";
+  const renderNotification = () =>
+    isAccountConfirmed ? (
+      <Alert type="success">Account verified! You can now sign in to your account</Alert>
+    ) : null;
 
   return (
     <>
@@ -97,9 +98,9 @@ const SignInPage: FC = () => {
         </Popover>
       </header>
       <MenuPage>
-        {accountConfirmed() && flash()}
         <Container>
           <BoxSection>
+            {renderNotification()}
             <SignInForm themeTint={400} themeColour="red" />
           </BoxSection>
         </Container>

@@ -60,7 +60,7 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
     }
     return false;
   };
-  const onSuccess = () => toast.custom(<Notification header="Slug succesfully updated!" />);
+  const onSuccess = () => toast.custom(<Notification header="Address succesfully updated!" />);
 
   const [updateRestaurantAddress, { loading }] = useUpdateRestaurantAddress({
     onCompleted: () => onSuccess(),
@@ -80,6 +80,7 @@ const UpdateRestaurantAddressForm: FC<Props> = ({
       variables: {
         input: {
           id,
+          name: input.restaurantName,
           address_line_1: input.addressLineOne,
           address_line_2: input.addressLineTwo,
           postal_code: input.postalCode,
