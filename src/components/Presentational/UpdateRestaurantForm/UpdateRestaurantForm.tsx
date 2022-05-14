@@ -1,10 +1,8 @@
 import React from "react";
 import type { FC } from "react";
 import { classnames } from "tailwindcss-classnames";
-import { Card, ThemeFonts, UploadImageBox } from "@base";
-import { useUploadPhoto } from "@hooks";
+import { Card, ThemeFonts } from "@base";
 import {
-  ItemImage,
   UpdateRestaurantAddressForm,
   UpdateRestaurantFontForm,
   UpdateRestaurantSlugForm,

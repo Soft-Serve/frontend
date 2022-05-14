@@ -1,24 +1,26 @@
 import React, { useState } from "react";
 import type { FC } from "react";
+import ImageUploading from "react-images-uploading";
 
 import { ItemImage } from "@presentational";
 import { BANNERS_QUERY, useBannersQuery, useRestaurantQuery } from "@shared";
 import {
+  BoxUploadImage,
   Button,
   Card,
   CardContent,
   HeroBanner,
   TabWrapper,
   ThemeFonts,
-  UploadImageBox,
 } from "@base";
 import { classnames } from "tailwindcss-classnames";
-import { useUploadPhoto } from "@hooks";
+import { useUploadPhoto, useViewport } from "@hooks";
 import { SettingsHeader } from "../SettingsHeader";
 import { UpdateBannerHeadingsForm } from "./UpdateBannerHeadingsForm";
 import { SkeletonBannerSettings } from "./SkeletonBannerSettings";
 import { useUpdateBannerImageMutation } from "./UpdateBannerImage.mutation";
 import { useCreateNewBannerImage } from "./CreateBannerImagePhoto.mutation";
+import type { ImageListType } from "react-images-uploading";
 
 interface Props {
   themeColour: string;
@@ -27,6 +29,10 @@ interface Props {
   restaurantSlug: string;
 }
 const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug }) => {
+  const { width } = useViewport();
+  const isMobile = width < 475;
+  const [images, setImages] = useState<ImageListType>([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const { data, loading } = useBannersQuery({
     variables: {
@@ -40,10 +46,20 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
     },
   });
 
-  const [updatePhoto] = useUpdateBannerImageMutation({ onCompleted: () => setIsLoading(false) });
-  const [createPhoto] = useCreateNewBannerImage({ onCompleted: () => setIsLoading(false) });
+  const [updatePhoto] = useUpdateBannerImageMutation({
+    onCompleted: () => {
+      setIsLoading(false);
+      setImages([]);
+    },
+  });
+  const [createPhoto] = useCreateNewBannerImage({
+    onCompleted: () => {
+      setIsLoading(false);
+      setImages([]);
+    },
+  });
 
-  const { photoFile, setPhotoFile, fetchPhoto } = useUploadPhoto();
+  const { setPhotoFile, fetchPhoto } = useUploadPhoto();
 
   const handleUpdatePhoto = async () => {
     setIsLoading(true);
@@ -87,6 +103,91 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
       });
     }
   };
+
+  const renderBannerPhoto = () => {
+    if (images.length)
+      return (
+        <div className="mr-4 flex h-32 w-32 items-center justify-center">
+          <img src={images[0].dataURL} />
+        </div>
+      );
+    else if (!images.length && data?.banners?.[0]?.photo) {
+      return (
+        <div className="mr-4 flex h-32 w-32 items-center justify-center">
+          <ItemImage photoUrl={data.banners[0].photo} />
+        </div>
+      );
+    }
+    return null;
+  };
+
+  const onChange = (e?: ImageListType) => {
+    if (e) {
+      setImages(e);
+      setPhotoFile(e[0].file);
+    }
+  };
+
+  const renderActions = (onImageUpload: () => void, onImageUpdate: (index: number) => void) => {
+    const handlePhotoChange = () => {
+      onImageUpdate(0);
+      setPhotoFile(images[0].file);
+    };
+
+    if (images.length)
+      return (
+        <div className="my-2 flex flex-wrap items-center justify-center">
+          <Button
+            isFullwidth={isMobile}
+            disabled={loading || isLoading}
+            colour="accent"
+            size="XL"
+            onClick={handlePhotoChange}
+            themeColour={themeColour}
+            themeTint={themeTint}
+          >
+            Change photo
+          </Button>
+          <div className="ml-0 mt-4 w-full xs:ml-4 xs:mt-0 xs:w-auto">
+            <Button
+              isFullwidth={isMobile}
+              onClick={handleUpdatePhoto}
+              loading={loading || isLoading}
+              size="XL"
+              themeColour={themeColour}
+              themeTint={themeTint}
+            >
+              Upload photo
+            </Button>
+          </div>
+        </div>
+      );
+
+    return (
+      <BoxUploadImage
+        imageFile={images[0]?.file}
+        onChange={onImageUpload}
+        themeColour={themeColour}
+        themeTint={themeTint}
+      />
+    );
+  };
+
+  const renderBanner = () => {
+    if (data?.banners?.[0]?.photo) {
+      return (
+        <Card>
+          <HeroBanner
+            restaurantSlug={restaurantSlug}
+            themeColour={themeColour}
+            themeFont={themeFont}
+          />
+        </Card>
+      );
+    }
+    return null;
+  };
+
   if (loading || restaurantLoading) return <SkeletonBannerSettings />;
 
   return (
@@ -96,19 +197,10 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
           <SettingsHeader>Banner</SettingsHeader>
         </CardContent>
       </Card>
-      <Card>
-        <HeroBanner
-          restaurantSlug={restaurantSlug}
-          themeColour={themeColour}
-          themeFont={themeFont}
-        />
-      </Card>
-
+      {renderBanner()}
       <Card css={classnames("flex-col", "mt-4")}>
         <UpdateBannerHeadingsForm
-          photo={
-            data?.banners?.[0] ? data?.banners?.[0]?.photo : restaurantData?.restaurant?.logo || ""
-          }
+          photo={data?.banners?.[0] ? data?.banners?.[0]?.photo : ""}
           restaurantSlug={restaurantSlug}
           themeColour={themeColour}
           themeTint={themeTint}
@@ -120,33 +212,14 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
         <label className="my-4 block font-Quicksand text-sm font-bold text-gray-900">
           Hero image
         </label>
-        <div className="flex w-full flex-wrap items-center justify-between">
-          <div className="m-2">
-            <ItemImage
-              photoUrl={
-                data?.banners?.[0]
-                  ? data?.banners?.[0]?.photo
-                  : restaurantData?.restaurant?.logo || ""
-              }
-            />
-          </div>
-          <UploadImageBox
-            themeColour={themeColour}
-            themeTint={themeTint}
-            onChange={setPhotoFile}
-            imageFile={photoFile}
-          />
+        <div className="flex w-full flex-wrap items-center justify-center sm:justify-between">
+          {renderBannerPhoto()}
+          <ImageUploading value={images} onChange={onChange} maxNumber={1}>
+            {({ onImageUpload, onImageUpdate }) => (
+              <>{renderActions(onImageUpload, onImageUpdate)}</>
+            )}
+          </ImageUploading>
         </div>
-        <Button
-          loading={isLoading}
-          onClick={handleUpdatePhoto}
-          disabled={!photoFile || isLoading}
-          size="XXL"
-          themeColour={themeColour}
-          themeTint={themeTint}
-        >
-          Update banner photo
-        </Button>
       </Card>
     </TabWrapper>
   );

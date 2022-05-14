@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import type { FC } from "react";
 import { BoxUploadImage, Button, Notification } from "@base";
 import { ItemImage } from "@presentational";
-import { useUploadPhoto } from "@hooks";
+import { useUploadPhoto, useViewport } from "@hooks";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { useUpdateRestaurantLogo } from "./UpdateRestaurantLogo.mutation";
 import { RESTAURANT_QUERY } from "@shared";
@@ -17,6 +17,8 @@ interface Props {
 }
 const UpdateRestaurantLogo: FC<Props> = ({ logo, themeColour, themeTint, id, restaurantSlug }) => {
   const onSuccess = () => toast.custom(<Notification header="Logo succesfully updated!" />);
+  const { width } = useViewport();
+  const isMobile = width < 475;
 
   const [images, setImages] = useState<ImageListType>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -71,8 +73,10 @@ const UpdateRestaurantLogo: FC<Props> = ({ logo, themeColour, themeTint, id, res
 
     if (images.length)
       return (
-        <div className="flex justify-center">
+        <div className="flex flex-wrap items-center justify-center">
           <Button
+            isFullwidth={isMobile}
+            disabled={loading || isLoading}
             colour="accent"
             css="mr-2"
             size="XL"
@@ -82,15 +86,18 @@ const UpdateRestaurantLogo: FC<Props> = ({ logo, themeColour, themeTint, id, res
           >
             Change photo
           </Button>
-          <Button
-            onClick={handleUpdate}
-            loading={loading || isLoading}
-            size="XL"
-            themeColour={themeColour}
-            themeTint={themeTint}
-          >
-            Upload photo
-          </Button>
+          <div className="ml-0 mt-4 w-full xs:ml-4 xs:mt-0 xs:w-auto">
+            <Button
+              isFullwidth={isMobile}
+              onClick={handleUpdate}
+              loading={loading || isLoading}
+              size="XL"
+              themeColour={themeColour}
+              themeTint={themeTint}
+            >
+              Upload photo
+            </Button>
+          </div>
         </div>
       );
 
@@ -103,8 +110,10 @@ const UpdateRestaurantLogo: FC<Props> = ({ logo, themeColour, themeTint, id, res
     <ImageUploading value={images} onChange={onChange} maxNumber={1}>
       {({ onImageUpload, onImageUpdate }) => (
         <>
-          <span className="font-Quicksand text-sm font-bold text-gray-900">Restaurant Logo</span>
-          <div className="flex w-full flex-wrap items-center justify-center">
+          <span className="mb-4 font-Quicksand text-sm font-bold text-gray-900">
+            Restaurant Logo
+          </span>
+          <div className="flex w-full flex-wrap items-center justify-center sm:justify-between">
             <div className="mr-4 flex h-32 w-32 items-center justify-center">{renderImage()}</div>
             {renderActions(onImageUpload, onImageUpdate)}
           </div>

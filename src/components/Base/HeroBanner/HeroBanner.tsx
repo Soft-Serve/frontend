@@ -28,7 +28,7 @@ const HeroBanner: FC<Props> = ({ themeColour, themeFont, restaurantSlug }) => {
   const cldImage = cld.image(data?.banners?.[0]?.photo);
   if (loading) return <Skeleton height={40} />;
 
-  if (!data?.banners?.[0]) return <></>;
+  if (!data?.banners?.[0]) return null;
   return (
     <div className="w-full">
       <div className="relative w-full">
