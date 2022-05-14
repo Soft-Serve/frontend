@@ -75,7 +75,7 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID })
   };
 
   if (
-    (!menusData?.menus.length || !data?.restaurant?.has_items || !data?.restaurant?.has_styles) &&
+    (!data?.restaurant?.has_items || !data?.restaurant?.has_styles) &&
     !data?.restaurant?.onboarding_done
   ) {
     return (

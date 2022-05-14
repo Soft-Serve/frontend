@@ -1,0 +1,1 @@
+export { UpdateRestaurantLogo } from "./UpdateRestaurantLogo";
