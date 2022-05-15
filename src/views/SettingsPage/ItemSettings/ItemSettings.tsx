@@ -16,7 +16,13 @@ import {
   ThemeFonts,
 } from "@base";
 import { PlusCircleIcon, ChevronRightIcon } from "@heroicons/react/solid";
-import { AddDietaryForm, DeleteItemForm, PostItemForm, UpdateItemForm } from "@presentational";
+import {
+  AddDietaryForm,
+  DeleteItemForm,
+  PostItemForm,
+  UpdateItemForm,
+  UpdatePhotoForm,
+} from "@presentational";
 import { useGetParams } from "@utility";
 import { CategoryItems } from "./CategoryItems";
 import { SettingsHeader } from "../SettingsHeader";
@@ -27,6 +33,7 @@ enum ModalForms {
   UpdateItem = "updateItem",
   DeleteItem = "deleteItem",
   AddDietary = "addDietary",
+  UpdatePhoto = "updatePhoto",
 }
 
 interface Props {
@@ -118,15 +125,24 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
     />
   );
 
+  const updatePhoto = <UpdatePhotoForm />;
+
   const mapModalForms = {
     deleteItem,
     postItem,
     updateItem,
     addDietary,
+    updatePhoto,
   };
 
   const renderModalForm = () => {
     return mapModalForms[action];
+  };
+
+  const handleUpdatePhoto = (item: Item) => {
+    setAction(ModalForms.UpdatePhoto);
+    setActiveItem(item);
+    setIsModalOpen(true);
   };
 
   const handleAddDietary = (item: Item) => {
@@ -243,6 +259,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
               themeFont={themeFont}
               themeColour={themeColour}
               themeTint={themeTint}
+              handleUpdatePhoto={handleUpdatePhoto}
               handleAddDietary={handleAddDietary}
               handleUpdateItem={handleUpdateItem}
               searchValue={searchValue}

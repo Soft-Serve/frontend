@@ -60,8 +60,6 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
               themeFont={themeFont}
               themeTint={themeTint}
               item={item}
-              tabIndex={0}
-              role="button"
             />
           ))}
         </Grid>

@@ -9,13 +9,14 @@ import { isNameValid, isNameOnlyNumbers, isNameInputValid, hasBeginningWhiteSpac
 import { usePostCategoryMutation } from "./PostCategory.mutation";
 
 interface Props {
+  menuName: string;
   onCompleted?: (state: boolean) => void;
   menuID: number;
   themeColour: string;
   themeTint: number;
 }
 
-const PostCategoryForm: FC<Props> = ({ onCompleted, menuID, themeTint, themeColour }) => {
+const PostCategoryForm: FC<Props> = ({ onCompleted, menuID, themeTint, themeColour, menuName }) => {
   const [name, setName] = useState("");
   const [isNameDirty, setIsNameDirty] = useState(false);
   const [categoryType, setCategoryType] = useState("food");
@@ -84,7 +85,7 @@ const PostCategoryForm: FC<Props> = ({ onCompleted, menuID, themeTint, themeColo
     <div>
       <div className="flex items-center justify-between">
         <h3 className="mr-4 font-Quicksand text-sm font-semibold uppercase tracking-wider text-gray-900">
-          add new category
+          adding a new category to the <span className="underline">{menuName}</span>
         </h3>
         <Button
           themeColour={themeColour}

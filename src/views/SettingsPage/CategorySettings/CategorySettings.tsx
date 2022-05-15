@@ -57,6 +57,7 @@ const CategorySettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug })
 
   const postCategory = (
     <PostCategoryForm
+      menuName={activeMenu?.name ?? ""}
       themeColour={themeColour}
       themeTint={themeTint}
       menuID={activeMenu?.id ? activeMenu.id : 0}

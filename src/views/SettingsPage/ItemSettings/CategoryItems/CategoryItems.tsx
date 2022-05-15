@@ -8,6 +8,7 @@ interface Props {
   themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
+  handleUpdatePhoto: (item: Item) => void;
   handleAddDietary: (item: Item) => void;
   handleDeleteItem: (item: Item, categoryID: number) => void;
   handleUpdateItem: (item: Item, categoryID: number) => void;
@@ -20,6 +21,7 @@ const CategoryItems: FC<Props> = ({
   handleDeleteItem,
   categoryID,
   searchValue,
+  handleUpdatePhoto,
   handleUpdateItem,
   handleAddDietary,
   themeColour,
@@ -56,6 +58,7 @@ const CategoryItems: FC<Props> = ({
           categoryID={categoryID}
           key={item.id}
           item={item}
+          handleUpdatePhoto={handleUpdatePhoto}
           handleAddDietary={handleAddDietary}
           handleDeleteItem={handleDeleteItem}
           handleUpdateItem={handleUpdateItem}

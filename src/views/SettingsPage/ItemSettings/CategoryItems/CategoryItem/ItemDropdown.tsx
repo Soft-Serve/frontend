@@ -1,10 +1,11 @@
 import React from "react";
 import type { FC } from "react";
 import { KebabDropdown, KebabDropdownItem } from "@base";
-import { PencilIcon, FilterIcon } from "@heroicons/react/solid";
+import { PencilIcon, FilterIcon, PhotographIcon } from "@heroicons/react/solid";
 import { DeleteSVG } from "@svgs";
 
 interface Props {
+  handleUpdatePhoto: any;
   handleUpdate: any;
   handleDelete: any;
   handleAllergies?: any;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const ItemDropdown: FC<Props> = ({
+  handleUpdatePhoto,
   handleAllergies,
   handleDelete,
   handleUpdate,
@@ -37,6 +39,16 @@ const ItemDropdown: FC<Props> = ({
         <span className="flex items-center">
           Update Dietaries
           <FilterIcon className="ml-2 h-5 w-5" />
+        </span>
+      </KebabDropdownItem>
+      <KebabDropdownItem
+        themeColour={themeColour}
+        themeTint={themeTint}
+        onClick={handleUpdatePhoto}
+      >
+        <span className="flex items-center">
+          Update Photo
+          <PhotographIcon className="ml-2 h-5 w-5" />
         </span>
       </KebabDropdownItem>
     </KebabDropdown>

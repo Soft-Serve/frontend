@@ -11,6 +11,7 @@ interface Props {
   themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
+  handleUpdatePhoto: (item: Item) => void;
   handleAddDietary: (item: Item) => void;
   handleDeleteItem: (item: Item, categoryID: number) => void;
   handleUpdateItem: (item: Item, categoryID: number) => void;
@@ -26,6 +27,7 @@ const MobileCategoryItemWithImage: FC<Props> = ({
   categoryID,
   handleUpdateItem,
   handleAddDietary,
+  handleUpdatePhoto,
   item,
 }) => {
   const [isItemAvailable, setIsItemAvailable] = useState(item.available);
@@ -45,7 +47,7 @@ const MobileCategoryItemWithImage: FC<Props> = ({
   };
 
   return (
-    <div key={item.id} className="relative flex flex-col overflow-hidden rounded-md shadow-md">
+    <div key={item.id} className="relative flex flex-col overflow-visible rounded-md shadow-md">
       <div className="h-40 flex-shrink-0">
         <ItemImage
           className="inset-0 h-full w-full object-cover"
@@ -62,6 +64,7 @@ const MobileCategoryItemWithImage: FC<Props> = ({
         <ItemDropdown
           themeColour={themeColour}
           themeTint={themeTint}
+          handleUpdatePhoto={() => handleUpdatePhoto(item)}
           handleAllergies={() => handleAddDietary(item)}
           handleDelete={() => handleDeleteItem(item, categoryID)}
           handleUpdate={() => handleUpdateItem(item, categoryID)}

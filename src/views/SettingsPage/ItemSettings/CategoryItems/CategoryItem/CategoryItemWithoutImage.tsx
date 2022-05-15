@@ -10,6 +10,7 @@ interface Props {
   themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
+  handleUpdatePhoto: (item: Item) => void;
   handleAddDietary: (item: Item) => void;
   handleDeleteItem: (item: Item, categoryID: number) => void;
   handleUpdateItem: (item: Item, categoryID: number) => void;
@@ -24,6 +25,7 @@ const CategoryItemWithoutImage: FC<Props> = ({
   handleDeleteItem,
   categoryID,
   handleUpdateItem,
+  handleUpdatePhoto,
   handleAddDietary,
   item,
 }) => {
@@ -65,6 +67,7 @@ const CategoryItemWithoutImage: FC<Props> = ({
             <ItemDropdown
               themeColour={themeColour}
               themeTint={themeTint}
+              handleUpdatePhoto={() => handleUpdatePhoto(item)}
               handleAllergies={() => handleAddDietary(item)}
               handleDelete={() => handleDeleteItem(item, categoryID)}
               handleUpdate={() => handleUpdateItem(item, categoryID)}

@@ -8,6 +8,7 @@ import { ItemDropdown } from "../ItemDropdown";
 import { CategoryItemDietaries } from "../CategoryItemDietaries";
 
 interface Props {
+  handleUpdatePhoto: (item: Item) => void;
   handleAddDietary: (item: Item) => void;
   handleDeleteItem: (item: Item, categoryID: number) => void;
   handleUpdateItem: (item: Item, categoryID: number) => void;
@@ -19,10 +20,11 @@ interface Props {
 }
 
 const DesktopCategoryItemWithImage: FC<Props> = ({
+  handleUpdatePhoto,
   handleDeleteItem,
-  categoryID,
   handleUpdateItem,
   handleAddDietary,
+  categoryID,
   themeColour,
   themeTint,
   themeFont,
@@ -45,7 +47,7 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
   };
 
   return (
-    <div key={item.id} className="relative flex overflow-hidden rounded-md shadow-md">
+    <div key={item.id} className="relative flex overflow-visible rounded-md shadow-md">
       <div className="relative h-full w-56 flex-shrink-0">
         <ItemImage className="inset-0 h-full w-full object-cover" photoUrl={item?.photo} />
         <div className="absolute top-3 left-1 flex items-center">
@@ -70,6 +72,7 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
               <ItemDropdown
                 themeColour={themeColour}
                 themeTint={themeTint}
+                handleUpdatePhoto={() => handleUpdatePhoto(item)}
                 handleAllergies={() => handleAddDietary(item)}
                 handleDelete={() => handleDeleteItem(item, categoryID)}
                 handleUpdate={() => handleUpdateItem(item, categoryID)}
