@@ -63,7 +63,7 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
                     themeTint,
                     classnames("mx-1", "text-white", "w-8", "h-8", "p-2")
                   )}
-                  <span className={`font-${themeFont} ml-2 font-bold`}>{allergy.name}</span>
+                  <span className={`font-${themeFont} ml-2 font-bold`}>{allergy.filter_name}</span>
                 </div>
               </div>
               <Toggle

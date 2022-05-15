@@ -4,7 +4,6 @@ import {
   CogIcon,
   HomeIcon,
   UserIcon,
-  FilterIcon,
   ViewGridIcon,
   PhotographIcon,
   QrcodeIcon,
@@ -66,12 +65,12 @@ export const SUB_NAVIGATION = [
     icon: ClipboardListIcon,
     current: false,
   },
-  {
-    name: "dietaries",
-    description: "View and modify dietary filters",
-    icon: FilterIcon,
-    current: false,
-  },
+  // {
+  //   name: "dietaries",
+  //   description: "View and modify dietary filters",
+  //   icon: FilterIcon,
+  //   current: false,
+  // },
   {
     name: "QR",
     description: "print your QR code",
