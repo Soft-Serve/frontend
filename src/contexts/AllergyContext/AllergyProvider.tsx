@@ -4,6 +4,11 @@ import { AllergyContext } from "@contexts";
 import type { Allergy, Action } from "./types";
 import { ActionTypes } from "./types";
 
+export enum LifeStyles {
+  Vegan = "Vegan",
+  Vegeterian = "Vegetarian",
+}
+
 const reducer = (activeAllergies: Allergy[], action: Action) => {
   switch (action.type) {
     case ActionTypes.ADD:
@@ -21,8 +26,13 @@ interface Props {
   children: React.ReactNode;
 }
 
+const isAllergyVegetarianOrVegan = (name: string) =>
+  name === LifeStyles.Vegan || name === LifeStyles.Vegeterian;
+
 const AllergyProvider: FC<Props> = ({ children }) => {
   const [activeAllergies, dispatch] = useReducer(reducer, []);
+  const isUserVegan = activeAllergies.some(allergy => allergy.name === "Vegan");
+  const isUserVegetarian = activeAllergies.some(allergy => allergy.name === "Vegetarian");
 
   const isAllergyActive = (allergy: Allergy) => {
     return !!activeAllergies.find(activeAllergy => activeAllergy.id === allergy.id);
@@ -31,8 +41,11 @@ const AllergyProvider: FC<Props> = ({ children }) => {
   return (
     <AllergyContext.Provider
       value={{
-        isAllergyActive,
+        isAllergyVegetarianOrVegan,
+        isUserVegan,
+        isUserVegetarian,
         activeAllergies,
+        isAllergyActive,
         dispatch,
       }}
     >

@@ -2,6 +2,9 @@ import { createContext } from "react";
 import type { Allergy, Dispatch } from "./types";
 
 interface AllergyContextData {
+  isUserVegan: boolean;
+  isAllergyVegetarianOrVegan: (name: string) => boolean;
+  isUserVegetarian: boolean;
   activeAllergies: Allergy[];
   dispatch: Dispatch;
   isAllergyActive: (allergy: Allergy) => boolean;

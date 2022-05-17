@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { useViewportContext } from "@contexts";
 import { Container, Grid, ThemeFonts } from "@base";
 import { MenuItem } from "@presentational";
-import { useCurrentUserQuery, useItemsQuery } from "@shared";
+import { Category, useCurrentUserQuery, useItemsQuery } from "@shared";
 import Skeleton from "react-loading-skeleton";
 import { NoItemsCTA } from "./NoItemsCTA";
 
@@ -12,17 +12,17 @@ interface Props {
   themeTint: number;
   themeFont: ThemeFonts;
   restaurantSlug: string;
-  categoryID: number;
+  category?: Category;
 }
-const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, categoryID }) => {
+const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, category }) => {
   const { width } = useViewportContext();
   const { data: userData, loading: userLoading } = useCurrentUserQuery();
 
   const { data, loading, error } = useItemsQuery({
     variables: {
-      categoryID,
+      categoryID: category?.id || 0,
     },
-    skip: !categoryID,
+    skip: !category?.id,
   });
 
   const getGridSize = () => {
@@ -55,6 +55,7 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
         <Grid size={getGridSize()}>
           {data?.items?.map(item => (
             <MenuItem
+              categoryType={category?.category_type}
               key={item.id}
               themeColour={themeColour}
               themeFont={themeFont}

@@ -9,11 +9,11 @@ import { ThemeFonts } from "@base";
 interface Props {
   categories: Category[];
   loading?: boolean;
-  setCategoryID: (value: SetStateAction<number>) => void;
+  setCategory: (value: SetStateAction<Category | undefined>) => void;
   themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
-  categoryID: number;
+  category?: Category;
 }
 
 function classNames(...classes: string[]) {
@@ -23,18 +23,18 @@ function classNames(...classes: string[]) {
 const Categories: FC<Props> = ({
   categories,
   loading,
-  setCategoryID,
+  setCategory,
   themeFont,
   themeTint,
   themeColour,
-  categoryID,
+  category,
 }) => {
   const { cursorStyles, activeStyles, checkedStyles, baseStyles } = useStyles(
     themeColour,
     themeTint
   );
 
-  const handleChange = (cat: Category) => setCategoryID(cat.id);
+  const handleChange = (cat: Category) => setCategory(cat);
 
   if (loading) return <SkeletonCategories />;
 
@@ -63,7 +63,7 @@ const Categories: FC<Props> = ({
   return (
     <div className="flex ">
       <RadioGroup
-        value={categories.find(cat => cat.id === categoryID)}
+        value={categories.find(cat => cat.id === category?.id)}
         onChange={handleChange}
         className="mt-2"
       >

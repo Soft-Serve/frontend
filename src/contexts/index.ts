@@ -1,4 +1,4 @@
-export { AllergyProvider } from "./AllergyContext";
+export { AllergyProvider, LifeStyles } from "./AllergyContext";
 export { AllergyContext } from "./AllergyContext";
 
 export type { AllergyContextData } from "./AllergyContext";

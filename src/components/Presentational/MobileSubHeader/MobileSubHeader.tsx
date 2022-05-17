@@ -10,8 +10,8 @@ interface Props {
   themeFont: ThemeFonts;
   themeColour: string;
   themeTint: number;
-  categoryID: number;
-  setCategoryID: Dispatch<SetStateAction<number>>;
+  category?: Category;
+  setCategory: Dispatch<SetStateAction<Category | undefined>>;
   menuID: number;
 }
 const MobileSubHeader: FC<Props> = ({
@@ -20,8 +20,8 @@ const MobileSubHeader: FC<Props> = ({
   themeFont,
   themeColour,
   themeTint,
-  categoryID,
-  setCategoryID,
+  category,
+  setCategory,
 }) => {
   if (categories.length < 1) {
     return null;
@@ -32,11 +32,11 @@ const MobileSubHeader: FC<Props> = ({
       <div className="hide-scroll-bar my-2 flex overflow-x-scroll">
         <div className="mx-2 flex flex-nowrap">
           <Categories
-            categoryID={categoryID}
+            category={category}
             themeColour={themeColour}
             themeTint={themeTint}
             themeFont={themeFont}
-            setCategoryID={setCategoryID}
+            setCategory={setCategory}
             loading={isCategoriesLoading}
             categories={categories}
           />
