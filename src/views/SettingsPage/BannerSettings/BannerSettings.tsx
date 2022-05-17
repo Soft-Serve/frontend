@@ -32,8 +32,8 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
   const { width } = useViewport();
   const isMobile = width < 475;
   const [images, setImages] = useState<ImageListType>([]);
-
   const [isLoading, setIsLoading] = useState(false);
+
   const { data, loading } = useBannersQuery({
     variables: {
       restaurantSlug,
@@ -173,21 +173,6 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
     );
   };
 
-  const renderBanner = () => {
-    if (data?.banners?.[0]?.photo) {
-      return (
-        <Card>
-          <HeroBanner
-            restaurantSlug={restaurantSlug}
-            themeColour={themeColour}
-            themeFont={themeFont}
-          />
-        </Card>
-      );
-    }
-    return null;
-  };
-
   if (loading || restaurantLoading) return <SkeletonBannerSettings />;
 
   return (
@@ -197,7 +182,16 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
           <SettingsHeader>Banner</SettingsHeader>
         </CardContent>
       </Card>
-      {renderBanner()}
+      <Card>
+        <HeroBanner
+          subHeader={data?.banners?.[0]?.sub_header}
+          header={data?.banners?.[0]?.header}
+          image={data?.banners?.[0]?.photo}
+          restaurantSlug={restaurantSlug}
+          themeColour={themeColour}
+          themeFont={themeFont}
+        />
+      </Card>
       <Card css={classnames("flex-col", "mt-4")}>
         <UpdateBannerHeadingsForm
           photo={data?.banners?.[0]?.photo ? data?.banners?.[0]?.photo : ""}

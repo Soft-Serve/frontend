@@ -8,6 +8,7 @@ import {
   useCurrentUserQuery,
   useCategoriesQuery,
   Category,
+  useBannersQuery,
 } from "@shared";
 import { Container, BoxSection, HeroBanner, LoadingScreen } from "@base";
 
@@ -29,6 +30,12 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
   const { id: restaurantSlug } = useParams<Param>() as Param;
 
   const { data: currentUser, loading: userLoading } = useCurrentUserQuery();
+
+  const { data: bannersData, loading: bannersLoading } = useBannersQuery({
+    variables: {
+      restaurantSlug,
+    },
+  });
 
   const { data: themeData } = useRestaurantThemeQuery({
     variables: {
@@ -62,7 +69,7 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
     },
   });
 
-  if (loading || userLoading) return <LoadingScreen />;
+  if (loading || userLoading || bannersLoading) return <LoadingScreen />;
 
   const renderItems = () => {
     return (
@@ -105,9 +112,12 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
     return (
       <>
         <HeroBanner
+          subHeader={bannersData?.banners?.[0]?.sub_header}
+          header={bannersData?.banners?.[0]?.header}
+          image={bannersData?.banners?.[0]?.photo}
           restaurantSlug={restaurantSlug}
-          themeColour={themeData?.restaurant?.colour || "red"}
           themeFont={themeData?.restaurant?.font || "Quicksand"}
+          themeColour={themeData?.restaurant?.colour || "red"}
         />
         <Container>
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>

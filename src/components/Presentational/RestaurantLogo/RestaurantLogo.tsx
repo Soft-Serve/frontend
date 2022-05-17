@@ -16,6 +16,12 @@ interface Props {
   restaurantSlug: string;
 }
 
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: "softserve",
+  },
+});
+
 const RestaurantLogo: FC<Props> = ({
   dimensions,
   borderColor = "white",
@@ -27,11 +33,7 @@ const RestaurantLogo: FC<Props> = ({
       restaurantSlug,
     },
   });
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: "softserve",
-    },
-  });
+
   const logo = restaurantData?.restaurant?.logo;
   const cldImage = cld.image(logo);
   cldImage

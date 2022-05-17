@@ -1,34 +1,29 @@
 import React from "react";
 import type { FC } from "react";
-import Skeleton from "react-loading-skeleton";
-import { useBannersQuery } from "@shared";
 import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/base";
 import { ThemeFonts } from "@base";
 
 interface Props {
+  header?: string;
+  subHeader?: string;
+  image?: string;
   themeColour: string;
   themeFont: ThemeFonts;
   restaurantSlug: string;
 }
-const HeroBanner: FC<Props> = ({ themeColour, themeFont, restaurantSlug }) => {
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: "softserve",
-    },
-  });
 
-  const { data, loading } = useBannersQuery({
-    variables: {
-      restaurantSlug,
-    },
-    skip: !restaurantSlug,
-  });
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: "softserve",
+  },
+});
 
-  const cldImage = cld.image(data?.banners?.[0]?.photo);
-  if (loading) return <Skeleton height={40} />;
+const HeroBanner: FC<Props> = ({ themeColour, themeFont, image, header, subHeader }) => {
+  const cldImage = cld.image(image);
 
-  if (!data?.banners?.[0]) return null;
+  if (!image) return null;
+
   return (
     <div className="w-full">
       <div className="relative w-full">
@@ -46,15 +41,11 @@ const HeroBanner: FC<Props> = ({ themeColour, themeFont, restaurantSlug }) => {
             </div>
             <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
               <h1 className="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                <span className={`block text-white font-${themeFont}`}>
-                  {data?.banners?.[0]?.header}
-                </span>
+                <span className={`block text-white font-${themeFont}`}>{header}</span>
               </h1>
               <h3 className="text-md text-center text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
-                {data?.banners?.[0]?.sub_header && (
-                  <span className={`block text-white font-${themeFont}`}>
-                    {data?.banners?.[0]?.sub_header}
-                  </span>
+                {subHeader && (
+                  <span className={`block text-white font-${themeFont}`}>{subHeader}</span>
                 )}
               </h3>
             </div>
