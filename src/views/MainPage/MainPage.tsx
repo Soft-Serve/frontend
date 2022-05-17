@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { Route, Routes, useLocation, useParams, Navigate } from "react-router-dom";
 import { Footer, LoadingScreen } from "@base";
 import { MenuSlideOver, AllergyModal, AllergyFiltersSideMenu, Restaurant } from "@presentational";
-import { useCurrentUserQuery, useRestaurantThemeQuery } from "@shared";
+import { Category, useCurrentUserQuery, useRestaurantThemeQuery } from "@shared";
 import { MenuPage } from "../MenuPage";
 import { Providers } from "./Providers";
 import { MainNavigation } from "./MainNavigation";
@@ -24,7 +24,7 @@ const MainPage: FC = () => {
   const [isFiterSideMenuOpen, setIsFilterSideMenuOpen] = useState(false);
   const [isMenuSlideOverOpen, setIsMenuSlideOverOpen] = useState(false);
   const [menuID, setMenuID] = useState(0);
-  const [categoryID, setCategoryID] = useState(0);
+  const [category, setCategory] = useState<Category>();
   const { data: userData, loading: userLoading } = useCurrentUserQuery();
   const { data, loading } = useRestaurantThemeQuery({
     variables: {
@@ -98,9 +98,9 @@ const MainPage: FC = () => {
                   path="/"
                   element={
                     <Restaurant
-                      categoryID={categoryID}
+                      category={category}
                       menuID={menuID}
-                      setCategoryID={setCategoryID}
+                      setCategory={setCategory}
                       setMenuID={setMenuID}
                     />
                   }

@@ -4,6 +4,7 @@ import { Button } from "@base";
 import { DIETARIES_QUERY, Item, useAllergiesQuery, useDietaryQuery } from "@shared";
 import { usePostDietaryMutation } from "./PostDietary.mutation";
 import { useDeleteDietaryMutation } from "./DeleteDietary.mutation";
+import { LifeStyles } from "src/contexts";
 
 interface Payload {
   dietaryID: string;
@@ -89,6 +90,8 @@ const AddDietaryForm: FC<Props> = ({
     return isAllergyActive(name) ? handleDelete(name) : handlePost(dietaryID);
   };
 
+  const allergyPrefix = (name: string) =>
+    name === LifeStyles.Vegan || name === LifeStyles.Vegeterian ? null : "Contains:";
   return (
     <div>
       <fieldset>
@@ -98,21 +101,24 @@ const AddDietaryForm: FC<Props> = ({
         <div className={`mt-4  border-t  border-${themeColour}-${themeTint}`}>
           {restaurantDietariesData?.allergies?.map(allergy => (
             <label
+              key={allergy.id}
               htmlFor={`person-${allergy.id}`}
               className={`flex w-full ${
                 isPostLoading || isDeleteLoading ? "cursor-wait" : "cursor-pointer"
               } select-none justify-between border-b font-Quicksand font-bold text-gray-700  border-${themeColour}-${themeTint} items-center py-4`}
             >
-              {allergy.name}
-
+              <div>
+                {allergyPrefix(allergy.name)}{" "}
+                <span className={`text-${themeColour}-${themeTint}`}>{allergy.name}</span>
+              </div>
               <input
                 disabled={loading || isPostLoading || isDeleteLoading}
-                value={allergy.id}
                 onChange={e => handleChange({ dietaryID: e.target.value, name: allergy.name })}
                 checked={isAllergyActive(allergy.name)}
                 id={`person-${allergy.id}`}
                 name={`person-${allergy.id}`}
                 type="checkbox"
+                value={allergy.id}
                 className={`focus:ring-${themeColour}-${themeTint} h-4 w-4 text-${themeColour}-${themeTint} cursor-pointer rounded border-gray-300`}
               />
             </label>

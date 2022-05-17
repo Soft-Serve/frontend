@@ -7,6 +7,7 @@ import {
   useRestaurantThemeQuery,
   useCurrentUserQuery,
   useCategoriesQuery,
+  Category,
 } from "@shared";
 import { Container, BoxSection, HeroBanner, LoadingScreen } from "@base";
 
@@ -20,11 +21,11 @@ type Param = {
 interface Props {
   menuID: number;
   setMenuID: Dispatch<SetStateAction<number>>;
-  categoryID: number;
-  setCategoryID: Dispatch<SetStateAction<number>>;
+  category?: Category;
+  setCategory: Dispatch<SetStateAction<Category | undefined>>;
 }
 
-const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID }) => {
+const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => {
   const { id: restaurantSlug } = useParams<Param>() as Param;
 
   const { data: currentUser, loading: userLoading } = useCurrentUserQuery();
@@ -56,8 +57,9 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID })
       menuID,
     },
     skip: !menuID,
-    onCompleted: completedData =>
-      setCategoryID(completedData?.categories?.filter(cat => cat.name !== "No category")?.[0]?.id),
+    onCompleted: completedData => {
+      setCategory(completedData?.categories?.filter(cat => cat.name !== "No category")?.[0]);
+    },
   });
 
   if (loading || userLoading) return <LoadingScreen />;
@@ -65,7 +67,7 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID })
   const renderItems = () => {
     return (
       <Items
-        categoryID={categoryID}
+        category={category}
         restaurantSlug={restaurantSlug}
         themeFont={themeData?.restaurant?.font || "Quicksand"}
         themeColour={themeData?.restaurant?.colour || "red"}
@@ -124,9 +126,9 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID })
             <CategoriesContainer
               categories={categories}
               isCategoriesLoading={categoryLoading}
-              categoryID={categoryID}
+              category={category}
               menuID={menuID}
-              setCategoryID={setCategoryID}
+              setCategory={setCategory}
               themeFont={themeData?.restaurant?.font || "Quicksand"}
               themeColour={themeData?.restaurant?.colour || "red"}
               themeTint={themeData?.restaurant?.tint || 400}
@@ -135,8 +137,8 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, categoryID, setCategoryID })
               categories={categories}
               isCategoriesLoading={categoryLoading}
               menuID={menuID}
-              categoryID={categoryID}
-              setCategoryID={setCategoryID}
+              category={category}
+              setCategory={setCategory}
               themeFont={themeData?.restaurant?.font || "Quicksand"}
               themeColour={themeData?.restaurant?.colour || "red"}
               themeTint={themeData?.restaurant?.tint || 400}

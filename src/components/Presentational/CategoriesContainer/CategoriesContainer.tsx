@@ -11,8 +11,8 @@ interface Props {
   themeColour: string;
   themeTint: number;
   menuID: number;
-  setCategoryID: Dispatch<SetStateAction<number>>;
-  categoryID: number;
+  setCategory: Dispatch<SetStateAction<Category | undefined>>;
+  category?: Category;
 }
 const CategoriesContainer: FC<Props> = ({
   isCategoriesLoading,
@@ -20,8 +20,8 @@ const CategoriesContainer: FC<Props> = ({
   themeFont,
   themeTint,
   themeColour,
-  setCategoryID,
-  categoryID,
+  setCategory,
+  category,
 }) => {
   if (categories.length < 1) {
     return null;
@@ -31,11 +31,11 @@ const CategoriesContainer: FC<Props> = ({
     <div className="hidden w-full flex-wrap lg:flex">
       <div className="mt-4 mb-2 flex items-center">
         <Categories
-          categoryID={categoryID}
+          category={category}
           themeColour={themeColour}
           themeTint={themeTint}
           themeFont={themeFont}
-          setCategoryID={setCategoryID}
+          setCategory={setCategory}
           loading={isCategoriesLoading}
           categories={categories}
         />

@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import { BreadCrumbsNavigation, DietarySvg, ThemeFonts, Toggle } from "@base";
+import { BreadCrumbsNavigation, ThemeFonts } from "@base";
 import { useAllergyContext } from "@contexts";
 import { Allergy, useAllergiesQuery } from "@shared";
 import { ActionTypes } from "src/contexts/AllergyContext/types";
 import Skeleton from "react-loading-skeleton";
-import { classnames } from "tailwindcss-classnames";
+import { AllergyButton } from "./AllergyButton";
 
 interface Props {
   themeColour: string;
@@ -12,8 +12,9 @@ interface Props {
   themeFont: ThemeFonts;
   restaurantSlug: string;
 }
+
 const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restaurantSlug }) => {
-  const { dispatch, activeAllergies } = useAllergyContext();
+  const { dispatch, activeAllergies, isAllergyVegetarianOrVegan } = useAllergyContext();
 
   const isAllergyActive = (currentAllergy: Allergy) =>
     !!activeAllergies.find(activeAllergy => activeAllergy.id === currentAllergy.id);
@@ -31,6 +32,11 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
     },
   });
 
+  const lifestyles = data?.allergies?.filter(allergy => isAllergyVegetarianOrVegan(allergy.name));
+  const restrictions = data?.allergies?.filter(
+    allergy => !isAllergyVegetarianOrVegan(allergy.name)
+  );
+
   const renderAllergies = () => {
     if (loading) {
       return (
@@ -46,33 +52,27 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
     }
     return (
       <>
-        {data?.allergies?.map(allergy => (
-          <div key={allergy.id} className={`w-full`}>
-            <div
-              className={`my-2 flex w-full items-center justify-between whitespace-nowrap rounded-md border-2 bg-white p-2 border-${themeColour}-${themeTint}`}
-              onKeyDown={() => handleClick(allergy)}
-              role="button"
-              onClick={() => handleClick(allergy)}
-              tabIndex={0}
-            >
-              <div key={allergy.id} className="inline-flex items-center">
-                <div className="flex items-center">
-                  {DietarySvg(
-                    allergy,
-                    themeColour,
-                    themeTint,
-                    classnames("mx-1", "text-white", "w-8", "h-8", "p-2")
-                  )}
-                  <span className={`font-${themeFont} ml-2 font-bold`}>{allergy.filter_name}</span>
-                </div>
-              </div>
-              <Toggle
-                themeColour={themeColour}
-                themeTint={themeTint}
-                isEnabled={isAllergyActive(allergy)}
-              />
-            </div>
-          </div>
+        {lifestyles?.map(allergy => (
+          <AllergyButton
+            key={allergy.id}
+            isAllergyActive={isAllergyActive}
+            allergy={allergy}
+            themeColour={themeColour}
+            themeFont={themeFont}
+            themeTint={themeTint}
+            handleClick={handleClick}
+          />
+        ))}
+        {restrictions?.map(allergy => (
+          <AllergyButton
+            key={allergy.id}
+            isAllergyActive={isAllergyActive}
+            allergy={allergy}
+            themeColour={themeColour}
+            themeFont={themeFont}
+            themeTint={themeTint}
+            handleClick={handleClick}
+          />
         ))}
       </>
     );
