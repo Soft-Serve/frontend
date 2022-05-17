@@ -48,14 +48,14 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
 
   const [updatePhoto] = useUpdateBannerImageMutation({
     onCompleted: () => {
-      setIsLoading(false);
       setImages([]);
+      setIsLoading(false);
     },
   });
   const [createPhoto] = useCreateNewBannerImage({
     onCompleted: () => {
-      setIsLoading(false);
       setImages([]);
+      setIsLoading(false);
     },
   });
 
@@ -64,7 +64,7 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
   const handleUpdatePhoto = async () => {
     setIsLoading(true);
     const photo = await fetchPhoto();
-    if (data?.banners?.[0]?.photo) {
+    if (data?.banners?.[0]?.photo && photo) {
       updatePhoto({
         variables: {
           input: {
@@ -82,7 +82,7 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
           },
         ],
       });
-    } else {
+    } else if (photo) {
       createPhoto({
         variables: {
           input: {
@@ -200,7 +200,7 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
       {renderBanner()}
       <Card css={classnames("flex-col", "mt-4")}>
         <UpdateBannerHeadingsForm
-          photo={data?.banners?.[0] ? data?.banners?.[0]?.photo : ""}
+          photo={data?.banners?.[0]?.photo ? data?.banners?.[0]?.photo : ""}
           restaurantSlug={restaurantSlug}
           themeColour={themeColour}
           themeTint={themeTint}

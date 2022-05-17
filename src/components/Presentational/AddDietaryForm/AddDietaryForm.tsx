@@ -38,8 +38,6 @@ const AddDietaryForm: FC<Props> = ({
     },
   });
 
-  console.log(restaurantDietariesData?.allergies);
-
   const [postDietary, { loading: isPostLoading }] = usePostDietaryMutation({
     notifyOnNetworkStatusChange: true,
     refetchQueries: [

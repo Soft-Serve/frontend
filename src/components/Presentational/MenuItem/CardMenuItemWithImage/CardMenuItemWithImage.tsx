@@ -38,21 +38,17 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
       </div>
       <div className="flex flex-1 flex-col justify-between bg-white p-2 pb-0">
         <div>
-          <div className="flex w-full justify-between">
-            <Typography
-              css={classnames("font-bold", "mr-2", "mb-2")}
-              themeFont={themeFont}
-              type="h5"
-            >
-              {item?.name}
-            </Typography>
-            <Dietaries
-              themeColour={themeColour}
-              themeTint={themeTint}
-              itemAvailable={item.available}
-              itemID={item.id}
-            />
-          </div>
+          <Dietaries
+            themeColour={themeColour}
+            themeTint={themeTint}
+            itemAvailable={item.available}
+            itemID={item.id}
+          />
+
+          <Typography css={classnames("font-bold", "my-2")} themeFont={themeFont} type="h5">
+            {item?.name}
+          </Typography>
+
           <Typography css={classnames("my-4", "break-words")} type="h6" themeFont={themeFont}>
             {item.available ? item.description : "** Temporarily unavailable  **"}
           </Typography>

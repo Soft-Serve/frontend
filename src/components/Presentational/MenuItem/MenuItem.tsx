@@ -42,8 +42,8 @@ const MenuItem: FC<Props> = ({
     [activeAllergies]
   );
 
-  if (categoryType === CategoryTypes.beverage) {
-    return hasImage ? (
+  const renderItems = () =>
+    hasImage ? (
       <CardMenuItemWithImage
         themeFont={themeFont}
         themeColour={themeColour}
@@ -60,33 +60,19 @@ const MenuItem: FC<Props> = ({
         {...rest}
       />
     );
+
+  if (categoryType === CategoryTypes.food) {
+    if (
+      loading ||
+      isItemBeingFilteredOut ||
+      (isUserVegan && !isItemVegan) ||
+      (isUserVegetarian && !isItemVegan && !isItemVegetarian)
+    ) {
+      return null;
+    }
   }
 
-  if (
-    loading ||
-    isItemBeingFilteredOut ||
-    (isUserVegan && !isItemVegan) ||
-    (isUserVegetarian && !isItemVegan && !isItemVegetarian)
-  )
-    return null;
-
-  return hasImage ? (
-    <CardMenuItemWithImage
-      themeFont={themeFont}
-      themeColour={themeColour}
-      themeTint={themeTint}
-      item={item}
-      {...rest}
-    />
-  ) : (
-    <CardMenuItemWithoutImage
-      themeFont={themeFont}
-      themeColour={themeColour}
-      themeTint={themeTint}
-      item={item}
-      {...rest}
-    />
-  );
+  return renderItems();
 };
 
 export { MenuItem };
