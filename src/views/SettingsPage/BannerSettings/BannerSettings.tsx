@@ -111,7 +111,7 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
           <img src={images[0].dataURL} />
         </div>
       );
-    else if (!images.length && data?.banners?.[0]?.photo) {
+    else if (!images.length && data?.banners?.[0]?.photo?.length) {
       return (
         <div className="mr-4 flex h-32 w-32 items-center justify-center">
           <ItemImage photoUrl={data.banners[0].photo} />

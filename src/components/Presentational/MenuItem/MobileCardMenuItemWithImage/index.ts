@@ -1,0 +1,1 @@
+export { MobileCardMenuItemWithImage } from "./MobileCardMenuItemWithImage";

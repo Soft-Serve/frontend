@@ -1,12 +1,13 @@
 import React, { useMemo } from "react";
 import type { FC, DetailedHTMLProps, HTMLAttributes } from "react";
 import { LifeStyles, useAllergyContext } from "@contexts";
-import { CategoryType, Item, useDietaryQuery } from "@shared";
+import { CategoryType, Item, useDietaryQuery, CategoryTypes } from "@shared";
 import { CardMenuItemWithImage } from "./CardMenuItemWithImage";
 import { CardMenuItemWithoutImage } from "./CardMenuItemWithoutImage";
+import { MobileCardMenuItemWithImage } from "./MobileCardMenuItemWithImage";
 import { intersection } from "@utility";
 import { ThemeFonts } from "@base";
-import { CategoryTypes } from "src/shared/Categories.query";
+import { useViewport } from "src/hooks";
 
 interface Props extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   item: Item;
@@ -26,6 +27,7 @@ const MenuItem: FC<Props> = ({
 }) => {
   const { activeAllergies, isUserVegan, isUserVegetarian, isAllergyVegetarianOrVegan } =
     useAllergyContext();
+  const { width } = useViewport();
 
   const { data, loading } = useDietaryQuery({
     variables: {
@@ -33,6 +35,8 @@ const MenuItem: FC<Props> = ({
     },
   });
 
+  const isMobile = width < 400;
+  const isItemOfFoodCategory = categoryType === CategoryTypes.food;
   const hasImage = !!item?.photo?.length;
   const isItemVegan = data?.dietaries?.some(dietary => dietary.name === LifeStyles.Vegan);
   const isItemVegetarian = data?.dietaries?.some(dietary => dietary.name === LifeStyles.Vegeterian);
@@ -42,8 +46,16 @@ const MenuItem: FC<Props> = ({
     [activeAllergies]
   );
 
-  const renderItems = () =>
-    hasImage ? (
+  const renderItemWithImage = () =>
+    isMobile ? (
+      <MobileCardMenuItemWithImage
+        themeFont={themeFont}
+        themeColour={themeColour}
+        themeTint={themeTint}
+        item={item}
+        {...rest}
+      />
+    ) : (
       <CardMenuItemWithImage
         themeFont={themeFont}
         themeColour={themeColour}
@@ -51,6 +63,11 @@ const MenuItem: FC<Props> = ({
         item={item}
         {...rest}
       />
+    );
+
+  const renderItems = () =>
+    hasImage ? (
+      renderItemWithImage()
     ) : (
       <CardMenuItemWithoutImage
         themeFont={themeFont}
@@ -61,7 +78,7 @@ const MenuItem: FC<Props> = ({
       />
     );
 
-  if (categoryType === CategoryTypes.food) {
+  if (isItemOfFoodCategory) {
     if (
       loading ||
       isItemBeingFilteredOut ||

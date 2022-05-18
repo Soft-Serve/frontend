@@ -14,7 +14,7 @@ interface Props {
 }
 
 const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restaurantSlug }) => {
-  const { dispatch, activeAllergies, isAllergyVegetarianOrVegan } = useAllergyContext();
+  const { dispatch, activeAllergies } = useAllergyContext();
 
   const isAllergyActive = (currentAllergy: Allergy) =>
     !!activeAllergies.find(activeAllergy => activeAllergy.id === currentAllergy.id);
@@ -32,11 +32,6 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
     },
   });
 
-  const lifestyles = data?.allergies?.filter(allergy => isAllergyVegetarianOrVegan(allergy.name));
-  const restrictions = data?.allergies?.filter(
-    allergy => !isAllergyVegetarianOrVegan(allergy.name)
-  );
-
   const renderAllergies = () => {
     if (loading) {
       return (
@@ -50,32 +45,17 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
         </>
       );
     }
-    return (
-      <>
-        {lifestyles?.map(allergy => (
-          <AllergyButton
-            key={allergy.id}
-            isAllergyActive={isAllergyActive}
-            allergy={allergy}
-            themeColour={themeColour}
-            themeFont={themeFont}
-            themeTint={themeTint}
-            handleClick={handleClick}
-          />
-        ))}
-        {restrictions?.map(allergy => (
-          <AllergyButton
-            key={allergy.id}
-            isAllergyActive={isAllergyActive}
-            allergy={allergy}
-            themeColour={themeColour}
-            themeFont={themeFont}
-            themeTint={themeTint}
-            handleClick={handleClick}
-          />
-        ))}
-      </>
-    );
+    return data?.allergies?.map(allergy => (
+      <AllergyButton
+        key={allergy.id}
+        isAllergyActive={isAllergyActive}
+        allergy={allergy}
+        themeColour={themeColour}
+        themeFont={themeFont}
+        themeTint={themeTint}
+        handleClick={handleClick}
+      />
+    ));
   };
 
   if (data?.allergies && data?.allergies?.length < 1) return <></>;
