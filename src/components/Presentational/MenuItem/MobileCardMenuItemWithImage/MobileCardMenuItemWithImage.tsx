@@ -26,7 +26,7 @@ const MobileCardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, 
     );
 
   return (
-    <a href="" className="block overflow-hidden rounded-lg bg-white shadow-2xl">
+    <div className="block overflow-hidden rounded-lg bg-white shadow-2xl ">
       <ItemImage unavailable={!item?.available} photoUrl={item?.photo} />
       <div className="flex flex-1 flex-col justify-between bg-white p-2 pb-0">
         <div>
@@ -47,7 +47,7 @@ const MobileCardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, 
         </div>
         {renderPrice()}
       </div>
-    </a>
+    </div>
   );
 };
 

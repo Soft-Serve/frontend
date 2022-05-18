@@ -35,7 +35,9 @@ const ItemImage: FC<Props> = memo(function ItemImage({ photoUrl, unavailable, is
     return (
       <div className={`relative overflow-hidden pb-48 ${isDesktop ? "w-32" : null}`}>
         <AdvancedImage
-          className="absolute inset-0 h-full w-full object-cover"
+          className={`absolute inset-0 h-full w-full  object-cover  ${
+            isDesktop ? "rounded-l-md" : "rounded-t-md"
+          }`}
           cldImg={cldImage}
           plugins={[lazyload(), responsive({ steps: 200 }), placeholder("blur")]}
         />
