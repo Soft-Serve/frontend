@@ -7,6 +7,7 @@ import {
   ViewGridIcon,
   PhotographIcon,
   QrcodeIcon,
+  LightningBoltIcon,
 } from "@heroicons/react/solid";
 
 interface ColourObject {
@@ -28,6 +29,12 @@ export const SUB_NAVIGATION = [
     description: "View and edit your restaurant information",
     icon: HomeIcon,
     current: true,
+  },
+  {
+    name: "QR",
+    description: "print your QR code",
+    icon: QrcodeIcon,
+    current: false,
   },
   {
     name: "banner",
@@ -65,18 +72,19 @@ export const SUB_NAVIGATION = [
     icon: ClipboardListIcon,
     current: false,
   },
+  {
+    name: "promotions",
+    description: "set happy hour/promotions",
+    icon: LightningBoltIcon,
+    current: false,
+  },
   // {
   //   name: "dietaries",
   //   description: "View and modify dietary filters",
   //   icon: FilterIcon,
   //   current: false,
   // },
-  {
-    name: "QR",
-    description: "print your QR code",
-    icon: QrcodeIcon,
-    current: false,
-  },
+
   // {
   //   name: "billing",
   //   description: "View and modify your billing information",

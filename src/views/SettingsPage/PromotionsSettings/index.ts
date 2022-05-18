@@ -1,0 +1,1 @@
+export { PromotionSettings } from "./PromotionsSettings";
