@@ -15,7 +15,6 @@ interface Props extends Omit<ImgProps, "cldImg"> {
   photoUrl: string;
   width?: number;
   unavailable?: boolean;
-  isDesktop?: boolean;
 }
 
 const cld = new Cloudinary({
@@ -24,7 +23,7 @@ const cld = new Cloudinary({
   },
 });
 
-const ItemImage: FC<Props> = memo(function ItemImage({ photoUrl, unavailable, isDesktop }) {
+const MobileImage: FC<Props> = memo(function ItemImage({ photoUrl, unavailable }) {
   const cldImage = cld.image(photoUrl);
 
   if (unavailable) {
@@ -33,11 +32,9 @@ const ItemImage: FC<Props> = memo(function ItemImage({ photoUrl, unavailable, is
 
   if (photoUrl) {
     return (
-      <div className={`relative overflow-hidden pb-48 ${isDesktop ? "w-32" : null}`}>
+      <div className="relative overflow-hidden pb-48">
         <AdvancedImage
-          className={`absolute inset-0 h-full w-full  object-cover  ${
-            isDesktop ? "rounded-l-md" : "rounded-t-md"
-          }`}
+          className="absolute inset-0 h-full w-full object-cover"
           cldImg={cldImage}
           plugins={[lazyload(), responsive({ steps: 200 }), placeholder("blur")]}
         />
@@ -47,4 +44,4 @@ const ItemImage: FC<Props> = memo(function ItemImage({ photoUrl, unavailable, is
   return null;
 });
 
-export { ItemImage };
+export { MobileImage };

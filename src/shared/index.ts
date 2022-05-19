@@ -6,7 +6,7 @@ export { useCurrentUserQuery, CURRENT_USER_QUERY } from "./CurrentUser.query";
 export type { CurrentUserData } from "./CurrentUser.query";
 export type { ItemSizeData } from "./ItemSizes.query";
 export { useItemSizeQuery, ITEM_SIZES_QUERY } from "./ItemSizes.query";
-export { useCategoriesQuery, CATEGORIES_QUERY } from "./Categories.query";
+export { useCategoriesQuery, CATEGORIES_QUERY, CategoryTypes } from "./Categories.query";
 export type { CategoriesData, Category, CategoryType } from "./Categories.query";
 export { useBannersQuery, BANNERS_QUERY } from "./Banners.query";
 export type { BannersData, Banner } from "./Banners.query";

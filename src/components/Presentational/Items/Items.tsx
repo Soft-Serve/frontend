@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import type { FC } from "react";
 import { useViewportContext } from "@contexts";
 import { Container, Grid, ThemeFonts } from "@base";
@@ -37,6 +37,7 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
       </Container>
     );
   if (error) return <p>error</p>;
+
   if (data?.items?.length === 0 && !loading) {
     return (
       <Container>
@@ -61,8 +62,6 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
               themeFont={themeFont}
               themeTint={themeTint}
               item={item}
-              tabIndex={0}
-              role="button"
             />
           ))}
         </Grid>
