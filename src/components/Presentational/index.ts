@@ -49,3 +49,6 @@ export { AllergyModal } from "./AllergyModal";
 export { MenuSlideOver } from "./MenuSlideOver";
 export { AllergyFiltersSideMenu } from "./AllergyFiltersSideMenu";
 export { MobileSubHeader } from "./MobileSubHeader";
+export { PromotionCard } from "./PromotionCard";
+export { CategoryName } from "./CategoryName";
+export { UpdatePromotionForm } from "./UpdatePromotionForm";

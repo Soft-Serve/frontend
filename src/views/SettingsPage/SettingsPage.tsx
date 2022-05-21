@@ -20,6 +20,7 @@ import { SettingsWrapper } from "./SettingsWrapper";
 import { CategorySettings } from "./CategorySettings";
 import { BannerSettings } from "./BannerSettings/BannerSettings";
 import { QRCodeSettings } from "./QRCodeSettings";
+import { PromotionSettings } from "./PromotionsSettings";
 interface MappableObject {
   [key: string]: JSX.Element;
 }
@@ -114,6 +115,13 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
       restaurantSlug={restaurantSlug}
     />
   );
+  const promotions = (
+    <PromotionSettings
+      themeColour={themeData?.restaurant?.colour || "red"}
+      themeTint={themeData?.restaurant?.tint || 400}
+      restaurantSlug={restaurantSlug}
+    />
+  );
 
   const SettingsMap = {
     restaurant,
@@ -126,6 +134,7 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
     dietaries,
     categories,
     QR,
+    promotions,
   } as MappableObject;
 
   const renderSettingsTab = () => SettingsMap[id];

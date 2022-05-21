@@ -19,3 +19,5 @@ export { useSignOutMutation } from "./SignOut.mutation";
 export { useSignUpFormMutation } from "./SignUp.mutation";
 export { useRestaurantThemeQuery, RESTAURANT_THEME_QUERY } from "./RestaurantTheme.query";
 export type { RestaurantThemeData } from "./RestaurantTheme.query";
+export { usePromotionsQuery, PROMOTIONS_QUERY } from "./Promotions.query";
+export type { PromotionsData, Promotion } from "./Promotions.query";

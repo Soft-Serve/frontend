@@ -45,7 +45,7 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
   };
 
   return (
-    <div key={item.id} className="relative flex overflow-hidden rounded-md shadow-md">
+    <div key={item.id} className="relative flex rounded-md shadow-md">
       <div className="relative h-full w-56 flex-shrink-0">
         <ItemImage className="inset-0 h-full w-full object-cover" photoUrl={item?.photo} />
         <div className="absolute top-3 left-1 flex items-center">

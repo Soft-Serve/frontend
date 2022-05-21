@@ -45,7 +45,7 @@ const MobileCategoryItemWithImage: FC<Props> = ({
   };
 
   return (
-    <div key={item.id} className="relative flex flex-col overflow-hidden rounded-md shadow-md">
+    <div key={item.id} className="relative flex flex-col rounded-md shadow-md">
       <div className="h-40 flex-shrink-0">
         <ItemImage
           className="inset-0 h-full w-full object-cover"
@@ -57,6 +57,14 @@ const MobileCategoryItemWithImage: FC<Props> = ({
         <Pill type={isItemAvailable ? "success" : "error"}>
           {isItemAvailable ? "Available" : "86"}
         </Pill>
+      </div>
+      <div className="absolute top-3 right-14">
+        <Toggle
+          themeColour={themeColour}
+          themeTint={themeTint}
+          isEnabled={isItemAvailable}
+          handleClick={handleToggle}
+        />
       </div>
       <div className="absolute top-1 right-1">
         <ItemDropdown
@@ -70,12 +78,6 @@ const MobileCategoryItemWithImage: FC<Props> = ({
       <div className="flex flex-1 flex-col justify-between bg-white p-2">
         <div className="flex w-full justify-between">
           <p className="font-Quicksand font-bold">{item?.name}</p>
-          <Toggle
-            themeColour={themeColour}
-            themeTint={themeTint}
-            isEnabled={isItemAvailable}
-            handleClick={handleToggle}
-          />
         </div>
         <p className="mt-2 overflow-hidden text-ellipsis break-words font-Quicksand text-sm italic text-gray-600">
           {item.available ? item.description : "** Temporarily unavailable  **"}

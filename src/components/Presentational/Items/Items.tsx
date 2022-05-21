@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import type { FC } from "react";
 import { useViewportContext } from "@contexts";
 import { Container, Grid, ThemeFonts } from "@base";
