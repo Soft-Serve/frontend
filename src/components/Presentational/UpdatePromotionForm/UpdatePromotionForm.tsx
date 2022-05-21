@@ -155,7 +155,13 @@ const UpdatePromotionForm: FC<Props> = ({ themeColour, themeTint, promotion, onC
           </div>
         </div>
         <div className="mt-4 w-full">
-          <Button size="XL" isFullwidth themeColour={themeColour} themeTint={themeTint}>
+          <Button
+            disabled={false}
+            size="XL"
+            isFullwidth
+            themeColour={themeColour}
+            themeTint={themeTint}
+          >
             Update
           </Button>
         </div>
