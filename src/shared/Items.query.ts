@@ -20,6 +20,7 @@ export const ITEMS_QUERY = gql`
 interface ItemSize {
   id?: any;
   price: string;
+  promo_price?: string;
   unit: string;
   menu_item_id: number;
   __typename: string;

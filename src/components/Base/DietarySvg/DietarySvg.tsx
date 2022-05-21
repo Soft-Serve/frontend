@@ -1,6 +1,19 @@
 import React from "react";
 import { TArg } from "tailwindcss-classnames";
-import { SoySVG, GlutenSVG, NutSVG, DairySVG, VegetarianSVG, VeganSVG, ShellfishSVG } from "./svgs";
+import {
+  SoySVG,
+  GlutenSVG,
+  NutSVG,
+  DairySVG,
+  VegetarianSVG,
+  VeganSVG,
+  ShellfishSVG,
+  SesameSVG,
+  EggsSVG,
+  HalalSVG,
+  PeanutsSVG,
+  SeafoodSVG,
+} from "./svgs";
 import { buildSvgStyles } from "./styles";
 
 type SVG = React.FunctionComponent<
@@ -24,9 +37,14 @@ const Components: DietaryMap = {
   Gluten: GlutenSVG,
   Lactose: DairySVG,
   Vegan: VeganSVG,
-  Nut: NutSVG,
+  "Tree nuts": NutSVG,
   Vegetarian: VegetarianSVG,
   Shellfish: ShellfishSVG,
+  Sesame: SesameSVG,
+  Eggs: EggsSVG,
+  Peanuts: PeanutsSVG,
+  Seafood: SeafoodSVG,
+  Halal: HalalSVG,
 };
 
 const DietarySvg = (dietary: Dietary, themeColour: string, themeTint: number, css?: TArg) => {

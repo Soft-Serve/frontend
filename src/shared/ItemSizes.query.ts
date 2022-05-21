@@ -9,6 +9,7 @@ const ITEM_SIZES_QUERY = gql`
       id
       price
       unit
+      promo_price
       menu_item_id
       __typename
     }
