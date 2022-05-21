@@ -11,6 +11,7 @@ interface MappableObject {
 }
 interface Props {
   handleUpdatePromotion: (promotion: Promotion) => void;
+  handleUpdateCategories: (promotionCategories?: PromotionCategory[]) => void;
   promo: Promotion;
   themeColour: string;
   themeTint: number;
@@ -23,7 +24,13 @@ const units = {
   amount: "$",
 } as MappableObject;
 
-const PromotionCard: FC<Props> = ({ promo, themeColour, themeTint, handleUpdatePromotion }) => {
+const PromotionCard: FC<Props> = ({
+  promo,
+  themeColour,
+  themeTint,
+  handleUpdatePromotion,
+  handleUpdateCategories,
+}) => {
   const { data } = usePromotionCategoriesQuery({
     variables: {
       promotionID: promo?.id ?? 0,
@@ -31,18 +38,21 @@ const PromotionCard: FC<Props> = ({ promo, themeColour, themeTint, handleUpdateP
     skip: !promo?.id,
   });
 
-  const renderDiscount = (category: PromotionCategory) => (
-    <div key={category.id} className="mt-2 flex items-center text-sm font-bold text-gray-500 ">
-      <span>{category.discount}</span>
-      <span className="mr-1">{units[category.unit]} off </span>
-      <CategoryName categoryID={category?.id} />
-    </div>
-  );
+  const renderDiscount = (category: PromotionCategory) => {
+    console.log(category);
+    return (
+      <div key={category.id} className="mt-2 flex items-center text-sm font-bold text-gray-500 ">
+        <span>{category.discount}</span>
+        <span className="mr-1">{units[category.unit]} off </span>
+        <CategoryName categoryID={category?.menu_category_id} />
+      </div>
+    );
+  };
 
   const renderWeekdays = () =>
     promo?.days.split(",").map(day => (
       <div
-        className={`border-l-2 border-white first:rounded-l-md last:rounded-r-md bg-${themeColour}-${themeTint}`}
+        className={`mt-4 border-l-2 border-white first:rounded-l-md last:rounded-r-md bg-${themeColour}-${themeTint}`}
         key={day}
       >
         <span className="ml-1 mr-2 flex flex-wrap p-1 text-sm font-bold uppercase text-white sm:text-base">
@@ -54,6 +64,14 @@ const PromotionCard: FC<Props> = ({ promo, themeColour, themeTint, handleUpdateP
   return (
     <>
       <li className="relative">
+        <div className="absolute top-2 right-2">
+          <PromotionDropdown
+            handleUpdateCategories={() => handleUpdateCategories(data?.promotionCategories)}
+            handleUpdate={() => handleUpdatePromotion(promo)}
+            themeColour={themeColour}
+            themeTint={themeTint}
+          />
+        </div>
         <div className="flex items-center overflow-visible px-4 py-4 shadow-lg sm:px-6">
           <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
             <div className="w-full">
@@ -92,13 +110,6 @@ const PromotionCard: FC<Props> = ({ promo, themeColour, themeTint, handleUpdateP
               </div>
             </div>
             <div className="mt-4 h-full flex-shrink-0 sm:mt-0 sm:ml-5">
-              <div className="absolute top-2 right-2">
-                <PromotionDropdown
-                  handleUpdate={() => handleUpdatePromotion(promo)}
-                  themeColour={themeColour}
-                  themeTint={themeTint}
-                />
-              </div>
               <div className="flex h-full -space-x-1">{renderWeekdays()}</div>
             </div>
           </div>

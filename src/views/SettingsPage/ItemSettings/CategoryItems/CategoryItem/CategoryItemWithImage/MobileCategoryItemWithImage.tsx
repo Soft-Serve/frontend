@@ -58,14 +58,6 @@ const MobileCategoryItemWithImage: FC<Props> = ({
           {isItemAvailable ? "Available" : "86"}
         </Pill>
       </div>
-      <div className="absolute top-3 right-14">
-        <Toggle
-          themeColour={themeColour}
-          themeTint={themeTint}
-          isEnabled={isItemAvailable}
-          handleClick={handleToggle}
-        />
-      </div>
       <div className="absolute top-1 right-1">
         <ItemDropdown
           themeColour={themeColour}
@@ -79,9 +71,17 @@ const MobileCategoryItemWithImage: FC<Props> = ({
         <div className="flex w-full justify-between">
           <p className="font-Quicksand font-bold">{item?.name}</p>
         </div>
-        <p className="mt-2 overflow-hidden text-ellipsis break-words font-Quicksand text-sm italic text-gray-600">
-          {item.available ? item.description : "** Temporarily unavailable  **"}
-        </p>
+        <div className="mt-2 flex items-end justify-between">
+          <p className="mt-2 overflow-hidden text-ellipsis break-words font-Quicksand text-sm italic text-gray-600">
+            {item.available ? item.description : "** Temporarily unavailable  **"}
+          </p>
+          <Toggle
+            themeColour={themeColour}
+            themeTint={themeTint}
+            isEnabled={isItemAvailable}
+            handleClick={handleToggle}
+          />
+        </div>
         <CategoryItemDietaries
           themeFont={themeFont}
           themeColour={themeColour}

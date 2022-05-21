@@ -5,7 +5,8 @@ import { Promotion } from "@shared";
 
 import { SettingsHeader } from "../SettingsHeader";
 import { usePromotionsQuery } from "@shared";
-import { PromotionCard, UpdatePromotionForm } from "@presentational";
+import { PromotionCard, UpdatePromotionCategoryForm, UpdatePromotionForm } from "@presentational";
+import { PromotionCategory } from "src/components/Presentational/PromotionCard/PromotionCategories.query";
 
 interface Props {
   themeColour: string;
@@ -16,15 +17,21 @@ interface Props {
 enum ModalForms {
   // PostPromotion = "postPromotion",
   UpdatePromotion = "updatePromotion",
+  UpdateCategory = "updateCategory",
   // DeletePromotion = "deletePromotion",
 }
 
 const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activePromotion, setActivePromotion] = useState<Promotion>();
+  const [activePromotionCategories, setActivePromotionCategories] = useState<PromotionCategory[]>();
   const [action, setAction] = useState<ModalForms>(ModalForms.UpdatePromotion);
 
   // const [activeMenu, setActiveMenu] = useState<Menu>();
+
+  const updateCategory = (
+    <UpdatePromotionCategoryForm promotionCategories={activePromotionCategories} />
+  );
 
   const updatePromotion = (
     <UpdatePromotionForm
@@ -37,6 +44,7 @@ const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
 
   const mapModalForms = {
     updatePromotion,
+    updateCategory,
   };
 
   const { data: promoData } = usePromotionsQuery({
@@ -126,6 +134,12 @@ const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
     setIsModalOpen(true);
   };
 
+  const handleUpdateCategories = (promotionCategories?: PromotionCategory[]) => {
+    setActivePromotionCategories(promotionCategories);
+    setAction(ModalForms.UpdateCategory);
+    setIsModalOpen(true);
+  };
+
   return (
     <TabWrapper>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
@@ -142,6 +156,7 @@ const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
         <ul role="list" className="divide-y divide-gray-200">
           {promoData?.promotions?.map(promo => (
             <PromotionCard
+              handleUpdateCategories={handleUpdateCategories}
               handleUpdatePromotion={handleUpdatePromotion}
               key={promo.id}
               themeColour={themeColour}

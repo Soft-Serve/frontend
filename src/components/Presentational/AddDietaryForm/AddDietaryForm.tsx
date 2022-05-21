@@ -93,12 +93,14 @@ const AddDietaryForm: FC<Props> = ({
   const allergyPrefix = (name: string) =>
     name === LifeStyles.Vegan || name === LifeStyles.Vegeterian ? null : "Contains:";
   return (
-    <div>
+    <div className="w-72 sm:w-full">
       <fieldset>
-        <legend className="font-Quicksand text-lg font-bold text-gray-900">
+        <legend
+          className={`border-2 font-Quicksand text-lg font-bold text-${themeColour}-${themeTint} border-${themeColour}-${themeTint} w-full rounded-md p-2 text-center`}
+        >
           Dietary Restrictions
         </legend>
-        <div className={`mt-4  border-t  border-${themeColour}-${themeTint}`}>
+        <div className={`mt-4  border-t  border-${themeColour}-${themeTint} h-80 overflow-scroll`}>
           {restaurantDietariesData?.allergies?.map(allergy => (
             <label
               key={allergy.id}

@@ -1,10 +1,11 @@
 import React, { FC } from "react";
-import { BreadCrumbsNavigation, ThemeFonts } from "@base";
+import { BreadCrumbsNavigation, ThemeFonts, Typography } from "@base";
 import { useAllergyContext } from "@contexts";
 import { Allergy, useAllergiesQuery } from "@shared";
 import { ActionTypes } from "src/contexts/AllergyContext/types";
 import Skeleton from "react-loading-skeleton";
 import { AllergyButton } from "./AllergyButton";
+import { classnames } from "tailwindcss-classnames";
 
 interface Props {
   themeColour: string;
@@ -62,7 +63,10 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
 
   return (
     <BreadCrumbsNavigation>
-      <div className={`flex  w-full flex-col`}>{renderAllergies()}</div>
+      <div className="min-w-0 flex-1"></div>
+      <div className="h-96 overflow-scroll rounded-md border-2 border-white p-2">
+        {renderAllergies()}
+      </div>
     </BreadCrumbsNavigation>
   );
 };

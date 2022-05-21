@@ -52,3 +52,4 @@ export { MobileSubHeader } from "./MobileSubHeader";
 export { PromotionCard } from "./PromotionCard";
 export { CategoryName } from "./CategoryName";
 export { UpdatePromotionForm } from "./UpdatePromotionForm";
+export { UpdatePromotionCategoryForm } from "./UpdatePromotionCategoryForm";
