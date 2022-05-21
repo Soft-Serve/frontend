@@ -19,8 +19,6 @@ import { Popover, Transition } from "@headlessui/react";
 import { FacebookSVG, FullLogoSVG, InstagramSVG, TwitterSVG } from "@svgs";
 import DesktopImage from "./desktop.png";
 import menuImage from "./menu_image.png";
-import bellaCiaoSettings from "./bella_ciao_settings.png";
-import cafeMontySettings from "./cafe_monty_settings.png";
 import computer from "./computer.png";
 import { routes } from "src/routes";
 
@@ -238,7 +236,7 @@ const LandingPage: FC = () => {
           <div aria-hidden="true" className="absolute inset-x-0 top-0 h-48 bg-white" />
           <div className="relative py-28">
             <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
-              <div className="mx-auto max-w-xl px-4 sm:px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">
+              <div className="mx-auto flex max-w-xl items-center px-4 sm:px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">
                 <div>
                   <div>
                     <span className="flex h-12 w-12 items-center justify-center rounded-md bg-red-400">
@@ -265,18 +263,20 @@ const LandingPage: FC = () => {
                 </div>
               </div>
               <div className="mt-12 sm:mt-16 lg:mt-0">
-                <div className="flex flex-wrap justify-around">
-                  <img className="max-h-96 p-2" src={bellaCiaoSettings} alt="Tablet settings" />
-                  <img className="max-h-96 p-2" src={cafeMontySettings} alt="Phone settings" />
+                <div className="flex flex-wrap justify-around px-10">
+                  <video loop autoPlay muted className="max-h-[32rem] rounded-3xl">
+                    <source
+                      src="https://res.cloudinary.com/softserve/video/upload/v1653164402/settings_katuhz.mov"
+                      type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
               </div>
             </div>
           </div>
           <div className="relative bg-red-400 py-28 ">
             <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
-              <div className="mt-12 flex justify-center sm:mt-16 lg:mt-0">
-                <img className="max-h-96 p-2" src={menuImage} alt="Sample menu" />
-              </div>
               <div className="mx-auto max-w-xl px-4 sm:px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">
                 <div>
                   <div>
@@ -302,6 +302,9 @@ const LandingPage: FC = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className="mt-12 flex justify-center sm:mt-16 lg:mt-0">
+                <img className="max-h-96 p-2" src={menuImage} alt="Sample menu" />
               </div>
             </div>
           </div>
@@ -439,7 +442,7 @@ const LandingPage: FC = () => {
                       </div>
                       {isMonthly && (
                         <div className="mt-8 flex items-center justify-center font-Quicksand text-5xl font-extrabold text-gray-900">
-                          <span>$20</span>
+                          <span>$40</span>
                           <span className="ml-3 font-Quicksand text-xl font-medium text-gray-500">
                             CAD /month
                           </span>
@@ -447,7 +450,7 @@ const LandingPage: FC = () => {
                       )}
                       {!isMonthly && (
                         <div className="mt-8 flex items-center justify-center font-Quicksand text-5xl font-extrabold text-gray-900">
-                          <span>$216</span>
+                          <span>$432</span>
                           <span className="ml-3 font-Quicksand text-xl font-medium text-gray-500">
                             CAD /year
                           </span>
