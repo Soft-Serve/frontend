@@ -265,7 +265,7 @@ const LandingPage: FC = () => {
               </div>
               <div className="mt-12 sm:mt-16 xl:mt-0">
                 <div className="flex flex-wrap justify-around px-10">
-                  <video loop autoPlay muted className="max-h-[32rem] rounded-3xl">
+                  <video loop autoPlay muted playsInline className="max-h-[32rem] rounded-3xl">
                     <source
                       src="https://res.cloudinary.com/softserve/video/upload/v1653164402/settings_katuhz.mov"
                       type="video/mp4"
