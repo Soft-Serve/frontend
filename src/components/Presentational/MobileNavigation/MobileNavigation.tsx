@@ -4,6 +4,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import { RestaurantLogo } from "@presentational";
 import { XIcon } from "@heroicons/react/solid";
 import { Button } from "@base";
+import { Link } from "react-router-dom";
+import { routes } from "src/routes";
 
 interface Props {
   isOpen: boolean;
@@ -75,16 +77,18 @@ const MobileNavigation: FC<Props> = ({
               </div>
             </Transition.Child>
             <div className="h-full">
-              <div
-                className={`flex flex-shrink-0 items-center px-4 bg-${themeColour}-${themeTint} pt-4 pb-4`}
-              >
-                <RestaurantLogo
-                  restaurantSlug={restaurantSlug}
-                  dimensions={60}
-                  borderColor="white"
-                  borderWidth={2}
-                />
-              </div>
+              <Link to={`${routes.restaurants}/${restaurantSlug}`}>
+                <div
+                  className={`flex flex-shrink-0 items-center px-4 bg-${themeColour}-${themeTint} pt-4 pb-4`}
+                >
+                  <RestaurantLogo
+                    restaurantSlug={restaurantSlug}
+                    dimensions={60}
+                    borderColor="white"
+                    borderWidth={2}
+                  />
+                </div>
+              </Link>
               <nav aria-label="Sidebar" className="h-full">
                 {children}
               </nav>

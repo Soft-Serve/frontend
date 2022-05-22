@@ -1,6 +1,8 @@
 import React from "react";
 import type { FC } from "react";
 import { FullLogoSVG } from "@svgs";
+import { Link } from "react-router-dom";
+import { routes } from "src/routes";
 
 interface Props {
   themeColour: string;
@@ -15,9 +17,11 @@ const Footer: FC<Props> = ({ themeTint, themeColour }) => {
         >
           Powered by:
         </h6>
-        <FullLogoSVG
-          className={`w-24 fill-current stroke-current text-${themeColour}-${themeTint}`}
-        />
+        <Link to={routes.home}>
+          <FullLogoSVG
+            className={`w-24 fill-current stroke-current text-${themeColour}-${themeTint}`}
+          />
+        </Link>
       </div>
     </footer>
   );
