@@ -18,9 +18,8 @@ import { Link } from "react-router-dom";
 import { Popover, Transition } from "@headlessui/react";
 import { FacebookSVG, FullLogoSVG, InstagramSVG, TwitterSVG } from "@svgs";
 import DesktopImage from "./desktop.png";
-import menuImage from "./menu_image.png";
-import bellaCiaoSettings from "./bella_ciao_settings.png";
-import cafeMontySettings from "./cafe_monty_settings.png";
+import bellaCiaoImage from "./bella_ciao_menu.png";
+import cafeMontyImage from "./cafe_monty_menu.png";
 import computer from "./computer.png";
 import { routes } from "src/routes";
 import { Button, Grid, Modal } from "@base";
@@ -256,8 +255,8 @@ const LandingPage: FC = () => {
         <div className="relative overflow-hidden">
           <div aria-hidden="true" className="absolute inset-x-0 top-0 h-48 bg-white" />
           <div className="relative py-28">
-            <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
-              <div className="mx-auto max-w-xl px-4 sm:px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">
+            <div className="xl:mx-auto xl:grid xl:max-w-7xl xl:grid-flow-col-dense xl:grid-cols-2 xl:gap-24 xl:px-8">
+              <div className="mx-auto max-w-xl px-4 sm:px-6 xl:col-start-2 xl:mx-0 xl:max-w-none xl:py-32 xl:px-0">
                 <div>
                   <div>
                     <span className="flex h-12 w-12 items-center justify-center rounded-md bg-red-400">
@@ -268,7 +267,7 @@ const LandingPage: FC = () => {
                     <h2 className="font-Quicksand text-3xl font-extrabold tracking-tight text-gray-900">
                       Manage your menu from any device
                     </h2>
-                    <p className="mt-4 font-Quicksand text-lg text-gray-500">
+                    <p className="mt-4 font-Quicksand text-xl text-gray-500">
                       Quick menu changes during service have never been easier. Add, update or
                       delete menus and dishes on the fly from any computer, phone or tablet.
                     </p>
@@ -283,20 +282,22 @@ const LandingPage: FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-12 sm:mt-16 lg:mt-0">
-                <div className="flex flex-wrap justify-around">
-                  <img className="max-h-96 p-2" src={bellaCiaoSettings} alt="Tablet settings" />
-                  <img className="max-h-96 p-2" src={cafeMontySettings} alt="Phone settings" />
+              <div className="mt-12 sm:mt-16 xl:mt-0">
+                <div className="flex flex-wrap justify-around px-10">
+                  <video loop autoPlay muted playsInline className="max-h-[32rem] rounded-3xl">
+                    <source
+                      src="https://res.cloudinary.com/softserve/video/upload/v1653164402/settings_katuhz.mov"
+                      type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
               </div>
             </div>
           </div>
           <div className="relative bg-red-400 py-28 ">
-            <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
-              <div className="mt-12 flex justify-center sm:mt-16 lg:mt-0">
-                <img className="max-h-96 p-2" src={menuImage} alt="Sample menu" />
-              </div>
-              <div className="mx-auto max-w-xl px-4 sm:px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">
+            <div className="xl:mx-auto xl:grid xl:max-w-7xl xl:grid-flow-col-dense xl:grid-cols-2 xl:gap-24 xl:px-8">
+              <div className="mx-auto max-w-xl px-4 sm:px-6 xl:mx-0 xl:max-w-none xl:py-16 xl:px-0">
                 <div>
                   <div>
                     <span className="flex h-12 w-12 items-center justify-center rounded-md bg-white">
@@ -307,7 +308,7 @@ const LandingPage: FC = () => {
                     <h2 className="font-Quicksand text-3xl font-extrabold tracking-tight text-white">
                       Create unique menus
                     </h2>
-                    <p className="mt-4 font-Quicksand text-lg text-white">
+                    <p className="mt-4 font-Quicksand text-xl text-white">
                       With a custom colour, logo, banner and font, no 2 SoftServe menus look the
                       same.
                     </p>
@@ -322,11 +323,25 @@ const LandingPage: FC = () => {
                   </div>
                 </div>
               </div>
+              <div className="mt-12 flex flex-wrap justify-center sm:mt-16 xl:mt-0">
+                <img
+                  className="max-h-[32rem] p-2"
+                  src={bellaCiaoImage}
+                  style={{ borderRadius: "2.5rem" }}
+                  alt="Sample menu 1"
+                />
+                <img
+                  className="max-h-[32rem] p-2"
+                  src={cafeMontyImage}
+                  style={{ borderRadius: "2.5rem" }}
+                  alt="Sample menu 2"
+                />
+              </div>
             </div>
           </div>
           <div className="my-28 py-8">
-            <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
-              <div className="mx-auto max-w-xl px-4 sm:px-6 lg:col-start-2 lg:mx-0 lg:max-w-none lg:py-32 lg:px-0">
+            <div className="xl:mx-auto xl:grid xl:max-w-7xl xl:grid-flow-col-dense xl:grid-cols-2 xl:gap-24 xl:px-8">
+              <div className="mx-auto max-w-xl px-4 sm:px-6 xl:col-start-2 xl:mx-0 xl:max-w-none xl:py-32 xl:px-0">
                 <div>
                   <div>
                     <span className="flex h-12 w-12 items-center justify-center rounded-md bg-red-400">
@@ -337,7 +352,7 @@ const LandingPage: FC = () => {
                     <h2 className="font-Quicksand text-3xl font-bold tracking-tight text-gray-900">
                       Built by hospitality professionals
                     </h2>
-                    <p className="mt-4 text-lg text-gray-500">
+                    <p className="mt-4 text-xl text-gray-500">
                       Our team has over over 15 years experience working in the hospitality
                       industry. We understand your needs and are here to make your job easier. We'd
                       love to chat so if you have questions don't hestitate to reach out to our
@@ -354,10 +369,10 @@ const LandingPage: FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-12 sm:mt-16 lg:col-start-1 lg:mt-0">
-                <div className="-ml-48 pr-4 sm:pr-6 md:-ml-16 lg:relative lg:m-0 lg:h-full lg:px-0">
+              <div className="mt-12 sm:mt-16 xl:col-start-1 xl:mt-0">
+                <div className="-ml-48 pr-4 sm:pr-6 md:-ml-16 xl:relative xl:m-0 xl:h-full xl:px-0">
                   <img
-                    className="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none"
+                    className="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 xl:absolute xl:right-0 xl:h-full xl:w-auto xl:max-w-none"
                     src={DesktopImage}
                     alt="Customer profile user interface"
                   />
@@ -458,7 +473,7 @@ const LandingPage: FC = () => {
                       </div>
                       {isMonthly && (
                         <div className="mt-8 flex items-center justify-center font-Quicksand text-5xl font-extrabold text-gray-900">
-                          <span>$20</span>
+                          <span>$30</span>
                           <span className="ml-3 font-Quicksand text-xl font-medium text-gray-500">
                             CAD /month
                           </span>
@@ -466,7 +481,7 @@ const LandingPage: FC = () => {
                       )}
                       {!isMonthly && (
                         <div className="mt-8 flex items-center justify-center font-Quicksand text-5xl font-extrabold text-gray-900">
-                          <span>$216</span>
+                          <span>$324</span>
                           <span className="ml-3 font-Quicksand text-xl font-medium text-gray-500">
                             CAD /year
                           </span>
