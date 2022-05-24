@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/client";
 
 export const POST_PROMOTION_CATEGORY_MUTATION = gql`
   mutation PostPromotionCategory($promotionID: number, $input: input) {
-    PostPromotionCategory(promotionID: $promotionID, input: $input)
+    postPromotionCategory(promotionID: $promotionID, input: $input)
       @rest(
         type: PromotionCategory
         path: "promotions/{args.promotionID}/promotion_categories"
@@ -27,8 +27,8 @@ interface PromotionCategory {
   __typename: string;
 }
 
-interface PromotionCategoryData {
-  promotionCategory: PromotionCategory;
+interface PostPromotionCategoryData {
+  postPromotionCategory: PromotionCategory;
 }
 
 interface Variables {
@@ -37,8 +37,8 @@ interface Variables {
 }
 
 const usePostPromotionCatgegoryMutation = (
-  options?: MutationHookOptions<PromotionCategoryData, Variables>
-) => useMutation<PromotionCategoryData, Variables>(POST_PROMOTION_CATEGORY_MUTATION, options);
+  options?: MutationHookOptions<PostPromotionCategoryData, Variables>
+) => useMutation<PostPromotionCategoryData, Variables>(POST_PROMOTION_CATEGORY_MUTATION, options);
 
 export { usePostPromotionCatgegoryMutation };
-export type { PromotionCategoryData };
+export type { PostPromotionCategoryData };

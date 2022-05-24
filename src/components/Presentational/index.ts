@@ -55,3 +55,4 @@ export { UpdatePromotionForm } from "./UpdatePromotionForm";
 export { PromotionCategories } from "./PromotionCategories";
 export { PostPromotionCategoryForm } from "./PostPromotionCategoryForm";
 export { DeletePromotionCategoryForm } from "./DeletePromotionCategoryForm";
+export { PromotionCategoryActions } from "./PromotionCategoryActions";

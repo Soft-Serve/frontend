@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import type { FC } from "react";
-import { Disclose, Button, Input, Dropdown, Tab, Tabs } from "@base";
+import { Disclose, Button, Input, Dropdown, Tab, Tabs, Notification } from "@base";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/solid";
 import { classnames } from "tailwindcss-classnames";
 import Skeleton from "react-loading-skeleton";
 import { Category, Menu, useCategoriesQuery, useMenusQuery } from "src/shared";
 import { usePostPromotionCatgegoryMutation } from "./PostPromotionCatgegory.mutation";
 import { PROMOTIONS_CATEGORIES_QUERY } from "../PromotionCategories/PromotionCategories.query";
+import toast from "react-hot-toast";
 
 interface Props {
   themeColour: string;
@@ -38,6 +39,7 @@ const PostPromotionCategoryForm: FC<Props> = ({
   const [activeCategory, setActiveCategory] = useState<Category>();
   const [amount, setAmount] = useState("");
   const [unit, setUnit] = useState(unitsArray[0]);
+  const onSuccess = () => toast.custom(<Notification header="Promotion succesfully added!" />);
 
   const [addPromotionCategory, { loading }] = usePostPromotionCatgegoryMutation({
     refetchQueries: [
@@ -51,6 +53,7 @@ const PostPromotionCategoryForm: FC<Props> = ({
     onCompleted: () => {
       setAmount("");
       setUnit(unitsArray[0]);
+      onSuccess();
     },
   });
 
@@ -188,6 +191,7 @@ const PostPromotionCategoryForm: FC<Props> = ({
         </fieldset>
         <div className="mt-4 flex-1">
           <Button
+            disabled={!amount}
             onClick={() => handleAddPromotionCategory()}
             loading={loading}
             isFullwidth

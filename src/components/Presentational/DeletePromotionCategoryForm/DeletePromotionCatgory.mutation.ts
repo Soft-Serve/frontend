@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import type { MutationHookOptions } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 
-export const DELEE_PROMOTION_CATEGORY_MUTATION = gql`
+export const DELETE_PROMOTION_CATEGORY_MUTATION = gql`
   mutation DeletePromotionCategory($promotionID: number, $input: input) {
     deletePromotionCategory(promotionID: $promotionID, input: $input)
       @rest(
@@ -41,7 +41,7 @@ interface Variables {
 const useDeletePromotionCatgegoryMutation = (
   options?: MutationHookOptions<DeletePromotionCategoryData, Variables>
 ) =>
-  useMutation<DeletePromotionCategoryData, Variables>(DELEE_PROMOTION_CATEGORY_MUTATION, options);
+  useMutation<DeletePromotionCategoryData, Variables>(DELETE_PROMOTION_CATEGORY_MUTATION, options);
 
 export { useDeletePromotionCatgegoryMutation };
 export type { DeletePromotionCategoryData, PromotionCategory };
