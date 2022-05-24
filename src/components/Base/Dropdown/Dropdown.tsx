@@ -5,6 +5,7 @@ import { CheckIcon, ChevronDownIcon } from "@heroicons/react/solid";
 import { buildStyles } from "./styles";
 
 interface Props {
+  showCheckmark?: boolean;
   onChange: any;
   value: any;
   data: any;
@@ -16,6 +17,7 @@ interface Props {
   themeTint: number;
 }
 const Dropdown: FC<Props> = ({
+  showCheckmark = true,
   onChange,
   value,
   data,
@@ -56,9 +58,9 @@ const Dropdown: FC<Props> = ({
                   className={`relative z-0 inline-flex divide-x rounded-md shadow-sm divide-${themeColour}-${themeTint}`}
                 >
                   <Listbox.Button
-                    className={`relative inline-flex items-center border-2 bg-white py-2 pl-3 pr-4  border-${themeColour}-${themeTint} rounded-l-md shadow-sm text-${themeColour}-${themeTint} focus:outline-none`}
+                    className={`relative inline-flex items-center border-2 border-r-0 bg-white py-2 pl-3 pr-4  border-${themeColour}-${themeTint} rounded-l-md shadow-sm text-${themeColour}-${themeTint} focus:outline-none`}
                   >
-                    <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                    {showCheckmark && <CheckIcon className="h-5 w-5" aria-hidden="true" />}
                     <p className="ml-2.5 text-sm font-bold">{value ? value?.name : defaultValue}</p>
                   </Listbox.Button>
                   <Listbox.Button
@@ -81,7 +83,7 @@ const Dropdown: FC<Props> = ({
               >
                 <Listbox.Options
                   static
-                  className="absolute z-10 mt-2  w-72 origin-top-left divide-y divide-gray-200 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  className="absolute z-50 mt-2 w-auto divide-y divide-gray-200 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 selection:origin-top-left focus:outline-none"
                 >
                   {data?.map((option: any) => (
                     <Listbox.Option
@@ -99,7 +101,7 @@ const Dropdown: FC<Props> = ({
                                   active ? "text-white" : `text-${themeColour}-${themeTint}`
                                 }
                               >
-                                <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                                <CheckIcon className="ml-2 h-5 w-5" aria-hidden="true" />
                               </span>
                             ) : null}
                           </div>

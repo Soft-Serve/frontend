@@ -1,1 +1,0 @@
-export { UpdatePromotionCategoryForm } from "./UpdatePromotionCategoryForm";

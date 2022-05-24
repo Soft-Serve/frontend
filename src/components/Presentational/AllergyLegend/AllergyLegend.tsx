@@ -1,11 +1,10 @@
 import React, { FC } from "react";
-import { BreadCrumbsNavigation, ThemeFonts, Typography } from "@base";
+import { BreadCrumbsNavigation, ThemeFonts } from "@base";
 import { useAllergyContext } from "@contexts";
 import { Allergy, useAllergiesQuery } from "@shared";
 import { ActionTypes } from "src/contexts/AllergyContext/types";
 import Skeleton from "react-loading-skeleton";
 import { AllergyButton } from "./AllergyButton";
-import { classnames } from "tailwindcss-classnames";
 
 interface Props {
   themeColour: string;

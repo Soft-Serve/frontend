@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import type { FC } from "react";
 import {
   PhoneIcon,
@@ -23,6 +23,8 @@ import bellaCiaoSettings from "./bella_ciao_settings.png";
 import cafeMontySettings from "./cafe_monty_settings.png";
 import computer from "./computer.png";
 import { routes } from "src/routes";
+import { Button, Grid, Modal } from "@base";
+import { DocumentIcon, PhotographIcon } from "@heroicons/react/solid";
 
 const navigation = {
   main: [
@@ -97,9 +99,24 @@ const features = [
 ];
 
 const LandingPage: FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMonthly, setIsMonthly] = useState(true);
+
+  useEffect(() => () => setIsModalOpen(false), []);
   return (
     <>
+      <Modal onClose={setIsModalOpen} isOpen={isModalOpen}>
+        <Grid size="M">
+          <Button size="XXL" themeColour="red" themeTint={600}>
+            <Link to="/restaurants/cafemonty">Demo with images</Link>
+            <PhotographIcon className="ml-2 h-6 w-6" aria-hidden="true" />
+          </Button>
+          <Button size="XXL" themeColour="red" themeTint={600}>
+            <Link to="/restaurants/bellaciao">Demo without images</Link>
+            <DocumentIcon className="ml-2 h-6 w-6" aria-hidden="true" />
+          </Button>
+        </Grid>
+      </Modal>
       <header>
         <Popover className="relative bg-red-400">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 md:justify-start md:space-x-10 lg:px-8">
@@ -222,12 +239,14 @@ const LandingPage: FC = () => {
                     >
                       Start free trial
                     </Link>
-                    <Link
-                      to="/restaurants/cafemonty"
-                      className="flex items-center justify-center rounded-md border border-transparent bg-red-500 bg-opacity-60 px-4 py-3 font-Quicksand text-base font-bold text-white shadow-sm hover:bg-opacity-70 sm:px-8"
+                    <Button
+                      onClick={() => setIsModalOpen(true)}
+                      themeColour="red"
+                      themeTint={400}
+                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-500 bg-opacity-60 px-4 py-3 font-Quicksand text-base font-bold text-white shadow-sm hover:bg-opacity-70 sm:px-8"
                     >
                       Live demo
-                    </Link>
+                    </Button>
                   </div>
                 </div>
               </div>
