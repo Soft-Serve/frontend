@@ -1,17 +1,19 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import type { FC, Dispatch, SetStateAction } from "react";
-import { Promotion } from "@shared";
+import { Promotion, PromotionsData, PROMOTIONS_QUERY } from "@shared";
 import { Button, Grid, Input, TextBox } from "@base";
 import { XIcon } from "@heroicons/react/solid";
 import { WeekDayButton } from "./WeekDayButton";
 import TimePicker, { TimePickerValue } from "react-time-picker";
 import "./style.css";
+import { useUpdatePromotionMutation } from "./UpdatePromotion.mutation";
 
 interface Props {
   onClose: Dispatch<SetStateAction<boolean>>;
   promotion?: Promotion;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
 enum Times {
@@ -20,15 +22,21 @@ enum Times {
 }
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-const UpdatePromotionForm: FC<Props> = ({ themeColour, themeTint, promotion, onClose }) => {
+const UpdatePromotionForm: FC<Props> = ({
+  themeColour,
+  themeTint,
+  promotion,
+  onClose,
+  restaurantSlug,
+}) => {
   const [input, setInput] = useState({
     name: promotion?.name ?? "",
-    description: promotion?.description,
+    description: promotion?.description ?? "",
     start_time: new Date(promotion?.start_time ?? ""),
     end_time: new Date(promotion?.end_time ?? ""),
     days: promotion?.days.split(",") ?? [],
     id: promotion?.id ?? 0,
-    restaurant_id: promotion?.restaurant_id,
+    restaurant_id: promotion?.restaurant_id ?? 0,
     __typename: "Promotion",
   });
 
@@ -60,6 +68,49 @@ const UpdatePromotionForm: FC<Props> = ({ themeColour, themeTint, promotion, onC
     }
   };
 
+  const [updatePromotion, { loading }] = useUpdatePromotionMutation({
+    onCompleted: () => onClose(false),
+    update(cache, { data: updatePromotionData }) {
+      const { promotions } =
+        cache.readQuery<PromotionsData>({
+          query: PROMOTIONS_QUERY,
+          variables: {
+            restaurantSlug,
+          },
+        }) ?? {};
+
+      cache.writeQuery<PromotionsData>({
+        query: PROMOTIONS_QUERY,
+        variables: {
+          restaurantSlug,
+        },
+        data: {
+          promotions:
+            promotions?.map(promo =>
+              promo.id === updatePromotionData?.updatePromotion?.id
+                ? updatePromotionData?.updatePromotion
+                : promo
+            ) ?? [],
+        },
+      });
+    },
+  });
+
+  const handleUpdate = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    updatePromotion({
+      variables: {
+        promotionID: promotion?.id ?? 0,
+        input: {
+          ...input,
+          start_time: input?.start_time.toLocaleTimeString(),
+          end_time: input?.end_time.toLocaleTimeString(),
+          days: input?.days.join(","),
+        },
+      },
+    });
+  };
+
   const renderWeekDays = () =>
     weekdays.map(day => (
       <WeekDayButton
@@ -87,7 +138,7 @@ const UpdatePromotionForm: FC<Props> = ({ themeColour, themeTint, promotion, onC
           <XIcon className="h-5 w-5" />
         </Button>
       </div>
-      <form className="mt-4 flex flex-col">
+      <form onSubmit={handleUpdate} className="mt-4 flex flex-col">
         <Input
           onChange={handleInputChange}
           value={input.name}
@@ -156,7 +207,8 @@ const UpdatePromotionForm: FC<Props> = ({ themeColour, themeTint, promotion, onC
         </div>
         <div className="mt-4 w-full">
           <Button
-            disabled={false}
+            loading={loading}
+            type="submit"
             size="XL"
             isFullwidth
             themeColour={themeColour}

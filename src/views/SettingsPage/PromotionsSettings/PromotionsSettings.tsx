@@ -24,6 +24,7 @@ const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
 
   const updatePromotion = (
     <UpdatePromotionForm
+      restaurantSlug={restaurantSlug}
       onClose={setIsModalOpen}
       promotion={activePromotion}
       themeColour={themeColour}
