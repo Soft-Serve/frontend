@@ -169,9 +169,11 @@ const UpdatePromotionForm: FC<Props> = ({
             </span>
             <span className="text-red-600">*</span>
           </p>
-          <Grid isSmallGap size="M">
-            {renderWeekDays()}
-          </Grid>
+          <div className="h-52 sm:h-auto ">
+            <Grid isSmallGap size="M">
+              {renderWeekDays()}
+            </Grid>
+          </div>
         </div>
         <div className="mt-4 flex w-full justify-start">
           <div className="mr-4">
