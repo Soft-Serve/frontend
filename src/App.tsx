@@ -23,7 +23,7 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Suspense fallback={<LoadingScreen />}>
+        <Suspense fallback={<LoadingScreen themeColour="red" themeTint={400} />}>
           <Routes>
             <Route path={routes.pageNotFound} element={<PageNotFound />} />
             <Route path={routes.home} element={<LandingPage />} />

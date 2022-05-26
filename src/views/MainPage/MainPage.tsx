@@ -44,7 +44,12 @@ const MainPage: FC = () => {
   };
 
   if (loading || userLoading) {
-    return <LoadingScreen />;
+    return (
+      <LoadingScreen
+        themeTint={data?.restaurant?.tint || 400}
+        themeColour={data?.restaurant?.colour || "red"}
+      />
+    );
   }
 
   if (data?.restaurant) {
@@ -92,7 +97,14 @@ const MainPage: FC = () => {
             setIsMenuSlideOverOpen={setIsMenuSlideOverOpen}
             setIsFilterSideMenuOpen={setIsFilterSideMenuOpen}
           >
-            <Suspense fallback={<LoadingScreen />}>
+            <Suspense
+              fallback={
+                <LoadingScreen
+                  themeTint={data?.restaurant?.tint || 400}
+                  themeColour={data?.restaurant?.colour || "red"}
+                />
+              }
+            >
               <Routes>
                 <Route
                   path="/"

@@ -69,7 +69,13 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
     },
   });
 
-  if (loading || userLoading || bannersLoading) return <LoadingScreen />;
+  if (loading || userLoading || bannersLoading)
+    return (
+      <LoadingScreen
+        themeColour={themeData?.restaurant?.colour || "red"}
+        themeTint={themeData?.restaurant?.tint || 400}
+      />
+    );
 
   const renderItems = () => {
     return (
