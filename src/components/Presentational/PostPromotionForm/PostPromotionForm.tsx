@@ -1,16 +1,14 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import type { FC, Dispatch, SetStateAction } from "react";
-import { Promotion, PromotionsData, PROMOTIONS_QUERY } from "@shared";
+import { PromotionsData, PROMOTIONS_QUERY } from "@shared";
 import { Button, Grid, Input, TextBox, Notification, WeekDayToggle } from "@base";
 import { XIcon } from "@heroicons/react/solid";
 import TimePicker, { TimePickerValue } from "react-time-picker";
-import "./style.css";
-import { useUpdatePromotionMutation } from "./UpdatePromotion.mutation";
 import toast from "react-hot-toast";
+import { usePostPromotionMutation } from "./PostPromotion.mutation";
 
 interface Props {
   onClose: Dispatch<SetStateAction<boolean>>;
-  promotion?: Promotion;
   themeColour: string;
   themeTint: number;
   restaurantSlug: string;
@@ -22,24 +20,27 @@ enum Times {
 }
 
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+interface NewPromotion {
+  name: string;
+  description: string;
+  start_time: string;
+  end_time: string;
+  days: string[];
+  id: 0;
+  restaurant_id: string;
+  __typename: string;
+}
+const PostPromotionForm: FC<Props> = ({ themeColour, themeTint, onClose, restaurantSlug }) => {
+  const onSuccess = () => toast.custom(<Notification header="Promotion succesfully added!" />);
 
-const UpdatePromotionForm: FC<Props> = ({
-  themeColour,
-  themeTint,
-  promotion,
-  onClose,
-  restaurantSlug,
-}) => {
-  const onSuccess = () => toast.custom(<Notification header="Promotion succesfully updated!" />);
-
-  const [input, setInput] = useState({
-    name: promotion?.name ?? "",
-    description: promotion?.description ?? "",
-    start_time: new Date(promotion?.start_time ?? ""),
-    end_time: new Date(promotion?.end_time ?? ""),
-    days: promotion?.days.split(",") ?? [],
-    id: promotion?.id ?? 0,
-    restaurant_id: promotion?.restaurant_id ?? 0,
+  const [input, setInput] = useState<NewPromotion>({
+    name: "",
+    description: "",
+    start_time: "",
+    end_time: "",
+    days: [],
+    id: 0,
+    restaurant_id: restaurantSlug,
     __typename: "Promotion",
   });
 
@@ -63,63 +64,41 @@ const UpdatePromotionForm: FC<Props> = ({
         ...prevState,
         days: [...prevState.days.filter((weekDay: string) => weekDay !== day)],
       }));
-    } else {
-      setInput(prevState => ({
-        ...prevState,
-        days: [...prevState.days, day],
-      }));
-    }
+    } else setInput(prevState => ({ ...prevState, days: [...prevState.days, day] }));
   };
 
-  const [updatePromotion, { loading }] = useUpdatePromotionMutation({
+  const [postPromotion, { loading }] = usePostPromotionMutation({
     onCompleted: () => {
       onClose(false);
       onSuccess();
     },
-    update(cache, { data: updatePromotionData }) {
-      const { promotions } =
-        cache.readQuery<PromotionsData>({
-          query: PROMOTIONS_QUERY,
-          variables: {
-            restaurantSlug,
-          },
-        }) ?? {};
+    update(cache, { data: postPromotionData }) {
+      const { promotions } = cache.readQuery({
+        query: PROMOTIONS_QUERY,
+        variables: {
+          restaurantSlug,
+        },
+      }) as PromotionsData;
 
-      cache.writeQuery<PromotionsData>({
+      cache.writeQuery({
         query: PROMOTIONS_QUERY,
         variables: {
           restaurantSlug,
         },
         data: {
-          promotions:
-            promotions?.map(promo =>
-              promo.id === updatePromotionData?.updatePromotion?.id
-                ? updatePromotionData?.updatePromotion
-                : promo
-            ) ?? [],
+          promotions: [...promotions, postPromotionData?.postPromotion],
         },
       });
     },
   });
 
-  const handleUpdate = (e: FormEvent<HTMLFormElement>) => {
+  const handlePost = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updatePromotion({
+    postPromotion({
       variables: {
-        promotionID: promotion?.id ?? 0,
         input: {
-          name: input.name,
-          id: input.id,
-          description: input.description,
-          restaurant_id: input.restaurant_id,
-          __typename: "Promotion",
-          start_time:
-            input.start_time instanceof Date
-              ? input.start_time.toLocaleTimeString()
-              : input.start_time,
-          end_time:
-            input?.end_time instanceof Date ? input.end_time.toLocaleTimeString() : input.end_time,
-          days: input?.days.join(","),
+          ...input,
+          days: input.days.join(","),
         },
       },
     });
@@ -129,7 +108,7 @@ const UpdatePromotionForm: FC<Props> = ({
     weekdays.map(day => (
       <WeekDayToggle
         key={day}
-        handleDayChange={handleDayChange}
+        handleDayChange={() => handleDayChange(day)}
         day={day}
         themeColour={themeColour}
         themeTint={themeTint}
@@ -141,7 +120,7 @@ const UpdatePromotionForm: FC<Props> = ({
     <div className="font-Quicksand">
       <div className="flex items-center justify-between">
         <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
-          Update {input?.name}
+          Create new promotion
         </h3>
         <Button
           onClick={() => onClose(false)}
@@ -152,7 +131,7 @@ const UpdatePromotionForm: FC<Props> = ({
           <XIcon className="h-5 w-5" />
         </Button>
       </div>
-      <form onSubmit={handleUpdate} className="mt-4 flex flex-col">
+      <form onSubmit={handlePost} className="mt-4 flex flex-col">
         <Input
           onChange={handleInputChange}
           value={input.name}
@@ -238,4 +217,4 @@ const UpdatePromotionForm: FC<Props> = ({
   );
 };
 
-export { UpdatePromotionForm };
+export { PostPromotionForm };

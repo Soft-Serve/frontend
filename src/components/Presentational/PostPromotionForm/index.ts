@@ -1,0 +1,1 @@
+export { PostPromotionForm } from "./PostPromotionForm";

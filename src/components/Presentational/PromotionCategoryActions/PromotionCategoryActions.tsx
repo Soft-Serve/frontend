@@ -119,12 +119,12 @@ const PromotionCategoryActions: FC<Props> = ({
   return (
     <tr
       key={promoCategory.id}
-      className="wrap mb-2 flex flex-none flex-col rounded-md border-b-2 sm:mb-0 sm:table-row"
+      className={`wrap mb-2 flex flex-none flex-col rounded-md border-b-2 sm:mb-0 sm:table-row border-${themeColour}-${themeTint}`}
     >
-      <td className="rounded-l-md border-2 p-3">
+      <td className={`rounded-l-md border-2 border-${themeColour}-${themeTint} p-3`}>
         <CategoryName categoryID={promoCategory.menu_category_id} />
       </td>
-      <td className="border-2 p-3 ">
+      <td className={`border-2 p-3 border-${themeColour}-${themeTint}`}>
         <fieldset className="flex items-end justify-start">
           <Input
             css={classnames("rounded-r-none", "border-r-0", "-mr-8", "w-24", "sm:py-2", "py-1.5")}
@@ -155,7 +155,7 @@ const PromotionCategoryActions: FC<Props> = ({
           />
         </fieldset>
       </td>
-      <td className="cursor-pointer border-2 p-3">
+      <td className={`cursor-pointer border-2 p-3  border-${themeColour}-${themeTint}`}>
         <div className="flex w-full">
           <Button
             onClick={() => handleDeleteCategoryPromotion(promoCategory)}

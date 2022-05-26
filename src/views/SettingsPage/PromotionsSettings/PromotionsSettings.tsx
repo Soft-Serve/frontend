@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import type { FC } from "react";
-import { Card, CardContent, Modal, TabWrapper } from "@base";
+import { Button, Card, CardContent, Modal, TabWrapper } from "@base";
 import { Promotion } from "@shared";
 
 import { SettingsHeader } from "../SettingsHeader";
 import { usePromotionsQuery } from "@shared";
-import { PromotionCard, UpdatePromotionForm } from "@presentational";
+import { PostPromotionForm, PromotionCard, UpdatePromotionForm } from "@presentational";
+import { LightningBoltIcon } from "@heroicons/react/solid";
 
 interface Props {
   themeColour: string;
@@ -15,6 +16,7 @@ interface Props {
 
 enum ModalForms {
   UpdatePromotion = "updatePromotion",
+  PostPromotion = "postPromotion",
 }
 
 const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => {
@@ -32,8 +34,18 @@ const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
     />
   );
 
+  const postPromotion = (
+    <PostPromotionForm
+      restaurantSlug={restaurantSlug}
+      onClose={setIsModalOpen}
+      themeColour={themeColour}
+      themeTint={themeTint}
+    />
+  );
+
   const mapModalForms = {
     updatePromotion,
+    postPromotion,
   };
 
   const { data: promoData } = usePromotionsQuery({
@@ -51,6 +63,11 @@ const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
     setIsModalOpen(true);
   };
 
+  const handleAddPromotion = () => {
+    setAction(ModalForms.PostPromotion);
+    setIsModalOpen(true);
+  };
+
   return (
     <TabWrapper>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
@@ -59,6 +76,15 @@ const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
       <Card css="mb-4">
         <CardContent>
           <SettingsHeader>Promotions</SettingsHeader>
+          <Button
+            onClick={handleAddPromotion}
+            themeColour={themeColour}
+            themeTint={themeTint}
+            size="XXL"
+          >
+            Add
+            <LightningBoltIcon className="ml-2 h-5 w-5" />
+          </Button>
         </CardContent>
       </Card>
       <div className="flex w-full">

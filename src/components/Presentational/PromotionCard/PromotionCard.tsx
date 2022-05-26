@@ -15,6 +15,22 @@ interface Props {
   restaurantSlug: string;
 }
 
+interface MappableObject {
+  [key: string]: number;
+}
+
+const map = {
+  Monday: 1,
+  Tuesday: 2,
+  Wednesday: 3,
+  Thursday: 4,
+  Friday: 5,
+  Saturday: 6,
+  Sunday: 7,
+} as MappableObject;
+
+const sortWeekDays = (weekdays: string[]) => weekdays.sort((a, b) => map[a] - map[b]);
+
 const getShortName = (weekday: string) => weekday.substring(0, 3);
 
 const PromotionCard: FC<Props> = ({
@@ -25,12 +41,12 @@ const PromotionCard: FC<Props> = ({
   restaurantSlug,
 }) => {
   const renderWeekdays = () =>
-    promo?.days.split(",").map(day => (
+    sortWeekDays(promo?.days.split(",")).map(day => (
       <div
         className={`mt-4 border-l-2 border-white first:rounded-l-md last:rounded-r-md bg-${themeColour}-${themeTint}`}
         key={day}
       >
-        <span className="ml-1 mr-2 flex flex-wrap p-1 text-sm font-bold uppercase text-white sm:text-base">
+        <span className="ml-1 mr-1 flex p-1 text-xs font-bold uppercase text-white sm:mr-2 sm:text-base">
           {getShortName(day)}
         </span>
       </div>
