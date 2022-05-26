@@ -9,7 +9,7 @@ interface Props {
   day: string;
   handleDayChange: (day: string) => void;
 }
-const WeekDayButton: FC<Props> = ({
+const WeekDayToggle: FC<Props> = ({
   handleDayChange,
   day,
   isPromoActive,
@@ -35,4 +35,4 @@ const WeekDayButton: FC<Props> = ({
   );
 };
 
-export { WeekDayButton };
+export { WeekDayToggle };
