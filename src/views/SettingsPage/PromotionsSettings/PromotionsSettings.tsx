@@ -88,7 +88,7 @@ const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
         </CardContent>
       </Card>
       <div className="flex w-full">
-        <ul role="list" className="w-full divide-y divide-gray-200">
+        <ul role="list" className="w-full space-y-4 divide-y divide-gray-200">
           {promoData?.promotions?.map(promo => (
             <PromotionCard
               restaurantSlug={restaurantSlug}

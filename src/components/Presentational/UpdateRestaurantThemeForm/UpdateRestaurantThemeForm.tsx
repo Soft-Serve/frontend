@@ -6,6 +6,10 @@ import toast from "react-hot-toast";
 import { ColourPicker } from "@presentational";
 import { useUpdateRestaurantTheme } from "./UpdateRestautantTheme.mutation";
 import { RestaurantThemeData, RESTAURANT_THEME_QUERY } from "@shared";
+import {
+  RestaurantOnBoardingData,
+  RESTAURANT_ONBOARDING_QUERY,
+} from "../Restaurant/RestaurantOnboarding.query";
 
 interface Props {
   id: number;
@@ -39,6 +43,24 @@ const UpdateRestaurantThemeForm: FC<Props> = ({ id, themeColour, themeTint, rest
           restaurant: {
             ...updatedTheme?.updateRestaurantTheme,
             font: restaurant?.font,
+          },
+        },
+      });
+      const { restaurant: restaurantData } = cache.readQuery({
+        query: RESTAURANT_ONBOARDING_QUERY,
+        variables: {
+          restaurantSlug,
+        },
+      }) as RestaurantOnBoardingData;
+      cache.writeQuery<RestaurantOnBoardingData>({
+        query: RESTAURANT_ONBOARDING_QUERY,
+        variables: {
+          restaurantSlug,
+        },
+        data: {
+          restaurant: {
+            ...restaurantData,
+            has_styles: true,
           },
         },
       });

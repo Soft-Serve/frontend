@@ -4,6 +4,10 @@ import { Item, ItemsData, ITEMS_QUERY } from "@shared";
 import { Button } from "@base";
 import { XIcon } from "@heroicons/react/solid";
 import { useDeleteItemMutation } from "./DeleteItem.mutation";
+import {
+  RestaurantOnBoardingData,
+  RESTAURANT_ONBOARDING_QUERY,
+} from "../Restaurant/RestaurantOnboarding.query";
 
 interface Props {
   onCompleted?: (state: boolean) => void;
@@ -11,6 +15,7 @@ interface Props {
   deletedItem?: Item;
   themeColour: string;
   themeTint: number;
+  restaurantSlug: string;
 }
 
 const DeleteItemForm: FC<Props> = ({
@@ -19,6 +24,7 @@ const DeleteItemForm: FC<Props> = ({
   deletedItem,
   themeTint,
   themeColour,
+  restaurantSlug,
 }) => {
   const [deleteItem, { loading }] = useDeleteItemMutation({
     onCompleted: () => onCompleted?.(false),
@@ -31,15 +37,38 @@ const DeleteItemForm: FC<Props> = ({
           },
         }) ?? {};
 
+      const filteredItems =
+        items?.filter(item => item.id !== deletedItemData?.deleteItem?.id) || [];
+
       cache.writeQuery<ItemsData>({
         query: ITEMS_QUERY,
         variables: {
           categoryID,
         },
         data: {
-          items: items?.filter(item => item.id !== deletedItemData?.deleteItem?.id) || [],
+          items: filteredItems,
         },
       });
+      if (!filteredItems.length) {
+        const { restaurant } = cache.readQuery({
+          query: RESTAURANT_ONBOARDING_QUERY,
+          variables: {
+            restaurantSlug,
+          },
+        }) as RestaurantOnBoardingData;
+        cache.writeQuery<RestaurantOnBoardingData>({
+          query: RESTAURANT_ONBOARDING_QUERY,
+          variables: {
+            restaurantSlug,
+          },
+          data: {
+            restaurant: {
+              ...restaurant,
+              has_items: false,
+            },
+          },
+        });
+      }
     },
   });
 

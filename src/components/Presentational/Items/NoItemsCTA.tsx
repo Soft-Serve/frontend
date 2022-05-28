@@ -1,6 +1,7 @@
 import { BoxSection, Button } from "@base";
 import type { FC } from "react";
 import { useNavigate } from "react-router-dom";
+import { ArrowRightIcon } from "@heroicons/react/solid";
 
 interface Props {
   isAdmin: boolean;
@@ -15,7 +16,7 @@ const NoItemsCTA: FC<Props> = ({ themeColour, themeTint, restaurantSlug, isAdmin
   if (isAdmin) {
     return (
       <BoxSection>
-        <div className="flex flex-col items-center justify-center sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="flex flex-col items-center justify-center font-Quicksand sm:mx-auto sm:w-full sm:max-w-md">
           <h4 className={`text-bold m-8 text-center text-2xl ${themeColour}-${themeTint}`}>
             No menu items yet!
           </h4>
@@ -26,12 +27,13 @@ const NoItemsCTA: FC<Props> = ({ themeColour, themeTint, restaurantSlug, isAdmin
             <Button
               themeColour={themeColour}
               themeTint={themeTint}
-              size="XL"
+              size="XXL"
               onClick={() =>
                 navigate(`/restaurants/${restaurantSlug}/settings/items`, { replace: true })
               }
             >
               Add items
+              <ArrowRightIcon className="ml-2 h-5 w-5 text-white" />
             </Button>
           </div>
         </div>

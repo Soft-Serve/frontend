@@ -80,6 +80,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
 
   const deleteItem = (
     <DeleteItemForm
+      restaurantSlug={restaurantSlug}
       themeColour={themeColour}
       themeTint={themeTint}
       onCompleted={setIsModalOpen}

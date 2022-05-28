@@ -25,7 +25,10 @@ import {
   hasBeginningWhiteSpace,
 } from "@utility";
 import { usePostItemMutation } from "./PostItem.mutation";
-import { RESTAURANT_ONBOARDING_QUERY } from "../Restaurant/RestaurantOnboarding.query";
+import {
+  RestaurantOnBoardingData,
+  RESTAURANT_ONBOARDING_QUERY,
+} from "../Restaurant/RestaurantOnboarding.query";
 
 interface Props {
   restaurantSlug: string;
@@ -110,14 +113,6 @@ const PostItemForm: FC<Props> = ({
     }));
 
   const [postItem, { loading }] = usePostItemMutation({
-    refetchQueries: [
-      {
-        query: RESTAURANT_ONBOARDING_QUERY,
-        variables: {
-          restaurantSlug,
-        },
-      },
-    ],
     onCompleted: () => {
       onCompleted?.(false);
       setIsLoading(false);
@@ -131,15 +126,39 @@ const PostItemForm: FC<Props> = ({
         },
       }) as ItemsData;
 
+      const newItems = [...items, newPostItemData?.postItem];
+      const isFirstItem = newItems.length === 1;
+
       cache.writeQuery({
         query: ITEMS_QUERY,
         variables: {
           categoryID: activeCategory?.id,
         },
         data: {
-          items: [...items, newPostItemData?.postItem],
+          items: newItems,
         },
       });
+      if (isFirstItem) {
+        const { restaurant } = cache.readQuery({
+          query: RESTAURANT_ONBOARDING_QUERY,
+          variables: {
+            restaurantSlug,
+          },
+        }) as RestaurantOnBoardingData;
+        cache.writeQuery<RestaurantOnBoardingData>({
+          query: RESTAURANT_ONBOARDING_QUERY,
+          variables: {
+            restaurantSlug,
+          },
+          data: {
+            restaurant: {
+              ...restaurant,
+              has_items: true,
+              onboarding_done: true,
+            },
+          },
+        });
+      }
     },
   });
 

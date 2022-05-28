@@ -37,14 +37,14 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
     },
   });
 
-  const { data: themeData } = useRestaurantThemeQuery({
+  const { data: themeData, loading: themeLoading } = useRestaurantThemeQuery({
     variables: {
       restaurantSlug,
     },
     skip: !restaurantSlug,
   });
 
-  const { data, error, loading } = useRestaurantOnboardingQuery({
+  const { data, loading } = useRestaurantOnboardingQuery({
     variables: {
       restaurantSlug,
     },
@@ -69,7 +69,9 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
     },
   });
 
-  if (loading || userLoading || bannersLoading)
+  const categories = categoryData?.categories?.filter(cat => cat.name !== "No category") ?? [];
+
+  if (loading || userLoading || bannersLoading || themeLoading)
     return (
       <LoadingScreen
         themeColour={themeData?.restaurant?.colour || "red"}
@@ -89,10 +91,11 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
     );
   };
 
-  if (
-    (!data?.restaurant?.has_items || !data?.restaurant?.has_styles) &&
-    !data?.restaurant?.onboarding_done
-  ) {
+  const isUserOnboarded =
+    (data?.restaurant?.has_items || data?.restaurant?.has_styles) &&
+    data?.restaurant?.onboarding_done;
+
+  if (!isUserOnboarded) {
     return (
       <Container>
         <BoxSection withPadding css={classnames("lg:py-10")}>
@@ -112,60 +115,55 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
     );
   }
 
-  if (data?.restaurant.has_items) {
-    const categories = categoryData?.categories?.filter(cat => cat.name !== "No category") ?? [];
-
-    return (
-      <>
-        <HeroBanner
-          subHeader={bannersData?.banners?.[0]?.sub_header}
-          header={bannersData?.banners?.[0]?.header}
-          image={bannersData?.banners?.[0]?.photo}
-          restaurantSlug={restaurantSlug}
-          themeFont={themeData?.restaurant?.font || "Quicksand"}
-          themeColour={themeData?.restaurant?.colour || "red"}
-        />
-        <Container>
-          <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
-            <div className="hidden w-full lg:flex">
-              <Menus
-                isMenuLoading={menusLoading}
-                menus={menusData?.menus ?? []}
-                setMenuID={setMenuID}
-                menuID={menuID}
-                restaurantSlug={restaurantSlug}
-                themeFont={themeData?.restaurant?.font || "Quicksand"}
-                themeColour={themeData?.restaurant?.colour || "red"}
-                themeTint={themeData?.restaurant?.tint || 400}
-              />
-            </div>
-            <CategoriesContainer
-              categories={categories}
-              isCategoriesLoading={categoryLoading}
-              category={category}
+  return (
+    <>
+      <HeroBanner
+        subHeader={bannersData?.banners?.[0]?.sub_header}
+        header={bannersData?.banners?.[0]?.header}
+        image={bannersData?.banners?.[0]?.photo}
+        restaurantSlug={restaurantSlug}
+        themeFont={themeData?.restaurant?.font || "Quicksand"}
+        themeColour={themeData?.restaurant?.colour || "red"}
+      />
+      <Container>
+        <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
+          <div className="hidden w-full lg:flex">
+            <Menus
+              isMenuLoading={menusLoading}
+              menus={menusData?.menus ?? []}
+              setMenuID={setMenuID}
               menuID={menuID}
-              setCategory={setCategory}
+              restaurantSlug={restaurantSlug}
               themeFont={themeData?.restaurant?.font || "Quicksand"}
               themeColour={themeData?.restaurant?.colour || "red"}
               themeTint={themeData?.restaurant?.tint || 400}
             />
-            <MobileSubHeader
-              categories={categories}
-              isCategoriesLoading={categoryLoading}
-              menuID={menuID}
-              category={category}
-              setCategory={setCategory}
-              themeFont={themeData?.restaurant?.font || "Quicksand"}
-              themeColour={themeData?.restaurant?.colour || "red"}
-              themeTint={themeData?.restaurant?.tint || 400}
-            />
-          </BoxSection>
-          {renderItems()}
-        </Container>
-      </>
-    );
-  }
-  return <p>{error?.message}</p>;
+          </div>
+          <CategoriesContainer
+            categories={categories}
+            isCategoriesLoading={categoryLoading}
+            category={category}
+            menuID={menuID}
+            setCategory={setCategory}
+            themeFont={themeData?.restaurant?.font || "Quicksand"}
+            themeColour={themeData?.restaurant?.colour || "red"}
+            themeTint={themeData?.restaurant?.tint || 400}
+          />
+          <MobileSubHeader
+            categories={categories}
+            isCategoriesLoading={categoryLoading}
+            menuID={menuID}
+            category={category}
+            setCategory={setCategory}
+            themeFont={themeData?.restaurant?.font || "Quicksand"}
+            themeColour={themeData?.restaurant?.colour || "red"}
+            themeTint={themeData?.restaurant?.tint || 400}
+          />
+        </BoxSection>
+        {renderItems()}
+      </Container>
+    </>
+  );
 };
 
 export { Restaurant };

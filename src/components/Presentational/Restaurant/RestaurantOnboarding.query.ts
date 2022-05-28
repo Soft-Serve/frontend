@@ -37,3 +37,4 @@ const useRestaurantOnboardingQuery = (
 ) => useQuery<RestaurantOnBoardingData, Variables>(RESTAURANT_ONBOARDING_QUERY, options);
 
 export { useRestaurantOnboardingQuery, RESTAURANT_ONBOARDING_QUERY };
+export type { RestaurantOnBoardingData };

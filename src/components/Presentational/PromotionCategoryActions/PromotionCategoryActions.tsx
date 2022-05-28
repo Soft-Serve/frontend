@@ -119,9 +119,9 @@ const PromotionCategoryActions: FC<Props> = ({
   return (
     <tr
       key={promoCategory.id}
-      className={`wrap mb-2 flex flex-none flex-col rounded-md border-b-2 sm:mb-0 sm:table-row border-${themeColour}-${themeTint}`}
+      className={`wrap mb-2 flex flex-none flex-col rounded-md border-b-0 sm:mb-0 sm:table-row sm:border-b-2 border-${themeColour}-${themeTint}`}
     >
-      <td className={`rounded-l-md border-2 border-${themeColour}-${themeTint} p-3`}>
+      <td className={`border-2 border-${themeColour}-${themeTint} p-3`}>
         <CategoryName categoryID={promoCategory.menu_category_id} />
       </td>
       <td className={`border-2 p-3 border-${themeColour}-${themeTint}`}>

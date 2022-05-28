@@ -20,6 +20,10 @@ interface Props {
   restaurantSlug: string;
 }
 
+const classNames = (...classes: any) => {
+  return classes.filter(Boolean).join(" ");
+};
+
 const Steps: FC<Props> = ({
   hasMenus,
   hasItems,
@@ -61,14 +65,10 @@ const Steps: FC<Props> = ({
       name: "Add categories & items",
       description:
         "Add categories and items to your menus. Menus can be created without categories if you do not wish to use them.",
-      href: `/restaurants/${restaurantSlug}/settings/categories`,
+      href: `/restaurants/${restaurantSlug}/settings/items`,
       status: itemStatus(),
     },
   ];
-
-  const classNames = (...classes: any) => {
-    return classes.filter(Boolean).join(" ");
-  };
 
   const listCompletedStep = (step: Step, stepIdx: number) => {
     return (
