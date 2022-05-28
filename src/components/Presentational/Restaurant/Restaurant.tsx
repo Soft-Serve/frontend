@@ -44,7 +44,7 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
     skip: !restaurantSlug,
   });
 
-  const { data, loading } = useRestaurantOnboardingQuery({
+  const { data: onBoardingData, loading: onboardingLoading } = useRestaurantOnboardingQuery({
     variables: {
       restaurantSlug,
     },
@@ -71,7 +71,7 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
 
   const categories = categoryData?.categories?.filter(cat => cat.name !== "No category") ?? [];
 
-  if (loading || userLoading || bannersLoading || themeLoading)
+  if (onboardingLoading || userLoading || bannersLoading || themeLoading)
     return (
       <LoadingScreen
         themeColour={themeData?.restaurant?.colour || "red"}
@@ -92,10 +92,14 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
   };
 
   const isUserOnboarded =
-    (data?.restaurant?.has_items || data?.restaurant?.has_styles) &&
-    data?.restaurant?.onboarding_done;
+    (onBoardingData?.restaurant?.has_items || onBoardingData?.restaurant?.has_styles) &&
+    onBoardingData?.restaurant?.onboarding_done;
 
-  if (isUserOnboarded) {
+  console.log(isUserOnboarded);
+
+  console.log(onBoardingData?.restaurant);
+
+  if (isUserOnboarded && !onboardingLoading) {
     return (
       <>
         <HeroBanner
@@ -151,15 +155,15 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
     <Container>
       <BoxSection withPadding css={classnames("lg:py-10")}>
         <WelcomePage
-          restaurantName={data?.restaurant?.name}
+          restaurantName={onBoardingData?.restaurant?.name}
           isAdmin={!!currentUser?.currentUser}
           adminName={currentUser?.currentUser?.first_name}
           restaurantSlug={restaurantSlug}
           themeColour={themeData?.restaurant?.colour || "red"}
           themeTint={themeData?.restaurant?.tint || 400}
           hasMenus={menusData?.menus.length !== 0}
-          hasItems={!!data?.restaurant?.has_items}
-          hasStyles={!!data?.restaurant?.has_styles}
+          hasItems={!!onBoardingData?.restaurant?.has_items}
+          hasStyles={!!onBoardingData?.restaurant?.has_styles}
         />
       </BoxSection>
     </Container>
