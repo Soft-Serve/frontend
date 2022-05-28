@@ -92,14 +92,9 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
   };
 
   const isUserOnboarded =
-    (onBoardingData?.restaurant?.has_items || onBoardingData?.restaurant?.has_styles) &&
-    onBoardingData?.restaurant?.onboarding_done;
+    onBoardingData?.restaurant?.has_items || onBoardingData?.restaurant?.has_styles;
 
-  console.log(isUserOnboarded);
-
-  console.log(onBoardingData?.restaurant);
-
-  if (isUserOnboarded && !onboardingLoading) {
+  if (isUserOnboarded) {
     return (
       <>
         <HeroBanner
