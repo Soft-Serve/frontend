@@ -16,7 +16,7 @@ const RESTAURANT_ONBOARDING_QUERY = gql`
   }
 `;
 
-interface Restaurant {
+interface Onboarding {
   id: number;
   has_items: boolean;
   has_styles: boolean;
@@ -25,7 +25,7 @@ interface Restaurant {
 }
 
 interface RestaurantOnBoardingData {
-  restaurant: Restaurant;
+  restaurant: Onboarding;
 }
 
 interface Variables {
@@ -37,4 +37,4 @@ const useRestaurantOnboardingQuery = (
 ) => useQuery<RestaurantOnBoardingData, Variables>(RESTAURANT_ONBOARDING_QUERY, options);
 
 export { useRestaurantOnboardingQuery, RESTAURANT_ONBOARDING_QUERY };
-export type { RestaurantOnBoardingData };
+export type { RestaurantOnBoardingData, Onboarding };

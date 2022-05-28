@@ -1,0 +1,1 @@
+export { DeletePromotionForm } from "./DeletePromotionForm";

@@ -6,11 +6,12 @@ import { DeleteSVG } from "@svgs";
 import { Promotion } from "@shared";
 
 interface Props {
+  handleDelete: (promotion: Promotion) => void;
   handleUpdate: (promotion: Promotion) => void;
   themeColour: string;
   themeTint: number;
 }
-const PromotionDropdown: FC<Props> = ({ themeColour, themeTint, handleUpdate }) => {
+const PromotionDropdown: FC<Props> = ({ themeColour, themeTint, handleUpdate, handleDelete }) => {
   return (
     <KebabDropdown themeColour={themeColour} themeTint={themeTint}>
       <KebabDropdownItem themeColour={themeColour} themeTint={themeTint} onClick={handleUpdate}>
@@ -20,7 +21,7 @@ const PromotionDropdown: FC<Props> = ({ themeColour, themeTint, handleUpdate }) 
         </span>
       </KebabDropdownItem>
 
-      <KebabDropdownItem themeColour={themeColour} themeTint={themeTint}>
+      <KebabDropdownItem onClick={handleDelete} themeColour={themeColour} themeTint={themeTint}>
         <span className="flex items-center">
           Delete
           <DeleteSVG className="ml-2 h-5 w-5" />

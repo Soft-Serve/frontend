@@ -36,4 +36,4 @@ const useRestaurantThemeQuery = (options?: QueryHookOptions<RestaurantThemeData,
   useQuery<RestaurantThemeData, Variables>(RESTAURANT_THEME_QUERY, options);
 
 export { useRestaurantThemeQuery, RESTAURANT_THEME_QUERY };
-export type { RestaurantThemeData };
+export type { RestaurantThemeData, Theme };

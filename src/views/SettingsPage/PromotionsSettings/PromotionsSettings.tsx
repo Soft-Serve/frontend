@@ -5,7 +5,12 @@ import { Promotion } from "@shared";
 
 import { SettingsHeader } from "../SettingsHeader";
 import { usePromotionsQuery } from "@shared";
-import { PostPromotionForm, PromotionCard, UpdatePromotionForm } from "@presentational";
+import {
+  DeletePromotionForm,
+  PostPromotionForm,
+  PromotionCard,
+  UpdatePromotionForm,
+} from "@presentational";
 import { LightningBoltIcon } from "@heroicons/react/solid";
 
 interface Props {
@@ -17,6 +22,7 @@ interface Props {
 enum ModalForms {
   UpdatePromotion = "updatePromotion",
   PostPromotion = "postPromotion",
+  DeletePromotion = "deletePromotion",
 }
 
 const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => {
@@ -43,9 +49,20 @@ const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
     />
   );
 
+  const deletePromotion = (
+    <DeletePromotionForm
+      onCompleted={setIsModalOpen}
+      promotion={activePromotion}
+      restaurantSlug={restaurantSlug}
+      themeColour={themeColour}
+      themeTint={themeTint}
+    />
+  );
+
   const mapModalForms = {
     updatePromotion,
     postPromotion,
+    deletePromotion,
   };
 
   const { data: promoData } = usePromotionsQuery({
@@ -65,6 +82,12 @@ const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
 
   const handleAddPromotion = () => {
     setAction(ModalForms.PostPromotion);
+    setIsModalOpen(true);
+  };
+
+  const handleDeletePromotion = (promotion: Promotion) => {
+    setActivePromotion(promotion);
+    setAction(ModalForms.DeletePromotion);
     setIsModalOpen(true);
   };
 
@@ -92,6 +115,7 @@ const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
           {promoData?.promotions?.map(promo => (
             <PromotionCard
               restaurantSlug={restaurantSlug}
+              handleDeletePromotion={handleDeletePromotion}
               handleUpdatePromotion={handleUpdatePromotion}
               key={promo.id}
               themeColour={themeColour}

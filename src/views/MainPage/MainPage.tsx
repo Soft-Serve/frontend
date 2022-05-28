@@ -9,6 +9,7 @@ import { Providers } from "./Providers";
 import { MainNavigation } from "./MainNavigation";
 import { MainMobileHeader } from "./MainMobileHeader";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
+import { QueryData } from "src/components/Presentational/QueryData";
 
 const SettingsPage = lazy(() => import("../SettingsPage/DefaultSettingsPage"));
 
@@ -109,12 +110,14 @@ const MainPage: FC = () => {
                 <Route
                   path="/"
                   element={
-                    <Restaurant
-                      category={category}
-                      menuID={menuID}
-                      setCategory={setCategory}
-                      setMenuID={setMenuID}
-                    />
+                    <QueryData restaurantSlug={restaurantSlug}>
+                      <Restaurant
+                        category={category}
+                        menuID={menuID}
+                        setCategory={setCategory}
+                        setMenuID={setMenuID}
+                      />
+                    </QueryData>
                   }
                 />
                 <Route

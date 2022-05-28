@@ -2,18 +2,13 @@ import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { classnames } from "tailwindcss-classnames";
 import { Items, Menus, CategoriesContainer, WelcomePage, MobileSubHeader } from "@presentational";
-import {
-  useMenusQuery,
-  useRestaurantThemeQuery,
-  useCurrentUserQuery,
-  useCategoriesQuery,
-  Category,
-  useBannersQuery,
-} from "@shared";
-import { Container, BoxSection, HeroBanner, LoadingScreen } from "@base";
+import { useMenusQuery, useCategoriesQuery, Category, Banner } from "@shared";
+import { Container, BoxSection, HeroBanner } from "@base";
 
-import { useRestaurantOnboardingQuery } from "./RestaurantOnboarding.query";
+import type { Onboarding } from "./RestaurantOnboarding.query";
 import { useParams } from "react-router-dom";
+import { User } from "src/shared/Users.query";
+import { Theme } from "src/shared/RestaurantTheme.query";
 
 type Param = {
   id: string;
@@ -24,32 +19,23 @@ interface Props {
   setMenuID: Dispatch<SetStateAction<number>>;
   category?: Category;
   setCategory: Dispatch<SetStateAction<Category | undefined>>;
+  currentUser?: User;
+  banners?: Banner[];
+  theme?: Theme;
+  onboarding?: Onboarding;
 }
 
-const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => {
+const Restaurant: FC<Props> = ({
+  menuID,
+  setMenuID,
+  category,
+  setCategory,
+  currentUser,
+  banners,
+  theme,
+  onboarding,
+}) => {
   const { id: restaurantSlug } = useParams<Param>() as Param;
-
-  const { data: currentUser, loading: userLoading } = useCurrentUserQuery();
-
-  const { data: bannersData, loading: bannersLoading } = useBannersQuery({
-    variables: {
-      restaurantSlug,
-    },
-  });
-
-  const { data: themeData, loading: themeLoading } = useRestaurantThemeQuery({
-    variables: {
-      restaurantSlug,
-    },
-    skip: !restaurantSlug,
-  });
-
-  const { data: onBoardingData, loading: onboardingLoading } = useRestaurantOnboardingQuery({
-    variables: {
-      restaurantSlug,
-    },
-    skip: !restaurantSlug,
-  });
 
   const { data: menusData, loading: menusLoading } = useMenusQuery({
     variables: {
@@ -64,46 +50,35 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
       menuID,
     },
     skip: !menuID,
-    onCompleted: completedData => {
-      setCategory(completedData?.categories?.filter(cat => cat.name !== "No category")?.[0]);
-    },
+    onCompleted: completedData =>
+      setCategory(completedData?.categories?.filter(cat => cat.name !== "No category")?.[0]),
   });
 
   const categories = categoryData?.categories?.filter(cat => cat.name !== "No category") ?? [];
-
-  if (onboardingLoading || userLoading || bannersLoading || themeLoading)
-    return (
-      <LoadingScreen
-        themeColour={themeData?.restaurant?.colour || "red"}
-        themeTint={themeData?.restaurant?.tint || 400}
-      />
-    );
+  const isUserOnboarded = onboarding?.has_items || onboarding?.has_styles;
 
   const renderItems = () => {
     return (
       <Items
         category={category}
         restaurantSlug={restaurantSlug}
-        themeFont={themeData?.restaurant?.font || "Quicksand"}
-        themeColour={themeData?.restaurant?.colour || "red"}
-        themeTint={themeData?.restaurant?.tint || 400}
+        themeFont={theme?.font || "Quicksand"}
+        themeColour={theme?.colour || "red"}
+        themeTint={theme?.tint || 400}
       />
     );
   };
-
-  const isUserOnboarded =
-    onBoardingData?.restaurant?.has_items || onBoardingData?.restaurant?.has_styles;
 
   if (isUserOnboarded) {
     return (
       <>
         <HeroBanner
-          subHeader={bannersData?.banners?.[0]?.sub_header}
-          header={bannersData?.banners?.[0]?.header}
-          image={bannersData?.banners?.[0]?.photo}
+          subHeader={banners?.[0]?.sub_header}
+          header={banners?.[0]?.header}
+          image={banners?.[0]?.photo}
           restaurantSlug={restaurantSlug}
-          themeFont={themeData?.restaurant?.font || "Quicksand"}
-          themeColour={themeData?.restaurant?.colour || "red"}
+          themeFont={theme?.font || "Quicksand"}
+          themeColour={theme?.colour || "red"}
         />
         <Container>
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
@@ -114,9 +89,9 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
                 setMenuID={setMenuID}
                 menuID={menuID}
                 restaurantSlug={restaurantSlug}
-                themeFont={themeData?.restaurant?.font || "Quicksand"}
-                themeColour={themeData?.restaurant?.colour || "red"}
-                themeTint={themeData?.restaurant?.tint || 400}
+                themeFont={theme?.font || "Quicksand"}
+                themeColour={theme?.colour || "red"}
+                themeTint={theme?.tint || 400}
               />
             </div>
             <CategoriesContainer
@@ -125,9 +100,9 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
               category={category}
               menuID={menuID}
               setCategory={setCategory}
-              themeFont={themeData?.restaurant?.font || "Quicksand"}
-              themeColour={themeData?.restaurant?.colour || "red"}
-              themeTint={themeData?.restaurant?.tint || 400}
+              themeFont={theme?.font || "Quicksand"}
+              themeColour={theme?.colour || "red"}
+              themeTint={theme?.tint || 400}
             />
             <MobileSubHeader
               categories={categories}
@@ -135,9 +110,9 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
               menuID={menuID}
               category={category}
               setCategory={setCategory}
-              themeFont={themeData?.restaurant?.font || "Quicksand"}
-              themeColour={themeData?.restaurant?.colour || "red"}
-              themeTint={themeData?.restaurant?.tint || 400}
+              themeFont={theme?.font || "Quicksand"}
+              themeColour={theme?.colour || "red"}
+              themeTint={theme?.tint || 400}
             />
           </BoxSection>
           {renderItems()}
@@ -150,15 +125,15 @@ const Restaurant: FC<Props> = ({ menuID, setMenuID, category, setCategory }) => 
     <Container>
       <BoxSection withPadding css={classnames("lg:py-10")}>
         <WelcomePage
-          restaurantName={onBoardingData?.restaurant?.name}
-          isAdmin={!!currentUser?.currentUser}
-          adminName={currentUser?.currentUser?.first_name}
+          restaurantName={onboarding?.name}
+          isAdmin={!!currentUser}
+          adminName={currentUser?.first_name}
           restaurantSlug={restaurantSlug}
-          themeColour={themeData?.restaurant?.colour || "red"}
-          themeTint={themeData?.restaurant?.tint || 400}
+          themeColour={theme?.colour || "red"}
+          themeTint={theme?.tint || 400}
           hasMenus={menusData?.menus.length !== 0}
-          hasItems={!!onBoardingData?.restaurant?.has_items}
-          hasStyles={!!onBoardingData?.restaurant?.has_styles}
+          hasItems={!!onboarding?.has_items}
+          hasStyles={!!onboarding?.has_styles}
         />
       </BoxSection>
     </Container>

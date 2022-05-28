@@ -9,6 +9,8 @@ import { Card } from "@base";
 
 interface Props {
   handleUpdatePromotion: (promotion: Promotion) => void;
+  handleDeletePromotion: (promotion: Promotion) => void;
+
   promo: Promotion;
   themeColour: string;
   themeTint: number;
@@ -38,6 +40,7 @@ const PromotionCard: FC<Props> = ({
   themeColour,
   themeTint,
   handleUpdatePromotion,
+  handleDeletePromotion,
   restaurantSlug,
 }) => {
   const renderWeekdays = () =>
@@ -57,6 +60,7 @@ const PromotionCard: FC<Props> = ({
       <Card isOverflowHidden={false} css={"relative"}>
         <div className="absolute top-2 right-2">
           <PromotionDropdown
+            handleDelete={() => handleDeletePromotion(promo)}
             handleUpdate={() => handleUpdatePromotion(promo)}
             themeColour={themeColour}
             themeTint={themeTint}
