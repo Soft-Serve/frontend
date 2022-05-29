@@ -30,27 +30,33 @@ const ColourPicker: FC<Props> = ({ onClose, themeTint, themeColour, handleSubmit
     handleSubmit(colour, Number(tailWindNumber));
     onClose(false);
   };
+
   return (
     <div>
       <div className=" mb-2 h-96 overflow-y-auto">
         {colourMap.map(([colour, value]) => (
-          <div className="my-4" key={colour}>
+          <div className="my-4" key={`${colour}-${value}`}>
             <span className="mx-2 font-Quicksand text-sm font-bold text-gray-900">
               {camelCaseFormatter(colour)}
             </span>
             <div className="flex flex-wrap items-center">
-              {Object.entries(value).map(([tailWindNumber, hexColour]) => (
-                <div
-                  tabIndex={0}
-                  role="button"
-                  onKeyDown={() => handleClick(colour, tailWindNumber)}
-                  onClick={() => handleClick(colour, tailWindNumber)}
-                  key={tailWindNumber}
-                  className={`bg-${colour}-${tailWindNumber} m-2 h-14 w-14 rounded-md `}
-                >
-                  <span className="sr-only">{hexColour}</span>
-                </div>
-              ))}
+              {Object.entries(value).map(([tailWindNumber, hexColour]) => {
+                const isSelected = Number(tailWindNumber) === themeTint && colour === themeColour;
+                return (
+                  <div
+                    key={hexColour}
+                    tabIndex={0}
+                    role="button"
+                    onKeyDown={() => handleClick(colour, tailWindNumber)}
+                    onClick={() => handleClick(colour, tailWindNumber)}
+                    className={`bg-${colour}-${tailWindNumber} m-2 h-14 w-14 rounded-md ${
+                      isSelected ? "ring-4" : null
+                    }`}
+                  >
+                    <span className="sr-only">{hexColour}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         ))}

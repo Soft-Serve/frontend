@@ -27,10 +27,13 @@ const ItemPrice: FC<Props> = ({
   themeFont,
 }) => {
   const { data, error, loading } = useItemSizeQuery({
+    fetchPolicy: "network-only",
     variables: {
       itemID,
     },
   });
+
+  console.log(data?.itemSizes);
 
   const renderPrice = () => {
     if (withImage && data?.itemSizes?.length && data.itemSizes.length > 1) {
