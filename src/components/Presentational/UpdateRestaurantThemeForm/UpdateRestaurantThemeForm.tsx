@@ -10,16 +10,14 @@ import {
   RestaurantOnBoardingData,
   RESTAURANT_ONBOARDING_QUERY,
 } from "../Restaurant/RestaurantOnboarding.query";
+import { darkColours } from "@constants";
 
 interface Props {
   id: number;
   logo: string;
   themeColour: string;
   themeTint: number;
-  restaurantName: string;
-  restaurantThemeColour: string;
   restaurantSlug: string;
-  restaurantThemeTint: number;
 }
 
 const UpdateRestaurantThemeForm: FC<Props> = ({ id, themeColour, themeTint, restaurantSlug }) => {
@@ -43,6 +41,8 @@ const UpdateRestaurantThemeForm: FC<Props> = ({ id, themeColour, themeTint, rest
           restaurant: {
             ...updatedTheme?.updateRestaurantTheme,
             font: restaurant?.font,
+            background_colour: restaurant?.background_colour,
+            background_tint: restaurant?.background_tint,
           },
         },
       });
@@ -86,6 +86,7 @@ const UpdateRestaurantThemeForm: FC<Props> = ({ id, themeColour, themeTint, rest
           Select Restaurant Theme Colour
         </h3>
         <ColourPicker
+          colours={darkColours}
           handleSubmit={handleSubmit}
           themeColour={themeColour}
           themeTint={themeTint}

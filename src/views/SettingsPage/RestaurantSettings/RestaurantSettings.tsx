@@ -10,8 +10,17 @@ interface Props {
   themeTint: number;
   restaurantSlug: string;
   themeFont: ThemeFonts;
+  backgroundColour: string;
+  backgroundTint: number;
 }
-const RestaurantSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug, themeFont }) => {
+const RestaurantSettings: FC<Props> = ({
+  themeTint,
+  themeColour,
+  restaurantSlug,
+  themeFont,
+  backgroundColour,
+  backgroundTint,
+}) => {
   const { data, loading } = useRestaurantQuery({
     variables: {
       restaurantSlug,
@@ -35,6 +44,8 @@ const RestaurantSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug,
               restaurantSlug={restaurantSlug}
               themeColour={themeColour}
               themeTint={themeTint}
+              backgroundColour={backgroundColour}
+              backgroundTint={backgroundTint}
               restaurant={data.restaurant}
             />
           </div>

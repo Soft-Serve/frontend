@@ -12,6 +12,8 @@ const RESTAURANT_THEME_QUERY = gql`
       colour
       tint
       font
+      background_colour
+      background_tint
     }
   }
 `;
@@ -22,6 +24,8 @@ interface Theme {
   colour: string;
   tint: number;
   font: ThemeFonts;
+  background_colour: string;
+  background_tint: number;
 }
 
 interface RestaurantThemeData {

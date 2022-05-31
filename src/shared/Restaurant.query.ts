@@ -62,3 +62,4 @@ const useRestaurantQuery = (options?: QueryHookOptions<RestaurantData, Variables
   useQuery<RestaurantData, Variables>(RESTAURANT_QUERY, options);
 
 export { useRestaurantQuery, RESTAURANT_QUERY };
+export type { Restaurant };

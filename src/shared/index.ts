@@ -1,4 +1,5 @@
 export { useRestaurantQuery, RESTAURANT_QUERY } from "./Restaurant.query";
+export type { Restaurant } from "./Restaurant.query";
 export { useMenusQuery, MENUS_QUERY } from "./Menus.query";
 export { useUsersQuery, USERS_QUERY } from "./Users.query";
 export type { MenusData, Menu } from "./Menus.query";

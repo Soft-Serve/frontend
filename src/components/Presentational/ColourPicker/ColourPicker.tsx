@@ -1,13 +1,14 @@
 import React from "react";
 import type { FC } from "react";
 import { Button } from "@base";
-import { colorsMap } from "@constants";
+import type { DarkColoursMap } from "@constants";
 
 interface Props {
   themeColour: string;
   themeTint: number;
   onClose: (state: boolean) => void;
   handleSubmit: (colour: string, tint: number) => void;
+  colours: DarkColoursMap;
 }
 
 const capatalize = ([firstLetter, ...restOfWord]: string) =>
@@ -23,9 +24,8 @@ const camelCaseFormatter = (name: string) => {
     findUpperCaseIndex(name.split(""))
   )}`;
 };
-const colourMap = Object.entries(colorsMap);
 
-const ColourPicker: FC<Props> = ({ onClose, themeTint, themeColour, handleSubmit }) => {
+const ColourPicker: FC<Props> = ({ onClose, themeTint, themeColour, handleSubmit, colours }) => {
   const handleClick = (colour: string, tailWindNumber: string) => {
     handleSubmit(colour, Number(tailWindNumber));
     onClose(false);
@@ -34,7 +34,7 @@ const ColourPicker: FC<Props> = ({ onClose, themeTint, themeColour, handleSubmit
   return (
     <div>
       <div className=" mb-2 h-96 overflow-y-auto">
-        {colourMap.map(([colour, value]) => (
+        {colours.map(([colour, value]) => (
           <div className="my-4" key={`${colour}-${value}`}>
             <span className="mx-2 font-Quicksand text-sm font-bold text-gray-900">
               {camelCaseFormatter(colour)}
@@ -49,8 +49,8 @@ const ColourPicker: FC<Props> = ({ onClose, themeTint, themeColour, handleSubmit
                     role="button"
                     onKeyDown={() => handleClick(colour, tailWindNumber)}
                     onClick={() => handleClick(colour, tailWindNumber)}
-                    className={`bg-${colour}-${tailWindNumber} m-2 h-14 w-14 rounded-md ${
-                      isSelected ? "ring-4" : null
+                    className={`bg-${colour}-${tailWindNumber} m-2 h-14 w-14 rounded-md  ${
+                      isSelected ? " ring-4 ring-offset-4" : null
                     }`}
                   >
                     <span className="sr-only">{hexColour}</span>
@@ -63,7 +63,7 @@ const ColourPicker: FC<Props> = ({ onClose, themeTint, themeColour, handleSubmit
       </div>
       <Button
         themeColour={themeColour}
-        themeTint={themeTint}
+        themeTint={600}
         css="mt-4"
         onClick={() => onClose(false)}
         size="XXL"

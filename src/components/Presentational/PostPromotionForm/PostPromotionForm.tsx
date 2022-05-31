@@ -209,7 +209,7 @@ const PostPromotionForm: FC<Props> = ({ themeColour, themeTint, onClose, restaur
             themeColour={themeColour}
             themeTint={themeTint}
           >
-            Add
+            Add Promotion
           </Button>
         </div>
       </form>

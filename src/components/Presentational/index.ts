@@ -58,3 +58,4 @@ export { DeletePromotionCategoryForm } from "./DeletePromotionCategoryForm";
 export { PromotionCategoryActions } from "./PromotionCategoryActions";
 export { PostPromotionForm } from "./PostPromotionForm";
 export { DeletePromotionForm } from "./DeletePromotionForm";
+export { UpdateRestaurantBackgroundForm } from "./UpdateRestaurantBackgroundForm";

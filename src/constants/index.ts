@@ -16,8 +16,6 @@ interface ColourObject {
 
 /* eslint-disable */
 const colors = require("tailwindcss/colors");
-const createColourObj = (tailwindColourObject: ColourObject) =>
-  Object.fromEntries(Object.entries(tailwindColourObject).splice(4));
 
 // Shahyn if you value your life do not change again
 export const uid = "uid";
@@ -93,27 +91,64 @@ export const SUB_NAVIGATION = [
   // },
 ];
 
-export const colorsMap = {
-  rose: createColourObj(colors.rose),
-  pink: createColourObj(colors.pink),
-  fuchsia: createColourObj(colors.fuchsia),
-  purple: createColourObj(colors.purple),
-  violet: createColourObj(colors.violet),
-  indigo: createColourObj(colors.indigo),
-  blue: createColourObj(colors.blue),
-  sky: createColourObj(colors.sky),
-  cyan: createColourObj(colors.cyan),
-  teal: createColourObj(colors.teal),
-  emerald: createColourObj(colors.emerald),
-  green: createColourObj(colors.green),
-  lime: createColourObj(colors.lime),
-  yellow: createColourObj(colors.yellow),
-  amber: createColourObj(colors.amber),
-  orange: createColourObj(colors.orange),
-  red: createColourObj(colors.red),
-  slate: createColourObj(colors.slate),
-  gray: createColourObj(colors.gray),
-  zinc: createColourObj(colors.zinc),
-  neutral: createColourObj(colors.neutral),
-  stone: createColourObj(colors.stone),
+const createDarkColourObj = (tailwindColourObject: ColourObject) =>
+  Object.fromEntries(Object.entries(tailwindColourObject).splice(4));
+
+const createLightColourObj = (tailwindColourObject: ColourObject) =>
+  Object.fromEntries(Object.entries(tailwindColourObject).splice(1, 5));
+
+export const darkColorsMap = {
+  rose: createDarkColourObj(colors.rose),
+  pink: createDarkColourObj(colors.pink),
+  fuchsia: createDarkColourObj(colors.fuchsia),
+  purple: createDarkColourObj(colors.purple),
+  violet: createDarkColourObj(colors.violet),
+  indigo: createDarkColourObj(colors.indigo),
+  blue: createDarkColourObj(colors.blue),
+  sky: createDarkColourObj(colors.sky),
+  cyan: createDarkColourObj(colors.cyan),
+  teal: createDarkColourObj(colors.teal),
+  emerald: createDarkColourObj(colors.emerald),
+  green: createDarkColourObj(colors.green),
+  lime: createDarkColourObj(colors.lime),
+  yellow: createDarkColourObj(colors.yellow),
+  amber: createDarkColourObj(colors.amber),
+  orange: createDarkColourObj(colors.orange),
+  red: createDarkColourObj(colors.red),
+  slate: createDarkColourObj(colors.slate),
+  gray: createDarkColourObj(colors.gray),
+  zinc: createDarkColourObj(colors.zinc),
+  neutral: createDarkColourObj(colors.neutral),
+  stone: createDarkColourObj(colors.stone),
 };
+
+export const lightColorsMap = {
+  rose: createLightColourObj(colors.rose),
+  pink: createLightColourObj(colors.pink),
+  fuchsia: createLightColourObj(colors.fuchsia),
+  purple: createLightColourObj(colors.purple),
+  violet: createLightColourObj(colors.violet),
+  indigo: createLightColourObj(colors.indigo),
+  blue: createLightColourObj(colors.blue),
+  sky: createLightColourObj(colors.sky),
+  cyan: createLightColourObj(colors.cyan),
+  teal: createLightColourObj(colors.teal),
+  emerald: createLightColourObj(colors.emerald),
+  green: createLightColourObj(colors.green),
+  lime: createLightColourObj(colors.lime),
+  yellow: createLightColourObj(colors.yellow),
+  amber: createLightColourObj(colors.amber),
+  orange: createLightColourObj(colors.orange),
+  red: createLightColourObj(colors.red),
+  slate: createLightColourObj(colors.slate),
+  gray: createLightColourObj(colors.gray),
+  zinc: createLightColourObj(colors.zinc),
+  neutral: createLightColourObj(colors.neutral),
+  stone: createLightColourObj(colors.stone),
+};
+
+export const lightColors = Object.entries(lightColorsMap);
+
+export const darkColours = Object.entries(darkColorsMap);
+
+export type DarkColoursMap = typeof darkColours;

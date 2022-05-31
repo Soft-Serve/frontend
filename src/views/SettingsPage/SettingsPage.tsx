@@ -21,6 +21,7 @@ import { CategorySettings } from "./CategorySettings";
 import { BannerSettings } from "./BannerSettings/BannerSettings";
 import { QRCodeSettings } from "./QRCodeSettings";
 import { PromotionSettings } from "./PromotionsSettings";
+
 interface MappableObject {
   [key: string]: JSX.Element;
 }
@@ -55,6 +56,8 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
       themeFont={themeData?.restaurant?.font || FontsMap.Quicksand}
       themeColour={themeData?.restaurant?.colour || "red"}
       themeTint={themeData?.restaurant?.tint || 400}
+      backgroundColour={themeData?.restaurant?.background_colour || "gray"}
+      backgroundTint={themeData?.restaurant?.background_tint || 200}
     />
   );
   const banner = (

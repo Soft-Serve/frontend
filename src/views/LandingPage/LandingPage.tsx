@@ -106,14 +106,18 @@ const LandingPage: FC = () => {
     <>
       <Modal onClose={setIsModalOpen} isOpen={isModalOpen}>
         <Grid size="M">
-          <Button size="XXL" themeColour="red" themeTint={600}>
-            <Link to="/restaurants/cafemonty">Demo with images</Link>
-            <PhotographIcon className="ml-2 h-6 w-6" aria-hidden="true" />
-          </Button>
-          <Button size="XXL" themeColour="red" themeTint={600}>
-            <Link to="/restaurants/bellaciao">Demo without images</Link>
-            <DocumentIcon className="ml-2 h-6 w-6" aria-hidden="true" />
-          </Button>
+          <Link to="/restaurants/cafemonty">
+            <Button size="XL" themeColour="red" themeTint={600}>
+              Demo with images
+              <PhotographIcon className="ml-2 h-6 w-6" aria-hidden="true" />
+            </Button>
+          </Link>
+          <Link to="/restaurants/bellaciao">
+            <Button size="XL" themeColour="red" themeTint={600}>
+              Demo without images
+              <DocumentIcon className="ml-2 h-6 w-6" aria-hidden="true" />
+            </Button>
+          </Link>
         </Grid>
       </Modal>
       <header>

@@ -4,11 +4,12 @@ import { classnames } from "tailwindcss-classnames";
 import { Card, ThemeFonts } from "@base";
 import {
   UpdateRestaurantAddressForm,
+  UpdateRestaurantBackgroundForm,
   UpdateRestaurantFontForm,
   UpdateRestaurantSlugForm,
   UpdateRestaurantThemeForm,
 } from "@presentational";
-import type { Restaurant } from "./UpdateRestaurant.mutation";
+import type { Restaurant } from "@shared";
 import { UpdateRestaurantLogo } from "../UpdateRestaurantLogo";
 
 interface Props {
@@ -17,6 +18,8 @@ interface Props {
   themeTint: number;
   restaurantSlug: string;
   themeFont: ThemeFonts;
+  backgroundColour: string;
+  backgroundTint: number;
 }
 
 const UpdateRestaurantForm: FC<Props> = ({
@@ -25,6 +28,8 @@ const UpdateRestaurantForm: FC<Props> = ({
   themeColour,
   restaurantSlug,
   themeFont,
+  backgroundColour,
+  backgroundTint,
 }) => {
   return (
     <>
@@ -42,10 +47,15 @@ const UpdateRestaurantForm: FC<Props> = ({
           themeColour={themeColour}
           themeTint={themeTint}
           id={restaurant.id}
-          restaurantThemeTint={restaurant.tint}
-          restaurantThemeColour={restaurant.colour}
-          restaurantName={restaurant.name}
           logo={restaurant.logo}
+        />
+      </Card>
+      <Card css={classnames("flex-col", "mt-4")}>
+        <UpdateRestaurantBackgroundForm
+          restaurantSlug={restaurantSlug}
+          backgroundColor={backgroundColour}
+          backgroundTint={backgroundTint}
+          id={restaurant.id}
         />
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>

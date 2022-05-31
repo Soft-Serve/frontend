@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import type { MutationHookOptions } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 
-export const UPDATE_RESTAURANT_THENE = gql`
+export const UPDATE_RESTAURANT_THEME = gql`
   mutation UpdateRestaurantTheme($input: input) {
     updateRestaurantTheme(input: $input)
       @rest(type: Restaurant, path: "restaurants/{args.input.id}", method: "PATCH") {
@@ -36,6 +36,6 @@ interface UpdateRestaurantThemeData {
 
 const useUpdateRestaurantTheme = (
   options?: MutationHookOptions<UpdateRestaurantThemeData, Variables>
-) => useMutation<UpdateRestaurantThemeData, Variables>(UPDATE_RESTAURANT_THENE, options);
+) => useMutation<UpdateRestaurantThemeData, Variables>(UPDATE_RESTAURANT_THEME, options);
 
 export { useUpdateRestaurantTheme };

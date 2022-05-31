@@ -23,6 +23,14 @@ enum Times {
 
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
+const formatTime = (time: string | Date) =>
+  time instanceof Date
+    ? time
+        .toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
+        .replace("AM", "")
+        .replace("PM", "")
+    : time;
+
 const UpdatePromotionForm: FC<Props> = ({
   themeColour,
   themeTint,
@@ -35,8 +43,8 @@ const UpdatePromotionForm: FC<Props> = ({
   const [input, setInput] = useState({
     name: promotion?.name ?? "",
     description: promotion?.description ?? "",
-    start_time: new Date(promotion?.start_time ?? ""),
-    end_time: new Date(promotion?.end_time ?? ""),
+    start_time: formatTime(promotion?.start_time ?? ""),
+    end_time: formatTime(promotion?.end_time ?? ""),
     days: promotion?.days.split(",") ?? [],
     id: promotion?.id ?? 0,
     restaurant_id: promotion?.restaurant_id ?? 0,
@@ -102,6 +110,8 @@ const UpdatePromotionForm: FC<Props> = ({
     },
   });
 
+  console.log(formatTime(input.start_time));
+
   const handleUpdate = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     updatePromotion({
@@ -113,12 +123,8 @@ const UpdatePromotionForm: FC<Props> = ({
           description: input.description,
           restaurant_id: input.restaurant_id,
           __typename: "Promotion",
-          start_time:
-            input.start_time instanceof Date
-              ? input.start_time.toLocaleTimeString()
-              : input.start_time,
-          end_time:
-            input?.end_time instanceof Date ? input.end_time.toLocaleTimeString() : input.end_time,
+          start_time: input.start_time,
+          end_time: input.end_time,
           days: input?.days.join(","),
         },
       },
@@ -196,6 +202,9 @@ const UpdatePromotionForm: FC<Props> = ({
               <span className="text-red-600">*</span>
             </p>
             <TimePicker
+              locale="en-US"
+              maxDetail="minute"
+              format="h:m a "
               clearIcon={null}
               autoFocus={false}
               disableClock
@@ -211,6 +220,9 @@ const UpdatePromotionForm: FC<Props> = ({
               <span className="text-red-600">*</span>
             </p>
             <TimePicker
+              locale="en-US"
+              maxDetail="minute"
+              format="h:m a "
               clearIcon={null}
               autoFocus={false}
               disableClock
