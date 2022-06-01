@@ -25,7 +25,6 @@ const CardMenuItemWithoutImage: FC<Props> = ({
         themeFont={themeFont}
         themeColour={themeColour}
         themeTint={themeTint}
-        withImage
         itemID={item.id}
       />
     );
@@ -46,7 +45,7 @@ const CardMenuItemWithoutImage: FC<Props> = ({
             />
           </div>
           <Typography
-            css={classnames("mb-4", "break-words", "italic")}
+            css={classnames("mb-8", "break-words", "italic")}
             themeFont={themeFont}
             type="h6"
           >

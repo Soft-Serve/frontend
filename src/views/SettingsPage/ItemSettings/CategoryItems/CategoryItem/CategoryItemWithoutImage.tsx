@@ -84,8 +84,6 @@ const CategoryItemWithoutImage: FC<Props> = ({
           themeColour={themeColour}
           themeTint={themeTint}
           themeFont={themeFont}
-          position="end"
-          withImage
           itemID={item.id}
         />
       </div>

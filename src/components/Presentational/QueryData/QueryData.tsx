@@ -1,6 +1,11 @@
 import React, { ReactNode, Children, cloneElement, isValidElement } from "react";
 import type { FC } from "react";
-import { useCurrentUserQuery, useBannersQuery, useRestaurantThemeQuery } from "@shared";
+import {
+  useCurrentUserQuery,
+  useBannersQuery,
+  useRestaurantThemeQuery,
+  usePromotionsQuery,
+} from "@shared";
 import { useRestaurantOnboardingQuery } from "../Restaurant/RestaurantOnboarding.query";
 import { LoadingScreen } from "@base";
 
@@ -31,6 +36,13 @@ const QueryData: FC<Props> = ({ children, restaurantSlug }) => {
     skip: !restaurantSlug,
   });
 
+  const { data: promoData } = usePromotionsQuery({
+    variables: {
+      restaurantSlug,
+    },
+    skip: !restaurantSlug,
+  });
+
   const renderChildren = () =>
     Children.map(children, child =>
       isValidElement(child)
@@ -39,6 +51,7 @@ const QueryData: FC<Props> = ({ children, restaurantSlug }) => {
             banners: bannersData?.banners,
             theme: themeData?.restaurant,
             onboarding: onBoardingData?.restaurant,
+            promotions: promoData?.promotions,
           })
         : null
     );

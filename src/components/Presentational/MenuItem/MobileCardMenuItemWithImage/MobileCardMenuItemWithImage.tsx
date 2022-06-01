@@ -20,7 +20,6 @@ const MobileCardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, 
         themeFont={themeFont}
         themeColour={themeColour}
         themeTint={themeTint}
-        withImage
         itemID={item.id}
       />
     );

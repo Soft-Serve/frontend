@@ -38,3 +38,4 @@ export { BoxUploadImage } from "./BoxUploadImage";
 export { MultiSelect } from "./MultiSelect";
 export { Disclose } from "./Disclose";
 export { WeekDayToggle } from "./WeekDayToggle";
+export { FloatingBanner } from "./FloatingBanner";

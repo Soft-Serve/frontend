@@ -19,7 +19,6 @@ const CardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, themeT
         themeFont={themeFont}
         themeColour={themeColour}
         themeTint={themeTint}
-        withImage
         itemID={item.id}
       />
     );

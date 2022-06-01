@@ -90,8 +90,6 @@ const DesktopCategoryItemWithImage: FC<Props> = ({
           themeFont={themeFont}
           themeColour={themeColour}
           themeTint={themeTint}
-          position="end"
-          withImage
           itemID={item.id}
         />
       </div>

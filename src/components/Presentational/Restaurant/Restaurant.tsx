@@ -1,8 +1,15 @@
 import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { classnames, TArg } from "tailwindcss-classnames";
-import { Items, Menus, CategoriesContainer, WelcomePage, MobileSubHeader } from "@presentational";
-import { useMenusQuery, useCategoriesQuery, Category, Banner } from "@shared";
+import {
+  Items,
+  Menus,
+  CategoriesContainer,
+  WelcomePage,
+  MobileSubHeader,
+  PromotionBanners,
+} from "@presentational";
+import { useMenusQuery, useCategoriesQuery, Category, Banner, Promotion } from "@shared";
 import { Container, BoxSection, HeroBanner } from "@base";
 
 import type { Onboarding } from "./RestaurantOnboarding.query";
@@ -23,6 +30,7 @@ interface Props {
   banners?: Banner[];
   theme?: Theme;
   onboarding?: Onboarding;
+  promotions?: Promotion[];
 }
 
 const Restaurant: FC<Props> = ({
@@ -34,6 +42,7 @@ const Restaurant: FC<Props> = ({
   banners,
   theme,
   onboarding,
+  promotions,
 }) => {
   const { id: restaurantSlug } = useParams<Param>() as Param;
 
@@ -73,6 +82,12 @@ const Restaurant: FC<Props> = ({
   if (isUserOnboarded) {
     return (
       <>
+        <PromotionBanners
+          promotions={promotions}
+          themeTint={theme?.tint || 400}
+          themeFont={theme?.font || "Quicksand"}
+          themeColour={theme?.colour || "red"}
+        />
         <HeroBanner
           subHeader={banners?.[0]?.sub_header}
           header={banners?.[0]?.header}

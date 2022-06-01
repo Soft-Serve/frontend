@@ -95,8 +95,6 @@ const MobileCategoryItemWithImage: FC<Props> = ({
           themeColour={themeColour}
           themeFont={themeFont}
           themeTint={themeTint}
-          position="end"
-          withImage
           itemID={item.id}
         />
       </div>

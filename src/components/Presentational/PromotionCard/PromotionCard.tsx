@@ -43,7 +43,6 @@ const PromotionCard: FC<Props> = ({
   handleDeletePromotion,
   restaurantSlug,
 }) => {
-  console.log(promo);
   const renderWeekdays = () =>
     sortWeekDays(promo?.days.split(",")).map(day => (
       <div
