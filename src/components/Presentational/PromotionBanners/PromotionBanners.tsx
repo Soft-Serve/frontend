@@ -31,12 +31,12 @@ const PromotionBanners: FC<Props> = ({ promotions, themeColour, themeFont, theme
                 <ClockIcon className="mr-1 h-5 w-5 flex-shrink-0" aria-hidden="true" />
                 <p className="whitespace-nowrap">
                   {" "}
-                  <time className="font-bold" dateTime={new Date(promo?.start_time).toString()}>
-                    {new Date(promo?.start_time).toLocaleTimeString()}
+                  <time className="font-bold" dateTime={promo?.start_time}>
+                    {promo?.start_time}
                   </time>
                   {" to "}{" "}
-                  <time className="font-bold" dateTime={new Date(promo?.end_time).toString()}>
-                    {new Date(promo?.end_time).toLocaleTimeString()}
+                  <time className="font-bold" dateTime={promo?.end_time}>
+                    {promo?.end_time}
                   </time>
                 </p>
               </div>
