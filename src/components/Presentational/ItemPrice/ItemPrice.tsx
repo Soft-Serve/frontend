@@ -20,8 +20,6 @@ const ItemPrice: FC<Props> = ({ itemID, themeColour, themeTint, themeFont }) => 
     skip: !itemID,
   });
 
-  console.log(data?.itemSizes);
-
   return (
     <div className="flex flex-wrap items-center justify-end">
       {data?.itemSizes?.map(size => (

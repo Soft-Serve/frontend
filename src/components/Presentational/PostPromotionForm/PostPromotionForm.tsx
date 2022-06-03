@@ -175,6 +175,9 @@ const PostPromotionForm: FC<Props> = ({ themeColour, themeTint, onClose, restaur
               <span className="text-red-600">*</span>
             </p>
             <TimePicker
+              locale="en-US"
+              maxDetail="minute"
+              format="HH:mm"
               clearIcon={null}
               autoFocus={false}
               disableClock
@@ -190,6 +193,9 @@ const PostPromotionForm: FC<Props> = ({ themeColour, themeTint, onClose, restaur
               <span className="text-red-600">*</span>
             </p>
             <TimePicker
+              locale="en-US"
+              maxDetail="minute"
+              format="HH:mm"
               clearIcon={null}
               autoFocus={false}
               disableClock

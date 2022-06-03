@@ -2,7 +2,7 @@ import React, { Suspense, useState, lazy } from "react";
 import type { FC } from "react";
 import { Route, Routes, useLocation, useParams, Navigate } from "react-router-dom";
 import { Footer, LoadingScreen } from "@base";
-import { MenuSlideOver, AllergyModal, AllergyFiltersSideMenu, Restaurant } from "@presentational";
+import { MenuSlideOver, AllergyModal, AllergyFiltersSideMenu } from "@presentational";
 import { Category, useCurrentUserQuery, useRestaurantThemeQuery } from "@shared";
 import { MenuPage } from "../MenuPage";
 import { Providers } from "./Providers";
@@ -12,6 +12,9 @@ import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { QueryData } from "src/components/Presentational/QueryData";
 
 const SettingsPage = lazy(() => import("../SettingsPage/DefaultSettingsPage"));
+const Restaurant = lazy(
+  () => import("../../components/Presentational/Restaurant/DefaultRestaurant")
+);
 
 type Param = {
   id: string;

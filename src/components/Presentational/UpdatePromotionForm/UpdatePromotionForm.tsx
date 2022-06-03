@@ -23,14 +23,6 @@ enum Times {
 
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-const formatTime = (time: string | Date) =>
-  time instanceof Date
-    ? time
-        .toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
-        .replace("AM", "")
-        .replace("PM", "")
-    : time;
-
 const UpdatePromotionForm: FC<Props> = ({
   themeColour,
   themeTint,
@@ -43,8 +35,8 @@ const UpdatePromotionForm: FC<Props> = ({
   const [input, setInput] = useState({
     name: promotion?.name ?? "",
     description: promotion?.description ?? "",
-    start_time: formatTime(promotion?.start_time ?? ""),
-    end_time: formatTime(promotion?.end_time ?? ""),
+    start_time: promotion?.start_time ?? "",
+    end_time: promotion?.end_time ?? "",
     days: promotion?.days.split(",") ?? [],
     id: promotion?.id ?? 0,
     restaurant_id: promotion?.restaurant_id ?? 0,
@@ -109,8 +101,6 @@ const UpdatePromotionForm: FC<Props> = ({
       });
     },
   });
-
-  console.log(formatTime(input.start_time));
 
   const handleUpdate = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -204,7 +194,7 @@ const UpdatePromotionForm: FC<Props> = ({
             <TimePicker
               locale="en-US"
               maxDetail="minute"
-              format="h:m a "
+              format="HH:mm"
               clearIcon={null}
               autoFocus={false}
               disableClock
@@ -222,7 +212,7 @@ const UpdatePromotionForm: FC<Props> = ({
             <TimePicker
               locale="en-US"
               maxDetail="minute"
-              format="h:m a "
+              format="HH:mm"
               clearIcon={null}
               autoFocus={false}
               disableClock

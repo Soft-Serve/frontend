@@ -22,3 +22,4 @@ export { useRestaurantThemeQuery, RESTAURANT_THEME_QUERY } from "./RestaurantThe
 export type { RestaurantThemeData } from "./RestaurantTheme.query";
 export { usePromotionsQuery, PROMOTIONS_QUERY } from "./Promotions.query";
 export type { PromotionsData, Promotion } from "./Promotions.query";
+export { useActivePromotionsQuery } from "./ActivePromotion.query";

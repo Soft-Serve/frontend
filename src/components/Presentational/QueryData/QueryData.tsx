@@ -4,7 +4,7 @@ import {
   useCurrentUserQuery,
   useBannersQuery,
   useRestaurantThemeQuery,
-  usePromotionsQuery,
+  useActivePromotionsQuery,
 } from "@shared";
 import { useRestaurantOnboardingQuery } from "../Restaurant/RestaurantOnboarding.query";
 import { LoadingScreen } from "@base";
@@ -36,7 +36,7 @@ const QueryData: FC<Props> = ({ children, restaurantSlug }) => {
     skip: !restaurantSlug,
   });
 
-  const { data: promoData } = usePromotionsQuery({
+  const { data: promoData } = useActivePromotionsQuery({
     variables: {
       restaurantSlug,
     },
@@ -51,7 +51,7 @@ const QueryData: FC<Props> = ({ children, restaurantSlug }) => {
             banners: bannersData?.banners,
             theme: themeData?.restaurant,
             onboarding: onBoardingData?.restaurant,
-            promotions: promoData?.promotions,
+            promotions: promoData?.activePromotion,
           })
         : null
     );
