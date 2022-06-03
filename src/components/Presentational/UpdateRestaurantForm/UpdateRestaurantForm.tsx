@@ -4,7 +4,6 @@ import { classnames } from "tailwindcss-classnames";
 import { Card, ThemeFonts } from "@base";
 import {
   UpdateRestaurantAddressForm,
-  UpdateRestaurantBackgroundForm,
   UpdateRestaurantFontForm,
   UpdateRestaurantSlugForm,
   UpdateRestaurantThemeForm,
@@ -28,8 +27,6 @@ const UpdateRestaurantForm: FC<Props> = ({
   themeColour,
   restaurantSlug,
   themeFont,
-  backgroundColour,
-  backgroundTint,
 }) => {
   return (
     <>
@@ -48,14 +45,6 @@ const UpdateRestaurantForm: FC<Props> = ({
           themeTint={themeTint}
           id={restaurant.id}
           logo={restaurant.logo}
-        />
-      </Card>
-      <Card css={classnames("flex-col", "mt-4")}>
-        <UpdateRestaurantBackgroundForm
-          restaurantSlug={restaurantSlug}
-          backgroundColor={backgroundColour}
-          backgroundTint={backgroundTint}
-          id={restaurant.id}
         />
       </Card>
       <Card css={classnames("flex-col", "mt-4")}>

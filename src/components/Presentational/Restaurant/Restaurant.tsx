@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
-import { classnames, TArg } from "tailwindcss-classnames";
+import { classnames } from "tailwindcss-classnames";
 import {
   Items,
   Menus,
@@ -65,7 +65,6 @@ const Restaurant: FC<Props> = ({
 
   const categories = categoryData?.categories?.filter(cat => cat.name !== "No category") ?? [];
   const isUserOnboarded = onboarding?.has_items || onboarding?.has_styles;
-  const backgroundColour = `bg-${theme?.background_colour}-${theme?.background_tint}` as TArg;
 
   const renderItems = () => {
     return (
@@ -96,7 +95,7 @@ const Restaurant: FC<Props> = ({
           themeFont={theme?.font || "Quicksand"}
           themeColour={theme?.colour || "red"}
         />
-        <Container css={classnames(backgroundColour)}>
+        <Container css={classnames("bg-gray-50")}>
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
             <div className="hidden w-full lg:flex">
               <Menus

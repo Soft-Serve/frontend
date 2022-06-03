@@ -20,10 +20,13 @@ const ItemPrice: FC<Props> = ({ itemID, themeColour, themeTint, themeFont }) => 
     skip: !itemID,
   });
 
+  console.log(data?.itemSizes);
+
   return (
-    <div className="flex flex-col items-center justify-end xs:flex-row">
+    <div className="flex flex-wrap items-center justify-end">
       {data?.itemSizes?.map(size => (
         <PriceTag
+          isMultiSize={data?.itemSizes.length > 1}
           key={size?.id}
           themeFont={themeFont}
           size={size}

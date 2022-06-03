@@ -1,7 +1,7 @@
 import { classnames } from "tailwindcss-classnames";
 
 export const page = classnames(
-  "bg-gray-50",
+  "bg-transparent",
   "relative",
   "h-screen",
   "flex",

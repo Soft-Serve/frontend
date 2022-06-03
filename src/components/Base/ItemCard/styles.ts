@@ -3,7 +3,7 @@ import type { TArg } from "tailwindcss-classnames";
 
 export const cardStyles = (isVertical: boolean) => {
   const height = `h-fit` as unknown as TArg;
-  return classnames(height, "flex", "overflow-hidden", "rounded-md", "shadow-xl", {
+  return classnames(height, "flex", "overflow-hidden", "rounded-md", "shadow-2xl", {
     "flex-col": isVertical,
   });
 };

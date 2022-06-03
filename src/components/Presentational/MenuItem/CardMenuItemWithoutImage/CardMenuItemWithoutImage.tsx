@@ -29,6 +29,21 @@ const CardMenuItemWithoutImage: FC<Props> = ({
       />
     );
 
+  const renderDescription = () => {
+    if (item?.description?.length) {
+      return (
+        <Typography
+          css={classnames("mb-4", "break-words", "italic")}
+          themeFont={themeFont}
+          type="h6"
+        >
+          {item.available ? item.description : "** Temporarily unavailable  **"}
+        </Typography>
+      );
+    }
+    return null;
+  };
+
   return (
     <ItemCard {...rest}>
       <div className="relative flex flex-1 flex-col justify-between bg-white p-2 pb-0">
@@ -44,13 +59,7 @@ const CardMenuItemWithoutImage: FC<Props> = ({
               itemID={item.id}
             />
           </div>
-          <Typography
-            css={classnames("mb-8", "break-words", "italic")}
-            themeFont={themeFont}
-            type="h6"
-          >
-            {item.available ? item.description : "** Temporarily unavailable  **"}
-          </Typography>
+          {renderDescription()}
           {renderPrice()}
         </div>
       </div>

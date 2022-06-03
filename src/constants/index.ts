@@ -95,7 +95,7 @@ const createDarkColourObj = (tailwindColourObject: ColourObject) =>
   Object.fromEntries(Object.entries(tailwindColourObject).splice(4));
 
 const createLightColourObj = (tailwindColourObject: ColourObject) =>
-  Object.fromEntries(Object.entries(tailwindColourObject).splice(1, 5));
+  Object.fromEntries(Object.entries(tailwindColourObject).splice(1));
 
 export const darkColorsMap = {
   rose: createDarkColourObj(colors.rose),
