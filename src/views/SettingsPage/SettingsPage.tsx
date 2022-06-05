@@ -1,26 +1,15 @@
-import type { FC } from "react";
+import { FC, lazy, Suspense } from "react";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Toaster } from "react-hot-toast";
 import { SettingsSubMenu } from "@presentational";
 import { useViewport } from "@hooks";
-import { Button, FontsMap, Footer, TabContent } from "@base";
+import { Button, FontsMap, Footer, LoadingScreen, TabContent } from "@base";
 import { useRestaurantThemeQuery } from "@shared";
 import { ChevronRightIcon } from "@heroicons/react/solid";
 import { classnames } from "tailwindcss-classnames";
 import { SettingsMobileSubNavigation } from "./SettingsMobileSubNavigation";
-import { AccountSettings } from "./AccountSettings";
-import { UsersSettings } from "./UsersSettings";
-import { AllergiesSettings } from "./AllergiesSettings";
-import { BillingSettings } from "./BillingSettings";
-import { ItemSettings } from "./ItemSettings";
-import { MenuSettings } from "./MenuSettings";
-import { RestaurantSettings } from "./RestaurantSettings";
 import { SettingsWrapper } from "./SettingsWrapper";
-import { CategorySettings } from "./CategorySettings";
-import { BannerSettings } from "./BannerSettings/BannerSettings";
-import { QRCodeSettings } from "./QRCodeSettings";
-import { PromotionSettings } from "./PromotionsSettings";
 
 interface MappableObject {
   [key: string]: JSX.Element;
@@ -33,6 +22,18 @@ type Param = {
 interface Props {
   restaurantSlug: string;
 }
+
+const RestaurantSettings = lazy(() => import("./RestaurantSettings"));
+const BannerSettings = lazy(() => import("./BannerSettings"));
+const UsersSettings = lazy(() => import("./UsersSettings"));
+const MenuSettings = lazy(() => import("./MenuSettings"));
+const AllergiesSettings = lazy(() => import("./AllergiesSettings"));
+const ItemSettings = lazy(() => import("./ItemSettings"));
+const AccountSettings = lazy(() => import("./AccountSettings"));
+const BillingSettings = lazy(() => import("./BillingSettings"));
+const CategorySettings = lazy(() => import("./CategorySettings"));
+const QRCodeSettings = lazy(() => import("./QRCodeSettings"));
+const PromotionSettings = lazy(() => import("./PromotionsSettings"));
 
 const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
   const { id } = useParams<Param>() as Param;
@@ -194,7 +195,17 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
             themeColour={themeData?.restaurant?.colour || "red"}
             themeTint={themeData?.restaurant?.tint || 400}
           >
-            {renderSettingsTab()}
+            <Suspense
+              fallback={
+                <LoadingScreen
+                  reverseTheme
+                  themeColour={themeData?.restaurant?.colour || "red"}
+                  themeTint={themeData?.restaurant?.tint || 400}
+                />
+              }
+            >
+              {renderSettingsTab()}
+            </Suspense>
           </TabContent>
         </SettingsWrapper>
         {renderMobileFooter()}

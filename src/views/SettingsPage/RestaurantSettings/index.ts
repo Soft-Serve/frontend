@@ -1,1 +1,1 @@
-export { RestaurantSettings } from "./RestaurantSettings";
+export { RestaurantSettings as default } from "./RestaurantSettings";

@@ -95,7 +95,7 @@ const Restaurant: FC<Props> = ({
           themeFont={theme?.font || "Quicksand"}
           themeColour={theme?.colour || "red"}
         />
-        <Container css={classnames("bg-gray-50")}>
+        <Container css="bg-gray-50">
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
             <div className="hidden w-full lg:flex">
               <Menus

@@ -2,13 +2,15 @@ import { classnames } from "tailwindcss-classnames";
 
 const base = classnames(
   "w-full",
-  "p-4",
+  "p-2",
   "text-white",
   "font-bold",
   "border-b-2",
   "cursor-pointer",
   "flex",
-  "items-start"
+  "flex-col",
+  "items-center",
+  "text-sm"
 );
 
 const button = classnames("focus:outline-none");

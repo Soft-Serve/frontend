@@ -1,1 +1,1 @@
-export { ItemSettings } from "./ItemSettings";
+export { ItemSettings as default } from "./ItemSettings";

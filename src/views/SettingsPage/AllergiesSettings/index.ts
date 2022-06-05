@@ -1,1 +1,1 @@
-export { AllergiesSettings } from "./AllergiesSettings";
+export { AllergiesSettings as default } from "./AllergiesSettings";

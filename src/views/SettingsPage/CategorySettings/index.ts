@@ -1,1 +1,1 @@
-export { CategorySettings } from "./CategorySettings";
+export { CategorySettings as default } from "./CategorySettings";

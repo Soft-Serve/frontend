@@ -1,1 +1,1 @@
-export { PromotionSettings } from "./PromotionsSettings";
+export { PromotionSettings as default } from "./PromotionsSettings";

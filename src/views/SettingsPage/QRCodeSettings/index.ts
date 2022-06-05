@@ -1,1 +1,1 @@
-export { QRCodeSettings } from "./QRCodeSettings";
+export { QRCodeSettings as default } from "./QRCodeSettings";
