@@ -2,7 +2,7 @@ import React from "react";
 import type { FC } from "react";
 import { Promotion } from "@shared";
 import { FloatingBanner, ThemeFonts } from "@base";
-import { ClockIcon, LightningBoltIcon } from "@heroicons/react/solid";
+import { ClockIcon } from "@heroicons/react/solid";
 
 interface Props {
   promotion?: Promotion;

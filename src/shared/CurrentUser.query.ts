@@ -33,7 +33,7 @@ interface CurrentUserData {
 const useCurrentUserQuery = (options?: QueryHookOptions<CurrentUserData>) =>
   useQuery<CurrentUserData>(CURRENT_USER_QUERY, {
     ...options,
-    fetchPolicy: "cache-and-network",
+    fetchPolicy: "network-only",
   });
 
 export { useCurrentUserQuery, CURRENT_USER_QUERY };
