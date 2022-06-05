@@ -40,12 +40,12 @@ const PriceTag: FC<Props> = ({ isMultiSize, size, themeColour, themeTint, themeF
   const renderPromoPrice = () => {
     return (
       <div
-        className={`text-center bg-${themeColour}-${themeTint} mb-2 w-full rounded-md px-1.5 py-2 text-xs font-bold text-white xs:w-min sm:px-2 sm:py-3 sm:text-sm font-${themeFont} flex justify-center xs:ml-2`}
+        className={`text-center bg-${themeColour}-${themeTint} mb-2 w-min rounded-md px-1.5 py-2 text-xs font-bold text-white sm:px-2 sm:py-3 sm:text-sm font-${themeFont} ml-2 flex items-start whitespace-nowrap`}
       >
         <span className="mr-2 line-through">{formatPrice(size.price)}</span>
-        <LightningBoltIcon className="h-5 w-5 text-white" />
         {renderSize()}
-        <span>{formatPrice(size.promo_price)}</span>
+        {formatPrice(size.promo_price)}
+        <LightningBoltIcon className="ml-1 h-3 w-3 text-white sm:h-4 sm:w-4" />
       </div>
     );
   };

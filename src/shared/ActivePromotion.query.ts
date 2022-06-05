@@ -38,7 +38,10 @@ interface Variables {
 }
 
 const useActivePromotionsQuery = (options?: QueryHookOptions<ActivePromotionData, Variables>) =>
-  useQuery<ActivePromotionData, Variables>(ACTIVE_PROMOTION_QUERY, options);
+  useQuery<ActivePromotionData, Variables>(ACTIVE_PROMOTION_QUERY, {
+    fetchPolicy: "network-only",
+    ...options,
+  });
 
 export { useActivePromotionsQuery, ACTIVE_PROMOTION_QUERY };
 export type { ActivePromotionData, Promotion };

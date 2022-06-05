@@ -51,7 +51,7 @@ const QueryData: FC<Props> = ({ children, restaurantSlug }) => {
             banners: bannersData?.banners,
             theme: themeData?.restaurant,
             onboarding: onBoardingData?.restaurant,
-            promotions: promoData?.activePromotion,
+            promotion: promoData?.activePromotion,
           })
         : null
     );

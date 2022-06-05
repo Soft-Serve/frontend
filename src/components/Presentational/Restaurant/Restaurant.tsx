@@ -30,7 +30,7 @@ interface Props {
   banners?: Banner[];
   theme?: Theme;
   onboarding?: Onboarding;
-  promotions?: Promotion[];
+  promotion?: Promotion;
 }
 
 const Restaurant: FC<Props> = ({
@@ -42,7 +42,7 @@ const Restaurant: FC<Props> = ({
   banners,
   theme,
   onboarding,
-  promotions,
+  promotion,
 }) => {
   const { id: restaurantSlug } = useParams<Param>() as Param;
 
@@ -82,7 +82,7 @@ const Restaurant: FC<Props> = ({
     return (
       <>
         <PromotionBanners
-          promotions={promotions}
+          promotion={promotion}
           themeTint={theme?.tint || 400}
           themeFont={theme?.font || "Quicksand"}
           themeColour={theme?.colour || "red"}

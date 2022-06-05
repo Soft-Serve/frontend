@@ -22,7 +22,7 @@ const FloatingBanner: FC<Props> = ({ themeColour, themeFont, themeTint, children
             } p-2 shadow-lg sm:p-3`}
           >
             <div className="flex flex-wrap items-center justify-between">
-              <div className={`flex w-0 flex-1 items-center font-${themeFont} text-white`}>
+              <div className={`flex w-0 flex-1 items-center font-${themeFont} mr-8 text-white`}>
                 <span
                   className={`flex rounded-lg bg-${themeColour}-${
                     themeTint === 900 ? themeTint : themeTint + 100
@@ -32,7 +32,7 @@ const FloatingBanner: FC<Props> = ({ themeColour, themeFont, themeTint, children
                 </span>
                 {children}
               </div>
-              <div className="order-2 flex-shrink-0 sm:order-3 sm:ml-2">
+              <div className="order-2 flex-initial flex-shrink-0 sm:order-3 sm:ml-2">
                 <Button
                   colour="naked"
                   onClick={() => setIsVisible(false)}
