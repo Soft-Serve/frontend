@@ -45,7 +45,7 @@ const MobileCategoryItemWithImage: FC<Props> = ({
   };
 
   return (
-    <div key={item.id} className="relative flex flex-col rounded-md shadow-md">
+    <div key={item.id} className="relative block overflow-hidden rounded-lg bg-white shadow-2xl ">
       <div className="h-40 flex-shrink-0">
         <ItemImage
           className="inset-0 h-full w-full object-cover"
@@ -67,20 +67,22 @@ const MobileCategoryItemWithImage: FC<Props> = ({
           handleUpdate={() => handleUpdateItem(item, categoryID)}
         />
       </div>
+      <div className="absolute top-3 right-12">
+        <Toggle
+          themeColour={themeColour}
+          themeTint={themeTint}
+          isEnabled={isItemAvailable}
+          handleClick={handleToggle}
+        />
+      </div>
       <div className="flex flex-1 flex-col justify-between bg-white p-2">
         <div className="flex w-full justify-between">
           <p className="font-Quicksand font-bold">{item?.name}</p>
         </div>
-        <div className="mt-2 flex items-end justify-between">
+        <div className=" mt-2 flex items-end justify-between">
           <p className="mt-2 overflow-hidden text-ellipsis break-words font-Quicksand text-sm italic text-gray-600">
             {item.available ? item.description : "** Temporarily unavailable  **"}
           </p>
-          <Toggle
-            themeColour={themeColour}
-            themeTint={themeTint}
-            isEnabled={isItemAvailable}
-            handleClick={handleToggle}
-          />
         </div>
         <CategoryItemDietaries
           themeFont={themeFont}
@@ -89,8 +91,7 @@ const MobileCategoryItemWithImage: FC<Props> = ({
           itemID={item?.id}
         />
       </div>
-
-      <div className="flex items-center justify-between bg-white px-2">
+      <div className="my-2 flex w-full items-center justify-end bg-white px-2">
         <ItemPrice
           themeColour={themeColour}
           themeFont={themeFont}

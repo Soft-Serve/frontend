@@ -37,7 +37,7 @@ const Dropdown: FC<Props> = ({
     return errors?.slice(0, 2).map(error => <p key={`error-item-${error}`}>{error}</p>);
   };
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col font-Quicksand ">
       <Listbox value={value} onChange={onChange}>
         {({ open }) => (
           <>

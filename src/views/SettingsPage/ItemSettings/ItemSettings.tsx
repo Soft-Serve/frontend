@@ -163,6 +163,18 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
     setActiveMenu(menu);
   };
 
+  const renderSearchBar = () => {
+    if (!!categoryData?.categories?.length)
+      return (
+        <SearchBar
+          themeColour={themeColour}
+          themeTint={themeTint}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
+      );
+  };
+
   const renderMenusTabs = () => {
     if (menuLoading) return <Skeleton className="my-2" height={50} />;
     return (
@@ -190,25 +202,19 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
     return categories?.filter(category => category.name === categoryParam);
   };
 
-  const renderSearchBar = () => {
+  const renderCTA = () => {
     if (loading) return null;
-    if (categoryData?.categories?.length) {
+
+    if (categoryData?.categories?.length && categoryData?.categories?.length === 1) {
       return (
-        <SearchBar
-          themeColour={themeColour}
-          themeTint={themeTint}
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-        />
-      );
-    } else {
-      return (
-        <Alert type="warning">
-          <Link className="flex" to={`/restaurants/${restaurantSlug}/settings/menus`}>
-            Create a new Menu first before creating a new item
-            <ChevronRightIcon className="h-5 w-5 " />
-          </Link>
-        </Alert>
+        <div className="mt-4">
+          <Alert type="warning">
+            <Link className="flex" to={`/restaurants/${restaurantSlug}/settings/categories`}>
+              Create a new Category first before creating a new item
+              <ChevronRightIcon className="h-5 w-5 " />
+            </Link>
+          </Alert>
+        </div>
       );
     }
   };
@@ -235,8 +241,9 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
           </div>
         </CardContent>
       </Card>
-      {renderMenusTabs()}
       {renderSearchBar()}
+      {renderMenusTabs()}
+      {renderCTA()}
       <div className="mt-8">
         <Grid size="SM">
           {filteredCategories(categoryData?.categories)?.map(category => (

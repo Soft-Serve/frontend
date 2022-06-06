@@ -38,12 +38,7 @@ const PromotionCategories: FC<Props> = ({ themeColour, themeTint, promotionID })
           onCompleted={setIsOpen}
         />
       </Modal>
-      {/* <h3 className="flex items-center font-Quicksand text-lg font-bold">
-        <LightningBoltIcon
-          className={`mr-2 h-8 w-8 rounded-full border-2 p-2 bg-${themeColour}-${themeTint} text-white`}
-        />
-        Running promotions
-      </h3> */}
+      <h3 className="flex items-center font-Quicksand text-lg font-bold">Running promotions:</h3>
       <table className="flex-no-wrap my-5 flex w-full flex-row overflow-visible rounded-md font-Quicksand sm:bg-white">
         <tbody className="flex-1 sm:flex-none">
           {data?.promotionCategories?.map(promoCat => (

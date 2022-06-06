@@ -119,13 +119,13 @@ const PromotionCategoryActions: FC<Props> = ({
   return (
     <tr
       key={promoCategory.id}
-      className={`wrap mb-2 flex flex-none flex-col rounded-md border-b-0 sm:mb-0 sm:table-row sm:border-b-2 border-${themeColour}-${themeTint}`}
+      className={`wrap mb-2 flex flex-none flex-col rounded-md border-b-0 sm:mb-0 sm:table-row sm:border-b-2 border-${themeColour}-${themeTint} font-Quicksand`}
     >
-      <td className={`border-2 border-${themeColour}-${themeTint} p-3`}>
+      <td className={`border-2 border-${themeColour}-${themeTint} p-3 font-bold`}>
         <CategoryName categoryID={promoCategory.menu_category_id} />
       </td>
       <td className={`border-2 p-3 border-${themeColour}-${themeTint}`}>
-        <fieldset className="flex items-end justify-start">
+        <fieldset className="flex items-end justify-start font-Quicksand">
           <Input
             css={classnames("rounded-r-none", "border-r-0", "-mr-8", "w-24", "sm:py-2", "py-1.5")}
             onChange={e => handleChange(e)}
@@ -174,7 +174,7 @@ const PromotionCategoryActions: FC<Props> = ({
             themeColour={themeColour}
             themeTint={themeTint}
           >
-            Save
+            Update
           </Button>
         </div>
       </td>

@@ -8,6 +8,7 @@ import { Category, Menu, useCategoriesQuery, useMenusQuery } from "src/shared";
 import { usePostPromotionCatgegoryMutation } from "./PostPromotionCatgegory.mutation";
 import { PROMOTIONS_CATEGORIES_QUERY } from "../PromotionCategories/PromotionCategories.query";
 import toast from "react-hot-toast";
+import { useViewport } from "src/hooks";
 
 interface Props {
   themeColour: string;
@@ -38,8 +39,10 @@ const PostPromotionCategoryForm: FC<Props> = ({
   const [activeMenu, setActiveMenu] = useState<Menu>();
   const [activeCategory, setActiveCategory] = useState<Category>();
   const [amount, setAmount] = useState("");
+  const { width } = useViewport();
   const [unit, setUnit] = useState(unitsArray[0]);
-  const onSuccess = () => toast.custom(<Notification header="Promotion succesfully added!" />);
+  const onSuccess = () =>
+    toast.custom(<Notification header="Promotion Category succesfully added!" />);
 
   const [addPromotionCategory, { loading }] = usePostPromotionCatgegoryMutation({
     refetchQueries: [
@@ -146,12 +149,12 @@ const PostPromotionCategoryForm: FC<Props> = ({
       buttonContent={open =>
         open ? (
           <Button size="XL" themeColour={themeColour} themeTint={themeTint}>
-            Close
+            Promotion Settings
             <ChevronUpIcon className="h-5 w-5 text-white" />
           </Button>
         ) : (
           <Button size="XL" themeColour={themeColour} themeTint={themeTint}>
-            Add Category
+            Promotion Settings
             <ChevronDownIcon className="h-5 w-5 text-white" />
           </Button>
         )
@@ -159,7 +162,7 @@ const PostPromotionCategoryForm: FC<Props> = ({
     >
       <div className="my-4">{renderMenusTabs()}</div>
       <form className="my-4 flex flex-wrap items-end justify-between">
-        <fieldset className="mr-4 flex flex-wrap items-end justify-start">
+        <fieldset className="mr-4 flex flex-auto flex-wrap items-end justify-start">
           {renderDropdown()}
           <div className="flex items-end">
             <Input
@@ -189,12 +192,12 @@ const PostPromotionCategoryForm: FC<Props> = ({
             />
           </div>
         </fieldset>
-        <div className="mt-4 flex-1">
+        <div className="mt-4 flex w-full flex-1 justify-end">
           <Button
+            isFullwidth={width < 549}
             disabled={!amount}
             onClick={() => handleAddPromotionCategory()}
             loading={loading}
-            isFullwidth
             size="XXL"
             themeColour={themeColour}
             themeTint={themeTint}

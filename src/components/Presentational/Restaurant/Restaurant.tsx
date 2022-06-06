@@ -99,6 +99,7 @@ const Restaurant: FC<Props> = ({
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
             <div className="hidden w-full lg:flex">
               <Menus
+                isAdmin={!!currentUser}
                 isMenuLoading={menusLoading}
                 menus={menusData?.menus ?? []}
                 setMenuID={setMenuID}
