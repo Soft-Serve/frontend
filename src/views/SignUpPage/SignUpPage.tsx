@@ -13,7 +13,7 @@ import {
 import { MenuIcon, XIcon } from "@heroicons/react/solid";
 import { AttachedLabelInput, Button, Input } from "@base";
 import { Link } from "react-router-dom";
-import { FacebookSVG, FullLogoSVG, InstagramSVG, TwitterSVG } from "@svgs";
+import { LinkedInSVG, FullLogoSVG, InstagramSVG, TwitterSVG } from "@svgs";
 import manager from "./manager.png";
 import { PasswordModal } from "./PasswordModal";
 
@@ -28,13 +28,13 @@ const navigation = {
   ],
   social: [
     {
-      name: "Facebook",
-      href: "#",
-      icon: FacebookSVG,
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/company/softserveapp/about/",
+      icon: LinkedInSVG,
     },
     {
       name: "Instagram",
-      href: "#",
+      href: "https://www.instagram.com/softserveapp",
       icon: InstagramSVG,
     },
     {
