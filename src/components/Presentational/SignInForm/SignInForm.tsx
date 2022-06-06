@@ -108,13 +108,15 @@ const SignInForm: FC<Props> = ({ themeColour, themeTint }) => {
 
   return (
     <>
-      <div className="mt-10 flex flex-col items-center justify-center sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="mt-10 flex flex-col items-center justify-center font-Quicksand sm:mx-auto sm:w-full sm:max-w-md">
         {renderCTA()}
       </div>
       <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className=" bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           {isSmallerThenTablet && (
-            <h2 className="mt-2 mb-8 text-center text-3xl font-extrabold text-gray-900">Sign in</h2>
+            <h2 className="mt-2 mb-8 text-center font-Quicksand text-3xl font-extrabold text-gray-900">
+              Sign in
+            </h2>
           )}
           <form className="space-y-6" onSubmit={handleSubmit}>
             <Input

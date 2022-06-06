@@ -66,7 +66,7 @@ const PromotionCard: FC<Props> = ({
             themeTint={themeTint}
           />
         </div>
-        <div className="flex w-full flex-col text-sm">
+        <div className="flex w-full flex-col font-Quicksand text-sm">
           <p className={`truncate text-lg font-bold text-${themeColour}-${themeTint}`}>
             {promo?.name}
           </p>

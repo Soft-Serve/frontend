@@ -38,7 +38,9 @@ const svgs = {
 
 const Alert: FC<Props> = ({ type = "info", children }) => {
   return (
-    <div className={`border-l-4 ${baseStyles[type]} ${backgroundStyles[type]} bg-yellow-50 p-4`}>
+    <div
+      className={`border-l-4 ${baseStyles[type]} ${backgroundStyles[type]} bg-yellow-50 p-4 font-Quicksand`}
+    >
       <div className="flex">
         <div className="flex-shrink-0">{svgs[type]}</div>
         <div className={`ml-3 text-sm ${textStyles[type]}`}>{children}</div>
