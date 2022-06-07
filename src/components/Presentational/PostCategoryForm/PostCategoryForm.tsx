@@ -63,6 +63,7 @@ const PostCategoryForm: FC<Props> = ({ onCompleted, menuID, themeTint, themeColo
         input: {
           name,
           category_type: categoryType,
+          has_active_promo: false,
           menu_id: menuID,
           __typename: "Category",
           id: 0,
@@ -73,6 +74,7 @@ const PostCategoryForm: FC<Props> = ({ onCompleted, menuID, themeTint, themeColo
         postCategory: {
           name,
           category_type: categoryType,
+          has_active_promo: false,
           menu_id: menuID,
           __typename: "Category",
           id: 0,

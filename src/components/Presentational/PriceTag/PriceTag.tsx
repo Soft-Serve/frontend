@@ -42,8 +42,8 @@ const PriceTag: FC<Props> = ({ isMultiSize, size, themeColour, themeTint, themeF
       <div
         className={`text-center bg-${themeColour}-${themeTint} mb-2 w-min rounded-md px-1.5 py-2 text-xs font-bold text-white sm:px-2 sm:py-3 sm:text-sm font-${themeFont} ml-2 flex items-start whitespace-nowrap`}
       >
-        <span className="mr-2 line-through">{formatPrice(size.price)}</span>
         {renderSize()}
+        <span className=" mx-1 line-through">{formatPrice(size.price)}</span>
         {formatPrice(size.promo_price)}
         <LightningBoltIcon className="ml-1 h-3 w-3 text-white sm:h-4 sm:w-4" />
       </div>

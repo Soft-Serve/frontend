@@ -6,7 +6,7 @@ import { XIcon } from "@heroicons/react/solid";
 import TimePicker, { TimePickerValue } from "react-time-picker";
 import toast from "react-hot-toast";
 import { usePostPromotionMutation } from "./PostPromotion.mutation";
-
+import "./style.css";
 interface Props {
   onClose: Dispatch<SetStateAction<boolean>>;
   themeColour: string;
@@ -36,8 +36,8 @@ const PostPromotionForm: FC<Props> = ({ themeColour, themeTint, onClose, restaur
   const [input, setInput] = useState<NewPromotion>({
     name: "",
     description: "",
-    start_time: "",
-    end_time: "",
+    start_time: "17:00",
+    end_time: "21:00",
     days: [],
     id: 0,
     restaurant_id: restaurantSlug,
@@ -116,6 +116,8 @@ const PostPromotionForm: FC<Props> = ({ themeColour, themeTint, onClose, restaur
       />
     ));
 
+  const isValid = input.name.length && input.description.length && input.days.length;
+
   return (
     <div className="font-Quicksand">
       <div className="flex items-center justify-between">
@@ -171,7 +173,7 @@ const PostPromotionForm: FC<Props> = ({ themeColour, themeTint, onClose, restaur
         <div className="mt-4 flex w-full justify-start">
           <div className="mr-4">
             <p>
-              <span className="text-sm font-semibold text-gray-700">Start time:</span>
+              <span className="text-sm font-semibold text-gray-700">Start time: (24H)</span>
               <span className="text-red-600">*</span>
             </p>
             <TimePicker
@@ -189,10 +191,11 @@ const PostPromotionForm: FC<Props> = ({ themeColour, themeTint, onClose, restaur
           </div>
           <div>
             <p>
-              <span className="text-sm font-semibold text-gray-700">End time:</span>
+              <span className="text-sm font-semibold text-gray-700">End time: (24H)</span>
               <span className="text-red-600">*</span>
             </p>
             <TimePicker
+              minTime={input.start_time}
               locale="en-US"
               maxDetail="minute"
               format="HH:mm"
@@ -208,6 +211,7 @@ const PostPromotionForm: FC<Props> = ({ themeColour, themeTint, onClose, restaur
         </div>
         <div className="mt-4 w-full">
           <Button
+            disabled={!isValid}
             loading={loading}
             type="submit"
             size="XL"

@@ -11,6 +11,7 @@ const CATEGORIES_QUERY = gql`
   query CategoriesQuery($menuID: Int!) {
     categories(menuID: $menuID) @rest(type: Category, path: "menus/{args.menuID}/menu_categories") {
       id
+      has_active_promo
       name
       menu_id
       category_type
@@ -22,6 +23,7 @@ const CATEGORIES_QUERY = gql`
 type CategoryType = keyof typeof CategoryTypes;
 
 interface Category {
+  has_active_promo: boolean;
   id: number;
   name: string;
   category_type: CategoryType;
@@ -38,7 +40,10 @@ interface Variables {
 }
 
 const useCategoriesQuery = (options?: QueryHookOptions<CategoriesData, Variables>) =>
-  useQuery<CategoriesData, Variables>(CATEGORIES_QUERY, options);
+  useQuery<CategoriesData, Variables>(CATEGORIES_QUERY, {
+    fetchPolicy: "cache-and-network",
+    ...options,
+  });
 
 export { useCategoriesQuery, CATEGORIES_QUERY };
 export type { CategoriesData, Category, CategoryType };

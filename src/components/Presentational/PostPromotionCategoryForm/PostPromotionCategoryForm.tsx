@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import type { FC } from "react";
-import { Disclose, Button, Input, Dropdown, Tab, Tabs, Notification } from "@base";
-import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/solid";
+import { Disclose, Button, Input, Dropdown, Tab, Tabs, Notification, Alert } from "@base";
+import { ChevronUpIcon, ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import { classnames } from "tailwindcss-classnames";
 import Skeleton from "react-loading-skeleton";
 import { Category, Menu, useCategoriesQuery, useMenusQuery } from "src/shared";
@@ -9,8 +9,10 @@ import { usePostPromotionCatgegoryMutation } from "./PostPromotionCatgegory.muta
 import { PROMOTIONS_CATEGORIES_QUERY } from "../PromotionCategories/PromotionCategories.query";
 import toast from "react-hot-toast";
 import { useViewport } from "src/hooks";
+import { Link } from "react-router-dom";
 
 interface Props {
+  promoName: string;
   themeColour: string;
   themeTint: number;
   restaurantSlug: string;
@@ -31,6 +33,7 @@ const unitsArray = [
 ];
 
 const PostPromotionCategoryForm: FC<Props> = ({
+  promoName,
   themeColour,
   themeTint,
   restaurantSlug,
@@ -144,17 +147,33 @@ const PostPromotionCategoryForm: FC<Props> = ({
       );
   };
 
+  const isMenuOrCategoryPresent =
+    !!menusData?.menus?.length &&
+    !!categoriesData?.categories.length &&
+    categoriesData?.categories.length >= 2;
+
+  if (!isMenuOrCategoryPresent) {
+    return (
+      <Alert type="warning">
+        <Link className="flex" to={`/restaurants/${restaurantSlug}/settings/categories`}>
+          Create a new Category first before creating a new item
+          <ChevronRightIcon className="h-5 w-5 " />
+        </Link>
+      </Alert>
+    );
+  }
+
   return (
     <Disclose
       buttonContent={open =>
         open ? (
           <Button size="XL" themeColour={themeColour} themeTint={themeTint}>
-            Promotion Settings
+            Add category to {promoName}
             <ChevronUpIcon className="h-5 w-5 text-white" />
           </Button>
         ) : (
           <Button size="XL" themeColour={themeColour} themeTint={themeTint}>
-            Promotion Settings
+            Add category to {promoName}
             <ChevronDownIcon className="h-5 w-5 text-white" />
           </Button>
         )

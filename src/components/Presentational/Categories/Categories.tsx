@@ -5,6 +5,7 @@ import { SkeletonCategories } from "./SkeletonCategories";
 import { RadioGroup } from "@headlessui/react";
 import { useStyles } from "./styles";
 import { ThemeFonts } from "@base";
+import { LightningBoltIcon } from "@heroicons/react/solid";
 
 interface Props {
   categories: Category[];
@@ -53,8 +54,9 @@ const Categories: FC<Props> = ({
         }
       >
         <RadioGroup.Label as="p">
-          <span className={`font-${themeFont} whitespace-nowrap text-sm font-bold`}>
+          <span className={`font-${themeFont} flex whitespace-nowrap text-sm font-bold`}>
             {option.name}
+            {option.has_active_promo && <LightningBoltIcon className="ml-2 h-5 w-5" />}
           </span>
         </RadioGroup.Label>
       </RadioGroup.Option>

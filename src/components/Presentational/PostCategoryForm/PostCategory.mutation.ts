@@ -8,6 +8,7 @@ const POST_CATEGORY_MUTATION = gql`
       id
       name
       menu_id
+      has_active_promo
       category_type
       __typename
     }
@@ -17,6 +18,7 @@ const POST_CATEGORY_MUTATION = gql`
 interface Category {
   id: number;
   name: string;
+  has_active_promo: boolean;
   category_type: string;
   menu_id: number;
   __typename: string;

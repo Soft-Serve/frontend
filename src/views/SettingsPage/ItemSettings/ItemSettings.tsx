@@ -229,7 +229,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
           <div className="mb-4 flex w-full items-center justify-between">
             <SettingsHeader>Items</SettingsHeader>
             <Button
-              disabled={!categoryData?.categories?.length}
+              disabled={!!categoryData?.categories?.length && categoryData?.categories?.length < 2}
               themeColour={themeColour}
               themeTint={themeTint}
               onClick={handlePostItem}

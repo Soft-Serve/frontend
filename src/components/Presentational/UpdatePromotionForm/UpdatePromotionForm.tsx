@@ -133,6 +133,8 @@ const UpdatePromotionForm: FC<Props> = ({
       />
     ));
 
+  const isValid = input.name.length && input.description.length && input.days.length;
+
   return (
     <div className="font-Quicksand">
       <div className="flex items-center justify-between">
@@ -188,7 +190,7 @@ const UpdatePromotionForm: FC<Props> = ({
         <div className="mt-4 flex w-full justify-start">
           <div className="mr-4">
             <p>
-              <span className="text-sm font-semibold text-gray-700">Start time:</span>
+              <span className="text-sm font-semibold text-gray-700">Start time: (24H)</span>
               <span className="text-red-600">*</span>
             </p>
             <TimePicker
@@ -206,10 +208,11 @@ const UpdatePromotionForm: FC<Props> = ({
           </div>
           <div>
             <p>
-              <span className="text-sm font-semibold text-gray-700">End time:</span>
+              <span className="text-sm font-semibold text-gray-700">End time: (24H)</span>
               <span className="text-red-600">*</span>
             </p>
             <TimePicker
+              minTime={input.start_time}
               locale="en-US"
               maxDetail="minute"
               format="HH:mm"
@@ -225,6 +228,7 @@ const UpdatePromotionForm: FC<Props> = ({
         </div>
         <div className="mt-4 w-full">
           <Button
+            disabled={!isValid}
             loading={loading}
             type="submit"
             size="XL"

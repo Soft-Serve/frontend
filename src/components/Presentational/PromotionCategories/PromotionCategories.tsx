@@ -27,6 +27,18 @@ const PromotionCategories: FC<Props> = ({ themeColour, themeTint, promotionID })
     setIsOpen(prevState => !prevState);
   };
 
+  const renderTitle = () => {
+    if (data?.promotionCategories?.length)
+      return (
+        <h3 className="flex items-center font-Quicksand text-lg font-bold">Running promotions:</h3>
+      );
+    return (
+      <h3 className="flex items-center font-Quicksand text-lg font-bold">
+        No categories added to promotion
+      </h3>
+    );
+  };
+
   return (
     <>
       <Modal onClose={setIsOpen} isOpen={isOpen}>
@@ -38,7 +50,7 @@ const PromotionCategories: FC<Props> = ({ themeColour, themeTint, promotionID })
           onCompleted={setIsOpen}
         />
       </Modal>
-      <h3 className="flex items-center font-Quicksand text-lg font-bold">Running promotions:</h3>
+      {renderTitle()}
       <table className="flex-no-wrap my-5 flex w-full flex-row overflow-visible rounded-md font-Quicksand sm:bg-white">
         <tbody className="flex-1 sm:flex-none">
           {data?.promotionCategories?.map(promoCat => (
