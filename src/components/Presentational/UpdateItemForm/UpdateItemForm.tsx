@@ -9,12 +9,13 @@ import {
   ItemSize,
   ITEM_SIZES_QUERY,
 } from "@shared";
-import { Button, Input, TextBox } from "@base";
+import { Button, Input, TextBox, UploadImageBox } from "@base";
 import { XIcon } from "@heroicons/react/solid";
 import { MultiSize } from "@presentational";
 import { isNameInputValid, isNameOnlyNumbers, isNameValid, isPriceInvalid } from "@utility";
 import { v4 as uuidv4 } from "uuid";
 import { useUpdateItemMutation } from "./UpdateItem.mutation";
+import { useUploadPhoto } from "src/hooks";
 
 interface Props {
   onCompleted?: (state: boolean) => void;
@@ -30,6 +31,7 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
       itemID: selectedItem?.id || 0,
     },
   });
+  const { photoFile, setPhotoFile, fetchPhoto } = useUploadPhoto();
 
   const [sizes, setSizes] = useState(itemSizeData?.itemSizes);
 
@@ -114,8 +116,9 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
     return null;
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const photo = await fetchPhoto();
     updateItem({
       variables: {
         input: {
@@ -124,6 +127,7 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
             sizes?.map(({ id, ...rest }) =>
               typeof id === "number" ? { id, ...rest } : { ...rest }
             ) || [],
+          photo,
         },
       },
       optimisticResponse: {
@@ -188,6 +192,12 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
           deleteSize={onDeleteSize}
           sizes={sizes}
         />
+        <UploadImageBox
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onChange={setPhotoFile}
+          imageFile={photoFile}
+        />
         <div className="mt-4 rounded-md sm:flex-shrink-0">
           <Button
             themeColour={themeColour}
@@ -198,7 +208,7 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
             size="XXL"
             type="submit"
           >
-            Update
+            Update Item
           </Button>
         </div>
       </form>

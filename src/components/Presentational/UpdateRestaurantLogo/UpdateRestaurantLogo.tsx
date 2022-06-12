@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import type { FC } from "react";
 import { BoxUploadImage, Button, Notification } from "@base";
-import { ItemImage } from "@presentational";
 import { useUploadPhoto, useViewport } from "@hooks";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { useUpdateRestaurantLogo } from "./UpdateRestaurantLogo.mutation";
 import { RESTAURANT_QUERY } from "@shared";
 import toast from "react-hot-toast";
+import { RestaurantLogo } from "../RestaurantLogo";
 
 interface Props {
   logo: string;
@@ -61,8 +61,8 @@ const UpdateRestaurantLogo: FC<Props> = ({ logo, themeColour, themeTint, id, res
   };
 
   const renderImage = () => {
-    if (images.length) return <img src={images[0].dataURL} />;
-    return <ItemImage photoUrl={logo} />;
+    if (images.length) return <img className="h-full" src={images[0].dataURL} />;
+    return <RestaurantLogo dimensions={100} restaurantSlug={restaurantSlug} />;
   };
 
   const renderActions = (onImageUpload: () => void, onImageUpdate: (index: number) => void) => {
@@ -73,7 +73,7 @@ const UpdateRestaurantLogo: FC<Props> = ({ logo, themeColour, themeTint, id, res
 
     if (images.length)
       return (
-        <div className="flex flex-wrap items-center justify-center">
+        <div className="mt-4 flex flex-wrap items-center justify-center">
           <Button
             isFullwidth={isMobile}
             disabled={loading || isLoading}
@@ -101,6 +101,24 @@ const UpdateRestaurantLogo: FC<Props> = ({ logo, themeColour, themeTint, id, res
         </div>
       );
 
+    if (logo) {
+      return (
+        <div className="mt-4 flex flex-wrap items-center justify-center">
+          <Button
+            isFullwidth={isMobile}
+            disabled={loading || isLoading}
+            colour="accent"
+            css="mr-2"
+            size="XL"
+            onClick={handlePhotoChange}
+            themeColour={themeColour}
+            themeTint={themeTint}
+          >
+            Change photo
+          </Button>
+        </div>
+      );
+    }
     return (
       <BoxUploadImage onChange={onImageUpload} themeColour={themeColour} themeTint={themeTint} />
     );
