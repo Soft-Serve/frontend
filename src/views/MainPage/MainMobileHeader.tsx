@@ -99,7 +99,11 @@ const MainMobileHeader: FC<Props> = ({
 
   const renderLogo = () => {
     if (!data?.currentUser || hasUser) {
-      return <RestaurantLogo restaurantSlug={restaurantSlug} dimensions={50} />;
+      return (
+        <Link className="flex" to={`/restaurants/${restaurantSlug}`}>
+          <RestaurantLogo restaurantSlug={restaurantSlug} dimensions={50} />
+        </Link>
+      );
     }
   };
 
