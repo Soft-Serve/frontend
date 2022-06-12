@@ -4,6 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/solid";
 import { MenusMobileNavigation, RestaurantLogo } from "@presentational";
 import { Button, ThemeFonts } from "@base";
+import { Link } from "react-router-dom";
 
 interface Props {
   isOpen: boolean;
@@ -71,14 +72,16 @@ const MenuSlideOver: FC<Props> = ({
               </div>
             </Transition.Child>
             <div className="h-full pt-5 pb-4">
-              <div className="flex flex-shrink-0 items-center px-4">
-                <RestaurantLogo
-                  restaurantSlug={restaurantSlug}
-                  dimensions={60}
-                  borderColor="black"
-                  borderWidth={1}
-                />
-              </div>
+              <Link className="flex" to={`/restaurants/${restaurantSlug}`}>
+                <div className="flex flex-shrink-0 items-center px-4">
+                  <RestaurantLogo
+                    restaurantSlug={restaurantSlug}
+                    dimensions={60}
+                    borderColor="black"
+                    borderWidth={1}
+                  />
+                </div>
+              </Link>
               <nav aria-label="Sidebar" className="mt-5">
                 <MenusMobileNavigation
                   menuID={menuID}

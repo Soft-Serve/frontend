@@ -16,7 +16,7 @@ import {
 } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import { Popover, Transition } from "@headlessui/react";
-import { FacebookSVG, FullLogoSVG, InstagramSVG, TwitterSVG } from "@svgs";
+import { LinkedInSVG, FullLogoSVG, InstagramSVG, TwitterSVG } from "@svgs";
 import DesktopImage from "./desktop.png";
 import bellaCiaoImage from "./bella_ciao_menu.png";
 import cafeMontyImage from "./cafe_monty_menu.png";
@@ -36,13 +36,13 @@ const navigation = {
   ],
   social: [
     {
-      name: "Facebook",
-      href: "#",
-      icon: FacebookSVG,
+      name: "Linkedin",
+      href: "https://www.linkedin.com/company/softserveapp/",
+      icon: LinkedInSVG,
     },
     {
       name: "Instagram",
-      href: "#",
+      href: "https://www.instagram.com/softserveapp/",
       icon: InstagramSVG,
     },
     {
