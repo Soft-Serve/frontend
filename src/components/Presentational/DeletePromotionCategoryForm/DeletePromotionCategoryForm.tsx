@@ -7,7 +7,6 @@ import {
   PromotionCategory,
   useDeletePromotionCatgegoryMutation,
 } from "./DeletePromotionCatgory.mutation";
-import { CategoryName } from "../CategoryName";
 import {
   PromotionCategoriesData,
   PROMOTIONS_CATEGORIES_QUERY,
@@ -79,7 +78,7 @@ const DeletePromotionCategoryForm: FC<Props> = ({
         <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
           Category name:{" "}
           <span className={`font-bold underline text-${themeColour}-${themeTint}`}>
-            <CategoryName categoryID={deletedPromotionCategory?.menu_category_id ?? 0} />
+            {deletedPromotionCategory?.menu_category_name}
           </span>
         </h3>
         <Button

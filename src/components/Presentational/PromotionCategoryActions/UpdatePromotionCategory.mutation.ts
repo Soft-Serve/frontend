@@ -15,6 +15,8 @@ export const UPDATE_PROMOTION_CATEGORY_MUTATION = gql`
       unit
       promotion_id
       menu_category_id
+      menu_category_name
+      menu_name
       __typename
     }
   }
@@ -26,6 +28,8 @@ interface PromotionCategory {
   unit: string;
   promotion_id: number;
   menu_category_id: number;
+  menu_category_name: string;
+  menu_name: string;
   __typename: string;
 }
 

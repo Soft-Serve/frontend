@@ -1,1 +1,0 @@
-export { CategoryName } from "./CategoryName";

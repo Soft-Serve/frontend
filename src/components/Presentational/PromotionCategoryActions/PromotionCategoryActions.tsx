@@ -5,9 +5,7 @@ import {
   PromotionCategory,
   PROMOTIONS_CATEGORIES_QUERY,
 } from "../PromotionCategories/PromotionCategories.query";
-import { Input, Dropdown, Button, Notification } from "@base";
-import { classnames } from "tailwindcss-classnames";
-import { CategoryName } from "@presentational";
+import { Input, Dropdown, Button, Notification, Card, CardContent } from "@base";
 import "./styles.css";
 import { useUpdatePromotionCatgegoryMutation } from "./UpdatePromotionCategory.mutation";
 import toast from "react-hot-toast";
@@ -121,42 +119,19 @@ const PromotionCategoryActions: FC<Props> = ({
       key={promoCategory.id}
       className={`wrap mb-2 flex flex-none flex-col rounded-md border-b-0 sm:mb-0 sm:table-row sm:border-b-2 border-${themeColour}-${themeTint} font-Quicksand`}
     >
-      <td className={`border-2 border-${themeColour}-${themeTint} p-3 font-bold`}>
-        <CategoryName categoryID={promoCategory.menu_category_id} />
+      <td className={`p-3`}>
+        <p>
+          <strong>Menu:</strong> {promoCategory.menu_name}
+        </p>
+        <p className={`text-${themeColour}-${themeTint}`}>
+          {promoCategory.unit === "percentage" &&
+            `${promoCategory.discount}% off ${promoCategory.menu_category_name}`}
+          {promoCategory.unit === "amount" &&
+            `$${promoCategory.discount} off ${promoCategory.menu_category_name}`}
+        </p>
       </td>
-      <td className={`border-2 p-3 border-${themeColour}-${themeTint}`}>
-        <fieldset className="flex items-end justify-start font-Quicksand">
-          <Input
-            css={classnames("rounded-r-none", "border-r-0", "-mr-8", "w-24", "sm:py-2", "py-1.5")}
-            onChange={e => handleChange(e)}
-            value={input.discount}
-            themeColour={themeColour}
-            themeTint={themeTint}
-            placeholder="10.00"
-            min={0}
-            step={0.1}
-            required
-            type="number"
-            name="discount"
-            id="discount"
-          />
-
-          <Dropdown
-            showCheckmark={false}
-            themeColour={themeColour}
-            themeTint={themeTint}
-            required
-            defaultValue={units[input?.unit]}
-            value={{ name: units[input?.unit] }}
-            onChange={(discount: { name: string; id: number; unit: string }) =>
-              onDropdownChange(discount.unit)
-            }
-            data={unitsArray}
-          />
-        </fieldset>
-      </td>
-      <td className={`cursor-pointer border-2 p-3  border-${themeColour}-${themeTint}`}>
-        <div className="flex w-full">
+      <td className={`p-3`}>
+        <div className="flex">
           <Button
             onClick={() => handleDeleteCategoryPromotion(promoCategory)}
             css="mr-2"
@@ -180,6 +155,116 @@ const PromotionCategoryActions: FC<Props> = ({
       </td>
     </tr>
   );
+
+  // return (
+  //   <tr
+  //     key={promoCategory.id}
+  //     className={`wrap mb-2 flex flex-none flex-col rounded-md border-b-0 sm:mb-0 sm:table-row sm:border-b-2 border-${themeColour}-${themeTint} font-Quicksand`}
+  //   >
+  //     <td className={`border-2 border-${themeColour}-${themeTint} p-3`}>
+  //       <p>
+  //         <strong>Menu:</strong> {promoCategory.menu_name}
+  //       </p>
+  //       <p>
+  //         <strong>Category:</strong> {promoCategory.menu_category_name}
+  //       </p>
+  //     </td>
+  //     {/* <td className={`border-2 border-${themeColour}-${themeTint} p-3 font-bold`}>
+
+  //     </td> */}
+  //     <td className={`border-2 p-3 border-${themeColour}-${themeTint}`}>
+  //       {promoCategory.unit === "percentage" && `${promoCategory.discount}% off`}
+  //       {promoCategory.unit === "amount" && `$${promoCategory.discount} off`}
+  //     </td>
+  //     <td className={`cursor-pointer border-2 p-3  border-${themeColour}-${themeTint}`}>
+  //       <div className="flex w-full">
+  //         <Button
+  //           onClick={() => handleDeleteCategoryPromotion(promoCategory)}
+  //           css="mr-2"
+  //           isFullwidth
+  //           themeColour={themeColour}
+  //           themeTint={themeTint}
+  //         >
+  //           Delete
+  //         </Button>
+  //         <Button
+  //           loading={loading}
+  //           onClick={() => updatePromotionCategory()}
+  //           disabled={isUpdated}
+  //           isFullwidth
+  //           themeColour={themeColour}
+  //           themeTint={themeTint}
+  //         >
+  //           Update
+  //         </Button>
+  //       </div>
+  //     </td>
+  //   </tr>
+  // );
+  // return (
+  // <tr
+  //   key={promoCategory.id}
+  //   className={`wrap mb-2 flex flex-none flex-col rounded-md border-b-0 sm:mb-0 sm:table-row sm:border-b-2 border-${themeColour}-${themeTint} font-Quicksand`}
+  // >
+  //   <td className={`border-2 border-${themeColour}-${themeTint} p-3 font-bold`}>
+  //     <CategoryName categoryID={promoCategory.menu_category_id} />
+  //   </td>
+  //   <td className={`border-2 p-3 border-${themeColour}-${themeTint}`}>
+  //     <fieldset className="flex items-end justify-start font-Quicksand">
+  //       <Input
+  //         css={classnames("rounded-r-none", "border-r-0", "-mr-8", "w-24", "sm:py-2", "py-1.5")}
+  //         onChange={e => handleChange(e)}
+  //         value={input.discount}
+  //         themeColour={themeColour}
+  //         themeTint={themeTint}
+  //         placeholder="10.00"
+  //         min={0}
+  //         step={0.1}
+  //         required
+  //         type="number"
+  //         name="discount"
+  //         id="discount"
+  //       />
+
+  //       <Dropdown
+  //         showCheckmark={false}
+  //         themeColour={themeColour}
+  //         themeTint={themeTint}
+  //         required
+  //         defaultValue={units[input?.unit]}
+  //         value={{ name: units[input?.unit] }}
+  //         onChange={(discount: { name: string; id: number; unit: string }) =>
+  //           onDropdownChange(discount.unit)
+  //         }
+  //         data={unitsArray}
+  //       />
+  //     </fieldset>
+  //   </td>
+  //   <td className={`cursor-pointer border-2 p-3  border-${themeColour}-${themeTint}`}>
+  //     <div className="flex w-full">
+  //       <Button
+  //         onClick={() => handleDeleteCategoryPromotion(promoCategory)}
+  //         css="mr-2"
+  //         isFullwidth
+  //         themeColour={themeColour}
+  //         themeTint={themeTint}
+  //       >
+  //         Delete
+  //       </Button>
+  //       <Button
+  //         loading={loading}
+  //         onClick={() => updatePromotionCategory()}
+  //         disabled={isUpdated}
+  //         isFullwidth
+  //         themeColour={themeColour}
+  //         themeTint={themeTint}
+  //       >
+  //         Update
+  //       </Button>
+  //     </div>
+  //   </td>
+  // </tr>
+  // );
 };
 
 export { PromotionCategoryActions };
