@@ -12,6 +12,8 @@ const PROMOTIONS_CATEGORIES_QUERY = gql`
       promotion_id
       menu_category_id
       __typename
+      menu_name
+      menu_category_name
     }
   }
 `;
@@ -22,6 +24,8 @@ interface PromotionCategory {
   unit: string;
   promotion_id: number;
   menu_category_id: number;
+  menu_category_name: string;
+  menu_name: string;
   __typename: string;
 }
 

@@ -30,13 +30,10 @@ const PromotionCategories: FC<Props> = ({ themeColour, themeTint, promotionID })
   const renderTitle = () => {
     if (data?.promotionCategories?.length)
       return (
-        <h3 className="flex items-center font-Quicksand text-lg font-bold">Running promotions:</h3>
+        <h3 className="flex items-center font-Quicksand text-lg font-bold">
+          Promotion categories:
+        </h3>
       );
-    return (
-      <h3 className="flex items-center font-Quicksand text-lg font-bold">
-        No categories added to promotion
-      </h3>
-    );
   };
 
   return (
@@ -51,7 +48,12 @@ const PromotionCategories: FC<Props> = ({ themeColour, themeTint, promotionID })
         />
       </Modal>
       {renderTitle()}
-      <table className="flex-no-wrap my-5 flex w-full flex-row overflow-visible rounded-md font-Quicksand sm:bg-white">
+      <table className="flex-no-wrap my-5 flex w-full table-auto flex-row overflow-visible rounded-md font-Quicksand sm:bg-white">
+        {/* <thead>
+          <th className={`border-2 border-${themeColour}-${themeTint} p-3 font-bold`}>Menu</th>
+          <th className={`border-2 border-${themeColour}-${themeTint} p-3 font-bold`}>Category</th>
+          <th className={`border-2 border-${themeColour}-${themeTint} p-3 font-bold`}>Discount</th>
+        </thead> */}
         <tbody className="flex-1 sm:flex-none">
           {data?.promotionCategories?.map(promoCat => (
             <PromotionCategoryActions

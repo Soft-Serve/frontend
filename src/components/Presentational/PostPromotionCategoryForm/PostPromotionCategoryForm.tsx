@@ -187,7 +187,7 @@ const PostPromotionCategoryForm: FC<Props> = ({
             <Input
               onChange={e => setAmount(e.target.value)}
               value={amount}
-              css={classnames("rounded-r-none", "border-r-0", "-mr-2", "w-28", "sm:py-2", "py-1.5")}
+              css={classnames("mr-4", "w-28", "sm:py-2", "py-1.5")}
               labelText="Amount"
               themeColour={themeColour}
               themeTint={themeTint}
