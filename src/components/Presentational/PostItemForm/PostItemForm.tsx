@@ -23,6 +23,7 @@ import {
   isNameOnlyNumbers,
   isNameInputValid,
   hasBeginningWhiteSpace,
+  filterCategories,
 } from "@utility";
 import { usePostItemMutation } from "./PostItem.mutation";
 import {
@@ -56,12 +57,9 @@ const PostItemForm: FC<Props> = ({
     },
   });
 
-  const filteredCategories =
-    categoryData?.categories && categoryData.categories.length > 1
-      ? categoryData.categories.filter(cat => cat.name !== "No category")
-      : categoryData?.categories ?? [];
-
-  const [activeCategory, setActiveCategory] = useState(() => filteredCategories[0]);
+  const [activeCategory, setActiveCategory] = useState(
+    () => filterCategories(categoryData?.categories)?.[0]
+  );
 
   const size: ItemSize = {
     price: "",
@@ -239,7 +237,7 @@ const PostItemForm: FC<Props> = ({
           defaultValue="Select category"
           value={activeCategory}
           onChange={(cat: Category) => handleCategoryChange(cat)}
-          data={filteredCategories}
+          data={filterCategories(categoryData?.categories)}
         />
         <div className="mt-4">
           <Input

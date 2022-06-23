@@ -4,6 +4,7 @@ import { Card, CardContent, List, ListItem, SkeletonList } from "@base";
 import { Category, Menu } from "@shared";
 import { CategoryDropdown } from "./CategoryDropdown";
 import { classnames } from "tailwindcss-classnames";
+import { filterCategories } from "src/utility";
 
 enum ModalForms {
   UpdateCategory = "updateCategory",
@@ -27,24 +28,22 @@ const CategoryList: FC<Props> = ({ categories, handleModal, loading, themeColour
     <Card css={classnames("mt-4", "overflow-visible")}>
       <CardContent>
         <List>
-          {categories
-            ?.filter(category => category.name !== "No category")
-            ?.map(category => (
-              <ListItem key={category.id}>
-                <div className="flex flex-1 items-end">
-                  <span className="font-Quicksand font-bold">{category.name}</span>
-                </div>
+          {filterCategories(categories)?.map(category => (
+            <ListItem key={category.id}>
+              <div className="flex flex-1 items-end">
+                <span className="font-Quicksand font-bold">{category.name}</span>
+              </div>
 
-                <div className="ml-4 flex flex-col sm:flex-row">
-                  <CategoryDropdown
-                    themeColour={themeColour}
-                    themeTint={themeTint}
-                    handleDelete={() => handleModal(ModalForms.DeleteCategory, category)}
-                    handleUpdate={() => handleModal(ModalForms.UpdateCategory, category)}
-                  />
-                </div>
-              </ListItem>
-            ))}
+              <div className="ml-4 flex flex-col sm:flex-row">
+                <CategoryDropdown
+                  themeColour={themeColour}
+                  themeTint={themeTint}
+                  handleDelete={() => handleModal(ModalForms.DeleteCategory, category)}
+                  handleUpdate={() => handleModal(ModalForms.UpdateCategory, category)}
+                />
+              </div>
+            </ListItem>
+          ))}
         </List>
       </CardContent>
     </Card>

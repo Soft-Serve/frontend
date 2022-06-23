@@ -16,6 +16,7 @@ import type { Onboarding } from "./RestaurantOnboarding.query";
 import { useParams } from "react-router-dom";
 import { User } from "src/shared/Users.query";
 import { Theme } from "src/shared/RestaurantTheme.query";
+import { filterCategories } from "src/utility";
 
 type Param = {
   id: string;
@@ -59,11 +60,9 @@ const Restaurant: FC<Props> = ({
       menuID,
     },
     skip: !menuID,
-    onCompleted: completedData =>
-      setCategory(completedData?.categories?.filter(cat => cat.name !== "No category")?.[0]),
+    onCompleted: completedData => setCategory(filterCategories(completedData?.categories)?.[0]),
   });
 
-  const categories = categoryData?.categories?.filter(cat => cat.name !== "No category") ?? [];
   const isUserOnboarded = onboarding?.has_items || onboarding?.has_styles;
 
   const renderItems = () => {
@@ -111,7 +110,7 @@ const Restaurant: FC<Props> = ({
               />
             </div>
             <CategoriesContainer
-              categories={categories}
+              categories={filterCategories(categoryData?.categories) ?? []}
               isCategoriesLoading={categoryLoading}
               category={category}
               menuID={menuID}
@@ -121,7 +120,7 @@ const Restaurant: FC<Props> = ({
               themeTint={theme?.tint || 400}
             />
             <MobileSubHeader
-              categories={categories}
+              categories={filterCategories(categoryData?.categories) ?? []}
               isCategoriesLoading={categoryLoading}
               menuID={menuID}
               category={category}

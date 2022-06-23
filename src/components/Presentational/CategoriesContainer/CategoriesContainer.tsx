@@ -23,10 +23,6 @@ const CategoriesContainer: FC<Props> = ({
   setCategory,
   category,
 }) => {
-  if (categories.length < 1) {
-    return null;
-  }
-
   return (
     <div className="hidden w-full flex-wrap lg:flex">
       <div className="mt-4 mb-2 flex items-center">

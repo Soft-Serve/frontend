@@ -23,3 +23,4 @@ export { generateThemeColours, generateThemeAccentColours } from "./generateThem
 export { useGetParams } from "./useGetParams";
 
 export { capatalize } from "./capatalize";
+export { filterCategories } from "./filterCategories";

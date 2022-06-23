@@ -17,7 +17,7 @@ import {
 } from "@base";
 import { PlusCircleIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import { AddDietaryForm, DeleteItemForm, PostItemForm, UpdateItemForm } from "@presentational";
-import { useGetParams } from "@utility";
+import { filterCategories, useGetParams } from "@utility";
 import { CategoryItems } from "./CategoryItems";
 import { SettingsHeader } from "../SettingsHeader";
 import { SearchBar } from "./SearchBar";
@@ -163,16 +163,18 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
     setActiveMenu(menu);
   };
 
+  const hasCategory = filterCategories(categoryData?.categories)?.length;
+
   const renderSearchBar = () => {
-    if (!!categoryData?.categories?.length)
-      return (
-        <SearchBar
-          themeColour={themeColour}
-          themeTint={themeTint}
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-        />
-      );
+    if (!hasCategory) return null;
+    return (
+      <SearchBar
+        themeColour={themeColour}
+        themeTint={themeTint}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
+    );
   };
 
   const renderMenusTabs = () => {
@@ -204,8 +206,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
 
   const renderCTA = () => {
     if (loading) return null;
-
-    if (categoryData?.categories?.length && categoryData?.categories?.length === 1) {
+    if (!hasCategory) {
       return (
         <div className="mt-4">
           <Alert type="warning">
@@ -229,7 +230,7 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
           <div className="mb-4 flex w-full items-center justify-between">
             <SettingsHeader>Items</SettingsHeader>
             <Button
-              disabled={!!categoryData?.categories?.length && categoryData?.categories?.length < 2}
+              disabled={!hasCategory}
               themeColour={themeColour}
               themeTint={themeTint}
               onClick={handlePostItem}

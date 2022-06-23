@@ -98,7 +98,6 @@ const PromotionCard: FC<Props> = ({
             promotionID={promo.id}
           />
           <PostPromotionCategoryForm
-            promoName={promo.name}
             promotionID={promo.id}
             restaurantSlug={restaurantSlug}
             themeColour={themeColour}

@@ -34,16 +34,12 @@ const FloatingBanner: FC<Props> = ({ themeColour, themeFont, themeTint, children
               </div>
               <div className="order-2 flex-initial flex-shrink-0 sm:order-3 sm:ml-2">
                 <Button
-                  colour="naked"
                   onClick={() => setIsVisible(false)}
-                  themeTint={themeTint}
+                  themeTint={themeTint === 900 ? themeTint : themeTint + 100}
                   themeColour={themeColour}
                 >
                   <span className="sr-only">Dismiss</span>
-                  <XIcon
-                    className={`h-6 w-6 text-${themeColour}-${themeTint}`}
-                    aria-hidden="true"
-                  />
+                  <XIcon className={`h-6 w-6 text-white`} aria-hidden="true" />
                 </Button>
               </div>
             </div>

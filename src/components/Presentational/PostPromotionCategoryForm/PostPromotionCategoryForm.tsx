@@ -10,9 +10,9 @@ import { PROMOTIONS_CATEGORIES_QUERY } from "../PromotionCategories/PromotionCat
 import toast from "react-hot-toast";
 import { useViewport } from "src/hooks";
 import { Link } from "react-router-dom";
+import { filterCategories } from "@utility";
 
 interface Props {
-  promoName: string;
   themeColour: string;
   themeTint: number;
   restaurantSlug: string;
@@ -33,7 +33,6 @@ const unitsArray = [
 ];
 
 const PostPromotionCategoryForm: FC<Props> = ({
-  promoName,
   themeColour,
   themeTint,
   restaurantSlug,
@@ -70,21 +69,18 @@ const PostPromotionCategoryForm: FC<Props> = ({
     onCompleted: completedData => setActiveMenu(completedData?.menus?.[0]),
   });
 
-  const { data: categoriesData } = useCategoriesQuery({
+  const { data: categoriesData, loading: categoriesLoading } = useCategoriesQuery({
     fetchPolicy: "cache-and-network",
     variables: {
       menuID: activeMenu?.id || 0,
     },
     skip: !activeMenu?.id,
     onCompleted: completedData => {
-      setActiveCategory(completedData?.categories?.[0]);
+      setActiveCategory(filterCategories(completedData?.categories)?.[0]);
     },
   });
 
-  const filteredCategories =
-    categoriesData?.categories && categoriesData.categories.length > 1
-      ? categoriesData.categories.filter(cat => cat.name !== "No category")
-      : categoriesData?.categories ?? [];
+  const categories = filterCategories(categoriesData?.categories);
 
   const handleMenuChange = (menu: Menu) => {
     setActiveMenu(menu);
@@ -130,7 +126,8 @@ const PostPromotionCategoryForm: FC<Props> = ({
   };
 
   const renderDropdown = () => {
-    if (filteredCategories.length)
+    if (categoriesLoading) return null;
+    if (categories?.length)
       return (
         <div className="mr-4">
           <Dropdown
@@ -141,39 +138,77 @@ const PostPromotionCategoryForm: FC<Props> = ({
             defaultValue="Select category"
             value={activeCategory}
             onChange={(cat: Category) => setActiveCategory(cat)}
-            data={filteredCategories}
+            data={categories}
           />
         </div>
       );
-  };
-
-  const isMenuOrCategoryPresent =
-    !!menusData?.menus?.length &&
-    !!categoriesData?.categories.length &&
-    categoriesData?.categories.length >= 2;
-
-  if (!isMenuOrCategoryPresent) {
     return (
       <Alert type="warning">
         <Link className="flex" to={`/restaurants/${restaurantSlug}/settings/categories`}>
-          Create a new Category first before creating a new item
+          Create a new Category first
           <ChevronRightIcon className="h-5 w-5 " />
         </Link>
       </Alert>
     );
-  }
+  };
+
+  const renderInput = () => {
+    if (categoriesLoading) return null;
+    if (categories?.length) {
+      return (
+        <div className="flex items-end">
+          <Input
+            onChange={e => setAmount(e.target.value)}
+            value={amount}
+            css={classnames("mr-4", "w-28", "sm:py-2", "py-1.5")}
+            labelText="Amount"
+            themeColour={themeColour}
+            themeTint={themeTint}
+            placeholder="10.00"
+            min={0}
+            step={0.1}
+            required
+            type="number"
+            name="amount"
+            id="price"
+          />
+          <Dropdown
+            showCheckmark={false}
+            themeColour={themeColour}
+            themeTint={themeTint}
+            required
+            label="Unit"
+            value={unit}
+            onChange={(value: { name: string; unit: string; id: number }) => setUnit(value)}
+            data={unitsArray}
+          />
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <Disclose
       buttonContent={open =>
         open ? (
-          <Button size="XL" themeColour={themeColour} themeTint={themeTint}>
-            Add category to {promoName}
+          <Button
+            isFullwidth={width < 400}
+            size="XL"
+            themeColour={themeColour}
+            themeTint={themeTint}
+          >
+            Add category
             <ChevronUpIcon className="h-5 w-5 text-white" />
           </Button>
         ) : (
-          <Button size="XL" themeColour={themeColour} themeTint={themeTint}>
-            Add category to {promoName}
+          <Button
+            isFullwidth={width < 400}
+            size="XL"
+            themeColour={themeColour}
+            themeTint={themeTint}
+          >
+            Add category
             <ChevronDownIcon className="h-5 w-5 text-white" />
           </Button>
         )
@@ -183,33 +218,7 @@ const PostPromotionCategoryForm: FC<Props> = ({
       <form className="my-4 flex flex-wrap items-end justify-between">
         <fieldset className="mr-4 flex flex-auto flex-wrap items-end justify-start">
           {renderDropdown()}
-          <div className="flex items-end">
-            <Input
-              onChange={e => setAmount(e.target.value)}
-              value={amount}
-              css={classnames("mr-4", "w-28", "sm:py-2", "py-1.5")}
-              labelText="Amount"
-              themeColour={themeColour}
-              themeTint={themeTint}
-              placeholder="10.00"
-              min={0}
-              step={0.1}
-              required
-              type="number"
-              name="amount"
-              id="price"
-            />
-            <Dropdown
-              showCheckmark={false}
-              themeColour={themeColour}
-              themeTint={themeTint}
-              required
-              label="Unit"
-              value={unit}
-              onChange={(value: { name: string; unit: string; id: number }) => setUnit(value)}
-              data={unitsArray}
-            />
-          </div>
+          {renderInput()}
         </fieldset>
         <div className="mt-4 flex w-full flex-1 justify-end">
           <Button

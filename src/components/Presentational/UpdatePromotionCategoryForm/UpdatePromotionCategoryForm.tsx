@@ -2,6 +2,7 @@ import { Input, Dropdown, Button } from "@base";
 import { XIcon } from "@heroicons/react/solid";
 import type { ChangeEvent, FC, FormEvent } from "react";
 import { useState } from "react";
+import { useViewport } from "src/hooks";
 import { classnames } from "tailwindcss-classnames";
 import {
   PromotionCategoriesData,
@@ -43,6 +44,7 @@ const UpdatePromotionCategoryFrom: FC<Props> = ({
   promotionID,
   onCompleted,
 }) => {
+  const { width } = useViewport();
   const [input, setInput] = useState<MappablePromo>({
     id: promoCat?.id ?? 0,
     discount: promoCat?.discount ?? 0,
@@ -78,10 +80,6 @@ const UpdatePromotionCategoryFrom: FC<Props> = ({
   };
 
   const [updatePromotionCategory, { loading }] = useUpdatePromotionCatgegoryMutation({
-    variables: {
-      input,
-      promotionID,
-    },
     onCompleted: () => {
       onCompleted?.(false);
     },
@@ -113,7 +111,12 @@ const UpdatePromotionCategoryFrom: FC<Props> = ({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updatePromotionCategory();
+    updatePromotionCategory({
+      variables: {
+        input,
+        promotionID,
+      },
+    });
   };
 
   return (
@@ -164,6 +167,7 @@ const UpdatePromotionCategoryFrom: FC<Props> = ({
       </fieldset>
       <div className="mt-4 flex w-full flex-1 justify-end">
         <Button
+          isFullwidth={width < 402}
           loading={loading}
           type="submit"
           disabled={!isPromoUpdated()}
