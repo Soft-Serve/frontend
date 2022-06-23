@@ -145,7 +145,7 @@ const PostPromotionCategoryForm: FC<Props> = ({
     return (
       <Alert type="warning">
         <Link className="flex" to={`/restaurants/${restaurantSlug}/settings/categories`}>
-          Create a new Category first
+          Create a Category first
           <ChevronRightIcon className="h-5 w-5 " />
         </Link>
       </Alert>

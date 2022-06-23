@@ -1,7 +1,13 @@
 import React from "react";
 import type { FC } from "react";
 import { Button } from "@base";
-import { DIETARIES_QUERY, Item, useAllergiesQuery, useDietaryQuery } from "@shared";
+import {
+  ALLERGIES_QUERY,
+  DIETARIES_QUERY,
+  Item,
+  useAllergiesQuery,
+  useDietaryQuery,
+} from "@shared";
 import { usePostDietaryMutation } from "./PostDietary.mutation";
 import { useDeleteDietaryMutation } from "./DeleteDietary.mutation";
 import { LifeStyles } from "src/contexts";
@@ -47,6 +53,13 @@ const AddDietaryForm: FC<Props> = ({
           itemID: item?.id || 0,
         },
       },
+      {
+        query: ALLERGIES_QUERY,
+        variables: {
+          restaurantSlug,
+          active: true,
+        },
+      },
     ],
   });
 
@@ -57,6 +70,13 @@ const AddDietaryForm: FC<Props> = ({
         query: DIETARIES_QUERY,
         variables: {
           itemID: item?.id || 0,
+        },
+      },
+      {
+        query: ALLERGIES_QUERY,
+        variables: {
+          restaurantSlug,
+          active: true,
         },
       },
     ],
