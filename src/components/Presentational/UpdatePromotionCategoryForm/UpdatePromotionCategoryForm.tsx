@@ -165,7 +165,7 @@ const UpdatePromotionCategoryFrom: FC<Props> = ({
           />
         </div>
       </fieldset>
-      <div className="mt-4 flex w-full flex-1 justify-end">
+      <div className="mt-8 flex w-full flex-1 justify-end">
         <Button
           isFullwidth={width < 402}
           loading={loading}

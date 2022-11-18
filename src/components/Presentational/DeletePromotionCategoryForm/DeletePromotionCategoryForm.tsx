@@ -11,6 +11,7 @@ import {
   PromotionCategoriesData,
   PROMOTIONS_CATEGORIES_QUERY,
 } from "../PromotionCategories/PromotionCategories.query";
+import { Column, Columns } from "@interface";
 
 interface Props {
   promotionID: number;
@@ -93,8 +94,8 @@ const DeletePromotionCategoryForm: FC<Props> = ({
       <p className="my-8 font-Quicksand text-base text-gray-900 underline">
         all promotion prices within this category will be removed!
       </p>
-      <div className="mt-4 flex items-center">
-        <div className="mr-2 w-full">
+      <Columns isMarginless>
+        <Column>
           <Button
             themeColour={themeColour}
             themeTint={themeTint}
@@ -106,8 +107,8 @@ const DeletePromotionCategoryForm: FC<Props> = ({
           >
             Cancel
           </Button>
-        </div>
-        <div className="w-full">
+        </Column>
+        <Column>
           <Button
             loading={loading}
             themeColour={themeColour}
@@ -119,8 +120,8 @@ const DeletePromotionCategoryForm: FC<Props> = ({
           >
             Delete
           </Button>
-        </div>
-      </div>
+        </Column>
+      </Columns>
     </form>
   );
 };

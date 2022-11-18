@@ -10,7 +10,7 @@ import { filterCategories, useGetParams } from "@utility";
 import { CategoryItems } from "./CategoryItems";
 import { SettingsHeader } from "../SettingsHeader";
 import { SearchBar } from "./SearchBar";
-import { Dialog, Box, Column, Columns, Container } from "@interface";
+import { Dialog, Box, Column, Columns } from "@interface";
 
 enum ModalForms {
   PostItem = "postItem",
@@ -246,23 +246,22 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
       {renderSearchBar()}
       {renderCTA()}
       {renderMenusTabs()}
-      <Container containerWidth="full">
-        <Columns className="!flex-col">
-          {filteredCategories(categoryData?.categories)?.map(category => (
-            <CategoryItems
-              key={category.id}
-              themeFont={themeFont}
-              themeColour={themeColour}
-              themeTint={themeTint}
-              handleAddDietary={handleAddDietary}
-              handleUpdateItem={handleUpdateItem}
-              searchValue={searchValue}
-              handleDeleteItem={handleDeleteItem}
-              categoryID={category.id}
-            />
-          ))}
-        </Columns>
-      </Container>
+
+      <Columns isMarginless className="!flex-col">
+        {filteredCategories(categoryData?.categories)?.map(category => (
+          <CategoryItems
+            key={category.id}
+            themeFont={themeFont}
+            themeColour={themeColour}
+            themeTint={themeTint}
+            handleAddDietary={handleAddDietary}
+            handleUpdateItem={handleUpdateItem}
+            searchValue={searchValue}
+            handleDeleteItem={handleDeleteItem}
+            categoryID={category.id}
+          />
+        ))}
+      </Columns>
     </TabWrapper>
   );
 };

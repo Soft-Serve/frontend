@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import type { FC } from "react";
-import { Modal } from "@base";
+
 import { PromotionCategory, usePromotionCategoriesQuery } from "./PromotionCategories.query";
 import {
   DeletePromotionCategoryForm,
   PromotionCategoryActions,
   UpdatePromotionCategoryFrom,
 } from "@presentational";
-
+import { Dialog } from "@interface";
 interface Props {
   themeColour: string;
   themeTint: number;
@@ -95,9 +95,9 @@ const PromotionCategories: FC<Props> = ({ themeColour, themeTint, promotionID })
 
   return (
     <>
-      <Modal onClose={setIsOpen} isOpen={isOpen}>
+      <Dialog themeColour={themeColour} themeTint={themeTint} onClose={setIsOpen} isOpen={isOpen}>
         {forms[action]}
-      </Modal>
+      </Dialog>
       {renderTitle()}
       <table className="flex-no-wrap my-5 flex w-full table-auto flex-row overflow-visible rounded-md font-Quicksand sm:bg-white">
         <tbody className="flex-1 sm:flex-none">

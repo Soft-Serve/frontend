@@ -1,6 +1,6 @@
 import { classnames } from "tailwindcss-classnames";
 
-export const root = classnames("mx-auto", "w-full", "overflow-auto");
+export const root = classnames("mx-auto", "w-full", "overflow-y-auto", "overflow-x-hidden");
 export const container = classnames("w-full");
 export const extraSmall = classnames("max-w-4xl");
 export const small = classnames("max-w-5xl");
