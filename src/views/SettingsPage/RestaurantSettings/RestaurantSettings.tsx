@@ -2,8 +2,9 @@ import React from "react";
 import type { FC } from "react";
 import { UpdateRestaurantForm } from "@presentational";
 import { useRestaurantQuery } from "@shared";
-import { Card, CardContent, TabWrapper, ThemeFonts } from "@base";
+import { TabWrapper, ThemeFonts } from "@base";
 import { SettingsHeader } from "../SettingsHeader";
+import { Box, Column, Columns } from "@interface";
 
 interface Props {
   themeColour: string;
@@ -32,24 +33,22 @@ const RestaurantSettings: FC<Props> = ({
   if (data?.restaurant) {
     return (
       <TabWrapper>
-        <Card css="mb-4">
-          <CardContent>
-            <SettingsHeader>Restaurant</SettingsHeader>
-          </CardContent>
-        </Card>
-        <div className="mt-10 w-full">
-          <div className="mt-5 md:col-span-2 md:mt-0">
-            <UpdateRestaurantForm
-              themeFont={themeFont}
-              restaurantSlug={restaurantSlug}
-              themeColour={themeColour}
-              themeTint={themeTint}
-              backgroundColour={backgroundColour}
-              backgroundTint={backgroundTint}
-              restaurant={data.restaurant}
-            />
-          </div>
-        </div>
+        <Box>
+          <Columns isMarginless>
+            <Column columnWidth="six" className="justify-center">
+              <SettingsHeader>Restaurant</SettingsHeader>
+            </Column>
+          </Columns>
+        </Box>
+        <UpdateRestaurantForm
+          themeFont={themeFont}
+          restaurantSlug={restaurantSlug}
+          themeColour={themeColour}
+          themeTint={themeTint}
+          backgroundColour={backgroundColour}
+          backgroundTint={backgroundTint}
+          restaurant={data.restaurant}
+        />
       </TabWrapper>
     );
   }

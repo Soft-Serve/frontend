@@ -5,7 +5,7 @@ interface Props {
   children: React.ReactNode;
 }
 const TabWrapper: FC<Props> = ({ children }) => {
-  return <div className="mb-4 h-full w-full flex-1">{children}</div>;
+  return <div className="mb-2 h-full w-full flex-1 ">{children}</div>;
 };
 
 export { TabWrapper };

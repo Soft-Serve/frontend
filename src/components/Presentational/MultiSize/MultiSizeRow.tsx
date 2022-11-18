@@ -71,7 +71,7 @@ const MultiSizeRow: FC<Props> = ({
     <>
       <div className="flex w-full items-center justify-between p-2">
         {renderSizeInput()}
-        <div className={classnames("mx-2", { ["w-full"]: numberOfSizes === 1 })}>
+        <div className={classnames("mx-2", { ["max-w-xs"]: numberOfSizes === 1 })}>
           <Input
             themeColour={themeColour}
             themeTint={themeTint}

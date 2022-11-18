@@ -23,7 +23,7 @@ const AllergyButton: FC<Props> = ({
 }) => {
   return (
     <div
-      className={`my-2 flex w-full items-center justify-between whitespace-nowrap rounded-md border-2 bg-white p-2 border-${themeColour}-${themeTint}`}
+      className={`flex w-full items-center justify-between whitespace-nowrap rounded-md border-2 bg-white p-2 shadow-md border-${themeColour}-${themeTint}`}
       onKeyDown={() => handleClick(allergy)}
       role="button"
       onClick={() => handleClick(allergy)}

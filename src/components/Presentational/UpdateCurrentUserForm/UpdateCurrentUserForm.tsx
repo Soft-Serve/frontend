@@ -7,6 +7,7 @@ import { CURRENT_USER_QUERY } from "@shared";
 import { useViewport } from "@hooks";
 import { isNameOnlyNumbers, isNameValid } from "@utility";
 import { useUpdateCurrentUser } from "./UpdateCurrentUser.mutation";
+import { Box } from "@interface";
 
 interface Props {
   firstName: string;
@@ -106,55 +107,53 @@ const UpdateCurrentUserForm: FC<Props> = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="overflow-hidden shadow sm:rounded-md">
-        <div className="bg-white px-4 py-5 sm:p-6">
-          <div className="grid grid-cols-6 gap-6">
-            <div className="col-span-6 sm:col-span-3">
-              <Input
-                themeColour={themeColour}
-                themeTint={themeTint}
-                labelText="First name"
-                errors={[nameErrors(state.firstName, isFirstNameDirty)]}
-                onBlur={() => setIsFirstNameDirty(true)}
-                value={state.firstName || ""}
-                onChange={handleChange}
-                type="text"
-                name="firstName"
-                id="firstName"
-                autoComplete="given-name"
-              />
-            </div>
+      <Box>
+        <div className="grid grid-cols-6 gap-6">
+          <div className="col-span-6 sm:col-span-3">
+            <Input
+              themeColour={themeColour}
+              themeTint={themeTint}
+              labelText="First name"
+              errors={[nameErrors(state.firstName, isFirstNameDirty)]}
+              onBlur={() => setIsFirstNameDirty(true)}
+              value={state.firstName || ""}
+              onChange={handleChange}
+              type="text"
+              name="firstName"
+              id="firstName"
+              autoComplete="given-name"
+            />
+          </div>
 
-            <div className="col-span-6 sm:col-span-3">
-              <Input
-                themeColour={themeColour}
-                themeTint={themeTint}
-                labelText="Last name"
-                errors={[nameErrors(state.lastName, isLastNameDirty)]}
-                onBlur={() => setIsLastNameDirty(true)}
-                value={state.lastName || ""}
-                onChange={handleChange}
-                type="text"
-                name="lastName"
-                id="lastName"
-                autoComplete="family-name"
-              />
-            </div>
+          <div className="col-span-6 sm:col-span-3">
+            <Input
+              themeColour={themeColour}
+              themeTint={themeTint}
+              labelText="Last name"
+              errors={[nameErrors(state.lastName, isLastNameDirty)]}
+              onBlur={() => setIsLastNameDirty(true)}
+              value={state.lastName || ""}
+              onChange={handleChange}
+              type="text"
+              name="lastName"
+              id="lastName"
+              autoComplete="family-name"
+            />
+          </div>
 
-            <div className="col-span-10 sm:col-span-5">
-              <Input
-                disabled
-                themeColour={themeColour}
-                themeTint={themeTint}
-                labelText="Email"
-                readOnly
-                value={state.email}
-                type="text"
-                name="email"
-                id="email"
-                autoComplete="email"
-              />
-            </div>
+          <div className="col-span-10 sm:col-span-5">
+            <Input
+              disabled
+              themeColour={themeColour}
+              themeTint={themeTint}
+              labelText="Email"
+              readOnly
+              value={state.email}
+              type="text"
+              name="email"
+              id="email"
+              autoComplete="email"
+            />
           </div>
         </div>
         {isCurrentUserUpdated() && (
@@ -171,7 +170,7 @@ const UpdateCurrentUserForm: FC<Props> = ({
             </Button>
           </div>
         )}
-      </div>
+      </Box>
     </form>
   );
 };

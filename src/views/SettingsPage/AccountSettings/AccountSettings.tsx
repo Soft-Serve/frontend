@@ -3,8 +3,9 @@ import type { FC } from "react";
 
 import { UpdateCurrentUserForm } from "@presentational";
 import { useCurrentUserQuery } from "@shared";
-import { Card, CardContent, TabWrapper } from "@base";
+import { CardContent, TabWrapper } from "@base";
 import { SettingsHeader } from "../SettingsHeader";
+import { Box } from "@interface";
 
 interface Props {
   themeColour: string;
@@ -22,11 +23,11 @@ const AccountSettings: FC<Props> = ({ themeColour, themeTint }) => {
     const { first_name: firstName, last_name: lastName, email, id } = data?.currentUser;
     return (
       <TabWrapper>
-        <Card css="mb-4">
+        <Box>
           <CardContent>
             <SettingsHeader>Account</SettingsHeader>
           </CardContent>
-        </Card>
+        </Box>
 
         <div className="mt-10 w-full">
           <div className="mt-5 md:col-span-2 md:mt-0">

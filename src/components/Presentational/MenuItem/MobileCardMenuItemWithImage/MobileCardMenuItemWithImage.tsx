@@ -25,7 +25,7 @@ const MobileCardMenuItemWithImage: FC<Props> = ({ item, themeFont, themeColour, 
     );
 
   return (
-    <div className="block overflow-hidden rounded-lg bg-white shadow-2xl ">
+    <div className="block overflow-hidden rounded-lg border border-t-0 border-gray-100 shadow-md ">
       <ItemImage unavailable={!item?.available} photoUrl={item?.photo} />
       <div className="flex flex-1 flex-col justify-between bg-white p-2 pb-0">
         <div>

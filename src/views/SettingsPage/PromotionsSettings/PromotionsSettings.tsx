@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import type { FC } from "react";
-import { Button, Card, CardContent, Modal, TabWrapper } from "@base";
+import { Button, TabWrapper } from "@base";
 import { Promotion } from "@shared";
-
+import { Box, Column, Columns, Dialog } from "@interface";
 import { SettingsHeader } from "../SettingsHeader";
 import { usePromotionsQuery } from "@shared";
 import {
@@ -93,23 +93,32 @@ const PromotionSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }
 
   return (
     <TabWrapper>
-      <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
+      <Dialog
+        themeColour={themeColour}
+        themeTint={themeTint}
+        isOpen={isModalOpen}
+        onClose={setIsModalOpen}
+      >
         {renderModalForm()}
-      </Modal>
-      <Card css="mb-4">
-        <CardContent>
-          <SettingsHeader>Promotions</SettingsHeader>
-          <Button
-            onClick={handleAddPromotion}
-            themeColour={themeColour}
-            themeTint={themeTint}
-            size="XXL"
-          >
-            Add
-            <LightningBoltIcon className="ml-2 h-5 w-5" />
-          </Button>
-        </CardContent>
-      </Card>
+      </Dialog>
+      <Box>
+        <Columns isMarginless isStackingOnMobile={false}>
+          <Column className="justify-center">
+            <SettingsHeader>Promotions</SettingsHeader>
+          </Column>
+          <Column columnWidth="small">
+            <Button
+              onClick={handleAddPromotion}
+              themeColour={themeColour}
+              themeTint={themeTint}
+              size="XXL"
+            >
+              Add
+              <LightningBoltIcon className="ml-2 h-5 w-5" />
+            </Button>
+          </Column>
+        </Columns>
+      </Box>
       <div className="flex w-full">
         <ul role="list" className="w-full space-y-4 divide-y divide-gray-200">
           {promoData?.promotions?.map(promo => (

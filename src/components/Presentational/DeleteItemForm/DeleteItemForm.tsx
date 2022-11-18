@@ -1,5 +1,6 @@
 import React, { FormEvent } from "react";
 import type { FC } from "react";
+import { Columns, Column } from "@interface";
 import { Item, ItemsData, ITEMS_QUERY } from "@shared";
 import { Button } from "@base";
 import { XIcon } from "@heroicons/react/solid";
@@ -113,8 +114,8 @@ const DeleteItemForm: FC<Props> = ({
         This item will be removed from the menu
       </p>
 
-      <div className="mt-4 flex items-center">
-        <div className="mr-2 w-full">
+      <Columns isMarginless>
+        <Column>
           <Button
             themeColour={themeColour}
             themeTint={themeTint}
@@ -126,8 +127,8 @@ const DeleteItemForm: FC<Props> = ({
           >
             Cancel
           </Button>
-        </div>
-        <div className="w-full">
+        </Column>
+        <Column>
           <Button
             themeColour={themeColour}
             themeTint={themeTint}
@@ -139,8 +140,8 @@ const DeleteItemForm: FC<Props> = ({
           >
             Delete
           </Button>
-        </div>
-      </div>
+        </Column>
+      </Columns>
     </form>
   );
 };

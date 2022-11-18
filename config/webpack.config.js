@@ -294,6 +294,7 @@ module.exports = function (webpackEnv) {
         .filter(ext => useTypeScript || !ext.includes("ts")),
       alias: {
         "@base": path.resolve(__dirname, "../src/components/Base/"),
+        "@interface": path.resolve(__dirname, "../src/components/Interface/"),
         "@transitions": path.resolve(__dirname, "../src/components/Transitions/"),
         "@presentational": path.resolve(__dirname, "../src/components/Presentational/"),
         "@graphql": path.resolve(__dirname, "../src/graphql/"),

@@ -131,7 +131,7 @@ const UpdateRestaurantLogo: FC<Props> = ({ logo, themeColour, themeTint, id, res
           <span className="mb-4 font-Quicksand text-sm font-bold text-gray-900">
             Restaurant Logo
           </span>
-          <div className="flex w-full flex-wrap items-center justify-center sm:justify-between">
+          <div className="flex w-full flex-wrap items-center justify-center ">
             <div className="mr-4 flex h-32 w-32 items-center justify-center">{renderImage()}</div>
             {renderActions(onImageUpload, onImageUpdate)}
           </div>

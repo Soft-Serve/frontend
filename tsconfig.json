@@ -19,8 +19,8 @@
     "jsx": "react-jsx",
     "paths": {
       "@base": ["src/components/Base"],
+      "@interface": ["src/components/Interface"],
       "@transitions": ["src/components/Transitions/"],
-      "@graphql": ["src/graphql/"],
       "@contexts": ["src/contexts/"],
       "@hooks": ["src/hooks/"],
       "@views": ["src/views/"],

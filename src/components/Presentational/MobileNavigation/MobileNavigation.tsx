@@ -52,7 +52,7 @@ const MobileNavigation: FC<Props> = ({
           leaveTo="-translate-x-full"
         >
           <div
-            className={`relative flex w-full max-w-xs flex-1 flex-col bg-${themeColour}-${themeTint} focus:outline-none`}
+            className={`relative flex w-full max-w-xs flex-1 flex-col bg-slate-50 focus:outline-none`}
           >
             <Transition.Child
               as={Fragment}
@@ -67,7 +67,6 @@ const MobileNavigation: FC<Props> = ({
                 <Button
                   themeColour={themeColour}
                   themeTint={themeTint}
-                  colour="accent"
                   onClick={() => onClose(false)}
                 >
                   <span className="sr-only">Close sidebar</span>
@@ -77,9 +76,7 @@ const MobileNavigation: FC<Props> = ({
             </Transition.Child>
             <div className="h-full">
               <Link className="flex" to={`/restaurants/${restaurantSlug}`}>
-                <div
-                  className={`flex flex-shrink-0 items-center px-4 bg-${themeColour}-${themeTint} pt-4 pb-4`}
-                >
+                <div className={`flex flex-shrink-0 items-center bg-slate-50 px-4 pt-4 pb-4`}>
                   <RestaurantLogo
                     restaurantSlug={restaurantSlug}
                     dimensions={60}

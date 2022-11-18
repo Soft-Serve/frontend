@@ -60,6 +60,13 @@ const PromotionCategories: FC<Props> = ({ themeColour, themeTint, promotionID })
           Promotion categories:
         </h3>
       );
+    else {
+      return (
+        <h3 className="flex items-center font-Quicksand text-lg font-bold">
+          No active promotion on categories
+        </h3>
+      );
+    }
   };
 
   const UPDATE = (

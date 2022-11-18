@@ -3,6 +3,7 @@ import type { FC } from "react";
 import { Category, Item, useItemsQuery } from "@shared";
 import { CategoryItem, SkeletonCategoryItem } from "./CategoryItem";
 import { ThemeFonts } from "@base";
+import { Column } from "@interface";
 
 interface Props {
   themeFont: ThemeFonts;
@@ -49,17 +50,18 @@ const CategoryItems: FC<Props> = ({
   return (
     <>
       {filterdItems?.map(item => (
-        <CategoryItem
-          themeFont={themeFont}
-          themeColour={themeColour}
-          themeTint={themeTint}
-          categoryID={categoryID}
-          key={item.id}
-          item={item}
-          handleAddDietary={handleAddDietary}
-          handleDeleteItem={handleDeleteItem}
-          handleUpdateItem={handleUpdateItem}
-        />
+        <Column key={item.id} columnWidth="six">
+          <CategoryItem
+            themeFont={themeFont}
+            themeColour={themeColour}
+            themeTint={themeTint}
+            categoryID={categoryID}
+            item={item}
+            handleAddDietary={handleAddDietary}
+            handleDeleteItem={handleDeleteItem}
+            handleUpdateItem={handleUpdateItem}
+          />
+        </Column>
       ))}
     </>
   );

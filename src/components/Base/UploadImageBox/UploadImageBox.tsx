@@ -12,9 +12,9 @@ interface Props {
 const UploadImageBox: FC<Props> = ({ onChange, imageFile, themeTint, themeColour }) => {
   return (
     <div
-      className={`my-6 flex max-w-lg justify-center border-2 px-3 pt-2 pb-2 border-${themeColour}-${themeTint} rounded-md border-dashed`}
+      className={`my-6 flex w-full justify-center border-2 px-3 pt-2 pb-2 border-${themeColour}-${themeTint} rounded-md border-dashed`}
     >
-      <div className="space-y-0.5 text-center">
+      <div className="space-y-1 text-center">
         <div className="flex w-full text-sm text-gray-600">
           <label
             htmlFor="file-upload"

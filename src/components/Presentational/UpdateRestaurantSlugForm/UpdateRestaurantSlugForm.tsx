@@ -87,7 +87,7 @@ const UpdateRestaurantSlugForm: FC<Props> = ({ slug, id, themeColour, themeTint 
   };
 
   return (
-    <form className="p-4" onSubmit={handleSubmit}>
+    <form className="max-w-xl" onSubmit={handleSubmit}>
       <AttachedLabelInput
         themeColour={themeColour}
         themeTint={themeTint}

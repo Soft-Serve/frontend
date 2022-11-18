@@ -6,7 +6,6 @@ const input = classnames(
   "appearance-none",
   "shadow-sm",
   "focus:outline-none",
-  "focus:bg-gray-100",
   "block",
   "w-full",
   "sm:text-sm",

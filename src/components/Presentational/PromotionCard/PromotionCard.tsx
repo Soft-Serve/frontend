@@ -5,7 +5,7 @@ import { ClockIcon } from "@heroicons/react/solid";
 import { PostPromotionCategoryForm, PromotionCategories } from "@presentational";
 import { Promotion } from "@shared";
 import { PromotionDropdown } from "./PromotionDropdown";
-import { Card } from "@base";
+import { Box } from "@interface";
 
 interface Props {
   handleUpdatePromotion: (promotion: Promotion) => void;
@@ -57,7 +57,7 @@ const PromotionCard: FC<Props> = ({
 
   return (
     <li>
-      <Card isOverflowHidden={false} css={"relative"}>
+      <Box isOverflowVisible className="relative">
         <div className="absolute top-2 right-2">
           <PromotionDropdown
             handleDelete={() => handleDeletePromotion(promo)}
@@ -104,7 +104,7 @@ const PromotionCard: FC<Props> = ({
             themeTint={themeTint}
           />
         </div>
-      </Card>
+      </Box>
     </li>
   );
 };

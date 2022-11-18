@@ -1,12 +1,8 @@
 import React from "react";
 import type { FC } from "react";
-import {
-  MobileNavigation,
-  MobileNavigationWrapper,
-  MobileNavigationProfile,
-  AllergyLegend,
-} from "@presentational";
+import { MobileNavigation, MobileNavigationWrapper, AllergyLegend } from "@presentational";
 import type { ThemeFonts } from "@base";
+import { Container } from "@interface";
 
 interface Props {
   isOpen: boolean;
@@ -33,15 +29,21 @@ const AllergyFiltersSideMenu: FC<Props> = ({
       isOpen={isOpen}
       onClose={onClose}
     >
-      <MobileNavigationWrapper themeColour={themeColour} themeTint={themeTint}>
-        <AllergyLegend
-          restaurantSlug={restaurantSlug}
-          themeColour={themeColour}
-          themeFont={themeFont}
-          themeTint={themeTint}
-        />
+      <MobileNavigationWrapper>
+        <Container
+          adjustHeight={100}
+          className="rounded-lg bg-slate-50"
+          isScrollable
+          containerWidth="full"
+        >
+          <AllergyLegend
+            restaurantSlug={restaurantSlug}
+            themeColour={themeColour}
+            themeFont={themeFont}
+            themeTint={themeTint}
+          />
+        </Container>
       </MobileNavigationWrapper>
-      <MobileNavigationProfile />
     </MobileNavigation>
   );
 };

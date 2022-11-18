@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { BreadCrumbsNavigation, ThemeFonts } from "@base";
+import { Column, Columns } from "@interface";
 import { useAllergyContext } from "@contexts";
 import { Allergy, useAllergiesQuery } from "@shared";
 import { ActionTypes } from "src/contexts/AllergyContext/types";
@@ -46,15 +47,16 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
       );
     }
     return data?.allergies?.map(allergy => (
-      <AllergyButton
-        key={allergy.id}
-        isAllergyActive={isAllergyActive}
-        allergy={allergy}
-        themeColour={themeColour}
-        themeFont={themeFont}
-        themeTint={themeTint}
-        handleClick={handleClick}
-      />
+      <Column key={allergy.id} columnWidth="six">
+        <AllergyButton
+          isAllergyActive={isAllergyActive}
+          allergy={allergy}
+          themeColour={themeColour}
+          themeFont={themeFont}
+          themeTint={themeTint}
+          handleClick={handleClick}
+        />
+      </Column>
     ));
   };
 
@@ -62,10 +64,7 @@ const AllergyLegend: FC<Props> = ({ themeColour, themeTint, themeFont, restauran
 
   return (
     <BreadCrumbsNavigation>
-      <div className="min-w-0 flex-1"></div>
-      <div className="h-96 overflow-scroll rounded-md border-2 border-white p-2">
-        {renderAllergies()}
-      </div>
+      <Columns className="!flex-col">{renderAllergies()}</Columns>
     </BreadCrumbsNavigation>
   );
 };

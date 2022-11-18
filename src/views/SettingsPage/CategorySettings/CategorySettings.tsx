@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import type { FC } from "react";
-import { Alert, Button, Card, CardContent, Modal, Tab, Tabs, TabWrapper } from "@base";
+import { Alert, Button, Tab, Tabs, TabWrapper } from "@base";
 import { useCategoriesQuery, useMenusQuery, Category, Menu } from "@shared";
 import {
   UpdateCategoryForm,
@@ -13,6 +13,7 @@ import { ChevronRightIcon, ViewGridAddIcon } from "@heroicons/react/solid";
 import { CategoryList } from "./CategoryList";
 import { SettingsHeader } from "../SettingsHeader";
 import { Link } from "react-router-dom";
+import { Box, Column, Columns, Dialog } from "@interface";
 
 enum ModalForms {
   PostCategory = "postCategory",
@@ -145,24 +146,33 @@ const CategorySettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug })
 
   return (
     <TabWrapper>
-      <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
+      <Dialog
+        themeColour={themeColour}
+        themeTint={themeTint}
+        isOpen={isModalOpen}
+        onClose={setIsModalOpen}
+      >
         {renderModalForm()}
-      </Modal>
-      <Card css="mb-4">
-        <CardContent>
-          <SettingsHeader>Categories</SettingsHeader>
-          <Button
-            disabled={!data?.menus?.length}
-            themeColour={themeColour}
-            themeTint={themeTint}
-            size="XXL"
-            onClick={() => handleModal(ModalForms.PostCategory)}
-          >
-            Add
-            <ViewGridAddIcon className="ml-2 h-5 w-5" />
-          </Button>
-        </CardContent>
-      </Card>
+      </Dialog>
+      <Box>
+        <Columns isMarginless isStackingOnMobile={false}>
+          <Column className="justify-center">
+            <SettingsHeader>Categories</SettingsHeader>
+          </Column>
+          <Column columnWidth="small">
+            <Button
+              disabled={!data?.menus?.length}
+              themeColour={themeColour}
+              themeTint={themeTint}
+              size="XXL"
+              onClick={() => handleModal(ModalForms.PostCategory)}
+            >
+              Add
+              <ViewGridAddIcon className="ml-2 h-5 w-5" />
+            </Button>
+          </Column>
+        </Columns>
+      </Box>
       {renderMenusTabs()}
       {renderCategories()}
       {renderAlert()}

@@ -6,6 +6,7 @@ import { Button, Notification } from "@base";
 import toast from "react-hot-toast";
 import { XIcon } from "@heroicons/react/solid";
 import { useDeleteCategoryMutation } from "./DeleteCategory.mutation";
+import { Column, Columns } from "@interface";
 
 interface Props {
   onCompleted?: (state: boolean) => void;
@@ -94,8 +95,8 @@ const DeleteCategoryForm: FC<Props> = ({
       <p className="my-8 font-Quicksand text-base text-gray-900 underline">
         All items within this menu will be deleted!
       </p>
-      <div className="mt-4 flex items-center">
-        <div className="mr-2 flex-1">
+      <Columns isMarginless>
+        <Column>
           <Button
             themeColour={themeColour}
             themeTint={themeTint}
@@ -107,8 +108,8 @@ const DeleteCategoryForm: FC<Props> = ({
           >
             Cancel
           </Button>
-        </div>
-        <div className="mr-2 flex-1">
+        </Column>
+        <Column>
           <Button
             themeColour={themeColour}
             themeTint={themeTint}
@@ -119,8 +120,8 @@ const DeleteCategoryForm: FC<Props> = ({
           >
             Delete
           </Button>
-        </div>
-      </div>
+        </Column>
+      </Columns>
     </form>
   );
 };

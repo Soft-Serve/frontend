@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import type { FC } from "react";
-import { Modal, Notification } from "@base";
+import { Notification } from "@base";
 import toast from "react-hot-toast";
 
 import { ColourPicker } from "@presentational";
@@ -11,6 +11,7 @@ import {
   RESTAURANT_ONBOARDING_QUERY,
 } from "../Restaurant/RestaurantOnboarding.query";
 import { darkColours } from "@constants";
+import { Dialog, DialogHeader } from "@interface";
 
 interface Props {
   id: number;
@@ -81,10 +82,21 @@ const UpdateRestaurantThemeForm: FC<Props> = ({ id, themeColour, themeTint, rest
 
   return (
     <>
-      <Modal isOpen={isColourModalOpen} onClose={setIsColourModalOpen}>
-        <h3 className="mr-4 font-Quicksand text-sm font-bold uppercase tracking-wider text-gray-900 ">
-          Select Restaurant Theme Colour
-        </h3>
+      <Dialog
+        themeColour={themeColour}
+        themeTint={themeTint}
+        isOpen={isColourModalOpen}
+        onClose={setIsColourModalOpen}
+      >
+        <DialogHeader
+          themeColour={themeColour}
+          themeTint={themeTint}
+          onClose={setIsColourModalOpen}
+        >
+          <h3 className="mr-4 font-Quicksand text-sm font-bold uppercase tracking-wider text-gray-900 ">
+            Select Restaurant Theme Colour
+          </h3>
+        </DialogHeader>
         <ColourPicker
           colours={darkColours}
           handleSubmit={handleSubmit}
@@ -92,7 +104,7 @@ const UpdateRestaurantThemeForm: FC<Props> = ({ id, themeColour, themeTint, rest
           themeTint={themeTint}
           onClose={setIsColourModalOpen}
         />
-      </Modal>
+      </Dialog>
       <div className="flex items-end">
         <div>
           <span className="font-Quicksand text-sm font-bold text-gray-900">Theme Colour</span>

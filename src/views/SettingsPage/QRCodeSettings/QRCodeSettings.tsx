@@ -1,7 +1,8 @@
-import { TabWrapper, Card, CardContent, Button } from "@base";
+import { TabWrapper, Button } from "@base";
 import type { FC } from "react";
 import { SettingsHeader } from "../SettingsHeader";
 import { QRCodeSVG } from "qrcode.react";
+import { Box, Column, Columns } from "@interface";
 
 interface Props {
   restaurantSlug: string;
@@ -13,27 +14,30 @@ const QRCodeSettings: FC<Props> = ({ restaurantSlug, themeColour, themeTint }) =
   return (
     <TabWrapper>
       <div className="print:hidden">
-        <Card css="mb-4">
-          <CardContent>
-            <SettingsHeader>QR Code</SettingsHeader>
-          </CardContent>
-        </Card>
+        <Box>
+          <Columns isMarginless isStackingOnMobile={false}>
+            <Column className="justify-center">
+              <SettingsHeader>QR Code</SettingsHeader>
+            </Column>
+            <Column columnWidth="small">
+              <div className="w-full print:hidden">
+                <Button
+                  isFullwidth
+                  onClick={() => window.print()}
+                  size="XXL"
+                  themeColour={themeColour}
+                  themeTint={themeTint}
+                >
+                  Print QR Code
+                </Button>
+              </div>
+            </Column>
+          </Columns>
+        </Box>
       </div>
       <div className="mt-10 w-full print:block">
         <div className="mt-5 flex flex-col items-center justify-center md:col-span-2 md:mt-0">
           <QRCodeSVG size={300} includeMargin value={url} />
-          <div className="w-full print:hidden">
-            <Button
-              onClick={() => window.print()}
-              isFullwidth
-              css="mt-4"
-              size="XL"
-              themeColour={themeColour}
-              themeTint={themeTint}
-            >
-              Print QR Code
-            </Button>
-          </div>
         </div>
       </div>
     </TabWrapper>

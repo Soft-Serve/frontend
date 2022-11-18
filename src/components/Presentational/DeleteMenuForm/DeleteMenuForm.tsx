@@ -1,6 +1,7 @@
 import React, { FormEvent } from "react";
 import type { FC } from "react";
 import { Button, Notification } from "@base";
+import { Columns, Column } from "@interface";
 import { MENUS_QUERY, Menu } from "@shared";
 import type { MenusData } from "@shared";
 import { XIcon } from "@heroicons/react/solid";
@@ -88,34 +89,32 @@ const DeleteMenuForm: FC<Props> = ({
       <p className="my-8 font-Quicksand text-base text-gray-900 underline">
         All items and categories within this menu will be deleted!
       </p>
-      <div className="mt-4 flex items-center">
-        <div className="mr-2 w-full">
+      <Columns isMarginless>
+        <Column>
           <Button
             themeColour={themeColour}
             themeTint={themeTint}
             colour="accent"
             onClick={() => onCompleted?.(false)}
             size="M"
-            isFullwidth
             css="text-center"
           >
             Cancel
           </Button>
-        </div>
-        <div className="w-full">
+        </Column>
+        <Column>
           <Button
             themeColour={themeColour}
             themeTint={themeTint}
             loading={loading}
             size="LG"
-            isFullwidth
             type="submit"
             css="text-center"
           >
             Delete
           </Button>
-        </div>
-      </div>
+        </Column>
+      </Columns>
     </form>
   );
 };

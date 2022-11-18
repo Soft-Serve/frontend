@@ -145,124 +145,123 @@ const PostNewUserForm: FC<Props> = ({ setIsModalOpen, themeColour, themeTint, re
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full">
-      {!userData?.currentUser && (
-        <>
-          <Input
-            themeColour={themeColour}
-            themeTint={themeTint}
-            required
-            value={input.name}
-            onChange={handleChange}
-            onBlur={() => handleBlur(NAME)}
-            errors={[getNameErrors(input.name, !!touchedFields[NAME])]}
-            labelText="Restaurant name"
-            type="text"
-            name={NAME}
-            id={NAME}
-          />
-          <Input
-            themeColour={themeColour}
-            themeTint={themeTint}
-            required
-            value={input.slug}
-            onChange={handleChange}
-            onBlur={() => handleBlur(SLUG)}
-            errors={[getNameErrors(input.slug, !!touchedFields[SLUG])]}
-            labelText="Slug"
-            type="text"
-            name={SLUG}
-            id={SLUG}
-          />
-        </>
-      )}
-      <Input
-        themeColour={themeColour}
-        themeTint={themeTint}
-        required
-        value={input.first_name}
-        onChange={handleChange}
-        onBlur={() => handleBlur(FIRST_NAME)}
-        errors={[getNameErrors(input.first_name, !!touchedFields[FIRST_NAME])]}
-        labelText="First name"
-        type="text"
-        name={FIRST_NAME}
-        id={FIRST_NAME}
-      />
-
-      <Input
-        themeColour={themeColour}
-        themeTint={themeTint}
-        required
-        value={input.last_name}
-        onChange={handleChange}
-        onBlur={() => handleBlur(LAST_NAME)}
-        errors={[getNameErrors(input.last_name, !!touchedFields[LAST_NAME])]}
-        labelText="Last name"
-        type="text"
-        name={LAST_NAME}
-        id={LAST_NAME}
-      />
-
-      <Input
-        themeColour={themeColour}
-        themeTint={themeTint}
-        required
-        value={input.email}
-        onChange={handleChange}
-        onBlur={() => handleBlur(EMAIL)}
-        errors={[getEmailErrors()]}
-        labelText="Email"
-        autoComplete="email"
-        type="email"
-        name={EMAIL}
-        id={EMAIL}
-      />
-
-      <Input
-        css="mt-4"
-        themeColour={themeColour}
-        themeTint={themeTint}
-        required
-        value={input.password}
-        onChange={handleChange}
-        onBlur={() => handleBlur(PASSWORD)}
-        errors={[getPasswordErrors(input.password, !!touchedFields[PASSWORD])]}
-        labelText="Password"
-        type="password"
-        name={PASSWORD}
-        id={PASSWORD}
-      />
-
-      <Input
-        css="mt-4"
-        themeColour={themeColour}
-        themeTint={themeTint}
-        required
-        value={input.password_confirmation}
-        onChange={handleChange}
-        onBlur={() => handleBlur(PASSWORD_CONFIRMATION)}
-        errors={[
-          getPasswordErrors(input.password_confirmation, !!touchedFields[PASSWORD_CONFIRMATION]),
-          getPasswordConfirmationErrors(),
-        ]}
-        labelText="Confirm password"
-        type="password"
-        name={PASSWORD_CONFIRMATION}
-        id={PASSWORD_CONFIRMATION}
-      />
+    <>
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+        {!userData?.currentUser && (
+          <>
+            <Input
+              themeColour={themeColour}
+              themeTint={themeTint}
+              required
+              value={input.name}
+              onChange={handleChange}
+              onBlur={() => handleBlur(NAME)}
+              errors={[getNameErrors(input.name, !!touchedFields[NAME])]}
+              labelText="Restaurant name"
+              type="text"
+              name={NAME}
+              id={NAME}
+            />
+            <Input
+              themeColour={themeColour}
+              themeTint={themeTint}
+              required
+              value={input.slug}
+              onChange={handleChange}
+              onBlur={() => handleBlur(SLUG)}
+              errors={[getNameErrors(input.slug, !!touchedFields[SLUG])]}
+              labelText="Slug"
+              type="text"
+              name={SLUG}
+              id={SLUG}
+            />
+          </>
+        )}
+        <Input
+          themeColour={themeColour}
+          themeTint={themeTint}
+          required
+          value={input.first_name}
+          onChange={handleChange}
+          onBlur={() => handleBlur(FIRST_NAME)}
+          errors={[getNameErrors(input.first_name, !!touchedFields[FIRST_NAME])]}
+          labelText="First name"
+          type="text"
+          name={FIRST_NAME}
+          id={FIRST_NAME}
+        />
+        <Input
+          themeColour={themeColour}
+          themeTint={themeTint}
+          required
+          value={input.last_name}
+          onChange={handleChange}
+          onBlur={() => handleBlur(LAST_NAME)}
+          errors={[getNameErrors(input.last_name, !!touchedFields[LAST_NAME])]}
+          labelText="Last name"
+          type="text"
+          name={LAST_NAME}
+          id={LAST_NAME}
+        />
+        <Input
+          themeColour={themeColour}
+          themeTint={themeTint}
+          required
+          value={input.email}
+          onChange={handleChange}
+          onBlur={() => handleBlur(EMAIL)}
+          errors={[getEmailErrors()]}
+          labelText="Email"
+          autoComplete="email"
+          type="email"
+          name={EMAIL}
+          id={EMAIL}
+        />
+        <div className=" hidden w-full md:block"></div>
+        <Input
+          css="mt-4"
+          themeColour={themeColour}
+          themeTint={themeTint}
+          required
+          value={input.password}
+          onChange={handleChange}
+          onBlur={() => handleBlur(PASSWORD)}
+          errors={[getPasswordErrors(input.password, !!touchedFields[PASSWORD])]}
+          labelText="Password"
+          type="password"
+          name={PASSWORD}
+          id={PASSWORD}
+        />
+        <Input
+          css="mt-4"
+          themeColour={themeColour}
+          themeTint={themeTint}
+          required
+          value={input.password_confirmation}
+          onChange={handleChange}
+          onBlur={() => handleBlur(PASSWORD_CONFIRMATION)}
+          errors={[
+            getPasswordErrors(input.password_confirmation, !!touchedFields[PASSWORD_CONFIRMATION]),
+            getPasswordConfirmationErrors(),
+          ]}
+          labelText="Confirm password"
+          type="password"
+          name={PASSWORD_CONFIRMATION}
+          id={PASSWORD_CONFIRMATION}
+        />
+      </form>
       <Button
         themeTint={themeTint}
         themeColour={themeColour}
         disabled={!isFormValid()}
-        css="mt-4"
+        css="mt-8"
         isFullwidth
         size="XXL"
         type="submit"
       >
         Add new user
       </Button>
-    </form>
+    </>
   );
 };
 

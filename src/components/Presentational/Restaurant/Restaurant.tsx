@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
-import { classnames } from "tailwindcss-classnames";
+import { classnames, TArg } from "tailwindcss-classnames";
 import {
   Items,
   Menus,
@@ -94,7 +94,7 @@ const Restaurant: FC<Props> = ({
           themeFont={theme?.font || "Quicksand"}
           themeColour={theme?.colour || "red"}
         />
-        <Container css="bg-gray-50">
+        <Container css={"bg-slate-50" as TArg}>
           <BoxSection withPadding={false} css={classnames("max-w-6xl")}>
             <div className="hidden w-full lg:flex">
               <Menus

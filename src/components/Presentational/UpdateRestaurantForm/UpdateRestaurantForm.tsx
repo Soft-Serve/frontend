@@ -1,7 +1,6 @@
 import React from "react";
 import type { FC } from "react";
-import { classnames } from "tailwindcss-classnames";
-import { Card, ThemeFonts } from "@base";
+import { ThemeFonts } from "@base";
 import {
   UpdateRestaurantAddressForm,
   UpdateRestaurantFontForm,
@@ -10,6 +9,7 @@ import {
 } from "@presentational";
 import type { Restaurant } from "@shared";
 import { UpdateRestaurantLogo } from "../UpdateRestaurantLogo";
+import { Box } from "@interface";
 
 interface Props {
   restaurant: Restaurant;
@@ -30,15 +30,15 @@ const UpdateRestaurantForm: FC<Props> = ({
 }) => {
   return (
     <>
-      <Card withPadding={false} css={classnames("flex-col")}>
+      <Box>
         <UpdateRestaurantSlugForm
           themeColour={themeColour}
           themeTint={themeTint}
           id={restaurant.id}
           slug={restaurant.slug}
         />
-      </Card>
-      <Card css={classnames("flex-col", "mt-4")}>
+      </Box>
+      <Box>
         <UpdateRestaurantThemeForm
           restaurantSlug={restaurantSlug}
           themeColour={themeColour}
@@ -46,8 +46,8 @@ const UpdateRestaurantForm: FC<Props> = ({
           id={restaurant.id}
           logo={restaurant.logo}
         />
-      </Card>
-      <Card css={classnames("flex-col", "mt-4")}>
+      </Box>
+      <Box>
         <UpdateRestaurantFontForm
           themeFont={themeFont}
           restaurantSlug={restaurantSlug}
@@ -55,8 +55,8 @@ const UpdateRestaurantForm: FC<Props> = ({
           themeTint={themeTint}
           id={restaurant.id}
         />
-      </Card>
-      <Card css={classnames("flex-col", "mt-4")}>
+      </Box>
+      <Box>
         <UpdateRestaurantLogo
           restaurantSlug={restaurantSlug}
           id={restaurant.id}
@@ -64,8 +64,8 @@ const UpdateRestaurantForm: FC<Props> = ({
           themeColour={themeColour}
           themeTint={themeTint}
         />
-      </Card>
-      <Card css="mt-4">
+      </Box>
+      <Box>
         <UpdateRestaurantAddressForm
           restaurantSlug={restaurantSlug}
           themeColour={themeColour}
@@ -78,7 +78,7 @@ const UpdateRestaurantForm: FC<Props> = ({
           province={restaurant.province}
           postalCode={restaurant.postal_code}
         />
-      </Card>
+      </Box>
     </>
   );
 };

@@ -3,24 +3,14 @@ import type { FC } from "react";
 import Skeleton from "react-loading-skeleton";
 import { Link, useNavigate } from "react-router-dom";
 import { Category, Item, Menu, useCategoriesQuery, useItemsQuery, useMenusQuery } from "@shared";
-import {
-  Alert,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  Modal,
-  Tab,
-  Tabs,
-  TabWrapper,
-  ThemeFonts,
-} from "@base";
+import { Alert, Button, Tab, Tabs, TabWrapper, ThemeFonts } from "@base";
 import { PlusCircleIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import { AddDietaryForm, DeleteItemForm, PostItemForm, UpdateItemForm } from "@presentational";
 import { filterCategories, useGetParams } from "@utility";
 import { CategoryItems } from "./CategoryItems";
 import { SettingsHeader } from "../SettingsHeader";
 import { SearchBar } from "./SearchBar";
+import { Dialog, Box, Column, Columns, Container } from "@interface";
 
 enum ModalForms {
   PostItem = "postItem",
@@ -180,22 +170,26 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
   const renderMenusTabs = () => {
     if (menuLoading) return <Skeleton className="my-2" height={50} />;
     return (
-      <Tabs>
-        {menuData?.menus?.map((menu, index) => (
-          <Tab
-            themeTint={themeTint}
-            themeColour={themeColour}
-            themeFont="Quicksand"
-            onClick={() => handleActiveMenu(menu)}
-            numOfTabs={menuData.menus.length}
-            tabIndex={index}
-            isActive={menu.id === activeMenu?.id}
-            key={menu.id}
-          >
-            {menu.name}
-          </Tab>
-        ))}
-      </Tabs>
+      <Columns>
+        <Column columnWidth="six">
+          <Tabs>
+            {menuData?.menus?.map((menu, index) => (
+              <Tab
+                themeTint={themeTint}
+                themeColour={themeColour}
+                themeFont="Quicksand"
+                onClick={() => handleActiveMenu(menu)}
+                numOfTabs={menuData.menus.length}
+                tabIndex={index}
+                isActive={menu.id === activeMenu?.id}
+                key={menu.id}
+              >
+                {menu.name}
+              </Tab>
+            ))}
+          </Tabs>
+        </Column>
+      </Columns>
     );
   };
 
@@ -222,13 +216,20 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
 
   return (
     <TabWrapper>
-      <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
+      <Dialog
+        themeColour={themeColour}
+        themeTint={themeTint}
+        isOpen={isModalOpen}
+        onClose={setIsModalOpen}
+      >
         {renderModalForm()}
-      </Modal>
-      <Card css="mb-4">
-        <CardContent css="flex-col">
-          <div className="mb-4 flex w-full items-center justify-between">
+      </Dialog>
+      <Box>
+        <Columns isMarginless isStackingOnMobile={false}>
+          <Column className="justify-center">
             <SettingsHeader>Items</SettingsHeader>
+          </Column>
+          <Column columnWidth="small">
             <Button
               disabled={!hasCategory}
               themeColour={themeColour}
@@ -239,29 +240,29 @@ const ItemSettings: FC<Props> = ({ themeColour, themeTint, themeFont, restaurant
               Add
               <PlusCircleIcon className="ml-2 h-5 w-5" />
             </Button>
-          </div>
-        </CardContent>
-      </Card>
+          </Column>
+        </Columns>
+      </Box>
       {renderSearchBar()}
-      {renderMenusTabs()}
       {renderCTA()}
-      <div className="mt-8">
-        <Grid size="SM">
+      {renderMenusTabs()}
+      <Container containerWidth="full">
+        <Columns className="!flex-col">
           {filteredCategories(categoryData?.categories)?.map(category => (
             <CategoryItems
+              key={category.id}
               themeFont={themeFont}
               themeColour={themeColour}
               themeTint={themeTint}
               handleAddDietary={handleAddDietary}
               handleUpdateItem={handleUpdateItem}
               searchValue={searchValue}
-              key={category.id}
               handleDeleteItem={handleDeleteItem}
               categoryID={category.id}
             />
           ))}
-        </Grid>
-      </div>
+        </Columns>
+      </Container>
     </TabWrapper>
   );
 };

@@ -47,6 +47,7 @@ const TextBox: FC<Props> = ({
         </label>
       )}
       <textarea
+        rows={4}
         autoComplete={autoComplete}
         name={name}
         id={id}

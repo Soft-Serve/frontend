@@ -214,7 +214,7 @@ const PostPromotionCategoryForm: FC<Props> = ({
         )
       }
     >
-      <div className="my-4">{renderMenusTabs()}</div>
+      <div className="mt-4 mb-12">{renderMenusTabs()}</div>
       <form className="my-4 flex flex-wrap items-end justify-between">
         <fieldset className="mr-4 flex flex-auto flex-wrap items-end justify-start">
           {renderDropdown()}

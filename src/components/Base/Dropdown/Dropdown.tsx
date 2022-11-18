@@ -5,6 +5,7 @@ import { CheckIcon, ChevronDownIcon } from "@heroicons/react/solid";
 import { buildStyles } from "./styles";
 
 interface Props {
+  isFullWidth?: boolean;
   showCheckmark?: boolean;
   onChange: any;
   value: any;
@@ -18,6 +19,7 @@ interface Props {
 }
 const Dropdown: FC<Props> = ({
   showCheckmark = true,
+  isFullWidth = false,
   onChange,
   value,
   data,
@@ -37,7 +39,7 @@ const Dropdown: FC<Props> = ({
     return errors?.slice(0, 2).map(error => <p key={`error-item-${error}`}>{error}</p>);
   };
   return (
-    <div className="flex flex-col font-Quicksand ">
+    <div className="flex w-full flex-col font-Quicksand">
       <Listbox value={value} onChange={onChange}>
         {({ open }) => (
           <>
@@ -50,15 +52,19 @@ const Dropdown: FC<Props> = ({
               </Listbox.Label>
             )}
 
-            <div className="relative">
+            <div className="relative w-full">
               <div
-                className={`inline-flex divide-x rounded-md shadow-sm divide-${themeColour}-${themeTint}`}
+                className={`inline-flex divide-x rounded-md divide-${themeColour}-${themeTint} w-full`}
               >
                 <div
-                  className={`relative z-0 inline-flex divide-x rounded-md shadow-sm divide-${themeColour}-${themeTint}`}
+                  className={`relative z-0 inline-flex divide-x rounded-md shadow-sm divide-${themeColour}-${themeTint} ${
+                    isFullWidth ? "w-full" : null
+                  }`}
                 >
                   <Listbox.Button
-                    className={`relative inline-flex items-center border-2 border-r-0 bg-white py-2 pl-3 pr-4  border-${themeColour}-${themeTint} rounded-l-md shadow-sm text-${themeColour}-${themeTint} focus:outline-none`}
+                    className={`relative inline-flex items-center border-2 border-r-0 bg-white py-2 pl-3 pr-4  border-${themeColour}-${themeTint} rounded-l-md shadow-sm text-${themeColour}-${themeTint} focus:outline-none ${
+                      isFullWidth ? "w-full" : null
+                    }`}
                   >
                     {showCheckmark && <CheckIcon className="h-5 w-5" aria-hidden="true" />}
                     <p className="ml-2.5 text-sm font-bold">{value ? value?.name : defaultValue}</p>
@@ -83,7 +89,7 @@ const Dropdown: FC<Props> = ({
               >
                 <Listbox.Options
                   static
-                  className="absolute z-50 mt-2 w-auto divide-y divide-gray-200 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 selection:origin-top-left focus:outline-none"
+                  className="absolute z-50 mt-2 w-auto divide-y divide-gray-200 overflow-hidden rounded-md bg-white shadow-xl ring-1 ring-black ring-opacity-5 selection:origin-top-left focus:outline-none"
                 >
                   {data?.map((option: any) => (
                     <Listbox.Option

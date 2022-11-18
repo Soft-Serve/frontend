@@ -1,7 +1,8 @@
 import React from "react";
 import type { FC } from "react";
-import { Button } from "@base";
+
 import type { DarkColoursMap } from "@constants";
+import { Container } from "@interface";
 
 interface Props {
   themeColour: string;
@@ -32,46 +33,36 @@ const ColourPicker: FC<Props> = ({ onClose, themeTint, themeColour, handleSubmit
   };
 
   return (
-    <div>
-      <div className=" mb-2 h-96 overflow-y-auto">
-        {colours.map(([colour, value]) => (
-          <div className="my-4" key={`${colour}-${value}`}>
-            <span className="mx-2 font-Quicksand text-sm font-bold text-gray-900">
+    <Container adjustHeight={150} isScrollable containerWidth="full">
+      {colours.map(([colour, value]) => (
+        <div key={`${colour}-${value}`}>
+          <div className="w-full text-left md:text-center">
+            <span className="text-md font-Quicksand font-bold text-gray-900">
               {camelCaseFormatter(colour)}
             </span>
-            <div className="flex flex-wrap items-center">
-              {Object.entries(value).map(([tailWindNumber, hexColour]) => {
-                const isSelected = Number(tailWindNumber) === themeTint && colour === themeColour;
-                return (
-                  <div
-                    key={hexColour}
-                    tabIndex={0}
-                    role="button"
-                    onKeyDown={() => handleClick(colour, tailWindNumber)}
-                    onClick={() => handleClick(colour, tailWindNumber)}
-                    className={`bg-${colour}-${tailWindNumber} m-2 h-14 w-14 rounded-md  ${
-                      isSelected ? " ring-4 ring-offset-4" : null
-                    }`}
-                  >
-                    <span className="sr-only">{hexColour}</span>
-                  </div>
-                );
-              })}
-            </div>
           </div>
-        ))}
-      </div>
-      <Button
-        themeColour={themeColour}
-        themeTint={600}
-        css="mt-4"
-        onClick={() => onClose(false)}
-        size="XXL"
-        isFullwidth
-      >
-        close
-      </Button>
-    </div>
+          <div className="flex flex-wrap items-center md:justify-center">
+            {Object.entries(value).map(([tailWindNumber, hexColour]) => {
+              const isSelected = Number(tailWindNumber) === themeTint && colour === themeColour;
+              return (
+                <div
+                  key={hexColour}
+                  tabIndex={0}
+                  role="button"
+                  onKeyDown={() => handleClick(colour, tailWindNumber)}
+                  onClick={() => handleClick(colour, tailWindNumber)}
+                  className={`bg-${colour}-${tailWindNumber} m-2 h-14 w-14 rounded-md  ${
+                    isSelected ? " ring-4 ring-offset-4" : null
+                  }`}
+                >
+                  <span className="sr-only">{hexColour}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </Container>
   );
 };
 

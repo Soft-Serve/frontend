@@ -1,7 +1,8 @@
 import React, { Dispatch, SetStateAction } from "react";
 import type { FC } from "react";
 import { AllergyLegend } from "@presentational";
-import { Modal, Button, ThemeFonts } from "@base";
+import { ThemeFonts } from "@base";
+import { Dialog, DialogHeader, Container, Columns } from "@interface";
 
 interface Props {
   setIsFilterSideMenuOpen: Dispatch<SetStateAction<boolean>>;
@@ -20,23 +21,32 @@ const AllergyModal: FC<Props> = ({
   themeFont,
 }) => {
   return (
-    <Modal onClose={setIsFilterSideMenuOpen} isOpen={isOpen}>
-      <AllergyLegend
-        restaurantSlug={restaurantSlug}
+    <Dialog
+      themeColour={themeColour}
+      themeTint={themeTint}
+      onClose={setIsFilterSideMenuOpen}
+      isOpen={isOpen}
+    >
+      <DialogHeader
         themeColour={themeColour}
-        themeFont={themeFont}
         themeTint={themeTint}
-      />
-      <Button
-        themeColour={themeColour}
-        themeTint={themeTint}
-        onClick={() => setIsFilterSideMenuOpen(prevState => !prevState)}
-        size="XXL"
-        isFullwidth
+        onClose={setIsFilterSideMenuOpen}
       >
-        close
-      </Button>
-    </Modal>
+        <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
+          Allergy Filters
+        </h3>
+      </DialogHeader>
+      <Container adjustHeight={100} containerWidth="full">
+        <Columns>
+          <AllergyLegend
+            restaurantSlug={restaurantSlug}
+            themeColour={themeColour}
+            themeFont={themeFont}
+            themeTint={themeTint}
+          />
+        </Columns>
+      </Container>
+    </Dialog>
   );
 };
 

@@ -37,7 +37,7 @@ const PromotionCategoryActions: FC<Props> = ({
   return (
     <tr
       key={promoCategory.id}
-      className={`wrap mb-2 flex flex-none flex-col rounded-md border-b-0 sm:mb-0 sm:table-row sm:border-b-2 border-${themeColour}-${themeTint} font-Quicksand`}
+      className={`wrap mb-4 flex flex-none flex-col rounded-md border-b-0 sm:mb-0 sm:table-row sm:border-b-2 border-${themeColour}-${themeTint} font-Quicksand`}
     >
       <td className={`p-3`}>
         <p>

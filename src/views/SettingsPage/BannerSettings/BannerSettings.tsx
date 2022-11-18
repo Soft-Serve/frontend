@@ -4,16 +4,8 @@ import ImageUploading from "react-images-uploading";
 
 import { ItemImage } from "@presentational";
 import { BANNERS_QUERY, useBannersQuery, useRestaurantQuery } from "@shared";
-import {
-  BoxUploadImage,
-  Button,
-  Card,
-  CardContent,
-  HeroBanner,
-  TabWrapper,
-  ThemeFonts,
-} from "@base";
-import { classnames } from "tailwindcss-classnames";
+import { BoxUploadImage, Button, CardContent, HeroBanner, TabWrapper, ThemeFonts } from "@base";
+import { Box } from "@interface";
 import { useUploadPhoto, useViewport } from "@hooks";
 import { SettingsHeader } from "../SettingsHeader";
 import { UpdateBannerHeadingsForm } from "./UpdateBannerHeadingsForm";
@@ -177,12 +169,12 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
 
   return (
     <TabWrapper>
-      <Card css="mb-4">
+      <Box>
         <CardContent>
           <SettingsHeader>Banner</SettingsHeader>
         </CardContent>
-      </Card>
-      <Card>
+      </Box>
+      <Box>
         <HeroBanner
           subHeader={data?.banners?.[0]?.sub_header}
           header={data?.banners?.[0]?.header}
@@ -191,8 +183,8 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
           themeColour={themeColour}
           themeFont={themeFont}
         />
-      </Card>
-      <Card css={classnames("flex-col", "mt-4")}>
+      </Box>
+      <Box>
         <UpdateBannerHeadingsForm
           photo={data?.banners?.[0]?.photo ? data?.banners?.[0]?.photo : ""}
           restaurantSlug={restaurantSlug}
@@ -214,7 +206,7 @@ const BannerSettings: FC<Props> = ({ themeTint, themeColour, themeFont, restaura
             )}
           </ImageUploading>
         </div>
-      </Card>
+      </Box>
     </TabWrapper>
   );
 };

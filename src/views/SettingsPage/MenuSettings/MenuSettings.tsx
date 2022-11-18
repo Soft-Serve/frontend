@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import type { FC } from "react";
-import { Button, Card, CardContent, Modal, TabWrapper } from "@base";
+import { Button, TabWrapper } from "@base";
+import { Dialog, Box, Column, Columns } from "@interface";
 import { useRestaurantQuery, useMenusQuery, Menu } from "@shared";
 import { DeleteMenuForm, PostMenuForm, UpdateMenuForm } from "src/components/Presentational";
 import { PlusCircleIcon } from "@heroicons/react/solid";
@@ -99,23 +100,32 @@ const MenuSettings: FC<Props> = ({ themeTint, themeColour, restaurantSlug }) => 
 
   return (
     <TabWrapper>
-      <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
+      <Dialog
+        themeColour={themeColour}
+        themeTint={themeTint}
+        isOpen={isModalOpen}
+        onClose={setIsModalOpen}
+      >
         {renderModalForm()}
-      </Modal>
-      <Card css="mb-4">
-        <CardContent>
-          <SettingsHeader>Menus</SettingsHeader>
-          <Button
-            themeColour={themeColour}
-            themeTint={themeTint}
-            size="XXL"
-            onClick={() => handleMenuModal(ModalForms.PostMenu)}
-          >
-            Add
-            <PlusCircleIcon className="ml-2 h-5 w-5" />
-          </Button>
-        </CardContent>
-      </Card>
+      </Dialog>
+      <Box>
+        <Columns isMarginless isStackingOnMobile={false}>
+          <Column className="justify-center">
+            <SettingsHeader>Menus</SettingsHeader>
+          </Column>
+          <Column columnWidth="small">
+            <Button
+              themeColour={themeColour}
+              themeTint={themeTint}
+              size="XXL"
+              onClick={() => handleMenuModal(ModalForms.PostMenu)}
+            >
+              Add
+              <PlusCircleIcon className="ml-2 h-5 w-5" />
+            </Button>
+          </Column>
+        </Columns>
+      </Box>
       {renderMenus()}
     </TabWrapper>
   );

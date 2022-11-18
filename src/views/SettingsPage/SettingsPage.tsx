@@ -160,7 +160,7 @@ const SettingsPage: FC<Props> = ({ restaurantSlug }) => {
 
   return (
     <>
-      <div className="mt-4 ml-4 block print:hidden lg:hidden">
+      <div className="mt-4 ml-4 block bg-slate-50 print:hidden lg:hidden">
         <Button
           css={classnames("items-center")}
           size="XL"

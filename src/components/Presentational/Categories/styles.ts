@@ -11,11 +11,10 @@ export const useStyles = (themeColour: string, themeTint: number) => {
       ? `bg-${themeColour}-${themeTint} border-transparent text-white hover:bg-${themeColour}-${
           themeTint + 100
         }`
-      : `border-gray-200 bg-white text-gray-900 hover:bg-gray-50 ${text}`;
+      : `border-2 border-${themeColour}-${themeTint} bg-white text-gray-900 hover:bg-gray-50 ${text}`;
   };
 
-  const baseStyles =
-    "mx-2 flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1";
+  const baseStyles = `mx-2 flex items-center justify-center rounded-md  py-3 px-3 text-sm font-medium uppercase sm:flex-1`;
 
   return {
     baseStyles,

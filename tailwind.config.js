@@ -19,6 +19,14 @@ module.exports = {
         /border-(red|green|blue|rose|pink|fuchsia|purple|violet|indigo|sky|cyan|teal|emerald|green|lime|yellow|amber|orange|slate|gray|zinc|neutral|stone)-(400|500|600|700|800|900)/,
     },
     {
+      pattern:
+        /from-(red|green|blue|rose|pink|fuchsia|purple|violet|indigo|sky|cyan|teal|emerald|green|lime|yellow|amber|orange|slate|gray|zinc|neutral|stone)-(400|500|600|700|800|900)/,
+    },
+    {
+      pattern:
+        /to-(red|green|blue|rose|pink|fuchsia|purple|violet|indigo|sky|cyan|teal|emerald|green|lime|yellow|amber|orange|slate|gray|zinc|neutral|stone)-(400|500|600|700|800|900)/,
+    },
+    {
       pattern: /font-(Sans|Arima|Baskerville|Cardo|Oswald|Quicksand|Raleway)/,
     },
   ],
