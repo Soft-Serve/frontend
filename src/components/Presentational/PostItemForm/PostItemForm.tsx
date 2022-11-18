@@ -30,6 +30,7 @@ import {
   RestaurantOnBoardingData,
   RESTAURANT_ONBOARDING_QUERY,
 } from "../Restaurant/RestaurantOnboarding.query";
+import { Container } from "@interface";
 
 interface Props {
   restaurantSlug: string;
@@ -213,95 +214,100 @@ const PostItemForm: FC<Props> = ({
     </span>
   );
 
-  return (
-    <div className="font-Quicksand">
-      <div className="flex items-center justify-between">
-        <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
-          add new item
-        </h3>
-        <Button
-          themeColour={themeColour}
-          themeTint={themeTint}
-          onClick={() => onCompleted?.(false)}
-          size="S"
-        >
-          <XIcon className="h-5 w-5" />
-        </Button>
-      </div>
-      <form noValidate onSubmit={handleSubmit} className="mt-4 flex flex-col">
-        <Dropdown
-          themeColour={themeColour}
-          themeTint={themeTint}
-          required
-          label="Category"
-          defaultValue="Select category"
-          value={activeCategory}
-          onChange={(cat: Category) => handleCategoryChange(cat)}
-          data={filterCategories(categoryData?.categories)}
-        />
-        <div className="mt-4">
-          <Input
-            themeColour={themeColour}
-            themeTint={themeTint}
-            onBlur={() => {
-              if (input.name.length) {
-                setIsInputNameDirty(true);
-              }
-            }}
-            errors={[inputNameError()]}
-            labelText="Name"
-            onChange={handleInputChange}
-            value={input.name}
-            type="text"
-            name="name"
-            id="name"
-            required
-          />
-        </div>
-        <div className="mt-4">
-          <TextBox
-            themeColour={themeColour}
-            themeTint={themeTint}
-            labelText="Description"
-            onChange={handleInputChange}
-            value={input.description}
-            name="description"
-            id="description"
-          />
-        </div>
-        <MultiSize
-          themeColour={themeColour}
-          themeTint={themeTint}
-          onChange={onSizeChange}
-          addSize={onAddSize}
-          deleteSize={onDeleteSize}
-          sizes={input.sizes}
-        />
-        <UploadImageBox
-          themeColour={themeColour}
-          themeTint={themeTint}
-          onChange={setPhotoFile}
-          imageFile={photoFile}
-        />
-        <Tooltip
-          css={classnames("w-full")}
-          isDisabled={!!activeCategory?.name}
-          tooltipText={tooltiptext}
-        >
-          <Button
-            themeColour={themeColour}
-            themeTint={themeTint}
-            loading={loading || isLoading}
-            disabled={!isFormValid}
-            isFullwidth
-            size="XXL"
-            type="submit"
-          >
-            Add Item
-          </Button>
-        </Tooltip>
-      </form>
+  const staticContent = (
+    <div className="mb-4 flex items-center justify-between">
+      <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
+        add new item
+      </h3>
+      <Button
+        themeColour={themeColour}
+        themeTint={themeTint}
+        onClick={() => onCompleted?.(false)}
+        size="S"
+      >
+        <XIcon className="h-5 w-5" />
+      </Button>
     </div>
+  );
+
+  return (
+    <Container isScrollable adjustHeight={75} containerWidth="full" staticContent={staticContent}>
+      <div className="font-Quicksand">
+        <form noValidate onSubmit={handleSubmit} className="mt-4 flex flex-col">
+          <Dropdown
+            themeColour={themeColour}
+            themeTint={themeTint}
+            required
+            label="Category"
+            defaultValue="Select category"
+            value={activeCategory}
+            onChange={(cat: Category) => handleCategoryChange(cat)}
+            data={filterCategories(categoryData?.categories)}
+          />
+          <div className="mt-4">
+            <Input
+              themeColour={themeColour}
+              themeTint={themeTint}
+              onBlur={() => {
+                if (input.name.length) {
+                  setIsInputNameDirty(true);
+                }
+              }}
+              errors={[inputNameError()]}
+              labelText="Name"
+              onChange={handleInputChange}
+              value={input.name}
+              type="text"
+              name="name"
+              id="name"
+              required
+            />
+          </div>
+          <div className="mt-4">
+            <TextBox
+              themeColour={themeColour}
+              themeTint={themeTint}
+              labelText="Description"
+              onChange={handleInputChange}
+              value={input.description}
+              name="description"
+              id="description"
+            />
+          </div>
+          <MultiSize
+            themeColour={themeColour}
+            themeTint={themeTint}
+            onChange={onSizeChange}
+            addSize={onAddSize}
+            deleteSize={onDeleteSize}
+            sizes={input.sizes}
+          />
+          <UploadImageBox
+            themeColour={themeColour}
+            themeTint={themeTint}
+            onChange={setPhotoFile}
+            imageFile={photoFile}
+          />
+          <Tooltip
+            css={classnames("w-full")}
+            isDisabled={!!activeCategory?.name}
+            tooltipText={tooltiptext}
+          >
+            <Button
+              themeColour={themeColour}
+              themeTint={themeTint}
+              loading={loading || isLoading}
+              disabled={!isFormValid}
+              isFullwidth
+              size="XXL"
+              type="submit"
+            >
+              Add Item
+            </Button>
+          </Tooltip>
+        </form>
+      </div>
+    </Container>
   );
 };
 

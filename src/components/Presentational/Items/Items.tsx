@@ -1,11 +1,12 @@
 import React from "react";
 import type { FC } from "react";
 import { useViewportContext } from "@contexts";
-import { Container, Grid, ThemeFonts } from "@base";
+import { Grid, ThemeFonts } from "@base";
 import { MenuItem } from "@presentational";
 import { Category, useCurrentUserQuery, useItemsQuery } from "@shared";
 import Skeleton from "react-loading-skeleton";
 import { NoItemsCTA } from "./NoItemsCTA";
+import { Container } from "@interface";
 
 interface Props {
   themeColour: string;
@@ -32,15 +33,16 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
 
   if (loading || userLoading)
     return (
-      <Container>
+      <Container containerWidth="large">
         <Skeleton width="100%" className="m-4" count={4} height={250} />
       </Container>
     );
+
   if (error) return <p>error</p>;
 
   if (data?.items?.length === 0 && !loading) {
     return (
-      <Container>
+      <Container containerWidth="large">
         <NoItemsCTA
           isAdmin={!!userData?.currentUser}
           themeColour={themeColour}
@@ -51,7 +53,7 @@ const Items: FC<Props> = ({ themeTint, themeColour, themeFont, restaurantSlug, c
     );
   }
   return (
-    <Container>
+    <Container containerWidth="large">
       <div className="my-2 w-full">
         <Grid size={getGridSize()}>
           {data?.items?.map(item => (

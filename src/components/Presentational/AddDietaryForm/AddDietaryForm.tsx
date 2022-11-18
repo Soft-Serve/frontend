@@ -12,6 +12,7 @@ import { usePostDietaryMutation } from "./PostDietary.mutation";
 import { useDeleteDietaryMutation } from "./DeleteDietary.mutation";
 import { LifeStyles } from "src/contexts";
 import { Container } from "@interface";
+import { XIcon } from "@heroicons/react/solid";
 
 interface Payload {
   dietaryID: string;
@@ -113,8 +114,24 @@ const AddDietaryForm: FC<Props> = ({
 
   const allergyPrefix = (name: string) =>
     name === LifeStyles.Vegan || name === LifeStyles.Vegeterian ? null : "Contains:";
+
+  const staticContent = (
+    <div className="mb-4 flex items-center justify-between">
+      <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
+        Update Allergies
+      </h3>
+      <Button
+        themeColour={themeColour}
+        themeTint={themeTint}
+        onClick={() => onCompleted?.(false)}
+        size="S"
+      >
+        <XIcon className="h-5 w-5" />
+      </Button>
+    </div>
+  );
   return (
-    <Container containerWidth="full">
+    <Container isScrollable adjustHeight={75} containerWidth="full" staticContent={staticContent}>
       <div className={`mt-4  border-t  border-${themeColour}-${themeTint} `}>
         {restaurantDietariesData?.allergies?.map(allergy => (
           <label
@@ -141,16 +158,6 @@ const AddDietaryForm: FC<Props> = ({
           </label>
         ))}
       </div>
-      <Button
-        themeColour={themeColour}
-        themeTint={themeTint}
-        onClick={() => onCompleted?.(false)}
-        size="XL"
-        isFullwidth
-        css="mt-8"
-      >
-        Close
-      </Button>
     </Container>
   );
 };

@@ -16,6 +16,7 @@ import { isNameInputValid, isNameOnlyNumbers, isNameValid, isPriceInvalid } from
 import { v4 as uuidv4 } from "uuid";
 import { useUpdateItemMutation } from "./UpdateItem.mutation";
 import { useUploadPhoto } from "src/hooks";
+import { Container } from "@interface";
 
 interface Props {
   onCompleted?: (state: boolean) => void;
@@ -145,74 +146,79 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
 
   const isFormValid = isNameInputValid(input.name) && sizes && !isPriceInvalid(sizes);
 
-  return (
-    <div className="font-Quicksand">
-      <div className="flex items-center justify-between">
-        <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
-          Update {input.name}
-        </h3>
-        <Button
-          themeColour={themeColour}
-          themeTint={themeTint}
-          onClick={() => onCompleted?.(false)}
-          size="S"
-        >
-          <XIcon className="h-5 w-5" />
-        </Button>
-      </div>
-      <form onSubmit={handleSubmit} className="mt-4 flex flex-col">
-        <Input
-          themeColour={themeColour}
-          themeTint={themeTint}
-          errors={[inputNameError()]}
-          onChange={handleInputChange}
-          labelText="Name:"
-          value={input.name}
-          type="text"
-          name="name"
-          id="name"
-          required
-        />
-        <div className="mt-4">
-          <TextBox
-            themeColour={themeColour}
-            themeTint={themeTint}
-            labelText="Description"
-            onChange={handleInputChange}
-            value={input.description}
-            name="description"
-            id="description"
-          />
-        </div>
-        <MultiSize
-          themeColour={themeColour}
-          themeTint={themeTint}
-          onChange={onSizeChange}
-          addSize={onAddSize}
-          deleteSize={onDeleteSize}
-          sizes={sizes}
-        />
-        <UploadImageBox
-          themeColour={themeColour}
-          themeTint={themeTint}
-          onChange={setPhotoFile}
-          imageFile={photoFile}
-        />
-        <div className="mt-4 rounded-md sm:flex-shrink-0">
-          <Button
-            themeColour={themeColour}
-            themeTint={themeTint}
-            loading={updateLoading}
-            disabled={!isFormValid}
-            isFullwidth
-            size="XXL"
-            type="submit"
-          >
-            Update Item
-          </Button>
-        </div>
-      </form>
+  const staticContent = (
+    <div className="mb-4 flex items-center justify-between">
+      <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
+        Update {input.name}
+      </h3>
+      <Button
+        themeColour={themeColour}
+        themeTint={themeTint}
+        onClick={() => onCompleted?.(false)}
+        size="S"
+      >
+        <XIcon className="h-5 w-5" />
+      </Button>
     </div>
+  );
+
+  return (
+    <Container isScrollable adjustHeight={75} containerWidth="full" staticContent={staticContent}>
+      <div className="font-Quicksand">
+        <form onSubmit={handleSubmit} className="mt-4 flex flex-col">
+          <Input
+            themeColour={themeColour}
+            themeTint={themeTint}
+            errors={[inputNameError()]}
+            onChange={handleInputChange}
+            labelText="Name:"
+            value={input.name}
+            type="text"
+            name="name"
+            id="name"
+            required
+          />
+          <div className="mt-4">
+            <TextBox
+              themeColour={themeColour}
+              themeTint={themeTint}
+              labelText="Description"
+              onChange={handleInputChange}
+              value={input.description}
+              name="description"
+              id="description"
+            />
+          </div>
+          <MultiSize
+            themeColour={themeColour}
+            themeTint={themeTint}
+            onChange={onSizeChange}
+            addSize={onAddSize}
+            deleteSize={onDeleteSize}
+            sizes={sizes}
+          />
+          <UploadImageBox
+            themeColour={themeColour}
+            themeTint={themeTint}
+            onChange={setPhotoFile}
+            imageFile={photoFile}
+          />
+          <div className="mt-4 rounded-md sm:flex-shrink-0">
+            <Button
+              themeColour={themeColour}
+              themeTint={themeTint}
+              loading={updateLoading}
+              disabled={!isFormValid}
+              isFullwidth
+              size="XXL"
+              type="submit"
+            >
+              Update Item
+            </Button>
+          </div>
+        </form>
+      </div>
+    </Container>
   );
 };
 

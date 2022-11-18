@@ -7,4 +7,4 @@ export const small = classnames("max-w-5xl");
 export const medium = classnames("max-w-6xl");
 export const large = classnames("max-w-7xl");
 export const full = classnames("max-w-full");
-export const padding = classnames("px-4", "pt-2");
+export const padding = classnames("px-1", "pt-2");
