@@ -13,6 +13,7 @@ import {
   CogIcon,
   UsersIcon,
   XIcon,
+  MailIcon,
 } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import { Popover, Transition } from "@headlessui/react";
@@ -24,6 +25,12 @@ import computer from "./computer.png";
 import { routes } from "src/routes";
 import { Button, Grid, Modal } from "@base";
 import { DocumentIcon, PhotographIcon } from "@heroicons/react/solid";
+import emailjs from "emailjs-com";
+import Swal from "sweetalert2";
+
+const SERVICE_ID = "service_yldn2lp";
+const TEMPLATE_ID = "template_7py28lg";
+const USER_ID = "BJWROl4p5lSbIMH7W";
 
 const navigation = {
   main: [
@@ -100,6 +107,43 @@ const features = [
 const LandingPage: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMonthly, setIsMonthly] = useState(true);
+
+  const [message, setMessage] = useState({ name: "", email: "", phone: "", message: "" });
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setMessage(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleOnSubmit = (e: any) => {
+    e.preventDefault();
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target, USER_ID).then(
+      result => {
+        console.log(result);
+        Swal.fire({
+          icon: "success",
+          title: "Message Sent Successfully",
+        });
+      },
+      error => {
+        Swal.fire({
+          icon: "error",
+          title: "Ooops, something went wrong",
+          text: error.text,
+        });
+      }
+    );
+    e.target.reset();
+    setMessage({
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    });
+  };
 
   useEffect(() => () => setIsModalOpen(false), []);
   return (
@@ -504,6 +548,115 @@ const LandingPage: FC = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="relative bg-white">
+          <div className="absolute inset-0">
+            <div className="absolute inset-y-0 left-0 w-1/2 bg-gray-50" />
+          </div>
+          <div className="relative mx-auto max-w-7xl lg:grid lg:grid-cols-5">
+            <div className="bg-gray-50 py-16 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-24 xl:pr-12">
+              <div className="mx-auto max-w-lg">
+                <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                  Get in touch
+                </h2>
+
+                <dl className="mt-8 text-base text-gray-500">
+                  <div className="mt-6">
+                    <dt className="sr-only">Phone number</dt>
+                    <dd className="flex">
+                      <PhoneIcon
+                        className="h-6 w-6 flex-shrink-0 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      <span className="ml-3">+1 (437) 324-0189</span>
+                    </dd>
+                  </div>
+                  <div className="mt-3">
+                    <dt className="sr-only">Email</dt>
+                    <dd className="flex">
+                      <MailIcon
+                        className="h-6 w-6 flex-shrink-0 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      <span className="ml-3">support@softserveapp.com</span>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div className="bg-white py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
+              <div className="mx-auto max-w-lg lg:max-w-none">
+                <form onSubmit={handleOnSubmit} className="grid grid-cols-1 gap-y-6">
+                  <div>
+                    <label htmlFor="full-name" className="sr-only">
+                      Full name
+                    </label>
+                    <input
+                      // value={message.name}
+                      type="text"
+                      name="name"
+                      onChange={handleChange}
+                      id="name"
+                      className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-red-500 focus:ring-red-500"
+                      placeholder="Full name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="sr-only">
+                      Email
+                    </label>
+                    <input
+                      value={message.email}
+                      id="email"
+                      name="email"
+                      onChange={handleChange}
+                      type="email"
+                      autoComplete="email"
+                      className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-red-500 focus:ring-red-500"
+                      placeholder="Email"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="sr-only">
+                      Phone
+                    </label>
+                    <input
+                      value={message.phone}
+                      type="text"
+                      name="phone"
+                      onChange={handleChange}
+                      id="phone"
+                      autoComplete="tel"
+                      className="focus:red-indigo-500 block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-red-500"
+                      placeholder="Phone"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="sr-only">
+                      Message
+                    </label>
+                    <textarea
+                      value={message.message}
+                      id="message"
+                      onChange={handleChange}
+                      name="message"
+                      rows={4}
+                      className="block w-full rounded-md border-gray-300 py-3 px-4 placeholder-gray-500 shadow-sm focus:border-red-500 focus:ring-red-500"
+                      placeholder="Message"
+                    />
+                  </div>
+                  <div>
+                    <button
+                      type="submit"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-red-600 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
