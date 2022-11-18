@@ -137,7 +137,7 @@ const PostPromotionForm: FC<Props> = ({ themeColour, themeTint, onClose, restaur
   );
 
   return (
-    <Container isScrollable adjustHeight={150} containerWidth="full" staticContent={staticContent}>
+    <Container isScrollable adjustHeight={75} containerWidth="full" staticContent={staticContent}>
       <div className="font-Quicksand">
         <form onSubmit={handlePost} className="mt-4 flex flex-col">
           <Input

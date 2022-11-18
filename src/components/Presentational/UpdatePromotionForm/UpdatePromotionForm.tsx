@@ -152,7 +152,7 @@ const UpdatePromotionForm: FC<Props> = ({
     </div>
   );
   return (
-    <Container adjustHeight={150} isScrollable containerWidth="full" staticContent={staticContent}>
+    <Container adjustHeight={75} isScrollable containerWidth="full" staticContent={staticContent}>
       <div className="font-Quicksand">
         <form onSubmit={handleUpdate} className="mt-4 flex flex-col">
           <Input
