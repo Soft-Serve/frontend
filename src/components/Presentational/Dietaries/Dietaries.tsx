@@ -29,6 +29,7 @@ const Dietaries: FC<Props> = ({ itemID, itemAvailable, css, themeColour, themeTi
       {data?.dietaries.map(dietary => (
         <div key={dietary.id} className="inline-flex items-center">
           <Tooltip
+            isHidden={!itemAvailable}
             themeColour={themeColour}
             themeTint={themeTint}
             tooltipContent={content(dietary.name)}
