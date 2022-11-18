@@ -147,7 +147,7 @@ const UpdateItemForm: FC<Props> = ({ onCompleted, selectedItem, themeColour, the
   const isFormValid = isNameInputValid(input.name) && sizes && !isPriceInvalid(sizes);
 
   const staticContent = (
-    <div className="mb-4 flex items-center justify-between">
+    <div className="justify-betwee max-lg mb-4 flex items-center">
       <h3 className="mr-4 text-sm font-semibold uppercase tracking-wider text-gray-900">
         Update {input.name}
       </h3>
