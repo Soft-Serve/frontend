@@ -95,7 +95,13 @@ const PromotionCategories: FC<Props> = ({ themeColour, themeTint, promotionID })
 
   return (
     <>
-      <Dialog themeColour={themeColour} themeTint={themeTint} onClose={setIsOpen} isOpen={isOpen}>
+      <Dialog
+        isOverflowVisible
+        themeColour={themeColour}
+        themeTint={themeTint}
+        onClose={setIsOpen}
+        isOpen={isOpen}
+      >
         {forms[action]}
       </Dialog>
       {renderTitle()}
