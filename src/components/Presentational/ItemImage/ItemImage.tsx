@@ -4,6 +4,9 @@ import { AdvancedImage, lazyload, placeholder, responsive } from "@cloudinary/re
 import { Cloudinary, CloudinaryImage } from "@cloudinary/base";
 import { Plugins } from "@cloudinary/html";
 import { Effect } from "@cloudinary/base/actions/effect";
+import { scale } from "@cloudinary/base/actions/resize";
+import { auto } from "@cloudinary/base/qualifiers/quality";
+import { quality } from "@cloudinary/base/actions/delivery";
 
 export interface ImgProps {
   cldImg: CloudinaryImage;
@@ -26,6 +29,7 @@ const cld = new Cloudinary({
 
 const ItemImage: FC<Props> = memo(function ItemImage({ photoUrl, unavailable, isDesktop }) {
   const cldImage = cld.image(photoUrl);
+  cldImage.resize(scale().width(200).height(200)).delivery(quality(auto()));
 
   if (unavailable) {
     cldImage.effect(Effect.grayscale());

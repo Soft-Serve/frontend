@@ -46,9 +46,9 @@ const CardMenuItemWithoutImage: FC<Props> = ({
 
   return (
     <ItemCard {...rest}>
-      <div className="relative flex flex-1 flex-col justify-between bg-white p-2 pb-0">
+      <div className="flex flex-1 flex-col justify-between bg-white p-2 pb-0">
         <div>
-          <div className="flex items-center justify-between py-2 ">
+          <div className="flex items-center justify-between py-2">
             <Typography css={classnames("font-bold", "truncate")} themeFont={themeFont} type="h5">
               {item?.name}
             </Typography>
