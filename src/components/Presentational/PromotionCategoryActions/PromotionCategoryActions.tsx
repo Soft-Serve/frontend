@@ -39,15 +39,15 @@ const PromotionCategoryActions: FC<Props> = ({
       key={promoCategory.id}
       className={`wrap mb-4 flex flex-none flex-col rounded-md border-b-0 sm:mb-0 sm:table-row sm:border-b-2 border-${themeColour}-${themeTint} font-Quicksand`}
     >
-      <td className={`p-3`}>
-        <p>
-          <strong>Menu:</strong> {promoCategory.menu_name}
-        </p>
-        <p className={`text-${themeColour}-${themeTint}`}>
+      <td className={`p-4`}>
+        <p className={`text-bold text-${themeColour}-${themeTint}`}>
           {promoCategory.unit === "percentage" &&
             `${promoCategory.discount}% off ${promoCategory.menu_category_name}`}
           {promoCategory.unit === "amount" &&
             `$${promoCategory.discount} off ${promoCategory.menu_category_name}`}
+        </p>
+        <p>
+          <strong>Menu:</strong> {promoCategory.menu_name}
         </p>
       </td>
       <td className={`p-3`}>

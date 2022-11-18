@@ -79,7 +79,7 @@ const DeletePromotionForm: FC<Props> = ({
         </Button>
       </div>
       <p className="my-8 font-Quicksand text-base text-gray-900 underline">
-        all promotion prices and categories within this promotion will be removed!
+        all promotion prices and categories for this promotion will be removed!
       </p>
       <div className="mt-4 flex items-center">
         <div className="mr-2 w-full">
