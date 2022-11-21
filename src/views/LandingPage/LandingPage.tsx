@@ -188,12 +188,12 @@ const LandingPage: FC = () => {
                 >
                   Features
                 </a>
-                {/* <a
+                <a
                   href="#pricing"
                   className="rounded-md px-4 py-2 font-Quicksand text-base font-bold  text-white hover:bg-white hover:text-red-400 "
                 >
                   Pricing
-                </a> */}
+                </a>
               </Popover.Group>
               <Link
                 to="/sign-up"
@@ -454,12 +454,12 @@ const LandingPage: FC = () => {
               </div>
             </div>
           </div>
-          {/* <div id="pricing" className="bg-gray-100">
+          <div id="pricing" className="bg-gray-100">
             <div className="pt-12 sm:pt-16 lg:pt-20">
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="text-center">
                   <h2 className="font-Quicksand text-3xl font-extrabold text-gray-900 sm:text-4xl lg:text-5xl">
-                    30 day free trial with no commitment
+                    60 day free trial with no commitment
                   </h2>
                   <p className="mt-4 font-Quicksand text-xl text-gray-600">
                     No credit card information required. Try SoftServe risk free and see how it
@@ -521,7 +521,7 @@ const LandingPage: FC = () => {
                       </div>
                       {isMonthly && (
                         <div className="mt-8 flex items-center justify-center font-Quicksand text-5xl font-extrabold text-gray-900">
-                          <span>$30</span>
+                          <span>$19</span>
                           <span className="ml-3 font-Quicksand text-xl font-medium text-gray-500">
                             CAD /month
                           </span>
@@ -529,7 +529,7 @@ const LandingPage: FC = () => {
                       )}
                       {!isMonthly && (
                         <div className="mt-8 flex items-center justify-center font-Quicksand text-5xl font-extrabold text-gray-900">
-                          <span>$324</span>
+                          <span>$205</span>
                           <span className="ml-3 font-Quicksand text-xl font-medium text-gray-500">
                             CAD /year
                           </span>
@@ -550,7 +550,7 @@ const LandingPage: FC = () => {
                 </div>
               </div>
             </div>
-          </div>*/}
+          </div>
         </div>
         <div className="relative bg-white">
           <div className="absolute inset-0">
@@ -651,7 +651,7 @@ const LandingPage: FC = () => {
                   <div>
                     <button
                       type="submit"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-red-600 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-red-400 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                     >
                       Submit
                     </button>
